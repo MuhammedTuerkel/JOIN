@@ -5,3 +5,9 @@
 @import url(./styles/help.css);
 @import url(./styles/login.css);
 @import url(./styles/summary.css);
+
+:root {
+    --primary-color-darkblue: #2A3647;
+    --secondary-color-darkblue: #091931;
+    --text-grey: #a8a8a8;
+}
