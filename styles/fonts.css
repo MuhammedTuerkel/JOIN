@@ -1,0 +1,71 @@
+@font-face {
+    font-family: Inter-18;
+    src: url(../assets/fonts/Inter_18pt-Thin.woff2);
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: Inter-18;
+    src: url(../assets/fonts/Inter_18pt-Regular.woff2);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Inter-18;
+    src: url(../assets/fonts/Inter_18pt-Bold.woff2);
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: Inter-18;
+    src: url(../assets/fonts/Inter_18pt-ExtraBold.woff2);
+    font-weight: 800;
+}
+
+@font-face {
+    font-family: Inter-24;
+    src: url(../assets/fonts/Inter_24pt-Thin.woff2);
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: Inter-24;
+    src: url(../assets/fonts/Inter_24pt-Regular.woff2);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Inter-24;
+    src: url(../assets/fonts/Inter_24pt-Bold.woff2);
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: Inter-24;
+    src: url(../assets/fonts/Inter_24pt-ExtraBold.woff2);
+    font-weight: 800;
+}
+
+@font-face {
+    font-family: Inter-28;
+    src: url(../assets/fonts/Inter_28pt-Thin.woff2);
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: Inter-28;
+    src: url(../assets/fonts/Inter_28pt-Regular.woff2);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Inter-28;
+    src: url(../assets/fonts/Inter_28pt-Bold.woff2);
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: Inter-28;
+    src: url(../assets/fonts/Inter_28pt-ExtraBold.woff2);
+    font-weight: 800;
+}
