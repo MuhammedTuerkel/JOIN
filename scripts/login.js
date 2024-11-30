@@ -1,3 +1,8 @@
+function init(){
+    moveImage();
+//    loadLoginTemplate();
+}
+
 /**
  * Let the logo move from the middle of the page to the left top corner.
  * The class 'login_moved' lets the logo move and change the size.
@@ -19,11 +24,13 @@ function moveImage() {
 
 /**
  * Create the login template for registered users 
+ * 
  */
 function loadLoginTemplate() {
-    // Implement your template loading logic here
+    let loginPage = document.getElementById('loginContent');
+    loginPage.innerHTML = "",
+    loginPage.innerHTML += getUserLoginTemplate();
 }
-
 
 /**
  * check if the inputfield is empty than remove the error class
@@ -39,4 +46,8 @@ function checkEmailInput() {
     } else {
         input.classList.remove('login_input_error');
     }
+}
+
+function loadSignUpTemplate(){
+
 }

@@ -90,7 +90,7 @@
 
 .login_buttons_styles:hover{
     background-color: #29abe2;
-    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 10px 14px -5px rgba(0, 0, 0, 0.3);
 }
 
 .login_header_img img {
@@ -137,9 +137,27 @@
     border: solid 1px #D1D1D1;
     border-radius: 30px;
     background-color: #ffffff;
-    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.2);
     height: 400px;
     width: 442px;
+    margin-left: 18px;
+    margin-right: 18px;
+    align-items: center;
+    font-family: "Inter", serif;
+    justify-content: space-around;
+}
+
+.signin_card{
+    display: flex;
+    flex-direction: column;
+    padding-top: 48px;
+    padding-right: 88px;
+    padding-bottom: 48px;
+    padding-left: 88px;
+    border: solid 1px #D1D1D1;
+    border-radius: 30px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.2);
     margin-left: 18px;
     margin-right: 18px;
     align-items: center;
@@ -167,12 +185,14 @@
     align-items: center;
     justify-content: flex-start;
     justify-content: space-between;
+    margin-top: 5px;
 }
 
 .login_card_headline h1{
      font-size: 52px;
      margin-bottom: 12px;
      font-weight: bold;
+     margin-top: 5px;
 }
 
 .login_underline{
@@ -241,10 +261,12 @@
     transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-.login_buttons_styles_clear:hover{
+.login_buttons_styles_clear:hover {
     border: solid 1px #29abe2;
-    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 10px 14px -5px rgba(0, 0, 0, 0.3);
+    color: #29abe2;
 }
+
 
 .login_input_error{
     border-color: #e40000 !important;
@@ -265,5 +287,29 @@
 
 .login_footer a:hover{
     color: #29abe2;
+    font-weight: bold;
+}
+
+.login_checkbox{
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+}
+
+.login_checkbox label{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #ababab;
+    margin-left: 8px;
+}
+
+.login_checkbox p{
+    color: #29abe2;
+}
+
+
+.login_checkbox p:hover{
+    text-decoration: underline;
     font-weight: bold;
 }

@@ -10,18 +10,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz@0,14..32;1,14..32&display=swap" rel="stylesheet">
 
     <script src="script.js"></script>
-    <script src="./scripts/login.js" ></script>
+    <script src="./scripts/login.js"></script>
+    <script src="./templates/loginTemplate.js" ></script>
 
 </head>
 
-<body onload="moveImage()" class="login_body">
+<body onload="init()" class="login_body">
 
     <header id="login_header"  class="login_header login_d_none">
         <main class="login_head">
         <div class="login_header_img">
             <img src="./assets/img/capa.png" alt="">
         </div>
-        <div class="login_header_nav">
+        <div onclick="loadSignUpTemplate()" class="login_header_nav">
             <a href="#">Not a Join user?</a>
             <div class="login_buttons_styles">
                 Sign up
@@ -39,37 +40,43 @@
     <main id="loginMain" class="login_main_container login_d_none">
          <article id="loginContent" class="login_variants"> 
 
-            <div class="login_card scale_up_center">
-
+            <div class="signin_card scale_up_center">
                 <div class="login_card_headline">
-                    <h1>Log in</h1>
+                    <h1>Sign up</h1>
                     <div class="login_underline"></div>
                 </div>
-
+                <div class="login_input_field">
+                    <input type="text" placeholder="Name">
+                    <img src="./assets/img/person.png" alt="Mail Icon">
+                </div>
                 <div class="login_input_field">
                     <input id="loginInputMail" type="text" placeholder="Mail" oninput="checkEmailInput()" >
                     <img src="./assets/img/mail.png" alt="Mail Icon">
-                </div>
-                
+                </div>                
                 <div class="login_input_field">
                     <input type="text" placeholder="Passwort">
                     <img src="./assets/img/lock.png" alt="Mail Icon">
                 </div>
+                <div class="login_input_field">
+                    <input type="text" placeholder="Confirm Passwort">
+                    <img src="./assets/img/lock.png" alt="Mail Icon">
+                </div>
+
+                <div class="login_checkbox">
+                    <input type="checkbox" id="acceptTerms" class="form-check-input">
+                    <label for="acceptTerms" class="form-check-label">I accept the <p>Privacy policy</p></label>
+                </div>
+                
 
                 <div class="login_buttons">
                     <div class="login_buttons_styles">
                         Log in
                     </div>
-
                     <div class="login_buttons_styles_clear">
                         Guest Log in
                     </div>
-
-
                 </div>
-
             </div>
-
 
         </article>
     </main>
