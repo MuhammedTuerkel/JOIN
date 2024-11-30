@@ -1,0 +1,68 @@
+.side-navigation {
+    height: 100vh;
+    width: 232px;
+    background-color: #2A3647;
+    justify-content: space-between;
+    flex-direction: column;
+    display: flex;
+    padding: 64px 0px;
+    align-items: center;
+}
+
+.logo-icon {
+    width: 100px;
+    height: 120px;
+    color: white;
+}
+
+.menu {
+    width: 232px;
+    height: 229px;
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0px;
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #CDCDCD;
+    font-size: 16px;
+}
+
+.menu-icons {
+    width: 25px;
+    height: 25px;
+}
+
+.menu-sections {
+    width: 100%;
+    height: 46px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding: 0px 56px;
+}
+
+.menu-sections:hover {
+    background-color: #091931;
+    ;
+}
+
+.Privacy-section {
+    padding-top: 243px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.Privacy-section a {
+    text-decoration: none;
+    color: #A8A8A8;
+    font-size: 16px;
+    padding: 8px;
+}
