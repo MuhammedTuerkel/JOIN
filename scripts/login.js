@@ -7,11 +7,13 @@ function moveImage() {
     let image = document.getElementById('loginMovableImage');
     image.classList.toggle('login_moved');
     let position = document.getElementById('loginMoveImgContainer');
-    let header = document.getElementById('login_header')
+    let header = document.getElementById('login_header');
+    let main = document.getElementById('loginMain');
 
     setTimeout(function() {
-        position.classList.remove('login_move_image_container')
-        header.classList.remove('login_d_none')
+        position.classList.remove('login_move_image_container');
+        header.classList.remove('login_d_none');
+        main.classList.remove('login_d_none')
     }, 780);
 }
 
