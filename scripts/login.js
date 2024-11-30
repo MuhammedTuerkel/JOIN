@@ -1,6 +1,6 @@
 function init(){
     moveImage();
-//    loadLoginTemplate();
+    loadLoginTemplate();
 }
 
 /**
@@ -48,6 +48,40 @@ function checkEmailInput() {
     }
 }
 
+/**
+ * to get the sign up template at first the div container get th d_none class
+ * the login header have an flex box now the class is removed 
+ * now can load the template
+ * 
+ */
 function loadSignUpTemplate(){
+    let loginHeader = document.getElementById('loginHeader');
+    loginHeader.classList.add('login_d_none');
+    loginHeader.classList.remove('login_header_nav');
+    let signUpPage = document.getElementById('loginContent');
+    signUpPage.innerHTML = "",
+    signUpPage.innerHTML += getSignUpTemplate();
+}
 
+/**
+ * to get the sign in template the steps must be removed
+ * 
+ */
+function backToSignin(){
+    let signUp = document.getElementById('logiSignUp');
+    signUp.innerHTML = "";
+    let loginHeader = document.getElementById('loginHeader');
+    loginHeader.classList.remove('login_d_none')
+    loginHeader.classList.add('login_header_nav');
+    loadLoginTemplate();
+}
+
+/**
+ * if the checkbox is checkt the button where enabled do go to the next step
+ *  
+ */
+function toggleButton() {
+    let checkBox = document.getElementById('acceptTerms');
+    let button = document.getElementById('signUpButton');
+    button.disabled = !checkBox.checked;
 }
