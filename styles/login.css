@@ -132,15 +132,16 @@
     padding-right: 115px;
     padding-bottom: 48px;
     padding-left: 115px;
-    border-radius: 5px;
+    border: solid 1px #D1D1D1;
+    border-radius: 30px;
     background-color: #ffffff;
     box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
     height: 449px;
-    width: 60%;
+    width: 50%;
     margin-left: 18px;
     margin-right: 18px;
-    justify-content: center;
     align-items: center;
+    font-family: "Inter", serif;
 }
 
 .scale_up_center {
@@ -156,24 +157,103 @@
     }
   }
   
-  .login_card_headline{
+.login_card_headline{
     display: flex;
     flex-direction: column;
     width: 100%;
     align-items: center;
     justify-content: flex-start;
-  }
+    justify-content: space-between;
+}
 
-  .login_card_headline h1{
-    font-size: 52px;
-    margin-bottom: 3px;
+.login_card_headline h1{
+     font-size: 52px;
+     margin-bottom: 12px;
+     font-weight: bold;
+}
+
+.login_underline{
+     height: 3px;
+     background-color: #29abe2;
+     width: 20%;
+}
+
+  .login_input_field {
+     margin-top: 20px;
+     position: relative;
+     display: flex;
+     align-items: center;
+}
+
+.login_input_field input {
+     width: 442px;
+     height: 48px;
+     border: solid 1px  #D1D1D1;
+     border-radius: 10px;
+     padding-top: 6px;
+     padding-bottom: 6px;
+     padding-left: 21px;
+     padding-right: 21px;
+     font-size: 24px;
+     transition: border-color 0.3s ;
+     cursor: text;
+}
+
+.login_input_field img {
+     position: absolute;
+     height: 24px;
+     right: 10px;
+     top: 50%; 
+     transform: translateY(-50%);
+}
+
+.login_input_field input::placeholder { 
+    font-size: 24px;
+    color:  #D1D1D1;
+}
+
+.login_input_field input:focus{
+    border-color: #29abe2;
+    outline: none;
+    border: solid 2px  #29abe2;
+}
+
+.login_buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 55px;
+    gap: 32px;
+}
+
+.{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px #2A3647;
+    width: 99px;
+    height: 48px;
+    border-radius: 8px;
     font-weight: bold;
-  }
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 24px;
+    padding-right: 24px;
+    cursor: pointer;
+    
 
-  .login_underline{
-    height: 3px;
-    background-color: #29abe2;
-    width: 20%;
-  }
 
-  .login_input_field
+
+}
+
+.login_buttons_styles_clear {
+    border: solid 1px #2A3647;
+    color: #2A3647;
+    font-weight: bold;
+    border-radius: 8px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 24px;
+    padding-right: 24px;
+    cursor: pointer;
+}
