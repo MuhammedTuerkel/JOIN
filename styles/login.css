@@ -85,10 +85,12 @@
     padding-left: 24px;
     padding-right: 24px;
     cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .login_buttons_styles:hover{
     background-color: #29abe2;
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
 }
 
 .login_header_img img {
@@ -136,12 +138,13 @@
     border-radius: 30px;
     background-color: #ffffff;
     box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
-    height: 449px;
-    width: 50%;
+    height: 400px;
+    width: 442px;
     margin-left: 18px;
     margin-right: 18px;
     align-items: center;
     font-family: "Inter", serif;
+    justify-content: space-around;
 }
 
 .scale_up_center {
@@ -187,7 +190,6 @@
 
 .login_input_field input {
      width: 442px;
-     height: 48px;
      border: solid 1px  #D1D1D1;
      border-radius: 10px;
      padding-top: 6px;
@@ -226,26 +228,6 @@
     gap: 32px;
 }
 
-.{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: solid 1px #2A3647;
-    width: 99px;
-    height: 48px;
-    border-radius: 8px;
-    font-weight: bold;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 24px;
-    padding-right: 24px;
-    cursor: pointer;
-    
-
-
-
-}
-
 .login_buttons_styles_clear {
     border: solid 1px #2A3647;
     color: #2A3647;
@@ -256,4 +238,32 @@
     padding-left: 24px;
     padding-right: 24px;
     cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.login_buttons_styles_clear:hover{
+    border: solid 1px #29abe2;
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+}
+
+.login_input_error{
+    border-color: #e40000 !important;
+}
+
+.login_footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+}
+
+.login_footer a{
+    text-decoration: none;
+    color: #ababab;
+    font-weight: lighter;
+}
+
+.login_footer a:hover{
+    color: #29abe2;
+    font-weight: bold;
 }

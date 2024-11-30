@@ -23,3 +23,20 @@ function moveImage() {
 function loadLoginTemplate() {
     // Implement your template loading logic here
 }
+
+
+/**
+ * check if the inputfield is empty than remove the error class
+ * if the user doesnt inser an @ than comes the error 
+ * if the user have the @ in his mail adress than also remove the error class
+ */
+function checkEmailInput() {
+    let input = document.getElementById('loginInputMail');
+    if (input.value === '') {
+        input.classList.remove('login_input_error');
+    } else if (!input.value.includes('@')) {
+        input.classList.add('login_input_error');
+    } else {
+        input.classList.remove('login_input_error');
+    }
+}
