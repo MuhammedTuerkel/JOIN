@@ -85,3 +85,33 @@ function toggleButton() {
     let button = document.getElementById('signUpButton');
     button.disabled = !checkBox.checked;
 }
+
+/**
+ *
+ *  if the user have typed 3 letters the img form the inputfield password will change form the lock to the visibility off 
+ */
+function togglePasswordIcon() {
+    var passwordInput = document.getElementById('loginInputPassword');
+    var toggleIcon = document.getElementById('togglePasswordIcon');
+    if (passwordInput.value.length >= 3) {
+        toggleIcon.src = './assets/img/visibility_off.png';
+    } else {
+        toggleIcon.src = './assets/img/lock.png';
+    }
+}
+
+/**
+ * if the user will show the password so he can klick on the eye to watch his password
+ * 
+ */
+function togglePasswordVisibility() {
+    var passwordInput = document.getElementById('loginInputPassword');
+    var toggleIcon = document.getElementById('togglePasswordIcon');
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleIcon.src = './assets/img/visibility.png';
+    } else {
+        passwordInput.type = 'password';
+        toggleIcon.src = './assets/img/visibility_off.png';
+    }
+}
