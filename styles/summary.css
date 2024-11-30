@@ -66,3 +66,44 @@
     font-size: 16px;
     padding: 8px;
 }
+
+.summary {
+    max-width: 1440px;
+    width: 1440px;
+ 
+}
+
+header {
+    height: 96px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px 20px 348px;
+    box-shadow: 0px 4px 4px 0px #0000001A;
+    align-items: center;
+}
+
+header p {
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+}
+
+.user {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #2A3647;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: #29ABE2;
+    cursor: pointer;
+}
+
+.help-user {
+    display: flex;
+    gap: 16px;
+
+}

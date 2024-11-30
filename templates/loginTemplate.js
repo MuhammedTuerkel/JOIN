@@ -29,6 +29,10 @@ function getUserLoginTemplate(){
     `
 }
 
+/**
+ * 
+ * 
+ */
 function getSignUpTemplate(){
     return `
      <div id="logiSignUp"  class="signup_card scale_up_center">

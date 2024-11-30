@@ -87,12 +87,12 @@ function toggleButton() {
 }
 
 /**
- *
  *  if the user have typed 3 letters the img form the inputfield password will change form the lock to the visibility off 
+ * 
  */
 function togglePasswordIcon() {
-    var passwordInput = document.getElementById('loginInputPassword');
-    var toggleIcon = document.getElementById('togglePasswordIcon');
+    let passwordInput = document.getElementById('loginInputPassword');
+    let toggleIcon = document.getElementById('togglePasswordIcon');
     if (passwordInput.value.length >= 3) {
         toggleIcon.src = './assets/img/visibility_off.png';
     } else {
@@ -105,8 +105,8 @@ function togglePasswordIcon() {
  * 
  */
 function togglePasswordVisibility() {
-    var passwordInput = document.getElementById('loginInputPassword');
-    var toggleIcon = document.getElementById('togglePasswordIcon');
+    let passwordInput = document.getElementById('loginInputPassword');
+    let toggleIcon = document.getElementById('togglePasswordIcon');
     if (passwordInput.type === 'password') {
         passwordInput.type = 'text';
         toggleIcon.src = './assets/img/visibility.png';
@@ -115,3 +115,4 @@ function togglePasswordVisibility() {
         toggleIcon.src = './assets/img/visibility_off.png';
     }
 }
+
