@@ -15,11 +15,14 @@ function moveImage() {
     let position = document.getElementById('loginMoveImgContainer');
     let header = document.getElementById('login_header');
     let main = document.getElementById('loginMain');
+    let loginFooter = document.getElementById('loginFooter');
+    
 
     setTimeout(function() {
         position.classList.remove('login_move_image_container');
         header.classList.remove('login_d_none');
-        main.classList.remove('login_d_none')
+        main.classList.remove('login_d_none');
+        loginFooter.classList.remove('login_d_none');
     }, 780);
 }
 
@@ -29,12 +32,8 @@ function moveImage() {
  */
 function loadLoginTemplate() {
     let loginPage = document.getElementById('loginContent');
-    let loginFooter = document.getElementById('loginFooter');
     loginPage.innerHTML = "",
     loginPage.innerHTML += getUserLoginTemplate();
-    loginFooter.classList.remove('login_d_none')
-
-    
 }
 
 /**

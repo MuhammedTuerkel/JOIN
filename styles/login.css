@@ -265,6 +265,10 @@
     border-color: #e40000 !important;
 }
 
+.login_footer_container{
+    color: rgba(255, 255, 255, 0);
+}
+
 .login_footer{
     display: flex;
     justify-content: center;
