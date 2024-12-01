@@ -35,7 +35,7 @@ function getUserLoginTemplate(){
  */
 function getSignUpTemplate(){
     return `
-     <form id="logiSignUp"  class="signup_card scale_up_center">
+     <form  id="logiSignUp"  class="signup_card scale_up_center">
         <div class="login_back_to_sign_in">
             <img onclick="backToSignin()" src="./assets/img/back_arrow.png" alt="">
         </div>
@@ -70,7 +70,7 @@ function getSignUpTemplate(){
         </div>
 
         <div class="signup_buttons">
-            <button class="login_signup_buttons_styles" id="signUpButton" disabled onclick="pushNewUserinArray()">
+            <button class="login_signup_buttons_styles" id="signUpButton" disabled onclick="pushNewUserinFireBaseArray()">
                 Sign up
             </button>
         </div>

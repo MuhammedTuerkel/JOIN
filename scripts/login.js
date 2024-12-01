@@ -246,6 +246,65 @@ function pushNewUserinArray(){
     console.log(users);
 }
 
-function showSignUpInformation(){
+/**
+ * Function to show sign up information
+ */
+function showSignUpInformation() {
     window.location.href = 'confirmation.html?msg=You have successfully registered';
 }
+
+/**
+ * Function to push new user data to Firebase Realtime Database
+ */
+async function pushNewUserinFireBaseArray() {
+    let userName = document.getElementById('signUpName').value;
+    let userMail = document.getElementById('loginInputMail').value;
+    let userPassword = document.getElementById('signUpConfirmInputPassword').value;
+
+    const color = createRandomColor();
+    const userData = {
+        name: userName,
+        email: userMail,
+        password: userPassword,
+        color: color,
+        createdAt: new Date().toISOString()
+    };
+
+    try {
+        let response = await postData(`users/${userMail.replace('.', '_')}`, userData);
+        console.log("User successfully added to Realtime Database:", response);
+        loadLoginTemplate();
+        showSignUpInformation();
+    } catch (error) {
+        console.error("Error adding user to Realtime Database:", error);
+    }
+}
+
+/**
+ * Function to post data to Firebase Realtime Database
+ */
+async function postData(path = "", data = {}) {
+    let response = await fetch(BASE_URL + path + ".json", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    return response.json();
+}
+
+/**
+ * Function to generate a random color
+ * @returns {string} - Randomly generated color in hex format
+ */
+function createRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+
