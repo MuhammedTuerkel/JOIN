@@ -223,4 +223,17 @@ function pushNewUserinArray(){
     let userName = document.getElementById('signUpName').value;
     let userMail = document.getElementById('loginInputMail').value;
     let userPassword = document.getElementById('signUpConfirmInputPassword').value;
+
+    const color = createRandomColor();
+
+    users.push ({
+        name: userName,
+        email: userMail,
+        password: userPassword,
+        color: color,
+    });
+
+    console.log(users);
+    
+
 }

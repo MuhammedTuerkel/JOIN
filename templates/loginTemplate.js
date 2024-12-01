@@ -60,11 +60,11 @@ function getSignUpTemplate(){
             <img id="togglePasswordIconSignUpConfirm" src="./assets/img/lock.png" alt="Show/Hide Password" onclick="toggleSignUpConfirmPasswordVisibility()">
         </div>
         <div class="login_checkbox">
-            <input type="checkbox" id="acceptTerms" class="form_check_input" onclick="acceptPolicy()">
+            <input type="checkbox" id="acceptTerms" class="form_check_input" onclick="acceptTerms()">
             <label for="acceptTerms" class="form-check-label">I accept the <p class="hover_target">Privacy policy</p></label>
         </div>
         <div class="signup_buttons">
-            <button class="login_signup_buttons_styles" id="signUpButton" disabled>
+            <button class="login_signup_buttons_styles" id="signUpButton" disabled onclick="pushNewUserinArray()">
                 Sign up
             </button>
         </div>
