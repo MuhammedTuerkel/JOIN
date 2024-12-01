@@ -44,7 +44,7 @@ function getSignUpTemplate(){
             <div class="login_underline"></div>
         </div>
         <div class="login_input_field">
-            <input type="text" placeholder="Name">
+            <input id="signUpName" type="text" placeholder="Name">
             <img src="./assets/img/person.png" alt="Mail Icon">
         </div>
         <div class="login_input_field">
@@ -52,15 +52,15 @@ function getSignUpTemplate(){
             <img src="./assets/img/mail.png" alt="Mail Icon">
         </div>                
         <div class="login_input_field">
-            <input type="text" placeholder="Passwort">
-            <img src="./assets/img/lock.png" alt="Mail Icon">
+            <input id="signUpInputPassword" type="password" placeholder="Passwort" oninput="toggleSignUpPasswordIcon()">
+            <img id="togglePasswordIconSignUp" src="./assets/img/lock.png" alt="Show/Hide Password" onclick="toggleSignUpPasswordVisibility()">
         </div>
         <div class="login_input_field">
-            <input type="text" placeholder="Confirm Passwort">
-            <img src="./assets/img/lock.png" alt="Mail Icon">
+            <input id="signUpConfirmInputPassword" type="password" placeholder="Confirm Passwort" oninput="toggleAndCheckInputConfirmPassword()">
+            <img id="togglePasswordIconSignUpConfirm" src="./assets/img/lock.png" alt="Show/Hide Password" onclick="toggleSignUpConfirmPasswordVisibility()">
         </div>
         <div class="login_checkbox">
-            <input type="checkbox" id="acceptTerms" class="form_check_input" onclick="toggleButton()">
+            <input type="checkbox" id="acceptTerms" class="form_check_input" onclick="acceptPolicy()">
             <label for="acceptTerms" class="form-check-label">I accept the <p class="hover_target">Privacy policy</p></label>
         </div>
         <div class="signup_buttons">
