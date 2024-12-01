@@ -1,6 +1,7 @@
 function init(){
     moveImage();
     loadLoginTemplate();
+    
 }
 
 /**
@@ -28,8 +29,12 @@ function moveImage() {
  */
 function loadLoginTemplate() {
     let loginPage = document.getElementById('loginContent');
+    let loginFooter = document.getElementById('loginFooter');
     loginPage.innerHTML = "",
     loginPage.innerHTML += getUserLoginTemplate();
+    loginFooter.classList.remove('login_d_none')
+
+    
 }
 
 /**
@@ -219,6 +224,10 @@ function createRandomColor(){
     return color
 }
 
+/**
+ *  push the new user in the global array 
+ * 
+ */
 function pushNewUserinArray(){
     let userName = document.getElementById('signUpName').value;
     let userMail = document.getElementById('loginInputMail').value;
@@ -232,8 +241,12 @@ function pushNewUserinArray(){
         password: userPassword,
         color: color,
     });
+    loadLoginTemplate();
+    showSignUpInformation();
 
     console.log(users);
-    
+}
 
+function showSignUpInformation(){
+    window.location.href = 'confirmation.html?msg=You have successfully registered';
 }

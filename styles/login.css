@@ -283,11 +283,17 @@
     font-weight: bold;
 }
 
+.login_checkbox_container{
+    display: flex;
+    flex-direction: row;
+}
+
 .login_checkbox {
     display: flex;
     flex-direction: row;
     margin-top: 30px;
     align-items: center;
+    cursor: pointer;
 }
 
 .login_checkbox input {
@@ -295,6 +301,7 @@
     width: 24px;
     border: solid 3px black;
     transition: border-color 0.3s, box-shadow 0.3s;
+    cursor: pointer;
 }
 
 .login_checkbox input:focus, .login_checkbox input:hover {
@@ -313,6 +320,7 @@
 .login_checkbox p {
     color: #29abe2;
     margin: 0;
+    cursor: pointer;
 }
 
 .login_checkbox p:hover {
