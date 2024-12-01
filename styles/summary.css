@@ -1,3 +1,7 @@
+body {
+    font-family: 'Inter';
+}
+
 .side-navigation {
     height: 100vh;
     width: 232px;
@@ -68,18 +72,23 @@
 }
 
 .summary {
-    max-width: 1440px;
-    width: 1440px;
- 
+    width: 100vw;
+    background-color: #F6F7F8;
 }
 
 header {
     height: 96px;
+    box-shadow: 0px 4px 4px 0px #0000001A;
+    background-color: #ffffff;
+
+}
+
+.header-content{
     display: flex;
     justify-content: space-between;
     padding: 20px 40px 20px 348px;
-    box-shadow: 0px 4px 4px 0px #0000001A;
     align-items: center;
+    max-width: 1440px;
 }
 
 header p {
@@ -105,5 +114,77 @@ header p {
 .help-user {
     display: flex;
     gap: 16px;
+}
 
+.headline {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    position: absolute;
+    top: 206px;
+    left: 328px;
+}
+
+.headline h1 {
+    font-size: 61px;
+    font-weight: 700;
+}
+
+.headline h3 {
+    font-size: 27px;
+    font-weight: 400;
+}
+
+.line {
+    height: 59px;
+    width: 3px;
+    background-color: #29ABE2;
+}
+
+.Tasks {
+    width: 560px;
+    height: 562px;
+    position: absolute;
+    top: 335px;
+    left: 328px;
+}
+
+.Todo-Done {
+    width: 560px;
+    height: 168px;
+    display: flex;
+    gap: 18px;
+}
+
+.Urgency {
+    width: 560px;
+    height: 168px;
+}
+
+.viewOfTasks {
+    width: 560px;
+    height: 170px;
+}
+
+.To-do {
+    width: 264px;
+    height: 100%;
+    border-radius: 30px;
+    background-color: white;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+    padding: 38px 19px;
+    gap: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.To-do h2 {
+    font-size: 64px;
+    font-weight: 600;
+}
+
+.To-do p {
+    font-size: 20px;
+    font-weight: 400;
 }
