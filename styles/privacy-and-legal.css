@@ -2,6 +2,14 @@
     font-family: 'Inter';
     src: url('../assets/fonts/Inter_18pt-Regular.woff2') format('woff2');
 }
+.privacy_and_legal_body{
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
 
 .privacy_and_legal_aside {
     font-family: 'Inter', sans-serif;
@@ -49,4 +57,35 @@
 
 .privacy_and_legal_privacy_plolicy_text{
     margin-top: 20px;
+}
+
+.highlight{
+    color: #29abe2;
+}
+
+
+
+.scrollable-content {
+    max-height: 70vh; /* 80% der Bildschirmhöhe */
+    overflow-y: auto; /* Scrollbar für vertikales Scrollen */
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    color: #333;
+}
+
+p {
+    color: #555;
+}
+
+strong {
+    color: #000;
+}
+
+.highlight {
+    color: red; /* Beispiel für die Hervorhebung bestimmter Wörter */
 }

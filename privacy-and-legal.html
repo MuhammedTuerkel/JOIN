@@ -11,7 +11,7 @@
 
 </head>
 
-<body>
+<body class="privacy_and_legal_body">
     <aside class="side-navigation privacy_and_legal_aside">
         <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
         <div class="menu">
@@ -45,11 +45,78 @@
 
     <main class="privacy_and_legal_main_container">
         <div id="privacyAndLegalContentContainer">
+            <div class="privacy_and_legal_privacy_plolicy_text_container">
+            <div id="legalNotice" class="scrollable-content">
+                <h1>Legal Notice</h1>        
+                <h2>Imprint</h2>
+                <p>
+                    <strong>Student Names List:</strong> [Student Names List]<br>
+                    <strong>Address of the JOIN operator:</strong> [Address of the JOIN operator - e.g. one of the students]<br>
+                    <strong>Postcode and city:</strong> [Postcode and city]
+                </p>
+                
+                <h2>Exploring the Board</h2>
+                <p>
+                    <strong>Email:</strong> [Email]
+                </p>
+                
+                <h2>Acceptance of Terms</h2>
+                <p>
+                    By accessing and using (Product), you acknowledge and agree to the following terms and conditions, and any policies, guidelines, or amendments thereto that may be presented to you from time to time. We, the listed students, may update or change the terms and conditions from time to time without notice.
+                </p>
+                
+                <h2>Scope and Ownership of the Product</h2>
+                <p>
+                    (Product) has been developed as part of a student group project in a web development bootcamp at the (Institution). It has an educational purpose and is not intended for extensive personal & business usage. As such, we cannot guarantee consistent availability, reliability, accuracy, or any other aspect of quality regarding this Product.
+                </p>
+                <p>
+                    The design of (Product) is owned by the (Institution). Unauthorized use, reproduction, modification, distribution, or replication of the design is strictly prohibited.
+                </p>
+                
+                <h2>Proprietary Rights</h2>
+                <p>
+                    Aside from the design owned by the (Institution), we, the listed students, retain all proprietary rights in (Product), including any associated copyrighted material, trademarks, and other proprietary information.
+                </p>
+                
+                <h2>Use of the Product</h2>
+                <p>
+                    (Product) is intended to be used for lawful purposes only, in accordance with all applicable laws and regulations. Any use of (Product) for illegal activities, or to harass, harm, threaten, or intimidate another person, is strictly prohibited. You are solely responsible for your interactions with other users of (Product).
+                </p>
+                
+                <h2>Disclaimer of Warranties and Limitation of Liability</h2>
+                <p>
+                    (Product) is provided "as is" without warranty of any kind, whether express or implied, including but not limited to the implied warranties of merchantability, fitness for a particular purpose, and non-infringement. In no event will we, the listed students, or the (Institution), be liable for any direct, indirect, incidental, special, consequential or exemplary damages, including but not limited to, damages for loss of profits, goodwill, use, data, or other intangible losses, even if we have been advised of the possibility of such damages, arising out of or in connection with the use or performance of (Product).
+                </p>
+                
+                <h2>Indemnity</h2>
+                <p>
+                    You agree to indemnify, defend and hold harmless us, the listed students, the (Institution), and our affiliates, partners, officers, directors, agents, and employees, from and against any claim, demand, loss, damage, cost, or liability (including reasonable legal fees) arising out of or relating to your use of (Product) and/or your breach of this Legal Notice.
+                </p>
+                
+                <p>
+                    For any questions or notices, please contact us at [Contact Email].
+                </p>
+                
+                <p><strong>Date:</strong> July 26, 2023</p>
+            </div>
+            </div>
+            </div>
 
-        
-
-        </div>
     </main>
     </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let textElements = document.getElementById('legalNotice');
+            let text = textElements.innerHTML;
+
+            let highlightedText = text.replace(/Join/g, '<span class="highlight">Join</span>');
+            highlightedText = highlightedText.replace(/Developer/g, '<span class="highlight">Developer</span>');
+            highlightedText = highlightedText.replace(/Akademie/g, '<span class="highlight">Akademie</span>');
+
+            textElements.innerHTML = highlightedText;
+        })
+    </script>
+
 </body>
 </html>
