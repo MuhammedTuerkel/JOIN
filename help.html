@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary</title>
+    <link rel="shortcut icon" href="./assets/favicon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <script src="./scripts/summary.js"></script>
+</head>
+
+<body>
+    <div class="side-navigation">
+        <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
+        <div class="menu">
+            <div class="menu-sections activated">
+                <img class="menu-icons" src="assets/icons/summary-icon.svg" alt="">
+                <a href="#">Summary</a>
+            </div>
+            <div class="menu-sections">
+                <img class="menu-icons" src="assets/icons/add-task-icon.svg" alt="">
+                <a href="./add-task.html">Add Task</a>
+            </div>
+            <div class="menu-sections">
+                <img class="menu-icons" src="assets/icons/board-icon.svg" alt="">
+                <a href="#">Board</a>
+            </div>
+            <div class="menu-sections">
+                <img class="menu-icons" src="assets/icons/contacts-icon.svg" alt="">
+                <a href="#">Contacts</a>
+            </div>
+        </div>
+        <div class="Privacy-section">
+            <a href="">Privacy Policy</a>
+            <a href="">Legal Notice</a>
+        </div>
+    </div>
+    <div class="summary">
+        <header>
+            <div class="header-content">
+                <p>Kanban Project Management Tool</p>
+                <div id="help-user" class="help-user">
+                    <img src="assets/icons/help-symbol-icon-default.svg" alt="" style="cursor: pointer;">
+                    <span onclick="showSubmenu()" class="user">M</span>
+                </div>
+                <div id="Submenu" class="Submenu" style="display: none;">
+                    <div class="Submenu-buttons">Legal Notice</div>
+                    <div class="Submenu-buttons">Privacy Policy</div>
+                    <div class="Submenu-buttons">Log out</div>
+                </div>
+            </div>
+        </header>
+        <div class="headline">
+            <h1>Join 360</h1>
+            <div class="line"></div>
+            <h3>Key Metrics at a Glance</h3>
+        </div>
+        <div class="Tasks">
+            <div class="Todo-Done">
+                <div class="To-do">
+                    <img src="./assets/img/pencil.png" alt="">
+                    <div>
+                        <h2>1</h2>
+                        <p>To-do</p>
+                    </div>
+                </div>
+                <div class="To-do">
+                    <img src="./assets/img/done.png" alt="">
+                    <div>
+                        <h2>1</h2>
+                        <p>Done </p>
+                    </div>
+                </div>
+            </div>
+            <div class="Urgency">
+                <div class="urgent-number">
+                    <img src="./assets/img/Urgent.png" alt="">
+                    <div>
+                        <h2>1</h2>
+                        <p>Urgent</p>
+                    </div>
+                </div>
+                <div class="Urgent-line"></div>
+                <div class="Deadline">
+                    <h3>October 16, 2022</h3>
+                    <p>Upcoming Deadline</p>
+                </div>
+            </div>
+            <div class="viewOfTasks">
+                <div class="Task">
+                    <h2>5</h2>
+                    <p>Tasks in Board</p>
+                </div>
+                <div class="Task">
+                    <h2>2</h2>
+                    <p>Tasks In Progress</p>
+                </div>
+                <div class="Task">
+                    <h2>2</h2>
+                    <p>Awaiting Feedback</p>
+                </div>
+            </div>
+        </div>
+        <div class="greeting">
+            <h2>Good morning,</h2>
+            <h1>Sofia Müller</h1>
+        </div>
+    </div>
+</body>
+
+</html>
