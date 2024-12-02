@@ -10,6 +10,9 @@
     --primary-color-darkblue: #2A3647;
     --secondary-color-darkblue: #091931;
     --text-grey: #a8a8a8;
+    --prio-urgent: #FF3D00;
+    --prio-medium: #FFA800;
+    --prio-low: #7AE229;
 }
 
 .activated {
