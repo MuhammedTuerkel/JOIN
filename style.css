@@ -11,3 +11,11 @@
     --secondary-color-darkblue: #091931;
     --text-grey: #a8a8a8;
 }
+
+.activated {
+    background-color: #091931;
+}
+
+.activated a {
+    color: white;
+}

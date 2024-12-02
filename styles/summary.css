@@ -83,12 +83,13 @@ header {
 
 }
 
-.header-content{
+.header-content {
     display: flex;
     justify-content: space-between;
     padding: 20px 40px 20px 348px;
     align-items: center;
     max-width: 1440px;
+    height: 96px;
 }
 
 header p {
@@ -147,23 +148,36 @@ header p {
     position: absolute;
     top: 335px;
     left: 328px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
 }
 
 .Todo-Done {
     width: 560px;
     height: 168px;
     display: flex;
-    gap: 18px;
+    justify-content: space-between;
 }
 
 .Urgency {
     width: 560px;
     height: 168px;
+    padding: 28px 48px;
+    display: flex;
+    gap: 61px;
+    border-radius: 30px;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+    background-color: #FFFFFF;
+    align-items: center;
+    justify-content: center;
 }
 
 .viewOfTasks {
     width: 560px;
     height: 170px;
+    display: flex;
+    gap: 28px;
 }
 
 .To-do {
@@ -187,4 +201,124 @@ header p {
 .To-do p {
     font-size: 20px;
     font-weight: 400;
+}
+
+.urgent-number {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.urgent-number img {
+    width: 60px;
+    height: 60px;
+}
+
+.urgent-number h2 {
+    font-size: 64px;
+    font-weight: 600;
+    text-align: center;
+    color: black;
+}
+
+.Urgent-line {
+    width: 2px;
+    background-color: #D1D1D1;
+    height: 102px;
+}
+
+.Deadline {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.Deadline h3 {
+    font-size: 21px;
+    font-weight: 700;
+    color: #2A3647;
+}
+
+.Deadline p {
+    font-size: 16px;
+    font-weight: 400;
+    color: #2A3647;
+}
+
+.Task {
+    width: 168px;
+    height: 168px;
+    border-radius: 30px;
+    padding: 25px 42.5px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    background-color: white;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+    justify-content: center;
+    align-items: center;
+}
+
+.Task h2 {
+    font-size: 64px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.Task p {
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+    color: #2A3647;
+}
+
+.greeting {
+    position: absolute;
+    top: 547.5px;
+    left: 968px;
+    width: 385px;
+    height: 136px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.greeting h2 {
+    font-size: 47px;
+    font-weight: 500;
+    color: #2A3647;
+}
+
+.greeting h1 {
+    font-size: 64px;
+    font-weight: 700;
+    color: #29ABE2;
+}
+
+.Submenu {
+    position: relative;
+    right: 0;
+    top: 31px;
+    border-radius: 20px 0px 20px 20px;
+    width: 150px;
+    height: 158px;
+    background-color: #2A3647;
+    padding: 10px;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.Submenu-buttons {
+    width: 130px;
+    height: 46px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #CDCDCD;
+    display: flex;
+    padding: 8px;
+    align-items: center;
+    cursor: pointer;
 }
