@@ -1,7 +1,9 @@
+let fetchedPassword = "";
+
 function init(){
     moveImage();
-    loadLoginTemplate();
-    
+    onloadFunction();
+    loadLoginTemplate(); 
 }
 
 /**
@@ -36,10 +38,11 @@ function loadLoginTemplate() {
     loginPage.innerHTML += getUserLoginTemplate();
 }
 
+
 /**
- * check if the inputfield is empty than remove the error class
- * if the user doesnt inser an @ than comes the error 
- * if the user have the @ in his mail adress than also remove the error class
+ * Check if the input field is empty then remove the error class
+ * if the user doesn't insert an '@' then show the error
+ * if the user has the '@' in their email address then also remove the error class
  */
 function checkEmailInput() {
     let input = document.getElementById('loginInputMail');
@@ -49,6 +52,59 @@ function checkEmailInput() {
         input.classList.add('login_input_error');
     } else {
         input.classList.remove('login_input_error');
+        fetchPassword(input.value.replace(/\./g, '_')); 
+    }
+}
+
+/**
+ * Fetch the password for a given email from Firebase Realtime Database
+ * The email input value with '.' replaced by '_'
+ */
+async function fetchPassword(userMail) {
+    let path = `users/`;
+
+    try {
+        let users = await loadData(path);
+        for (let userId in users) {
+            let user = users[userId];
+
+            for (let subId in user) {
+                let userDetails = user[subId];
+                if (userDetails.email === userMail.replace(/_/g, '.')) {
+                    fetchedPassword = userDetails.password;
+                    return;
+                }
+            }
+        }
+        console.log("No user found with this email."); // warunung e mail nicht registriert
+    } catch (error) {
+        console.error("Error fetching password from Realtime Database:", error); // warnung passwort oder mail stimme nicht überein 
+    }
+}
+
+/**
+ * Fetch data from Firebase Realtime Database
+ * users is the path to the data in the database 
+ * 
+ */
+async function loadData(path = "") {
+    let response = await fetch(BASE_URL + path + ".json");
+    let responseToJson = await response.json();
+    return responseToJson;
+}
+
+/**
+ * check des entered password with the created passwort and gives the user feedbakc if it is corect or false
+ * 
+ */
+function checkLoginPassword(){
+    let enteredPassword = document.getElementById('loginInputPassword').value;
+    if(enteredPassword === fetchedPassword){
+        console.log("login Succesful");
+        
+    } else {
+        console.log("angegebene mail oder passwort ist falsch");
+        
     }
 }
 
@@ -94,7 +150,7 @@ function acceptTerms() {
  *  if the user have typed 3 letters the img form the inputfield password will change form the lock to the visibility off 
  * 
  */
-function togglePasswordIcon() {
+function togglePasswordIcons() {
     let passwordInput = document.getElementById('loginInputPassword');
     let toggleIcon = document.getElementById('togglePasswordIcon');
     if (passwordInput.value.length >= 3) {
@@ -224,43 +280,12 @@ function createRandomColor(){
 }
 
 /**
- *  push the new user in the global array 
- * 
- */
-function pushNewUserinArray(){
-    let userName = document.getElementById('signUpName').value;
-    let userMail = document.getElementById('loginInputMail').value;
-    let userPassword = document.getElementById('signUpConfirmInputPassword').value;
-
-    const color = createRandomColor();
-
-    users.push ({
-        name: userName,
-        email: userMail,
-        password: userPassword,
-        color: color,
-    });
-    loadLoginTemplate();
-    showSignUpInformation();
-
-    console.log(users);
-}
-
-/**
- * Function to show sign up information
- */
-function showSignUpInformation() {
-    window.location.href = 'confirmation.html?msg=You have successfully registered';
-}
-
-/**
  * Function to push new user data to Firebase Realtime Database
  */
 async function pushNewUserinFireBaseArray() {
     let userName = document.getElementById('signUpName').value;
     let userMail = document.getElementById('loginInputMail').value;
     let userPassword = document.getElementById('signUpConfirmInputPassword').value;
-
     const color = createRandomColor();
     const userData = {
         name: userName,
@@ -269,7 +294,6 @@ async function pushNewUserinFireBaseArray() {
         color: color,
         createdAt: new Date().toISOString()
     };
-
     try {
         let response = await postData(`users/${userMail.replace('.', '_')}`, userData);
         console.log("User successfully added to Realtime Database:", response);
@@ -278,6 +302,13 @@ async function pushNewUserinFireBaseArray() {
     } catch (error) {
         console.error("Error adding user to Realtime Database:", error);
     }
+}
+
+/**
+ * Function to show sign up information
+ */
+function showSignUpInformation() {
+    window.location.href = 'confirmation.html?msg=You have successfully registered';
 }
 
 /**
@@ -296,7 +327,7 @@ async function postData(path = "", data = {}) {
 
 /**
  * Function to generate a random color
- * @returns {string} - Randomly generated color in hex format
+ * Randomly generated color in hex format
  */
 function createRandomColor() {
     const letters = '0123456789ABCDEF';
@@ -305,6 +336,23 @@ function createRandomColor() {
         color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
+}
+
+/**
+ * Load user data from Firebase Realtime Database into global users array
+ */
+async function onloadFunction() {
+    let userResponse = await loadData("users");
+    let userKeyArray = Object.keys(userResponse);
+
+    for (let index = 0; index < userKeyArray.length; index++) {
+        let userEntries = Object.values(userResponse[userKeyArray[index]]);
+        for (let entry of userEntries) {
+            users.push(entry);
+        }
+    }
+
+    console.log("Global users array:", users);
 }
 
 

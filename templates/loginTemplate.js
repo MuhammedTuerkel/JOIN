@@ -1,6 +1,6 @@
 /**
  * template for the user login 
- * 
+ * if the user is registred than he can log in 
  */
 function getUserLoginTemplate(){
     return `
@@ -14,11 +14,11 @@ function getUserLoginTemplate(){
             <img src="./assets/img/mail.png" alt="Mail Icon">
         </div>                
         <div class="login_input_field">
-            <input id="loginInputPassword" type="password" placeholder="Passwort" oninput="togglePasswordIcon()" required>
+            <input id="loginInputPassword" type="password" placeholder="Passwort" oninput="togglePasswordIcons()" required>
             <img id="togglePasswordIcon" src="./assets/img/lock.png" alt="Show/Hide Password" onclick="togglePasswordVisibility()">
         </div>
         <div class="login_buttons">
-            <div class="login_buttons_styles">
+            <div onclick="checkLoginPassword()" class="login_buttons_styles">
                 Log in
                 </div>
             <div class="login_buttons_styles_clear">
@@ -30,12 +30,12 @@ function getUserLoginTemplate(){
 }
 
 /**
- * 
+ * the Sign Up Template will be lodet if the user is not registred 
  * 
  */
 function getSignUpTemplate(){
     return `
-     <form  id="logiSignUp"  class="signup_card scale_up_center">
+    <form  id="logiSignUp"  class="signup_card scale_up_center">
         <div class="login_back_to_sign_in">
             <img onclick="backToSignin()" src="./assets/img/back_arrow.png" alt="">
         </div>
