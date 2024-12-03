@@ -120,6 +120,11 @@ body {
     font-size: 40px;
 }
 
+.form-wrapper {
+    justify-self: flex-start;
+    margin-left: 110px;
+}
+
 .privacy-section {
     display: flex;
     flex-direction: column;
@@ -154,4 +159,116 @@ body {
 .prio-options {
     display: flex;
     gap: 8px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+form {
+    font-family: Inter-18;
+}
+
+input[type="text"],
+input[type="date"],
+textarea,
+select {
+    font-family: Inter-18;
+    font-size: 14px;
+    color: var(--text-grey);
+    border-radius: 10px;
+    width: calc(136px * 3 + 16px);
+}
+
+.form-buttons {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    align-content: flex-end;
+    width: 100%;
+    margin-top: 138px;
+}
+
+.subtasks-input {
+    position: relative;
+}
+
+.add-subtask-btn {
+    position: absolute;
+    top: 50%;
+    right: 4px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    background: none;
+}
+
+.btn-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.clear-btn {
+    width: 110px;
+    height: 56px;
+    border: 1px solid #2a3647;
+    border-radius: 10px;
+    padding: 16px;
+    font-family: Inter-18;
+    font-weight: 400;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+}
+
+.create-btn {
+    width: 183px;
+    height: 56px;
+    border: none;
+    border-radius: 10px;
+    padding: 16px;
+    background-color: #2a3647;
+    color: white;
+    font-family: Inter-18;
+    font-weight: 700;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.required-hint {
+    font-size: 13px;
+    justify-self: flex-start;
+    margin-right: 110px;
+}
+
+.add-task-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    min-height: 424px;
+    width: 100%;
+    height: 100%;
+}
+
+.form-column-left,
+.form-column-right {
+    flex-grow: 1;
+    width: 100%;
+}
+
+.separator {
+    width: 1px;
+    background-color: #D1D1D1;
+    align-self: stretch;
+    margin: 0 48px;
+    min-height: 416px;
 }
