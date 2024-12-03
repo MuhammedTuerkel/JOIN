@@ -4,10 +4,7 @@ function init(){
     moveImage();
     onloadFunction();
     loadLoginTemplate(); 
-    
 }
-
-
 
 /**
  * Let the logo move from the middle of the page to the left top corner.
@@ -91,7 +88,6 @@ async function fetchPassword(userMail) {
             }
         }
         inputPasswordError.classList.remove('login_d_none');
-        document.getElementById('loginButton').disabled = false;
     } catch (error) {        
     }
 }
@@ -116,11 +112,9 @@ function checkLoginPassword(){
     let wrongPassword = document.getElementById('loginInputWrongPasswordError');
     if(enteredPassword === fetchedPassword){
         wrongPassword.classList.add('login_d_none');
-        // übergang zur nächsten Seite XXXXX
         console.log('login successfull');
     } else {
         wrongPassword.classList.remove('login_d_none')
-        
     }
 }
 
@@ -164,9 +158,13 @@ function acceptTerms() {
 
 /**
  *  if the user have typed 3 letters the img form the inputfield password will change form the lock to the visibility off 
- * 
+ * set the enabled css class to show the log in button
  */
 function togglePasswordIcons() {
+    const loginButton = document.getElementById('loginButton');
+    loginButton.disabled = false; 
+    loginButton.classList.add('enabled');
+    
     let passwordInput = document.getElementById('loginInputPassword');
     let toggleIcon = document.getElementById('togglePasswordIcon');
     if (passwordInput.value.length >= 3) {

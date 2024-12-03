@@ -76,7 +76,38 @@
     top: 67px;
 }
 
+
 .login_buttons_styles {
+    border-radius: 8px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 24px;
+    padding-right: 24px;
+    background-color: #ccc;
+    border: none;
+    border-radius: 5px;
+    cursor: not-allowed;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    font-size: 19px;
+}
+
+.login_buttons_styles:enabled {
+    background-color: #2a3647;
+    color: white;
+    cursor: pointer;
+}
+
+.login_buttons_styles:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.login_buttons_styles:hover:enabled {
+    background-color: #1a8ac2;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login_not_a_user_buttons_styles {
     background-color: #2a3647;
     color: white;
     border-radius: 8px;
@@ -85,10 +116,13 @@
     padding-left: 24px;
     padding-right: 24px;
     cursor: pointer;
+    font-size: 16px;
     transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-.login_buttons_styles:hover{
+
+
+.login_not_a_user_buttons_styles:hover{
     background-color: #29abe2;
     box-shadow: 0px 10px 14px -5px rgba(0, 0, 0, 0.3);
 }
@@ -250,6 +284,25 @@
     margin-top: 55px;
     gap: 32px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .login_buttons_styles_clear {
     border: solid 1px #2A3647;
