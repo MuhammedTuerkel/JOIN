@@ -4,28 +4,34 @@
  */
 function getUserLoginTemplate(){
     return `
-    <form class="login_card scale_up_center">
-        <div class="login_card_headline">
-            <h1>Log in</h1>
-            <div class="login_underline"></div>
+<form class="login_card scale_up_center">
+    <div class="login_card_headline">
+        <h1>Log in</h1>
+        <div class="login_underline"></div>
+    </div>
+    <div class="login_input_field">
+        <input id="loginInputMail" type="text" placeholder="Mail" oninput="checkEmailInput()" required class="blur_placeholder">
+        <img src="./assets/img/mail.png" alt="Mail Icon">
+    </div>   
+    <small id="loginInputMailError" class="login_input_mail_info login_d_none">Bitte geben Sie eine gültige E-Mail-Adresse ein.</small>
+
+    <div class="login_input_field">
+        <input id="loginInputPassword" type="password" placeholder="Passwort" oninput="togglePasswordIcons()" required class="blur_placeholder">
+        <img id="togglePasswordIcon" src="./assets/img/lock.png" alt="Show/Hide Password" onclick="togglePasswordVisibility()">
+    </div>
+    <small id="loginInputPasswordError" class="login_input_mail_info login_d_none">Diese E-Mail-Adresse ist nicht Registrierd</small> 
+    <small id="loginInputWrongPasswordError" class="login_input_mail_info login_d_none">E-Mail-Adresse und Passwort stimmen nicht überein</small>
+
+    <div class="login_buttons">
+        <button id="loginButton" onclick="checkLoginPassword()" class="login_buttons_styles" disabled>
+            Log in
+        </button>
+        <div class="login_buttons_styles_clear">
+            Guest Log in
         </div>
-        <div class="login_input_field">
-            <input id="loginInputMail" type="text" placeholder="Mail" oninput="checkEmailInput()" required>
-            <img src="./assets/img/mail.png" alt="Mail Icon">
-        </div>                
-        <div class="login_input_field">
-            <input id="loginInputPassword" type="password" placeholder="Passwort" oninput="togglePasswordIcons()" required>
-            <img id="togglePasswordIcon" src="./assets/img/lock.png" alt="Show/Hide Password" onclick="togglePasswordVisibility()">
-        </div>
-        <div class="login_buttons">
-            <div onclick="checkLoginPassword()" class="login_buttons_styles">
-                Log in
-                </div>
-            <div class="login_buttons_styles_clear">
-                Guest Log in
-            </div>
-        </div>
-    </form>
+    </div>
+</form>
+
     `
 }
 
@@ -70,7 +76,7 @@ function getSignUpTemplate(){
         </div>
 
         <div class="signup_buttons">
-            <button class="login_signup_buttons_styles" id="signUpButton" disabled onclick="pushNewUserinFireBaseArray()">
+            <button class="login_signup_buttons_styles" id="signUpButton" disabled onsubmit="pushNewUserinFireBaseArray()">
                 Sign up
             </button>
         </div>

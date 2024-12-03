@@ -4,7 +4,10 @@ function init(){
     moveImage();
     onloadFunction();
     loadLoginTemplate(); 
+    
 }
+
+
 
 /**
  * Let the logo move from the middle of the page to the left top corner.
@@ -34,24 +37,35 @@ function moveImage() {
  */
 function loadLoginTemplate() {
     let loginPage = document.getElementById('loginContent');
+    let inputMail = document.getElementById('loginInputMail');
+    let inputPassword = document.getElementById('loginInputPassword');
+    
     loginPage.innerHTML = "",
     loginPage.innerHTML += getUserLoginTemplate();
+    if(inputMail === "" || inputPassword ===""){
+        document.getElementById('loginButton').disabled = true;
+    }
 }
 
-
 /**
- * Check if the input field is empty then remove the error class
- * if the user doesn't insert an '@' then show the error
- * if the user has the '@' in their email address then also remove the error class
+ * Check if the input field is empty, then remove the error class.
+ * If the user doesn't insert a valid email address, show the error.
+ * If the email address is valid, remove the error class.
  */
 function checkEmailInput() {
     let input = document.getElementById('loginInputMail');
+    let inputMailError = document.getElementById('loginInputMailError');
+    let inputPasswordError = document.getElementById('loginInputPasswordError');
+    let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (input.value === '') {
         input.classList.remove('login_input_error');
-    } else if (!input.value.includes('@')) {
+        inputPasswordError.classList.add('login_d_none');
+    } else if (!emailPattern.test(input.value)) {
         input.classList.add('login_input_error');
+        inputMailError.classList.remove('login_d_none')
     } else {
         input.classList.remove('login_input_error');
+        inputMailError.classList.add('login_d_none');
         fetchPassword(input.value.replace(/\./g, '_')); 
     }
 }
@@ -62,7 +76,7 @@ function checkEmailInput() {
  */
 async function fetchPassword(userMail) {
     let path = `users/`;
-
+    let inputPasswordError = document.getElementById('loginInputPasswordError');
     try {
         let users = await loadData(path);
         for (let userId in users) {
@@ -76,9 +90,9 @@ async function fetchPassword(userMail) {
                 }
             }
         }
-        console.log("No user found with this email."); // warunung e mail nicht registriert
-    } catch (error) {
-        console.error("Error fetching password from Realtime Database:", error); // warnung passwort oder mail stimme nicht überein 
+        inputPasswordError.classList.remove('login_d_none');
+        document.getElementById('loginButton').disabled = false;
+    } catch (error) {        
     }
 }
 
@@ -99,11 +113,13 @@ async function loadData(path = "") {
  */
 function checkLoginPassword(){
     let enteredPassword = document.getElementById('loginInputPassword').value;
+    let wrongPassword = document.getElementById('loginInputWrongPasswordError');
     if(enteredPassword === fetchedPassword){
-        console.log("login Succesful");
-        
+        wrongPassword.classList.add('login_d_none');
+        // übergang zur nächsten Seite XXXXX
+        console.log('login successfull');
     } else {
-        console.log("angegebene mail oder passwort ist falsch");
+        wrongPassword.classList.remove('login_d_none')
         
     }
 }
