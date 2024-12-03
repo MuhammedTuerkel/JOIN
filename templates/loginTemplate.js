@@ -4,13 +4,13 @@
  */
 function getUserLoginTemplate(){
     return `
-    <form class="login_card scale_up_center"> 
+    <div class="login_card scale_up_center"> 
         <div class="login_card_headline">
             <h1>Log in</h1> 
             <div class="login_underline"></div> 
         </div>
         <div class="login_input_field">
-            <input id="loginInputMail" type="text" placeholder="Mail" oninput="checkEmailInput()" required class="blur_placeholder">
+            <input id="loginInputMail" type="text" placeholder="Mail" oninput="checkEmailInput()" onchange="checkLoginInputfields()" required class="blur_placeholder">
             <img src="./assets/img/mail.png" alt="Mail Icon"> 
         </div>
         <small id="loginInputMailError" class="login_input_mail_info login_d_none">Bitte geben Sie eine gültige E-Mail-Adresse ein.</small>
@@ -23,7 +23,7 @@ function getUserLoginTemplate(){
         <div class="login_buttons"> <button id="loginButton" onclick="checkLoginPassword()" class="login_buttons_styles" disabled true> Log in </button> 
             <div class="login_buttons_styles_clear"> Guest Log in </div> 
         </div>
-     </form>
+     </div>
 
     `
 }

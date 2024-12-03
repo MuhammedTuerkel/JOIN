@@ -25,7 +25,7 @@ function moveImage() {
         header.classList.remove('login_d_none');
         main.classList.remove('login_d_none');
         loginFooter.classList.remove('login_d_none');
-    }, 780);
+    }, 1080);
 }
 
 /**
@@ -57,15 +57,49 @@ function checkEmailInput() {
     if (input.value === '') {
         input.classList.remove('login_input_error');
         inputPasswordError.classList.add('login_d_none');
+        disableLogInBottun()
     } else if (!emailPattern.test(input.value)) {
         input.classList.add('login_input_error');
         inputMailError.classList.remove('login_d_none')
+        checkLoginIputfields()
     } else {
         input.classList.remove('login_input_error');
         inputMailError.classList.add('login_d_none');
         fetchPassword(input.value.replace(/\./g, '_')); 
     }
 }
+
+/**
+ * makes the button disabled to not allow the user to klick the log in bottun
+ * 
+ */
+function disableLogInBottun(){
+    const loginButton = document.getElementById('loginButton');
+    loginButton.disabled = true; 
+    loginButton.classList.add('disabled');
+}
+
+/**
+ * Checks the email and password input fields.
+ * 
+ * This function verifies if the email field is empty or the password is less than 3 characters long.
+ * If either condition is true, the login button is disabled.
+ * If both fields contain valid entries, the button is enabled.
+ */
+function checkLoginInputfields() {
+    const loginButton = document.getElementById('loginButton');
+    let input = document.getElementById('loginInputMail');
+    let passwordInput = document.getElementById('loginInputPassword');
+    
+    if (input.value.trim() === "" || passwordInput.value.length < 3) {
+        loginButton.disabled = true;
+        loginButton.classList.remove('enabled');
+    } else {
+        loginButton.disabled = false;
+        loginButton.classList.add('enabled');
+    }
+}
+
 
 /**
  * Fetch the password for a given email from Firebase Realtime Database
@@ -113,9 +147,14 @@ function checkLoginPassword(){
     if(enteredPassword === fetchedPassword){
         wrongPassword.classList.add('login_d_none');
         console.log('login successfull');
+        goToaddTask();
     } else {
         wrongPassword.classList.remove('login_d_none')
     }
+}
+
+function goToaddTask(){
+    console.log("login successfull");
 }
 
 /**
@@ -169,8 +208,11 @@ function togglePasswordIcons() {
     let toggleIcon = document.getElementById('togglePasswordIcon');
     if (passwordInput.value.length >= 3) {
         toggleIcon.src = './assets/img/visibility_off.png';
+
     } else {
         toggleIcon.src = './assets/img/lock.png';
+        loginButton.disabled = true; 
+        loginButton.classList.add('disabled');
     }
 }
 
