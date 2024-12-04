@@ -54,25 +54,19 @@ function checkEmailInput() {
     let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (input.value === '') {
         input.classList.remove('login_input_error');
+        document.getElementById('loginInputMailError').classList.add('login_d_none');
         disableLogInBottun()
     } else if (!emailPattern.test(input.value)) {
         input.classList.add('login_input_error');
+        document.getElementById('loginInputMailError').classList.remove('login_d_none');
         checkLoginInputfields()
     } else {
         input.classList.remove('login_input_error');
-        inputMailError.classList.add('login_d_none');
+        document.getElementById('loginInputMailError').classList.remove('login_d_none');
         fetchPassword(input.value.replace(/\./g, '_')); 
     }
-}
 
-/**
- * makes the button disabled to not allow the user to klick the log in bottun
- * 
- */
-function disableLogInBottun(){
-    const loginButton = document.getElementById('loginButton');
-    loginButton.disabled = true; 
-    loginButton.classList.add('disabled');
+    checkLoginInputfields();
 }
 
 /**
@@ -86,20 +80,28 @@ function checkLoginInputfields() {
     const loginButton = document.getElementById('loginButton');
     let input = document.getElementById('loginInputMail');
     let passwordInput = document.getElementById('loginInputPassword');
-    let mailInfo = document.getElementById('loginInputMailError');
     
     if (input.value.trim() === "" || passwordInput.value.length < 3) {
         loginButton.disabled = true;
         loginButton.classList.remove('enabled');
-        mailInfo.classList.remove('login_d_none');
+        
     } else {
         loginButton.disabled = false;
         loginButton.classList.add('enabled');
-        document.getElementById('loginInputMailError').classList.add('login_d_none');
+
           
     }
 }
 
+/**
+ * makes the button disabled to not allow the user to klick the log in bottun
+ * 
+ */
+function disableLogInBottun(){
+    const loginButton = document.getElementById('loginButton');
+    loginButton.disabled = true; 
+    loginButton.classList.add('disabled');
+}
 
 /**
  * Fetch the password for a given email from Firebase Realtime Database
