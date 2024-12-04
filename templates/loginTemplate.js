@@ -20,8 +20,13 @@ function getUserLoginTemplate(){
         </div> 
         <small id="loginInputPasswordError" class="login_input_mail_info login_d_none">Diese E-Mail-Adresse ist nicht Registrierd</small> 
         <small id="loginInputWrongPasswordError" class="login_input_mail_info login_d_none">E-Mail-Adresse und Passwort stimmen nicht überein</small> 
-        <div class="login_buttons"> <button id="loginButton" onclick="checkLoginPassword()" class="login_buttons_styles" disabled true> Log in </button> 
-            <div class="login_buttons_styles_clear"> Guest Log in </div> 
+        <div class="login_buttons"> 
+            <button id="loginButton" onclick="checkLoginPassword()" class="login_buttons_styles" disabled>
+                Log in 
+            </button> 
+            <div class="login_buttons_styles_clear"> 
+                Guest Log in 
+            </div> 
         </div>
      </div>
 

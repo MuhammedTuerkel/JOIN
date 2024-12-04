@@ -19,7 +19,6 @@ function moveImage() {
     let main = document.getElementById('loginMain');
     let loginFooter = document.getElementById('loginFooter');
     
-
     setTimeout(function() {
         position.classList.remove('login_move_image_container');
         header.classList.remove('login_d_none');
@@ -70,16 +69,6 @@ function checkEmailInput() {
 }
 
 /**
- * makes the button disabled to not allow the user to klick the log in bottun
- * 
- */
-function disableLogInBottun(){
-    const loginButton = document.getElementById('loginButton');
-    loginButton.disabled = true; 
-    loginButton.classList.add('disabled');
-}
-
-/**
  * Checks the email and password input fields.
  * 
  * This function verifies if the email field is empty or the password is less than 3 characters long.
@@ -100,6 +89,35 @@ function checkLoginInputfields() {
     }
 }
 
+/**
+ * makes the button disabled to not allow the user to klick the log in bottun
+ * 
+ */
+function disableLogInBottun(){
+    const loginButton = document.getElementById('loginButton');
+    loginButton.disabled = true; 
+    loginButton.classList.add('disabled');
+}
+
+/**
+ * Checks the email and password input fields.
+ * This function verifies if the email field is empty or the password is less than 3 characters long.
+ * If either condition is true, the login button is disabled.
+ * If both fields contain valid entries, the button is enabled.
+ */
+function checkLoginInputfields() {
+    const loginButton = document.getElementById('loginButton');
+    let input = document.getElementById('loginInputMail');
+    let passwordInput = document.getElementById('loginInputPassword');
+    
+    if (input.value.trim() === "" || passwordInput.value.length < 3) {
+        loginButton.disabled = true;
+        loginButton.classList.remove('enabled');
+    } else {
+        loginButton.disabled = false;
+        loginButton.classList.add('enabled');
+    }
+}
 
 /**
  * Fetch the password for a given email from Firebase Realtime Database
@@ -127,19 +145,7 @@ async function fetchPassword(userMail) {
 }
 
 /**
- * Fetch data from Firebase Realtime Database
- * users is the path to the data in the database 
- * 
- */
-async function loadData(path = "") {
-    let response = await fetch(BASE_URL + path + ".json");
-    let responseToJson = await response.json();
-    return responseToJson;
-}
-
-/**
  * check des entered password with the created passwort and gives the user feedbakc if it is corect or false
- * 
  */
 function checkLoginPassword(){
     let enteredPassword = document.getElementById('loginInputPassword').value;
@@ -152,6 +158,7 @@ function checkLoginPassword(){
         wrongPassword.classList.remove('login_d_none')
     }
 }
+
 
 function goToaddTask(){
     console.log("login successfull");
@@ -174,7 +181,6 @@ function loadSignUpTemplate(){
 
 /**
  * to get the sign in template the steps must be removed
- * 
  */
 function backToSignin(){
     let signUp = document.getElementById('logiSignUp');
@@ -196,7 +202,7 @@ function acceptTerms() {
 }
 
 /**
- *  if the user have typed 3 letters the img form the inputfield password will change form the lock to the visibility off 
+ * if the user have typed 3 letters the img form the inputfield password will change form the lock to the visibility off 
  * set the enabled css class to show the log in button
  */
 function togglePasswordIcons() {
@@ -393,22 +399,3 @@ function createRandomColor() {
     }
     return color;
 }
-
-/**
- * Load user data from Firebase Realtime Database into global users array
- */
-async function onloadFunction() {
-    let userResponse = await loadData("users");
-    let userKeyArray = Object.keys(userResponse);
-
-    for (let index = 0; index < userKeyArray.length; index++) {
-        let userEntries = Object.values(userResponse[userKeyArray[index]]);
-        for (let entry of userEntries) {
-            users.push(entry);
-        }
-    }
-
-    console.log("Global users array:", users);
-}
-
-
