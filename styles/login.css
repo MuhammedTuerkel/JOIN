@@ -76,27 +76,33 @@
     top: 67px;
 }
 
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
 .login_buttons_styles {
     border-radius: 8px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 24px;
-    padding-right: 24px;
+    padding: 15px 24px;
     background-color: #ccc;
     border: none;
     cursor: not-allowed;
-    transition: background-color 0.3s, transform 0.6s;
     font-size: 19px;
-    transform: rotateY(0deg);
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .login_buttons_styles.enabled {
     background-color: #2a3647;
     color: white;
     cursor: pointer;
+    animation: pulse 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2;
 }
 
-.login_buttons_styles:disabled {
+.login_buttons_styles.disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }
@@ -105,6 +111,8 @@
     background-color: #1a8ac2;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
+
+
 
 .login_not_a_user_buttons_styles {
     background-color: #2a3647;
