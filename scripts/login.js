@@ -19,6 +19,7 @@ function moveImage() {
     let main = document.getElementById('loginMain');
     let loginFooter = document.getElementById('loginFooter');
     
+
     setTimeout(function() {
         position.classList.remove('login_move_image_container');
         header.classList.remove('login_d_none');
@@ -60,32 +61,11 @@ function checkEmailInput() {
     } else if (!emailPattern.test(input.value)) {
         input.classList.add('login_input_error');
         inputMailError.classList.remove('login_d_none')
-        checkLoginIputfields()
+        checkLoginInputfields()
     } else {
         input.classList.remove('login_input_error');
         inputMailError.classList.add('login_d_none');
         fetchPassword(input.value.replace(/\./g, '_')); 
-    }
-}
-
-/**
- * Checks the email and password input fields.
- * 
- * This function verifies if the email field is empty or the password is less than 3 characters long.
- * If either condition is true, the login button is disabled.
- * If both fields contain valid entries, the button is enabled.
- */
-function checkLoginInputfields() {
-    const loginButton = document.getElementById('loginButton');
-    let input = document.getElementById('loginInputMail');
-    let passwordInput = document.getElementById('loginInputPassword');
-    
-    if (input.value.trim() === "" || passwordInput.value.length < 3) {
-        loginButton.disabled = true;
-        loginButton.classList.remove('enabled');
-    } else {
-        loginButton.disabled = false;
-        loginButton.classList.add('enabled');
     }
 }
 
@@ -101,6 +81,7 @@ function disableLogInBottun(){
 
 /**
  * Checks the email and password input fields.
+ * 
  * This function verifies if the email field is empty or the password is less than 3 characters long.
  * If either condition is true, the login button is disabled.
  * If both fields contain valid entries, the button is enabled.
@@ -118,6 +99,7 @@ function checkLoginInputfields() {
         loginButton.classList.add('enabled');
     }
 }
+
 
 /**
  * Fetch the password for a given email from Firebase Realtime Database
@@ -145,7 +127,19 @@ async function fetchPassword(userMail) {
 }
 
 /**
+ * Fetch data from Firebase Realtime Database
+ * users is the path to the data in the database 
+ * 
+ */
+async function loadData(path = "") {
+    let response = await fetch(BASE_URL + path + ".json");
+    let responseToJson = await response.json();
+    return responseToJson;
+}
+
+/**
  * check des entered password with the created passwort and gives the user feedbakc if it is corect or false
+ * 
  */
 function checkLoginPassword(){
     let enteredPassword = document.getElementById('loginInputPassword').value;
@@ -158,7 +152,6 @@ function checkLoginPassword(){
         wrongPassword.classList.remove('login_d_none')
     }
 }
-
 
 function goToaddTask(){
     console.log("login successfull");
@@ -181,6 +174,7 @@ function loadSignUpTemplate(){
 
 /**
  * to get the sign in template the steps must be removed
+ * 
  */
 function backToSignin(){
     let signUp = document.getElementById('logiSignUp');
@@ -202,7 +196,7 @@ function acceptTerms() {
 }
 
 /**
- * if the user have typed 3 letters the img form the inputfield password will change form the lock to the visibility off 
+ *  if the user have typed 3 letters the img form the inputfield password will change form the lock to the visibility off 
  * set the enabled css class to show the log in button
  */
 function togglePasswordIcons() {
@@ -329,73 +323,19 @@ function checkPasswords(){
 }
 
 /**
- * for each user an random color that makes the user individual
- * the function create an random color an that color will be pushed with the user datas in the array
+ * Load user data from Firebase Realtime Database into global users array
  */
-function createRandomColor(){
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for(let index = 0; index < 6; index++){
-        color += letters[Math.floor(Math.random() * 16)];
+async function onloadFunction() {
+    let userResponse = await loadData("users");
+    let userKeyArray = Object.keys(userResponse);
+
+    for (let index = 0; index < userKeyArray.length; index++) {
+        let userEntries = Object.values(userResponse[userKeyArray[index]]);
+        for (let entry of userEntries) {
+            users.push(entry);
+        }
     }
-    return color
+    console.log("Global users array:", users);
 }
 
-/**
- * Function to push new user data to Firebase Realtime Database
- */
-async function pushNewUserinFireBaseArray() {
-    let userName = document.getElementById('signUpName').value;
-    let userMail = document.getElementById('loginInputMail').value;
-    let userPassword = document.getElementById('signUpConfirmInputPassword').value;
-    const color = createRandomColor();
-    const userData = {
-        name: userName,
-        email: userMail,
-        password: userPassword,
-        color: color,
-        createdAt: new Date().toISOString()
-    };
-    try {
-        let response = await postData(`users/${userMail.replace('.', '_')}`, userData);
-        console.log("User successfully added to Realtime Database:", response);
-        loadLoginTemplate();
-        showSignUpInformation();
-    } catch (error) {
-        console.error("Error adding user to Realtime Database:", error);
-    }
-}
 
-/**
- * Function to show sign up information
- */
-function showSignUpInformation() {
-    window.location.href = 'confirmation.html?msg=You have successfully registered';
-}
-
-/**
- * Function to post data to Firebase Realtime Database
- */
-async function postData(path = "", data = {}) {
-    let response = await fetch(BASE_URL + path + ".json", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data)
-    });
-    return response.json();
-}
-
-/**
- * Function to generate a random color
- * Randomly generated color in hex format
- */
-function createRandomColor() {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
