@@ -21,7 +21,7 @@ function getUserLoginTemplate(){
             <img id="togglePasswordIcon" src="./assets/img/lock.png" alt="Show/Hide Password" onclick="togglePasswordVisibility()"> 
         </div> 
         <div class="login_input_mail_info_error_container">
-            <small id="loginInputWrongPasswordError" class="login_input_mail_info login_d_none">E-Mail-Adresse und Passwort stimmen nicht überein</small> 
+            <small id="loginInputPasswordError" class="login_input_mail_info">E-Mail-Adresse und Passwort stimmen nicht überein</small> 
         </div>
         <div class="login_buttons"> 
             <button id="loginButton" onclick="checkLoginPassword()" class="login_buttons_styles" disabled>

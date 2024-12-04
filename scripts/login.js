@@ -51,16 +51,12 @@ function loadLoginTemplate() {
  */
 function checkEmailInput() {
     let input = document.getElementById('loginInputMail');
-    let inputMailError = document.getElementById('loginInputMailError');
-    let inputPasswordError = document.getElementById('loginInputPasswordError');
     let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (input.value === '') {
         input.classList.remove('login_input_error');
-        inputPasswordError.classList.add('login_d_none');
         disableLogInBottun()
     } else if (!emailPattern.test(input.value)) {
         input.classList.add('login_input_error');
-        inputMailError.classList.remove('login_d_none')
         checkLoginInputfields()
     } else {
         input.classList.remove('login_input_error');
@@ -90,13 +86,17 @@ function checkLoginInputfields() {
     const loginButton = document.getElementById('loginButton');
     let input = document.getElementById('loginInputMail');
     let passwordInput = document.getElementById('loginInputPassword');
+    let mailInfo = document.getElementById('loginInputMailError');
     
     if (input.value.trim() === "" || passwordInput.value.length < 3) {
         loginButton.disabled = true;
         loginButton.classList.remove('enabled');
+        mailInfo.classList.remove('login_d_none');
     } else {
         loginButton.disabled = false;
         loginButton.classList.add('enabled');
+        document.getElementById('loginInputMailError').classList.add('login_d_none');
+          
     }
 }
 
