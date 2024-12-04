@@ -21,7 +21,9 @@ async function pushNewUserinFireBaseArray(event) {
         email: userMail,
         password: userPassword,
         color: color,
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toISOString(),
+        task: 0,
+
     };
     try {
         let response = await postData(`users/${userMail.replace('.', '_')}`, userData);
@@ -35,7 +37,6 @@ async function pushNewUserinFireBaseArray(event) {
 
 /**
  * Shows the sign up information.
- * 
  * This function displays an alert message confirming successful registration.
  */
 function showSignUpInformation() {
@@ -44,10 +45,8 @@ function showSignUpInformation() {
 
 /**
  * Posts data to the Firebase Realtime Database.
- * 
  * This function sends a POST request to the specified path in the Firebase Realtime Database
  * with the provided data.
- * 
  *  The response data from Firebase.
  */
 async function postData(path = "", data = {}) {
@@ -74,4 +73,3 @@ function createRandomColor() {
     }
     return color;
 }
-

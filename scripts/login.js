@@ -7,6 +7,31 @@ function init(){
 }
 
 /**
+ * Fetch the password for a given email from Firebase Realtime Database
+ * The email input value with '.' replaced by '_'
+ */
+async function fetchPassword(userMail) {
+    let path = `users/`;
+    let inputPasswordError = document.getElementById('loginInputPasswordError');
+    try {
+        let users = await loadData(path);
+        for (let userId in users) {
+            let user = users[userId];
+
+            for (let subId in user) {
+                let userDetails = user[subId];
+                if (userDetails.email === userMail.replace(/_/g, '.')) {
+                    fetchedPassword = userDetails.password;
+                    return;
+                }
+            }
+        }
+        inputPasswordError.classList.remove('login_d_none');
+    } catch (error) {        
+    }
+}
+
+/**
  * Let the logo move from the middle of the page to the left top corner.
  * The class 'login_moved' lets the logo move and change the size.
  * the class login_move_image_container must be removed after the move to create new contents
@@ -65,33 +90,34 @@ function checkEmailInput() {
         document.getElementById('loginInputMailError').classList.remove('login_d_none');
         fetchPassword(input.value.replace(/\./g, '_')); 
     }
-
     checkLoginInputfields();
 }
 
 /**
  * Checks the email and password input fields.
  * 
- * This function verifies if the email field is empty or the password is less than 3 characters long.
- * If either condition is true, the login button is disabled.
+ * This function verifies if the email field contains a valid email address and the password is at least 3 characters long.
+ * If either condition is not met, the login button is disabled.
  * If both fields contain valid entries, the button is enabled.
  */
 function checkLoginInputfields() {
     const loginButton = document.getElementById('loginButton');
-    let input = document.getElementById('loginInputMail');
-    let passwordInput = document.getElementById('loginInputPassword');
-    
-    if (input.value.trim() === "" || passwordInput.value.length < 3) {
-        loginButton.disabled = true;
-        loginButton.classList.remove('enabled');
-        
-    } else {
+    const emailInput = document.getElementById('loginInputMail');
+    const passwordInput = document.getElementById('loginInputPassword');
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    const isEmailValid = emailPattern.test(emailInput.value.trim());
+    const isPasswordValid = passwordInput.value.length >= 3;
+
+    if (isEmailValid && isPasswordValid) {
         loginButton.disabled = false;
         loginButton.classList.add('enabled');
-
-          
+    } else {
+        loginButton.disabled = true;
+        loginButton.classList.remove('enabled');
     }
 }
+
 
 /**
  * makes the button disabled to not allow the user to klick the log in bottun
@@ -101,31 +127,6 @@ function disableLogInBottun(){
     const loginButton = document.getElementById('loginButton');
     loginButton.disabled = true; 
     loginButton.classList.add('disabled');
-}
-
-/**
- * Fetch the password for a given email from Firebase Realtime Database
- * The email input value with '.' replaced by '_'
- */
-async function fetchPassword(userMail) {
-    let path = `users/`;
-    let inputPasswordError = document.getElementById('loginInputPasswordError');
-    try {
-        let users = await loadData(path);
-        for (let userId in users) {
-            let user = users[userId];
-
-            for (let subId in user) {
-                let userDetails = user[subId];
-                if (userDetails.email === userMail.replace(/_/g, '.')) {
-                    fetchedPassword = userDetails.password;
-                    return;
-                }
-            }
-        }
-        inputPasswordError.classList.remove('login_d_none');
-    } catch (error) {        
-    }
 }
 
 /**
@@ -203,7 +204,6 @@ function acceptTerms() {
  */
 function togglePasswordIcons() {
     const loginButton = document.getElementById('loginButton');
-    loginButton.disabled = false; 
     loginButton.classList.add('enabled');
     
     let passwordInput = document.getElementById('loginInputPassword');
@@ -213,9 +213,8 @@ function togglePasswordIcons() {
 
     } else {
         toggleIcon.src = './assets/img/lock.png';
-        loginButton.disabled = true; 
-        loginButton.classList.add('disabled');
     }
+    checkLoginInputfields();
 }
 
 /**
@@ -339,5 +338,3 @@ async function onloadFunction() {
     }
     console.log("Global users array:", users);
 }
-
-
