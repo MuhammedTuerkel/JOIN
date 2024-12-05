@@ -7,6 +7,31 @@ function init(){
 }
 
 /**
+ * Fetch the password for a given email from Firebase Realtime Database
+ * The email input value with '.' replaced by '_'
+ */
+async function fetchPassword(userMail) {
+    let path = `users/`;
+    let inputPasswordError = document.getElementById('loginInputPasswordError');
+    try {
+        let users = await loadData(path);
+        for (let userId in users) {
+            let user = users[userId];
+
+            for (let subId in user) {
+                let userDetails = user[subId];
+                if (userDetails.email === userMail.replace(/_/g, '.')) {
+                    fetchedPassword = userDetails.password;
+                    return;
+                }
+            }
+        }
+        inputPasswordError.classList.remove('login_d_none');
+    } catch (error) {        
+    }
+}
+
+/**
  * Let the logo move from the middle of the page to the left top corner.
  * The class 'login_moved' lets the logo move and change the size.
  * the class login_move_image_container must be removed after the move to create new contents
@@ -19,6 +44,7 @@ function moveImage() {
     let main = document.getElementById('loginMain');
     let loginFooter = document.getElementById('loginFooter');
     
+
     setTimeout(function() {
         position.classList.remove('login_move_image_container');
         header.classList.remove('login_d_none');
@@ -50,44 +76,48 @@ function loadLoginTemplate() {
  */
 function checkEmailInput() {
     let input = document.getElementById('loginInputMail');
-    let inputMailError = document.getElementById('loginInputMailError');
-    let inputPasswordError = document.getElementById('loginInputPasswordError');
     let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (input.value === '') {
         input.classList.remove('login_input_error');
-        inputPasswordError.classList.add('login_d_none');
+        document.getElementById('loginInputMailError').classList.add('login_d_none');
         disableLogInBottun()
     } else if (!emailPattern.test(input.value)) {
         input.classList.add('login_input_error');
-        inputMailError.classList.remove('login_d_none')
-        checkLoginIputfields()
+        document.getElementById('loginInputMailError').classList.remove('login_d_none');
+        checkLoginInputfields()
     } else {
         input.classList.remove('login_input_error');
-        inputMailError.classList.add('login_d_none');
+        document.getElementById('loginInputMailError').classList.remove('login_d_none');
         fetchPassword(input.value.replace(/\./g, '_')); 
     }
+    checkLoginInputfields();
 }
 
 /**
  * Checks the email and password input fields.
  * 
- * This function verifies if the email field is empty or the password is less than 3 characters long.
- * If either condition is true, the login button is disabled.
+ * This function verifies if the email field contains a valid email address and the password is at least 3 characters long.
+ * If either condition is not met, the login button is disabled.
  * If both fields contain valid entries, the button is enabled.
  */
 function checkLoginInputfields() {
     const loginButton = document.getElementById('loginButton');
-    let input = document.getElementById('loginInputMail');
-    let passwordInput = document.getElementById('loginInputPassword');
-    
-    if (input.value.trim() === "" || passwordInput.value.length < 3) {
-        loginButton.disabled = true;
-        loginButton.classList.remove('enabled');
-    } else {
+    const emailInput = document.getElementById('loginInputMail');
+    const passwordInput = document.getElementById('loginInputPassword');
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    const isEmailValid = emailPattern.test(emailInput.value.trim());
+    const isPasswordValid = passwordInput.value.length >= 3;
+
+    if (isEmailValid && isPasswordValid) {
         loginButton.disabled = false;
         loginButton.classList.add('enabled');
+    } else {
+        loginButton.disabled = true;
+        loginButton.classList.remove('enabled');
     }
 }
+
 
 /**
  * makes the button disabled to not allow the user to klick the log in bottun
@@ -100,52 +130,19 @@ function disableLogInBottun(){
 }
 
 /**
- * Checks the email and password input fields.
- * This function verifies if the email field is empty or the password is less than 3 characters long.
- * If either condition is true, the login button is disabled.
- * If both fields contain valid entries, the button is enabled.
+ * Fetch data from Firebase Realtime Database
+ * users is the path to the data in the database 
+ * 
  */
-function checkLoginInputfields() {
-    const loginButton = document.getElementById('loginButton');
-    let input = document.getElementById('loginInputMail');
-    let passwordInput = document.getElementById('loginInputPassword');
-    
-    if (input.value.trim() === "" || passwordInput.value.length < 3) {
-        loginButton.disabled = true;
-        loginButton.classList.remove('enabled');
-    } else {
-        loginButton.disabled = false;
-        loginButton.classList.add('enabled');
-    }
-}
-
-/**
- * Fetch the password for a given email from Firebase Realtime Database
- * The email input value with '.' replaced by '_'
- */
-async function fetchPassword(userMail) {
-    let path = `users/`;
-    let inputPasswordError = document.getElementById('loginInputPasswordError');
-    try {
-        let users = await loadData(path);
-        for (let userId in users) {
-            let user = users[userId];
-
-            for (let subId in user) {
-                let userDetails = user[subId];
-                if (userDetails.email === userMail.replace(/_/g, '.')) {
-                    fetchedPassword = userDetails.password;
-                    return;
-                }
-            }
-        }
-        inputPasswordError.classList.remove('login_d_none');
-    } catch (error) {        
-    }
+async function loadData(path = "") {
+    let response = await fetch(BASE_URL + path + ".json");
+    let responseToJson = await response.json();
+    return responseToJson;
 }
 
 /**
  * check des entered password with the created passwort and gives the user feedbakc if it is corect or false
+ * 
  */
 function checkLoginPassword(){
     let enteredPassword = document.getElementById('loginInputPassword').value;
@@ -158,7 +155,6 @@ function checkLoginPassword(){
         wrongPassword.classList.remove('login_d_none')
     }
 }
-
 
 function goToaddTask(){
     console.log("login successfull");
@@ -181,6 +177,7 @@ function loadSignUpTemplate(){
 
 /**
  * to get the sign in template the steps must be removed
+ * 
  */
 function backToSignin(){
     let signUp = document.getElementById('logiSignUp');
@@ -202,12 +199,11 @@ function acceptTerms() {
 }
 
 /**
- * if the user have typed 3 letters the img form the inputfield password will change form the lock to the visibility off 
+ *  if the user have typed 3 letters the img form the inputfield password will change form the lock to the visibility off 
  * set the enabled css class to show the log in button
  */
 function togglePasswordIcons() {
     const loginButton = document.getElementById('loginButton');
-    loginButton.disabled = false; 
     loginButton.classList.add('enabled');
     
     let passwordInput = document.getElementById('loginInputPassword');
@@ -217,9 +213,8 @@ function togglePasswordIcons() {
 
     } else {
         toggleIcon.src = './assets/img/lock.png';
-        loginButton.disabled = true; 
-        loginButton.classList.add('disabled');
     }
+    checkLoginInputfields();
 }
 
 /**
@@ -329,73 +324,17 @@ function checkPasswords(){
 }
 
 /**
- * for each user an random color that makes the user individual
- * the function create an random color an that color will be pushed with the user datas in the array
+ * Load user data from Firebase Realtime Database into global users array
  */
-function createRandomColor(){
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for(let index = 0; index < 6; index++){
-        color += letters[Math.floor(Math.random() * 16)];
+async function onloadFunction() {
+    let userResponse = await loadData("users");
+    let userKeyArray = Object.keys(userResponse);
+
+    for (let index = 0; index < userKeyArray.length; index++) {
+        let userEntries = Object.values(userResponse[userKeyArray[index]]);
+        for (let entry of userEntries) {
+            users.push(entry);
+        }
     }
-    return color
-}
-
-/**
- * Function to push new user data to Firebase Realtime Database
- */
-async function pushNewUserinFireBaseArray() {
-    let userName = document.getElementById('signUpName').value;
-    let userMail = document.getElementById('loginInputMail').value;
-    let userPassword = document.getElementById('signUpConfirmInputPassword').value;
-    const color = createRandomColor();
-    const userData = {
-        name: userName,
-        email: userMail,
-        password: userPassword,
-        color: color,
-        createdAt: new Date().toISOString()
-    };
-    try {
-        let response = await postData(`users/${userMail.replace('.', '_')}`, userData);
-        console.log("User successfully added to Realtime Database:", response);
-        loadLoginTemplate();
-        showSignUpInformation();
-    } catch (error) {
-        console.error("Error adding user to Realtime Database:", error);
-    }
-}
-
-/**
- * Function to show sign up information
- */
-function showSignUpInformation() {
-    window.location.href = 'confirmation.html?msg=You have successfully registered';
-}
-
-/**
- * Function to post data to Firebase Realtime Database
- */
-async function postData(path = "", data = {}) {
-    let response = await fetch(BASE_URL + path + ".json", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data)
-    });
-    return response.json();
-}
-
-/**
- * Function to generate a random color
- * Randomly generated color in hex format
- */
-function createRandomColor() {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
+    console.log("Global users array:", users);
 }
