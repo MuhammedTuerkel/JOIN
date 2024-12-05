@@ -9,12 +9,16 @@ async function onloadFunction() {
     let userKeyArray = Object.keys(userResponse);
 
     for (let index = 0; index < userKeyArray.length; index++) {
-        let userEntries = Object.values(userResponse[userKeyArray[index]]);
+        var userEntries = Object.values(userResponse[userKeyArray[index]]);
         for (let entry of userEntries) {
             users.push(entry);
         }
     }
     console.log("Global users array:", users);
+    let JSONObject  = await userEntries.json();
+    console.log(JSONObject);
+    
+    
 }
 
 /**

@@ -13,9 +13,10 @@
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="JOIN" />
     <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+    <script src="script.js"></script>
 </head>
 
-<body>
+<body onclick="Init()">
     <div class="side-navigation">
         <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
         <div class="menu">
@@ -45,14 +46,16 @@
         <header>
             <div class="header-content">
                 <p>Kanban Project Management Tool</p>
-                <div id="help-user" class="help-user">
-                    <img src="assets/icons/help-symbol-icon-default.svg" alt="" style="cursor: pointer;">
-                    <span onclick="showSubmenu()" class="user">M</span>
-                </div>
-                <div id="Submenu" class="Submenu" style="display: none;">
-                    <div class="Submenu-buttons">Legal Notice</div>
-                    <div class="Submenu-buttons">Privacy Policy</div>
-                    <div class="Submenu-buttons">Log out</div>
+                <div class="d-flex-column">
+                    <div id="help-user" class="help-user">
+                        <img src="assets/icons/help-symbol-icon-default.svg" alt="" style="cursor: pointer;">
+                        <span onclick="showSubmenu(event)" class="user">M</span>
+                    </div>
+                    <div onclick="stopEventBubbling(event)" id="Submenu" class="Submenu" style="display: none;">
+                        <div class="Submenu-buttons">Legal Notice</div>
+                        <div class="Submenu-buttons">Privacy Policy</div>
+                        <div class="Submenu-buttons">Log out</div>
+                    </div>
                 </div>
             </div>
         </header>
@@ -112,6 +115,6 @@
             <h1>Sofia Müller</h1>
         </div>
     </div>
-    </body>
+</body>
 
 </html>

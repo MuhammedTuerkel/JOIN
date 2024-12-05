@@ -1,9 +1,12 @@
 let greeting;
 
+function Init() {
+    hideSubMenu();
+}
 
-function showSubmenu() {
+function showSubmenu(event) {
+    event.stopPropagation();
     document.getElementById('Submenu').style = "";
-
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -18,5 +21,13 @@ document.addEventListener("DOMContentLoaded", function () {
     else if (hourNow >= 18 && hourNow < 24) {
         greeting = "Good Evening"
     }
-document.getElementById('greeting').innerHTML = greeting;
+    document.getElementById('greeting').innerHTML = greeting;
 });
+
+function stopEventBubbling(event) {
+    event.stopPropagation();
+}
+
+function hideSubMenu() {
+    document.getElementById('Submenu').style = "display:none;"
+}
