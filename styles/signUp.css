@@ -1,0 +1,180 @@
+.signup_card{
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-right: 88px;
+    padding-bottom: 48px;
+    padding-left: 88px;
+    border: solid 1px #D1D1D1;
+    border-radius: 30px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.05);
+    margin-left: 18px;
+    margin-right: 18px;
+    align-items: center;
+    font-family: "Inter", serif;
+    justify-content: space-around;
+}
+
+.login_sign_up_card_headline{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.login_sign_up_card_headline h1{
+     font-size: 52px;
+     margin-bottom: 12px;
+     font-weight: bold;
+     margin-top: 20px;
+}
+
+.login_input_field {
+    position: relative;
+    margin-bottom: 2.5em; /* Etwas mehr Platz für die Fehlermeldungen */
+}
+
+.login_input_mail_info {
+    color: red;
+    font-size: 0.875em;
+    position: absolute;
+    bottom: -1.5em; /* Positioniert die Fehlermeldung direkt unter dem Input-Feld */
+    left: 0;
+    width: 100%;
+}
+
+
+.login_checkbox_container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5em;
+}
+
+.login_checkbox {
+    margin-right: 0.5em;
+}
+
+.signup_buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.login_signup_buttons_styles {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.login_signup_buttons_styles_clear {
+    background-color: #f8f9fa;
+    color: black;
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    border-radius: 4px;
+    text-align: center;
+}
+.login_checkbox_container{
+    display: flex;
+    flex-direction: row;
+}
+
+.login_checkbox {
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.login_checkbox input {
+    height: 24px;
+    width: 24px;
+    border: solid 3px black;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.login_checkbox input:focus, .login_checkbox input:hover {
+    box-shadow: inset 0px 0px 10px #9c9c9c;
+}
+
+.login_checkbox label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #ababab;
+    margin-left: 8px;
+    font-size: 19px;
+}
+
+.login_checkbox p {
+    color: #29abe2;
+    margin: 0;
+    cursor: pointer;
+}
+
+.login_checkbox p:hover {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.login_checkbox .hover_target:hover ~ .form-form_check_input-input {
+    background-color: #d3d3d3;
+}
+
+.login_back_to_sign_in{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    position: absolute;
+    align-items: flex-start;
+    top: 70px;
+    left: 88px;
+    cursor: pointer;
+}
+
+.signup_buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 55px;
+    gap: 32px;
+}
+
+.login_signup_buttons_styles {
+    border-radius: 8px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 24px;
+    padding-right: 24px;
+    background-color: #ccc;
+    border: none;
+    border-radius: 5px;
+    cursor: not-allowed;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    font-size: 19px;
+}
+
+.login_signup_buttons_styles:enabled {
+    background-color: #2a3647;
+    color: white;
+    cursor: pointer;
+}
+
+.login_signup_buttons_styles:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.login_signup_buttons_styles:hover:enabled {
+    background-color: #1a8ac2;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}

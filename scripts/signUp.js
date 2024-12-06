@@ -1,45 +1,89 @@
-
 /**
- * to get the sign up template at first the div container get th d_none class
- * the login header have an flex box now the class is removed 
- * now can load the template
- * 
+ * Loads the Sign-Up template.
+ * Hides the login header and displays the Sign-Up form.
  */
-function loadSignUpTemplate(){
+function loadSignUpTemplate() {
     let loginHeader = document.getElementById('loginHead');
-    loginHeader.classList.add('login_d_none');
     let signUpPage = document.getElementById('loginContent');
-    signUpPage.innerHTML = "",
+    signUpPage.innerHTML = "";
     signUpPage.innerHTML += getSignUpTemplate();
     loginHeader.classList.add('login_d_none');
 }
 
 /**
- * to get the sign in template the steps must be removed
- * 
+ * Returns to the Login template from the Sign-Up template.
+ * Clears the Sign-Up form and displays the login header.
  */
-function backToLogIn(){
+function backToLogIn() {
     let signUp = document.getElementById('logiSignUp');
     signUp.innerHTML = "";
     let loginHeader = document.getElementById('loginHead');
-    loginHeader.classList.remove('login_d_none')
     loginHeader.classList.remove('login_d_none');
     loadLoginTemplate();
 }
 
 /**
- * if the checkbox is checkt the button where enabled do go to the next step
- *  
+ * Checks if the Sign-Up name input field is valid.
+ * Displays an error message if the name contains invalid characters.
  */
-function acceptTerms() {
-    let checkBox = document.getElementById('acceptTerms');
-    let button = document.getElementById('signUpButton');
-    button.disabled = !checkBox.checked;
+function checkSignUpNameInput() {
+    let nameInput = document.getElementById('signUpName');
+    let nameError = document.getElementById('signUpNameError');
+    let namePattern = /^[A-Za-zÄäÖöÜüß\s]+$/; // Erlaubt nur Buchstaben und Leerzeichen
+
+    if (namePattern.test(nameInput.value.trim())) {
+        nameInput.classList.remove('login_input_error');
+        nameError.classList.add('login_d_none');
+    } else {
+        nameInput.classList.add('login_input_error');
+        nameError.classList.remove('login_d_none');
+    }
+    validateSignUpForm();
 }
 
 /**
- *  if the user have typed 3 letters the img form the inputfield password will change form the lock to the visibility off 
- * 
+ * Checks if the email input field is valid.
+ * Displays an error message if the email format is invalid.
+ */
+function checkSignUpEmailInput() {
+    let input = document.getElementById('signUpInputMail');
+    let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    let emailError = document.getElementById('signUpInputMailError');
+
+    if (input.value === '') {
+        input.classList.remove('login_input_error');
+        emailError.classList.add('login_d_none');
+        disableSignUpButton();
+    } else if (!emailPattern.test(input.value)) {
+        input.classList.add('login_input_error');
+        emailError.classList.remove('login_d_none');
+    } else {
+        input.classList.remove('login_input_error');
+        emailError.classList.add('login_d_none');
+    }
+    validateSignUpForm();
+}
+
+/**
+ * Checks if the Sign-Up password meets the requirements.
+ * Displays an error message if the password is invalid.
+ */
+function checkPasswordInput() {
+    let passwordInput = document.getElementById('signUpInputPassword');
+    let passwordError = document.getElementById('signUpPasswordError');
+    if (passwordInput.value.length < 3) {
+        passwordInput.classList.add('login_input_error');
+        passwordError.classList.remove('login_d_none');
+    } else {
+        passwordInput.classList.remove('login_input_error');
+        passwordError.classList.add('login_d_none');
+    }
+    validateSignUpForm();
+}
+
+
+/**
+ * Toggles the password visibility icon based on the password input length.
  */
 function toggleSignUpPasswordIcon() {
     let passwordInput = document.getElementById('signUpInputPassword');
@@ -52,8 +96,7 @@ function toggleSignUpPasswordIcon() {
 }
 
 /**
- * if the user will show the password so he can klick on the eye to watch his password
- * 
+ * Toggles the visibility of the Sign-Up password.
  */
 function toggleSignUpPasswordVisibility() {
     let passwordInput = document.getElementById('signUpInputPassword');
@@ -68,34 +111,21 @@ function toggleSignUpPasswordVisibility() {
 }
 
 /**
- *  if the user have typed 3 letters the img form the inputfield password will change form the lock to the visibility off 
- * 
+ * Toggles the password visibility icon based on the confirm password input length.
  */
 function toggleSignUpConfirmPasswordIcon() {
     let passwordInput = document.getElementById('signUpConfirmInputPassword');
     let toggleIcon = document.getElementById('togglePasswordIconSignUpConfirm');
     if (passwordInput.value.length >= 3) {
         toggleIcon.src = './assets/img/visibility_off.png';
-        
     } else {
         toggleIcon.src = './assets/img/lock.png';
-        checkSignUpPasswords()
-    } 
+        checkSignUpPasswords();
+    }
 }
 
 /**
- * two functions in one oninputfield must react in one function.
- * toggleSignUp let the user with the click on the crossed out eye to see his input
- * checkSignUpPasswords take the value from the signUpPassword Inputfield and the vlauer from the SignUp Confirm Password input field and check them.
- */
-function toggleAndCheckInputConfirmPassword(){
-    toggleSignUpConfirmPasswordIcon();
-    checkSignUpPasswords();
-}
-
-/**
- * if the user will show the password so he can klick on the eye to watch his password
- * 
+ * Toggles the visibility of the Sign-Up confirm password.
  */
 function toggleSignUpConfirmPasswordVisibility() {
     let passwordInput = document.getElementById('signUpConfirmInputPassword');
@@ -109,20 +139,68 @@ function toggleSignUpConfirmPasswordVisibility() {
     }
 }
 
-/** SIGN UP
- * sign up check password and confirm password ist the same
- * if is not the sam the calss login_input_error wil be added
+/**
+ * Toggles the password visibility and checks if passwords match.
  */
-function checkSignUpPasswords(){
+function toggleAndCheckInputConfirmPassword() {
+    toggleSignUpConfirmPasswordIcon();
+    checkSignUpPasswords();
+}
+
+/**
+ * Checks if the Sign-Up password and confirm password match.
+ * Displays an error message if the passwords do not match.
+ * Disables the checkbox if passwords do not match.
+ */
+function checkSignUpPasswords() {
     let password = document.getElementById('signUpInputPassword').value;
     let confirmPassword = document.getElementById('signUpConfirmInputPassword').value;
     let checkbox = document.getElementById('acceptTerms');
+    let passwordMatchError = document.getElementById('signUpConfirmPasswordError');
 
-    if(password === confirmPassword){
+    if (password === confirmPassword && password.length >= 3) {
         document.getElementById('signUpConfirmInputPassword').classList.remove('login_input_error');
+        passwordMatchError.classList.add('login_d_none');
         checkbox.disabled = false;
-    }else{
+    } else {
         document.getElementById('signUpConfirmInputPassword').classList.add('login_input_error');
+        passwordMatchError.classList.remove('login_d_none');
         checkbox.disabled = true;
     }
+    validateSignUpForm();
+}
+
+/**
+ * Checks if all Sign-Up input fields are correctly filled.
+ * Enables the checkbox if all fields are valid.
+ */
+function validateSignUpForm() {
+    let name = document.getElementById('signUpName').value.trim();
+    let email = document.getElementById('signUpInputMail').value.trim();
+    let password = document.getElementById('signUpInputPassword').value.trim();
+    let confirmPassword = document.getElementById('signUpConfirmInputPassword').value.trim();
+    let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    let namePattern = /^[A-Za-zÄäÖöÜüß\s]+$/; // Erlaubt nur Buchstaben und Leerzeichen
+    let isFormValid = namePattern.test(name) && emailPattern.test(email) && password.length >= 3 && password === confirmPassword;
+
+    let checkbox = document.getElementById('acceptTerms');
+    checkbox.disabled = !isFormValid;
+}
+
+/**
+ * Toggles the disabled state of the Sign-Up button based on the checkbox state.
+ */
+function acceptTerms() {
+    let checkBox = document.getElementById('acceptTerms');
+    let button = document.getElementById('signUpButton');
+    button.disabled = !checkBox.checked;
+}
+
+/**
+ * Disables the login button to prevent the user from clicking the login button.
+ */
+function disableSignUpButton() {
+    const loginButton = document.getElementById('signUpButton');
+    loginButton.disabled = true; 
+    loginButton.classList.add('disabled');
 }
