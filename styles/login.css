@@ -2,44 +2,51 @@
     max-width: 1920px;
     width: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center; /* Zentriert den Inhalt horizontal */
+    align-items: center; /* Zentriert den Inhalt vertikal */
     top: 0;
-    height: 100dvh;
+    height: 100vh; /* Volle Höhe des Viewports */
     margin: 0;
     padding: 0;
-    background-color: #F6F7F8;
+    background-color: #F6F7F8; /* Anfangs Weiß */
     font-family: "Inter", serif;
     flex-direction: column;
+    transition: background-color 1s ease; /* Übergang für Hintergrundfarbe */
 }
 
-.login_d_none{
+.login_d_none {
     display: none;
 }
 
 .login_header {
     height: 100px;
-    position: relative;
-    margin-top: 80px;
-    margin-left: 77px;
-    margin-right: 77px;
+    position: fixed; /* Stellt sicher, dass der Header immer sichtbar ist und oben bleibt */
+    top: 0; /* Positioniert den Header ganz oben auf der Seite */
+    width: 100%; /* Stellt sicher, dass der Header die gesamte Breite des Bildschirms einnimmt */
+    margin-top: 0; /* Entfernt zusätzlichen Abstand */
+    margin-left: 0; /* Entfernt zusätzlichen Abstand */
+    margin-right: 0; /* Entfernt zusätzlichen Abstand */
+    z-index: 1000; /* Stellt sicher, dass der Header vor anderen Elementen angezeigt wird */
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 77px; /* Innenabstand für den Inhalt */
 }
 
-.login_head{
+
+.login_head {
     display: flex;
     justify-content: space-between;
-    height: 170px;
 }
 
 .login_move_image_container {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: fixed; /* Sicherstellen, dass es über dem gesamten Bildschirm liegt */
+    height: 100vh; /* Volle Höhe des Viewports */
+    width: 100vw; /* Volle Breite des Viewports */
+    top: 0;
+    left: 0;
     margin: 0;
 }
 
@@ -47,25 +54,28 @@
     transition: all 1s ease;
     width: 274px;
     height: 334.07px;
-    position: absolute; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Zentrale Positionierung */
 }
 
 .login_moved {
-    animation: moveAndResize 0.8s forwards;
+    animation: moveAndResize 1s forwards;
 }
 
 @keyframes moveAndResize {
     0% {
-        top: 50%; 
-        left: 50%; 
+        top: 50%;
+        left: 50%;
         transform: translate(-50%, -50%);
         width: 274px;
         height: 334.07px;
     }
     100% {
-        top: 80px; 
-        left: 77px; 
-        transform: translate(0, 0); 
+        top: 20px;
+        left: 77px; /* Position in der linken oberen Ecke mit Einrückung */
+        transform: translate(0, 0);
         width: 137.03px;
         height: 167.035px;
     }
@@ -75,6 +85,8 @@
     display: flex;
     top: 67px;
 }
+
+
 
 @keyframes pulse {
     0%, 100% {
@@ -145,6 +157,8 @@
     width: 279px;
     justify-content: center;
     align-items: center;
+    margin-top: 35px;
+    margin-right: 77px;
 }
 
 .login_header_nav a{

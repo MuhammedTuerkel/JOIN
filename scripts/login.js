@@ -32,25 +32,25 @@ async function fetchPassword(userMail) {
 }
 
 /**
- * Let the logo move from the middle of the page to the left top corner.
+ * Let the logo move from the middle of the page to the upper left corner.
  * The class 'login_moved' lets the logo move and change the size.
- * the class login_move_image_container must be removed after the move to create new contents
+ * The class 'login_move_image_container' must be removed after the move to create new contents.
  */
 function moveImage() {
     let image = document.getElementById('loginMovableImage');
-    image.classList.toggle('login_moved');
     let position = document.getElementById('loginMoveImgContainer');
-    let header = document.getElementById('login_header');
+    let header = document.getElementById('loginHead');
     let main = document.getElementById('loginMain');
     let loginFooter = document.getElementById('loginFooter');
-    
-
+    let body = document.querySelector('.login_body');
+    image.classList.add('login_moved');
+    body.style.backgroundColor = 'transparent';
     setTimeout(function() {
         position.classList.remove('login_move_image_container');
         header.classList.remove('login_d_none');
         main.classList.remove('login_d_none');
         loginFooter.classList.remove('login_d_none');
-    }, 1080);
+    }, 1000);
 }
 
 /**
@@ -105,19 +105,19 @@ function checkLoginInputfields() {
     const emailInput = document.getElementById('loginInputMail');
     const passwordInput = document.getElementById('loginInputPassword');
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
     const isEmailValid = emailPattern.test(emailInput.value.trim());
     const isPasswordValid = passwordInput.value.length >= 3;
 
     if (isEmailValid && isPasswordValid) {
         loginButton.disabled = false;
         loginButton.classList.add('enabled');
+        loginButton.classList.remove('disabled');
     } else {
         loginButton.disabled = true;
         loginButton.classList.remove('enabled');
+        loginButton.classList.add('disabled');
     }
 }
-
 
 /**
  * makes the button disabled to not allow the user to klick the log in bottun
@@ -150,13 +150,15 @@ function checkLoginPassword(){
     if(enteredPassword === fetchedPassword){
         wrongPassword.classList.add('login_d_none');
         console.log('login successfull');
-        goToaddTask();
+        goToAddTask();
     } else {
-        wrongPassword.classList.remove('login_d_none')
+        wrongPassword.classList.remove('login_d_none');
+        document.getElementById('loginInputPassword').classList.add('login_input_error');
+        document.getElementById('loginInputMail').classList.add('login_input_error');
     }
 }
 
-function goToaddTask(){
+function goToAddTask(){
     console.log("login successfull");
 }
 
@@ -204,6 +206,7 @@ function acceptTerms() {
  */
 function togglePasswordIcons() {
     const loginButton = document.getElementById('loginButton');
+    let passwortInput = document.getElementById('loginInputPassword')
     loginButton.classList.add('enabled');
     
     let passwordInput = document.getElementById('loginInputPassword');
@@ -213,6 +216,8 @@ function togglePasswordIcons() {
 
     } else {
         toggleIcon.src = './assets/img/lock.png';
+        passwortInput.classList.remove('login_input_error');
+        document.getElementById('loginInputMail').classList.remove('login_input_error');
     }
     checkLoginInputfields();
 }

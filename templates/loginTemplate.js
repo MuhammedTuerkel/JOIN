@@ -87,7 +87,10 @@ function getSignUpTemplate(){
     `
 }
 
-
+/**
+ * 
+ * 
+ */
 function getInfoForValidMailAdressTemplate(){
     return `
     <small id="loginInputMailError" class="login_input_mail_info login_d_none">Bitte geben Sie eine gültige E-Mail-Adresse ein.</small>
