@@ -2,16 +2,16 @@
     max-width: 1920px;
     width: 100%;
     display: flex;
-    justify-content: center; /* Zentriert den Inhalt horizontal */
-    align-items: center; /* Zentriert den Inhalt vertikal */
+    justify-content: center;
+    align-items: center;
     top: 0;
-    height: 100vh; /* Volle Höhe des Viewports */
+    height: 100vh;
     margin: 0;
     padding: 0;
-    background-color: #F6F7F8; /* Anfangs Weiß */
+    background-color: #F6F7F8;
     font-family: "Inter", serif;
     flex-direction: column;
-    transition: background-color 1s ease; /* Übergang für Hintergrundfarbe */
+    transition: background-color 1s ease;
 }
 
 .login_d_none {
@@ -20,18 +20,17 @@
 
 .login_header {
     height: 100px;
-    position: fixed; /* Stellt sicher, dass der Header immer sichtbar ist und oben bleibt */
-    top: 0; /* Positioniert den Header ganz oben auf der Seite */
-    width: 100%; /* Stellt sicher, dass der Header die gesamte Breite des Bildschirms einnimmt */
-    margin-top: 0; /* Entfernt zusätzlichen Abstand */
-    margin-left: 0; /* Entfernt zusätzlichen Abstand */
-    margin-right: 0; /* Entfernt zusätzlichen Abstand */
-    z-index: 1000; /* Stellt sicher, dass der Header vor anderen Elementen angezeigt wird */
+    position: fixed; 
+    top: 0;
+    width: 100%;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    z-index: 1000;
     justify-content: flex-end;
     align-items: center;
-    padding: 0 77px; /* Innenabstand für den Inhalt */
+    padding: 0 77px;
 }
-
 
 .login_head {
     display: flex;
@@ -42,9 +41,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: fixed; /* Sicherstellen, dass es über dem gesamten Bildschirm liegt */
-    height: 100vh; /* Volle Höhe des Viewports */
-    width: 100vw; /* Volle Breite des Viewports */
+    position: fixed; 
+    height: 100vh; 
+    width: 100vw; 
     top: 0;
     left: 0;
     margin: 0;
@@ -57,7 +56,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Zentrale Positionierung */
+    transform: translate(-50%, -50%);
 }
 
 .login_moved {
@@ -74,7 +73,7 @@
     }
     100% {
         top: 20px;
-        left: 77px; /* Position in der linken oberen Ecke mit Einrückung */
+        left: 77px;
         transform: translate(0, 0);
         width: 137.03px;
         height: 167.035px;
@@ -85,8 +84,6 @@
     display: flex;
     top: 67px;
 }
-
-
 
 @keyframes pulse {
     0%, 100% {
@@ -123,8 +120,6 @@
     background-color: #1a8ac2;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
-
-
 
 .login_not_a_user_buttons_styles {
     background-color: #2a3647;
@@ -189,24 +184,6 @@
     font-family: "Inter", serif;
 }
 
-.signup_card{
-    display: flex;
-    flex-direction: column;
-    padding-top: 48px;
-    padding-right: 88px;
-    padding-bottom: 48px;
-    padding-left: 88px;
-    border: solid 1px #D1D1D1;
-    border-radius: 30px;
-    background-color: #ffffff;
-    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.05);
-    margin-left: 18px;
-    margin-right: 18px;
-    align-items: center;
-    font-family: "Inter", serif;
-    justify-content: space-around;
-}
-
 .scale_up_center {
 	animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
@@ -252,7 +229,7 @@
     color: red;
     font-size: 0.875em;
     position: absolute;
-    bottom: -1.5em; /* Positioniert die Fehlermeldung direkt unter dem Input-Feld */
+    bottom: -1.5em;
     left: 0;
     width: 100%;
     margin-left: 10px;
@@ -361,104 +338,6 @@
     font-weight: bold;
 }
 
-.login_checkbox_container{
-    display: flex;
-    flex-direction: row;
-}
-
-.login_checkbox {
-    display: flex;
-    flex-direction: row;
-    margin-top: 30px;
-    align-items: center;
-    cursor: pointer;
-}
-
-.login_checkbox input {
-    height: 24px;
-    width: 24px;
-    border: solid 3px black;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    cursor: pointer;
-}
-
-.login_checkbox input:focus, .login_checkbox input:hover {
-    box-shadow: inset 0px 0px 10px #9c9c9c;
-}
-
-.login_checkbox label {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: #ababab;
-    margin-left: 8px;
-    font-size: 19px;
-}
-
-.login_checkbox p {
-    color: #29abe2;
-    margin: 0;
-    cursor: pointer;
-}
-
-.login_checkbox p:hover {
-    text-decoration: underline;
-    font-weight: bold;
-}
-
-.login_checkbox .hover_target:hover ~ .form-form_check_input-input {
-    background-color: #d3d3d3;
-}
-
-.login_back_to_sign_in{
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    position: absolute;
-    align-items: flex-start;
-    top: 70px;
-    left: 88px;
-    cursor: pointer;
-}
-
-.signup_buttons{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 55px;
-    gap: 32px;
-}
-
-.login_signup_buttons_styles {
-    border-radius: 8px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 24px;
-    padding-right: 24px;
-    background-color: #ccc;
-    border: none;
-    border-radius: 5px;
-    cursor: not-allowed;
-    transition: background-color 0.3s, box-shadow 0.3s;
-    font-size: 19px;
-}
-
-.login_signup_buttons_styles:enabled {
-    background-color: #2a3647;
-    color: white;
-    cursor: pointer;
-}
-
-.login_signup_buttons_styles:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-.login_signup_buttons_styles:hover:enabled {
-    background-color: #1a8ac2;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
 .login_input_mail_info {
     color: #999;
     font-size: 14px;
@@ -469,18 +348,3 @@
     filter: blur(1.5px); 
     opacity: 0.5; 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

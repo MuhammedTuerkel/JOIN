@@ -118,8 +118,6 @@ function togglePasswordVisibility() {
     }
 }
 
-
-
 /**
  * Checks if the email input field is empty, shows or hides error messages accordingly.
  * Validates the email format and fetches the password if valid.
