@@ -364,7 +364,7 @@ header p {
     height: 70px;
     background-size: cover;
     background-position: center;
-    background-image: url(/assets/img/pencil_blue.png);
+    background-image: url(../assets/img/pencil_blue.png);
 
 }
 
@@ -373,7 +373,7 @@ header p {
     height: 70px;
     background-size: cover;
     background-position: center;
-    background-image: url(/assets/img/done_blue.png);
+    background-image: url(../assets/img/done_blue.png);
 }
 
 .To-do:hover {
@@ -385,11 +385,11 @@ header p {
     cursor: pointer;
 
     .image1 {
-        background-image: url(/assets/img/pencil_white.png);
+        background-image: url(../assets/img/pencil_white.png);
     }
 
     .image2 {
-        background-image: url(/assets/img/done_white.png);
+        background-image: url(../assets/img/done_white.png);
     }
 
     .To-do_text h2 {
