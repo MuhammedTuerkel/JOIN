@@ -9,6 +9,22 @@ async function onloadFunction() {
     let userKeyArray = Object.keys(userResponse);
 
     for (let index = 0; index < userKeyArray.length; index++) {
+        let userEntries = Object.values(userResponse[userKeyArray[index]]);
+        for (let entry of userEntries) {
+            users.push(entry);
+        }
+    }
+    console.log("Global users array:", users);
+}
+
+/**
+ * Load user data from Firebase Realtime Database into global users array
+ */
+async function onloadFunction() {
+    let userResponse = await loadData("users");
+    let userKeyArray = Object.keys(userResponse);
+
+    for (let index = 0; index < userKeyArray.length; index++) {
         var userEntries = Object.values(userResponse[userKeyArray[index]]);
         for (let entry of userEntries) {
             users.push(entry);

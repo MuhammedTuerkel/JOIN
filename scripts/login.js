@@ -70,35 +70,83 @@ function loadLoginTemplate() {
 }
 
 /**
- * Check if the input field is empty, then remove the error class.
- * If the user doesn't insert a valid email address, show the error.
- * If the email address is valid, remove the error class.
+ * Fetch data from Firebase Realtime Database
+ * users is the path to the data in the database 
+ * 
+ */
+async function loadData(path = "") {
+    let response = await fetch(BASE_URL + path + ".json");
+    let responseToJson = await response.json();
+    return responseToJson;
+}
+
+/**
+ *  if the user have typed 3 letters the img form the inputfield password will change form the lock to the visibility off 
+ * set the enabled css class to show the log in button
+ */
+function togglePasswordIcons() {
+    const loginButton = document.getElementById('loginButton');
+    let passwortInput = document.getElementById('loginInputPassword')
+    loginButton.classList.add('enabled');
+    
+    let passwordInput = document.getElementById('loginInputPassword');
+    let toggleIcon = document.getElementById('togglePasswordIcon');
+    if (passwordInput.value.length >= 3) {
+        toggleIcon.src = './assets/img/visibility_off.png';
+    } else {
+        toggleIcon.src = './assets/img/lock.png';
+        passwortInput.classList.remove('login_input_error');
+        document.getElementById('loginInputMail').classList.remove('login_input_error');
+        document.getElementById('loginInputWrongPasswordError').classList.add('login_d_none');
+    }
+    checkLoginInputfields();
+}
+
+/**
+ * if the user will show the password so he can klick on the eye to watch his password
+ * 
+ */
+function togglePasswordVisibility() {
+    let passwordInput = document.getElementById('loginInputPassword');
+    let toggleIcon = document.getElementById('togglePasswordIcon');
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleIcon.src = './assets/img/visibility.png';
+    } else {
+        passwordInput.type = 'password';
+        toggleIcon.src = './assets/img/visibility_off.png';
+    }
+}
+
+
+
+/**
+ * Checks if the email input field is empty, shows or hides error messages accordingly.
+ * Validates the email format and fetches the password if valid.
  */
 function checkEmailInput() {
     let input = document.getElementById('loginInputMail');
     let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    let emailError = document.getElementById('loginInputMailError');
+
     if (input.value === '') {
         input.classList.remove('login_input_error');
-        document.getElementById('loginInputMailError').classList.add('login_d_none');
-        disableLogInBottun()
+        emailError.classList.add('login_d_none');
+        disableLogInButton();
     } else if (!emailPattern.test(input.value)) {
         input.classList.add('login_input_error');
-        document.getElementById('loginInputMailError').classList.remove('login_d_none');
-        checkLoginInputfields()
+        emailError.classList.remove('login_d_none');
     } else {
         input.classList.remove('login_input_error');
-        document.getElementById('loginInputMailError').classList.remove('login_d_none');
+        emailError.classList.add('login_d_none');
         fetchPassword(input.value.replace(/\./g, '_')); 
     }
     checkLoginInputfields();
 }
 
 /**
- * Checks the email and password input fields.
- * 
- * This function verifies if the email field contains a valid email address and the password is at least 3 characters long.
- * If either condition is not met, the login button is disabled.
- * If both fields contain valid entries, the button is enabled.
+ * Checks the email and password input fields for validity.
+ * Enables or disables the login button based on the validation.
  */
 function checkLoginInputfields() {
     const loginButton = document.getElementById('loginButton');
@@ -120,226 +168,33 @@ function checkLoginInputfields() {
 }
 
 /**
- * makes the button disabled to not allow the user to klick the log in bottun
- * 
+ * Checks if the entered password matches the fetched password.
+ * Displays an error message if the passwords do not match.
  */
-function disableLogInBottun(){
-    const loginButton = document.getElementById('loginButton');
-    loginButton.disabled = true; 
-    loginButton.classList.add('disabled');
-}
-
-/**
- * Fetch data from Firebase Realtime Database
- * users is the path to the data in the database 
- * 
- */
-async function loadData(path = "") {
-    let response = await fetch(BASE_URL + path + ".json");
-    let responseToJson = await response.json();
-    return responseToJson;
-}
-
-/**
- * check des entered password with the created passwort and gives the user feedbakc if it is corect or false
- * 
- */
-function checkLoginPassword(){
+function checkLoginPassword() {
     let enteredPassword = document.getElementById('loginInputPassword').value;
-    let wrongPassword = document.getElementById('loginInputWrongPasswordError');
-    if(enteredPassword === fetchedPassword){
-        wrongPassword.classList.add('login_d_none');
-        console.log('login successfull');
+    let wrongPasswordError = document.getElementById('loginInputWrongPasswordError');
+
+    if (enteredPassword === fetchedPassword) {
+        wrongPasswordError.classList.add('login_d_none');
+        console.log('Login erfolgreich');
         goToAddTask();
     } else {
-        wrongPassword.classList.remove('login_d_none');
+        wrongPasswordError.classList.remove('login_d_none');
         document.getElementById('loginInputPassword').classList.add('login_input_error');
         document.getElementById('loginInputMail').classList.add('login_input_error');
     }
 }
 
+/**
+ * Disables the login button to prevent the user from clicking the login button.
+ */
+function disableLogInButton() {
+    const loginButton = document.getElementById('loginButton');
+    loginButton.disabled = true; 
+    loginButton.classList.add('disabled');
+}
+
 function goToAddTask(){
     console.log("login successfull");
-}
-
-/**
- * to get the sign up template at first the div container get th d_none class
- * the login header have an flex box now the class is removed 
- * now can load the template
- * 
- */
-function loadSignUpTemplate(){
-    let loginHeader = document.getElementById('loginHeader');
-    loginHeader.classList.add('login_d_none');
-    loginHeader.classList.remove('login_header_nav');
-    let signUpPage = document.getElementById('loginContent');
-    signUpPage.innerHTML = "",
-    signUpPage.innerHTML += getSignUpTemplate();
-}
-
-/**
- * to get the sign in template the steps must be removed
- * 
- */
-function backToSignin(){
-    let signUp = document.getElementById('logiSignUp');
-    signUp.innerHTML = "";
-    let loginHeader = document.getElementById('loginHeader');
-    loginHeader.classList.remove('login_d_none')
-    loginHeader.classList.add('login_header_nav');
-    loadLoginTemplate();
-}
-
-/**
- * if the checkbox is checkt the button where enabled do go to the next step
- *  
- */
-function acceptTerms() {
-    let checkBox = document.getElementById('acceptTerms');
-    let button = document.getElementById('signUpButton');
-    button.disabled = !checkBox.checked;
-}
-
-/**
- *  if the user have typed 3 letters the img form the inputfield password will change form the lock to the visibility off 
- * set the enabled css class to show the log in button
- */
-function togglePasswordIcons() {
-    const loginButton = document.getElementById('loginButton');
-    let passwortInput = document.getElementById('loginInputPassword')
-    loginButton.classList.add('enabled');
-    
-    let passwordInput = document.getElementById('loginInputPassword');
-    let toggleIcon = document.getElementById('togglePasswordIcon');
-    if (passwordInput.value.length >= 3) {
-        toggleIcon.src = './assets/img/visibility_off.png';
-
-    } else {
-        toggleIcon.src = './assets/img/lock.png';
-        passwortInput.classList.remove('login_input_error');
-        document.getElementById('loginInputMail').classList.remove('login_input_error');
-    }
-    checkLoginInputfields();
-}
-
-/**
- * if the user will show the password so he can klick on the eye to watch his password
- * 
- */
-function togglePasswordVisibility() {
-    let passwordInput = document.getElementById('loginInputPassword');
-    let toggleIcon = document.getElementById('togglePasswordIcon');
-    if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        toggleIcon.src = './assets/img/visibility.png';
-    } else {
-        passwordInput.type = 'password';
-        toggleIcon.src = './assets/img/visibility_off.png';
-    }
-}
-
-/**
- *  if the user have typed 3 letters the img form the inputfield password will change form the lock to the visibility off 
- * 
- */
-function toggleSignUpPasswordIcon() {
-    let passwordInput = document.getElementById('signUpInputPassword');
-    let toggleIcon = document.getElementById('togglePasswordIconSignUp');
-    if (passwordInput.value.length >= 3) {
-        toggleIcon.src = './assets/img/visibility_off.png';
-    } else {
-        toggleIcon.src = './assets/img/lock.png';
-    }
-}
-
-/**
- * if the user will show the password so he can klick on the eye to watch his password
- * 
- */
-function toggleSignUpPasswordVisibility() {
-    let passwordInput = document.getElementById('signUpInputPassword');
-    let toggleIcon = document.getElementById('togglePasswordIconSignUp');
-    if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        toggleIcon.src = './assets/img/visibility.png';
-    } else {
-        passwordInput.type = 'password';
-        toggleIcon.src = './assets/img/visibility_off.png';
-    }
-}
-
-/**
- *  if the user have typed 3 letters the img form the inputfield password will change form the lock to the visibility off 
- * 
- */
-function toggleSignUpConfirmPasswordIcon() {
-    let passwordInput = document.getElementById('signUpConfirmInputPassword');
-    let toggleIcon = document.getElementById('togglePasswordIconSignUpConfirm');
-    if (passwordInput.value.length >= 3) {
-        toggleIcon.src = './assets/img/visibility_off.png';
-        
-    } else {
-        toggleIcon.src = './assets/img/lock.png';
-        checkPasswords()
-    } 
-}
-
-/**
- * two functions in one oninputfield must react in one function.
- * toggleSignUp let the user with the click on the crossed out eye to see his input
- * checkPasswords take the value from the signUpPassword Inputfield and the vlauer from the SignUp Confirm Password input field and check them.
- */
-function toggleAndCheckInputConfirmPassword(){
-    toggleSignUpConfirmPasswordIcon();
-    checkPasswords();
-}
-
-/**
- * if the user will show the password so he can klick on the eye to watch his password
- * 
- */
-function toggleSignUpConfirmPasswordVisibility() {
-    let passwordInput = document.getElementById('signUpConfirmInputPassword');
-    let toggleIcon = document.getElementById('togglePasswordIconSignUpConfirm');
-    if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        toggleIcon.src = './assets/img/visibility.png';
-    } else {
-        passwordInput.type = 'password';
-        toggleIcon.src = './assets/img/visibility_off.png';
-    }
-}
-
-/** SIGN UP
- * sign up check password and confirm password ist the same
- * if is not the sam the calss login_input_error wil be added
- */
-function checkPasswords(){
-    let password = document.getElementById('signUpInputPassword').value;
-    let confirmPassword = document.getElementById('signUpConfirmInputPassword').value;
-    let checkbox = document.getElementById('acceptTerms');
-
-    if(password === confirmPassword){
-        document.getElementById('signUpConfirmInputPassword').classList.remove('login_input_error');
-        checkbox.disabled = false;
-    }else{
-        document.getElementById('signUpConfirmInputPassword').classList.add('login_input_error');
-        checkbox.disabled = true;
-    }
-}
-
-/**
- * Load user data from Firebase Realtime Database into global users array
- */
-async function onloadFunction() {
-    let userResponse = await loadData("users");
-    let userKeyArray = Object.keys(userResponse);
-
-    for (let index = 0; index < userKeyArray.length; index++) {
-        let userEntries = Object.values(userResponse[userKeyArray[index]]);
-        for (let entry of userEntries) {
-            users.push(entry);
-        }
-    }
-    console.log("Global users array:", users);
 }
