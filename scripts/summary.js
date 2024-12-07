@@ -1,7 +1,7 @@
 let greeting;
 
 function Init() {
-    hideSubMenu();
+    greetingOnMobile();
 }
 
 function showSubmenu(event) {
@@ -30,4 +30,19 @@ function stopEventBubbling(event) {
 
 function hideSubMenu() {
     document.getElementById('Submenu').style = "display:none;"
+}
+
+async function greetingOnMobile() {
+    if (window.innerWidth < 1400) {
+        document.getElementById('headline').style = "display:none;";
+        document.getElementById('Tasks').style = "display:none;";
+        document.getElementById('greeting-top').classList.remove('d-none');
+        document.getElementById('greeting-top').classList.remove('greeting-position');
+        setTimeout(() => {
+            document.getElementById('greeting-top').classList.add('d-none');
+            document.getElementById('greeting-top').classList.add('greeting-position');
+            document.getElementById('headline').style = "";
+            document.getElementById('Tasks').style = "";
+        }, 3000);
+    }
 }

@@ -16,7 +16,7 @@
     <script src="script.js"></script>
 </head>
 
-<body onclick="Init()">
+<body onclick="hideSubMenu()" onload="Init()">
     <div class="side-navigation">
         <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
         <div class="menu">
@@ -59,60 +59,62 @@
                 </div>
             </div>
         </header>
-        <div class="headline">
-            <h1>Join 360</h1>
-            <div class="line"></div>
-            <h3>Key Metrics at a Glance</h3>
-        </div>
-        <div class="Tasks">
-            <div class="Todo-Done">
-                <div class="To-do">
-                    <div class="image1"></div>
-                    <div class="To-do_text">
-                        <h2>1</h2>
-                        <p>To-do</p>
+        <div class="Summary-body">
+            <div id="headline" class="headline">
+                <h1>Join 360</h1>
+                <div class="line"></div>
+                <h3>Key Metrics at a Glance</h3>
+            </div>
+            <div id="Tasks" class="Tasks">
+                <div class="Todo-Done">
+                    <div class="To-do">
+                        <div class="image1"></div>
+                        <div class="To-do_text">
+                            <h2>1</h2>
+                            <p>To-do</p>
+                        </div>
+                    </div>
+                    <div class="To-do">
+                        <div class="image2"></div>
+                        <div class="To-do_text">
+                            <h2>1</h2>
+                            <p>Done </p>
+                        </div>
                     </div>
                 </div>
-                <div class="To-do">
-                    <div class="image2"></div>
-                    <div class="To-do_text">
-                        <h2>1</h2>
-                        <p>Done </p>
+                <div class="Urgency">
+                    <div class="urgent-number">
+                        <img src="./assets/img/Urgent.png" alt="">
+                        <div>
+                            <h2>1</h2>
+                            <p>Urgent</p>
+                        </div>
+                    </div>
+                    <div class="Urgent-line"></div>
+                    <div class="Deadline">
+                        <h3>October 16, 2022</h3>
+                        <p>Upcoming Deadline</p>
+                    </div>
+                </div>
+                <div class="viewOfTasks">
+                    <div class="Task">
+                        <h2 class="Task_h2">5</h2>
+                        <p class="Task_p">Tasks in Board</p>
+                    </div>
+                    <div class="Task">
+                        <h2 class="Task_h2">2</h2>
+                        <p class="Task_p">Tasks In Progress</p>
+                    </div>
+                    <div class="Task">
+                        <h2 class="Task_h2">2</h2>
+                        <p class="Task_p">Awaiting Feedback</p>
                     </div>
                 </div>
             </div>
-            <div class="Urgency">
-                <div class="urgent-number">
-                    <img src="./assets/img/Urgent.png" alt="">
-                    <div>
-                        <h2>1</h2>
-                        <p>Urgent</p>
-                    </div>
-                </div>
-                <div class="Urgent-line"></div>
-                <div class="Deadline">
-                    <h3>October 16, 2022</h3>
-                    <p>Upcoming Deadline</p>
-                </div>
+            <div id="greeting-top" class="greeting d-none greeting-position">
+                <h2 id="greeting"></h2>
+                <h1>Sofia Müller</h1>
             </div>
-            <div class="viewOfTasks">
-                <div class="Task">
-                    <h2 class="Task_h2">5</h2>
-                    <p class="Task_p">Tasks in Board</p>
-                </div>
-                <div class="Task">
-                    <h2 class="Task_h2">2</h2>
-                    <p class="Task_p">Tasks In Progress</p>
-                </div>
-                <div class="Task">
-                    <h2 class="Task_h2">2</h2>
-                    <p class="Task_p">Awaiting Feedback</p>
-                </div>
-            </div>
-        </div>
-        <div class="greeting">
-            <h2 id="greeting"></h2>
-            <h1>Sofia Müller</h1>
         </div>
     </div>
 </body>
