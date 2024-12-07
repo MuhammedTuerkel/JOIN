@@ -74,7 +74,7 @@ function getSignUpTemplate() {
             </div>
         </div>
         <div class="signup_buttons">
-            <button onclick="showOverlay()" class="login_signup_buttons_styles" id="signUpButton" disabled>
+            <button class="login_signup_buttons_styles" id="signUpButton" disabled>
                 Sign up
             </button>
         </div>

@@ -213,7 +213,6 @@ function disableSignUpButton() {
  */
 function createUser(){
     pushUserDataInLocalStorage();
-    pushNewUserinFireBaseArray();
     signUpOverlay();
 }
 
@@ -228,7 +227,7 @@ function createUser(){
  */
 function signUpOverlay() {
     const overlay = document.getElementById('overlay');
-    const container = document.querySelector('.confirmation-container');
+    const container = document.querySelector('.confirmation_container');
     overlay.classList.remove('login_d_none')
     overlay.style.display = 'flex';
     setTimeout(() => {
@@ -243,13 +242,13 @@ function signUpOverlay() {
                 overlay.classList.remove('blur');
                 setTimeout(() => {
                     overlay.style.display = 'none'; 
-                    container.classList.remove('d-none', 'fly-up', 'flip-horizontal-bottom'); // Reset Klassen
+                    container.classList.remove('d-none', 'fly-up', 'flip-horizontal-bottom');
+                    checkLoginInputfields();
                 }, 500);
             }, 300);
         }, 700);
     }, 100);
 }
-
 
 /**
  * Speichert die Anmeldedaten im Local Storage und zeigt das Overlay an.
@@ -259,7 +258,6 @@ function pushUserDataInLocalStorage() {
     const password = document.getElementById('signUpInputPassword').value;    
     localStorage.setItem('email', email);
     localStorage.setItem('password', password);
-    signUpOverlay();
 }
 
 /**

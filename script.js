@@ -44,7 +44,7 @@ async function onloadFunction() {
 async function pushNewUserinFireBaseArray(event) {
     event.preventDefault();
     let userName = document.getElementById('signUpName').value;
-    let userMail = document.getElementById('loginInputMail').value;
+    let userMail = document.getElementById('signUpInputMail').value;
     let userPassword = document.getElementById('signUpConfirmInputPassword').value;
     const color = createRandomColor();
     const userData = {
@@ -54,25 +54,16 @@ async function pushNewUserinFireBaseArray(event) {
         color: color,
         createdAt: new Date().toISOString(),
         task: 0,
-
     };
     try {
         let response = await postData(`users/${userMail.replace('.', '_')}`, userData);
         console.log("User successfully added to Realtime Database:", response);
-        loadLoginTemplate(); // Load the login template after successful registration
-        showSignUpInformation();
+        createUser();
     } catch (error) {
         console.error("Error adding user to Realtime Database:", error);
     }
 }
 
-/**
- * Shows the sign up information.
- * This function displays an alert message confirming successful registration.
- */
-function showSignUpInformation() {
-    alert("You have successfully registered!");
-}
 
 /**
  * Posts data to the Firebase Realtime Database.
