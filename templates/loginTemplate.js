@@ -1,6 +1,6 @@
 /**
- * Template für den Benutzer-Login.
- * Wenn der Benutzer registriert ist, kann er sich einloggen.
+ * Template for registred users
+ * if the user have an account so he can log in
  */
 function getUserLoginTemplate() {
     return `
@@ -32,8 +32,8 @@ function getUserLoginTemplate() {
 }
 
 /**
- * Template für die Registrierung.
- * Wenn der Benutzer nicht registriert ist, kann er sich hier anmelden.
+ * Template vor new user
+ * if the user is not registred so he can here sign up to the application
  */
 function getSignUpTemplate() {
     return `
@@ -74,7 +74,7 @@ function getSignUpTemplate() {
             </div>
         </div>
         <div class="signup_buttons">
-            <button class="login_signup_buttons_styles" id="signUpButton" disabled>
+            <button onclick="showOverlay()" class="login_signup_buttons_styles" id="signUpButton" disabled>
                 Sign up
             </button>
         </div>

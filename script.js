@@ -42,7 +42,7 @@ async function onloadFunction() {
  * 
  */
 async function pushNewUserinFireBaseArray(event) {
-    event.preventDefault(); // Prevents default form submission behavior
+    event.preventDefault();
     let userName = document.getElementById('signUpName').value;
     let userMail = document.getElementById('loginInputMail').value;
     let userPassword = document.getElementById('signUpConfirmInputPassword').value;

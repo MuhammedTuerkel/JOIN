@@ -204,3 +204,72 @@ function disableSignUpButton() {
     loginButton.disabled = true; 
     loginButton.classList.add('disabled');
 }
+
+/**
+ * create User pushes the datas form the Sing Up form in to the Firebasa Remote Storage Realtime Database JOIN
+ * pushUserDataInLocalStorage push the mail adresse and the password will bi pushed in th elocal storage to use them in the log in side for an better user expirience
+ * pushNewUserinFireBaseArray pushes the datas in the Database 
+ * signUpOverlay create an animation to show the user es is sucessfuly lregistred
+ */
+function createUser(){
+    pushUserDataInLocalStorage();
+    pushNewUserinFireBaseArray();
+    signUpOverlay();
+}
+
+/**
+ * Shows the overlay and animates the background to blur, then the container flies up.
+ * first show overlay
+ * second the container flyes from bottom to the middle of the side
+ * third container flip an the log in side renders 
+ * fourth the overly get the display non class
+ * backToLogIn makes the same function as the back arrow
+ * prefillLoginForm takes the datas from the local storage and fills the input fields
+ */
+function signUpOverlay() {
+    const overlay = document.getElementById('overlay');
+    const container = document.querySelector('.confirmation-container');
+    overlay.classList.remove('login_d_none')
+    overlay.style.display = 'flex';
+    setTimeout(() => {
+        overlay.classList.add('blur');
+        container.classList.add('fly-up');
+        setTimeout(() => {
+            container.classList.add('flip-horizontal-bottom');
+            backToLogIn();
+            prefillLoginForm();
+            setTimeout(() => {
+                container.classList.add('login_d_none');
+                overlay.classList.remove('blur');
+                setTimeout(() => {
+                    overlay.style.display = 'none'; 
+                    container.classList.remove('d-none', 'fly-up', 'flip-horizontal-bottom'); // Reset Klassen
+                }, 500);
+            }, 300);
+        }, 700);
+    }, 100);
+}
+
+
+/**
+ * Speichert die Anmeldedaten im Local Storage und zeigt das Overlay an.
+ */
+function pushUserDataInLocalStorage() {
+    const email = document.getElementById('signUpInputMail').value;
+    const password = document.getElementById('signUpInputPassword').value;    
+    localStorage.setItem('email', email);
+    localStorage.setItem('password', password);
+    signUpOverlay();
+}
+
+/**
+ * Füllt die Anmeldedaten im Login-Formular aus.
+ */
+function prefillLoginForm() {
+    const email = localStorage.getItem('email');
+    const password = localStorage.getItem('password');
+    if (email && password) {
+        document.getElementById('loginInputMail').value = email;
+        document.getElementById('loginInputPassword').value = password;
+    }
+}
