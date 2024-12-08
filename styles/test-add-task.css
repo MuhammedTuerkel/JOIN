@@ -272,3 +272,97 @@ select {
     margin: 0 48px;
     min-height: 416px;
 }
+
+/* ____________________________________ Assigned to form from Chris __________________________________________________ */
+
+
+
+
+.dropdown-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+    width: calc(136px* 3 + 16px);
+    margin-top: 8px;
+}
+
+.dropdown-trigger p {
+    font-family: Inter-18;
+    font-size: 14px;
+    color: var(--text-grey);
+    border-radius: 10px;
+    
+}
+
+.dropdown-trigger img {
+    width: 8px;
+    height: 6px;
+    transition: transform 0.3s ease; 
+}
+
+.custom_dropdown {
+    display: flex;
+    flex-direction: column;
+    width: calc(135px * 3 + 16px);
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    z-index: 1;
+    max-height: 200px;
+    position: absolute;
+}   
+
+
+.user_template:hover {
+    background-color: #f0f0f0; 
+}
+
+.user_template {
+    display: flex;
+
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+
+}
+
+.user_template input{
+    display: flex;
+}
+
+.user_template_circle_name {
+    display: flex;
+    align-items: center;
+    width: calc(135px * 3 + 16px);
+}
+
+.user_circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    margin-right: 10px;
+    text-transform: uppercase;
+}
+
+.user_template_circle_name p {
+    margin: 0; /* Entfernen von Margin, um die Textausrichtung zu verbessern */
+    font-size: 13px;
+}
+
+.user_checkbox {
+    margin-left: auto; /* Sicherstellen, dass die Checkbox nach rechts ausgerichtet ist */
+}
+

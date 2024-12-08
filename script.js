@@ -1,4 +1,6 @@
 let users = [];
+let tasks = [];
+
 const BASE_URL = "https://join-bbd82-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /**
@@ -18,19 +20,14 @@ async function onloadFunction() {
 }
 
 /**
- * Load user data from Firebase Realtime Database into global users array
+ * Fetch data from Firebase Realtime Database
+ * users is the path to the data in the database 
+ * 
  */
-async function onloadFunction() {
-    let userResponse = await loadData("users");
-    let userKeyArray = Object.keys(userResponse);
-
-    for (let index = 0; index < userKeyArray.length; index++) {
-        var userEntries = Object.values(userResponse[userKeyArray[index]]);
-        for (let entry of userEntries) {
-            users.push(entry);
-        }
-    }
-    console.log("Global users array:", users); 
+async function loadData(path = "") {
+    let response = await fetch(BASE_URL + path + ".json");
+    let responseToJson = await response.json();
+    return responseToJson;
 }
 
 /**
@@ -63,7 +60,6 @@ async function pushNewUserinFireBaseArray(event) {
         console.error("Error adding user to Realtime Database:", error);
     }
 }
-
 
 /**
  * Posts data to the Firebase Realtime Database.

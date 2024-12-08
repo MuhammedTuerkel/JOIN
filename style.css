@@ -14,3 +14,12 @@
     --prio-medium: #FFA800;
     --prio-low: #7AE229;
 }
+
+.activated {
+    background-color: #091931;
+}
+
+.activated a {
+    color: white;
+}
+
