@@ -1,6 +1,6 @@
 let fetchedPassword = "";
 
-function init(){
+function logInInit(){
     moveImage();
     onloadFunction();
     loadLoginTemplate(); 
@@ -165,7 +165,7 @@ function checkLoginPassword() {
     if (enteredPassword === fetchedPassword) {
         wrongPasswordError.classList.add('login_d_none');
         console.log('Login erfolgreich');
-        goToSummaryHtml();
+        pushUserToLoggedInUserArray();
     } else {
         wrongPasswordError.classList.remove('login_d_none');
         document.getElementById('loginInputPassword').classList.add('login_input_error');
@@ -182,6 +182,30 @@ function disableLogInButton() {
     loginButton.classList.add('disabled');
 }
 
+
+
+/**
+ * if mail and passwort are true then got to the summary html
+ */
 function goToSummaryHtml(){
+    localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser[0]));
     window.location.href = 'summary.html';
 }
+
+/**
+ * push the data from the logged in user in an array to use this datas in the local storage
+ */
+function pushUserToLoggedInUserArray() {
+    let email = document.getElementById('loginInputMail').value;
+    let user = users.find(user => user.email === email);
+    
+    loggedInUser.push({
+        name: user.name,
+        email: user.email,
+        color: user.color,
+        createdAt: user.createdAt,
+        password: user.password
+    });
+    goToSummaryHtml()
+}
+
