@@ -7,15 +7,16 @@
     <link rel="stylesheet" href="./styles/test-add-task.css">
     <script src="./script.js"></script>
     <script src="./scripts/test-add-task.js"></script>
+    <script src="/scripts/test-add-task.js"></script>
     <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
     <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="JOIN" />
     <link rel="manifest" href="./assets/favicon/site.webmanifest" />
-    <title>Add a task</title>
+    <title>Add a task TEST</title>
 </head>
-<body>
+<body onload="addTaskInit()">
     <div class="site-wrapper">
         <section class="side-navigation">
             <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
@@ -67,12 +68,16 @@
                                 <label for="description">Description</label>
                                 <textarea id="task-description" name="description" placeholder="Enter a Description"></textarea>
                             </div>
-                            <div class="form-group">
+
+                            <div class="">
                                 <label for="assigned-to">Assigned to</label>
-                                <select name="assigned-to" id="task-assigned-to">
-                                    <option value="">Select contacts to assign</option>
-                                </select>
+                                <div id="assigned" class="dropdown-trigger" onclick="handleDropdownClick()">
+                                    <p>Select contacts to assign</p>
+                                    <img src="./assets/img/arrow_drop_down.png" alt="">
+                                </div>
+                                <div id="custom-dropdown" class="custom_dropdown"></div>
                             </div>
+
                         </div>
                         <div class="separator"></div>
                         <div class="form-column-right">
