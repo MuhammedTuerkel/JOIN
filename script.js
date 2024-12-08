@@ -1,4 +1,6 @@
 let users = [];
+let tasks = [];
+
 const BASE_URL = "https://join-bbd82-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /**
@@ -18,19 +20,14 @@ async function onloadFunction() {
 }
 
 /**
- * Load user data from Firebase Realtime Database into global users array
+ * Fetch data from Firebase Realtime Database
+ * users is the path to the data in the database 
+ * 
  */
-async function onloadFunction() {
-    let userResponse = await loadData("users");
-    let userKeyArray = Object.keys(userResponse);
-
-    for (let index = 0; index < userKeyArray.length; index++) {
-        var userEntries = Object.values(userResponse[userKeyArray[index]]);
-        for (let entry of userEntries) {
-            users.push(entry);
-        }
-    }
-    console.log("Global users array:", users); 
+async function loadData(path = "") {
+    let response = await fetch(BASE_URL + path + ".json");
+    let responseToJson = await response.json();
+    return responseToJson;
 }
 
 /**
@@ -64,7 +61,6 @@ async function pushNewUserinFireBaseArray(event) {
     }
 }
 
-
 /**
  * Posts data to the Firebase Realtime Database.
  * This function sends a POST request to the specified path in the Firebase Realtime Database
@@ -95,3 +91,54 @@ function createRandomColor() {
     }
     return color;
 }
+
+
+/**__________________________________________________________________
+ * Create user drop down list from the users array 
+ * 
+ * 
+ */
+// Funktion zum Initialisieren der Aufgabe
+// Funktion zum Initialisieren der Aufgabe
+// Funktion zum Initialisieren der Aufgabe
+function addTaskInit() {
+    onloadFunction();
+}
+
+// Funktion zum Anzeigen des benutzerdefinierten Dropdowns
+function handleDropdownClick() {
+    let dropdownContainer = document.getElementById('custom-dropdown');
+    if (dropdownContainer.style.display === 'none' || dropdownContainer.style.display === '') {
+        dropdownContainer.style.display = 'block';
+    } else {
+        dropdownContainer.style.display = 'none';
+    }
+}
+
+// Funktion zum Erstellen eines Templates für jeden Benutzer
+function createUserTemplate(user) {
+    // Den ersten Buchstaben des Benutzernamens holen
+    let initials = user.name.charAt(0).toUpperCase();
+
+    return `
+        <div class="user_template">
+            <div class="user_circle" style="background-color: ${user.color};">
+                ${initials}
+            </div>
+            <p>${user.name}</p>
+            <input type="checkbox" class="user_checkbox" value="${user.email}">
+        </div>
+    `;
+}
+
+// Funktion zum Füllen des benutzerdefinierten Dropdowns
+function loadUserInAssignedToDropdown() {
+    let dropdownContainer = document.getElementById('custom-dropdown');
+    dropdownContainer.innerHTML = ""; // Bestehende Optionen löschen
+
+    for (let index = 0; index < users.length; index++) {
+        let user = users[index];
+        dropdownContainer.innerHTML += createUserTemplate(user);
+    }
+}
+

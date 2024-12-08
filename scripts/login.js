@@ -69,16 +69,7 @@ function loadLoginTemplate() {
     }
 }
 
-/**
- * Fetch data from Firebase Realtime Database
- * users is the path to the data in the database 
- * 
- */
-async function loadData(path = "") {
-    let response = await fetch(BASE_URL + path + ".json");
-    let responseToJson = await response.json();
-    return responseToJson;
-}
+
 
 /**
  *  if the user have typed 3 letters the img form the inputfield password will change form the lock to the visibility off 
