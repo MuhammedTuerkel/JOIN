@@ -213,7 +213,9 @@ function disableSignUpButton() {
  */
 function createUser(){
     pushUserDataInLocalStorage();
+    users.length = 0;
     signUpOverlay();
+    onloadFunction();
 }
 
 /**
@@ -237,6 +239,7 @@ function signUpOverlay() {
             container.classList.add('flip-horizontal-bottom');
             backToLogIn();
             prefillLoginForm();
+            checkEmailInput();
             setTimeout(() => {
                 container.classList.add('login_d_none');
                 overlay.classList.remove('blur');

@@ -69,8 +69,6 @@ function loadLoginTemplate() {
     }
 }
 
-
-
 /**
  *  if the user have typed 3 letters the img form the inputfield password will change form the lock to the visibility off 
  * set the enabled css class to show the log in button
@@ -160,7 +158,7 @@ function checkLoginInputfields() {
  * Checks if the entered password matches the fetched password.
  * Displays an error message if the passwords do not match.
  */
-function checkLoginPassword() {
+function checkLoginPassword() {   
     let enteredPassword = document.getElementById('loginInputPassword').value;
     let wrongPasswordError = document.getElementById('loginInputWrongPasswordError');
 
@@ -186,4 +184,5 @@ function disableLogInButton() {
 
 function goToAddTask(){
     console.log("login successfull");
+    window.location.href = 'summary.html';
 }

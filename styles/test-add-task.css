@@ -319,14 +319,12 @@ select {
     position: absolute;
 }   
 
-
 .user_template:hover {
     background-color: #f0f0f0; 
 }
 
 .user_template {
     display: flex;
-
     align-items: center;
     padding: 10px;
     border-bottom: 1px solid #ccc;
@@ -358,11 +356,25 @@ select {
 }
 
 .user_template_circle_name p {
-    margin: 0; /* Entfernen von Margin, um die Textausrichtung zu verbessern */
+    margin: 0;
     font-size: 13px;
 }
 
 .user_checkbox {
-    margin-left: auto; /* Sicherstellen, dass die Checkbox nach rechts ausgerichtet ist */
+    margin-left: auto;
 }
 
+.custom_dropdown::-webkit-scrollbar {
+    width: 12px;
+}
+
+.custom_dropdown::-webkit-scrollbar-track {
+    background: #f0f0f0; 
+    border-radius: 10px; 
+}
+
+.custom_dropdown {
+    scrollbar-width: thin;
+    border-radius: 12px;
+    scrollbar-color: #091931 #f0f0f0;
+}

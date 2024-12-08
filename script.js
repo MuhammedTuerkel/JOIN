@@ -50,7 +50,6 @@ async function pushNewUserinFireBaseArray(event) {
         password: userPassword,
         color: color,
         createdAt: new Date().toISOString(),
-        task: 0,
     };
     try {
         let response = await postData(`users/${userMail.replace('.', '_')}`, userData);
