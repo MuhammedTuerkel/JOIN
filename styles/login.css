@@ -8,7 +8,7 @@
     height: 100vh;
     margin: 0;
     padding: 0;
-    background-color: #F6F7F8;
+    background-color: #ffffff00;
     font-family: "Inter", serif;
     flex-direction: column;
     transition: background-color 1s ease;
@@ -349,3 +349,156 @@
     opacity: 0.5; 
 }
 
+@media (max-width: 1900px) and (min-width: 768px) {
+    .login_head{
+        display: flex;
+    }    
+
+    .login_mobile {
+        display: none;
+        height: 100px;
+        width: 100%;
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+
+    }
+        
+    .login_moble_nav{
+        display: none;
+        gap: 35px;
+        height: 49px;
+        width: 279px;
+        justify-content: center;
+        align-items: center;
+
+    }
+    
+
+}
+
+@media (max-width: 413px) and (min-width: 320px) {
+    .login_head{
+        display: none;
+    }
+
+
+    .login_main_container{
+        width: 100%;
+    }
+
+    .login_mobile {
+        height: 100px;
+        width: 100%;
+        z-index: 1000;
+    }
+        
+    .login_moble_nav{
+        display: flex;
+        gap: 35px;
+        height: 49px;
+        width: 279px;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .login_moble_nav a{
+        text-decoration: none;
+        color: black;
+    }
+
+    .login_body{
+        max-width: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        background-color: #2a3647;
+        font-family: "Inter", serif;
+        flex-direction: column;
+        transition: background-color 1s ease;
+
+    }
+    
+    .login_card {
+        width: 90%;
+        margin: 0;
+        height: 70%;
+        margin-top: 100px;
+    }
+
+    .login_input_field input::placeholder{
+        font-size: 16px;
+    }
+
+    .login_input_field input {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+        border: solid 1px #D1D1D1;
+        border-radius: 10px;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        padding-left: 21px;
+        padding-right: 21px;
+        font-size: 12px;
+        transition: border-color 0.3s;
+        cursor: text;
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+
+    .login_input_field img {
+        position: absolute;
+        height: 18px;
+        right: 1%;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .login_buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 55px;
+        gap: 32px;
+        padding-bottom: 48px;
+        flex-direction: column;
+        width: 80%;
+    }
+
+    .login_buttons_styles_clear {
+        display: flex    ;
+        border: solid 1px #2A3647;
+        color: #2A3647;
+        font-weight: bold;
+        border-radius: 8px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-left: 24px;
+        padding-right: 24px;
+        cursor: pointer;
+        transition: background-color 0.3s, box-shadow 0.3s;
+        width: 78%;
+        justify-content: center;
+    }
+
+    .login_buttons_styles {
+        border-radius: 8px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-left: 24px;
+        padding-right: 24px;
+        background-color: #ccc;
+        border: none;
+        cursor: not-allowed;
+        font-size: 19px;
+        transition: background-color 0.3s, box-shadow 0.3s;       
+        width: 100%;
+    }
+}

@@ -40,6 +40,7 @@ function moveImage() {
     let image = document.getElementById('loginMovableImage');
     let position = document.getElementById('loginMoveImgContainer');
     let header = document.getElementById('loginHead');
+    let mobileNav = document.getElementById('loginMobile');
     let main = document.getElementById('loginMain');
     let loginFooter = document.getElementById('loginFooter');
     let body = document.querySelector('.login_body');
@@ -48,6 +49,7 @@ function moveImage() {
     setTimeout(function() {
         position.classList.remove('login_move_image_container');
         header.classList.remove('login_d_none');
+        mobileNav.classList.remove('login_d_none');
         main.classList.remove('login_d_none');
         loginFooter.classList.remove('login_d_none');
     }, 1000);
