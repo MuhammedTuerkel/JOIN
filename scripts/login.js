@@ -185,7 +185,7 @@ function disableLogInButton() {
 
 
 /**
- * if mail and passwort are true then got to the summary html
+ * if mail and passwort are true then go to the summary html
  */
 function goToSummaryHtml(){
     localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser[0]));

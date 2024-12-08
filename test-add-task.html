@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="./styles/test-add-task.css">
     <script src="./script.js"></script>
     <script src="./scripts/test-add-task.js"></script>
-    <script src="/scripts/test-add-task.js"></script>
     <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
     <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
@@ -69,14 +68,18 @@
                                 <textarea id="task-description" name="description" placeholder="Enter a Description"></textarea>
                             </div>
 
-                            <div class="">
+                            <div>
                                 <label for="assigned-to">Assigned to</label>
-                                <div id="assigned" class="dropdown-trigger" onclick="handleDropdownClick()">
+                                <div onclick="handleDropdownClick()" id="assigned" class="add_task_dropdown" >
                                     <p>Select contacts to assign</p>
-                                    <img src="./assets/img/arrow_drop_down.png" alt="">
+                                    <img id="dropDownArrow" src="./assets/img/arrow_drop_down.png" alt="" onclick="handleDropdownClick()">
                                 </div>
-                                <div id="custom-dropdown" class="custom_dropdown"></div>
+                                <div id="addTaskDropdown" class="custom_dropdown"></div>
+                                <div id="selectedUsers" class="selected_users"></div>
                             </div>
+                            
+
+                            
 
                         </div>
                         <div class="separator"></div>
@@ -185,3 +188,4 @@
     </div>
 </body>
 </html>
+
