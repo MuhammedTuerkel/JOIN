@@ -1,5 +1,16 @@
+@import url(./fonts.css);
+
+.activated {
+    background-color: #091931;
+}
+
+.activated a {
+    color: white;
+}
+
 body {
     font-family: 'Inter-18';
+    display: flex;
 }
 
 .side-navigation {
@@ -90,6 +101,7 @@ header {
     align-items: center;
     max-width: 1440px;
     height: 96px;
+    box-sizing: border-box;
 }
 
 header p {
@@ -122,9 +134,6 @@ header p {
     display: flex;
     align-items: center;
     gap: 30px;
-    position: absolute;
-    top: 206px;
-    left: 328px;
 }
 
 .headline h1 {
@@ -146,12 +155,10 @@ header p {
 .Tasks {
     width: 560px;
     height: 562px;
-    position: absolute;
-    top: 335px;
-    left: 328px;
     display: flex;
     flex-direction: column;
     gap: 28px;
+
 }
 
 .Todo-Done {
@@ -172,6 +179,7 @@ header p {
     background-color: #FFFFFF;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
 }
 
 .viewOfTasks {
@@ -192,6 +200,7 @@ header p {
     display: flex;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .To-do h2 {
@@ -258,6 +267,7 @@ header p {
     box-shadow: 0px 0px 4px 0px #0000001A;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .Task h2 {
@@ -277,6 +287,8 @@ header p {
     width: 385px;
     height: 136px;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     gap: 3px;
 }
@@ -298,7 +310,7 @@ header p {
     height: 32px;
 }
 
-.help-user img:hover{
+.help-user img:hover {
     width: 36px;
     height: 36px;
 }
@@ -409,6 +421,10 @@ header p {
     }
 }
 
+.d-none1 {
+    display: none;
+}
+
 .Task:hover {
     width: 184px;
     height: 184px;
@@ -426,26 +442,382 @@ header p {
     }
 }
 
-.d-none{
-
-}
-
-.Summary-body{
+.Summary-body {
     max-width: 1440px;
-    height: 90vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    padding: 49px 0px 0px 25px;
+    gap: 30px;
 }
 
-.greeting-position{
+.greeting-position {
     position: absolute;
     top: 547.5px;
     left: 968px;
 }
 
-@media (max-width: 1400px){
-   .d-none{
+.header-Join-Logo {
+    width: 32px;
+    height: 39px;
     display: none;
-   }
+}
+
+@media (max-width: 1400px) {
+    .d-none {
+        display: none;
+    }
+
+    .greeting-position {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: auto;
+    }
+}
+
+
+@media (max-width: 1200px) {
+    .help-user img {
+        display: none;
+    }
+
+    .Submenu {
+        height: 204px;
+        right: 86px;
+    }
+
+    .d-none1 {
+        display: flex;
+    }
+
+    .header-content {
+        padding-left: 148px;
+    }
+
+    .d-flex-column {
+        width: 56px;
+    }
+}
+
+.line2 {
+    height: 3px;
+    width: 90px;
+    background-color: #29ABE2;
+    display: none;
+}
+
+@media (max-width: 1000px) {
+    .line {
+        display: none;
+    }
+
+    .line2 {
+        display: flex;
+    }
+
+    .headline {
+        flex-direction: column;
+        gap: 16px;
+        top: 128px;
+        align-items: start;
+    }
+}
+
+@media (max-width: 900px) {
+    .Tasks {
+        left: 260px;
+    }
+
+    .headline {
+        left: 260px;
+    }
+}
+
+@media (max-width: 830px) {
+    body {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .greeting-position {
+        position: absolute;
+        inset: 0;
+        margin: auto;
+    }
+
+    .side-navigation {
+        height: 80px;
+        width: 100%;
+        padding: 0px;
+    }
+
+    .summary {
+        height: 92vh;
+    }
+
+    .logo-icon {
+        display: none;
+    }
+
+    .Privacy-section {
+        display: none;
+    }
+
+    .menu {
+        flex-direction: row;
+        width: 100%;
+        height: 80px;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px 16px;
+        box-sizing: border-box;
+    }
+
+    .menu-sections {
+        flex-direction: column;
+        width: 80px;
+        height: 76px;
+        border-radius: 16px;
+        gap: 10px;
+        justify-content: center;
+        padding: 0px;
+    }
+
+    header {
+        height: 80px;
+    }
+
+    .header-content {
+        height: 80px;
+        padding: 0px 20px;
+    }
+
+    .header-Join-Logo {
+        display: flex;
+    }
+
+    .header-content p {
+        display: none;
+    }
+
+    .headline {
+        left: 100px;
+    }
+
+    .Tasks {
+        left: 100px;
+    }
+
+    .headline h1 {
+        font-size: 47px;
+    }
+
+    .headline h3 {
+        font-size: 20px;
+    }
+
+    .Todo-Done {
+        width: 396px;
+        height: 110px;
+    }
+
+    .To-do {
+        width: 186px;
+        height: 110px;
+        gap: 10px;
+    }
+
+    .image1 {
+        width: 40px;
+        height: 40px;
+    }
+
+    .image2 {
+        width: 40px;
+        height: 40px;
+    }
+
+    .To-do h2 {
+        font-size: 47px;
+    }
+
+    .To-do p {
+        font-size: 14px;
+    }
+
+    .Urgency {
+        width: 396px;
+        height: 110px;
+        gap: 20px;
+    }
+
+    .urgent-number img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .urgent-number h2 {
+        font-size: 47px;
+    }
+
+    .urgent-number p {
+        font-size: 14px;
+    }
+
+    .Deadline h3 {
+        font-size: 16px;
+    }
+
+    .Deadline p {
+        font-size: 14px;
+    }
+
+    .Urgent-line {
+        height: 68px;
+    }
+
+    .viewOfTasks {
+        width: 396px;
+        height: 116px;
+    }
+
+    .Task {
+        height: 116px;
+        width: 116px;
+        gap: 13px;
+        padding: 25px 0px
+    }
+
+    .Task h2 {
+        font-size: 47px;
+    }
+
+    .Task p {
+        font-size: 14px;
+        width: 65px;
+    }
+
+    .headline {
+        left: 16px;
+    }
+
+    .Tasks {
+        left: 16px;
+        width: 396px;
+        height: 384px;
+    }
+    .To-do:hover{
+        width: 200px;
+        height: 124px;
+    }
+.Urgency:hover{
+    width: 412px;
+    height: 124px;
+}
+.Task:hover{
+    width: 130px;
+    height: 130px;
+}
+.Submenu{
+    right: 106px;
+    top: 10px;
+}
+}
+
+@media (max-width: 600px) {
+    .user {
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+    }
+
+    .greeting h1 {
+        font-size: 47px;
+    }
+
+    .greeting h2 {
+        font-size: 36px;
+    }
+
+    .d-flex-column {
+        flex-direction: column;
+    }
+
+    .help-user {
+        padding-top: 8px;
+    }
+}
+
+@media (max-width: 430px) {
+    .Tasks {
+        width: 300px;
+    }
+
+    .Todo-Done {
+        width: 300px;
+    }
+
+    .To-do {
+        width: 140px;
+    }
+
+    .Urgency {
+        width: 300px;
+        padding: 27px 25px;
+    }
+
+    .viewOfTasks {
+        width: 300px;
+    }
+
+    .urgent-number img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .urgent-number {
+        gap: 8px;
+    }
+
+    .urgent-number h2 {
+        font-size: 40px;
+    }
+
+    .Deadline h3 {
+        font-size: 14px;
+    }
+
+    .Deadline p {
+        font-size: 13px;
+    }
+
+    .To-do h2 {
+        font-size: 40px;
+    }
+    .Task{
+        width: 96px;
+        height: 110px;
+    }
+
+    .Task h2 {
+        font-size: 40px;
+    }
+    .To-do:hover{
+        width: 154px;
+        height: 124px;
+    }
+    .Urgency:hover{
+        width: 314px;
+        height: 124px;
+    }
+    .Task:hover{
+        width: 110px;
+        height: 130px;
+    }
+}
+
+@media (max-width: 340px) {
+    .Summary-body {
+        padding-left: 10px;
+    }
 }

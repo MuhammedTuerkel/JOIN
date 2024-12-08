@@ -37,10 +37,10 @@ async function greetingOnMobile() {
         document.getElementById('headline').style = "display:none;";
         document.getElementById('Tasks').style = "display:none;";
         document.getElementById('greeting-top').classList.remove('d-none');
-        document.getElementById('greeting-top').classList.remove('greeting-position');
+
         setTimeout(() => {
             document.getElementById('greeting-top').classList.add('d-none');
-            document.getElementById('greeting-top').classList.add('greeting-position');
+
             document.getElementById('headline').style = "";
             document.getElementById('Tasks').style = "";
         }, 3000);

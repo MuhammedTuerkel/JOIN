@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Summary</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./styles/standard.css">
+    <link rel="stylesheet" href="./styles/summary.css">
     <script src="./scripts/summary.js"></script>
     <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
@@ -22,7 +23,7 @@
         <div class="menu">
             <div class="menu-sections activated">
                 <img class="menu-icons" src="assets/icons/summary-icon.svg" alt="">
-                <a href="#">Summary</a>
+                <a href="./summary.html">Summary</a>
             </div>
             <div class="menu-sections">
                 <img class="menu-icons" src="assets/icons/add-task-icon.svg" alt="">
@@ -45,6 +46,7 @@
     <div class="summary">
         <header>
             <div class="header-content">
+                <img class="header-Join-Logo" src="./assets/img/capa.png" alt="">
                 <p>Kanban Project Management Tool</p>
                 <div class="d-flex-column">
                     <div id="help-user" class="help-user">
@@ -52,6 +54,7 @@
                         <span onclick="showSubmenu(event)" class="user">M</span>
                     </div>
                     <div onclick="stopEventBubbling(event)" id="Submenu" class="Submenu" style="display: none;">
+                        <div class="Submenu-buttons d-none1">Help</div>
                         <div class="Submenu-buttons">Legal Notice</div>
                         <div class="Submenu-buttons">Privacy Policy</div>
                         <div class="Submenu-buttons">Log out</div>
@@ -64,6 +67,7 @@
                 <h1>Join 360</h1>
                 <div class="line"></div>
                 <h3>Key Metrics at a Glance</h3>
+                <div class="line2"></div>
             </div>
             <div id="Tasks" class="Tasks">
                 <div class="Todo-Done">
