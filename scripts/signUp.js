@@ -42,6 +42,21 @@ function checkSignUpNameInput() {
 }
 
 /**
+ * check if the sign up mail adress ist used
+ * if it used then return true
+ * if it not used then return false
+ */
+function controllMailAdressIsUsed(email){
+    for(index = 0; index < users.length; index++){
+        let user =users[index];
+        if(user.email === email){
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
  * Checks if the email input field is valid.
  * Displays an error message if the email format is invalid.
  */
@@ -49,14 +64,19 @@ function checkSignUpEmailInput() {
     let input = document.getElementById('signUpInputMail');
     let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     let emailError = document.getElementById('signUpInputMailError');
+    let mailExistError = document.getElementById('signUpInputMailExistsError');
 
     if (input.value === '') {
         input.classList.remove('login_input_error');
+        mailExistError.classList.add('login_d_none')
         emailError.classList.add('login_d_none');
         disableSignUpButton();
     } else if (!emailPattern.test(input.value)) {
         input.classList.add('login_input_error');
         emailError.classList.remove('login_d_none');
+    } else if (controllMailAdressIsUsed(input.value)){
+        input.classList.add('login_input_error');
+        mailExistError.classList.remove('login_d_none')
     } else {
         input.classList.remove('login_input_error');
         emailError.classList.add('login_d_none');

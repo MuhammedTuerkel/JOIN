@@ -165,7 +165,7 @@ function checkLoginPassword() {
     if (enteredPassword === fetchedPassword) {
         wrongPasswordError.classList.add('login_d_none');
         console.log('Login erfolgreich');
-        goToAddTask();
+        goToSummaryHtml();
     } else {
         wrongPasswordError.classList.remove('login_d_none');
         document.getElementById('loginInputPassword').classList.add('login_input_error');
@@ -182,7 +182,6 @@ function disableLogInButton() {
     loginButton.classList.add('disabled');
 }
 
-function goToAddTask(){
-    console.log("login successfull");
+function goToSummaryHtml(){
     window.location.href = 'summary.html';
 }
