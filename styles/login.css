@@ -39,7 +39,10 @@
 
 .login_mobile_head{
     height: 7%;
-    display: none;
+}
+
+.login_mobile{
+    display: flex;
 }
 
 .login_move_image_container {
@@ -365,6 +368,9 @@
     opacity: 0.5; 
 }
 
+.login_mobile{
+    display: none;
+}
 
 @media (width: 1024px) and (height: 600px) {
     .login_card {
@@ -417,6 +423,10 @@
         font-size: 24px;
         transition: border-color 0.3s;
         cursor: text;
+    }
+
+    .login_mobile{
+        display: none;
     }
 
 }
@@ -636,7 +646,6 @@
 
     .login_mobile_head{
         height: 7%;
-        display: flex;
     }
 
     .login_moble_nav a {
@@ -875,6 +884,9 @@
 
     .login_mobile_head{
         height: 10%;
+    }
+
+    .login_mobile{
         display: flex;
     }
 
@@ -898,7 +910,6 @@
     }
 }
 
-
 @media (max-width: 450px) and (min-width: 320px) {
     .login_head {
         display: none;
@@ -912,6 +923,7 @@
         height: 100px;
         width: 100%;
         z-index: 1000;
+        display: flex;
     }
 
     .login_moble_nav {
@@ -1106,6 +1118,9 @@
 
     .login_mobile_head{
         height: 10%;
+    }
+
+    .login_mobile{
         display: flex;
     }
 

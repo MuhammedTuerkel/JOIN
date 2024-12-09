@@ -45,11 +45,8 @@ function moveImage() {
     let mobileNav = document.getElementById('loginMobile');
     let main = document.getElementById('loginMain');
     let loginFooter = document.getElementById('loginFooter');
-    let body = document.querySelector('.login_body');
-    image.classList.add('login_moved');
-    body.style.backgroundColor = 'transparent';
+    let body = document.querySelector('.login_body').style.backgroundColor = 'transparent';;
 
-    let body1 = document.querySelector('.login_body').style.backgroundColor = 'transparent';
     setTimeout(function() {
         position.classList.remove('login_move_image_container');
         header.classList.remove('login_d_none');
