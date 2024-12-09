@@ -56,6 +56,17 @@ function moveImage() {
 }
 
 /**
+ * let the second logo that is used for the mobile app after 100ms clear
+ * 
+ */
+function hideImageAfterDelay() {
+    const image = document.getElementById('loginMobileMovableImage');
+    setTimeout(() => {
+        image.classList.add('hidden'); 
+    }, 100);
+}
+
+/**
  * Create the login template for registered users 
  * 
  */
