@@ -1,10 +1,10 @@
 let fetchedPassword = "";
 
-function logInInit(){
+function logInInit() {
     moveImage();
     hideImageAfterDelay();
     onloadFunction();
-    loadLoginTemplate(); 
+    loadLoginTemplate();
 }
 
 /**
@@ -28,7 +28,7 @@ async function fetchPassword(userMail) {
             }
         }
         inputPasswordError.classList.remove('login_d_none');
-    } catch (error) {        
+    } catch (error) {
     }
 }
 
@@ -45,7 +45,11 @@ function moveImage() {
     let mobileNav = document.getElementById('loginMobile');
     let main = document.getElementById('loginMain');
     let loginFooter = document.getElementById('loginFooter');
-    let body = document.querySelector('.login_body').style.backgroundColor = 'transparent';
+    let body = document.querySelector('.login_body');
+    image.classList.add('login_moved');
+    body.style.backgroundColor = 'transparent';
+
+    let body1 = document.querySelector('.login_body').style.backgroundColor = 'transparent';
     setTimeout(function() {
         position.classList.remove('login_move_image_container');
         header.classList.remove('login_d_none');
@@ -74,10 +78,10 @@ function loadLoginTemplate() {
     let loginPage = document.getElementById('loginContent');
     let inputMail = document.getElementById('loginInputMail');
     let inputPassword = document.getElementById('loginInputPassword');
-    
+
     loginPage.innerHTML = "",
-    loginPage.innerHTML += getUserLoginTemplate();
-    if(inputMail === "" || inputPassword ===""){
+        loginPage.innerHTML += getUserLoginTemplate();
+    if (inputMail === "" || inputPassword === "") {
         document.getElementById('loginButton').disabled = true;
     }
 }
@@ -90,7 +94,7 @@ function togglePasswordIcons() {
     const loginButton = document.getElementById('loginButton');
     let passwortInput = document.getElementById('loginInputPassword')
     loginButton.classList.add('enabled');
-    
+
     let passwordInput = document.getElementById('loginInputPassword');
     let toggleIcon = document.getElementById('togglePasswordIcon');
     if (passwordInput.value.length >= 3) {
@@ -139,7 +143,7 @@ function checkEmailInput() {
     } else {
         input.classList.remove('login_input_error');
         emailError.classList.add('login_d_none');
-        fetchPassword(input.value.replace(/\./g, '_')); 
+        fetchPassword(input.value.replace(/\./g, '_'));
     }
     checkLoginInputfields();
 }
@@ -171,7 +175,7 @@ function checkLoginInputfields() {
  * Checks if the entered password matches the fetched password.
  * Displays an error message if the passwords do not match.
  */
-function checkLoginPassword() {   
+function checkLoginPassword() {
     let enteredPassword = document.getElementById('loginInputPassword').value;
     let wrongPasswordError = document.getElementById('loginInputWrongPasswordError');
 
@@ -191,14 +195,14 @@ function checkLoginPassword() {
  */
 function disableLogInButton() {
     const loginButton = document.getElementById('loginButton');
-    loginButton.disabled = true; 
+    loginButton.disabled = true;
     loginButton.classList.add('disabled');
 }
 
 /**
  * if mail and passwort are true then go to the summary html
  */
-function goToSummaryHtml(){
+function goToSummaryHtml() {
     localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser[0]));
     window.location.href = 'summary.html';
 }
@@ -209,7 +213,7 @@ function goToSummaryHtml(){
 function pushUserToLoggedInUserArray() {
     let email = document.getElementById('loginInputMail').value;
     let user = users.find(user => user.email === email);
-    
+
     loggedInUser.push({
         name: user.name,
         email: user.email,

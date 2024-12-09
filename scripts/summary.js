@@ -1,7 +1,12 @@
 let greeting;
 
+let User = [];
+
 function Init() {
+    getFromLocalStorage();
     greetingOnMobile();
+    onloadFunction();
+    putName();
 }
 
 function showSubmenu(event) {
@@ -45,4 +50,17 @@ async function greetingOnMobile() {
             document.getElementById('Tasks').style = "";
         }, 3000);
     }
+}
+
+function getFromLocalStorage() {
+    let text = localStorage.getItem("loggedInUser");
+    let Json = JSON.parse(text);
+    User.push(Json);
+    console.log(User);
+}
+
+function putName() {
+    document.getElementById('name').innerHTML = `${User[0].name}`;
+    let firstLetter = User[0].name.charAt(0).toUpperCase();
+    document.getElementById('user').innerHTML = `${firstLetter}`;
 }
