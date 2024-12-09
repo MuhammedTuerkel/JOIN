@@ -1,18 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html,
-body {
-    height: 100%;
-    width: 100%;
-    font-family: Inter-18;
-    font-weight: 400;
-    display: flex;
-}
-
 .side-navigation {
     height: 100%;
     width: 232px;
@@ -133,30 +118,6 @@ header p {
     position: absolute;
     top: 206px;
     left: 328px;
-}
-
-.add-task-form {
-    max-width: 800px;
-    margin: 40px auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    font-family: Inter-18;
-}
-
-.form-column-left, .form-column-right {
-    flex: 1;
-    min-width: 300px;
-}
-
-.separator {
-    height: 100%;
-    width: 2px;
-    background-color: green;
-}
-
-.form-group {
-    margin-bottom: 20px;
 }
 
 label {

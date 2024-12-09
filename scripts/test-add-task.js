@@ -151,3 +151,18 @@ function updateSelectedUsersContainer() {
         `;
     }
 }
+
+function setUrgent() {
+    document.getElementById('urgent-btn').classList.toggle('urgent');
+    document.getElementById('urgent-svg').classList.toggle('urgent-icon');
+}
+
+function setMedium() {
+    document.getElementById('medium-btn').classList.toggle('medium');
+    document.getElementById('medium-svg').classList.toggle('medium-icon');
+}
+
+function setLow() {
+    document.getElementById('low-btn').classList.toggle('low');
+    document.getElementById('low-svg').classList.toggle('low-icon');
+}
