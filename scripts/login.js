@@ -2,6 +2,7 @@ let fetchedPassword = "";
 
 function logInInit(){
     moveImage();
+    hideImageAfterDelay();
     onloadFunction();
     loadLoginTemplate(); 
 }
@@ -37,15 +38,14 @@ async function fetchPassword(userMail) {
  * The class 'login_move_image_container' must be removed after the move to create new contents.
  */
 function moveImage() {
-    let image = document.getElementById('loginMovableImage');
+    let image = document.getElementById('loginMovableImage').classList.add('login_moved');
+    let mobileImg = document.getElementById('loginMobileMovableImage').classList.add('login_moved')
     let position = document.getElementById('loginMoveImgContainer');
     let header = document.getElementById('loginHead');
     let mobileNav = document.getElementById('loginMobile');
     let main = document.getElementById('loginMain');
     let loginFooter = document.getElementById('loginFooter');
-    let body = document.querySelector('.login_body');
-    image.classList.add('login_moved');
-    body.style.backgroundColor = 'transparent';
+    let body = document.querySelector('.login_body').style.backgroundColor = 'transparent';
     setTimeout(function() {
         position.classList.remove('login_move_image_container');
         header.classList.remove('login_d_none');
@@ -194,8 +194,6 @@ function disableLogInButton() {
     loginButton.disabled = true; 
     loginButton.classList.add('disabled');
 }
-
-
 
 /**
  * if mail and passwort are true then go to the summary html
