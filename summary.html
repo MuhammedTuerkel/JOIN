@@ -51,7 +51,7 @@
                 <div class="d-flex-column">
                     <div id="help-user" class="help-user">
                         <img src="assets/icons/help-symbol-icon-default.svg" alt="" style="cursor: pointer;">
-                        <span onclick="showSubmenu(event)" class="user">M</span>
+                        <span onclick="showSubmenu(event)" class="user" id="user"></span>
                     </div>
                     <div onclick="stopEventBubbling(event)" id="Submenu" class="Submenu" style="display: none;">
                         <div class="Submenu-buttons d-none1">Help</div>
@@ -117,7 +117,7 @@
             </div>
             <div id="greeting-top" class="greeting d-none greeting-position">
                 <h2 id="greeting"></h2>
-                <h1>Sofia Müller</h1>
+                <h1 id="name"></h1>
             </div>
         </div>
     </div>

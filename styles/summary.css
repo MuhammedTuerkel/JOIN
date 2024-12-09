@@ -446,7 +446,7 @@ header p {
     max-width: 1440px;
     display: flex;
     flex-direction: column;
-    padding: 49px 0px 0px 25px;
+    padding: 75px 0px 0px 75px;
     gap: 30px;
 }
 
@@ -520,6 +520,9 @@ header p {
         gap: 16px;
         top: 128px;
         align-items: start;
+    }
+    .Summary-body{
+        padding: 50px 0px 0px 20px;
     }
 }
 
