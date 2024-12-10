@@ -14,6 +14,8 @@
     align-items: center;
     font-family: "Inter", serif;
     justify-content: space-around;
+    height: 68%;
+    margin-top: 90px;
 }
 
 .sign_up_card_headline{
@@ -28,14 +30,14 @@
      font-size: 52px;
      margin-bottom: 12px;
      font-weight: bold;
-     margin-top: 20px;
+     margin-top: 18px;
 }
 
 .signup_underline{
     height: 3px;
     background-color: #29abe2;
     width: 20%;
-    margin-bottom: 50px;
+    margin-bottom: 37px;
 }
 
 .signup_input_field {
@@ -263,7 +265,7 @@
 
 .signup_input_mail_info {
     color: red;
-    font-size: 0.675em;
+    font-size: 0.775em;
     position: absolute;
     bottom: -1.5em;
     left: 0;
@@ -271,14 +273,163 @@
     margin-left: 10px;
 }
 
-@media(max-width: 500px) and (min-width: 410px){
+.login_main_container{
+    width: 100%;
+}
+
+@media(max-width: 786px) and (min-width: 501px){
     .signup_card {
         display: block;
         flex-direction: column;
-        padding-top: 0;
-        padding-right: 0;
-        padding-bottom: 0;
-        padding-left: 0;
+        padding-top: 10;
+        padding-right: 15px;
+        padding-bottom: 10px;
+        padding-left: 15px;
+        border: solid 1px #D1D1D1;
+        border-radius: 30px;
+        background-color: #ffffff;
+        box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.05);
+        margin-left: 0;
+        margin-right: 0;
+        align-items: center;
+        font-family: "Inter", serif;
+        justify-content: space-around;
+        width: 60%;
+        margin-top: 6%;
+        height: 77%;
+    }
+
+    .sign_up_card_headline h1 {
+        font-size: 48px;
+        margin-bottom: 12px;
+        font-weight: bold;
+        margin-top: 18px;
+    }
+    
+    .login_back_to_sign_in {
+        display: flex;
+        justify-content: flex-start;
+        position: absolute;
+        align-items: flex-start;
+        top: 50px;
+        left: 40px;
+        cursor: pointer;
+    }
+
+    .signup_underline {
+        height: 3px;
+        background-color: #29abe2;
+        width: 20%;
+        margin-bottom: 30px;
+    }
+
+    .signup_buttons_styles {
+        border-radius: 8px;
+        padding-top: 13px;
+        padding-bottom: 13px;
+        padding-left: 24px;
+        padding-right: 24px;
+        background-color: #ccc;
+        border: none;
+        border-radius: 5px;
+        cursor: not-allowed;
+        transition: background-color 0.3s, box-shadow 0.3s;
+        font-size: 16px;
+        margin-top: 30px;
+    }
+
+    .signup_input_field{
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-bottom: 2.5em;    
+    }
+
+    .signup_input_field input {
+        width: 90%;
+        border: solid 1px #D1D1D1;
+        border-radius: 10px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        padding-left: 15px;
+        padding-right: 15px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+        cursor: text;
+    }
+
+    .signup_input_field input::placeholder {
+        font-size: 16px;
+    }
+
+    .signup_input_field img {
+        position: absolute;
+        height: 20px;
+        right: 22px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .signup_input_mail_info {
+        color: red;
+        font-size: 0.775em;
+        position: absolute;
+        bottom: -2.5em;
+        left: 0;
+        width: 100%;
+        margin-left: 10px;
+    }
+
+    .signup_checkbox_container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5em;
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .signup_checkbox {
+        display: flex    ;
+        flex-direction: row;
+        margin-top: 10px;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .signup_checkbox input {
+        height: 20px;
+        width: 20px;
+        border: solid 3px black;
+        transition: border-color 0.3s, box-shadow 0.3s;
+        cursor: pointer;
+    }
+
+    .signup_checkbox label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: #ababab;
+        margin-left: 8px;
+        font-size: 16px;
+    }
+
+    .signup_buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+}
+
+@media(max-width: 500px) and (min-width: 411px){
+    .signup_card {
+        display: block;
+        flex-direction: column;
+        padding-top: 10;
+        padding-right: 12px;
+        padding-bottom: 10px;
+        padding-left: 12px;
         border: solid 1px #D1D1D1;
         border-radius: 30px;
         background-color: #ffffff;
@@ -318,8 +469,8 @@
 
     .signup_buttons_styles {
         border-radius: 8px;
-        padding-top: 5px;
-        padding-bottom: 5px;
+        padding-top: 9px;
+        padding-bottom: 9px;
         padding-left: 24px;
         padding-right: 24px;
         background-color: #ccc;
@@ -340,8 +491,8 @@
         width: 90%;
         border: solid 1px #D1D1D1;
         border-radius: 10px;
-        padding-top: 5px;
-        padding-bottom: 5px;
+        padding-top: 8px;
+        padding-bottom: 8px;
         padding-left: 15px;
         padding-right: 15px;
         font-size: 14px;
@@ -350,7 +501,7 @@
     }
 
     .signup_input_field input::placeholder {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .signup_input_field img {
