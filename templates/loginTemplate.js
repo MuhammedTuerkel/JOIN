@@ -23,7 +23,7 @@ function getUserLoginTemplate() {
             <button id="loginButton" onclick="checkLoginPassword()" class="login_buttons_styles" disabled>
                 Log in 
             </button> 
-            <div class="login_buttons_styles_clear"> 
+            <div onclick="guestLogIn()" class="login_buttons_styles_clear"> 
                 Guest Log in 
             </div> 
         </div>
@@ -37,7 +37,7 @@ function getUserLoginTemplate() {
  */
 function getSignUpTemplate() {
     return `
-    <form id="logiSignUp" class="signup_card scale_up_center" onsubmit="pushNewUserinFireBaseArray(event)">
+       <form id="logiSignUp" class="signup_card scale_up_center" onsubmit="pushNewUserinFireBaseArray(event)">
         <div class="login_back_to_sign_in">
             <img onclick="backToLogIn()" src="./assets/img/back_arrow.png" alt="Zurück zur Anmeldung">
         </div>

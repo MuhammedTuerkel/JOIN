@@ -219,8 +219,22 @@ function pushUserToLoggedInUserArray() {
         email: user.email,
         color: user.color,
         createdAt: user.createdAt,
-        password: user.password
+        password: user.password,
     });
     goToSummaryHtml()
 }
 
+/**
+ * log in as a guest
+ */
+function guestLogIn(){
+    const color = createRandomColor();
+    loggedInUser.push({
+        name: "guest",
+        email: "guest@joingroup.com",
+        color: color,
+        createdAt: new Date().toISOString(),
+        password: "guestUser",
+    });
+    goToSummaryHtml()
+}
