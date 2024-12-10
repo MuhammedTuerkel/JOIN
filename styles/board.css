@@ -249,6 +249,7 @@ body {
     align-items: center;
     gap: 16px;
     width: 100%;
+    min-height: 500px;
 }
 
 .no-task-card {
@@ -334,5 +335,28 @@ body {
 
 .ticket-subtask-wrapper {
     margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 11px;
+}
+
+.ticket-subtask-counter {
+    font-size: 12px;
+}
+
+.ticket-subtask-progress-bar {
+    width: 128px;
+    height: 8px;
+    background-color: #F4F4F4;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 50%;
+    background-color: #4589FF;
+    border-radius: 8px;
 }
 
