@@ -13,6 +13,8 @@
     --prio-urgent: #FF3D00;
     --prio-medium: #FFA800;
     --prio-low: #7AE229;
+    --user-story-color: #0038FF;
+    --technical-task-color: #1FD7C1;
 }
 
 .activated {

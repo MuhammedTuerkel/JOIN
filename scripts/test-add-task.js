@@ -5,6 +5,7 @@ let selectedUsers = [];
  */
 function addTaskInit() {
     onloadFunction();
+    activateButton('medium-btn', 'medium-svg', 'medium', 'medium-icon');
 }
 
 /**
@@ -152,17 +153,46 @@ function updateSelectedUsersContainer() {
     }
 }
 
+/**
+ * Ensures that only one button is active and assigns the selected button its appearance
+ * 
+ * @param {string} buttonId - id of the selected button
+ * @param {string} svgId - id of the corresponding svg
+ * @param {string} buttonClass - class of the selected button
+ * @param {string} svgClass - class of the corresponding svg
+ */
+function activateButton(buttonId, svgId, buttonClass, svgClass) {
+    const buttons = document.querySelectorAll('.prio-btn');
+    buttons.forEach((button) => {
+        button.classList.remove('urgent', 'medium', 'low', 'active');
+    });
+
+    const svgs = document.querySelectorAll('svg');
+    svgs.forEach((svg) => {
+        svg.classList.remove('urgent-icon', 'medium-icon', 'low-icon');
+    });
+
+    document.getElementById(buttonId).classList.add(buttonClass, 'active');
+    document.getElementById(svgId).classList.add(svgClass);
+}
+
+/**
+ * Sets the Design of the Urgent-Button
+ */
 function setUrgent() {
-    document.getElementById('urgent-btn').classList.toggle('urgent');
-    document.getElementById('urgent-svg').classList.toggle('urgent-icon');
+    activateButton('urgent-btn', 'urgent-svg', 'urgent', 'urgent-icon');
 }
 
+/**
+ * Sets the Design of the Medium-Button
+ */
 function setMedium() {
-    document.getElementById('medium-btn').classList.toggle('medium');
-    document.getElementById('medium-svg').classList.toggle('medium-icon');
+    activateButton('medium-btn', 'medium-svg', 'medium', 'medium-icon');
 }
 
+/**
+ * Sets the Design of the Low-Button
+ */
 function setLow() {
-    document.getElementById('low-btn').classList.toggle('low');
-    document.getElementById('low-svg').classList.toggle('low-icon');
+    activateButton('low-btn', 'low-svg', 'low', 'low-icon');
 }

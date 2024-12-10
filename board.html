@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="JOIN" />
+    <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./styles/board.css">
+    <script src="./script.js"></script>
+    <script src="./scripts/board.js"></script>
+    <title>Board</title>
+</head>
+<body>
+    <div class="site-wrapper">
+        <section class="side-navigation">
+            <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
+            <div class="side-menu">
+                <div class="side-menu-sections">
+                    <img class="side-menu-icons" src="assets/icons/summary-icon.svg" alt="">
+                    <a href="#">Summary</a>
+                </div>
+                <div class="side-menu-sections">
+                    <img class="side-menu-icons" src="assets/icons/add-task-icon.svg" alt="">
+                    <a href="#">Add Task</a>
+                </div>
+                <div class="side-menu-sections">
+                    <img class="side-menu-icons" src="assets/icons/board-icon.svg" alt="">
+                    <a href="#">Board</a>
+                </div>
+                <div class="side-menu-sections">
+                    <img class="side-menu-icons" src="assets/icons/contacts-icon.svg" alt="">
+                    <a href="#">Contacts</a>
+                </div>
+            </div>
+            <div class="privacy-section">
+                <a href="">Privacy Policy</a>
+                <a href="">Legal Notice</a>
+            </div>
+        </section>
+        <section class="main-content-wrapper">
+            <div class="main-headline">
+                <div class="main-header-content">
+                    <p>Kanban Project Management Tool</p>
+                    <div class="help-user">
+                        <img src="assets/icons/help-symbol-icon-default.svg" alt="" style="cursor: pointer;">
+                        <span class="user">M</span>
+                    </div>
+                </div>
+            </div>
+            <div class="title-search-section">
+                <h1 class="title">Board</h1>
+                <div class="search-addtask-group">
+                    <div class="search-container">
+                        <input type="text" class="search-input" placeholder="Find Task">
+                        <div class="search-icon-wrapper">
+                            <div class="search-separator"></div>
+                            <svg class="search-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <mask id="mask0_75609_16019" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
+                                <rect width="32" height="32" fill="#D9D9D9"/>
+                                </mask>
+                                <g mask="url(#mask0_75609_16019)">
+                                <path d="M13.7118 20.2137C11.8946 20.2137 10.3567 19.5843 9.098 18.3256C7.83931 17.0669 7.20996 15.529 7.20996 13.7118C7.20996 11.8946 7.83931 10.3567 9.098 9.098C10.3567 7.83931 11.8946 7.20996 13.7118 7.20996C15.529 7.20996 17.0669 7.83931 18.3256 9.098C19.5843 10.3567 20.2137 11.8946 20.2137 13.7118C20.2137 14.4454 20.097 15.1372 19.8636 15.7874C19.6302 16.4376 19.3134 17.0127 18.9133 17.5129L24.5149 23.1145C24.6983 23.2979 24.79 23.5313 24.79 23.8147C24.79 24.0981 24.6983 24.3315 24.5149 24.5149C24.3315 24.6983 24.0981 24.79 23.8147 24.79C23.5313 24.79 23.2979 24.6983 23.1145 24.5149L17.5129 18.9133C17.0127 19.3134 16.4376 19.6302 15.7874 19.8636C15.1372 20.097 14.4454 20.2137 13.7118 20.2137ZM13.7118 18.2131C14.9622 18.2131 16.025 17.7755 16.9002 16.9002C17.7755 16.025 18.2131 14.9622 18.2131 13.7118C18.2131 12.4615 17.7755 11.3987 16.9002 10.5234C16.025 9.64815 14.9622 9.21053 13.7118 9.21053C12.4615 9.21053 11.3987 9.64815 10.5234 10.5234C9.64815 11.3987 9.21053 12.4615 9.21053 13.7118C9.21053 14.9622 9.64815 16.025 10.5234 16.9002C11.3987 17.7755 12.4615 18.2131 13.7118 18.2131Z" fill="#2A3647"/>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <button class="addtask-btn">
+                        <span>Add task</span>
+                        <svg width="25" height="24" viewBox="0 0 25 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+                            <mask id="mask0_75601_15213" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
+                            <rect x="0.248535" width="24" height="24" fill="#D9D9D9"/>
+                            </mask>
+                            <g mask="url(#mask0_75601_15213)">
+                            <path d="M11.2485 13H6.24854C5.9652 13 5.7277 12.9042 5.53604 12.7125C5.34437 12.5208 5.24854 12.2833 5.24854 12C5.24854 11.7167 5.34437 11.4792 5.53604 11.2875C5.7277 11.0958 5.9652 11 6.24854 11H11.2485V6C11.2485 5.71667 11.3444 5.47917 11.536 5.2875C11.7277 5.09583 11.9652 5 12.2485 5C12.5319 5 12.7694 5.09583 12.961 5.2875C13.1527 5.47917 13.2485 5.71667 13.2485 6V11H18.2485C18.5319 11 18.7694 11.0958 18.961 11.2875C19.1527 11.4792 19.2485 11.7167 19.2485 12C19.2485 12.2833 19.1527 12.5208 18.961 12.7125C18.7694 12.9042 18.5319 13 18.2485 13H13.2485V18C13.2485 18.2833 13.1527 18.5208 12.961 18.7125C12.7694 18.9042 12.5319 19 12.2485 19C11.9652 19 11.7277 18.9042 11.536 18.7125C11.3444 18.5208 11.2485 18.2833 11.2485 18V13Z" fill="#2A3647"/>
+                            </g>
+                            </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="board-column">
+                    <div class="column-headline">
+                        <h2>To do</h2>
+                        <svg class="column-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="1" y="1" width="22" height="22" rx="7" stroke="#091931" stroke-width="2"/>
+                            <path d="M12 8V16" stroke="#091931" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M16 12.0754L8 12.0754" stroke="#091931" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="column-content">
+                        <div class="no-task-card">
+                            <span>No tasks To do</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="board-column">
+                    <div class="column-headline">
+                        <h2>In progress</h2>
+                        <svg class="column-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="1" y="1" width="22" height="22" rx="7" stroke="#091931" stroke-width="2"/>
+                            <path d="M12 8V16" stroke="#091931" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M16 12.0754L8 12.0754" stroke="#091931" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="column-content">
+                        <div class="ticket-card">
+                            <div class="category-badge-user">
+                                <span>User Story</span>
+                            </div>
+                            <div class="ticket-title">
+                                <span>Kochwelt Page & Recipe Recommender</span>
+                            </div>
+                            <div class="ticket-description">
+                                <span>Build start page with recipe recommendation...</span>
+                            </div>
+                            <div class="ticket-subtask-wrapper">
+                                <div class="ticket-subtask-progress-bar">
+
+                                </div>
+                                <div class="ticket-subtask-counter">
+
+                                </div>
+                            </div>
+                            <div class="users-prio-wrapper">
+                                <div class="ticket-assigned-users">
+
+                                </div>
+                                <div class="ticket-prio">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="board-column">
+                    <div class="column-headline">
+                        <h2>Await feedback</h2>
+                        <svg class="column-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="1" y="1" width="22" height="22" rx="7" stroke="#091931" stroke-width="2"/>
+                            <path d="M12 8V16" stroke="#091931" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M16 12.0754L8 12.0754" stroke="#091931" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="column-content">
+
+                    </div>
+                </div>
+                <div class="board-column">
+                    <div class="column-headline">
+                        <h2>Done</h2>
+                    </div>
+                    <div class="column-content">
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
