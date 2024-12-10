@@ -71,8 +71,16 @@
 
 .login_logo img {
     transition: all 1s ease;
-
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.login_logo_mobile img {
+    transition: all 1s ease;
+    position: absolute;
+    display: none;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -372,7 +380,7 @@
     display: none;
 }
 
-@media (width: 1024px) and (height: 600px) {
+@media (width: 1024px) and (height: 787px) {
     .login_card {
         display: flex    ;
         flex-direction: column;
@@ -431,7 +439,15 @@
 
 }
 
-@media (max-width: 786px) and (min-width: 580px) {
+@media (max-width: 786px) and (min-width: 581px) {
+    .login_logo_mobile img {
+        transition: all 1s ease;
+        position: absolute;
+        display: flex;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
     .login_variants {
         display: flex    ;
         justify-content: center;
@@ -451,6 +467,7 @@
         height: 100px;
         width: 100%;
         z-index: 1000;
+        display: flex;
     }
 
     .login_moble_nav {
