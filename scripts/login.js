@@ -38,23 +38,24 @@ async function fetchPassword(userMail) {
  * The class 'login_move_image_container' must be removed after the move to create new contents.
  */
 function moveImage() {
-    let image = document.getElementById('loginMovableImage').classList.add('login_moved');
-    let mobileImg = document.getElementById('loginMobileMovableImage').classList.add('login_moved')
+    image = document.getElementById('loginMovableImage').classList.add('login_moved');
+    mobileImg = document.getElementById('loginMobileMovableImage').classList.add('login_moved');
     let position = document.getElementById('loginMoveImgContainer');
     let positionMobile = document.getElementById('loginMobileMoveImgContainer');
-    let header = document.getElementById('loginHead');
+    header = document.getElementById('loginHead').classList.remove('login_d_none');
     let mobileNav = document.getElementById('loginMobile');
     let main = document.getElementById('loginMain');
     let loginFooter = document.getElementById('loginFooter');
-    let body = document.querySelector('.login_body').style.backgroundColor = 'transparent';;
+    body = document.querySelector('.login_body').style.backgroundColor = 'transparent';
+    let loginHeaderNav = document.getElementById('loginHeader');
 
     setTimeout(function() {
         position.classList.remove('login_move_image_container');
         positionMobile.classList.remove('login_move_mobile_image_container');
-        header.classList.remove('login_d_none');
         mobileNav.classList.remove('login_d_none');
         main.classList.remove('login_d_none');
         loginFooter.classList.remove('login_d_none');
+        loginHeaderNav.classList.add('move_in');
     }, 1000);
 }
 

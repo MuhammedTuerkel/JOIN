@@ -3,11 +3,10 @@
  * Hides the login header and displays the Sign-Up form.
  */
 function loadSignUpTemplate() {
-    let loginHeader = document.getElementById('loginHead');
+    loginHeaderNav = document.getElementById('loginHeader').classList.add('move_out');
     let signUpPage = document.getElementById('loginContent');
     signUpPage.innerHTML = "";
     signUpPage.innerHTML += getSignUpTemplate();
-    loginHeader.classList.add('login_d_none');
 }
 
 /**
@@ -17,9 +16,10 @@ function loadSignUpTemplate() {
 function backToLogIn() {
     let signUp = document.getElementById('logiSignUp');
     signUp.innerHTML = "";
-    let loginHeader = document.getElementById('loginHead');
-    loginHeader.classList.remove('login_d_none');
+    loginHeaderNav = document.getElementById('loginHeader').classList.remove('move_out');
+    loginHeaderNavMoveIn = document.getElementById('loginHeader').classList.add('move_in');
     loadLoginTemplate();
+
 }
 
 /**
