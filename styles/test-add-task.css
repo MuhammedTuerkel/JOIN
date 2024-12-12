@@ -155,6 +155,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 8px;
+    cursor: pointer;
 }
 
 .prio-btn:hover {
@@ -284,6 +285,151 @@ select {
     background: none;
 }
 
+.subtasks-input .icons {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    visibility: hidden;
+}
+
+.subtasks-input .icons .clear-icon,
+.subtasks-input .icons .check-icon {
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.subtasks-input .icons .divider {
+    width: 1px;
+    height: 20px;
+    background-color: #ccc;
+    margin-left: 10px;
+}
+
+.subtasks-list {
+    margin-top: 10px;
+    padding-left: 20px;
+    width: 100%;
+}
+
+
+.subtasks-list .subtask {
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.subtasks-list .subtask:hover {
+    background-color: #f0f0f0;
+}
+
+.subtasks-list .actions {
+    display: flex;
+    align-items: center;
+    visibility: hidden;
+}
+
+.subtasks-list .subtask:hover .actions {
+    visibility: visible;
+}
+
+.subtasks-list .actions .edit-icon,
+.subtasks-list .actions .delete-icon {
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.subtasks-list .actions .divider {
+    width: 1px;
+    height: 20px;
+    background-color: #ccc;
+    margin-left: 10px;
+}
+
+.edit-icon {
+    cursor: pointer;
+}
+
+.delete-icon {
+    cursor: pointer;
+}
+
+.subtask-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 4px 4px; 
+}
+
+.subtask-item:hover {
+    background-color: #f0f0f0;
+}
+
+/* .subtasks-list li {
+    margin-bottom: 5px;
+    display: list-item;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.subtasks-list li:hover {
+    background-color: #EEEEEE;
+}
+
+.subtasks-list .actions {
+    display: flex;
+    align-items: center;
+    visibility: hidden;
+}
+
+.subtasks-list li:hover .actions {
+    visibility: visible;
+}
+
+.subtasks-list .actions .edit-icon,
+.subtasks-list .actions .delete-icon {
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.subtasks-list .actions .divider {
+    width: 1px;
+    height: 20px;
+    background-color: #ccc;
+    margin-left: 10px;
+}
+
+.edit-icon {
+    color: #2196f3;
+}
+
+.delete-icon {
+    color: #ff5722;
+} */
+
+.clear-icon {
+    color: #ff0000;
+}
+
+.check-icon {
+    color: #4caf50;
+}
+
 .btn-wrapper {
     display: flex;
     align-items: center;
@@ -303,6 +449,7 @@ select {
     align-items: center;
     justify-content: space-between;
     gap: 4px;
+    cursor: pointer;
 }
 
 .create-btn {
@@ -320,6 +467,7 @@ select {
     align-items: center;
     justify-content: center;
     gap: 4px;
+    cursor: pointer;
 }
 
 .required-hint {

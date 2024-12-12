@@ -6,6 +6,10 @@ let selectedUsers = [];
 function addTaskInit() {
     onloadFunction();
     activateButton('medium-btn', 'medium-svg', 'medium', 'medium-icon');
+    subtaskInput();
+    clearSubtaskInput();
+    checkSubtaskInput();
+    initSubtaskFunctions();
 }
 
 /**
@@ -196,3 +200,196 @@ function setMedium() {
 function setLow() {
     activateButton('low-btn', 'low-svg', 'low', 'low-icon');
 }
+
+function subtaskInput() {
+    const input = document.getElementById('task-subtasks');
+    const iconsContainer = document.getElementById('iconsContainer');
+    const addSubtaskBtn = document.getElementById('add-subtask-btn');
+    input.addEventListener('input', () => {
+        if (input.value.trim() !== '') {
+            iconsContainer.style.visibility = 'visible';
+            addSubtaskBtn.style.visibility = 'hidden';
+        } else {
+            iconsContainer.style.visibility = 'hidden';
+            addSubtaskBtn.style.visibility = 'visible';
+        }
+    });
+}
+
+function clearSubtaskInput() {
+    const input = document.getElementById('task-subtasks');
+    const clearIcon = document.getElementById('clearIcon');
+    const iconsContainer = document.getElementById('iconsContainer');
+    const addSubtaskBtn = document.getElementById('add-subtask-btn');
+    clearIcon.addEventListener('click', () => {
+        input.value = '';
+        input.focus();
+        iconsContainer.style.visibility = 'hidden';
+        addSubtaskBtn.style.visibility = 'visible';
+    });
+}
+
+// function checkSubtaskInput() {
+//     const checkIcon = document.getElementById('checkIcon');
+//     const input = document.getElementById('task-subtasks');
+//     const subtasksList = document.getElementById('subtasksList');
+//     const iconsContainer = document.getElementById('iconsContainer');
+//     const addSubtaskBtn = document.getElementById('add-subtask-btn');
+//     checkIcon.addEventListener('click', () => {
+//         if(input.value.trim() !== '') {
+//             const li = document.createElement('li');
+//             li.textContent = input.value;
+//             li.appendChild(editSubtaskLi());
+//             subtasksList.appendChild(li);
+//             input.value = '';
+//             iconsContainer.style.visibility = 'hidden';
+//             addSubtaskBtn.style.visibility = 'visible';
+//         }
+//     })
+// }
+
+// function initSubtaskFunctions() {
+//     const input = document.getElementById('task-subtasks');
+//     const clearIcon = document.getElementById('clearIcon');
+//     const checkIcon = document.getElementById('checkIcon');
+//     const iconsContainer = document.getElementById('iconsContainer');
+//     const subtasksList = document.getElementById('subtasksList');
+//     setupInputIcons(input, iconsContainer);
+//     setupClearIcon(input, iconsContainer, clearIcon);
+//     setupCheckIcon(input, iconsContainer, checkIcon, subtasksList);
+// }
+
+// function setupInputIcons(input, iconsContainer) {
+//     input.addEventListener('input', () => {
+//         toggleIconsVisibility(input, iconsContainer);
+//     });
+// }
+
+// function toggleIconsVisibility(input, iconsContainer) {
+//     iconsContainer.style.visibility = input.value.trim() !== '' ? 'visible' : 'hidden';
+// }
+
+// function setupClearIcon(input, iconsContainer, clearIcon) {
+//     clearIcon.addEventListener('click', () => {
+//         clearInputField(input, iconsContainer);
+//     });
+// }
+
+// function clearInputField(input, iconsContainer) {
+//     input.value = '';
+//     input.focus();
+//     iconsContainer.style.visibility = 'hidden';
+//     document.getElementById('add-subtask-btn').style.visibility = 'visible';
+// }
+
+// function setupCheckIcon(input, iconsContainer, checkIcon, subtasksList) {
+//     checkIcon.addEventListener('click', () => {
+//         addSubtask(input, iconsContainer, subtasksList);
+//     });
+// }
+
+// function addSubtask(input, iconsContainer, subtasksList) {
+//     if (input.value.trim() !== '') {
+//         const li = createSubtaskElement(input.value);
+//         subtasksList.appendChild(li);
+//         clearInputField(input, iconsContainer);
+//     }
+// }
+
+// function createSubtaskElement(subtaskText) {
+//     const div = document.createElement('div');
+//     const actions = createActions();
+//     let disc = "• ";
+//     div.className = 'subtask';
+//     div.textContent = disc + subtaskText;
+//     div.appendChild(actions);
+//     return div;
+// }
+
+// function createActions() {
+//     const actions = document.createElement('div');
+//     const editIcon = createEditIcon();
+//     const divider = createDivider();
+//     const deleteIcon = createDeleteIcon();
+//     actions.className = 'actions';
+//     actions.appendChild(editIcon);
+//     actions.appendChild(divider);
+//     actions.appendChild(deleteIcon);
+//     return actions;
+// }
+
+// function createDeleteIcon() {
+//     const img = document.createElement('img');
+//     img.setAttribute('src', '../assets/icons/subtask-delete.svg');
+//     img.setAttribute('width', '24');
+//     img.setAttribute('height', '24');
+//     img.classList.add('delete-icon');
+//     img.addEventListener('click', () => {
+//         deleteSubtask();
+//     });
+//     return img;
+// }
+
+// function createEditIcon() {
+//     const img = document.createElement('img');
+//     img.setAttribute('src', '../assets/icons/subtask-edit.svg');
+//     img.setAttribute('width', '24');
+//     img.setAttribute('height', '24');
+//     img.classList.add('edit-icon');
+//     img.addEventListener('click', () => {
+//         editSubtask();
+//     });
+//     return img;
+// }
+
+// function createDivider() {
+//     const divider = document.createElement('div');
+//     divider.className = 'divider';
+//     return divider;
+// }
+
+// function deleteSubtask() {
+
+// }
+
+// function editSubtask() {
+    
+// }
+
+let subtasksArray = [];
+
+function pushSubtaskArray() {
+    let arrayLength = subtasksArray.length;
+    let content = document.getElementById('task-subtasks');
+    subtasksArray.push(
+        {
+            'id' : arrayLength + 1,
+            'content' : content.value 
+        }
+    );
+    renderSubtaskList();
+    content.value = '';
+    document.getElementById('iconsContainer').style.visibility = 'hidden';
+    document.getElementById('add-subtask-btn').style.visibility = 'visible';
+}
+
+function renderSubtaskList() {
+    let target = document.getElementById('subtasksList');
+    target.innerHTML = '';
+    for(let i = 0; i < subtasksArray.length; i++) {
+        if(subtasksArray.length == 0) {
+            break;
+        } else {
+            let itemID = subtasksArray[i].id;
+            let itemContent = subtasksArray[i].content;
+            target.innerHTML += renderSubtaskItem(itemID, itemContent);
+        }
+    }
+}
+
+// function clearInputField(input, iconsContainer) {
+//     input.value = '';
+//     input.focus();
+//     iconsContainer.style.visibility = 'hidden';
+//     document.getElementById('add-subtask-btn').style.visibility = 'visible';
+// }
