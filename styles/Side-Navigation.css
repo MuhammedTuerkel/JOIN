@@ -1,0 +1,187 @@
+.side-navigation {
+    height: 100vh;
+    width: 232px;
+    background-color: #2A3647;
+    justify-content: space-between;
+    flex-direction: column;
+    display: flex;
+    padding: 64px 0px;
+    align-items: center;
+}
+
+.logo-icon {
+    width: 100px;
+    height: 120px;
+    color: white;
+}
+
+.menu {
+    width: 232px;
+    height: 229px;
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0px;
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #CDCDCD;
+    font-size: 16px;
+}
+
+.menu-icons {
+    width: 25px;
+    height: 25px;
+}
+
+.menu-sections {
+    width: 100%;
+    height: 46px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding: 0px 56px;
+}
+
+.menu-sections:hover {
+    background-color: #091931;
+    ;
+}
+
+.Privacy-section {
+    padding-top: 243px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.Privacy-section a {
+    text-decoration: none;
+    color: #A8A8A8;
+    font-size: 16px;
+    padding: 8px;
+}
+
+header {
+    height: 96px;
+    box-shadow: 0px 4px 4px 0px #0000001A;
+    background-color: #ffffff;
+
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px 20px 348px;
+    align-items: center;
+    max-width: 1440px;
+    height: 96px;
+    box-sizing: border-box;
+}
+
+header p {
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+}
+
+.user {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #2A3647;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: #29ABE2;
+    cursor: pointer;
+}
+
+.help-user {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.d-flex-column {
+    display: flex;
+    flex-direction: column;
+    width: 158px;
+    height: 56px;
+}
+
+.header-Join-Logo {
+    width: 32px;
+    height: 39px;
+    display: none;
+}
+
+body {
+    font-family: 'Inter-18';
+    display: flex;
+}
+
+.website-body {
+    width: 100vw;
+    background-color: #F6F7F8;
+}
+
+.help-user img {
+    width: 32px;
+    height: 32px;
+}
+
+.help-user img:hover {
+    width: 36px;
+    height: 36px;
+}
+
+.Submenu {
+    position: relative;
+    right: 30px;
+    top: 20px;
+    border-radius: 20px 0px 20px 20px;
+    width: 150px;
+    height: 158px;
+    background-color: #2A3647;
+    padding: 10px;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.Submenu-buttons {
+    width: 130px;
+    height: 46px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #CDCDCD;
+    display: flex;
+    padding: 8px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.d-flex-column {
+    display: flex;
+    flex-direction: column;
+    width: 158px;
+    height: 56px;
+}
+
+.user:hover {
+    background-color: #0C2E621F;
+}
+
+.d-none1 {
+    display: none;
+}

@@ -56,11 +56,11 @@ function getFromLocalStorage() {
     let text = localStorage.getItem("loggedInUser");
     let Json = JSON.parse(text);
     User.push(Json);
-    console.log(User);
 }
 
 function putName() {
-    document.getElementById('name').innerHTML = `${User[0].name}`;
+    let name = String(User[0].name).charAt(0).toUpperCase() + String(User[0].name).slice(1);
+    document.getElementById('name').innerHTML = `${name}`;
     let firstLetter = User[0].name.charAt(0).toUpperCase();
     document.getElementById('user').innerHTML = `${firstLetter}`;
 }
