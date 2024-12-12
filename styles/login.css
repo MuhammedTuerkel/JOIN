@@ -35,6 +35,7 @@
 .login_head {
     display: flex;
     justify-content: space-between;
+    margin-right: 20px;
 }
 
 .login_mobile_head{
@@ -468,6 +469,7 @@
     .login_mobile{
         display: none;
     }
+
 }
 
 @media (max-width: 786px) and (min-width: 581px) {
@@ -774,14 +776,14 @@
     }
 
     .login_card {
-        width: 74%;
+        width: 50%;
         margin: 0;
         height: 78%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin-top: 8%;
+        margin-top: 18%;
     }
 
     .login_card_headline {
@@ -1011,14 +1013,14 @@
     }
 
     .login_card {
-        width: 90%;
+        width: 70%;
         margin: 0;
-        height: 65%;
+        height: 70%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin-top: 16%;
+        margin-top: 18%;
     }
 
     .login_card_headline {
