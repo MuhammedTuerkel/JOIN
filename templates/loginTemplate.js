@@ -82,3 +82,24 @@ function getSignUpTemplate() {
     </form>
     `;
 }
+
+/**
+ * Template for "Remember Me" overlay
+ * This function returns the HTML template for the "Remember Me" overlay
+ */
+function getRememberMeTemplate() {
+    return `
+    <div id="rememberMeOverlay" class="remember_me_overlay">
+        <div id="rememberMeLogoContainer" class="remember_me_content">
+            <img src="./assets/img/capa.png" alt="Logo" class="remember_me_logo">
+        </div>
+        <div id="rememberMeTextButtonContainer" class="remember_me_text">
+                <p>Möchten Sie angemeldet bleiben?</p>
+                <div class="remember_me_buttons_container">
+                    <button class="remember_me_button" onclick="rememberMe(true)">Ja</button>
+                    <button class="remember_me_button" onclick="rememberMe(false)">Nein</button>
+                </div>
+        </div>
+    </div>
+    `;
+}

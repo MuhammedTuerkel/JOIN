@@ -203,9 +203,31 @@ function disableLogInButton() {
  * if mail and passwort are true then go to the summary html
  */
 function goToSummaryHtml() {
+    questionRememberMe();
     localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser[0]));
-    window.location.href = 'summary.html';
+ //   window.location.href = 'summary.html';
 }
+
+function questionRememberMe(){
+    let overlay = document.getElementById('overlay');
+    overlay.classList.remove('login_d_none')
+    overlay.style.display = 'flex';
+    overlay.classList.add('blur');
+    overlay.innerHTML += getRememberMeTemplate();
+    showRememberMeOverlay();
+
+}
+
+
+function showRememberMeOverlay() {    
+    let overlay = document.getElementById('rememberMeOverlay');
+    overlay.style.display = 'flex';
+    let logoContainer = document.getElementById('rememberMeLogoContainer');
+    let textButtonContainer = document.getElementById('rememberMeTextButtonContainer');
+    logoContainer.classList.add('animate-logo-container');
+    textButtonContainer.classList.add('animate-text-button-container');
+}
+
 
 /**
  * push the data from the logged in user in an array to use this datas in the local storage

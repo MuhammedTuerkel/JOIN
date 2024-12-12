@@ -30,7 +30,7 @@ function backToLogIn() {
 function checkSignUpNameInput() {
     let nameInput = document.getElementById('signUpName');
     let nameError = document.getElementById('signUpNameError');
-    let namePattern = /^[A-Za-zÄäÖöÜüß\s]+$/; // Erlaubt nur Buchstaben und Leerzeichen
+    let namePattern = /^[A-Za-zÄäÖöÜüß\s]+$/;
 
     if (namePattern.test(nameInput.value.trim())) {
         nameInput.classList.remove('login_input_error');
@@ -101,7 +101,6 @@ function checkPasswordInput() {
     }
     validateSignUpForm();
 }
-
 
 /**
  * Toggles the password visibility icon based on the password input length.
@@ -275,7 +274,7 @@ function signUpOverlay() {
 }
 
 /**
- * Speichert die Anmeldedaten im Local Storage und zeigt das Overlay an.
+ * save the e mail address and the password in the local storage
  */
 function pushUserDataInLocalStorage() {
     const email = document.getElementById('signUpInputMail').value;
@@ -285,7 +284,7 @@ function pushUserDataInLocalStorage() {
 }
 
 /**
- * Füllt die Anmeldedaten im Login-Formular aus.
+ * fill the email address and the password from the local storage in the two input fields 
  */
 function prefillLoginForm() {
     const email = localStorage.getItem('email');
