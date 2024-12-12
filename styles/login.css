@@ -3,7 +3,6 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
     top: 0;
     height: 100vh;
     margin: 0;
@@ -20,6 +19,7 @@
 
 .login_header {
     height: 100px;
+    max-width: 1920px;
     position: fixed; 
     top: 0;
     width: 100%;
@@ -181,7 +181,7 @@
     align-items: center;
     margin-top: 35px;
     margin-right: 77px;
-    transform: translateX(200%);
+    transform: translateX(900%);
     transition: transform 0.4s ease;
 }
 
@@ -190,7 +190,7 @@
 }
 
 .move_out{
-    transform: translate(200%);
+    transform: translate(900%);
 }
 
 .login_header_nav a{
@@ -262,6 +262,12 @@
     margin-bottom: 41px; 
 }
 
+.restricted_input{
+    padding-right: 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .login_input_mail_info {
     color: red;
     font-size: 0.875em;
@@ -273,13 +279,13 @@
 }
 
 .login_input_field input {
-     width: 442px;
+     width: 100%;
      border: solid 1px  #D1D1D1;
      border-radius: 10px;
      padding-top: 6px;
      padding-bottom: 6px;
      padding-left: 21px;
-     padding-right: 21px;
+     padding-right: 51px;
      font-size: 24px;
      transition: border-color 0.3s ;
      cursor: text;
@@ -287,10 +293,25 @@
 
 .login_input_field img {
      position: absolute;
-     height: 24px;
      right: 10px;
      top: 50%; 
      transform: translateY(-50%);
+}
+
+.input_icon_mail{
+    position: absolute;
+    right: 10px;
+    top: 50%; 
+    transform: translateY(-50%);
+    height: 47%;
+}
+
+.input_icon_password{
+    position: absolute;
+    right: 10px;
+    top: 50%; 
+    transform: translateY(-50%);
+    height: 60%;
 }
 
 .login_input_field input::placeholder { 
@@ -553,7 +574,10 @@
         width: 100%;
         border: solid 1px #D1D1D1;
         border-radius: 10px;
-        padding: 17px 40px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 21px;
+        padding-right: 51px;
         font-size: 19px;
         transition: border-color 0.3s;
         cursor: text;
@@ -792,8 +816,11 @@
         width: 100%;
         border: solid 1px #D1D1D1;
         border-radius: 10px;
-        padding: 12px 21px;
-        font-size: 12px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        padding-left: 21px;
+        padding-right: 51px;
+        font-size: 14px;
         transition: border-color 0.3s;
         cursor: text;
         box-sizing: border-box;
@@ -1023,14 +1050,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 100%;
-        border: solid 1px #D1D1D1;
-        border-radius: 10px;
-        padding: 12px 21px;
         font-size: 12px;
-        transition: border-color 0.3s;
-        cursor: text;
-        box-sizing: border-box;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        padding-left: 21px;
+        padding-right: 51px;
     }
 
     .login_input_field img {

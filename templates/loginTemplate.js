@@ -10,13 +10,13 @@ function getUserLoginTemplate() {
             <div class="login_underline"></div> 
         </div>
         <div class="login_input_field">
-            <input id="loginInputMail" type="text" placeholder="Mail" oninput="checkEmailInput()" onchange="checkLoginInputfields()" required class="blur_placeholder">
-            <img src="./assets/img/mail.png" alt="Mail Icon"> 
+            <input id="loginInputMail" type="text" placeholder="Mail" oninput="checkEmailInput()" onchange="checkLoginInputfields()" required class="blur_placeholder restricted_input">
+            <img src="./assets/img/mail.png" alt="Mail Icon" class="input_icon_mail"> 
             <small id="loginInputMailError" class="login_input_mail_info login_d_none">Bitte geben Sie eine gültige E-Mail-Adresse ein.</small>
         </div>
         <div class="login_input_field">
-            <input id="loginInputPassword" type="password" placeholder="Passwort" oninput="togglePasswordIcons()" required class="blur_placeholder"> 
-            <img id="togglePasswordIcon" src="./assets/img/lock.png" alt="Show/Hide Password" onclick="togglePasswordVisibility()"> 
+            <input id="loginInputPassword" type="password" placeholder="Passwort" oninput="togglePasswordIcons()" required class="blur_placeholder restricted_input"> 
+            <img id="togglePasswordIcon" src="./assets/img/lock.png" alt="Show/Hide Password" onclick="togglePasswordVisibility()" class="input_icon_password"> 
             <small id="loginInputWrongPasswordError" class="login_input_mail_info login_d_none">E-Mail-Adresse und Passwort stimmen nicht überein</small> 
         </div>
         <div class="login_buttons"> 
@@ -47,23 +47,23 @@ function getSignUpTemplate() {
         </div>
         <div class="signup_input_field">
             <input id="signUpName" type="text" placeholder="Name" class="blur_placeholder" oninput="validateSignUpForm(); checkSignUpNameInput()">
-            <img src="./assets/img/person.png" alt="Person Icon">
+            <img src="./assets/img/person.png" alt="Person Icon" class="input_icon_mail">
             <small id="signUpNameError" class="signup_input_mail_info login_d_none">Bitte geben Sie einen gültigen Namen ein (nur Buchstaben und Leerzeichen).</small>
         </div>
         <div class="signup_input_field">
             <input id="signUpInputMail" type="text" placeholder="Mail" oninput="validateSignUpForm(); checkSignUpEmailInput()" class="blur_placeholder" required>
-            <img src="./assets/img/mail.png" alt="Mail Icon">
+            <img src="./assets/img/mail.png" alt="Mail Icon" class="input_icon_mail">
             <small id="signUpInputMailError" class="signup_input_mail_info login_d_none">Bitte geben Sie eine gültige E-Mail-Adresse ein.</small>
             <small id="signUpInputMailExistsError" class="signup_input_mail_info login_d_none">Diese E-Mail-Adresse ist bereits registriert.</small>
         </div>
         <div class="signup_input_field">
             <input id="signUpInputPassword" type="password" placeholder="Passwort" oninput="validateSignUpForm(); toggleSignUpPasswordIcon(); checkPasswordInput()" class="blur_placeholder" required>
-            <img id="togglePasswordIconSignUp" src="./assets/img/lock.png" alt="Show/Hide Password" onclick="toggleSignUpPasswordVisibility()">
+            <img id="togglePasswordIconSignUp" src="./assets/img/lock.png" alt="Show/Hide Password" onclick="toggleSignUpPasswordVisibility()" class="input_icon_password">
             <small id="signUpPasswordError" class="signup_input_mail_info login_d_none">Das Passwort muss mindestens 3 Zeichen lang sein.</small>
         </div>
         <div class="signup_input_field">
             <input id="signUpConfirmInputPassword" type="password" placeholder="Confirm Passwort" oninput="validateSignUpForm(); toggleAndCheckInputConfirmPassword()" class="blur_placeholder" required>
-            <img id="togglePasswordIconSignUpConfirm" src="./assets/img/lock.png" alt="Show/Hide Password" onclick="toggleSignUpConfirmPasswordVisibility()">
+            <img id="togglePasswordIconSignUpConfirm" src="./assets/img/lock.png" alt="Show/Hide Password" onclick="toggleSignUpConfirmPasswordVisibility()" class="input_icon_password">
             <small id="signUpConfirmPasswordError" class="signup_input_mail_info login_d_none">Die Passwörter stimmen nicht überein.</small>
         </div>
         <div class="signup_checkbox_container">
