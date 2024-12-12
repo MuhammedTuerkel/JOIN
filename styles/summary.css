@@ -82,7 +82,7 @@ body {
     padding: 8px;
 }
 
-.summary {
+.website-body {
     width: 100vw;
     background-color: #F6F7F8;
 }
@@ -182,11 +182,16 @@ header p {
     box-sizing: border-box;
 }
 
+.Submenu a{
+    width: 130px;
+    height: 46px;
+}
+
 .viewOfTasks {
     width: 560px;
     height: 170px;
     display: flex;
-    gap: 28px;
+    justify-content: space-between;
 }
 
 .To-do {
@@ -521,7 +526,8 @@ header p {
         top: 128px;
         align-items: start;
     }
-    .Summary-body{
+
+    .Summary-body {
         padding: 50px 0px 0px 20px;
     }
 }
@@ -709,22 +715,26 @@ header p {
         width: 396px;
         height: 384px;
     }
-    .To-do:hover{
+
+    .To-do:hover {
         width: 200px;
         height: 124px;
     }
-.Urgency:hover{
-    width: 412px;
-    height: 124px;
-}
-.Task:hover{
-    width: 130px;
-    height: 130px;
-}
-.Submenu{
-    right: 106px;
-    top: 10px;
-}
+
+    .Urgency:hover {
+        width: 412px;
+        height: 124px;
+    }
+
+    .Task:hover {
+        width: 130px;
+        height: 130px;
+    }
+
+    .Submenu {
+        right: 106px;
+        top: 10px;
+    }
 }
 
 @media (max-width: 600px) {
@@ -797,7 +807,8 @@ header p {
     .To-do h2 {
         font-size: 40px;
     }
-    .Task{
+
+    .Task {
         width: 96px;
         height: 110px;
     }
@@ -805,15 +816,18 @@ header p {
     .Task h2 {
         font-size: 40px;
     }
-    .To-do:hover{
+
+    .To-do:hover {
         width: 154px;
         height: 124px;
     }
-    .Urgency:hover{
+
+    .Urgency:hover {
         width: 314px;
         height: 124px;
     }
-    .Task:hover{
+
+    .Task:hover {
         width: 110px;
         height: 130px;
     }

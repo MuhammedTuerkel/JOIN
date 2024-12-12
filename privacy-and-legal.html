@@ -6,19 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>privacy-and-legal</title>
     <link rel="shortcut icon" href="./assets/favicon/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./styles/Side-Navigation.css">
     <link rel="stylesheet" href="./styles/privacy-and-legal.css">
     <script src="./scripts/privacy_and_legal.js"></script>
-
+    <link rel="stylesheet" href="styles/standard.css">
+    <script src="scripts/Side-Navigation.js"></script>
 </head>
 
-<body class="privacy_and_legal_body">
-    <aside class="side-navigation privacy_and_legal_aside">
+<body class="privacy_and_legal_body" onload="Init()" onclick="hideSubMenu()">
+    <div class="side-navigation">
         <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
         <div class="menu">
             <div class="menu-sections activated">
                 <img class="menu-icons" src="assets/icons/summary-icon.svg" alt="">
-                <a href="#">Summary</a>
+                <a href="./summary.html">Summary</a>
             </div>
             <div class="menu-sections">
                 <img class="menu-icons" src="assets/icons/add-task-icon.svg" alt="">
@@ -33,16 +34,30 @@
                 <a href="#">Contacts</a>
             </div>
         </div>
-        <div class="Privacy-section ">
-            <a class="activated" href="">Privacy Policy</a>
-            <a href="">Legal Notice</a>
+        <div class="Privacy-section">
+            <a href="./privacy-and-legal.html">Privacy Policy</a>
+            <a href="./privacy-and-legal.html">Legal Notice</a>
         </div>
-    </aside>
-
-    <section class="privacy_and_legal_container">
-    <header class="privacy_and_legal_header">
-        <p>Kanban Project Management Tool</p>
-    </header>
+    </div>
+    <div class="website-body">
+        <header>
+            <div class="header-content">
+                <img class="header-Join-Logo" src="./assets/img/capa.png" alt="">
+                <p>Kanban Project Management Tool</p>
+                <div class="d-flex-column">
+                    <div id="help-user" class="help-user">
+                        <img src="assets/icons/help-symbol-icon-default.svg" alt="" style="cursor: pointer;">
+                        <span onclick="showSubmenu(event)" class="user" id="user"></span>
+                    </div>
+                    <div onclick="stopEventBubbling(event)" id="Submenu" class="Submenu" style="display: none;">
+                        <a href="./help.html" class="Submenu-buttons d-none1">Help</a>
+                        <a href="./privacy-and-legal.html" class="Submenu-buttons"> Legal Notice </a>
+                        <a href="./privacy-and-legal.html" class="Submenu-buttons"> Privacy Policy</a>
+                        <a href="./login.html" class="Submenu-buttons"> Log out </a>
+                    </div>
+                </div>
+            </div>
+        </header>
 
     <main class="privacy_and_legal_main_container">
         <div id="privacyAndLegalContentContainer">
