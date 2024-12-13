@@ -71,7 +71,7 @@ function getSignUpTemplate() {
                 <input type="checkbox" id="acceptTerms" class="form_check_input" disabled>
             </div> 
             <div class="signup_checkbox">
-                <label for="acceptTerms" class="form-check-label">I accept the <p onclick="showPrivacyPolicy()" class="hover_target">Privacy policy</p></label>
+                <label for="acceptTerms" class="form-check-label">I accept the <p onclick="renderPrivacyPolicyTemplateNotLoggedInUser()" class="hover_target">Privacy policy</p></label>
             </div>
         </div>
         <div class="signup_buttons">
