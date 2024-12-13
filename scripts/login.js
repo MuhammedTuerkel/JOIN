@@ -1,10 +1,29 @@
 let fetchedPassword = "";
 
 function logInInit() {
+    checkRememberMe()
+}
+
+/**
+ * if the rememberMe is false or null than the login page will load
+ */
+function LogInNotRemember(){
     moveImage();
     hideImageAfterDelay();
     onloadFunction();
     loadLoginTemplate();
+}
+
+/**
+ * check if the user have the status in the locals storage from rememberMe of true than he goes direktly to the summary side
+ */
+function checkRememberMe(){
+    let remember = localStorage.getItem('rememberMe');
+    if(remember === "true"){
+        window.location.href = "/summary.html";
+    }else{
+        LogInNotRemember();
+    }
 }
 
 /**
@@ -203,11 +222,14 @@ function disableLogInButton() {
  * if mail and passwort are true then go to the summary html
  */
 function goToSummaryHtml() {
-    questionRememberMe();
     localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser[0]));
- //   window.location.href = 'summary.html';
+    questionRememberMe();
 }
 
+
+/**
+ * show an overlay where the user can choos between yes or no to save his user datas in the local storage 
+ */
 function questionRememberMe(){
     let overlay = document.getElementById('overlay');
     overlay.classList.remove('login_d_none')
@@ -215,17 +237,18 @@ function questionRememberMe(){
     overlay.classList.add('blur');
     overlay.innerHTML += getRememberMeTemplate();
     showRememberMeOverlay();
-
 }
 
-
+/**
+ * load the Template where the user can choos his log in datas
+ */
 function showRememberMeOverlay() {    
     let overlay = document.getElementById('rememberMeOverlay');
     overlay.style.display = 'flex';
     let logoContainer = document.getElementById('rememberMeLogoContainer');
     let textButtonContainer = document.getElementById('rememberMeTextButtonContainer');
-    logoContainer.classList.add('animate-logo-container');
-    textButtonContainer.classList.add('animate-text-button-container');
+    logoContainer.classList.add('logo_fly_in');
+    textButtonContainer.classList.add('text_fly_in');
 }
 
 
@@ -258,5 +281,56 @@ function guestLogIn(){
         createdAt: new Date().toISOString(),
         password: "guestUser",
     });
-    goToSummaryHtml()
+    window.location.href = "/summary.html"; 
+}
+/**
+ *  if the user wants to save their data in the local storage, they can click the "Ja" button to go to the summary page.
+ *  rememberMe True will be saved in the local storage.
+ */
+function rememberMeYes() {
+    removeFlyInClasses();
+    let rememberMeText = document.getElementById('rememberMeTextButtonContainer');   
+    rememberMeText.innerHTML = "";
+    rememberMeText.innerHTML = getRememberMeYesTemplate();    
+    localStorage.setItem("rememberMe", "true");
+    setTimeout(() => {
+        flyout();
+    }, 1000); 
+    setTimeout(() => {
+       window.location.href = "/summary.html";       
+    }, 1500); 
+}
+
+/**
+ * if the user does not want to save their data in the local storage, they can click the "Nein" button to go to the summary page.
+ */
+function rememberMeNo() {
+    removeFlyInClasses();
+    let rememberMeText = document.getElementById('rememberMeTextButtonContainer');   
+    rememberMeText.innerHTML = "";
+    rememberMeText.innerHTML = getRememberMeNoTemplate();    
+    localStorage.setItem("rememberMe", "false");
+    setTimeout(() => {
+        flyout();
+    }, 1000); 
+    setTimeout(() => {
+       window.location.href = "/summary.html";       
+    }, 1500); 
+}
+
+/**
+ * remove the fly in classes
+ */
+function removeFlyInClasses() {
+    document.getElementById('rememberMeButtons').classList.add('login_d_none');
+    document.getElementById('rememberMeLogoContainer').classList.remove('logo_fly_in');
+    document.getElementById('rememberMeTextButtonContainer').classList.remove('text_fly_in');
+}
+
+/**
+ * add the fly in classes
+ */
+function flyout(){
+    document.getElementById('rememberMeNo').classList.add('text_fly_out');
+    document.getElementById('rememberMeLogoContainer').classList.add('logo_fly_out');
 }

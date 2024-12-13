@@ -95,11 +95,23 @@ function getRememberMeTemplate() {
         </div>
         <div id="rememberMeTextButtonContainer" class="remember_me_text">
                 <p>Möchten Sie angemeldet bleiben?</p>
-                <div class="remember_me_buttons_container">
-                    <button class="remember_me_button" onclick="rememberMe(true)">Ja</button>
-                    <button class="remember_me_button" onclick="rememberMe(false)">Nein</button>
+                <div id="rememberMeButtons" class="remember_me_buttons_container">
+                    <button class="remember_me_button" onclick="rememberMeYes()">Ja</button>
+                    <button class="remember_me_button" onclick="rememberMeNo()">Nein</button>
                 </div>
         </div>
     </div>
     `;
+}
+
+function getRememberMeYesTemplate(){
+    return `
+    <p id="rememberMeYes">Daten wurden gespeichert</p>
+    `
+}
+
+function getRememberMeNoTemplate(){
+    return `
+    <p id="rememberMeNo" >Daten wurden nicht gespeichert</p>
+    `
 }
