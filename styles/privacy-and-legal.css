@@ -112,3 +112,16 @@
     font-weight: bold;
     color: #29abe2; 
 }
+
+.pp_back_to_sign_in{
+    display: flex;
+    height: 30px;
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+.pp_back_to_sign_in img{
+   margin-right: 150px;
+   cursor: pointer;
+}
