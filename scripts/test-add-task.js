@@ -8,8 +8,8 @@ function addTaskInit() {
     activateButton('medium-btn', 'medium-svg', 'medium', 'medium-icon');
     subtaskInput();
     clearSubtaskInput();
-    checkSubtaskInput();
-    initSubtaskFunctions();
+    // checkSubtaskInput();
+    // initSubtaskFunctions();
 }
 
 /**
@@ -229,133 +229,6 @@ function clearSubtaskInput() {
     });
 }
 
-// function checkSubtaskInput() {
-//     const checkIcon = document.getElementById('checkIcon');
-//     const input = document.getElementById('task-subtasks');
-//     const subtasksList = document.getElementById('subtasksList');
-//     const iconsContainer = document.getElementById('iconsContainer');
-//     const addSubtaskBtn = document.getElementById('add-subtask-btn');
-//     checkIcon.addEventListener('click', () => {
-//         if(input.value.trim() !== '') {
-//             const li = document.createElement('li');
-//             li.textContent = input.value;
-//             li.appendChild(editSubtaskLi());
-//             subtasksList.appendChild(li);
-//             input.value = '';
-//             iconsContainer.style.visibility = 'hidden';
-//             addSubtaskBtn.style.visibility = 'visible';
-//         }
-//     })
-// }
-
-// function initSubtaskFunctions() {
-//     const input = document.getElementById('task-subtasks');
-//     const clearIcon = document.getElementById('clearIcon');
-//     const checkIcon = document.getElementById('checkIcon');
-//     const iconsContainer = document.getElementById('iconsContainer');
-//     const subtasksList = document.getElementById('subtasksList');
-//     setupInputIcons(input, iconsContainer);
-//     setupClearIcon(input, iconsContainer, clearIcon);
-//     setupCheckIcon(input, iconsContainer, checkIcon, subtasksList);
-// }
-
-// function setupInputIcons(input, iconsContainer) {
-//     input.addEventListener('input', () => {
-//         toggleIconsVisibility(input, iconsContainer);
-//     });
-// }
-
-// function toggleIconsVisibility(input, iconsContainer) {
-//     iconsContainer.style.visibility = input.value.trim() !== '' ? 'visible' : 'hidden';
-// }
-
-// function setupClearIcon(input, iconsContainer, clearIcon) {
-//     clearIcon.addEventListener('click', () => {
-//         clearInputField(input, iconsContainer);
-//     });
-// }
-
-// function clearInputField(input, iconsContainer) {
-//     input.value = '';
-//     input.focus();
-//     iconsContainer.style.visibility = 'hidden';
-//     document.getElementById('add-subtask-btn').style.visibility = 'visible';
-// }
-
-// function setupCheckIcon(input, iconsContainer, checkIcon, subtasksList) {
-//     checkIcon.addEventListener('click', () => {
-//         addSubtask(input, iconsContainer, subtasksList);
-//     });
-// }
-
-// function addSubtask(input, iconsContainer, subtasksList) {
-//     if (input.value.trim() !== '') {
-//         const li = createSubtaskElement(input.value);
-//         subtasksList.appendChild(li);
-//         clearInputField(input, iconsContainer);
-//     }
-// }
-
-// function createSubtaskElement(subtaskText) {
-//     const div = document.createElement('div');
-//     const actions = createActions();
-//     let disc = "• ";
-//     div.className = 'subtask';
-//     div.textContent = disc + subtaskText;
-//     div.appendChild(actions);
-//     return div;
-// }
-
-// function createActions() {
-//     const actions = document.createElement('div');
-//     const editIcon = createEditIcon();
-//     const divider = createDivider();
-//     const deleteIcon = createDeleteIcon();
-//     actions.className = 'actions';
-//     actions.appendChild(editIcon);
-//     actions.appendChild(divider);
-//     actions.appendChild(deleteIcon);
-//     return actions;
-// }
-
-// function createDeleteIcon() {
-//     const img = document.createElement('img');
-//     img.setAttribute('src', '../assets/icons/subtask-delete.svg');
-//     img.setAttribute('width', '24');
-//     img.setAttribute('height', '24');
-//     img.classList.add('delete-icon');
-//     img.addEventListener('click', () => {
-//         deleteSubtask();
-//     });
-//     return img;
-// }
-
-// function createEditIcon() {
-//     const img = document.createElement('img');
-//     img.setAttribute('src', '../assets/icons/subtask-edit.svg');
-//     img.setAttribute('width', '24');
-//     img.setAttribute('height', '24');
-//     img.classList.add('edit-icon');
-//     img.addEventListener('click', () => {
-//         editSubtask();
-//     });
-//     return img;
-// }
-
-// function createDivider() {
-//     const divider = document.createElement('div');
-//     divider.className = 'divider';
-//     return divider;
-// }
-
-// function deleteSubtask() {
-
-// }
-
-// function editSubtask() {
-    
-// }
-
 let subtasksArray = [];
 
 function pushSubtaskArray() {
@@ -387,9 +260,99 @@ function renderSubtaskList() {
     }
 }
 
-// function clearInputField(input, iconsContainer) {
-//     input.value = '';
-//     input.focus();
-//     iconsContainer.style.visibility = 'hidden';
-//     document.getElementById('add-subtask-btn').style.visibility = 'visible';
-// }
+document.addEventListener('click', (event) => {
+    const target = event.target;
+    if (target.classList.contains('edit-icon')) {
+        handleEditClick(target);
+    } else if (target.classList.contains('save-icon')) {
+        handleSaveClick(target);
+    } else if (target.classList.contains('delete-icon')) {
+        handleDeleteClick(target);
+    }
+});
+
+function handleEditClick(target) {
+    const subtaskItem = target.closest('.subtask-item');
+    const contentWrapper = subtaskItem.querySelector('.subtask-content-wrapper');
+    const contentSpan = subtaskItem.querySelector('.subtask-content');
+    subtaskItem.classList.add('editing');
+    const inputContainer = document.createElement('div');
+    inputContainer.classList.add('input-container');
+    const input = createInputField(contentSpan.textContent);
+    const deleteIcon = createIcon('delete-icon', './assets/icons/subtask-delete.png');
+    const saveIcon = createIcon('save-icon', './assets/icons/subtask-save.png');
+    inputContainer.appendChild(input);
+    inputContainer.appendChild(deleteIcon);
+    inputContainer.appendChild(saveIcon);
+    contentWrapper.innerHTML = '';
+    contentWrapper.appendChild(inputContainer);
+    const actions = subtaskItem.querySelector('.subtask-actions');
+    actions.style.visibility = 'hidden';
+    // input.focus();
+}
+
+function createIcon(className, src) {
+    const icon = document.createElement('img');
+    icon.setAttribute('src', src);
+    icon.setAttribute('alt', className);
+    icon.classList.add(className);
+    return icon;
+}
+
+function createInputField(currentText) {
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = currentText;
+    input.classList.add('subtask-input');
+    return input;
+}
+
+function createEditIcons() {
+    const deleteIcon = document.createElement('img');
+    deleteIcon.src = './assets/icons/subtask-delete.png';
+    deleteIcon.classList.add('delete-icon');
+    deleteIcon.title = 'Löschen';
+    const divider = document.createElement('span');
+    divider.classList.add('divider');
+    const saveIcon = document.createElement('img');
+    saveIcon.src = './assets/icons/subtask-save.png';
+    saveIcon.classList.add('save-icon');
+    saveIcon.title = 'Speichern';
+    return [deleteIcon, divider, saveIcon];
+}
+
+function handleSaveClick(target) {
+    const subtaskItem = target.closest('.subtask-item');
+    const contentWrapper = subtaskItem.querySelector('.subtask-content-wrapper');
+    const inputContainer = subtaskItem.querySelector('.input-container');
+    const input = inputContainer.querySelector('.subtask-input');
+    const updatedText = input.value;
+    contentWrapper.innerHTML = `
+        <span class="bullet-point">•</span>
+        <span class="subtask-content">${updatedText}</span>
+    `;
+    const actions = subtaskItem.querySelector('.subtask-actions');
+    actions.style.visibility = 'visible';
+    inputContainer.remove();
+    subtaskItem.classList.remove('editing');
+}
+
+function handleCancelClick(target) {
+    const subtaskItem = target.closest('.subtask-item');
+    const contentWrapper = subtaskItem.querySelector('.subtask-content-wrapper');
+    const inputContainer = subtaskItem.querySelector('.input-container');
+    const contentSpan = subtaskItem.querySelector('.subtask-content');
+    contentWrapper.innerHTML = `
+        <span class="bullet-point">•</span>
+        <span class="subtask-content">${contentSpan.textContent}</span>
+    `;
+    const actions = subtaskItem.querySelector('.subtask-actions');
+    actions.style.visibility = 'visible';
+    inputContainer.remove();
+}
+
+
+function handleDeleteClick(target) {
+    const subtaskItem = target.closest('.subtask-item');
+    subtaskItem.remove();
+}

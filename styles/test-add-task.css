@@ -258,7 +258,7 @@ textarea,
 select {
     font-family: Inter-18;
     font-size: 14px;
-    color: var(--text-grey);
+    /* color: var(--text-grey); */
     border-radius: 10px;
     width: calc(136px * 3 + 16px);
 }
@@ -338,9 +338,9 @@ select {
     visibility: hidden;
 }
 
-.subtasks-list .subtask:hover .actions {
+/* .subtasks-list .subtask-item:hover .actions {
     visibility: visible;
-}
+} */
 
 .subtasks-list .actions .edit-icon,
 .subtasks-list .actions .delete-icon {
@@ -365,69 +365,161 @@ select {
 }
 
 .subtask-item {
-    width: 100%;
+    width: calc(136px* 3 + 16px);
     display: flex;
+    position: relative;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-    padding: 4px 4px; 
+    padding: 4px 8px; 
 }
 
 .subtask-item:hover {
     background-color: #f0f0f0;
 }
 
-/* .subtasks-list li {
-    margin-bottom: 5px;
-    display: list-item;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    box-sizing: border-box;
+.subtask-item:hover .subtask-actions {
+    display: flex;
+    gap: 8px;
 }
 
-.subtasks-list li:hover {
-    background-color: #EEEEEE;
-}
-
-.subtasks-list .actions {
+.subtask-content-wrapper {
     display: flex;
     align-items: center;
-    visibility: hidden;
 }
 
-.subtasks-list li:hover .actions {
+.bullet-point {
+    margin-right: 8px;
+}
+
+.subtask-content {
+    font-size: 14px;
+}
+
+.subtask-actions {
+    display: flex;
+    gap: 10px;
     visibility: visible;
 }
 
-.subtasks-list .actions .edit-icon,
-.subtasks-list .actions .delete-icon {
-    cursor: pointer;
-    margin-left: 10px;
-}
-
-.subtasks-list .actions .divider {
-    width: 1px;
-    height: 20px;
-    background-color: #ccc;
-    margin-left: 10px;
-}
-
 .edit-icon {
-    color: #2196f3;
+    font-size: 16px;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
 .delete-icon {
-    color: #ff5722;
-} */
-
-.clear-icon {
-    color: #ff0000;
+    width: 24px !important;
+    height: 24px !important;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
-.check-icon {
-    color: #4caf50;
+.edit-icon:hover,
+.delete-icon:hover {
+    color: #000;
+}
+
+.divider {
+    width: 1px;
+    height: 16px;
+    background-color: #ccc;
+}
+
+input.subtask-input {
+    padding: 8px !important;
+    font-size: 14px !important;
+    border-bottom: 1px solid #005DFF !important;
+    margin-right: 8px !important;
+    border-radius: 0px !important;
+    width: 100% !important;
+}
+
+input.subtask-input:active {
+    padding: 4px !important;
+    font-size: 14px !important;
+    border-bottom: 1px solid #005DFF !important;
+    margin-right: 8px !important;
+    border-radius: 0px !important;
+    width: 100% !important;
+}
+
+input.subtask-input:focus {
+    padding: 4px !important;
+    font-size: 14px !important;
+    border-bottom: 1px solid #005DFF !important;
+    margin-right: 8px !important;
+    border-radius: 0px !important;
+    width: 100% !important;
+}
+
+.input-container {
+    position: relative;
+    width: 100%;
+    /* display: flex;
+    align-items: center; */
+}
+
+.input-container .subtask-input {
+    width: 100%;
+    padding-right: 60px;
+    font-size: 16px;
+    border-bottom: 1px solid #005DFF;
+    border-radius: 0px;
+    margin-right: 0;
+}
+
+.input-container .delete-icon,
+.input-container .save-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    opacity: 0.8;
+}
+
+.input-container .delete-icon {
+    right: 40px;
+}
+
+.input-container .save-icon {
+    right: 10px;
+}
+
+.input-container .delete-icon:hover,
+.input-container .save-icon:hover {
+    opacity: 1;
+}
+
+.subtask-actions {
+    display: none;
+}
+
+.subtask-item.editing .subtask-actions {
+    visibility: hidden;
+}
+
+.save-icon,
+.delete-icon {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.save-icon:hover,
+.delete-icon:hover {
+    opacity: 0.8;
+}
+
+.divider {
+    width: 1px;
+    height: 16px;
+    background-color: #ccc;
+    margin: 0 8px;
 }
 
 .btn-wrapper {
