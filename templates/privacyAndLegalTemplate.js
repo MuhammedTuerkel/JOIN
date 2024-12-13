@@ -66,6 +66,6 @@ function getPrivacyPolicyTemplate(){
             
                 <h2>6. Kontaktieren Sie uns</h2>
                 <p>Wenn Sie Fragen oder Anmerkungen zu dieser Richtlinie haben, können Sie uns per E-Mail unter <span class="highlight">info@developerakademie.com</span> oder per Post an:</p>
-                <p class="contact-details">Developer Akademie<br>Tassiopl 25<br>84541 München Deutschland</p>
+                <p class="pp_contact_details">Developer Akademie<br>Tassiopl 25<br>84541 München Deutschland</p>
     `
 }

@@ -314,7 +314,7 @@ function rememberMeNo() {
         flyout();
     }, 1000); 
     setTimeout(() => {
-       window.location.href = "/summary.html";       
+       window.location.href = "/summary.html";
     }, 1500); 
 }
 
