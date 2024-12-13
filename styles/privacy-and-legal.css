@@ -30,10 +30,14 @@
 .terms_container {
     max-height: 83vh;
     overflow-y: auto;
+    overflow-x: hidden;
     padding: 20px;
     background: #F6F7F8;
     margin: 10px;
     position: relative;
+    scrollbar-width: thin;
+    scrollbar-color: #29abe2 #F6F7F8;
+    word-wrap: break-word;
 }
 
 .pp_side_navigation {
@@ -56,7 +60,6 @@
     width: 232px;
     height: 229px;
     gap: 15px;
-    display: flex;
     flex-direction: column;
     padding: 8px 0px;
     font-family: "Inter", serif;
@@ -66,7 +69,6 @@
 }
 
 .pp_menu_sections {
-    width: 100%;
     height: 46px;
     display: flex;
     gap: 20px;
@@ -91,7 +93,6 @@
     gap: 4px;
     margin-bottom: 64px;
     width: 100%;
-    
 }
 
 .pp_terms_container a {
@@ -104,6 +105,7 @@
     align-items: center;
     display: flex;
     font-weight: normal;
+    width: 232px;
 }
 
 .pp_terms_container a:hover{
