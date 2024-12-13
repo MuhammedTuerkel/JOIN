@@ -4,24 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>privacy-and-legal</title>
-    <link rel="shortcut icon" href="./assets/favicon/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="./styles/Side-Navigation.css">
-    <link rel="stylesheet" href="./styles/privacy-and-legal.css">
-    <script src="./scripts/privacy_and_legal.js"></script>
-    <link rel="stylesheet" href="styles/standard.css">
-    <script src="scripts/Side-Navigation.js"></script>
+    <title>terms</title>
+    <link rel="stylesheet" href="./styles/standard.css">
+    <link rel="stylesheet" href="./styles/summary.css">
+    <script src="./scripts/summary.js"></script>
+    <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
+   <link rel="stylesheet" href="./styles/privacy-and-legal.css">
+    <meta name="apple-mobile-web-app-title" content="JOIN" />
+    <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+    <script src="script.js"></script>
 </head>
 
-<body class="privacy_and_legal_body" onload="Init()" onclick="hideSubMenu()">
-    <div class="side-navigation">
-        <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
-        <div class="menu">
-            <div class="menu-sections activated">
+<body onclick="hideSubMenu()" onload="Init()" class="pp_body">
+    <div class="pp_side_navigation">
+        <img class="pp_logo_icon" src="assets/img/Join-logo-white.svg" alt="">
+        <div class="pp_menu">
+            <div class="menu-sections ">
                 <img class="menu-icons" src="assets/icons/summary-icon.svg" alt="">
                 <a href="./summary.html">Summary</a>
             </div>
-            <div class="menu-sections">
+            <div class="pp_menu_sections">
                 <img class="menu-icons" src="assets/icons/add-task-icon.svg" alt="">
                 <a href="./add-task.html">Add Task</a>
             </div>
@@ -34,9 +38,9 @@
                 <a href="#">Contacts</a>
             </div>
         </div>
-        <div class="Privacy-section">
-            <a href="./privacy-and-legal.html">Privacy Policy</a>
-            <a href="./privacy-and-legal.html">Legal Notice</a>
+        <div class="pp_terms_container">
+            <a class="activated" href="./privacy-and-legal.html">Privacy Policy</a>
+            <a class="" href="./privacy-and-legal.html">Legal Notice</a>
         </div>
     </div>
     <div class="website-body">
@@ -44,95 +48,81 @@
             <div class="header-content">
                 <img class="header-Join-Logo" src="./assets/img/capa.png" alt="">
                 <p>Kanban Project Management Tool</p>
-                <div class="d-flex-column">
-                    <div id="help-user" class="help-user">
-                        <img src="assets/icons/help-symbol-icon-default.svg" alt="" style="cursor: pointer;">
-                        <span onclick="showSubmenu(event)" class="user" id="user"></span>
-                    </div>
-                    <div onclick="stopEventBubbling(event)" id="Submenu" class="Submenu" style="display: none;">
-                        <a href="./help.html" class="Submenu-buttons d-none1">Help</a>
-                        <a href="./privacy-and-legal.html" class="Submenu-buttons"> Legal Notice </a>
-                        <a href="./privacy-and-legal.html" class="Submenu-buttons"> Privacy Policy</a>
-                        <a href="./login.html" class="Submenu-buttons"> Log out </a>
-                    </div>
-                </div>
             </div>
         </header>
-
-    <main class="privacy_and_legal_main_container">
-        <div id="privacyAndLegalContentContainer">
+    
+        <main id="termsContent" class="terms_container">
+      
             <div class="privacy_and_legal_privacy_plolicy_text_container">
-            <div id="legalNotice" class="scrollable-content">
-                <h1>Legal Notice</h1>        
-                <h2>Imprint</h2>
-                <p>
-                    <strong>Student Names List:</strong> [Student Names List]<br>
-                    <strong>Address of the JOIN operator:</strong> [Address of the JOIN operator - e.g. one of the students]<br>
-                    <strong>Postcode and city:</strong> [Postcode and city]
-                </p>
-                
-                <h2>Exploring the Board</h2>
-                <p>
-                    <strong>Email:</strong> [Email]
-                </p>
-                
-                <h2>Acceptance of Terms</h2>
-                <p>
-                    By accessing and using (Product), you acknowledge and agree to the following terms and conditions, and any policies, guidelines, or amendments thereto that may be presented to you from time to time. We, the listed students, may update or change the terms and conditions from time to time without notice.
-                </p>
-                
-                <h2>Scope and Ownership of the Product</h2>
-                <p>
-                    (Product) has been developed as part of a student group project in a web development bootcamp at the (Institution). It has an educational purpose and is not intended for extensive personal & business usage. As such, we cannot guarantee consistent availability, reliability, accuracy, or any other aspect of quality regarding this Product.
-                </p>
-                <p>
-                    The design of (Product) is owned by the (Institution). Unauthorized use, reproduction, modification, distribution, or replication of the design is strictly prohibited.
-                </p>
-                
-                <h2>Proprietary Rights</h2>
-                <p>
-                    Aside from the design owned by the (Institution), we, the listed students, retain all proprietary rights in (Product), including any associated copyrighted material, trademarks, and other proprietary information.
-                </p>
-                
-                <h2>Use of the Product</h2>
-                <p>
-                    (Product) is intended to be used for lawful purposes only, in accordance with all applicable laws and regulations. Any use of (Product) for illegal activities, or to harass, harm, threaten, or intimidate another person, is strictly prohibited. You are solely responsible for your interactions with other users of (Product).
-                </p>
-                
-                <h2>Disclaimer of Warranties and Limitation of Liability</h2>
-                <p>
-                    (Product) is provided "as is" without warranty of any kind, whether express or implied, including but not limited to the implied warranties of merchantability, fitness for a particular purpose, and non-infringement. In no event will we, the listed students, or the (Institution), be liable for any direct, indirect, incidental, special, consequential or exemplary damages, including but not limited to, damages for loss of profits, goodwill, use, data, or other intangible losses, even if we have been advised of the possibility of such damages, arising out of or in connection with the use or performance of (Product).
-                </p>
-                
-                <h2>Indemnity</h2>
-                <p>
-                    You agree to indemnify, defend and hold harmless us, the listed students, the (Institution), and our affiliates, partners, officers, directors, agents, and employees, from and against any claim, demand, loss, damage, cost, or liability (including reasonable legal fees) arising out of or relating to your use of (Product) and/or your breach of this Legal Notice.
-                </p>
-                
-                <p>
-                    For any questions or notices, please contact us at [Contact Email].
-                </p>
-                
-                <p><strong>Date:</strong> July 26, 2023</p>
-            </div>
-            </div>
-            </div>
 
-    </main>
-    </section>
+                <h1 class="pp_headline">Privacy Policy</h1>
+                <p>Effective date: December 13, 2024</p>
+            
+                <h2>1. Introduction</h2>
+                <p>Welcome to <span class="pp_highlight">Developer Akademie</span>. We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about our policy, or our practices with regards to your personal information, please contact us at <span class="highlight">info@developerakademie.com</span>.</p>
+            
+                <h2>2. Information We Collect</h2>
+                <p>We collect personal information that you provide to us such as name, address, contact information, passwords and security data, and payment information.</p>
+            
+                <h2>3. How We Use Your Information</h2>
+                <p>We use the information we collect or receive:</p>
+                <ul>
+                    <li>To facilitate account creation and logon process.</li>
+                    <li>To send you marketing and promotional communications.</li>
+                    <li>To enforce our terms, conditions, and policies for business purposes, to comply with legal and regulatory requirements or in connection with our contract.</li>
+                </ul>
+            
+                <h2>4. Sharing Your Information</h2>
+                <p>We only share and disclose your information in the following situations:</p>
+                <ul>
+                    <li>Compliance with Laws.</li>
+                    <li>Business Transfers.</li>
+                    <li>Affiliates.</li>
+                    <li>Business Partners.</li>
+                </ul>
+            
+                <h2>5. Your Privacy Rights</h2>
+                <p>In some regions (like the European Economic Area), you have certain rights under applicable data protection laws. These may include the right (i) to request access and obtain a copy of your personal information, (ii) to request rectification or erasure; (iii) to restrict the processing of your personal information; and (iv) if applicable, to data portability.</p>
+            
+                <h2>6. Contact Us</h2>
+                <p>If you have questions or comments about this policy, you may email us at <span class="highlight">info@developerakademie.com</span> or by post to:</p>
+                <p class="pp_contact_details">Developer Akademie<br>Tassiopl 25<br>84541 München Deutschland</p>
+            
+                <h1 class="pp_highlight">Datenschutzrichtlinie</h1>
+                <p>Gültigkeitsdatum: 13 Dezember 2024</p>
+            
+                <h2>1. Einführung</h2>
+                <p>Willkommen bei <span class="highlight">Developer Akademie</span>. Wir verpflichten uns, Ihre persönlichen Daten und Ihr Recht auf Privatsphäre zu schützen. Wenn Sie Fragen oder Bedenken bezüglich unserer Richtlinie oder unserer Praktiken in Bezug auf Ihre persönlichen Informationen haben, kontaktieren Sie uns bitte unter <span class="highlight">info@developerakademie.com</span>.</p>
+            
+                <h2>2. Informationen, die wir sammeln</h2>
+                <p>Wir sammeln persönliche Informationen, die Sie uns zur Verfügung stellen, wie Name, Adresse, Kontaktinformationen, Passwörter und Sicherheitsdaten sowie Zahlungsinformationen.</p>
+            
+                <h2>3. Wie wir Ihre Informationen verwenden</h2>
+                <p>Wir verwenden die Informationen, die wir sammeln oder erhalten:</p>
+                <ul>
+                    <li>Zur Erleichterung der Kontoerstellung und des Anmeldeprozesses.</li>
+                    <li>Um Ihnen Marketing- und Werbemitteilungen zu senden.</li>
+                    <li>Um unsere Geschäftsbedingungen und Richtlinien für Geschäftszwecke durchzusetzen, um gesetzlichen und regulatorischen Anforderungen nachzukommen oder im Zusammenhang mit unserem Vertrag.</li>
+                </ul>
+            
+                <h2>4. Weitergabe Ihrer Informationen</h2>
+                <p>Wir geben Ihre Informationen nur in den folgenden Situationen weiter und offen:</p>
+                <ul>
+                    <li>Einhaltung von Gesetzen.</li>
+                    <li>Geschäftsübertragungen.</li>
+                    <li>Verbündete.</li>
+                    <li>Geschäftspartner.</li>
+                </ul>
+            
+                <h2>5. Ihre Datenschutzrechte</h2>
+                <p>In einigen Regionen (wie dem Europäischen Wirtschaftsraum) haben Sie bestimmte Rechte gemäß den geltenden Datenschutzgesetzen. Diese können das Recht umfassen (i) Zugang zu Ihren persönlichen Informationen anzufordern und eine Kopie davon zu erhalten, (ii) die Berichtigung oder Löschung anzufordern; (iii) die Verarbeitung Ihrer persönlichen Informationen einzuschränken; und (iv) falls zutreffend, auf Datenportabilität.</p>
+            
+                <h2>6. Kontaktieren Sie uns</h2>
+                <p>Wenn Sie Fragen oder Anmerkungen zu dieser Richtlinie haben, können Sie uns per E-Mail unter <span class="highlight">info@developerakademie.com</span> oder per Post an:</p>
+                <p class="contact-details">Developer Akademie<br>Tassiopl 25<br>84541 München Deutschland</p>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let textElements = document.getElementById('legalNotice');
-            let text = textElements.innerHTML;
-
-            let highlightedText = text.replace(/Join/g, '<span class="highlight">Join</span>');
-            highlightedText = highlightedText.replace(/Developer/g, '<span class="highlight">Developer</span>');
-            highlightedText = highlightedText.replace(/Akademie/g, '<span class="highlight">Akademie</span>');
-
-            textElements.innerHTML = highlightedText;
-        })
-    </script>
-
+        </main>
+    </div>
 </body>
+
 </html>
