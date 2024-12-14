@@ -120,6 +120,9 @@ function renderLegalNoticeTemplateLoggedInUser() {
     window.location.href = 'privacy-and-legal.html';
 }
 
+/**
+ * load the help html side
+ */
 function loadHelpHtml(){
     changeReturnArrowOnclickFunction();
 }
