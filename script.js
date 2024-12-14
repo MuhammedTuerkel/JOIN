@@ -96,6 +96,15 @@ function createRandomColor() {
 /**
  * Stores the template type as 'privacyPolicy' in sessionStorage and navigates to the 'privacy-and-legal.html' page.
  */
+function openHelpHtml() {
+    sessionStorage.setItem('previousPage', window.location.href);
+    sessionStorage.setItem('templateType', 'help');
+    window.location.href = 'help.html';
+}
+
+/**
+ * Stores the template type as 'privacyPolicy' in sessionStorage and navigates to the 'privacy-and-legal.html' page.
+ */
 function renderPrivacyPolicyTemplateLoggedInUser() {
     sessionStorage.setItem('previousPage', window.location.href);
     sessionStorage.setItem('templateType', 'privacyPolicy');
@@ -109,6 +118,10 @@ function renderLegalNoticeTemplateLoggedInUser() {
     sessionStorage.setItem('previousPage', window.location.href);
     sessionStorage.setItem('templateType', 'legalNotice');
     window.location.href = 'privacy-and-legal.html';
+}
+
+function loadHelpHtml(){
+    changeReturnArrowOnclickFunction();
 }
 
 /**
@@ -136,12 +149,14 @@ function renderLegalNoticeTemplate() {
 document.addEventListener('DOMContentLoaded', function() {
     const templateType = sessionStorage.getItem('templateType');
     let template = document.getElementById('termsContent');
-    template.innerHTML = "";
+
 
     if (templateType === 'privacyPolicy') {
         renderPrivacyPolicyTemplate();
     } else if (templateType === 'legalNotice') {
         renderLegalNoticeTemplate();
+    } else if (templateType === 'help'){
+        loadHelpHtml();
     }
 });
 
