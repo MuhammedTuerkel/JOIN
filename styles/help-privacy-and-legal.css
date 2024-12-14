@@ -142,7 +142,7 @@
 
  @media(max-width: 768px) and (min-width: 320px){
     .terms_container {
-        max-height: 76vh;
+        max-height: 66vh;
         padding-right: 15px;
         padding-left: 0px;
     }
@@ -154,5 +154,28 @@
     .privacy_and_legal_privacy_plolicy_text_container p {
         margin: 10px 0;
         font-size: 12px;
+    }
+
+    .pp_close_tab img {
+        margin-right: 42px;
+        height: 25px;
+        margin-bottom: 0;
+
+    }
+
+    .help_headline h1{
+        margin-top: 0px;
+    }
+ }
+
+ @media(min-height: 600px){
+    .terms_container {
+        max-height: 68vh;
+    }
+    .help_logo_icon {
+        width: 58px;
+        height: 119px;
+        color: white;
+        margin-bottom: 20px;
     }
  }
