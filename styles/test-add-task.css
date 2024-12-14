@@ -21,6 +21,15 @@ body {
     flex-grow: 1;
 }
 
+.main-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 26px;
+    margin-left: 328px;
+    margin-right: 64px;
+} 
+
 .main-content-wrapper {
     display: flex;
     flex-direction: column;
@@ -38,6 +47,7 @@ body {
     display: flex;
     padding: 64px 0px;
     align-items: center;
+    position: fixed;
 }
 
 .logo-icon {
@@ -120,14 +130,13 @@ body {
 
 .title {
     margin-top: 110px;
-    margin-left: 96px;
+    margin-left: 328px;
     font-size: 40px;
 }
 
 .form-wrapper {
     justify-self: flex-start;
-    margin-left: 110px;
-    width: 70%;
+    width: 100%;
 }
 
 .privacy-section {
@@ -571,17 +580,15 @@ input.subtask-input:focus {
 .add-task-form {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     align-items: stretch;
     min-height: 424px;
-    width: 100%;
+    width: 80%;
     height: 100%;
-    margin: 40px;
+    margin: 40px 0px;
 }
 
 .form-column-left,
 .form-column-right {
-    flex-grow: 1;
     width: calc(136px * 3 + 16px);
 }
 

@@ -260,6 +260,21 @@ function renderSubtaskList() {
     }
 }
 
+function editArrayEntry() {
+    //Hole mir die ID des bearbeiteten Eintrags
+    //Hole mir den geänderten Eintrag
+    //Finde den ursprünglichen Eintrag im Array
+    //Setze den Eintrag im Array den neuen Inhalt ein
+    //Rendere die Subtask-List
+}
+
+function deleteArrayEntry() {
+    //Hole mir die ID des gelöschten Eintrags
+    //Finde den ursprünglichen Eintrag im Array
+    //Entferne den Eintrag im Array
+    //Rendere die Subtask-List
+}
+
 document.addEventListener('click', (event) => {
     const target = event.target;
     if (target.classList.contains('edit-icon')) {
@@ -323,6 +338,7 @@ function createEditIcons() {
 
 function handleSaveClick(target) {
     const subtaskItem = target.closest('.subtask-item');
+    const targetID = target.closest('itemID');
     const contentWrapper = subtaskItem.querySelector('.subtask-content-wrapper');
     const inputContainer = subtaskItem.querySelector('.input-container');
     const input = inputContainer.querySelector('.subtask-input');
