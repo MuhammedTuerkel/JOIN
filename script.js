@@ -92,3 +92,59 @@ function createRandomColor() {
     }
     return color;
 }
+
+
+
+
+
+function renderPrivacyPolicyTemplateLoggedInUser() {
+    // Speichere den Template-Typ in sessionStorage
+    sessionStorage.setItem('templateType', 'privacyPolicy');
+    // Navigiere zur neuen Seite
+    window.location.href = 'privacy-and-legal.html';
+}
+
+function renderLegalNotceTemplateLoggedInUser() {
+    // Speichere den Template-Typ in sessionStorage
+    sessionStorage.setItem('templateType', 'legalNotice');
+    // Navigiere zur neuen Seite
+    window.location.href = 'privacy-and-legal.html';
+}
+
+function renderPrivacyPolicyTemplate() {
+    changeReturnArrowOnclickFunction();
+    document.getElementById('termsContent').innerHTML += getPrivacyPolicyTemplate();
+}
+
+function renderLegalNoticeTemplate() {
+    changeReturnArrowOnclickFunction();
+    document.getElementById('termsContent').innerHTML += getLegalNoticeTemplate();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const templateType = sessionStorage.getItem('templateType');
+    let template = document.getElementById('termsContent');
+    template.innerHTML = "";
+
+    if (templateType === 'privacyPolicy') {
+        renderPrivacyPolicyTemplate();
+    } else if (templateType === 'legalNotice') {
+        renderLegalNoticeTemplate();
+    }
+});
+
+function changeReturnArrowOnclickFunction() {
+    let image = document.getElementById('returnArrow');
+    if (image) {
+        image.onclick = returnToSessionStoragePage;
+    }
+}
+
+function returnToSessionStoragePage() {
+    let previousPage = sessionStorage.getItem('previousPage');
+    if (previousPage) {
+        window.location.href = previousPage;
+    } else {
+        console.log('Keine vorherige Seite gefunden.');
+    }
+}

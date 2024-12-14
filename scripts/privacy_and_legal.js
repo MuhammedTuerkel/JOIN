@@ -6,7 +6,7 @@ function renderPrivacyPolicyTemplateNotLoggedInUser() {
     let newTab = window.open("/privacy-and-legal.html", "_blank");
     newTab.addEventListener('DOMContentLoaded', function() {
         function showNotLoggedInUserAside() {
-            newTab.document.getElementById('privacy').classList.add('activated');
+            newTab.addClassActivatePrivatePolicy();
             newTab.loadPrivacyTemplate();
         }
         showNotLoggedInUserAside();
@@ -30,7 +30,7 @@ function renderLegalNoticeTemplateNotLoggedInUser() {
     let newTab = window.open("/privacy-and-legal.html", "_blank");
     newTab.addEventListener('DOMContentLoaded', function() {
         function showNotLoggedInUserAside() {
-            newTab.document.getElementById('privacy').classList.add('activated');
+            newTab.addClassActivateLegalNotice();
             newTab.loadLegalTemplate();
         }
         showNotLoggedInUserAside();
@@ -38,7 +38,7 @@ function renderLegalNoticeTemplateNotLoggedInUser() {
 }
 
 /**
- * this function is an help function to clear the html and load the Privacy Policy template
+ * this function is an help function to clear the html and load the Legal Notice template
  */
 function loadLegalTemplate(){
     let termPolicy = document.getElementById('termsContent');
@@ -47,8 +47,85 @@ function loadLegalTemplate(){
 }
 
 /**
+ * class remove and add the activate class to show the user whitch link is open
+ * this shows the user the Privacy Policy Template
+ */
+function addClassActivatePrivatePolicy(){
+    document.getElementById('privacy').classList.add('activated');
+    document.getElementById('legal').classList.remove('activated');
+}
+
+/**
+ * class remove and add the activate class to show the user whitch link is open
+ * this shows the user the Legal Notice Template
+ */
+function addClassActivateLegalNotice(){
+    document.getElementById('privacy').classList.remove('activated');
+    document.getElementById('legal').classList.add('activated');
+}
+
+/**
  * close these tab
  */
 function backToThePage() {
     window.close();   
+}
+
+/**
+ *  if the user clicks at the aside on the Privacy Policy Button then he can see the template from the Privacy Policy
+ */
+function showPrivacyPolicyTemplate(){
+    let template = document.getElementById('termsContent');
+    template.innerHTML = "",
+    addClassActivatePrivatePolicy();
+    template.innerHTML += getPrivacyPolicyTemplate();
+}
+
+/**
+ *  if the user clicks at the aside on the Privacy Policy Button then he can see the template from the Privacy Policy
+ */
+function showLegalNoticeTemplate(){
+    let template = document.getElementById('termsContent');
+    template.innerHTML = "",
+    addClassActivateLegalNotice();
+    template.innerHTML += getLegalNoticeTemplate();
+}
+
+
+/**
+ * this function is an help function to clear the html and load the Privacy Policy template
+ */
+function loadForLoggedInUserPrivacyTemplate(){
+    let termPolicy = document.getElementById('termsContent');
+    termPolicy.innerHTML = "";
+    termPolicy.innerHTML += getForLoggedInUserPrivacyPolicyTemplate();
+}
+
+
+/**
+ * this function is an help function to clear the html and load the Legal Notice template
+ */
+function loadForLogedInUsersLegalTemplate(){
+    let termPolicy = document.getElementById('termsContent');
+    termPolicy.innerHTML = "";
+    termPolicy.innerHTML += getForLoggedInUserPrivacyPolicyTemplate();
+}
+
+
+
+
+
+
+function redirectToPreviousPageAndClose() {
+    const previousPage = sessionStorage.getItem('previousPage');
+    
+    if (previousPage) {
+        window.open(previousPage, '_blank');
+    }
+    window.close();
+
+   
+    if (!window.closed && previousPage) {
+        window.location.href = previousPage;
+    }
 }

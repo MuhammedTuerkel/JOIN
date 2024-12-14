@@ -19,7 +19,7 @@
     <script src="./scripts/login.js"></script>
 </head>
 
-<body onload="" class="pp_body">
+<body class="pp_body">
     <div class="pp_side_navigation">
         <img class="pp_logo_icon" src="assets/img/Join-logo-white.svg" alt="">
         <div id="asideMenu" class="pp_menu" style="display: none;">
@@ -41,8 +41,8 @@
             </div>
         </div>
         <div class="pp_terms_container">
-            <a id="privacy" class="activated" href="./privacy-and-legal.html">Privacy Policy</a>
-            <a class="" href="./privacy-and-legal.html">Legal Notice</a>
+            <a id="privacy" class="" onclick="showPrivacyPolicyTemplate()" href="#">Privacy Policy</a>
+            <a id="legal"  class="" onclick="showLegalNoticeTemplate()" href="#">Legal Notice</a>
         </div>
     </div>
     <div class="website-body">
@@ -52,14 +52,10 @@
                 <p>Kanban Project Management Tool</p>
             </div>
         </header>
-        <div class="pp_back_to_sign_in">
-            <img onclick="backToThePage()" src="./assets/img/back_arrow.png" alt="Zurück zur ausgangsseite">
+        <div id="closeTab" class="pp_close_tab">
+            <img id="returnArrow" onclick="backToThePage()" src="./assets/img/back_arrow.png" alt="Zurück zur ausgangsseite">
         </div>
-        <main id="termsContent" class="terms_container">
-      
-
-
-        </main>
+        <main id="termsContent" class="terms_container"></main>
     </div>
 </body>
 
