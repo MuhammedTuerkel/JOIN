@@ -139,3 +139,20 @@
     align-items: center;
     display: flex;
  }
+
+ @media(max-width: 768px) and (min-width: 320px){
+    .terms_container {
+        max-height: 76vh;
+        padding-right: 15px;
+        padding-left: 0px;
+    }
+
+    .privacy_and_legal_privacy_plolicy_text_container li {
+        font-size: 12px;
+    }
+
+    .privacy_and_legal_privacy_plolicy_text_container p {
+        margin: 10px 0;
+        font-size: 12px;
+    }
+ }
