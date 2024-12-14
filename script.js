@@ -97,6 +97,7 @@ function createRandomColor() {
  * Stores the template type as 'privacyPolicy' in sessionStorage and navigates to the 'privacy-and-legal.html' page.
  */
 function renderPrivacyPolicyTemplateLoggedInUser() {
+    sessionStorage.setItem('previousPage', window.location.href);
     sessionStorage.setItem('templateType', 'privacyPolicy');
     window.location.href = 'privacy-and-legal.html';
 }
@@ -105,6 +106,7 @@ function renderPrivacyPolicyTemplateLoggedInUser() {
  * Stores the template type as 'legalNotice' in sessionStorage and navigates to the 'privacy-and-legal.html' page.
  */
 function renderLegalNoticeTemplateLoggedInUser() {
+    sessionStorage.setItem('previousPage', window.location.href);
     sessionStorage.setItem('templateType', 'legalNotice');
     window.location.href = 'privacy-and-legal.html';
 }
@@ -114,8 +116,8 @@ function renderLegalNoticeTemplateLoggedInUser() {
  * and sets the onclick function for the return arrow.
  */
 function renderPrivacyPolicyTemplate() {
-    changeReturnArrowOnclickFunction();
     document.getElementById('termsContent').innerHTML += getPrivacyPolicyTemplate();
+    changeReturnArrowOnclickFunction();
 }
 
 /**
@@ -123,8 +125,8 @@ function renderPrivacyPolicyTemplate() {
  * and sets the onclick function for the return arrow.
  */
 function renderLegalNoticeTemplate() {
-    changeReturnArrowOnclickFunction();
     document.getElementById('termsContent').innerHTML += getLegalNoticeTemplate();
+    changeReturnArrowOnclickFunction();
 }
 
 /**
@@ -155,13 +157,13 @@ function changeReturnArrowOnclickFunction() {
 
 /**
  * Navigates to the previous page stored in sessionStorage.
- * If no previous page is found, the user will go to the startside of JOIN
+ * If no previous page is found, the user will go to the login page of JOIN.
  */
 function returnToSessionStoragePage() {
     let previousPage = sessionStorage.getItem('previousPage');
     if (previousPage) {
         window.location.href = previousPage;
     } else {
-        window.location.href = '/login.html'
+        window.location.href = '/login.html';
     }
 }
