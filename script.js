@@ -93,34 +93,44 @@ function createRandomColor() {
     return color;
 }
 
-
-
-
-
+/**
+ * Stores the template type as 'privacyPolicy' in sessionStorage and navigates to the 'privacy-and-legal.html' page.
+ */
 function renderPrivacyPolicyTemplateLoggedInUser() {
-    // Speichere den Template-Typ in sessionStorage
     sessionStorage.setItem('templateType', 'privacyPolicy');
-    // Navigiere zur neuen Seite
     window.location.href = 'privacy-and-legal.html';
 }
 
-function renderLegalNotceTemplateLoggedInUser() {
-    // Speichere den Template-Typ in sessionStorage
+/**
+ * Stores the template type as 'legalNotice' in sessionStorage and navigates to the 'privacy-and-legal.html' page.
+ */
+function renderLegalNoticeTemplateLoggedInUser() {
     sessionStorage.setItem('templateType', 'legalNotice');
-    // Navigiere zur neuen Seite
     window.location.href = 'privacy-and-legal.html';
 }
 
+/**
+ * Renders the privacy policy template by updating the innerHTML of the 'termsContent' element
+ * and sets the onclick function for the return arrow.
+ */
 function renderPrivacyPolicyTemplate() {
     changeReturnArrowOnclickFunction();
     document.getElementById('termsContent').innerHTML += getPrivacyPolicyTemplate();
 }
 
+/**
+ * Renders the legal notice template by updating the innerHTML of the 'termsContent' element
+ * and sets the onclick function for the return arrow.
+ */
 function renderLegalNoticeTemplate() {
     changeReturnArrowOnclickFunction();
     document.getElementById('termsContent').innerHTML += getLegalNoticeTemplate();
 }
 
+/**
+ * Sets up the template rendering process based on the stored template type in sessionStorage.
+ * Clears the 'termsContent' element and renders the corresponding template.
+ */
 document.addEventListener('DOMContentLoaded', function() {
     const templateType = sessionStorage.getItem('templateType');
     let template = document.getElementById('termsContent');
@@ -133,6 +143,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+/**
+ * Changes the onclick function of the return arrow to call the returnToSessionStoragePage function.
+ */
 function changeReturnArrowOnclickFunction() {
     let image = document.getElementById('returnArrow');
     if (image) {
@@ -140,11 +153,15 @@ function changeReturnArrowOnclickFunction() {
     }
 }
 
+/**
+ * Navigates to the previous page stored in sessionStorage.
+ * If no previous page is found, the user will go to the startside of JOIN
+ */
 function returnToSessionStoragePage() {
     let previousPage = sessionStorage.getItem('previousPage');
     if (previousPage) {
         window.location.href = previousPage;
     } else {
-        console.log('Keine vorherige Seite gefunden.');
+        window.location.href = '/login.html'
     }
 }
