@@ -10,6 +10,10 @@ function showSubmenu(event) {
     document.getElementById('Submenu').style = "";
 }
 
+function logOut(){
+    localStorage.setItem("rememberMe", false);
+}
+
 function stopEventBubbling(event) {
     event.stopPropagation();
 }
