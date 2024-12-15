@@ -1,17 +1,9 @@
 let greeting;
 
-let User = [];
-
 function Init() {
     getFromLocalStorage();
-    greetingOnMobile();
-    onloadFunction();
     putName();
-}
-
-function showSubmenu(event) {
-    event.stopPropagation();
-    document.getElementById('Submenu').style = "";
+    greetingOnMobile();
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -29,14 +21,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('greeting').innerHTML = greeting;
 });
 
-function stopEventBubbling(event) {
-    event.stopPropagation();
-}
-
-function hideSubMenu() {
-    document.getElementById('Submenu').style = "display:none;"
-}
-
 async function greetingOnMobile() {
     if (window.innerWidth < 1400) {
         document.getElementById('headline').style = "display:none;";
@@ -50,12 +34,6 @@ async function greetingOnMobile() {
             document.getElementById('Tasks').style = "";
         }, 3000);
     }
-}
-
-function getFromLocalStorage() {
-    let text = localStorage.getItem("loggedInUser");
-    let Json = JSON.parse(text);
-    User.push(Json);
 }
 
 function putName() {

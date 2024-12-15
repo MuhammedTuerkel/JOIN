@@ -7,6 +7,7 @@
     <title>Summary</title>
     <link rel="stylesheet" href="./styles/standard.css">
     <link rel="stylesheet" href="./styles/summary.css">
+    <script src="./scripts/Side-Navigation.js"></script>
     <script src="./scripts/summary.js"></script>
     <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
@@ -15,9 +16,10 @@
     <meta name="apple-mobile-web-app-title" content="JOIN" />
     <link rel="manifest" href="./assets/favicon/site.webmanifest" />
     <script src="script.js"></script>
+    <link rel="stylesheet" href="./styles/Side-Navigation.css">
 </head>
 
-<body onclick="hideSubMenu()" onload="Init()">
+<body onclick="hideSubMenu()" onload="sideNavigation(), Init()">
     <div class="side-navigation">
         <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
         <div class="menu">

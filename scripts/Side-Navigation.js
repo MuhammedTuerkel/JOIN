@@ -1,6 +1,6 @@
 let User = [];
 
-function Init() {
+function sideNavigation() {
     getFromLocalStorage();
     putName();
 }

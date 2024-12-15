@@ -1,3 +1,11 @@
+.activated {
+    background-color: #091931;
+}
+
+.activated a {
+    color: white;
+}
+
 .side-navigation {
     height: 100vh;
     width: 232px;
@@ -185,3 +193,115 @@ body {
 .d-none1 {
     display: none;
 }
+
+.Submenu a{
+    width: 130px;
+    height: 46px;
+}
+
+@media (max-width: 1200px) {
+    .help-user img {
+        display: none;
+    }
+
+    .Submenu {
+        height: 204px;
+        right: 86px;
+    }
+
+    .d-none1 {
+        display: flex;
+    }
+
+    .header-content {
+        padding-left: 148px;
+    }
+
+    .d-flex-column {
+        width: 60px;
+    }
+}
+
+@media (max-width: 830px) {
+    body {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .side-navigation {
+        height: 80px;
+        width: 100%;
+        padding: 0px;
+    }
+
+    .website-body {
+        height: 92vh;
+    }
+
+    .logo-icon {
+        display: none;
+    }
+
+    .Privacy-section {
+        display: none;
+    }
+
+    .menu {
+        flex-direction: row;
+        width: 100%;
+        height: 80px;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px 16px;
+        box-sizing: border-box;
+    }
+
+    .menu-sections {
+        flex-direction: column;
+        width: 80px;
+        height: 76px;
+        border-radius: 16px;
+        gap: 10px;
+        justify-content: center;
+        padding: 0px;
+    }
+
+    header {
+        height: 80px;
+    }
+
+    .header-content {
+        height: 80px;
+        padding: 0px 20px;
+    }
+
+    .header-Join-Logo {
+        display: flex;
+    }
+
+    .header-content p {
+        display: none;
+    }
+
+    .Submenu {
+        right: 106px;
+        top: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .user {
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+    }
+
+    .d-flex-column {
+        flex-direction: column;
+    }
+
+    .help-user {
+        padding-top: 8px;
+    }
+}
+
