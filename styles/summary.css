@@ -310,7 +310,7 @@
     }
 
     .Summary-body {
-        padding: 50px 0px 0px 20px;
+        padding: 50px 0px 40px 20px;
     }
 }
 
@@ -452,7 +452,9 @@
         width: 130px;
         height: 130px;
     }
+
 }
+
 
 @media (max-width: 600px) {
 
@@ -462,6 +464,10 @@
 
     .greeting h2 {
         font-size: 36px;
+    }
+
+    .greeting {
+        width: 300px;
     }
 }
 
