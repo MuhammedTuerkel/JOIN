@@ -20,111 +20,111 @@
 </head>
 
 <body onclick="hideSubMenu()" onload="sideNavigation(), Init()">
-        <div class="side-navigation">
-            <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
-            <div class="menu">
-                <div class="menu-sections activated">
-                    <img class="menu-icons" src="assets/icons/summary-icon.svg" alt="">
-                    <a href="./summary.html">Summary</a>
-                </div>
-                <div class="menu-sections">
-                    <img class="menu-icons" src="assets/icons/add-task-icon.svg" alt="">
-                    <a href="./add-task.html">Add Task</a>
-                </div>
-                <div class="menu-sections">
-                    <img class="menu-icons" src="assets/icons/board-icon.svg" alt="">
-                    <a href="#">Board</a>
-                </div>
-                <div class="menu-sections">
-                    <img class="menu-icons" src="assets/icons/contacts-icon.svg" alt="">
-                    <a href="#">Contacts</a>
-                </div>
+    <div class="side-navigation">
+        <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
+        <div class="menu">
+            <div class="menu-sections activated">
+                <img class="menu-icons" src="assets/icons/summary-icon.svg" alt="">
+                <a href="./summary.html">Summary</a>
             </div>
-            <div class="Privacy-section">
-                <a onclick="renderPrivacyPolicyTemplateLoggedInUser()" href="#">Privacy Policy</a>
-                <a onclick="renderLegalNoticeTemplateLoggedInUser()" href="#">Legal Notice</a>
+            <div class="menu-sections">
+                <img class="menu-icons" src="assets/icons/add-task-icon.svg" alt="">
+                <a href="./add-task.html">Add Task</a>
+            </div>
+            <div class="menu-sections">
+                <img class="menu-icons" src="assets/icons/board-icon.svg" alt="">
+                <a href="./board.html">Board</a>
+            </div>
+            <div class="menu-sections">
+                <img class="menu-icons" src="assets/icons/contacts-icon.svg" alt="">
+                <a href="./contacts.html">Contacts</a>
             </div>
         </div>
-        <div class="website-body">
-            <header>
-                <div class="header-content">
-                    <img class="header-Join-Logo" src="./assets/img/capa.png" alt="">
-                    <p>Kanban Project Management Tool</p>
-                    <div class="d-flex-column">
-                        <div id="help-user" class="help-user">
-                            <img src="assets/icons/help-symbol-icon-default.svg" alt="" style="cursor: pointer;">
-                            <span onclick="showSubmenu(event)" class="user" id="user"></span>
-                        </div>
-                        <div onclick="stopEventBubbling(event)" id="Submenu" class="Submenu" style="display: none;">
-                            <a onclick="openHelpHtml()" href="#" class="Submenu-buttons d-none1">Help</a>
-                            <a onclick="renderLegalNotceTemplateLoggedInUser()" href="#" class="Submenu-buttons"> Legal
-                                Notice </a>
-                            <a onclick="renderPrivacyPolicyTemplateLoggedInUser()" href="./privacy-and-legal.html"
-                                class="Submenu-buttons"> Privacy Policy</a>
-                            <a onclick="logOut()" href="./login.html" class="Submenu-buttons"> Log out </a>
-                        </div>
+        <div class="Privacy-section">
+            <a onclick="renderPrivacyPolicyTemplateLoggedInUser()" href="#">Privacy Policy</a>
+            <a onclick="renderLegalNoticeTemplateLoggedInUser()" href="#">Legal Notice</a>
+        </div>
+    </div>
+    <div class="website-body">
+        <header>
+            <div class="header-content">
+                <img class="header-Join-Logo" src="./assets/img/capa.png" alt="">
+                <p>Kanban Project Management Tool</p>
+                <div class="d-flex-column">
+                    <div id="help-user" class="help-user">
+                        <a href="./help.html"><img src="assets/icons/help-symbol-icon-default.svg" alt="" style="cursor: pointer;"></a>
+                        <span onclick="showSubmenu(event)" class="user" id="user"></span>
                     </div>
-                </div>
-            </header>
-            <div class="Summary-body">
-                <div id="headline" class="headline">
-                    <h1>Join 360</h1>
-                    <div class="line"></div>
-                    <h3>Key Metrics at a Glance</h3>
-                    <div class="line2"></div>
-                </div>
-                <div id="Tasks" class="Tasks">
-                    <div class="Todo-Done">
-                        <div class="To-do">
-                            <div class="image1"></div>
-                            <div class="To-do_text">
-                                <h2>1</h2>
-                                <p>To-do</p>
-                            </div>
-                        </div>
-                        <div class="To-do">
-                            <div class="image2"></div>
-                            <div class="To-do_text">
-                                <h2>1</h2>
-                                <p>Done </p>
-                            </div>
-                        </div>
+                    <div onclick="stopEventBubbling(event)" id="Submenu" class="Submenu" style="display: none;">
+                        <a onclick="openHelpHtml()" href="#" class="Submenu-buttons d-none1">Help</a>
+                        <a onclick="renderLegalNotceTemplateLoggedInUser()" href="#" class="Submenu-buttons"> Legal
+                            Notice </a>
+                        <a onclick="renderPrivacyPolicyTemplateLoggedInUser()" href="./privacy-and-legal.html"
+                            class="Submenu-buttons"> Privacy Policy</a>
+                        <a onclick="logOut()" href="./login.html" class="Submenu-buttons"> Log out </a>
                     </div>
-                    <div class="Urgency">
-                        <div class="urgent-number">
-                            <img src="./assets/img/Urgent.png" alt="">
-                            <div>
-                                <h2>1</h2>
-                                <p>Urgent</p>
-                            </div>
-                        </div>
-                        <div class="Urgent-line"></div>
-                        <div class="Deadline">
-                            <h3>October 16, 2022</h3>
-                            <p>Upcoming Deadline</p>
-                        </div>
-                    </div>
-                    <div class="viewOfTasks">
-                        <div class="Task">
-                            <h2 class="Task_h2">5</h2>
-                            <p class="Task_p">Tasks in Board</p>
-                        </div>
-                        <div class="Task">
-                            <h2 class="Task_h2">2</h2>
-                            <p class="Task_p">Tasks In Progress</p>
-                        </div>
-                        <div class="Task">
-                            <h2 class="Task_h2">2</h2>
-                            <p class="Task_p">Awaiting Feedback</p>
-                        </div>
-                    </div>
-                </div>
-                <div id="greeting-top" class="greeting d-none greeting-position">
-                    <h2 id="greeting"></h2>
-                    <h1 id="name"></h1>
                 </div>
             </div>
+        </header>
+        <div class="Summary-body">
+            <div id="headline" class="headline">
+                <h1>Join 360</h1>
+                <div class="line"></div>
+                <h3>Key Metrics at a Glance</h3>
+                <div class="line2"></div>
+            </div>
+            <div id="Tasks" class="Tasks">
+                <div class="Todo-Done">
+                    <div class="To-do">
+                        <div class="image1"></div>
+                        <div class="To-do_text">
+                            <h2>1</h2>
+                            <p>To-do</p>
+                        </div>
+                    </div>
+                    <div class="To-do">
+                        <div class="image2"></div>
+                        <div class="To-do_text">
+                            <h2>1</h2>
+                            <p>Done </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="Urgency">
+                    <div class="urgent-number">
+                        <img src="./assets/img/Urgent.png" alt="">
+                        <div>
+                            <h2>1</h2>
+                            <p>Urgent</p>
+                        </div>
+                    </div>
+                    <div class="Urgent-line"></div>
+                    <div class="Deadline">
+                        <h3>October 16, 2022</h3>
+                        <p>Upcoming Deadline</p>
+                    </div>
+                </div>
+                <div class="viewOfTasks">
+                    <div class="Task">
+                        <h2 class="Task_h2">5</h2>
+                        <p class="Task_p">Tasks in Board</p>
+                    </div>
+                    <div class="Task">
+                        <h2 class="Task_h2">2</h2>
+                        <p class="Task_p">Tasks In Progress</p>
+                    </div>
+                    <div class="Task">
+                        <h2 class="Task_h2">2</h2>
+                        <p class="Task_p">Awaiting Feedback</p>
+                    </div>
+                </div>
+            </div>
+            <div id="greeting-top" class="greeting d-none greeting-position">
+                <h2 id="greeting"></h2>
+                <h1 id="name"></h1>
+            </div>
         </div>
+    </div>
 </body>
 
 </html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/Side-Navigation.css">
+    <script src="scripts/Side-Navigation.js"></script>
+    <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="JOIN" />
+    <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+    <link rel="stylesheet" href="./styles/standard.css">
+    <link rel="stylesheet" href="./styles/contacts.css">
+</head>
+
+<body onclick="hideSubMenu()" onload="sideNavigation(), Init()">
+    <div class="side-navigation">
+        <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
+        <div class="menu">
+            <div class="menu-sections">
+                <img class="menu-icons" src="assets/icons/summary-icon.svg" alt="">
+                <a href="./summary.html">Summary</a>
+            </div>
+            <div class="menu-sections">
+                <img class="menu-icons" src="assets/icons/add-task-icon.svg" alt="">
+                <a href="./add-task.html">Add Task</a>
+            </div>
+            <div class="menu-sections">
+                <img class="menu-icons" src="assets/icons/board-icon.svg" alt="">
+                <a href="./board.html">Board</a>
+            </div>
+            <div class="menu-sections activated">
+                <img class="menu-icons" src="assets/icons/contacts-icon.svg" alt="">
+                <a href="./contacts.html">Contacts</a>
+            </div>
+        </div>
+        <div class="Privacy-section">
+            <a onclick="renderPrivacyPolicyTemplateLoggedInUser()" href="#">Privacy Policy</a>
+            <a onclick="renderLegalNoticeTemplateLoggedInUser()" href="#">Legal Notice</a>
+        </div>
+    </div>
+    <div class="website-body">
+        <header>
+            <div class="header-content">
+                <img class="header-Join-Logo" src="./assets/img/capa.png" alt="">
+                <p>Kanban Project Management Tool</p>
+                <div class="d-flex-column">
+                    <div id="help-user" class="help-user">
+                        <a href="./help.html"><img src="assets/icons/help-symbol-icon-default.svg" alt=""
+                                style="cursor: pointer;"></a>
+                        <span onclick="showSubmenu(event)" class="user" id="user"></span>
+                    </div>
+                    <div onclick="stopEventBubbling(event)" id="Submenu" class="Submenu" style="display: none;">
+                        <a onclick="openHelpHtml()" href="#" class="Submenu-buttons d-none1">Help</a>
+                        <a onclick="renderLegalNotceTemplateLoggedInUser()" href="#" class="Submenu-buttons"> Legal
+                            Notice </a>
+                        <a onclick="renderPrivacyPolicyTemplateLoggedInUser()" href="./privacy-and-legal.html"
+                            class="Submenu-buttons"> Privacy Policy</a>
+                        <a onclick="logOut()" href="./login.html" class="Submenu-buttons"> Log out </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div>
+            <div class="Contacts">
+                <div class="addNewContact-button">
+                    <h2>Add new contact</h2>
+                    <img src="./assets/img/person_add.png" alt="">
+                </div>
+                <div class="ContactsList">
+                    <div class="lettersbox">
+                        <h3>A</h3>
+                    </div>
+                    <div class="line"></div>
+                    <div class="Contact">
+                        <div class="Profile-Badge">
+                            <h4>AM</h4>
+                        </div>
+                        <div class="name-email">
+                            <h2>Anton Mayer</h2>
+                            <h3>antonm@gmail.com<h3>
+                        </div>
+                    </div>
+                    <div class="Contact">
+                        <div class="Profile-Badge">
+                            <h4>AS</h4>
+                        </div>
+                        <div class="name-email">
+                            <h2>Anja Schulz</h2>
+                            <h3>schulz@hotmail.com<h3>
+                        </div>
+                    </div>
+                    <div class="lettersbox">
+                        <h3>B</h3>
+                    </div>
+                    <div class="line"></div>
+                    <div class="Contact">
+                        <div class="Profile-Badge">
+                            <h4>BZ</h4>
+                        </div>
+                        <div class="name-email">
+                            <h2>Benedikt Ziegler</h2>
+                            <h3>benedikt@gmail.com<h3>
+                        </div>
+                    </div>
+                    <div class="lettersbox">
+                        <h3>D</h3>
+                    </div>
+                    <div class="line"></div>
+                    <div class="Contact">
+                        <div class="Profile-Badge">
+                            <h4>DE</h4>
+                        </div>
+                        <div class="name-email">
+                            <h2>David Eisenberg</h2>
+                            <h3>davidberg@gmail.com<h3>
+                        </div>
+                    </div>
+                    <div class="lettersbox">
+                        <h3>E</h3>
+                    </div>
+                    <div class="line"></div>
+                    <div class="Contact">
+                        <div class="Profile-Badge">
+                            <h4>EF</h4>
+                        </div>
+                        <div class="name-email">
+                            <h2>Eva Fischer</h2>
+                            <h3>eva@gmail.com<h3>
+                        </div>
+                    </div>
+                    <div class="Contact">
+                        <div class="Profile-Badge">
+                            <h4>EM</h4>
+                        </div>
+                        <div class="name-email">
+                            <h2>Emmanuel Mauer</h2>
+                            <h3>emmanuelma@gmail.com<h3>
+                        </div>
+                    </div>
+                    <div class="lettersbox">
+                        <h3>M</h3>
+                    </div>
+                    <div class="line"></div>
+                    <div class="Contact">
+                        <div class="Profile-Badge">
+                            <h4>MB</h4>
+                        </div>
+                        <div class="name-email">
+                            <h2>Marcel Bauer</h2>
+                            <h3>bauer@gmail.com<h3>
+                        </div>
+                    </div>
+                    <div class="lettersbox">
+                        <h3>T</h3>
+                    </div>
+                    <div class="line"></div>
+                    <div class="Contact">
+                        <div class="Profile-Badge">
+                            <h4>TW</h4>
+                        </div>
+                        <div class="name-email">
+                            <h2>Tatjana Wolf</h2>
+                            <h3>wolf@gmail.com<h3>
+                        </div>
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+            <div></div>
+        </div>
+    </div>
+</body>
+
+</html>

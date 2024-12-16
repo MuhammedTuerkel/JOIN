@@ -1,0 +1,117 @@
+@import url(./fonts.css);
+
+.Contacts{
+    width: 456px;
+    background-color: white;
+    box-shadow: 4px 0px 6px 0px #00000014;
+    padding: 22px 52px;box-sizing: border-box;
+}
+
+.addNewContact-button{
+    width: 352px;
+    height: 56px;
+    border-radius: 10px;
+    border: 1px solid #2A3647;
+    background-color: #2A3647;
+    color: white;
+    padding: 12px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    box-sizing: border-box;
+    margin-bottom: 8px;
+}
+
+.addNewContact-button h2{
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.addNewContact-button img{
+ width: 32px;
+ height: 32px;
+}
+
+.ContactsList{
+    width: 400px;
+display: flex;
+flex-direction: column;
+gap: 8px;
+height: 79vh;
+overflow: scroll;
+}
+
+.lettersbox{
+    width: 352px;
+    height: 58px;
+    padding: 17px 36px;
+    box-sizing: border-box;
+    
+}
+
+.lettersbox h3{
+   font-size: 20px;
+   font-weight: 400;
+}
+
+.line{
+    width: 352px;
+    height: 1px;
+    border-radius: 3px;
+    background-color:  #D1D1D1;
+}
+
+.Contact{
+width: 352px;
+height: 78px;
+border-radius: 10px;
+padding: 15px 24px;
+box-sizing: border-box;
+display: flex;
+gap: 35px;
+}
+
+.Profile-Badge{
+    width: 42px;
+    border-radius: 45px;
+    height: 42px;
+    background-color: orange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Profile-Badge h4{
+    font-size: 12px;
+    font-weight: 400;
+    color: white;
+}
+
+.name-email{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.name-email h2{
+  font-size: 20px;
+  color: black;
+  font-weight: 400;
+}
+
+.name-email h3{
+    font-size: 16px;
+    color: #007CEE;
+    font-weight: 400;
+  }
+
+ .ContactsList::-webkit-scrollbar {
+    width: 24px;
+  }
+
+  .ContactsList::-webkit-scrollbar-thumb {
+border: 8px solid white;
+  background: #A8A8A8;
+  border-radius: 15px;
+  }

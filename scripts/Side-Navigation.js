@@ -10,7 +10,7 @@ function showSubmenu(event) {
     document.getElementById('Submenu').style = "";
 }
 
-function logOut(){
+function logOut() {
     localStorage.setItem("rememberMe", false);
 }
 
