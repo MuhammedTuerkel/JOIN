@@ -1,10 +1,20 @@
 let selectedUsers = [];
 let selectedPrio;
 
-const BASE_URL = 'https://join-bbd82-default-rtdb.europe-west1.firebasedatabase.app/';
+let FIREBASE_URL = 'https://join-bbd82-default-rtdb.europe-west1.firebasedatabase.app';
+
+/**
+ * Initializes the add task functionality.
+ */
+function addTaskOnInit() {
+    onloadFunction();
+    activateButton('medium-btn', 'medium-svg', 'medium', 'medium-icon');
+    subtaskInput();
+    clearSubtaskInput();
+}
 
 async function postTask(path = "", data={}) {
-    let response = await fetch(BASE_URL + path + ".json",{
+    let response = await fetch(FIREBASE_URL + path + ".json",{
        method: 'POST',
        header: {
             "Content-Type": "application/json", 
@@ -24,19 +34,6 @@ function buildTask() {
     let taskState = "toDo";
     let taskAssigned = '';
     return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState);
-}
-
-
-/**
- * Initializes the add task functionality.
- */
-function addTaskInit() {
-    onloadFunction();
-    activateButton('medium-btn', 'medium-svg', 'medium', 'medium-icon');
-    subtaskInput();
-    clearSubtaskInput();
-    // checkSubtaskInput();
-    // initSubtaskFunctions();
 }
 
 /**
