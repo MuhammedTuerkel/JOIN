@@ -32,7 +32,7 @@ function buildTask() {
     let taskCategory = document.getElementById('task-category').value;
     let taskSubtasks = subtasksArray;
     let taskState = "toDo";
-    let taskAssigned = '';
+    let taskAssigned = selectedUsers;
     return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState);
 }
 

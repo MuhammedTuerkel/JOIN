@@ -32,18 +32,7 @@ function taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory
     "description": ${taskDescription},
     "category": ${taskCategory},
     "subtasks": [${taskSubtasks}],
-    "assigned_to": [
-        {
-            "id": 0,
-            "firstname": "firstname",
-            "lastname": "lastname"
-        },
-        {
-            "id": 1,
-            "firstname": "firstname",
-            "lastname": "lastname"
-        }
-    ],
+    "assigned_to": [${taskAssigned}],
     "state": ${taskState}
 }`;
 }
