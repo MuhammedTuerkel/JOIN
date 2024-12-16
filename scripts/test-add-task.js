@@ -1,4 +1,31 @@
 let selectedUsers = [];
+let selectedPrio;
+
+const BASE_URL = 'https://join-bbd82-default-rtdb.europe-west1.firebasedatabase.app/';
+
+async function postTask(path = "", data={}) {
+    let response = await fetch(BASE_URL + path + ".json",{
+       method: 'POST',
+       header: {
+            "Content-Type": "application/json", 
+       },
+       body: JSON.stringify(data) 
+    });
+    return responseToJSON = await response.json();
+}
+
+function buildTask() {
+    let taskTitle = document.getElementById('task-title').value;
+    let taskDate = document.getElementById('task-due-date').value;
+    let taskPrio = selectedPrio;
+    let taskDescription = document.getElementById('task-description').value;
+    let taskCategory = document.getElementById('task-category').value;
+    let taskSubtasks = subtasksArray;
+    let taskState = "toDo";
+    let taskAssigned = '';
+    return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState);
+}
+
 
 /**
  * Initializes the add task functionality.
@@ -185,6 +212,7 @@ function activateButton(buttonId, svgId, buttonClass, svgClass) {
  */
 function setUrgent() {
     activateButton('urgent-btn', 'urgent-svg', 'urgent', 'urgent-icon');
+    selectedPrio = 'urgent';
 }
 
 /**
@@ -192,6 +220,7 @@ function setUrgent() {
  */
 function setMedium() {
     activateButton('medium-btn', 'medium-svg', 'medium', 'medium-icon');
+    selectedPrio = 'medium';
 }
 
 /**
@@ -199,6 +228,7 @@ function setMedium() {
  */
 function setLow() {
     activateButton('low-btn', 'low-svg', 'low', 'low-icon');
+    selectedPrio = 'low';
 }
 
 function subtaskInput() {
@@ -258,21 +288,6 @@ function renderSubtaskList() {
             target.innerHTML += renderSubtaskItem(itemID, itemContent);
         }
     }
-}
-
-function editArrayEntry() {
-    //Hole mir die ID des bearbeiteten Eintrags
-    //Hole mir den geänderten Eintrag
-    //Finde den ursprünglichen Eintrag im Array
-    //Setze den Eintrag im Array den neuen Inhalt ein
-    //Rendere die Subtask-List
-}
-
-function deleteArrayEntry() {
-    //Hole mir die ID des gelöschten Eintrags
-    //Finde den ursprünglichen Eintrag im Array
-    //Entferne den Eintrag im Array
-    //Rendere die Subtask-List
 }
 
 document.addEventListener('click', (event) => {
@@ -336,21 +351,36 @@ function createEditIcons() {
     return [deleteIcon, divider, saveIcon];
 }
 
+function editArrayEntry(subtaskID, updatedText) {
+    const subtask = subtasksArray.find(item => item.id === subtaskID);
+    if (subtask) {
+        subtask.content = updatedText;
+    } else {
+        console.log('Could not find subtask with this ID')
+    }
+}
+
+function deleteArrayEntry(subtaskID) {
+    const index = subtasksArray.findIndex(item => item.id === subtaskID);
+    if(index !== -1) {
+        subtasksArray.splice(index, 1);
+    }
+}
+
 function handleSaveClick(target) {
     const subtaskItem = target.closest('.subtask-item');
-    const targetID = target.closest('itemID');
+    const targetID = subtaskItem.id;
+    const numericID = parseInt(targetID.split('_')[1], 10);
     const contentWrapper = subtaskItem.querySelector('.subtask-content-wrapper');
     const inputContainer = subtaskItem.querySelector('.input-container');
     const input = inputContainer.querySelector('.subtask-input');
     const updatedText = input.value;
-    contentWrapper.innerHTML = `
-        <span class="bullet-point">•</span>
-        <span class="subtask-content">${updatedText}</span>
-    `;
+    contentWrapper.innerHTML = saveSubtaskItem(updatedText);
     const actions = subtaskItem.querySelector('.subtask-actions');
     actions.style.visibility = 'visible';
     inputContainer.remove();
     subtaskItem.classList.remove('editing');
+    editArrayEntry(numericID, updatedText);
 }
 
 function handleCancelClick(target) {
@@ -358,10 +388,7 @@ function handleCancelClick(target) {
     const contentWrapper = subtaskItem.querySelector('.subtask-content-wrapper');
     const inputContainer = subtaskItem.querySelector('.input-container');
     const contentSpan = subtaskItem.querySelector('.subtask-content');
-    contentWrapper.innerHTML = `
-        <span class="bullet-point">•</span>
-        <span class="subtask-content">${contentSpan.textContent}</span>
-    `;
+    contentWrapper.innerHTML = cancelSubtaskItem(contentSpan.textContent);
     const actions = subtaskItem.querySelector('.subtask-actions');
     actions.style.visibility = 'visible';
     inputContainer.remove();
@@ -370,5 +397,8 @@ function handleCancelClick(target) {
 
 function handleDeleteClick(target) {
     const subtaskItem = target.closest('.subtask-item');
+    const targetID = subtaskItem.id;
+    const numericID = parseInt(targetID.split('_')[1], 10);
     subtaskItem.remove();
+    deleteArrayEntry(numericID);
 }

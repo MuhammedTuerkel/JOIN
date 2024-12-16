@@ -11,3 +11,39 @@ function renderSubtaskItem(itemID, itemContent) {
                 </div>
             </div>`;
 }
+
+function saveSubtaskItem(updatedText) {
+    return `<span class="bullet-point">•</span>
+            <span class="subtask-content">${updatedText}</span>
+    `;
+}
+
+function cancelSubtaskItem(text) {
+    return `<span class="bullet-point">•</span>
+            <span class="subtask-content">${text}</span>
+    `;
+}
+
+function taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState) {
+    return `{
+    "title": ${taskTitle},
+    "due_date": ${taskDate},
+    "prio": ${taskPrio},
+    "description": ${taskDescription},
+    "category": ${taskCategory},
+    "subtasks": [${taskSubtasks}],
+    "assigned_to": [
+        {
+            "id": 0,
+            "firstname": "firstname",
+            "lastname": "lastname"
+        },
+        {
+            "id": 1,
+            "firstname": "firstname",
+            "lastname": "lastname"
+        }
+    ],
+    "state": ${taskState}
+}`;
+}
