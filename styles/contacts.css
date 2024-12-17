@@ -306,6 +306,7 @@
     margin: auto;
     border-radius: 30px;
     box-shadow: 0px 0px 1px 5000px rgba(0, 0, 0, 0.4);
+    display: flex;
 }
 
 .headline-addContact {
@@ -350,8 +351,118 @@
     color: white;
 }
 
-.line2{
+.line2 {
     height: 3px;
     width: 90px;
     background-color: #29ABE2;
+}
+
+.Button-head {
+    position: relative;
+    left: 0;
+}
+
+.addContactProfilePicture {
+    width: 120px;
+    height: 120px;
+    background-color: #D1D1D1;
+    border-radius: 70px;
+    border: 3px solid white;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 204px;
+    left: 550px;
+}
+
+.close {
+    position: absolute;
+    top: 48px;
+    left: 1132px;
+    cursor: pointer;
+}
+
+.addContactInput {
+    width: 422px;
+    height: 215px;
+    position: absolute;
+    top: 137px;
+    left: 742px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.addContactInput input {
+    width: 422px;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    padding: 13px 21px;
+    display: flex;
+    gap: 10px;
+    background-color: white;
+    box-sizing: border-box;
+}
+
+.addContactInput input::placeholder {
+    color: #D1D1D1;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+#input-name{
+        background-image: url(../assets/img/person.png);
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-position-x: 380px;
+}
+#input-email{
+        background-image: url(../assets/img/mail.png);
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-position-x: 380px;
+}
+#input-phone{
+        background-image: url(../assets/img/call.png);
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-position-x: 380px;
+}
+
+.cancel-create{
+    width: 364px;
+    height: 57px;
+    display: flex;
+    gap: 24px;
+    position: absolute;
+    top: 400px;
+    left: 742px;
+}
+
+.Cancel{
+    width: 126px;
+    height: 56px;
+    border-radius: 10px;
+    padding: 16px;
+    display: flex;
+    gap: 4px;
+    border: 1px solid #2A3647;
+    box-sizing: border-box;
+}
+
+.Create{
+    width: 214px;
+    height: 57px;
+    border-radius: 10px;
+    padding: 16px;
+    display: flex;
+    gap: 4px;
+    box-sizing: border-box;
+background-color: #2A3647;
 }
