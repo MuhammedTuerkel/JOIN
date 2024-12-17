@@ -263,3 +263,95 @@
     font-weight: 400;
     color: #007CEE;
 }
+
+.phone {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.phone h4 {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.phone p {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.animationRightToPosition {
+    animation: linear;
+    animation-name: run;
+    animation-duration: 0.3s;
+    overflow-x: hidden;
+}
+
+@keyframes run {
+    0% {
+        transform: translateX(1000px);
+    }
+}
+
+.d-none {
+    display: none;
+}
+
+.addNewContact {
+    background-color: white;
+    width: 1212px;
+    height: 592px;
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    border-radius: 30px;
+    box-shadow: 0px 0px 1px 5000px rgba(0, 0, 0, 0.4);
+}
+
+.headline-addContact {
+    height: 100%;
+    width: 467px;
+    background-color: #2A3647;
+    border-radius: 25px 0px 0px 25px;
+    padding: 66px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-sizing: border-box;
+    justify-content: center;
+}
+
+.headline-addContact img {
+    width: 56px;
+    height: 67px;
+}
+
+.Addcontact {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.Addcontact-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.Addcontact-text h2 {
+    font-weight: 700;
+    font-size: 61px;
+    color: white;
+}
+
+.Addcontact-text p {
+    font-weight: 400;
+    font-size: 27px;
+    color: white;
+}
+
+.line2{
+    height: 3px;
+    width: 90px;
+    background-color: #29ABE2;
+}

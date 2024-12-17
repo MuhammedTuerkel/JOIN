@@ -15,9 +15,10 @@
     <link rel="manifest" href="./assets/favicon/site.webmanifest" />
     <link rel="stylesheet" href="./styles/standard.css">
     <link rel="stylesheet" href="./styles/contacts.css">
+    <script src="./scripts/contacts.js"></script>
 </head>
 
-<body onclick="hideSubMenu()" onload="sideNavigation(), Init()">
+<body onclick="hideSubMenu(), hideAddNewContact(event)" onload="sideNavigation(), Init()">
     <div class="side-navigation">
         <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
         <div class="menu">
@@ -67,30 +68,30 @@
         </header>
         <div class="Contacts-body">
             <div class="Contacts">
-                <div class="addNewContact-button">
+                <div onclick="loadAddNewContact(event)" class="addNewContact-button">
                     <h2>Add new contact</h2>
                     <img src="./assets/img/person_add.png" alt="">
                 </div>
-                <div class="ContactsList">
+                <div onclick="hideContact()" class="ContactsList">
                     <div class="lettersbox">
                         <h3>A</h3>
                     </div>
                     <div class="line"></div>
-                    <div class="Contact">
+                    <div id="Contact0" onclick="loadContact(0, event)" class="Contact">
                         <div class="Profile-Badge">
                             <h4>AM</h4>
                         </div>
                         <div class="name-email">
-                            <h2>Anton Mayer</h2>
-                            <h3>antonm@gmail.com<h3>
+                            <h2 id="name0">Anton Mayer</h2>
+                            <h3>antonm@gmail.com</h3>
                         </div>
                     </div>
-                    <div class="Contact">
+                    <div id="Contact1" onclick="loadContact(1, event)" class="Contact">
                         <div class="Profile-Badge">
                             <h4>AS</h4>
                         </div>
                         <div class="name-email">
-                            <h2>Anja Schulz</h2>
+                            <h2 id="name1">Anja Schulz</h2>
                             <h3>schulz@hotmail.com<h3>
                         </div>
                     </div>
@@ -98,12 +99,12 @@
                         <h3>B</h3>
                     </div>
                     <div class="line"></div>
-                    <div class="Contact">
+                    <div id="Contact2" onclick="loadContact(2, event)" class="Contact">
                         <div class="Profile-Badge">
                             <h4>BZ</h4>
                         </div>
                         <div class="name-email">
-                            <h2>Benedikt Ziegler</h2>
+                            <h2 id="name2">Benedikt Ziegler</h2>
                             <h3>benedikt@gmail.com<h3>
                         </div>
                     </div>
@@ -111,12 +112,12 @@
                         <h3>D</h3>
                     </div>
                     <div class="line"></div>
-                    <div class="Contact">
+                    <div id="Contact3" onclick="loadContact(3, event)" class="Contact">
                         <div class="Profile-Badge">
                             <h4>DE</h4>
                         </div>
                         <div class="name-email">
-                            <h2>David Eisenberg</h2>
+                            <h2 id="name3">David Eisenberg</h2>
                             <h3>davidberg@gmail.com<h3>
                         </div>
                     </div>
@@ -124,21 +125,21 @@
                         <h3>E</h3>
                     </div>
                     <div class="line"></div>
-                    <div class="Contact">
+                    <div id="Contact4" onclick="loadContact( 4, event)" class="Contact">
                         <div class="Profile-Badge">
                             <h4>EF</h4>
                         </div>
                         <div class="name-email">
-                            <h2>Eva Fischer</h2>
+                            <h2 id="name4">Eva Fischer</h2>
                             <h3>eva@gmail.com<h3>
                         </div>
                     </div>
-                    <div class="Contact">
+                    <div id="Contact5" onclick="loadContact(5, event)" class="Contact">
                         <div class="Profile-Badge">
                             <h4>EM</h4>
                         </div>
                         <div class="name-email">
-                            <h2>Emmanuel Mauer</h2>
+                            <h2 id="name5">Emmanuel Mauer</h2>
                             <h3>emmanuelma@gmail.com<h3>
                         </div>
                     </div>
@@ -146,12 +147,12 @@
                         <h3>M</h3>
                     </div>
                     <div class="line"></div>
-                    <div class="Contact">
+                    <div id="Contact6" onclick="loadContact(6, event)" class="Contact">
                         <div class="Profile-Badge">
                             <h4>MB</h4>
                         </div>
                         <div class="name-email">
-                            <h2>Marcel Bauer</h2>
+                            <h2 id="name6">Marcel Bauer</h2>
                             <h3>bauer@gmail.com<h3>
                         </div>
                     </div>
@@ -159,12 +160,12 @@
                         <h3>T</h3>
                     </div>
                     <div class="line"></div>
-                    <div class="Contact">
+                    <div id="Contact7" onclick="loadContact(7, event)" class="Contact">
                         <div class="Profile-Badge">
                             <h4>TW</h4>
                         </div>
                         <div class="name-email">
-                            <h2>Tatjana Wolf</h2>
+                            <h2 id="name7">Tatjana Wolf</h2>
                             <h3>wolf@gmail.com<h3>
                         </div>
                     </div>
@@ -176,7 +177,7 @@
                     <div class="line1"></div>
                     <p>Better with a team</p>
                 </div>
-                <div class="all-information">
+                <div id="all-information" class="all-information d-none">
                     <div class="Profile-Information">
                         <div class="Profile-Badge1">
                             <h2>AM</h2>
@@ -203,10 +204,22 @@
                             <h4>Email</h4>
                             <p>antom@gmial.com</p>
                         </div>
-                        <div class="email">
+                        <div class="phone">
                             <h4>Phone</h4>
                             <p>+49 1111 111 11 1</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div onclick="stopPropagation(event)" id="addNewContact" class="addNewContact d-none">
+                <div class="headline-addContact">
+                    <img src="./assets/img/Join-logo-white.svg" alt="">
+                    <div class="Addcontact">
+                        <div class="Addcontact-text">
+                            <h2>Add Contact</h2>
+                            <p>Tasks are better with a team!</p>
+                        </div>
+                        <div class="line2"></div>
                     </div>
                 </div>
             </div>
