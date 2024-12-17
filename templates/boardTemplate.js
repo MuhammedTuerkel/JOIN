@@ -73,7 +73,7 @@ function prioIcon(prio) {
     }
 }
 
-function ticketTemplate(category, ticketTitle, ticketDescription, prio, subtaskDone, allSubtasks) {
+function ticketTemplate(ticketID, category, ticketTitle, ticketDescription, prio, subtaskDone, allSubtasks) {
     return `<div class="ticket-card" draggable="true" ondragstart="startDragging()">
                 ${categoryBadge(category)}
                 <div class="ticket-title">
@@ -84,7 +84,7 @@ function ticketTemplate(category, ticketTitle, ticketDescription, prio, subtaskD
                 </div>
                 <div class="ticket-subtask-wrapper">
                     <div class="ticket-subtask-progress-bar">
-                        <div class="progress-bar"></div>
+                        <div id="progress-bar_${ticketID}" style="height: 100%; width: 0%; background-color: #4589FF; border-radius: 8px;"></div>
                     </div>
                     <div class="ticket-subtask-counter">
                         <span><span id="subtasksDoneCounter">${subtaskDone}</span>/<span id="allSubtasksSum">${allSubtasks}</span> Subtasks</span>

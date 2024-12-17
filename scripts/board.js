@@ -32,9 +32,10 @@ function renderToDoTasks() {
             let ticketTitle = tasks[i].title;
             let ticketDescription = shortenDescription(tasks[i].description);
             let prio = tasks[i].prio;
-            let subtaskDone = subtasksDone(tasks[i].title);
+            let subtaskDone = subtasksClosed(tasks[i].title);
             let allSubtasks = tasks[i].subtasks.length;
-            target.innerHTML += ticketTemplate(category, ticketTitle, ticketDescription, prio, subtaskDone, allSubtasks);
+            let ticketID = findTicketIndex(tasks[i].title);
+            target.innerHTML += ticketTemplate(ticketID, category, ticketTitle, ticketDescription, prio, subtaskDone, allSubtasks);
         }
     }
 }
@@ -51,9 +52,10 @@ function renderInProgressTasks() {
             let ticketTitle = tasks[i].title;
             let ticketDescription = shortenDescription(tasks[i].description);
             let prio = tasks[i].prio;
-            let subtaskDone = subtasksDone(tasks[i].title);
+            let subtaskDone = subtasksClosed(tasks[i].title);
             let allSubtasks = tasks[i].subtasks.length;
-            target.innerHTML += ticketTemplate(category, ticketTitle, ticketDescription, prio, subtaskDone, allSubtasks);
+            let ticketID = findTicketIndex(tasks[i].title);
+            target.innerHTML += ticketTemplate(ticketID, category, ticketTitle, ticketDescription, prio, subtaskDone, allSubtasks);
         }
     }
 }
@@ -70,9 +72,10 @@ function renderFeedbackTasks() {
             let ticketTitle = tasks[i].title;
             let ticketDescription = shortenDescription(tasks[i].description);
             let prio = tasks[i].prio;
-            let subtaskDone = subtasksDone(tasks[i].title);
+            let subtaskDone = subtasksClosed(tasks[i].title);
             let allSubtasks = tasks[i].subtasks.length;
-            target.innerHTML += ticketTemplate(category, ticketTitle, ticketDescription, prio, subtaskDone, allSubtasks);
+            let ticketID = findTicketIndex(tasks[i].title);
+            target.innerHTML += ticketTemplate(ticketID, category, ticketTitle, ticketDescription, prio, subtaskDone, allSubtasks);
         }
     }
 }
@@ -89,17 +92,27 @@ function renderDoneTasks() {
             let ticketTitle = tasks[i].title;
             let ticketDescription = shortenDescription(tasks[i].description);
             let prio = tasks[i].prio;
-            let subtaskDone = subtasksDone(tasks[i].title);
+            let subtaskDone = subtasksClosed(tasks[i].title);
             let allSubtasks = tasks[i].subtasks.length;
-            target.innerHTML += ticketTemplate(category, ticketTitle, ticketDescription, prio, subtaskDone, allSubtasks);
+            let ticketID = findTicketIndex(tasks[i].title);
+            target.innerHTML += ticketTemplate(ticketID, category, ticketTitle, ticketDescription, prio, subtaskDone, allSubtasks);
         }
     }
 }
 
-function subtasksDone(title) {
+function subtasksClosed(title) {
     let searchedTask = allTasks.filter(t => t['title'] == title);
     let searchedSubTasks = searchedTask.filter(st => st['status'] == 'closed');
     return searchedSubTasks.length;
+}
+
+function updateProgressBar(title, ticketID) {
+    let closedTasks = subtasksClosed(title);
+    let searchedTask = allTasks.filter(t => t['title'] == title);
+    let allSubtasks = searchedTask.filter(st => st['subtasks']).length;
+    const progressPercentage = allSubtasks > 0 ? (closedTasks / allSubtasks) * 100 : 0;
+    let progressBar = document.getElementById(`progress-bar_${ticketID}`);
+    progressBar.style.width = progressPercentage + '%';
 }
 
 function shortenDescription(string, maxLength = 44) {
@@ -107,6 +120,11 @@ function shortenDescription(string, maxLength = 44) {
         return string.slice(0, maxLength - 3) + '...';
     }
     return string;
+}
+
+function findTicketIndex(title) {
+    let ticketIndex = allTasks.findIndex(ix => ix['title'] === title);
+    return ticketIndex;
 }
 
 function allowDrop(ev) {
