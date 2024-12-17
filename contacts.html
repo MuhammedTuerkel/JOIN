@@ -222,7 +222,7 @@
                         <div class="line2"></div>
                     </div>
                 </div>
-                <img class="close" src="./assets/img/Close.png" alt="">
+                <img onclick="hideAddNewContact(event)" class="close" src="./assets/img/Close.png" alt="">
                 <div class="addContactProfilePicture">
                     <img src="./assets/img/person-white.png" alt="">
                 </div>
@@ -232,13 +232,13 @@
                     <input id="input-phone" type="number" placeholder="Phone">
                 </div>
                 <div class="cancel-create">
-                    <div class="Cancel">
+                    <div onclick="hideAddNewContact(event)" class="Cancel">
                         <h3>Cancel</h3>
-                        <img src="" alt="">
+                        <img src="./assets/img/Close.png" alt="">
                     </div>
                     <div class="Create">
-                        <h3>Create Contact</h3>
-                        <img src="" alt="">
+                        <h3>Create contact</h3>
+                        <img src="/assets/img/check.png" alt="">
                     </div>
                 </div>
             </div>

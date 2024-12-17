@@ -293,9 +293,6 @@
     }
 }
 
-.d-none {
-    display: none;
-}
 
 .addNewContact {
     background-color: white;
@@ -307,6 +304,10 @@
     border-radius: 30px;
     box-shadow: 0px 0px 1px 5000px rgba(0, 0, 0, 0.4);
     display: flex;
+}
+
+.d-none {
+    display: none;
 }
 
 .headline-addContact {
@@ -413,29 +414,31 @@
     font-weight: 400;
 }
 
-#input-name{
-        background-image: url(../assets/img/person.png);
-    background-size: 16px;
-    background-repeat: no-repeat;
-    background-position: right;
-    background-position-x: 380px;
-}
-#input-email{
-        background-image: url(../assets/img/mail.png);
-    background-size: 16px;
-    background-repeat: no-repeat;
-    background-position: right;
-    background-position-x: 380px;
-}
-#input-phone{
-        background-image: url(../assets/img/call.png);
+#input-name {
+    background-image: url(../assets/img/person.png);
     background-size: 16px;
     background-repeat: no-repeat;
     background-position: right;
     background-position-x: 380px;
 }
 
-.cancel-create{
+#input-email {
+    background-image: url(../assets/img/mail.png);
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-position-x: 380px;
+}
+
+#input-phone {
+    background-image: url(../assets/img/call.png);
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-position-x: 380px;
+}
+
+.cancel-create {
     width: 364px;
     height: 57px;
     display: flex;
@@ -445,7 +448,7 @@
     left: 742px;
 }
 
-.Cancel{
+.Cancel {
     width: 126px;
     height: 56px;
     border-radius: 10px;
@@ -454,9 +457,12 @@
     gap: 4px;
     border: 1px solid #2A3647;
     box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
 
-.Create{
+.Create {
     width: 214px;
     height: 57px;
     border-radius: 10px;
@@ -464,5 +470,25 @@
     display: flex;
     gap: 4px;
     box-sizing: border-box;
-background-color: #2A3647;
+    background-color: #2A3647;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.Cancel h3 {
+    font-weight: 400;
+    font-size: 20px;
+    color: #2A3647;
+}
+
+.Cancel img {
+    width: 24px;
+    height: 24px;
+}
+
+.Create h3 {
+    font-size: 21px;
+    font-weight: 700;
+    color: white;
 }
