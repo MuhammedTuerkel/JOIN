@@ -25,14 +25,14 @@ function cancelSubtaskItem(text) {
 }
 
 function taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState) {
-    return `{
-    "title": ${taskTitle},
-    "due_date": ${taskDate},
-    "prio": ${taskPrio},
-    "description": ${taskDescription},
-    "category": ${taskCategory},
-    "subtasks": [${taskSubtasks}],
-    "assigned_to": [${taskAssigned}],
-    "state": ${taskState}
-}`;
+    return {
+    title: taskTitle,
+    due_date: taskDate,
+    prio: taskPrio,
+    description: taskDescription,
+    category: taskCategory,
+    subtasks: taskSubtasks,
+    assigned_to: taskAssigned,
+    state: taskState
+};
 }

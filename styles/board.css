@@ -298,7 +298,7 @@ body {
 }
 
 .category-badge-technical {
-    width: 113px;
+    width: 150px;
     height: 27px;
     border-radius: 8px;
     padding: 4px 16px;
@@ -355,7 +355,7 @@ body {
 
 .progress-bar {
     height: 100%;
-    width: 50%;
+    width: 0%;
     background-color: #4589FF;
     border-radius: 8px;
 }

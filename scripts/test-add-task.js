@@ -264,7 +264,8 @@ function pushSubtaskArray() {
     subtasksArray.push(
         {
             'id' : arrayLength + 1,
-            'content' : content.value 
+            'content' : content.value,
+            'status' : 'open'
         }
     );
     renderSubtaskList();

@@ -72,3 +72,33 @@ function prioIcon(prio) {
                 </div>`;
     }
 }
+
+function ticketTemplate(category, ticketTitle, ticketDescription, prio, subtaskDone, allSubtasks) {
+    return `<div class="ticket-card" draggable="true" ondragstart="startDragging()">
+                ${categoryBadge(category)}
+                <div class="ticket-title">
+                    <span>${ticketTitle}</span>
+                </div>
+                <div class="ticket-description">
+                    <span>${ticketDescription}</span>
+                </div>
+                <div class="ticket-subtask-wrapper">
+                    <div class="ticket-subtask-progress-bar">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <div class="ticket-subtask-counter">
+                        <span><span id="subtasksDoneCounter">${subtaskDone}</span>/<span id="allSubtasksSum">${allSubtasks}</span> Subtasks</span>
+                    </div>
+                </div>
+                <div class="users-prio-wrapper">
+                    <div class="ticket-assigned-users" id="ticketAssignedUsers">
+                                    
+                    </div>
+                    <div class="ticket-prio">
+                        <div class="board-prio-icon" id="boardPrioIcon">
+                            ${prioIcon(prio)}
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+}
