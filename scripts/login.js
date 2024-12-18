@@ -20,7 +20,7 @@ function LogInNotRemember(){
 function checkRememberMe(){
     let remember = localStorage.getItem('rememberMe');
     if(remember === "true"){
-        window.location.href = "/summary.html";
+        window.location.href = "../summary.html";
     }else{
         LogInNotRemember();
     }
