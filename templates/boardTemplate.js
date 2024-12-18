@@ -91,7 +91,7 @@ function ticketTemplate(ticketID, category, ticketTitle, ticketDescription, prio
                     </div>
                 </div>
                 <div class="users-prio-wrapper">
-                    <div class="ticket-assigned-users" id="ticketAssignedUsers">
+                    <div class="ticket-assigned-users" id="ticketAssignedUsers_${ticketID}">
                                     
                     </div>
                     <div class="ticket-prio">
@@ -100,5 +100,11 @@ function ticketTemplate(ticketID, category, ticketTitle, ticketDescription, prio
                         </div>
                     </div>
                 </div>
+            </div>`;
+}
+
+function renderUserCircle(initials, color) {
+    return `<div class="selected_user_circle_board" style="background-color: ${color};">
+                ${initials}
             </div>`;
 }
