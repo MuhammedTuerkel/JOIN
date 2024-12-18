@@ -6,10 +6,12 @@ let currentDraggedElement;
 /**
  * Initialize the board features which should be active at site load
  */
+
 async function onInit() {
     await getAllTasks();
     await renderAllTickets();
 }
+
 /**
  * Get all tasks which are saved in the firebase realtime database
  */
@@ -21,7 +23,6 @@ async function getAllTasks() {
         return { firebase_id: id, ...task };
     });
 }
-
 
 /**
  * Renders all Tickets on the board

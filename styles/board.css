@@ -18,6 +18,10 @@ body {
     display: none;
 }
 
+.d_flex {
+    display: flex;
+}
+
 .site-wrapper {
     display: flex;
     flex-direction: row;
@@ -211,7 +215,7 @@ body {
 
 .main-content {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
     gap: 26px;
     margin-left: 110px;
@@ -402,4 +406,17 @@ body {
     font-weight: bold;
     margin-right: 10px;
     text-transform: uppercase;
+}
+
+.site-ticket-overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.25);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
 }
