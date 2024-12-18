@@ -200,7 +200,6 @@ function checkLoginPassword() {
 
     if (enteredPassword === fetchedPassword) {
         wrongPasswordError.classList.add('login_d_none');
-        console.log('Login erfolgreich');
         pushUserToLoggedInUserArray();
     } else {
         wrongPasswordError.classList.remove('login_d_none');
@@ -273,6 +272,7 @@ function pushUserToLoggedInUserArray() {
  * log in as a guest
  */
 function guestLogIn(){
+    clearLocalStorageforGuestUser();
     const color = createRandomColor();
     loggedInUser.push({
         name: "guest",
@@ -281,8 +281,24 @@ function guestLogIn(){
         createdAt: new Date().toISOString(),
         password: "guestUser",
     });
+    goAsGuestToSummaryHtml();    
+}
+
+/**
+ * clears the local storage to let the guest User go to the Summary Page
+ */
+function clearLocalStorageforGuestUser(){
+    localStorage.clear();
+}
+
+/**
+ * push the guest User Datas to the Array and Local Storage and open the Summary page
+ */
+function goAsGuestToSummaryHtml() {
+    localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser[0]));
     window.location.href = "/summary.html"; 
 }
+
 /**
  *  if the user wants to save their data in the local storage, they can click the "Ja" button to go to the summary page.
  *  rememberMe True will be saved in the local storage.
