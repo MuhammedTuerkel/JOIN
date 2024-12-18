@@ -67,7 +67,7 @@
             </div>
         </header>
         <div class="Contacts-body">
-            <div class="Contacts">
+            <div id="Contacts" class="Contacts">
                 <div onclick="loadAddNewContact(event)" class="addNewContact-button">
                     <h2>Add new contact</h2>
                     <img src="./assets/img/person_add.png" alt="">
@@ -170,12 +170,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="Addtask-mobile d-none4"></div>
             </div>
-            <div class="headline-contact">
+            <div id="headline-contact" class="headline-contact d-none3">
                 <div class="headline">
                     <h2>Contacts</h2>
                     <div class="line1"></div>
                     <p>Better with a team</p>
+                    <div class="line3"></div>
                 </div>
                 <div id="all-information" class="all-information d-none">
                     <div class="Profile-Information">
@@ -210,36 +212,37 @@
                         </div>
                     </div>
                 </div>
+                <div class="edit-delete-mobile d-none4"></div>
+                <img onclick="hideContactMobile(event)" class="arrow-left d-none5" src="./assets/img/arrow-left-line.png" alt="">
+        </div>
+        <div onclick="stopPropagation(event)" id="addNewContact" class="addNewContact d-none">
+            <div class="headline-addContact">
+                <img src="./assets/img/Join-logo-white.svg" alt="">
+                <div class="Addcontact">
+                    <div class="Addcontact-text">
+                        <h2>Add Contact</h2>
+                        <p>Tasks are better with a team!</p>
+                    </div>
+                    <div class="line2"></div>
+                </div>
             </div>
-            <div onclick="stopPropagation(event)" id="addNewContact" class="addNewContact d-none">
-                <div class="headline-addContact">
-                    <img src="./assets/img/Join-logo-white.svg" alt="">
-                    <div class="Addcontact">
-                        <div class="Addcontact-text">
-                            <h2>Add Contact</h2>
-                            <p>Tasks are better with a team!</p>
-                        </div>
-                        <div class="line2"></div>
-                    </div>
+            <div onclick="hideAddNewContact(event)" class="close"> </div>
+            <div class="addContactProfilePicture">
+                <img src="./assets/img/person-white.png" alt="">
+            </div>
+            <div class="addContactInput">
+                <input id="input-name" type="text" placeholder="Name"  >
+                <input id="input-email" type="email" placeholder="Email">
+                <input id="input-phone" type="number" placeholder="Phone">
+            </div>
+            <div class="cancel-create">
+                <div onclick="hideAddNewContact(event)" class="Cancel">
+                    <h3>Cancel</h3>
+                    <div class="Cancel-image"></div>
                 </div>
-                <img onclick="hideAddNewContact(event)" class="close" src="./assets/img/Close.png" alt="">
-                <div class="addContactProfilePicture">
-                    <img src="./assets/img/person-white.png" alt="">
-                </div>
-                <div class="addContactInput">
-                    <input id="input-name" type="text" placeholder="Name"  >
-                    <input id="input-email" type="email" placeholder="Email">
-                    <input id="input-phone" type="number" placeholder="Phone">
-                </div>
-                <div class="cancel-create">
-                    <div onclick="hideAddNewContact(event)" class="Cancel">
-                        <h3>Cancel</h3>
-                        <img src="./assets/img/Close.png" alt="">
-                    </div>
-                    <div class="Create">
-                        <h3>Create contact</h3>
-                        <img src="/assets/img/check.png" alt="">
-                    </div>
+                <div class="Create">
+                    <h3>Create contact</h3>
+                    <img src="/assets/img/check.png" alt="">
                 </div>
             </div>
         </div>

@@ -1,5 +1,9 @@
 function loadContact(i, event) {
     event.stopPropagation();
+    if (window.innerWidth < 1050) {
+        document.getElementById('Contacts').style ="display:none;"
+        document.getElementById('headline-contact').classList.remove("d-none3");
+    }
     hideContact();
     setTimeout(() => {
         document.getElementById(`Contact${i}`).style = 'background-color: #2A3647;';
@@ -7,6 +11,15 @@ function loadContact(i, event) {
         document.getElementById('all-information').classList.add('animationRightToPosition');
         document.getElementById('all-information').classList.remove('d-none');
     }, 100);
+}
+
+function hideContactMobile(event){
+    event.stopPropagation();
+    if (window.innerWidth < 1050) { 
+        document.getElementById('Contacts').style ="";
+        document.getElementById('headline-contact').classList.add("d-none3");
+    }
+    hideContact();
 }
 
 function hideContact() {
