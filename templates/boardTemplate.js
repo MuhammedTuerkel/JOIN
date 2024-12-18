@@ -74,7 +74,7 @@ function prioIcon(prio) {
 }
 
 function ticketTemplate(ticketID, category, ticketTitle, ticketDescription, prio, subtaskDone, allSubtasks) {
-    return `<div class="ticket-card" draggable="true" ondragstart="startDragging()">
+    return `<div class="ticket-card" draggable="true" ondragstart="startDragging('${ticketID}')">
                 ${categoryBadge(category)}
                 <div class="ticket-title">
                     <span>${ticketTitle}</span>
@@ -83,10 +83,10 @@ function ticketTemplate(ticketID, category, ticketTitle, ticketDescription, prio
                     <span>${ticketDescription}</span>
                 </div>
                 <div class="ticket-subtask-wrapper">
-                    <div class="ticket-subtask-progress-bar">
+                    <div class="ticket-subtask-progress-bar" id="ticketSubtaskProgressBar_${ticketID}">
                         <div id="progress-bar_${ticketID}" style="height: 100%; width: 0%; background-color: #4589FF; border-radius: 8px;"></div>
                     </div>
-                    <div class="ticket-subtask-counter">
+                    <div class="ticket-subtask-counter" id="ticketSubtaskCounter_${ticketID}">
                         <span><span id="subtasksDoneCounter">${subtaskDone}</span>/<span id="allSubtasksSum">${allSubtasks}</span> Subtasks</span>
                     </div>
                 </div>
@@ -107,4 +107,8 @@ function renderUserCircle(initials, color) {
     return `<div class="selected_user_circle_board" style="background-color: ${color};">
                 ${initials}
             </div>`;
+}
+
+function renderDummyTicket() {
+    return `<div class="dummy-ticket-card"></div>`;
 }

@@ -37,7 +37,7 @@ function cancelSubtaskItem(text) {
 }
 
 /**
- * Creates a JSON-Object out of the form content to be pushed into the Firebase Realtime DB
+ * Creates a JSON-Object out of the form content to be pushed into the Firebase Realtime DB with an unique ID
  * 
  * @param {string} taskTitle 
  * @param {string} taskDate 
@@ -51,6 +51,7 @@ function cancelSubtaskItem(text) {
  */
 function taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState) {
     return {
+    id: generateUniqueID(),
     title: taskTitle,
     due_date: taskDate,
     prio: taskPrio,
