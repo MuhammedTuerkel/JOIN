@@ -18,32 +18,34 @@
     <script src="./templates/privacyAndLegalTemplate.js"></script>
     <script src="./scripts/login.js"></script>
     <script src="./scripts/summary.js"></script>
+    <link rel="stylesheet" href="./styles/Side-Navigation.css">
+    <script src="./scripts/Side-Navigation.js"></script>
 </head>
 
-<body class="pp_body">
-    <div class="pp_side_navigation">
-        <img class="help_logo_icon" src="assets/img/Join-logo-white.svg" alt="">
-        <div id="asideMenu" class="pp_menu" style="display: none;">
-            <div class="pp_menu_sections">
+<body onclick="hideSubMenu(), hideAddNewContact(event)" onload="sideNavigation()">
+    <div class="side-navigation">
+        <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
+        <div class="menu">
+            <div class="menu-sections">
                 <img class="menu-icons" src="assets/icons/summary-icon.svg" alt="">
                 <a href="./summary.html">Summary</a>
             </div>
-            <div class="pp_menu_sections">
+            <div class="menu-sections">
                 <img class="menu-icons" src="assets/icons/add-task-icon.svg" alt="">
                 <a href="./add-task.html">Add Task</a>
             </div>
-            <div class="pp_menu_sections">
+            <div class="menu-sections">
                 <img class="menu-icons" src="assets/icons/board-icon.svg" alt="">
-                <a href="#">Board</a>
+                <a href="./board.html">Board</a>
             </div>
-            <div class="pp_menu_sections">
+            <div class="menu-sections">
                 <img class="menu-icons" src="assets/icons/contacts-icon.svg" alt="">
-                <a href="#">Contacts</a>
+                <a href="./contacts.html">Contacts</a>
             </div>
         </div>
-        <div class="pp_terms_container">
-            <a id="privacy" class="" onclick="showPrivacyPolicyTemplate()" href="#">Privacy Policy</a>
-            <a id="legal"  class="" onclick="showLegalNoticeTemplate()" href="#">Legal Notice</a>
+        <div class="Privacy-section">
+            <a onclick="renderPrivacyPolicyTemplateLoggedInUser()" href="#">Privacy Policy</a>
+            <a onclick="renderLegalNoticeTemplateLoggedInUser()" href="#">Legal Notice</a>
         </div>
     </div>
     <div class="website-body">
@@ -51,13 +53,30 @@
             <div class="header-content">
                 <img class="header-Join-Logo" src="./assets/img/capa.png" alt="">
                 <p>Kanban Project Management Tool</p>
+                <div class="d-flex-column">
+                    <div id="help-user" class="help-user">
+                        <a href="./help.html"><img src="assets/icons/help-symbol-icon-default.svg" alt=""
+                                style="cursor: pointer;"></a>
+                        <span onclick="showSubmenu(event)" class="user" id="user"></span>
+                    </div>
+                    <div onclick="stopEventBubbling(event)" id="Submenu" class="Submenu" style="display: none;">
+                        <a onclick="openHelpHtml()" href="#" class="Submenu-buttons d-none1">Help</a>
+                        <a onclick="renderLegalNotceTemplateLoggedInUser()" href="#" class="Submenu-buttons"> Legal
+                            Notice </a>
+                        <a onclick="renderPrivacyPolicyTemplateLoggedInUser()" href="./privacy-and-legal.html"
+                            class="Submenu-buttons"> Privacy Policy</a>
+                        <a onclick="logOut()" href="./login.html" class="Submenu-buttons"> Log out </a>
+                    </div>
+                </div>
             </div>
         </header>
         <div id="closeTab" class="pp_close_tab">
-            <img id="returnArrow" onclick="backToThePage()" src="./assets/img/back_arrow.png" alt="Zurück zur ausgangsseite">
+            <img id="returnArrow" onclick="backToThePage()" src="./assets/img/back_arrow.png"
+                alt="Zurück zur ausgangsseite">
         </div>
         <main id="termsContent" class="terms_container"></main>
     </div>
+    
 </body>
 
 </html>
