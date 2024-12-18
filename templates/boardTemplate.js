@@ -1,6 +1,6 @@
 /**
  * Returns a template that reports the absence of tasks
- * 
+ *  
  * @param {string} listTitle - Title of the list in which there is no task
  * @returns 
  */
@@ -11,8 +11,7 @@ function noTasks(listTitle) {
 }
 
 /**
- * Returns a badge for the chosen category
- * 
+ * Returns a badge for the chosen category * 
  * @param {string} categoryName - Name of the category chosen by the user
  * @returns - Returns the correct designed badge for the category
  */
@@ -29,8 +28,7 @@ function categoryBadge(categoryName) {
 }
 
 /**
- * Returns the correct Icon based on the users choice by adding the task
- * 
+ * Returns the correct Icon based on the users choice by adding the task * 
  * @param {string} prio - Priority chosen by the user at add-task
  * @returns - Returns the correct icon based on the users choice
  */

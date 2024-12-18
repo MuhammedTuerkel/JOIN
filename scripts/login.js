@@ -250,7 +250,6 @@ function showRememberMeOverlay() {
     textButtonContainer.classList.add('text_fly_in');
 }
 
-
 /**
  * push the data from the logged in user in an array to use this datas in the local storage
  */
