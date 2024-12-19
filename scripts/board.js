@@ -53,7 +53,8 @@ function renderToDoTasks() {
             let subtaskDone = subtasksClosed(tasks[i].id);
             let allSubtasks = tasks[i].subtasks ? tasks[i].subtasks.length : 0;
             let ticketID = tasks[i].id;
-            target.innerHTML += ticketTemplate(ticketID, category, ticketTitle, ticketDescription, prio, subtaskDone, allSubtasks);
+            let ticketDate = tasks[i].due_date;
+            target.innerHTML += ticketTemplate(ticketID, category, ticketTitle, ticketDescription, prio, subtaskDone, allSubtasks, ticketDate);
             updateProgressBar(ticketID);
             displaySubtasks(allSubtasks, ticketID);
             renderAssignedUsers(ticketID);
@@ -80,7 +81,8 @@ function renderInProgressTasks() {
             let subtaskDone = subtasksClosed(tasks[i].id);
             let allSubtasks = tasks[i].subtasks ? tasks[i].subtasks.length : 0;
             let ticketID = tasks[i].id;
-            target.innerHTML += ticketTemplate(ticketID, category, ticketTitle, ticketDescription, prio, subtaskDone, allSubtasks);
+            let ticketDate = tasks[i].due_date;
+            target.innerHTML += ticketTemplate(ticketID, category, ticketTitle, ticketDescription, prio, subtaskDone, allSubtasks, ticketDate);
             updateProgressBar(ticketID);
             displaySubtasks(allSubtasks, ticketID);
             renderAssignedUsers(ticketID);
@@ -107,7 +109,8 @@ function renderFeedbackTasks() {
             let subtaskDone = subtasksClosed(tasks[i].id);
             let allSubtasks = tasks[i].subtasks ? tasks[i].subtasks.length : 0;
             let ticketID = tasks[i].id;
-            target.innerHTML += ticketTemplate(ticketID, category, ticketTitle, ticketDescription, prio, subtaskDone, allSubtasks);
+            let ticketDate = tasks[i].due_date;
+            target.innerHTML += ticketTemplate(ticketID, category, ticketTitle, ticketDescription, prio, subtaskDone, allSubtasks, ticketDate);
             updateProgressBar(ticketID);
             displaySubtasks(allSubtasks, ticketID);
             renderAssignedUsers(ticketID);
@@ -134,7 +137,8 @@ function renderDoneTasks() {
             let subtaskDone = subtasksClosed(tasks[i].id);
             let allSubtasks = tasks[i].subtasks ? tasks[i].subtasks.length : 0;
             let ticketID = tasks[i].id;
-            target.innerHTML += ticketTemplate(ticketID, category, ticketTitle, ticketDescription, prio, subtaskDone, allSubtasks);
+            let ticketDate = tasks[i].due_date;
+            target.innerHTML += ticketTemplate(ticketID, category, ticketTitle, ticketDescription, prio, subtaskDone, allSubtasks, ticketDate);
             updateProgressBar(ticketID);
             displaySubtasks(allSubtasks, ticketID);
             renderAssignedUsers(ticketID);
@@ -225,6 +229,70 @@ function renderAssignedUsers(ticketID) {
 }
 
 /**
+ * Renders the assigned Users into the Overlay-Ticket
+ * 
+ * @param {int} ticketID 
+ * @returns 
+ */
+function renderAssignedUsersOverlay(ticketID) {
+    let searchedTask = allTasks.filter(t => t['id'] == ticketID)[0];
+    let assignedUsers = searchedTask.assigned_to;
+    let targetElement = document.getElementById(`overlayAssignedUserContent_${ticketID}`);
+    if(!targetElement) {
+        console.error(`Element with ID overlayAssignedUserContent_${ticketID} not found`);
+        return;
+    } else {
+        for(let i = 0; i < assignedUsers.length; i++) {
+            let initials = assignedUsers[i].name.charAt(0).toUpperCase() + assignedUsers[i].name.charAt(assignedUsers[i].name.length - 1).toUpperCase();
+            let color = assignedUsers[i].color;
+            let userName = assignedUsers[i].name;
+            document.getElementById(`overlayAssignedUserContent_${ticketID}`).innerHTML += renderOverlayUserElement(userName, initials, color);
+        }
+    }
+}
+
+/**
+ * Renders all Subtasks into the Overlay-Ticket
+ * 
+ * @param {int} ticketID 
+ */
+function renderSubtasksOverlay(ticketID) {
+    let searchedTask = allTasks.find(t => t['id'] === ticketID);
+    let allSubtasks = searchedTask.subtasks;
+    let targetElement = document.getElementById(`overlaySubtasksContent_${ticketID}`);
+    targetElement.innerHTML = '';
+    allSubtasks.forEach((subtask, index) => {
+        let taskStatus = subtask.status;
+        let subtaskContent = subtask.content;
+        targetElement.innerHTML += renderOverlaySubtaskElement(index, subtaskContent, ticketID, taskStatus);
+    });
+}
+
+/**
+ * Changes the Subtask Status in the front-end and on the Firebase DB
+ * 
+ * @param {int} subtaskIndex 
+ * @param {string} ticketID 
+ */
+async function changeSubtaskStatus(subtaskIndex, ticketID) {
+    let task = allTasks.find(t => t['id'] === ticketID);
+    let firebaseID = task['firebase_id'];
+    let subtask = task.subtasks[subtaskIndex];
+    subtask.status = subtask.status === 'open' ? 'closed' : 'open';
+    try {
+        await fetch(`${FIREBASE_URL}tasks/${firebaseID}/subtasks/${subtaskIndex}.json`, {
+            method: 'PATCH',
+            body: JSON.stringify({ status: subtask.status }),
+            headers: { 'Content-Type': 'application/json' }
+        });
+        console.log(`Subtask status updated in Firebase: ${subtask.status}`);
+    } catch (error) {
+        console.error('Failed to update subtask in Firebase:', error);
+    }
+    renderSubtasksOverlay(ticketID);
+}
+
+/**
  * Saves the ticketID into a variable for further jobs
  * 
  * @param {string} ticketID - an unique identifier of the ticket which got moved
@@ -286,4 +354,47 @@ function removeHighlight(id) {
     if(dummyCard) {
         column.removeChild(dummyCard);
     }
+}
+
+/**
+ * Closes the overlay, after clicking outside of the Overlay-Ticket
+ * 
+ * @param {*} event 
+ */
+function closeOverlayOnClick(event) {
+    if (event.target === document.getElementById('overlayID')) {
+        toggleOverlay();
+    }
+}
+
+/**
+ * Toggles the Overlay view
+ */
+function toggleOverlay() {
+    let overlay = document.getElementById('overlayID');
+    if (overlay.classList.contains('d_none')) {
+        overlay.classList.remove('d_none');
+        overlay.classList.add('d_flex');
+        document.body.style.overflow = "hidden";
+    } else {
+        overlay.classList.remove('d_flex');
+        overlay.classList.add('d_none');
+        document.body.style.overflow = "auto";
+    }
+}
+
+/**
+ * Shows the ticket in the overlay when clicked on it
+ * 
+ * @param {string} category - The category of the ticket
+ * @param {string} ticketTitle  - The Ticket title
+ * @param {string} ticketDescription - The Ticket description
+ * @param {string} ticketDate - The due date of the ticket
+ * @param {string} prio - The Priority of the ticket
+ * @param {string} ticketID - The exact ID which is based on the Firebase-ID
+ */
+function showOverlayTicket(category, ticketTitle, ticketDescription, ticketDate, prio, ticketID) {
+    document.getElementById('overlayID').innerHTML = renderOverlayTicket(category, ticketTitle, ticketDescription, ticketDate, prio, ticketID);
+    renderAssignedUsersOverlay(ticketID);
+    renderSubtasksOverlay(ticketID);
 }

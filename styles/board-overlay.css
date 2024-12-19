@@ -1,0 +1,165 @@
+.site-ticket-overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.25);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.overlay-card {
+    width: 525px;
+    height: 90%;
+    background-color: white;
+    padding: 48px 40px;
+    border-radius: 30px;
+    box-shadow: 0px 0px 4px 0px #00000029;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.badge-and-close-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: self-start;
+}
+
+.overlay-category-badge-user {
+    width: 164px;
+    height: 36px;
+    border-radius: 8px;
+    padding: 4px 24px;
+    background-color: var(--user-story-color);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.overlay-category-badge-technical {
+    width: 170px;
+    height: 36px;
+    border-radius: 8px;
+    padding: 4px 24px;
+    background-color: var(--technical-task-color);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.overlay-close-btn {
+    cursor: pointer;
+}
+
+.overlay-card-title {
+    font-weight: 800;
+    font-size: 50px;
+    width: 100%;
+}
+
+.overlay-card-description {
+    width: 100%;
+}
+
+.overlay-date-wrapper,
+.overlay-prio-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 35px;
+    width: 100%;
+}
+
+.overlay-date-label,
+.overlay-prio-label,
+.overlay-assigned-label,
+.overlay-subtasks-label {
+    color: #2A3647;
+    font-size: 18px;
+}
+
+.overlay-prio-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 15px;
+}
+
+.overlay-service-btn-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: flex-end;
+}
+
+.overlay-ticket-delete,
+.overlay-ticket-edit {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.overlay-ticket-delete:hover,
+.overlay-ticket-edit:hover {
+    color: #29ABE2;
+    font-weight: 700;
+}
+
+.overlay-ticket-delete:hover svg path {
+    fill: #29ABE2;
+}
+
+.overlay-ticket-edit:hover svg path {
+    fill: #29ABE2;
+}
+
+.overlay-assigned-user-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px; 
+}
+
+.overlay-assigned-user-element {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 7px 16px;
+}
+
+.overlay-assigned-user-element span {
+    margin-left: 21px;
+}
+
+.overlay-subtasks-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.overlay-subtask-element {
+    width: 100%;
+    padding: 6px 16px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 16px;
+}
+
+.overlay-subtask-element:hover {
+    background-color: #E7E7E7;
+    border-radius: 10px;
+    cursor: pointer;
+}
