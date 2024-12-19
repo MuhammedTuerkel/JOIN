@@ -16,9 +16,10 @@
     <link rel="stylesheet" href="./styles/standard.css">
     <link rel="stylesheet" href="./styles/contacts.css">
     <script src="./scripts/contacts.js"></script>
+    <script src="script.js"></script>
 </head>
 
-<body onclick="hideSubMenu(), hideAddNewContact(event)" onload="sideNavigation(), Init()">
+<body onclick="hideSubMenu(), hideAddNewContact(event), hideEditDeleteMenu(event)" onload="sideNavigation()">
     <div class="side-navigation">
         <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
         <div class="menu">
@@ -170,7 +171,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="Addtask-mobile d-none4"></div>
+                <div onclick="loadAddNewContact(event)" class="Addtask-mobile d-none4"></div>
             </div>
             <div id="headline-contact" class="headline-contact d-none3">
                 <div class="headline">
@@ -212,41 +213,52 @@
                         </div>
                     </div>
                 </div>
-                <div class="edit-delete-mobile d-none4"></div>
-                <img onclick="hideContactMobile(event)" class="arrow-left d-none5" src="./assets/img/arrow-left-line.png" alt="">
-        </div>
-        <div onclick="stopPropagation(event)" id="addNewContact" class="addNewContact d-none">
-            <div class="headline-addContact">
-                <img src="./assets/img/Join-logo-white.svg" alt="">
-                <div class="Addcontact">
-                    <div class="Addcontact-text">
-                        <h2>Add Contact</h2>
-                        <p>Tasks are better with a team!</p>
+                <div onclick="showEditDeleteMenu(event)" class="edit-delete-mobile d-none4"></div>
+                <img onclick="hideContactMobile(event)" class="arrow-left d-none5"
+                    src="./assets/img/arrow-left-line.png" alt="">
+                <div id="editdelete-menu" class="editdelete-menu d-none">
+                    <div class="editdelete-flex">
+                        <img src="./assets/img/pencil-contacts.png" alt="">
+                        <h2>Edit</h2>
                     </div>
-                    <div class="line2"></div>
+                    <div class="editdelete-flex">
+                        <img src="./assets/img/trash-contacts.png" alt="">
+                        <h2>Delete</h2>
+                    </div>
                 </div>
             </div>
-            <div onclick="hideAddNewContact(event)" class="close"> </div>
-            <div class="addContactProfilePicture">
-                <img src="./assets/img/person-white.png" alt="">
-            </div>
-            <div class="addContactInput">
-                <input id="input-name" type="text" placeholder="Name"  >
-                <input id="input-email" type="email" placeholder="Email">
-                <input id="input-phone" type="number" placeholder="Phone">
-            </div>
-            <div class="cancel-create">
-                <div onclick="hideAddNewContact(event)" class="Cancel">
-                    <h3>Cancel</h3>
-                    <div class="Cancel-image"></div>
+            <div onclick="stopPropagation(event)" id="addNewContact" class="addNewContact d-none">
+                <div class="headline-addContact">
+                    <img src="./assets/img/Join-logo-white.svg" alt="">
+                    <div class="Addcontact">
+                        <div class="Addcontact-text">
+                            <h2>Add Contact</h2>
+                            <p>Tasks are better with a team!</p>
+                        </div>
+                        <div class="line2"></div>
+                    </div>
                 </div>
-                <div class="Create">
-                    <h3>Create contact</h3>
-                    <img src="/assets/img/check.png" alt="">
+                <div onclick="hideAddNewContact(event)" class="close"> </div>
+                <div class="addContactProfilePicture">
+                    <img src="./assets/img/person-white.png" alt="">
+                </div>
+                <div class="addContactInput">
+                    <input id="input-name" type="text" placeholder="Name">
+                    <input id="input-email" type="email" placeholder="Email">
+                    <input id="input-phone" type="number" placeholder="Phone">
+                </div>
+                <div class="cancel-create">
+                    <div onclick="hideAddNewContact(event)" class="Cancel">
+                        <h3>Cancel</h3>
+                        <div class="Cancel-image"></div>
+                    </div>
+                    <div class="Create">
+                        <h3>Create contact</h3>
+                        <img src="/assets/img/check.png" alt="">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 </body>
 
 </html>

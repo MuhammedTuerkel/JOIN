@@ -46,3 +46,15 @@ function hideAddNewContact(event){
 function stopPropagation(event){
     event.stopPropagation();
 }
+
+function showEditDeleteMenu(event){
+    event.stopPropagation();
+    document.getElementById('editdelete-menu').classList.remove('d-none');
+    document.getElementById('editdelete-menu').classList.add('animationRightToPosition');
+}
+
+function hideEditDeleteMenu(event){
+event.stopPropagation();
+document.getElementById('editdelete-menu').classList.add('d-none');
+document.getElementById('editdelete-menu').classList.remove('animationRightToPosition');
+}
