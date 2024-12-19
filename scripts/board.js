@@ -49,12 +49,13 @@ function renderToDoTasks() {
             let category = tasks[i].category;
             let ticketTitle = tasks[i].title;
             let ticketDescription = shortenDescription(tasks[i].description);
+            let longDescription = tasks[i].description;
             let prio = tasks[i].prio;
             let subtaskDone = subtasksClosed(tasks[i].id);
             let allSubtasks = tasks[i].subtasks ? tasks[i].subtasks.length : 0;
             let ticketID = tasks[i].id;
             let ticketDate = tasks[i].due_date;
-            target.innerHTML += ticketTemplate(ticketID, category, ticketTitle, ticketDescription, prio, subtaskDone, allSubtasks, ticketDate);
+            target.innerHTML += ticketTemplate(ticketID, category, ticketTitle, ticketDescription, longDescription, prio, subtaskDone, allSubtasks, ticketDate);
             updateProgressBar(ticketID);
             displaySubtasks(allSubtasks, ticketID);
             renderAssignedUsers(ticketID);
@@ -77,12 +78,13 @@ function renderInProgressTasks() {
             let category = tasks[i].category;
             let ticketTitle = tasks[i].title;
             let ticketDescription = shortenDescription(tasks[i].description);
+            let longDescription = tasks[i].description;
             let prio = tasks[i].prio;
             let subtaskDone = subtasksClosed(tasks[i].id);
             let allSubtasks = tasks[i].subtasks ? tasks[i].subtasks.length : 0;
             let ticketID = tasks[i].id;
             let ticketDate = tasks[i].due_date;
-            target.innerHTML += ticketTemplate(ticketID, category, ticketTitle, ticketDescription, prio, subtaskDone, allSubtasks, ticketDate);
+            target.innerHTML += ticketTemplate(ticketID, category, ticketTitle, ticketDescription, longDescription, prio, subtaskDone, allSubtasks, ticketDate);
             updateProgressBar(ticketID);
             displaySubtasks(allSubtasks, ticketID);
             renderAssignedUsers(ticketID);
@@ -105,12 +107,13 @@ function renderFeedbackTasks() {
             let category = tasks[i].category;
             let ticketTitle = tasks[i].title;
             let ticketDescription = shortenDescription(tasks[i].description);
+            let longDescription = tasks[i].description;
             let prio = tasks[i].prio;
             let subtaskDone = subtasksClosed(tasks[i].id);
             let allSubtasks = tasks[i].subtasks ? tasks[i].subtasks.length : 0;
             let ticketID = tasks[i].id;
             let ticketDate = tasks[i].due_date;
-            target.innerHTML += ticketTemplate(ticketID, category, ticketTitle, ticketDescription, prio, subtaskDone, allSubtasks, ticketDate);
+            target.innerHTML += ticketTemplate(ticketID, category, ticketTitle, ticketDescription, longDescription, prio, subtaskDone, allSubtasks, ticketDate);
             updateProgressBar(ticketID);
             displaySubtasks(allSubtasks, ticketID);
             renderAssignedUsers(ticketID);
@@ -133,12 +136,13 @@ function renderDoneTasks() {
             let category = tasks[i].category;
             let ticketTitle = tasks[i].title;
             let ticketDescription = shortenDescription(tasks[i].description);
+            let longDescription = tasks[i].description;
             let prio = tasks[i].prio;
             let subtaskDone = subtasksClosed(tasks[i].id);
             let allSubtasks = tasks[i].subtasks ? tasks[i].subtasks.length : 0;
             let ticketID = tasks[i].id;
             let ticketDate = tasks[i].due_date;
-            target.innerHTML += ticketTemplate(ticketID, category, ticketTitle, ticketDescription, prio, subtaskDone, allSubtasks, ticketDate);
+            target.innerHTML += ticketTemplate(ticketID, category, ticketTitle, ticketDescription, longDescription, prio, subtaskDone, allSubtasks, ticketDate);
             updateProgressBar(ticketID);
             displaySubtasks(allSubtasks, ticketID);
             renderAssignedUsers(ticketID);
@@ -161,32 +165,35 @@ function displaySubtasks(allSubtasks, ticketID) {
     }
 }
 
-/**
- * Returns the amount of subtasks which are already done, based on the ticket title
- * 
- * @param {string} title 
- * @returns The amount of subtasks, which are already done
- */
 function subtasksClosed(ticketID) {
-    let searchedTask = allTasks.filter(t => t['id'] == ticketID);
-    let searchedSubTasks = searchedTask.filter(st => st['status'] == 'closed');
-    return searchedSubTasks.length;
+    let task = allTasks.find(t => t['id'] === ticketID);
+    if (!task || !task.subtasks) {
+        return 0;
+    }
+    return task.subtasks.filter(st => st['status'] === 'closed').length;
 }
 
-/**
- * Updates the width of the progress-bar, based on the done subtasks of the ticket
- * 
- * @param {string} title - Title of the ticket
- * @param {int} ticketID - Identifier of the ticket based on the index of the ticket in the allTasks-Array
- */
 function updateProgressBar(ticketID) {
     let closedTasks = subtasksClosed(ticketID);
-    let searchedTask = allTasks.filter(t => t['id'] == ticketID);
-    let allSubtasks = searchedTask.filter(st => st['subtasks']).length;
-    const progressPercentage = allSubtasks > 0 ? (closedTasks / allSubtasks) * 100 : 0;
+    let task = allTasks.find(t => t['id'] === ticketID);
+    let totalSubtasks = task && task.subtasks ? task.subtasks.length : 0;
+    const progressPercentage = totalSubtasks > 0 ? (closedTasks / totalSubtasks) * 100 : 0;
     let progressBar = document.getElementById(`progress-bar_${ticketID}`);
-    progressBar.style.width = progressPercentage + '%';
+    if (progressBar) {
+        progressBar.style.width = progressPercentage + '%';
+    }
 }
+
+function updateSubtaskCounter(ticketID) {
+    let closedTasks = subtasksClosed(ticketID);
+    let task = allTasks.find(t => t['id'] === ticketID);
+    let totalSubtasks = task.subtasks ? task.subtasks.length : 0;
+    let counterElement = document.getElementById(`subtask-counter_${ticketID}`);
+    if (counterElement) {
+        counterElement.textContent = `${closedTasks}/${totalSubtasks}`;
+    }
+}
+
 
 /**
  * Shortens a string and adds some points at the end of the sentence
@@ -285,11 +292,12 @@ async function changeSubtaskStatus(subtaskIndex, ticketID) {
             body: JSON.stringify({ status: subtask.status }),
             headers: { 'Content-Type': 'application/json' }
         });
-        console.log(`Subtask status updated in Firebase: ${subtask.status}`);
     } catch (error) {
         console.error('Failed to update subtask in Firebase:', error);
     }
     renderSubtasksOverlay(ticketID);
+    updateProgressBar(ticketID);
+    updateSubtaskCounter(ticketID);
 }
 
 /**
@@ -354,6 +362,29 @@ function removeHighlight(id) {
     if(dummyCard) {
         column.removeChild(dummyCard);
     }
+}
+
+/**
+ * Deletes the task from the board, the array and from the Firebase-DB
+ * 
+ * @param {string} ticketID 
+ * @returns 
+ */
+async function deleteTicket(ticketID) {
+    let taskIndex = allTasks.findIndex(task => task['id'] === ticketID);
+    let firebaseID = allTasks[taskIndex]['firebase_id'];
+    try {
+        await fetch(`${FIREBASE_URL}tasks/${firebaseID}.json`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+        });
+    } catch (error) {
+        console.error('Failed to delete ticket from Firebase:', error);
+        return;
+    }
+    allTasks.splice(taskIndex, 1);
+    renderAllTickets();
+    toggleOverlay();
 }
 
 /**
