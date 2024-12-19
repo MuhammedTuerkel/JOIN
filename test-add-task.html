@@ -13,7 +13,7 @@
     <link rel="manifest" href="./assets/favicon/site.webmanifest" />
     <title>Add a task TEST</title>
 </head>
-<body onload="addTaskOnInit()">
+<body onload="addTaskOnInit()" onclick="handleDropdownBodyClick()">
     <div class="site-wrapper">
         <section class="side-navigation">
             <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
@@ -68,11 +68,11 @@
 
                             <div>
                                 <label for="assigned-to">Assigned to</label>
-                                <div onclick="handleDropdownClick()" id="assigned" class="add_task_dropdown" >
+                                <div onclick="openDropdown(event)" id="assigned" class="add_task_dropdown" >
                                     <p>Select contacts to assign</p>
-                                    <img id="dropDownArrow" src="./assets/img/arrow_drop_down.png" alt="" onclick="handleDropdownClick()">
+                                    <img id="dropDownArrow" src="./assets/img/arrow_drop_down.png" alt="" onclick="openDropdown(event)">
                                 </div>
-                                <div id="addTaskDropdown" class="custom_dropdown"></div>
+                                <div id="addTaskDropdown" class="custom_dropdown" onclick="event.stopPropagation()"></div>
                                 <div id="selectedUsers" class="selected_users"></div>
                             </div>
                         </div>

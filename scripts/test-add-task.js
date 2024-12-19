@@ -38,9 +38,10 @@ function buildTask() {
 
 /**
  * Handles the click event for the dropdown.
- * Toggles the visibility of the dropdown container and updates the dropdown arrow.
+ * * open the dropdown container and updates the dropdown arrow.
  */
-function handleDropdownClick() {
+function openDropdown(event) {
+    event.stopPropagation();
     let dropdownContainer = document.getElementById('addTaskDropdown');
     let dropdownImage = document.getElementById('dropDownArrow');
 
@@ -49,8 +50,27 @@ function handleDropdownClick() {
         dropdownImage.style.transform = 'rotate(180deg)';
         loadUserInAssignedToDropdown();
     } else {
-        dropdownContainer.style.display = 'none';
-        dropdownImage.style.transform = 'rotate(0deg)';
+        closeDropdown()
+    }
+}
+
+/**
+ * Handles the click event for the dropdown.
+ * * close the dropdown container and updates the dropdown arrow.
+ */
+function closeDropdown(){
+    let dropdownContainer = document.getElementById('addTaskDropdown');
+    let dropdownImage = document.getElementById('dropDownArrow');
+    dropdownContainer.style.display = 'none';
+    dropdownImage.style.transform = 'rotate(0deg)';
+}
+/**
+ * * if the user click outside of the Dropdown list the dropdown list will be closed
+ */
+function handleDropdownBodyClick(){
+    let dropdownContainer = document.getElementById('addTaskDropdown');   
+    if(dropdownContainer.style.display === 'block'){
+        closeDropdown();
     }
 }
 
@@ -74,7 +94,7 @@ function loadUserInAssignedToDropdown() {
  * 
  */
 function createUserTemplate(user) {
-    let initials = user.name.charAt(0).toUpperCase() + user.name.charAt(user.name.length - 1).toUpperCase(); // Anfangs- und Endbuchstabe
+    let initials = user.name.charAt(0).toUpperCase() + user.name.charAt(user.name.length - 1).toUpperCase();
 
     return `
         <div class="user_template_not_selected" id="template-${user.email}" >

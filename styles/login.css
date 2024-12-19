@@ -497,7 +497,6 @@
     }
 }
 
-/* Klassen für die Rückfahr-Animationen */
 .logo_fly_out {
     animation: logoFlyOut 1s ease forwards;
 }

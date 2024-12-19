@@ -694,6 +694,10 @@ input.subtask-input:focus {
     scrollbar-color: #091931 #f0f0f0;
 }
 
+.custom_dropdown.show {
+    transform: scaleY(1);
+}
+
 .user_template_label{
     margin: 0;
 }
