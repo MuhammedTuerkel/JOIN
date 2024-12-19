@@ -137,6 +137,7 @@ body {
 .form-wrapper {
     justify-self: flex-start;
     width: 100%;
+    height: 60dvh;
 }
 
 .privacy-section {
@@ -272,14 +273,21 @@ select {
     width: calc(136px * 3 + 16px);
 }
 
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
 .form-buttons {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
     align-content: flex-end;
     width: 100%;
-    margin-top: 60px;
+    height: 60px;
 }
+
+
 
 .subtasks-input {
     position: relative;
@@ -380,7 +388,8 @@ select {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-    padding: 4px 8px; 
+    padding: 4px 8px;
+    height: 30px;
 }
 
 .subtask-item:hover {
@@ -597,7 +606,7 @@ input.subtask-input:focus {
     background-color: #D1D1D1;
     align-self: stretch;
     margin: 0 48px;
-    min-height: 416px;
+    height: 48%;
 }
 
 .custom-select-wrapper {
@@ -668,9 +677,8 @@ input.subtask-input:focus {
 .custom_dropdown {
     display: flex;
     flex-direction: column;
-    width: calc(135px * 3 + 16px);
-    background-color: white;
-    border: 1px solid #ccc;
+    width: calc(136px * 3 + 16px);
+    background-color: white;    
     border-radius: 4px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
@@ -692,10 +700,6 @@ input.subtask-input:focus {
     scrollbar-width: thin;
     border-radius: 12px;
     scrollbar-color: #091931 #f0f0f0;
-}
-
-.custom_dropdown.show {
-    transform: scaleY(1);
 }
 
 .user_template_label{
