@@ -12,44 +12,66 @@
     <meta name="apple-mobile-web-app-title" content="JOIN" />
     <link rel="manifest" href="./assets/favicon/site.webmanifest" />
     <title>Add a task TEST</title>
+
+    <link rel="stylesheet" href="./styles/standard.css">
+    <link rel="stylesheet" href="./styles/summary.css">
+    <script src="./scripts/Side-Navigation.js"></script>
+    <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="JOIN" />
+    <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+    <link rel="stylesheet" href="./styles/Side-Navigation.css">
+
 </head>
 <body onload="addTaskOnInit()" onclick="handleDropdownBodyClick()">
-    <div class="site-wrapper">
-        <section class="side-navigation">
-            <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
-            <div class="side-menu">
-                <div class="side-menu-sections">
-                    <img class="side-menu-icons" src="assets/icons/summary-icon.svg" alt="">
-                    <a href="#">Summary</a>
-                </div>
-                <div class="side-menu-sections">
-                    <img class="side-menu-icons" src="assets/icons/add-task-icon.svg" alt="">
-                    <a href="#">Add Task</a>
-                </div>
-                <div class="side-menu-sections">
-                    <img class="side-menu-icons" src="assets/icons/board-icon.svg" alt="">
-                    <a href="#">Board</a>
-                </div>
-                <div class="side-menu-sections">
-                    <img class="side-menu-icons" src="assets/icons/contacts-icon.svg" alt="">
-                    <a href="#">Contacts</a>
-                </div>
+    <div class="side-navigation">
+        <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
+        <div class="menu">
+            <div class="menu-sections activated">
+                <img class="menu-icons" src="assets/icons/summary-icon.svg" alt="">
+                <a href="./summary.html">Summary</a>
             </div>
-            <div class="privacy-section">
-                <a href="">Privacy Policy</a>
-                <a href="">Legal Notice</a>
+            <div class="menu-sections">
+                <img class="menu-icons" src="assets/icons/add-task-icon.svg" alt="">
+                <a href="./add-task.html">Add Task</a>
             </div>
-        </section>
-        <section class="main-content-wrapper">
-            <div class="main-headline">
-                <div class="main-header-content">
-                    <p>Kanban Project Management Tool</p>
-                    <div class="help-user">
-                        <img src="assets/icons/help-symbol-icon-default.svg" alt="" style="cursor: pointer;">
-                        <span class="user">M</span>
+            <div class="menu-sections">
+                <img class="menu-icons" src="assets/icons/board-icon.svg" alt="">
+                <a href="./board.html">Board</a>
+            </div>
+            <div class="menu-sections">
+                <img class="menu-icons" src="assets/icons/contacts-icon.svg" alt="">
+                <a href="./contacts.html">Contacts</a>
+            </div>
+        </div>
+        <div class="Privacy-section">
+            <a onclick="renderPrivacyPolicyTemplateLoggedInUser()" href="#">Privacy Policy</a>
+            <a onclick="renderLegalNoticeTemplateLoggedInUser()" href="#">Legal Notice</a>
+        </div>
+    </div>
+    <div class="website-body">
+        <header>
+            <div class="header-content">
+                <img class="header-Join-Logo" src="./assets/img/capa.png" alt="">
+                <p>Kanban Project Management Tool</p>
+                <div class="d-flex-column">
+                    <div id="help-user" class="help-user">
+                        <a href="./help.html"><img src="assets/icons/help-symbol-icon-default.svg" alt="" style="cursor: pointer;"></a>
+                        <span onclick="showSubmenu(event)" class="user" id="user"></span>
+                    </div>
+                    <div onclick="stopEventBubbling(event)" id="Submenu" class="Submenu" style="display: none;">
+                        <a onclick="openHelpHtml()" href="#" class="Submenu-buttons d-none1">Help</a>
+                        <a onclick="renderLegalNotceTemplateLoggedInUser()" href="#" class="Submenu-buttons"> Legal
+                            Notice </a>
+                        <a onclick="renderPrivacyPolicyTemplateLoggedInUser()" href="./privacy-and-legal.html"
+                            class="Submenu-buttons"> Privacy Policy</a>
+                        <a onclick="logOut()" href="./login.html" class="Submenu-buttons"> Log out </a>
                     </div>
                 </div>
             </div>
+        </header>
             <div class="title">
                 <h1>Add task</h1>
             </div>
@@ -171,7 +193,7 @@
                                     </div>
                                 </div>
                                 <div class="subtasks-list" id="subtasksList">
-                                    
+
                                 </div>
                             </div>
                         </div>

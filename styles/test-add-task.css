@@ -271,6 +271,11 @@ select {
     /* color: var(--text-grey); */
     border-radius: 10px;
     width: calc(136px * 3 + 16px);
+    transition: border-color 0.3s ease;
+}
+
+select.focus{
+    border-color: #29abe2;
 }
 
 textarea {
@@ -286,6 +291,8 @@ textarea {
     width: 100%;
     height: 60px;
 }
+
+
 
 .subtasks-input {
     position: relative;
@@ -639,11 +646,9 @@ input.subtask-input:focus {
 }
 
 .custom-select:focus {
-    border-color: #007BFF;
+    border-color: #29abe2;;
 }
 /* ____________________________________ Assigned to form from Chris __________________________________________________ */
-
-
 
 
 .add_task_dropdown {
@@ -657,6 +662,10 @@ input.subtask-input:focus {
     cursor: pointer;
     width: calc(136px* 3 + 16px);
     margin-top: 8px;
+}
+
+.add_task_dropdown_active{
+    border-color: #29abe2;
 }
 
 .add_task_dropdown p {
@@ -807,3 +816,23 @@ input.subtask-input:focus {
     margin-left: 8px;
 }
 
+input[type="text"].disabled {
+     opacity: 0.5; 
+     pointer-events: none;
+}
+
+input[type="text"]:focus { 
+    border-color: #29abe2; 
+    outline: none; 
+}
+
+/* Style for the input placeholder */
+input[type="text"]::placeholder {
+    color: rgba(0, 0, 0, 0.5); /* Adjust color and opacity as needed */
+    transition: filter 0.3s ease;
+}
+
+/* Apply blur effect on focus */
+input[type="text"]:focus::placeholder {
+    filter: blur(1px);
+}

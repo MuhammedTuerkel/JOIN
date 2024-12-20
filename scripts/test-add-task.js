@@ -42,6 +42,7 @@ function buildTask() {
  */
 function openDropdown(event) {
     event.stopPropagation();
+    document.getElementById('assigned').classList.add('add_task_dropdown_active')
     let dropdownContainer = document.getElementById('addTaskDropdown');
     let dropdownImage = document.getElementById('dropDownArrow');
 
@@ -59,6 +60,7 @@ function openDropdown(event) {
  * * close the dropdown container and updates the dropdown arrow.
  */
 function closeDropdown(){
+    document.getElementById('assigned').classList.remove('add_task_dropdown_active')
     let dropdownContainer = document.getElementById('addTaskDropdown');
     let dropdownImage = document.getElementById('dropDownArrow');
     dropdownContainer.style.display = 'none';
@@ -279,19 +281,46 @@ function clearSubtaskInput() {
 let subtasksArray = [];
 
 function pushSubtaskArray() {
+    let subTaskInput = document.getElementById('task-subtasks');
     let arrayLength = subtasksArray.length;
-    let content = document.getElementById('task-subtasks');
-    subtasksArray.push(
-        {
-            'id' : arrayLength + 1,
-            'content' : content.value,
-            'status' : 'open'
-        }
-    );
-    renderSubtaskList();
-    content.value = '';
+    let content = subTaskInput.value.trim();
+    if(subtasksArray.length < 4 && content !== ''){
+        subtasksArray.push(            {
+                'id' : arrayLength + 1,
+                'content' : content,
+                'status' : 'open'
+            });
+            subTaskInput.value = '';
+            renderSubtaskList();
+        if(subtasksArray.length >= 4){
+            disableInputAndButton();
+        }       
+    }else if(arrayLength >= 4){
+        disableInputAndButton();
+    }
+    console.log(subtasksArray);
     document.getElementById('iconsContainer').style.visibility = 'hidden';
     document.getElementById('add-subtask-btn').style.visibility = 'visible';
+}
+
+function disableInputAndButton(){
+    let subtaskInput = document.getElementById('task-subtasks');
+    let addButton = document.getElementById('add-subtask-btn');
+    subtaskInput.placeholder = 'maximum 4 Subtasks reached';
+    subtaskInput.disabled = true;
+    addButton.disabled = true;
+    subtaskInput.classList.add('disabled');
+    addButton.classList.add('disabled');
+}
+
+function enableInputAndButton(){
+    let subtaskInput = document.getElementById('task-subtasks');
+    let addButton = document.getElementById('add-subtask-btn');
+    subtaskInput.placeholder = 'Add new subtask';
+    subtaskInput.disabled = false;
+    addButton.disabled = false;
+    subtaskInput.classList.remove('disabled');
+    addButton.classList.remove('disabled');
 }
 
 function renderSubtaskList() {
@@ -414,6 +443,7 @@ function handleCancelClick(target) {
 
 
 function handleDeleteClick(target) {
+    enableInputAndButton();
     const subtaskItem = target.closest('.subtask-item');
     const targetID = subtaskItem.id;
     const numericID = parseInt(targetID.split('_')[1], 10);
