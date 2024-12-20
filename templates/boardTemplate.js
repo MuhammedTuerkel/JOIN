@@ -170,7 +170,7 @@ function renderDummyTicket() {
 }
 
 function renderOverlayTicket(category, ticketTitle, ticketDescription, ticketDate, prio, ticketID) {
-    return `<div class="overlay-card slide-in-right">
+    return `<div class="overlay-card slide-in-right" id="overlayCard">
             <div class="badge-and-close-wrapper">
                 <div class="overlay-badge">
                     ${categoryBadgeOverlay(category)}
@@ -234,7 +234,7 @@ function renderOverlayTicket(category, ticketTitle, ticketDescription, ticketDat
                     </svg>
                     <span>Delete</span>
                 </div>
-                <div class="overlay-ticket-edit">
+                <div class="overlay-ticket-edit" onclick="editTicket('${ticketTitle}', '${ticketDescription}', '${ticketDate}')">
                     <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <mask id="mask0_75592_9969" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
                         <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
@@ -250,8 +250,8 @@ function renderOverlayTicket(category, ticketTitle, ticketDescription, ticketDat
 }
 
 function renderOverlayEditTicket() {
-    return `<div class="overlay-edit-card">
-                <div class="overlay-close-btn" onclick="toggleOverlay()">
+    return `
+                <div class="overlay-close-btn-edit" onclick="toggleOverlay()">
                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <mask id="mask0_264917_4230" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="4" width="24" height="24">
                         <rect x="4" y="4" width="24" height="24" fill="#D9D9D9"/>
@@ -263,7 +263,7 @@ function renderOverlayEditTicket() {
                 </div>
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" id="task-title-overlay-edit" name="title" placeholder="Enter a title">
+                <input type="text" id="task-title-overlay-edit" name="title">
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
@@ -271,7 +271,7 @@ function renderOverlayEditTicket() {
             </div>
             <div class="form-group">
                 <label for="due-date">Due date</label>
-                <input type="date" id="task-due-date-overlay-edit" name="due-date" placeholder="dd/mm/yyyy">
+                <input type="date" id="task-due-date-overlay-edit" name="due-date">
             </div>
             <div class="form-group prio-group">
                 <label>Priority</label>
@@ -375,7 +375,7 @@ function renderOverlayEditTicket() {
                     </g>
                 </svg>
             </button>
-        </div>`;
+        `;
 }
 
 function formatDate(ticketDate) {

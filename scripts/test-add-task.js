@@ -225,7 +225,7 @@ function activateButton(buttonId, svgId, buttonClass, svgClass) {
 }
 
 /**
- * Sets the Design of the Urgent-Button
+ * Sets the Design of the Urgent-Button and temporarily saves the prio into the selectedPrio variable
  */
 function setUrgent() {
     activateButton('urgent-btn', 'urgent-svg', 'urgent', 'urgent-icon');
@@ -233,7 +233,7 @@ function setUrgent() {
 }
 
 /**
- * Sets the Design of the Medium-Button
+ * Sets the Design of the Medium-Button and temporarily saves the prio into the selectedPrio variable
  */
 function setMedium() {
     activateButton('medium-btn', 'medium-svg', 'medium', 'medium-icon');
@@ -241,7 +241,7 @@ function setMedium() {
 }
 
 /**
- * Sets the Design of the Low-Button
+ * Sets the Design of the Low-Button and temporarily saves the prio into the selectedPrio variable
  */
 function setLow() {
     activateButton('low-btn', 'low-svg', 'low', 'low-icon');

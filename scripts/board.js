@@ -429,3 +429,12 @@ function showOverlayTicket(category, ticketTitle, ticketDescription, ticketDate,
     renderAssignedUsersOverlay(ticketID);
     renderSubtasksOverlay(ticketID);
 }
+
+function editTicket(ticketTitle, ticketDescription, ticketDate) {
+    let target = document.getElementById('overlayCard');
+    target.innerHTML = '';
+    target.innerHTML = renderOverlayEditTicket();
+    document.getElementById('task-title-overlay-edit').value = ticketTitle;
+    document.getElementById('task-description-overlay-edit').value = ticketDescription;
+    document.getElementById('task-due-date-overlay-edit').value = ticketDate;
+}
