@@ -19,7 +19,7 @@
     <script src="script.js"></script>
 </head>
 
-<body onclick="hideSubMenu(), hideAddNewContact(event), hideEditDeleteMenu(event)" onload="sideNavigation()">
+<body onclick="hideSubMenu(), hideAddNewContact(event), hideEditDeleteMenu(event)" onload="sideNavigation(),Init()">
     <div class="side-navigation">
         <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
         <div class="menu">
@@ -74,7 +74,6 @@
                     <img src="./assets/img/person_add.png" alt="">
                 </div>
                 <div id="ContactsList" onclick="hideContact()" class="ContactsList"></div>
-
                 <div onclick="loadAddNewContact(event)" class="Addtask-mobile d-none4"></div>
             </div>
             <div id="headline-contact" class="headline-contact d-none3">
