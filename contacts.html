@@ -19,7 +19,7 @@
     <script src="script.js"></script>
 </head>
 
-<body onclick="hideSubMenu(), hideAddNewContact(event), hideEditDeleteMenu(event)" onload="sideNavigation()">
+<body onclick="hideSubMenu(), hideAddNewContact(event), hideEditDeleteMenu(event)" onload="sideNavigation(), Init()">
     <div class="side-navigation">
         <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
         <div class="menu">
@@ -74,7 +74,6 @@
                     <img src="./assets/img/person_add.png" alt="">
                 </div>
                 <div id="ContactsList" onclick="hideContact()" class="ContactsList"></div>
-
                 <div onclick="loadAddNewContact(event)" class="Addtask-mobile d-none4"></div>
             </div>
             <div id="headline-contact" class="headline-contact d-none3">
@@ -87,10 +86,10 @@
                 <div id="all-information" class="all-information d-none">
                     <div class="Profile-Information">
                         <div class="Profile-Badge1">
-                            <h2>AM</h2>
+                            <h2 id="Profile-Badge1"></h2>
                         </div>
                         <div class="editdelete-top">
-                            <h2>Anton Mayer</h2>
+                            <h2 id="editdelete-name"></h2>
                             <div class="edit-delete">
                                 <div class="edit">
                                     <div class="pencil-image"></div>
@@ -109,11 +108,11 @@
                     <div class="email-phone">
                         <div class="email">
                             <h4>Email</h4>
-                            <p>antom@gmial.com</p>
+                            <p id="email"></p>
                         </div>
                         <div class="phone">
                             <h4>Phone</h4>
-                            <p>+49 1111 111 11 1</p>
+                            <p id="phone">+49 1111 111 11 1</p>
                         </div>
                     </div>
                 </div>

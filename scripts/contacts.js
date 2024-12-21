@@ -1,12 +1,12 @@
 let Contacts = [
-    { "name": "Anton Mayer", "email": "antonm@gmail.com" },
-    { "name": "Anja Schulz", "email": "schulz@hotmail.com" },
-    { "name": "Benedikt Ziegler", "email": "benedikt@gmail.com" },
-    { "name": "David Eisenberg", "email": "davidberg@gmail.com" },
-    { "name": "Eva Fischer", "email": "eva@gmail.com" },
-    { "name": "Emmanuel Mauer", "email": "emmanuelma@gmail.com" },
-    { "name": "Marcel Bauer", "email": "bauer@gmail.com" },
-    { "name": "Tatjana Wolf", "email": "wolf@gmail.com" },
+    { "name": "Anton Mayer", "email": "antonm@gmail.com", "phone":"+49 152322221" },
+    { "name": "Anja Schulz", "email": "schulz@hotmail.com", "phone":"+49 152322222" },
+    { "name": "Benedikt Ziegler", "email": "benedikt@gmail.com", "phone":"+49 152322223" },
+    { "name": "David Eisenberg", "email": "davidberg@gmail.com", "phone":"+49 152322224" },
+    { "name": "Eva Fischer", "email": "eva@gmail.com", "phone":"+49 152322225" },
+    { "name": "Emmanuel Mauer", "email": "emmanuelma@gmail.com", "phone":"+49 152322226" },
+    { "name": "Marcel Bauer", "email": "bauer@gmail.com", "phone":"+49 152322227" },
+    { "name": "Tatjana Wolf", "email": "wolf@gmail.com", "phone":"+49 152322228" },
 ]
 
 function Init() {
@@ -20,6 +20,7 @@ function loadContact(i, event) {
         document.getElementById('headline-contact').classList.remove("d-none3");
     }
     hideContact();
+    renderContactInformation(i);
     setTimeout(() => {
         document.getElementById(`Contact${i}`).style = 'background-color: #2A3647;';
         document.getElementById(`name${i}`).style = 'color:white;';
@@ -40,7 +41,7 @@ function hideContactMobile(event) {
 function hideContact() {
     document.getElementById('all-information').classList.remove('animationRightToPosition');
     document.getElementById('all-information').classList.add('d-none');
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < Contacts.length; i++) {
         document.getElementById(`Contact${i}`).style = "";
         document.getElementById(`name${i}`).style = '';
     }
@@ -100,16 +101,16 @@ function renderContact(a) {
     let firstLetter = Contacts[x].name.charAt(0);
     for (let i = 0; i < a.length; i++) {
         if (firstLetter == a[i]) {
-            let Badge = generateBadge();   
-            generateContactHTML(a , i, Badge);
+            let Badge = generateBadge(x);
+            generateContactHTML(a, i, Badge);
         }
     }
     clearEmptyDivs(a);
 }
 
-function generateContactHTML(a ,i, Badge){
+function generateContactHTML(a, i, Badge) {
     document.getElementById(`${a[i]}`).innerHTML += `
-    <div id="Contact${x}" onclick="loadContact(0, event)" class="Contact"><div class="Profile-Badge">
+    <div id="Contact${x}" onclick="loadContact(${x}, event)" class="Contact"><div class="Profile-Badge">
                         <h4>${Badge}</h4>
                     </div>
                     <div class="name-email">
@@ -125,12 +126,12 @@ function generateContactHTML(a ,i, Badge){
     }
 }
 
- function generateBadge(){
+function generateBadge(x) {
     var values = Contacts[x].name.split(" ");
     var f_name = values.shift().charAt(0);
     var l_name = values.join(' ').charAt(0);
-  return f_name + l_name;
- } 
+    return f_name + l_name;
+}
 
 function clearEmptyDivs(a) {
     for (let i = 0; i < a.length; i++) {
@@ -139,11 +140,12 @@ function clearEmptyDivs(a) {
             document.getElementById(`Section${i}`).style = "display:none;"
         }
     }
-    var values = Contacts[0].name.split(" ");
-    var f_name = values.shift().charAt(0);
-    var l_name = values.join(' ').charAt(0);
- let Badge = f_name + l_name;
-    console.log(Badge);
-    
-    
+}
+
+function renderContactInformation(i) {
+    let Badge = generateBadge(i);
+    document.getElementById('Profile-Badge1').innerHTML = `${Badge}`;
+    document.getElementById('editdelete-name').innerHTML = `${Contacts[i].name}`
+    document.getElementById('email').innerHTML = `${Contacts[i].email}`;
+    document.getElementById('phone').innerHTML = `${Contacts[i].phone}`;
 }
