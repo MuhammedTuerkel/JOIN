@@ -60,7 +60,7 @@ function openDropdown(event) {
  * * close the dropdown container and updates the dropdown arrow.
  */
 function closeDropdown(){
-    document.getElementById('assigned').classList.remove('add_task_dropdown_active')
+    document.getElementById('assigned').classList.remove('add_task_dropdown_active');
     let dropdownContainer = document.getElementById('addTaskDropdown');
     let dropdownImage = document.getElementById('dropDownArrow');
     dropdownContainer.style.display = 'none';
