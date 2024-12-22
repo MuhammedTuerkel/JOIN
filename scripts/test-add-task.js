@@ -8,7 +8,7 @@ let FIREBASE_URL = 'https://join-bbd82-default-rtdb.europe-west1.firebasedatabas
  */
 function addTaskOnInit() {
     onloadFunction();
-    activateButton('medium-btn', 'medium-svg', 'medium', 'medium-icon');
+    setMedium();
     subtaskInput();
     clearSubtaskInput();
 }

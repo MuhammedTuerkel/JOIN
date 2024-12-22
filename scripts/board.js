@@ -430,11 +430,50 @@ function showOverlayTicket(category, ticketTitle, ticketDescription, ticketDate,
     renderSubtasksOverlay(ticketID);
 }
 
-function editTicket(ticketTitle, ticketDescription, ticketDate) {
+function editTicket(ticketTitle, ticketDescription, ticketDate, prio) {
     let target = document.getElementById('overlayCard');
     target.innerHTML = '';
     target.innerHTML = renderOverlayEditTicket();
     document.getElementById('task-title-overlay-edit').value = ticketTitle;
     document.getElementById('task-description-overlay-edit').value = ticketDescription;
     document.getElementById('task-due-date-overlay-edit').value = ticketDate;
+    setPriorityOnEdit(prio);
+}
+
+function setPriorityOnEdit(prio) {
+    if(prio === 'urgent') {
+        activateButton('urgent-btn', 'urgent-svg', 'urgent', 'urgent-icon');
+    } else if(prio === 'medium') {
+        activateButton('medium-btn', 'medium-svg', 'medium', 'medium-icon');
+    } else if(prio = 'low') {
+        activateButton('low-btn', 'low-svg', 'low', 'low-icon');
+    }
+}
+
+function activateButton(buttonId, svgId, buttonClass, svgClass) {
+    const buttons = document.querySelectorAll('.prio-btn');
+    buttons.forEach((button) => {
+        button.classList.remove('urgent', 'medium', 'low', 'active');
+    });
+
+    const svgs = document.querySelectorAll('svg');
+    svgs.forEach((svg) => {
+        svg.classList.remove('urgent-icon', 'medium-icon', 'low-icon');
+    });
+
+    document.getElementById(buttonId).classList.add(buttonClass, 'active');
+    document.getElementById(svgId).classList.add(svgClass);
+}
+
+function saveEditonClick() {
+    let newTitle = document.getElementById('task-title-overlay-edit').value;
+    let newDescription = document.getElementById('task-description-overlay-edit').value;
+    let newDueDate = document.getElementById('task-due-date-overlay-edit').value;
+    //Nimm den Inhalt von Title und speichere ihn in das Overlay-Ticket und das Board-Ticket
+    //Nimm den Inhalt von Description und speichere ihn in das Overlay-Ticket und das Board-Ticket
+    //Nimm den Inhalt von Due date und speichere ihn in das Overlay-Ticket und das Board-Ticket
+    //Nimm die gewählte Priority und speichere sie in das Overlay-Ticket und das Board-Ticket
+    //Nimm die geänderten AssignedUser und speichere sie in das Overlay-Ticket und das Board-Ticket
+    //Nimm die geänderten Subtasks und speichere sie in das Overlay-Ticket und das Board-Ticket
+    //Aktualisiere die Firebase
 }
