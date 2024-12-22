@@ -76,9 +76,12 @@
             <div class="add_task_title">
                 <h1>Add task</h1>
             </div>
+
+            <main class="add_task_body">
+
             <div class="main-content">
                 <div class="form-wrapper">
-                    <form class="add-task-form">
+
                         <div class="form-column-left">
                             <div class="form-group">
                                 <label for="title">Title <span class="required-icon">*</span></label>
@@ -99,15 +102,22 @@
                                 <div id="selectedUsers" class="selected_users"></div>
                             </div>
                         </div>
+
+
                         <div class="separator"></div>
+
+
                         <div class="form-column-right">
+
                             <div class="form-group">
                                 <label for="due-date">Due date <span class="required-icon">*</span></label>
                                 <input type="date" id="task-due-date" name="due-date" placeholder="dd/mm/yyyy" required>
                             </div>
+
                             <div class="prio-group">
                                 <label>Prio <span class="required-icon">*</span></label>
                                 <div class="prio-options">
+
                                   <button type="button" class="prio-btn" id="urgent-btn" onclick="setUrgent()">
                                     <span>Urgent</span>
                                     <svg id="urgent-svg" width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -122,6 +132,7 @@
                                         </defs>
                                     </svg>
                                   </button>
+
                                   <button type="button" class="prio-btn active" id="medium-btn" onclick="setMedium()">
                                     <span>Medium</span>
                                     <svg id="medium-svg" width="21" height="8" viewBox="0 0 21 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -136,6 +147,7 @@
                                         </defs>
                                     </svg>
                                   </button>
+
                                   <button type="button" class="prio-btn" id="low-btn" onclick="setLow()">
                                     <span>Low</span>
                                     <svg id="low-svg" width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -143,6 +155,7 @@
                                         <path d="M10.8555 15.4463C10.6209 15.4467 10.3923 15.3719 10.2035 15.2328L1.30038 8.66307C1.06644 8.49028 0.910763 8.2317 0.867609 7.94422C0.824455 7.65674 0.897354 7.3639 1.07027 7.13013C1.24319 6.89636 1.50196 6.7408 1.78965 6.69768C2.07734 6.65456 2.3704 6.7274 2.60434 6.90019L10.8555 12.9827L19.1066 6.90019C19.3405 6.7274 19.6336 6.65456 19.9213 6.69768C20.209 6.7408 20.4678 6.89636 20.6407 7.13013C20.8136 7.3639 20.8865 7.65674 20.8433 7.94422C20.8002 8.2317 20.6445 8.49028 20.4106 8.66307L11.5075 15.2328C11.3186 15.3719 11.0901 15.4467 10.8555 15.4463Z" fill="#7AE229"/>
                                     </svg>
                                   </button>
+
                                 </div>
                             </div>
                             <div class="form-group">
@@ -155,20 +168,23 @@
                                     </select>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="subtasks">Subtasks</label>
+
                                 <div class="subtasks-input">
                                     <input type="text" id="task-subtasks" name="subtasks" placeholder="Add new subtask">
-                                    <button type="button" class="add-subtask-btn" id="add-subtask-btn">
-                                        <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <mask id="mask0_75601_15213" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
-                                            <rect x="0.248535" width="24" height="24" fill="#D9D9D9"/>
-                                            </mask>
-                                            <g mask="url(#mask0_75601_15213)">
-                                            <path d="M11.2485 13H6.24854C5.9652 13 5.7277 12.9042 5.53604 12.7125C5.34437 12.5208 5.24854 12.2833 5.24854 12C5.24854 11.7167 5.34437 11.4792 5.53604 11.2875C5.7277 11.0958 5.9652 11 6.24854 11H11.2485V6C11.2485 5.71667 11.3444 5.47917 11.536 5.2875C11.7277 5.09583 11.9652 5 12.2485 5C12.5319 5 12.7694 5.09583 12.961 5.2875C13.1527 5.47917 13.2485 5.71667 13.2485 6V11H18.2485C18.5319 11 18.7694 11.0958 18.961 11.2875C19.1527 11.4792 19.2485 11.7167 19.2485 12C19.2485 12.2833 19.1527 12.5208 18.961 12.7125C18.7694 12.9042 18.5319 13 18.2485 13H13.2485V18C13.2485 18.2833 13.1527 18.5208 12.961 18.7125C12.7694 18.9042 12.5319 19 12.2485 19C11.9652 19 11.7277 18.9042 11.536 18.7125C11.3444 18.5208 11.2485 18.2833 11.2485 18V13Z" fill="#2A3647"/>
-                                            </g>
-                                        </svg>
-                                    </button>
+                                        <button type="button" class="add-subtask-btn" id="add-subtask-btn">
+                                            <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <mask id="mask0_75601_15213" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
+                                                    <rect x="0.248535" width="24" height="24" fill="#D9D9D9"/>
+                                                </mask>
+                                                <g mask="url(#mask0_75601_15213)">
+                                                    <path d="M11.2485 13H6.24854C5.9652 13 5.7277 12.9042 5.53604 12.7125C5.34437 12.5208 5.24854 12.2833 5.24854 12C5.24854 11.7167 5.34437 11.4792 5.53604 11.2875C5.7277 11.0958 5.9652 11 6.24854 11H11.2485V6C11.2485 5.71667 11.3444 5.47917 11.536 5.2875C11.7277 5.09583 11.9652 5 12.2485 5C12.5319 5 12.7694 5.09583 12.961 5.2875C13.1527 5.47917 13.2485 5.71667 13.2485 6V11H18.2485C18.5319 11 18.7694 11.0958 18.961 11.2875C19.1527 11.4792 19.2485 11.7167 19.2485 12C19.2485 12.2833 19.1527 12.5208 18.961 12.7125C18.7694 12.9042 18.5319 13 18.2485 13H13.2485V18C13.2485 18.2833 13.1527 18.5208 12.961 18.7125C12.7694 18.9042 12.5319 19 12.2485 19C11.9652 19 11.7277 18.9042 11.536 18.7125C11.3444 18.5208 11.2485 18.2833 11.2485 18V13Z" fill="#2A3647"/>
+                                                </g>
+                                            </svg>
+                                        </button>
+
                                     <div class="icons" id="iconsContainer">
                                         <span class="clear-icon" id="clearIcon">
                                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -180,6 +196,7 @@
                                                 </g>
                                             </svg>
                                         </span>
+
                                         <div class="divider"></div>
                                         <span class="check-icon" id="checkIcon" onclick="pushSubtaskArray()">
                                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -195,11 +212,10 @@
                                 </div>
                                 <div class="subtasks-list" id="subtasksList">
 
-                                </div>
+                            </div>
                             </div>
                         </div>
-
-                    </form>
+                    </div>
 
                     <div class="form-buttons">
                         <p class="required-hint"><span class="required-icon">*</span>This field is required</p>
@@ -228,12 +244,9 @@
                                 </svg>
                             </button>
                         </div>
-                    </div>
-
-
-                </div>
+                    </div>                
             </div>
-        </section>
+        </main> 
     </div>
 
 </body>
