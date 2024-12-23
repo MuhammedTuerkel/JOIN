@@ -454,3 +454,20 @@ function handleDeleteClick(target) {
 function generateUniqueID() {
     return Date.now().toString(36) + Math.random().toString(36).substring(2, 10);
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const selectElement = document.getElementById('task-category');
+
+    selectElement.addEventListener('mouseover', function(event) {
+        if (event.target.tagName === 'OPTION') {
+            event.target.classList.add('custom-option-hover');
+        }
+    });
+
+    selectElement.addEventListener('mouseout', function(event) {
+        if (event.target.tagName === 'OPTION') {
+            event.target.classList.remove('custom-option-hover');
+        }
+    });
+});
+
