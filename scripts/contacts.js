@@ -172,12 +172,7 @@ function renderContactInformation(i) {
 
 function deleteContact(i) {
     Contacts.splice(i, 1);
-    let a = generateAlphabet();
-    for (let i = 0; i < a.length; i++) {
-        document.getElementById(`${a[i]}`).innerHTML = ``;
-    }
-    console.log(Contacts);
-    renderContact();
+    loadContactsAgain();
     hideAddNewContact(event);
     hideContactMobile(event);
 }
@@ -186,7 +181,6 @@ function loadEditContact(event, i) {
     let Badge = generateBadge(i);
     event.stopPropagation();
     generateEditNewContactHTML(Badge, i);
-
 }
 
 function generateEditNewContactHTML(Badge, i) {
@@ -202,4 +196,32 @@ function generateEditNewContactHTML(Badge, i) {
     document.getElementById('deleteSave').style = "";
     document.getElementById('cancelCreate').style = "display:none;";
     document.getElementById('DeleteEditContact').setAttribute(`onclick`, `deleteContact(${i})`)
+}
+function createNewContact(event) {
+    event.stopPropagation();
+    let name = document.getElementById('input-name').value
+    let email = document.getElementById('input-email').value
+    let phone = document.getElementById('input-phone').value
+    Contacts.push({ "name": `${name}`, "email": `${email}`, "phone": phone });
+    loadContactsAgain();
+    hideAddNewContact(event);
+    loadContact(Contacts.length - 1, event)
+    animateContactCreated();
+}
+
+function animateContactCreated() {
+    document.getElementById('ContactCreated').style = "";
+    document.getElementById('ContactCreated').classList.add('animationRightToPosition');
+    setTimeout(() => {
+        document.getElementById('ContactCreated').style = "display:none;";
+        document.getElementById('ContactCreated').classList.remove('animationRightToPosition');
+    }, 3000);
+}
+
+function loadContactsAgain() {
+    let a = generateAlphabet();
+    for (let i = 0; i < a.length; i++) {
+        document.getElementById(`${a[i]}`).innerHTML = ``;
+    }
+    renderContact();
 }

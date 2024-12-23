@@ -129,6 +129,9 @@
                         <h2>Delete</h2>
                     </div>
                 </div>
+                <div id="ContactCreated" style="display: none;" class="ContactCreated">
+                    <p>Contact succesfully created</p>
+                </div>
             </div>
             <div onclick="stopPropagation(event)" id="addNewContact" class="addNewContact d-none">
                 <div class="headline-addContact">
@@ -153,7 +156,7 @@
                     <div onclick="hideAddNewContact(event)" class="Cancel">
                         <h3>Cancel</h3>
                     </div>
-                    <div class="Create">
+                    <div  onclick="createNewContact(event)" class="Create">
                         <h3>Create contact</h3>
                         <img src="./assets/img/check.png" alt="">
                     </div>
