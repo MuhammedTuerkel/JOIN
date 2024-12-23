@@ -91,11 +91,11 @@
                         <div class="editdelete-top">
                             <h2 id="editdelete-name"></h2>
                             <div class="edit-delete">
-                                <div class="edit">
+                                <div id="editContact" class="edit">
                                     <div class="pencil-image"></div>
                                     <p>Edit</p>
                                 </div>
-                                <div class="edit">
+                                <div id="deleteContact" class="edit">
                                     <div class="trash-image"></div>
                                     <p>Delete</p>
                                 </div>
@@ -120,11 +120,11 @@
                 <img onclick="hideContactMobile(event)" class="arrow-left d-none5"
                     src="./assets/img/arrow-left-line.png" alt="">
                 <div id="editdelete-menu" class="editdelete-menu d-none">
-                    <div class="editdelete-flex">
+                    <div id="editContact1" class="editdelete-flex">
                         <img src="./assets/img/pencil-contacts.png" alt="">
                         <h2>Edit</h2>
                     </div>
-                    <div class="editdelete-flex">
+                    <div id="deleteContact1" class="editdelete-flex">
                         <img src="./assets/img/trash-contacts.png" alt="">
                         <h2>Delete</h2>
                     </div>
@@ -135,29 +135,36 @@
                     <img src="./assets/img/Join-logo-white.svg" alt="">
                     <div class="Addcontact">
                         <div class="Addcontact-text">
-                            <h2>Add Contact</h2>
-                            <p>Tasks are better with a team!</p>
+                            <h2 id="headlineAddContacth2">Add Contact</h2>
+                            <p id="headlineAddContactP">Tasks are better with a team!</p>
                         </div>
                         <div class="line2"></div>
                     </div>
                 </div>
                 <div onclick="hideAddNewContact(event)" class="close"> </div>
-                <div class="addContactProfilePicture">
-                    <img src="./assets/img/person-white.png" alt="">
+                <div id="addContactProfilePicture" class="addContactProfilePicture">
                 </div>
                 <div class="addContactInput">
                     <input id="input-name" type="text" placeholder="Name">
                     <input id="input-email" type="email" placeholder="Email">
                     <input id="input-phone" type="number" placeholder="Phone">
                 </div>
-                <div class="cancel-create">
+                <div id="cancelCreate" style="display: none;" class="cancel-create">
                     <div onclick="hideAddNewContact(event)" class="Cancel">
                         <h3>Cancel</h3>
-                        <div class="Cancel-image"></div>
                     </div>
                     <div class="Create">
                         <h3>Create contact</h3>
-                        <img src="/assets/img/check.png" alt="">
+                        <img src="./assets/img/check.png" alt="">
+                    </div>
+                </div>
+                <div id="deleteSave" class="cancel-create">
+                    <div id="DeleteEditContact" class="Cancel DeleteEditContact">
+                        <h3>Delete</h3>
+                    </div>
+                    <div class="Create saveEditContact">
+                        <h3>Save</h3>
+                        <img src="./assets/img/check.png" alt="">
                     </div>
                 </div>
             </div>

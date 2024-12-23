@@ -1,12 +1,12 @@
 let Contacts = [
-    { "name": "Anton Mayer", "email": "antonm@gmail.com", "phone":"+49 152322221" },
-    { "name": "Anja Schulz", "email": "schulz@hotmail.com", "phone":"+49 152322222" },
-    { "name": "Benedikt Ziegler", "email": "benedikt@gmail.com", "phone":"+49 152322223" },
-    { "name": "David Eisenberg", "email": "davidberg@gmail.com", "phone":"+49 152322224" },
-    { "name": "Eva Fischer", "email": "eva@gmail.com", "phone":"+49 152322225" },
-    { "name": "Emmanuel Mauer", "email": "emmanuelma@gmail.com", "phone":"+49 152322226" },
-    { "name": "Marcel Bauer", "email": "bauer@gmail.com", "phone":"+49 152322227" },
-    { "name": "Tatjana Wolf", "email": "wolf@gmail.com", "phone":"+49 152322228" },
+    { "name": "Anton Mayer", "email": "antonm@gmail.com", "phone": +49152322221 },
+    { "name": "Anja Schulz", "email": "schulz@hotmail.com", "phone": +49152322222 },
+    { "name": "Benedikt Ziegler", "email": "benedikt@gmail.com", "phone": +49152322223 },
+    { "name": "David Eisenberg", "email": "davidberg@gmail.com", "phone": +49152322224 },
+    { "name": "Eva Fischer", "email": "eva@gmail.com", "phone": +49152322225 },
+    { "name": "Emmanuel Mauer", "email": "emmanuelma@gmail.com", "phone": +49152322226 },
+    { "name": "Marcel Bauer", "email": "bauer@gmail.com", "phone": +49152322227 },
+    { "name": "Tatjana Wolf", "email": "wolf@gmail.com", "phone": +49152322228 },
 ]
 
 function Init() {
@@ -51,12 +51,21 @@ function loadAddNewContact(event) {
     event.stopPropagation();
     document.getElementById('addNewContact').classList.add('animationRightToPosition');
     document.getElementById('addNewContact').classList.remove('d-none');
+    document.getElementById('headlineAddContacth2').innerHTML = `Add contact`;
+    document.getElementById('addContactProfilePicture').style = "background-image: url(../assets/img/person-white.png);"
+    document.getElementById('addContactProfilePicture').innerHTML = ``;
+    document.getElementById('cancelCreate').style = "";
+    document.getElementById('deleteSave').style = "display:none;";
 }
 
 function hideAddNewContact(event) {
     event.stopPropagation();
     document.getElementById('addNewContact').classList.remove('animationRightToPosition');
     document.getElementById('addNewContact').classList.add('d-none');
+    document.getElementById('headlineAddContactP').style = "";
+    document.getElementById('input-name').value = ``;
+    document.getElementById('input-email').value = ``;
+    document.getElementById('input-phone').value = ``;
 }
 
 function stopPropagation(event) {
@@ -93,19 +102,25 @@ async function renderContactsListHTML() {
                     </div>
                     `;
     }
-    renderContact(alphabet);
+    renderContact();
 }
 let x = 0
 
-function renderContact(a) {
-    let firstLetter = Contacts[x].name.charAt(0);
-    for (let i = 0; i < a.length; i++) {
-        if (firstLetter == a[i]) {
-            let Badge = generateBadge(x);
-            generateContactHTML(a, i, Badge);
+function renderContact() {
+    let a = generateAlphabet();
+    if (Contacts == 0) {
+        clearEmptyDivs(a);
+    } else {
+        let firstLetter = Contacts[x].name.charAt(0);
+        for (let i = 0; i < a.length; i++) {
+            if (firstLetter == a[i]) {
+                let Badge = generateBadge(x);
+                generateContactHTML(a, i, Badge);
+            }
         }
+        x = 0;
+        clearEmptyDivs(a);
     }
-    clearEmptyDivs(a);
 }
 
 function generateContactHTML(a, i, Badge) {
@@ -140,6 +155,7 @@ function clearEmptyDivs(a) {
             document.getElementById(`Section${i}`).style = "display:none;"
         }
     }
+    hideContact();
 }
 
 function renderContactInformation(i) {
@@ -148,4 +164,42 @@ function renderContactInformation(i) {
     document.getElementById('editdelete-name').innerHTML = `${Contacts[i].name}`
     document.getElementById('email').innerHTML = `${Contacts[i].email}`;
     document.getElementById('phone').innerHTML = `${Contacts[i].phone}`;
+    document.getElementById('editContact').setAttribute(`onclick`, `loadEditContact(event, ${i})`)
+    document.getElementById('editContact1').setAttribute(`onclick`, `loadEditContact(event, ${i})`)
+    document.getElementById('deleteContact').setAttribute(`onclick`, `deleteContact(${i})`)
+    document.getElementById('deleteContact1').setAttribute(`onclick`, `deleteContact(${i})`)
+}
+
+function deleteContact(i) {
+    Contacts.splice(i, 1);
+    let a = generateAlphabet();
+    for (let i = 0; i < a.length; i++) {
+        document.getElementById(`${a[i]}`).innerHTML = ``;
+    }
+    console.log(Contacts);
+    renderContact();
+    hideAddNewContact(event);
+    hideContactMobile(event);
+}
+
+function loadEditContact(event, i) {
+    let Badge = generateBadge(i);
+    event.stopPropagation();
+    generateEditNewContactHTML(Badge, i);
+
+}
+
+function generateEditNewContactHTML(Badge, i) {
+    document.getElementById('addNewContact').classList.add('animationRightToPosition');
+    document.getElementById('addNewContact').classList.remove('d-none');
+    document.getElementById('headlineAddContacth2').innerHTML = `Edit contact`;
+    document.getElementById('headlineAddContactP').style = "display:none;"
+    document.getElementById('addContactProfilePicture').style = "background:orange;"
+    document.getElementById('addContactProfilePicture').innerHTML = `<h2>${Badge}</h2>`;
+    document.getElementById('input-name').value = `${Contacts[i].name}`;
+    document.getElementById('input-email').value = `${Contacts[i].email}`;
+    document.getElementById('input-phone').value = `${Contacts[i].phone}`;
+    document.getElementById('deleteSave').style = "";
+    document.getElementById('cancelCreate').style = "display:none;";
+    document.getElementById('DeleteEditContact').setAttribute(`onclick`, `deleteContact(${i})`)
 }
