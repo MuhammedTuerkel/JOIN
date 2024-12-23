@@ -181,6 +181,7 @@ function loadEditContact(event, i) {
     let Badge = generateBadge(i);
     event.stopPropagation();
     generateEditNewContactHTML(Badge, i);
+    document.getElementById('saveEditContact').setAttribute(`onclick`, `saveNewContact(${i})`);
 }
 
 function generateEditNewContactHTML(Badge, i) {
@@ -202,11 +203,13 @@ function createNewContact(event) {
     let name = document.getElementById('input-name').value
     let email = document.getElementById('input-email').value
     let phone = document.getElementById('input-phone').value
-    Contacts.push({ "name": `${name}`, "email": `${email}`, "phone": phone });
-    loadContactsAgain();
-    hideAddNewContact(event);
-    loadContact(Contacts.length - 1, event)
-    animateContactCreated();
+    if (name == "" || email == "" || phone == "") { alert('Name, Email oder Telefonnummer nicht eingegeben')} else {
+        Contacts.push({ "name": `${name}`, "email": `${email}`, "phone": phone });
+        loadContactsAgain();
+        hideAddNewContact(event);
+        loadContact(Contacts.length - 1, event);
+        animateContactCreated();
+    }
 }
 
 function animateContactCreated() {
@@ -222,6 +225,19 @@ function loadContactsAgain() {
     let a = generateAlphabet();
     for (let i = 0; i < a.length; i++) {
         document.getElementById(`${a[i]}`).innerHTML = ``;
+        document.getElementById(`Section${i}`).style = ``;
     }
     renderContact();
+}
+
+function saveNewContact(i) {
+    let name = document.getElementById('input-name').value
+    let email = document.getElementById('input-email').value
+    let phone = document.getElementById('input-phone').value
+    Contacts[i].name = name;
+    Contacts[i].email = email;
+    Contacts[i].phone = phone;
+    loadContactsAgain();
+    hideAddNewContact(event);
+    loadContact(i, event);
 }

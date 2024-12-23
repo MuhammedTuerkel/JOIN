@@ -147,29 +147,30 @@
                 <div onclick="hideAddNewContact(event)" class="close"> </div>
                 <div id="addContactProfilePicture" class="addContactProfilePicture">
                 </div>
-                <div class="addContactInput">
-                    <input id="input-name" type="text" placeholder="Name">
-                    <input id="input-email" type="email" placeholder="Email">
-                    <input id="input-phone" type="number" placeholder="Phone">
-                </div>
-                <div id="cancelCreate" style="display: none;" class="cancel-create">
-                    <div onclick="hideAddNewContact(event)" class="Cancel">
-                        <h3>Cancel</h3>
+                    <div class="addContactInput">
+                        <input id="input-name" type="text" placeholder="Name" required>
+                        <input id="input-email" type="email" placeholder="Email" required>
+                        <input id="input-phone" type="number" placeholder="Phone" required>
                     </div>
-                    <div  onclick="createNewContact(event)" class="Create">
-                        <h3>Create contact</h3>
-                        <img src="./assets/img/check.png" alt="">
+                    <div id="cancelCreate" style="display: none;" class="cancel-create">
+                        
+                        <div onclick="hideAddNewContact(event)" class="Cancel">
+                            <h3>Cancel</h3>
+                        </div>
+                        <div onclick="createNewContact(event)" class="Create">
+                            <h3>Create contact</h3>
+                            <img src="./assets/img/check.png" alt="">
+                        </div>
                     </div>
-                </div>
-                <div id="deleteSave" class="cancel-create">
-                    <div id="DeleteEditContact" class="Cancel DeleteEditContact">
-                        <h3>Delete</h3>
+                    <div id="deleteSave" class="cancel-create">
+                        <div id="DeleteEditContact" class="Cancel DeleteEditContact">
+                            <h3>Delete</h3>
+                        </div>
+                        <div id="saveEditContact" class="Create saveEditContact">
+                            <h3>Save</h3>
+                            <img src="./assets/img/check.png" alt="">
+                        </div>
                     </div>
-                    <div class="Create saveEditContact">
-                        <h3>Save</h3>
-                        <img src="./assets/img/check.png" alt="">
-                    </div>
-                </div>
             </div>
         </div>
 </body>
