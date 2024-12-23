@@ -200,7 +200,7 @@ function validateSignUpForm() {
     let password = document.getElementById('signUpInputPassword').value.trim();
     let confirmPassword = document.getElementById('signUpConfirmInputPassword').value.trim();
     let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    let namePattern = /^[A-Za-zÄäÖöÜüß\s]+$/; // Erlaubt nur Buchstaben und Leerzeichen
+    let namePattern = /^[A-Za-zÄäÖöÜüß\s]+$/;
     let isFormValid = namePattern.test(name) && emailPattern.test(email) && password.length >= 3 && password === confirmPassword;
 
     let checkbox = document.getElementById('acceptTerms');

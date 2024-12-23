@@ -1,3 +1,21 @@
+@media(max-width:1920px) and (min-width: 1500px){
+    .custom-select-wrapper::after{
+        right: 48px;
+    }
+
+    .subtasks-input {
+        width: 100%;
+    }
+
+    .add-subtask-btn {
+        right: 41px;
+    }
+
+    .custom_dropdown{
+        width: 32%;
+    }
+}
+
 @media(max-width: 1250px) and (min-width: 1000px){
     .prio-btn{
         width: 100px;
@@ -13,6 +31,10 @@
         width: 180px;
         height: 40px;
         font-size: 16px;
+    }
+
+    .custom_dropdown{
+        width: 26%;
     }
 }
 
