@@ -1,15 +1,9 @@
-let Contacts = [
-    { "name": "Anton Mayer", "email": "antonm@gmail.com", "phone": +49152322221 },
-    { "name": "Anja Schulz", "email": "schulz@hotmail.com", "phone": +49152322222 },
-    { "name": "Benedikt Ziegler", "email": "benedikt@gmail.com", "phone": +49152322223 },
-    { "name": "David Eisenberg", "email": "davidberg@gmail.com", "phone": +49152322224 },
-    { "name": "Eva Fischer", "email": "eva@gmail.com", "phone": +49152322225 },
-    { "name": "Emmanuel Mauer", "email": "emmanuelma@gmail.com", "phone": +49152322226 },
-    { "name": "Marcel Bauer", "email": "bauer@gmail.com", "phone": +49152322227 },
-    { "name": "Tatjana Wolf", "email": "wolf@gmail.com", "phone": +49152322228 },
-]
 
-function Init() {
+let Contacts = [];
+
+
+async function Init() {
+   await getItemsFromFirebase();
     renderContactsListHTML();
 }
 
@@ -111,7 +105,7 @@ function renderContact() {
     if (Contacts == 0) {
         clearEmptyDivs(a);
     } else {
-        let firstLetter = Contacts[x].name.charAt(0);
+        let firstLetter = Contacts[x].name.charAt(0).toUpperCase();
         for (let i = 0; i < a.length; i++) {
             if (firstLetter == a[i]) {
                 let Badge = generateBadge(x);
@@ -143,8 +137,8 @@ function generateContactHTML(a, i, Badge) {
 
 function generateBadge(x) {
     var values = Contacts[x].name.split(" ");
-    var f_name = values.shift().charAt(0);
-    var l_name = values.join(' ').charAt(0);
+    var f_name = values.shift().charAt(0).toUpperCase();
+    var l_name = values.join(' ').charAt(0).toUpperCase();
     return f_name + l_name;
 }
 
@@ -175,6 +169,7 @@ function deleteContact(i) {
     loadContactsAgain();
     hideAddNewContact(event);
     hideContactMobile(event);
+    deleteContactfromFirebase(i);
 }
 
 function loadEditContact(event, i) {
@@ -203,8 +198,9 @@ function createNewContact(event) {
     let name = document.getElementById('input-name').value
     let email = document.getElementById('input-email').value
     let phone = document.getElementById('input-phone').value
-    if (name == "" || email == "" || phone == "") { alert('Name, Email oder Telefonnummer nicht eingegeben')} else {
-        Contacts.push({ "name": `${name}`, "email": `${email}`, "phone": phone });
+    if (name == ' ' || email == "" || phone == "") { alert('Name, Email oder Telefonnummer nicht eingegeben') } else {
+        Contacts.push({ "name": `${name}`, "email": `${email}`, "phone": phone },);
+        getTheItemstoPushTOFireBase();
         loadContactsAgain();
         hideAddNewContact(event);
         loadContact(Contacts.length - 1, event);
@@ -240,4 +236,55 @@ function saveNewContact(i) {
     loadContactsAgain();
     hideAddNewContact(event);
     loadContact(i, event);
+}
+
+async function getTheItemstoPushTOFireBase() {
+    let Useremail = User[0].email
+    let result = Useremail.replace(".", "_");
+    let put = localStorage.getItem("loggedInUser", Contacts)
+    let Number = await getNumFromFirebase(`/users/${result}`,);
+    pushToFireBase(`users/${result}/${Number}/Contacts`)
+    getItemsFromFirebase(`users/${result}/${Number}/Contacts`)
+}
+
+async function getNumFromFirebase(path = "", data = {}) {
+    let response = await fetch(BASE_URL + path + ".json");
+    let json = await response.json();
+    let num = Object.keys(json)[0];
+    return num;
+}
+
+async function pushToFireBase(path = "") {
+    let response = await fetch(BASE_URL + path + ".json", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(Contacts)
+    });
+    return responseToJson = await response.json();
+}
+
+async function getItemsFromFirebase() {
+    let Useremail = User[0].email
+    let result = Useremail.replace(".", "_");
+    let Number = await getNumFromFirebase(`/users/${result}`);
+    let path = `users/${result}/${Number}/Contacts/`
+    let response = await fetch(BASE_URL + path + ".json");
+    let json = await response.json();
+    for (let i = 0; i < json.length; i++) {
+        Contacts.push(json[i])
+    }
+
+}
+
+async function deleteContactfromFirebase(i) {
+    let Useremail = User[0].email
+    let result = Useremail.replace(".", "_");
+    let Number = await getNumFromFirebase(`/users/${result}`);
+    let path = `users/${result}/${Number}/Contacts/${i}`
+    console.log(path);
+    let response = await fetch(BASE_URL + path + ".json", {
+        method: "DELETE",  });
+    return responseToJson = await response.json();
 }

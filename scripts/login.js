@@ -7,7 +7,7 @@ function logInInit() {
 /**
  * if the rememberMe is false or null than the login page will load
  */
-function LogInNotRemember(){
+function LogInNotRemember() {
     moveImage();
     hideImageAfterDelay();
     onloadFunction();
@@ -17,11 +17,11 @@ function LogInNotRemember(){
 /**
  * check if the user have the status in the locals storage from rememberMe of true than he goes direktly to the summary side
  */
-function checkRememberMe(){
+function checkRememberMe() {
     let remember = localStorage.getItem('rememberMe');
-    if(remember === "true"){
+    if (remember === "true") {
         window.location.href = "../summary.html";
-    }else{
+    } else {
         LogInNotRemember();
     }
 }
@@ -68,7 +68,7 @@ function moveImage() {
     body = document.querySelector('.login_body').style.backgroundColor = 'transparent';
     let loginHeaderNav = document.getElementById('loginHeader');
 
-    setTimeout(function() {
+    setTimeout(function () {
         position.classList.remove('login_move_image_container');
         positionMobile.classList.remove('login_move_mobile_image_container');
         mobileNav.classList.remove('login_d_none');
@@ -85,7 +85,7 @@ function moveImage() {
 function hideImageAfterDelay() {
     const image = document.getElementById('loginMobileMovableImage');
     setTimeout(() => {
-        image.classList.add('hidden'); 
+        image.classList.add('hidden');
     }, 100);
 }
 
@@ -229,7 +229,7 @@ function goToSummaryHtml() {
 /**
  * show an overlay where the user can choos between yes or no to save his user datas in the local storage 
  */
-function questionRememberMe(){
+function questionRememberMe() {
     let overlay = document.getElementById('overlay');
     overlay.classList.remove('login_d_none')
     overlay.style.display = 'flex';
@@ -241,7 +241,7 @@ function questionRememberMe(){
 /**
  * load the Template where the user can choos his log in datas
  */
-function showRememberMeOverlay() {    
+function showRememberMeOverlay() {
     let overlay = document.getElementById('rememberMeOverlay');
     overlay.style.display = 'flex';
     let logoContainer = document.getElementById('rememberMeLogoContainer');
@@ -263,6 +263,7 @@ function pushUserToLoggedInUserArray() {
         color: user.color,
         createdAt: user.createdAt,
         password: user.password,
+        Contacts: user.Contacts
     });
     goToSummaryHtml()
 }
@@ -270,7 +271,7 @@ function pushUserToLoggedInUserArray() {
 /**
  * log in as a guest
  */
-function guestLogIn(){
+function guestLogIn() {
     clearLocalStorageforGuestUser();
     const color = createRandomColor();
     loggedInUser.push({
@@ -280,13 +281,13 @@ function guestLogIn(){
         createdAt: new Date().toISOString(),
         password: "guestUser",
     });
-    goAsGuestToSummaryHtml();    
+    goAsGuestToSummaryHtml();
 }
 
 /**
  * clears the local storage to let the guest User go to the Summary Page
  */
-function clearLocalStorageforGuestUser(){
+function clearLocalStorageforGuestUser() {
     localStorage.clear();
 }
 
@@ -295,7 +296,7 @@ function clearLocalStorageforGuestUser(){
  */
 function goAsGuestToSummaryHtml() {
     localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser[0]));
-    window.location.href = "/summary.html"; 
+    window.location.href = "/summary.html";
 }
 
 /**
@@ -304,16 +305,16 @@ function goAsGuestToSummaryHtml() {
  */
 function rememberMeYes() {
     removeFlyInClasses();
-    let rememberMeText = document.getElementById('rememberMeTextButtonContainer');   
+    let rememberMeText = document.getElementById('rememberMeTextButtonContainer');
     rememberMeText.innerHTML = "";
-    rememberMeText.innerHTML = getRememberMeYesTemplate();    
+    rememberMeText.innerHTML = getRememberMeYesTemplate();
     localStorage.setItem("rememberMe", "true");
     setTimeout(() => {
         flyout();
-    }, 1000); 
+    }, 1000);
     setTimeout(() => {
-       window.location.href = "/summary.html";       
-    }, 1500); 
+        window.location.href = "/summary.html";
+    }, 1500);
 }
 
 /**
@@ -321,16 +322,16 @@ function rememberMeYes() {
  */
 function rememberMeNo() {
     removeFlyInClasses();
-    let rememberMeText = document.getElementById('rememberMeTextButtonContainer');   
+    let rememberMeText = document.getElementById('rememberMeTextButtonContainer');
     rememberMeText.innerHTML = "";
-    rememberMeText.innerHTML = getRememberMeNoTemplate();    
+    rememberMeText.innerHTML = getRememberMeNoTemplate();
     localStorage.setItem("rememberMe", "false");
     setTimeout(() => {
         flyout();
-    }, 1000); 
+    }, 1000);
     setTimeout(() => {
-       window.location.href = "/summary.html";
-    }, 1500); 
+        window.location.href = "/summary.html";
+    }, 1500);
 }
 
 /**
@@ -345,7 +346,7 @@ function removeFlyInClasses() {
 /**
  * add the fly in classes
  */
-function flyout(){
+function flyout() {
     document.getElementById('rememberMeNo').classList.add('text_fly_out');
     document.getElementById('rememberMeLogoContainer').classList.add('logo_fly_out');
 }

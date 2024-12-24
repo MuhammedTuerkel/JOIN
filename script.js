@@ -18,7 +18,7 @@ async function onloadFunction() {
             users.push(entry);
         }
     }
-    console.log("Global users array:", users);
+    console.log("Global users array:", users);   
 }
 
 /**
@@ -52,6 +52,9 @@ async function pushNewUserinFireBaseArray(event) {
         password: userPassword,
         color: color,
         createdAt: new Date().toISOString(),
+        Contacts  : [
+            {"name": "First Contact", "email": "firstco@gmail.com", "phone": "1234567890"}
+        ],
     };
     try {
         let response = await postData(`users/${userMail.replace('.', '_')}`, userData);
