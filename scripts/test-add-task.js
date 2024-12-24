@@ -456,18 +456,16 @@ function generateUniqueID() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    const selectElement = document.getElementById('task-category');
+    const buttons = document.querySelectorAll('.button');
 
-    selectElement.addEventListener('mouseover', function(event) {
-        if (event.target.tagName === 'OPTION') {
-            event.target.classList.add('custom-option-hover');
-        }
-    });
-
-    selectElement.addEventListener('mouseout', function(event) {
-        if (event.target.tagName === 'OPTION') {
-            event.target.classList.remove('custom-option-hover');
-        }
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            if (button.classList.contains('save-go-board')) {
+                button.classList.add('clicked');
+                setTimeout(() => {
+                    button.classList.remove('clicked');
+                }, 400); // Match the duration of the explode animation
+            }
+        });
     });
 });
-
