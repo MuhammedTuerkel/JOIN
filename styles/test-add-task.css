@@ -783,9 +783,6 @@ input[type="text"]:focus::placeholder {
 
 /*___________________ overlay _________________________________________ */
 
-
-
-
 .add_task_overlay {
     width: 100%;
     height: 100dvh;
@@ -848,8 +845,8 @@ input[type="text"]:focus::placeholder {
 }
 
 .button:hover {
-    background-color: #29abe2; /* Hover background color */
-    color: white; /* Optional: change text color */
+    background-color: #29abe2; 
+    color: white; 
 }
 
 .snake-border {
@@ -862,23 +859,22 @@ input[type="text"]:focus::placeholder {
     z-index: 0;
 }
 
-/* Individuelle Farben und Leuchteffekte */
 .go-back-border:hover .go-back-snake {
-    border-color: #ff5733; /* Orange */
+    border-color: #ff5733; 
     animation: snake-animation 0.35s linear forwards;
-    box-shadow: 0 0 10px #ff5733; /* Orange Glow */
+    box-shadow: 0 0 10px #ff5733;
 }
 
 .save-add-another-border:hover .save-add-another-snake {
-    border-color: #8e44ad; /* Purple */
+    border-color: #8e44ad;
     animation: snake-animation 0.35s linear forwards;
-    box-shadow: 0 0 10px #8e44ad; /* Purple Glow */
+    box-shadow: 0 0 10px #8e44ad; 
 }
 
 .save-go-board-border:hover .save-go-board-snake {
-    border-color: #3498db; /* Blue */
+    border-color: #3498db; 
     animation: snake-animation 0.35s linear forwards;
-    box-shadow: 0 0 10px #3498db; /* Blue Glow */
+    box-shadow: 0 0 10px #3498db;
 }
 
 @keyframes snake-animation {
@@ -899,7 +895,6 @@ input[type="text"]:focus::placeholder {
     }
 }
 
-/* Click effects with animations */
 .button:active {
     transform: scale(0.95);
 }
