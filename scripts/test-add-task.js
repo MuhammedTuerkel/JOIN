@@ -14,7 +14,7 @@ function addTaskOnInit() {
 }
 
 async function postTask(path = "", data={}) {
-    let response = await fetch(FIREBASE_URL + path + ".json",{
+    let response = await fetch(BASE_URL + path + ".json",{
        method: 'POST',
        header: {
             "Content-Type": "application/json", 
@@ -365,7 +365,6 @@ function handleEditClick(target) {
     contentWrapper.appendChild(inputContainer);
     const actions = subtaskItem.querySelector('.subtask-actions');
     actions.style.visibility = 'hidden';
-    // input.focus();
 }
 
 function createIcon(className, src) {
@@ -454,18 +453,3 @@ function handleDeleteClick(target) {
 function generateUniqueID() {
     return Date.now().toString(36) + Math.random().toString(36).substring(2, 10);
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-    const buttons = document.querySelectorAll('.button');
-
-    buttons.forEach(button => {
-        button.addEventListener('click', function() {
-            if (button.classList.contains('save-go-board')) {
-                button.classList.add('clicked');
-                setTimeout(() => {
-                    button.classList.remove('clicked');
-                }, 400); // Match the duration of the explode animation
-            }
-        });
-    });
-});

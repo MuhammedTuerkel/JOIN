@@ -6,7 +6,6 @@ let editedPrio;
 /**
  * Initialize the board features which should be active at site load
  */
-
 async function onInit() {
     await getAllTasks();
     await renderAllTickets(allTasks);
