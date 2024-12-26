@@ -234,7 +234,7 @@ function renderOverlayTicket(category, ticketTitle, ticketDescription, ticketDat
                     </svg>
                     <span>Delete</span>
                 </div>
-                <div class="overlay-ticket-edit" onclick="editTicket('${ticketTitle}', '${ticketDescription}', '${ticketDate}', '${prio}')">
+                <div class="overlay-ticket-edit" onclick="editTicket('${ticketID}', '${ticketTitle}', '${ticketDescription}', '${ticketDate}', '${prio}')">
                     <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <mask id="mask0_75592_9969" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
                         <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
@@ -364,7 +364,7 @@ function renderOverlayEditTicket() {
                     
                 </div>
             </div>
-            <button class="endEdit-btn">
+            <button class="endEdit-btn" onclick="saveEditonClick()">
                 <span>Ok</span>
                 <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <mask id="mask0_259614_6254" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
@@ -378,11 +378,23 @@ function renderOverlayEditTicket() {
         `;
 }
 
+/**
+ * Returns the Ticket Date in the correct format
+ * 
+ * @param {string} ticketDate - Ticket Due Date as a string in the incorrect format
+ * @returns The Ticket Date in the Format DD/MM/YYYY
+ */
 function formatDate(ticketDate) {
     let [year, month, day] = ticketDate.split('-');
     return `${day}/${month}/${year}`;
 }
 
+/**
+ * Takes the username and returns it with the first letter capitalized
+ * 
+ * @param {string} username 
+ * @returns The username with the first letter in capitals
+ */
 function capitalizeFirstChar(username) {
     if (!username) return '';
     if (username.charAt(0) === username.charAt(0).toUpperCase()) {
@@ -391,6 +403,14 @@ function capitalizeFirstChar(username) {
     return username.charAt(0).toUpperCase() + username.slice(1);
 }
 
+/**
+ * Returns a HTML Snippet with the Users Circle Icon and his/her name
+ * 
+ * @param {string} userName 
+ * @param {string} initials 
+ * @param {string} color 
+ * @returns a HTML Snippet to create the User Element in the Front-End
+ */
 function renderOverlayUserElement(userName, initials, color) {
     return `<div class="overlay-assigned-user-element">
                 ${renderUserCircle(initials, color)}
@@ -398,6 +418,15 @@ function renderOverlayUserElement(userName, initials, color) {
             </div>`;
 }
 
+/**
+ * Creates a HTML-Snippet to display the subtask element in the front-end
+ * 
+ * @param {int} subtaskIndex 
+ * @param {string} subtaskContent 
+ * @param {string} ticketID 
+ * @param {string} taskStatus 
+ * @returns a HTML Snippet to create a Subtask Element in the Front-End
+ */
 function renderOverlaySubtaskElement(subtaskIndex, subtaskContent, ticketID, taskStatus) {
     return `<div class="overlay-subtask-element">
                 <div class="overlay-subtask-status" onclick="changeSubtaskStatus(${subtaskIndex}, '${ticketID}')">
@@ -407,6 +436,12 @@ function renderOverlaySubtaskElement(subtaskIndex, subtaskContent, ticketID, tas
             </div>`;
 }
 
+/**
+ * Returns a different symbol (checked oder unchecked) based on the status of the task
+ * 
+ * @param {string} taskStatus 
+ * @returns a different symbol (checked oder unchecked) based on the status of the task
+ */
 function subtaskStatus(taskStatus) {
     if(taskStatus === 'open') {
         return `<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">

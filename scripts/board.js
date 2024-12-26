@@ -1,7 +1,9 @@
 let FIREBASE_URL = 'https://join-bbd82-default-rtdb.europe-west1.firebasedatabase.app/';
 
 let allTasks = [];
+let searchResults = [];
 let currentDraggedElement;
+let editedPrio;
 
 /**
  * Initialize the board features which should be active at site load
@@ -9,11 +11,11 @@ let currentDraggedElement;
 
 async function onInit() {
     await getAllTasks();
-    await renderAllTickets();
+    await renderAllTickets(allTasks);
 }
 
 /**
- * Get all tasks which are saved in the firebase realtime database
+ * Gets all tasks which are saved in the firebase realtime database with its Firebase-ID
  */
 async function getAllTasks() {
     let response = await fetch(FIREBASE_URL + 'tasks' + '.json');
@@ -27,19 +29,19 @@ async function getAllTasks() {
 /**
  * Renders all Tickets on the board
  */
-async function renderAllTickets() {
-    renderToDoTasks();
-    renderInProgressTasks();
-    renderFeedbackTasks();
-    renderDoneTasks();
+async function renderAllTickets(array) {
+    renderToDoTasks(array);
+    renderInProgressTasks(array);
+    renderFeedbackTasks(array);
+    renderDoneTasks(array);
 }
 
 /**
  * Renders the tasks which are in the 'To do' Column
  * 
  */
-function renderToDoTasks() {
-    let tasks = allTasks.filter(t => t['state'] == 'toDo');
+function renderToDoTasks(array) {
+    let tasks = array.filter(t => t['state'] == 'toDo');
     let target = document.getElementById('toDoColumn');
     target.innerHTML = '';
     if(tasks.length === 0) {
@@ -67,8 +69,8 @@ function renderToDoTasks() {
  * Renders the tasks which are in the 'In progress'-Column
  * 
  */
-function renderInProgressTasks() {
-    let tasks = allTasks.filter(t => t['state'] == 'inProgress');
+function renderInProgressTasks(array) {
+    let tasks = array.filter(t => t['state'] == 'inProgress');
     let target = document.getElementById('inProgressColumn');
     target.innerHTML = '';
     if(tasks.length === 0) {
@@ -96,8 +98,8 @@ function renderInProgressTasks() {
  * Renders the tasks which are in the 'Await Feedback' Column
  * 
  */
-function renderFeedbackTasks() {
-    let tasks = allTasks.filter(t => t['state'] == 'awaitFeedback');
+function renderFeedbackTasks(array) {
+    let tasks = array.filter(t => t['state'] == 'awaitFeedback');
     let target = document.getElementById('awaitFeedbackColumn');
     target.innerHTML = '';
     if(tasks.length === 0) {
@@ -125,8 +127,8 @@ function renderFeedbackTasks() {
  * Renders the tasks which are in the 'Done'-Column
  * 
  */
-function renderDoneTasks() {
-    let tasks = allTasks.filter(t => t['state'] == 'done');
+function renderDoneTasks(array) {
+    let tasks = array.filter(t => t['state'] == 'done');
     let target = document.getElementById('doneColumn');
     target.innerHTML = '';
     if(tasks.length === 0) {
@@ -333,7 +335,7 @@ async function move(category) {
             body: JSON.stringify({state: category}),
             headers: {'Content-Type': 'application/json'}
         });
-        renderAllTickets();
+        renderAllTickets(allTasks);
     } else {
         console.error('Task not found in allTasks array')
     }
@@ -383,7 +385,7 @@ async function deleteTicket(ticketID) {
         return;
     }
     allTasks.splice(taskIndex, 1);
-    renderAllTickets();
+    renderAllTickets(allTasks);
     toggleOverlay();
 }
 
@@ -430,7 +432,7 @@ function showOverlayTicket(category, ticketTitle, ticketDescription, ticketDate,
     renderSubtasksOverlay(ticketID);
 }
 
-function editTicket(ticketTitle, ticketDescription, ticketDate, prio) {
+function editTicket(ticketID, ticketTitle, ticketDescription, ticketDate, prio) {
     let target = document.getElementById('overlayCard');
     target.innerHTML = '';
     target.innerHTML = renderOverlayEditTicket();
@@ -440,16 +442,53 @@ function editTicket(ticketTitle, ticketDescription, ticketDate, prio) {
     setPriorityOnEdit(prio);
 }
 
+/**
+ * Sets the Priority on the Edit-Overlay based on the prio the task has
+ * 
+ * @param {string} prio 
+ */
 function setPriorityOnEdit(prio) {
     if(prio === 'urgent') {
-        activateButton('urgent-btn', 'urgent-svg', 'urgent', 'urgent-icon');
+        setUrgent();
     } else if(prio === 'medium') {
-        activateButton('medium-btn', 'medium-svg', 'medium', 'medium-icon');
+        setMedium();
     } else if(prio = 'low') {
-        activateButton('low-btn', 'low-svg', 'low', 'low-icon');
+        setLow();
     }
 }
 
+/**
+ * Sets the Design of the Urgent-Button and temporarily saves the prio into the selectedPrio variable
+ */
+function setUrgent() {
+    activateButton('urgent-btn', 'urgent-svg', 'urgent', 'urgent-icon');
+    editedPrio = 'urgent';
+}
+
+/**
+ * Sets the Design of the Medium-Button and temporarily saves the prio into the selectedPrio variable
+ */
+function setMedium() {
+    activateButton('medium-btn', 'medium-svg', 'medium', 'medium-icon');
+    editedPrio = 'medium';
+}
+
+/**
+ * Sets the Design of the Low-Button and temporarily saves the prio into the selectedPrio variable
+ */
+function setLow() {
+    activateButton('low-btn', 'low-svg', 'low', 'low-icon');
+    editedPrio = 'low';
+}
+
+/**
+ * Based on the clicked Prio-Button, the style of the button is changing. Makes sure, that only one Prio-Button could be active.
+ * 
+ * @param {string} buttonId 
+ * @param {string} svgId 
+ * @param {string} buttonClass 
+ * @param {string} svgClass 
+ */
 function activateButton(buttonId, svgId, buttonClass, svgClass) {
     const buttons = document.querySelectorAll('.prio-btn');
     buttons.forEach((button) => {
@@ -469,11 +508,51 @@ function saveEditonClick() {
     let newTitle = document.getElementById('task-title-overlay-edit').value;
     let newDescription = document.getElementById('task-description-overlay-edit').value;
     let newDueDate = document.getElementById('task-due-date-overlay-edit').value;
+    let newPrio = editedPrio;
+    let newAssignedUser = '';
+    let newSubtasks = '';
+    console.log(newTitle, newDescription, newDueDate, newPrio);
     //Nimm den Inhalt von Title und speichere ihn in das Overlay-Ticket und das Board-Ticket
     //Nimm den Inhalt von Description und speichere ihn in das Overlay-Ticket und das Board-Ticket
     //Nimm den Inhalt von Due date und speichere ihn in das Overlay-Ticket und das Board-Ticket
     //Nimm die gewählte Priority und speichere sie in das Overlay-Ticket und das Board-Ticket
     //Nimm die geänderten AssignedUser und speichere sie in das Overlay-Ticket und das Board-Ticket
     //Nimm die geänderten Subtasks und speichere sie in das Overlay-Ticket und das Board-Ticket
+    //Leere das Overlay und stelle wieder das Overlay-Ticket dar
     //Aktualisiere die Firebase
+}
+
+function startSearch() {
+    let searchTerm = document.getElementById('boardSearchInput').value;
+    clearBoard();
+    allTasks.forEach(task => {
+        const titleMatch = task.title.toLowerCase().includes(searchTerm.toLowerCase());
+        const descriptionMatch = task.description.toLowerCase().includes(searchTerm.toLowerCase());
+        if (titleMatch || descriptionMatch) {
+          searchResults.push(task);
+        }
+    });
+    if(searchResults.length === 0) {
+        reloadBoard(searchTerm);
+    } else {
+        renderAllTickets(searchResults);
+    }
+    //Wird der Suchbegriff gelöscht oder ist das Feld leer, werden alle Tickets wieder angezeigt
+}
+
+/**
+ * Clears the Board
+ */
+function clearBoard() {
+    document.getElementById('toDoColumn').innerHTML = '';
+    document.getElementById('inProgressColumn').innerHTML = '';
+    document.getElementById('awaitFeedbackColumn').innerHTML = '';
+    document.getElementById('doneColumn').innerHTML = '';
+}
+
+
+function reloadBoard(searchTerm) {
+    //Zeige eine Meldung an, dass der Suchbegriff (searchTerm) nicht vorhanden ist
+    renderAllTickets(allTasks);
+    document.getElementById('boardSearchInput').value = '';
 }
