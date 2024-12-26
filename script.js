@@ -7,6 +7,8 @@ const BASE_URL = "https://join-bbd82-default-rtdb.europe-west1.firebasedatabase.
 
 /**
  * Load user data from Firebase Realtime Database into global users array
+ * 
+ * 
  */
 async function onloadFunction() {
     let userResponse = await loadData("users");

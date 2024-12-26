@@ -1,5 +1,3 @@
-let FIREBASE_URL = 'https://join-bbd82-default-rtdb.europe-west1.firebasedatabase.app/';
-
 let allTasks = [];
 let searchResults = [];
 let currentDraggedElement;
@@ -12,13 +10,14 @@ let editedPrio;
 async function onInit() {
     await getAllTasks();
     await renderAllTickets(allTasks);
+    onloadFunction();
 }
 
 /**
  * Gets all tasks which are saved in the firebase realtime database with its Firebase-ID
  */
 async function getAllTasks() {
-    let response = await fetch(FIREBASE_URL + 'tasks' + '.json');
+    let response = await fetch(BASE_URL + 'tasks' + '.json');
     let responseAsJSON = await response.json();
     
     allTasks = Object.entries(responseAsJSON).map(([id, task]) => {
@@ -289,7 +288,7 @@ async function changeSubtaskStatus(subtaskIndex, ticketID) {
     let subtask = task.subtasks[subtaskIndex];
     subtask.status = subtask.status === 'open' ? 'closed' : 'open';
     try {
-        await fetch(`${FIREBASE_URL}tasks/${firebaseID}/subtasks/${subtaskIndex}.json`, {
+        await fetch(`${BASE_URL}tasks/${firebaseID}/subtasks/${subtaskIndex}.json`, {
             method: 'PATCH',
             body: JSON.stringify({ status: subtask.status }),
             headers: { 'Content-Type': 'application/json' }
@@ -330,7 +329,7 @@ async function move(category) {
     if(currentIndex !== -1) {
         allTasks[currentIndex]['state'] = category;
         let firebaseID = allTasks[currentIndex]['firebase_id'];
-        await fetch(`${FIREBASE_URL}tasks/${firebaseID}.json`, {
+        await fetch(`${BASE_URL}tasks/${firebaseID}.json`, {
             method: 'PATCH',
             body: JSON.stringify({state: category}),
             headers: {'Content-Type': 'application/json'}
@@ -376,7 +375,7 @@ async function deleteTicket(ticketID) {
     let taskIndex = allTasks.findIndex(task => task['id'] === ticketID);
     let firebaseID = allTasks[taskIndex]['firebase_id'];
     try {
-        await fetch(`${FIREBASE_URL}tasks/${firebaseID}.json`, {
+        await fetch(`${BASE_URL}tasks/${firebaseID}.json`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' }
         });

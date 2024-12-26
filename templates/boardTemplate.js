@@ -314,13 +314,20 @@ function renderOverlayEditTicket() {
                 </div>
             </div>
             <div>
-                <label for="assigned-to">Assigned to</label>
-                <div onclick="handleDropdownClick()" id="assigned" class="add_task_dropdown" >
-                    <p>Select contacts to assign</p>
-                    <img id="dropDownArrow" src="./assets/img/arrow_drop_down.png" alt="" onclick="handleDropdownClick()">
-                </div>
-                <div id="addTaskDropdown" class="custom_dropdown"></div>
-                <div id="selectedUsers" class="selected_users"></div>
+
+
+
+                                <label for="assigned-to">Assigned to</label>
+                                <div onclick="openDropdown(event)" id="assigned" class="add_task_dropdown" >
+                                    <p>Select contacts to assign</p>
+                                    <img id="dropDownArrow" src="./assets/img/arrow_drop_down.png" alt="" onclick="openDropdown(event)">
+                                </div>
+                                <div id="addTaskDropdown" class="custom_dropdown" onclick="event.stopPropagation()"></div>
+                                <div id="selectedUsers" class="selected_users"></div>
+                
+
+
+
             </div>
             <div class="form-group">
                 <label for="subtasks">Subtasks</label>

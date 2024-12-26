@@ -1,7 +1,7 @@
 let selectedUsers = [];
 let selectedPrio;
 
-let FIREBASE_URL = 'https://join-bbd82-default-rtdb.europe-west1.firebasedatabase.app';
+
 
 /**
  * Initializes the add task functionality.
