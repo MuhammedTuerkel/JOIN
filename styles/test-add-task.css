@@ -514,20 +514,18 @@ input.subtask-input:focus {
     cursor: pointer;
 }
 
-/* Stil für den deaktivierten Button */
 .create-btn:disabled {
-    background-color: #cccccc; /* Grau, um Deaktivierung zu zeigen */
-    color: #666666; /* Abgeschwächter Text */
-    cursor: not-allowed; /* Verändert den Cursor */
-    border: solid 1px #999999; /* Abgeschwächter Rahmen */
+    background-color: #cccccc; 
+    color: #666666; 
+    cursor: not-allowed;
+    border: solid 1px #999999; 
 }
 
 .create-btn:enabled {
-    background-color: #29abe2; /* Aktiv-Farbe */
-    color: #ffffff; /* Text-Farbe */
-    cursor: pointer; /* Pointer-Cursor für aktivierten Button */
+    background-color: #29abe2; 
+    color: #ffffff;
+    cursor: pointer;
 }
-
 
 .required-hint {
     font-size: 13px;
@@ -558,7 +556,6 @@ input.subtask-input:focus {
 .custom-select.option value{
     width: 100%;
 }
-
 
 .custom-select-wrapper::after {
     content: url(../assets/icons/arrow_drop_downaa.svg);
@@ -642,7 +639,6 @@ input.subtask-input:focus {
     background: #f0f0f0; 
     border-radius: 10px; 
 }
-
 
 .user_template_label{
     margin: 0;

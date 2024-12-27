@@ -1,8 +1,6 @@
 let selectedUsers = [];
 let selectedPrio;
 
-
-
 /**
  * Initializes the add task functionality.
  */
@@ -490,8 +488,8 @@ function checkFormValidity() {
     var createTaskButton = document.getElementById('createTaskButton');
 
     if (taskTitle && taskDueDate && taskCategory) {
-        createTaskButton.disabled = false; // Aktiviert die Schaltfläche
+        createTaskButton.disabled = false; 
     } else {
-        createTaskButton.disabled = true; // Deaktiviert die Schaltfläche
+        createTaskButton.disabled = true; 
     }
 }
