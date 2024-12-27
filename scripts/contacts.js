@@ -164,12 +164,17 @@ function renderContactInformation(i) {
     document.getElementById('deleteContact1').setAttribute(`onclick`, `deleteContact(${i})`)
 }
 
-function deleteContact(i) {
+async function deleteContact(i) {
+    if (Contacts.length > 1) {
     Contacts.splice(i, 1);
     loadContactsAgain();
     hideAddNewContact(event);
     hideContactMobile(event);
-    deleteContactfromFirebase(i);
+    await deleteContactfromFirebase(i);
+    await getTheItemstoPushTOFireBase();
+    }else{
+        alert("You Need To Have at least One Contact");
+    }
 }
 
 function loadEditContact(event, i) {
@@ -236,6 +241,7 @@ function saveNewContact(i) {
     loadContactsAgain();
     hideAddNewContact(event);
     loadContact(i, event);
+    getTheItemstoPushTOFireBase();
 }
 
 async function getTheItemstoPushTOFireBase() {
@@ -243,7 +249,8 @@ async function getTheItemstoPushTOFireBase() {
     let result = Useremail.replace(".", "_");
     let put = localStorage.getItem("loggedInUser", Contacts)
     let Number = await getNumFromFirebase(`/users/${result}`,);
-    pushToFireBase(`users/${result}/${Number}/Contacts`)
+    pushToFireBase(`users/${result}/${Number}/Contacts`);
+    Contacts = [];
     getItemsFromFirebase(`users/${result}/${Number}/Contacts`)
 }
 
@@ -283,8 +290,7 @@ async function deleteContactfromFirebase(i) {
     let result = Useremail.replace(".", "_");
     let Number = await getNumFromFirebase(`/users/${result}`);
     let path = `users/${result}/${Number}/Contacts/${i}`
-    console.log(path);
     let response = await fetch(BASE_URL + path + ".json", {
         method: "DELETE",  });
     return responseToJson = await response.json();
-}
+    }
