@@ -1,5 +1,4 @@
 let allTasks = [];
-let searchResults = [];
 let currentDraggedElement;
 let editedPrio;
 
@@ -520,9 +519,23 @@ function saveEditonClick() {
     //Aktualisiere die Firebase
 }
 
+function handleSearchInput() {
+    let searchTerm = document.getElementById('boardSearchInput').value.trim();
+    if (searchTerm === '') {
+        reloadBoard();
+        return;
+    }
+    startSearch();
+}
+
 function startSearch() {
-    let searchTerm = document.getElementById('boardSearchInput').value;
+    let searchTerm = document.getElementById('boardSearchInput').value.trim();
+    if(searchTerm === '') {
+        reloadBoard(searchTerm);
+        return;
+    }
     clearBoard();
+    let searchResults = [];
     allTasks.forEach(task => {
         const titleMatch = task.title.toLowerCase().includes(searchTerm.toLowerCase());
         const descriptionMatch = task.description.toLowerCase().includes(searchTerm.toLowerCase());
