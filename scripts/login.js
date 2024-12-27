@@ -239,7 +239,7 @@ function questionRememberMe() {
 }
 
 /**
- * load the Template where the user can choos his log in datas
+ * load the Template where the user can choose his log in datas
  */
 function showRememberMeOverlay() {
     let overlay = document.getElementById('rememberMeOverlay');

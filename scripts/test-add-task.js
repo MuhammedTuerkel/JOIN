@@ -13,6 +13,26 @@ function addTaskOnInit() {
     clearSubtaskInput();
 }
 
+function saveTaskGoToBoard(event){
+    event.preventDefault();
+    postTask();
+    buildTask();
+    window.location.href = "/board.html";
+}
+
+function saveTaskCreateNewTask(event){
+    event.preventDefault();
+    postTask();
+    buildTask();
+    document.getElementById('addTaskForm').reset();
+    document.getElementById('addTaskOverlayNextStep').style.display = 'none';
+}
+
+function goBackToAddTask(event){
+    document.getElementById('addTaskOverlayNextStep').style.display = 'none';
+    event.preventDefault();
+}
+
 async function postTask(path = "", data={}) {
     let response = await fetch(BASE_URL + path + ".json",{
        method: 'POST',
@@ -452,4 +472,26 @@ function handleDeleteClick(target) {
 
 function generateUniqueID() {
     return Date.now().toString(36) + Math.random().toString(36).substring(2, 10);
+}
+
+
+function showAddTaskOverlayNextStep(event){
+    event.preventDefault();
+    document.getElementById('addTaskOverlayNextStep').style.display = 'flex';
+}
+
+
+
+function checkFormValidity() {
+    var taskTitle = document.getElementById('task-title').value;
+    var taskDueDate = document.getElementById('task-due-date').value;
+    var taskCategory = document.getElementById('task-category').value;
+
+    var createTaskButton = document.getElementById('createTaskButton');
+
+    if (taskTitle && taskDueDate && taskCategory) {
+        createTaskButton.disabled = false; // Aktiviert die Schaltfläche
+    } else {
+        createTaskButton.disabled = true; // Deaktiviert die Schaltfläche
+    }
 }
