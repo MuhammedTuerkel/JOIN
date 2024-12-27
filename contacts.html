@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="./styles/contacts.css">
 </head>
 
-<body onclick="hideSubMenu(), hideAddNewContact(event), hideEditDeleteMenu(event)" onload="sideNavigation(),Init(), onloadFunction()">
+<body onclick="hideSubMenu(), hideAddNewContact(event), hideEditDeleteMenu(event)" onload="sideNavigation(),Init()">
     <div class="side-navigation">
         <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
         <div class="menu">
@@ -52,7 +52,7 @@
                 <p>Kanban Project Management Tool</p>
                 <div class="d-flex-column">
                     <div id="help-user" class="help-user">
-                        <a href="./help.html"><img src="assets/icons/help-symbol-icon-default.svg" alt=""
+                        <a onclick="openHelpHtml()"><img src="assets/icons/help-symbol-icon-default.svg" alt=""
                                 style="cursor: pointer;"></a>
                         <span onclick="showSubmenu(event)" class="user" id="user"></span>
                     </div>

@@ -52,12 +52,12 @@
                 <p>Kanban Project Management Tool</p>
                 <div class="d-flex-column">
                     <div id="help-user" class="help-user">
-                        <a href="./help.html"><img src="assets/icons/help-symbol-icon-default.svg" alt="" style="cursor: pointer;"></a>
+                        <a onclick="openHelpHtml()"><img src="assets/icons/help-symbol-icon-default.svg" alt="" style="cursor: pointer;"></a>
                         <span onclick="showSubmenu(event)" class="user" id="user"></span>
                     </div>
                     <div onclick="stopEventBubbling(event)" id="Submenu" class="Submenu" style="display: none;">
                         <a onclick="openHelpHtml()" href="#" class="Submenu-buttons d-none1">Help</a>
-                        <a onclick="renderLegalNotceTemplateLoggedInUser()" href="#" class="Submenu-buttons"> Legal
+                        <a onclick="renderLegalNoticeTemplateLoggedInUser()" href="#" class="Submenu-buttons"> Legal
                             Notice </a>
                         <a onclick="renderPrivacyPolicyTemplateLoggedInUser()" href="./privacy-and-legal.html"
                             class="Submenu-buttons"> Privacy Policy</a>
