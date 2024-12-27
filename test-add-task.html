@@ -110,13 +110,17 @@
 
                             <div class="assigned_to_container">
                                 <label for="assigned-to">Assigned to</label>
-                                <div onclick="openDropdown(event)" id="assigned" class="add_task_dropdown" >
-                                    <p>Select contacts to assign</p>
+                                <div id="assigned" class="add_task_dropdown" onclick="openDropdown(event)">
+                                    <input type="text" id="addTaskSearchContacts" placeholder="Select contacts to assign" oninput="addTaskSearchUser()">
                                     <img id="dropDownArrow" src="./assets/img/arrow_drop_down.png" alt="" onclick="openDropdown(event)">
                                 </div>
-                                <div id="addTaskDropdown" class="custom_dropdown" onclick="event.stopPropagation()"></div>
+                                <div id="addTaskDropdown" class="custom_dropdown" onclick="event.stopPropagation()">
+                                </div>
                                 <div id="selectedUsers" class="selected_users"></div>
                             </div>
+                            
+
+
                         </div>
 
 

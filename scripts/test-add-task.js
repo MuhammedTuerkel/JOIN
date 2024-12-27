@@ -84,6 +84,7 @@ function closeDropdown(){
     dropdownContainer.style.display = 'none';
     dropdownImage.style.transform = 'rotate(0deg)';
 }
+
 /**
  * * if the user click outside of the Dropdown list the dropdown list will be closed
  */
@@ -117,14 +118,14 @@ function createUserTemplate(user) {
     let initials = user.name.charAt(0).toUpperCase() + user.name.charAt(user.name.length - 1).toUpperCase();
 
     return `
-        <div class="user_template_not_selected" id="template-${user.email}" >
+        <div onclick="toggleUserSelection('${user.email}')" class="user_template_not_selected" id="template-${user.email}" >
             <div onclick="toggleUserSelection('${user.email}')" class="user_template_circle_name">
-                <div class="user_circle" style="background-color: ${user.color};">
+                <div onclick="toggleUserSelection('${user.email}')" class="user_circle" style="background-color: ${user.color};">
                     ${initials}
                 </div>
-                <p>${user.name}</p>
+                <p onclick="toggleUserSelection('${user.email}')">${user.name}</p>
             </div>
-            <input type="checkbox" class="user_checkbox" id="checkbox-${user.email}">
+            <input onclick="toggleUserSelection('${user.email}')" type="checkbox" class="user_checkbox" id="checkbox-${user.email}">
             <label onclick="toggleUserSelection('${user.email}')" class="user_template_label" for="checkbox-${user.email}">
                 <img src="./assets/img/check button.png" alt="" id="img-${user.email}">
             </label>
@@ -220,6 +221,24 @@ function updateSelectedUsersContainer() {
         `;
     }
 }
+
+function addTaskSearchUser() {    
+    let input = document.getElementById('addTaskSearchContacts').value.toLowerCase(); 
+    let filteredUsers = users.filter(user => user.name.toLowerCase().startsWith(input)); 
+    loadSearchedUsers(filteredUsers); 
+}
+
+function loadSearchedUsers(filteredUsers){
+    let findUser = document.getElementById('addTaskDropdown');
+    findUser.innerHTML = "";
+
+    for(let index = 0; index < filteredUsers.length; index++){
+        const user = filteredUsers[index];
+        findUser.innerHTML += createUserTemplate(user);
+    }
+}
+
+
 
 /**
  * Ensures that only one button is active and assigns the selected button its appearance
