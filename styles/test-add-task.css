@@ -497,6 +497,7 @@ input.subtask-input:focus {
     justify-content: space-between;
     gap: 4px;
     cursor: pointer;
+    background-color: white;
 }
 
 .create-btn {
@@ -515,20 +516,19 @@ input.subtask-input:focus {
     justify-content: center;
     gap: 4px;
     cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .create-btn:disabled {
-    background-color: #cccccc; 
-    color: #666666; 
+    background-color: #ccc;
     cursor: not-allowed;
-    border: solid 1px #999999; 
 }
 
-.create-btn:enabled {
-    background-color: #29abe2; 
-    color: #ffffff;
-    cursor: pointer;
+.create-btn:hover:enabled {
+    background-color: #29abe2;
+    box-shadow: 0px 10px 14px -5px rgba(0, 0, 0, 0.3); 
 }
+
 
 .required-hint {
     font-size: 13px;
@@ -943,4 +943,51 @@ input[type="text"]:focus::placeholder {
         transform: translateX(0);
         opacity: 1;
     }
+}
+
+
+
+
+
+.add_task_clear_button button {
+    width: 110px;
+    height: 56px;
+    border: 1px solid #2a3647;
+    border-radius: 10px;
+    padding: 16px;
+    font-family: Inter-18;
+    font-weight: 400;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+    cursor: pointer;
+    background-color: white; 
+    position: relative;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+
+.add_task_clear_button button:hover { 
+    border: solid 1px #29abe2; 
+    box-shadow: 0px 10px 14px -5px rgba(0, 0, 0, 0.3); 
+    color: #29abe2;
+    font-weight: bolder;
+}
+
+.add_task_clear_button_image_hover{
+    height: 27px;
+}
+
+.add_task_clear_button .add_task_clear_button_image_hover {
+    display: none;
+}
+
+.add_task_clear_button button:hover .add_task_clear_button_image {
+    display: none;
+}
+
+.add_task_clear_button button:hover .add_task_clear_button_image_hover {
+    display: block;
 }
