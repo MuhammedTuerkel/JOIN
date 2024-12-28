@@ -872,6 +872,15 @@
         width: 100%;
     }
 
+    .Contact {
+        width: 80%;
+    }
+}
+
+@media (max-width: 600px){
+    .Contact{
+        width: 100%;
+    }
 }
 
 @media (max-width: 530px) {
@@ -921,9 +930,22 @@
     .edit-delete {
         display: none;
     }
+
+    .ContactsList {
+        height: 81vh;
+    }
 }
 
 @media (max-width: 415px) {
+.Contact{
+    padding: 15px 8px;
+    gap: 15px;
+}
+
+.headline-contact {
+    padding: 50px 0px 0px 10px;
+}
+
     .addNewContact {
         width: 320px;
     }
