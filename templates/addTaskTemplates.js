@@ -62,3 +62,26 @@ function taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory
     state: taskState
 };
 }
+
+/**
+ * Creates a user template with the user's initials.
+ * 
+ */
+function createUserTemplate(user) {
+    let initials = user.name.charAt(0).toUpperCase() + user.name.charAt(user.name.length - 1).toUpperCase();
+
+    return `
+        <div onclick="toggleUserSelection('${user.email}')" class="user_template_not_selected" id="template-${user.email}" >
+            <div onclick="toggleUserSelection('${user.email}')" class="user_template_circle_name">
+                <div onclick="toggleUserSelection('${user.email}')" class="user_circle" style="background-color: ${user.color};">
+                    ${initials}
+                </div>
+                <p onclick="toggleUserSelection('${user.email}')">${user.name}</p>
+            </div>
+            <input onclick="toggleUserSelection('${user.email}')" type="checkbox" class="user_checkbox" id="checkbox-${user.email}">
+            <label onclick="toggleUserSelection('${user.email}')" class="user_template_label" for="checkbox-${user.email}">
+                <img src="./assets/img/check button.png" alt="" id="img-${user.email}">
+            </label>
+        </div>
+    `;
+}
