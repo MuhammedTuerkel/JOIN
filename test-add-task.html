@@ -99,15 +99,15 @@
                 <div class="form-wrapper">
 
                         <div class="form-column-left">
-                            <div class="form-group">
+                            <div class="form-group required_focus add_task_for_error_height">
                                 <label for="title">Title <span class="required-icon">*</span></label>
-                                <input type="text" id="task-title" name="title" placeholder="Enter a title" required>
+                                <input class="" type="text" id="task-title" name="title" placeholder="Enter a title" required>
+                                <small class="add_task_error" id="addTaskTitleErrorInput">* This field is required</small>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
                                 <textarea class="addTaskDescription" id="task-description" name="description" placeholder="Enter a Description"></textarea>
                             </div>
-
                             <div class="assigned_to_container">
                                 <label for="assigned-to">Assigned to</label>
                                 <div id="assigned" class="add_task_dropdown" onclick="openDropdown(event)">
@@ -117,23 +117,15 @@
                                 <div id="addTaskDropdown" class="custom_dropdown" onclick="event.stopPropagation()">
                                 </div>
                                 <div id="selectedUsers" class="selected_users"></div>
-                            </div>
-                            
-
-
+                            </div>                          
                         </div>
-
-
                         <div class="separator"></div>
-
-
                         <div class="form-column-right">
-
-                            <div class="form-group">
+                            <div class="form-group required_focus add_task_for_error_height">
                                 <label for="due-date">Due date <span class="required-icon">*</span></label>
-                                <input type="date" id="task-due-date" name="due-date" placeholder="dd/mm/yyyy" required>
+                                <input class="" type="date" id="task-due-date" name="due-date" placeholder="dd/mm/yyyy" required>
+                                <small class="add_task_error" id="addTaskDateErrorInput">* This field is required</small>
                             </div>
-
                             <div class="prio-group">
                                 <label>Prio <span class="required-icon">*</span></label>
                                 <div class="prio-options">
@@ -152,7 +144,6 @@
                                         </defs>
                                     </svg>
                                   </button>
-
                                   <button type="button" class="prio-btn active" id="medium-btn" onclick="setMedium()">
                                     <span>Medium</span>
                                     <svg id="medium-svg" width="21" height="8" viewBox="0 0 21 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -167,7 +158,6 @@
                                         </defs>
                                     </svg>
                                   </button>
-
                                   <button type="button" class="prio-btn" id="low-btn" onclick="setLow()">
                                     <span>Low</span>
                                     <svg id="low-svg" width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -175,23 +165,21 @@
                                         <path d="M10.8555 15.4463C10.6209 15.4467 10.3923 15.3719 10.2035 15.2328L1.30038 8.66307C1.06644 8.49028 0.910763 8.2317 0.867609 7.94422C0.824455 7.65674 0.897354 7.3639 1.07027 7.13013C1.24319 6.89636 1.50196 6.7408 1.78965 6.69768C2.07734 6.65456 2.3704 6.7274 2.60434 6.90019L10.8555 12.9827L19.1066 6.90019C19.3405 6.7274 19.6336 6.65456 19.9213 6.69768C20.209 6.7408 20.4678 6.89636 20.6407 7.13013C20.8136 7.3639 20.8865 7.65674 20.8433 7.94422C20.8002 8.2317 20.6445 8.49028 20.4106 8.66307L11.5075 15.2328C11.3186 15.3719 11.0901 15.4467 10.8555 15.4463Z" fill="#7AE229"/>
                                     </svg>
                                   </button>
-
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group add_task_for_error_height">
                                 <label for="category">Category <span class="required-icon">*</span></label>
-                                <div class="custom-select-wrapper">
-                                    <select class="custom-select" name="category" id="task-category" required>
+                                <div class="custom-select-wrapper ">
+                                    <select class="custom-select" name="category" id="task-category" required>                                        
                                         <option value="">Select task category</option>
                                         <option value="technical-tasks">Technical Tasks</option>
                                         <option value="user-story">User Story</option>
-                                    </select>
+                                    </select>                                    
                                 </div>
+                                <small class="add_task_error" id="addTaskCategoryErrorInput">* This field is required</small>
                             </div>
-
                             <div class="form-group">
                                 <label for="subtasks">Subtasks</label>
-
                                 <div class="subtasks-input">
                                     <input type="text" id="task-subtasks" name="subtasks" placeholder="Add new subtask">
                                         <button type="button" class="add-subtask-btn" id="add-subtask-btn">
@@ -204,7 +192,6 @@
                                                 </g>
                                             </svg>
                                         </button>
-
                                     <div class="icons" id="iconsContainer">
                                         <span class="clear-icon" id="clearIcon">
                                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -216,7 +203,6 @@
                                                 </g>
                                             </svg>
                                         </span>
-
                                         <div class="divider"></div>
                                         <span class="check-icon" id="checkIcon" onclick="pushSubtaskArray()">
                                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -231,12 +217,10 @@
                                     </div>
                                 </div>
                                 <div class="subtasks-list" id="subtasksList">
-
                             </div>
                             </div>
                         </div>
                     </div>
-
                     <div class="form-buttons">
                         <p class="required-hint"><span class="required-icon">*</span>This field is required</p>
                         <div class="btn-wrapper">
@@ -255,13 +239,9 @@
                             </div>
                         </div>
                     </div>
-                    
-                     
-
             </form>
         </main> 
     </div>
-
 </body>
 </html>
 

@@ -220,6 +220,10 @@ textarea {
     padding: 10px;
 }
 
+.add_task_for_error_height{
+    height: 80px;
+}
+
 form {
     font-family: Inter-18;
 }
@@ -529,6 +533,9 @@ input.subtask-input:focus {
     box-shadow: 0px 10px 14px -5px rgba(0, 0, 0, 0.3); 
 }
 
+.required-icon{
+    color: red;
+}
 
 .required-hint {
     font-size: 13px;
@@ -540,6 +547,7 @@ input.subtask-input:focus {
     position: relative;
     display: inline-block;
     width: 100%;
+    height: 37px;
 }
 
 .custom-select {
@@ -554,6 +562,7 @@ input.subtask-input:focus {
     outline: none;
     cursor: pointer;
     width: 94%;
+    border-radius: 10px;
 }
 
 .custom-select.option value{
@@ -572,7 +581,13 @@ input.subtask-input:focus {
 }
 
 .custom-select:focus {
-    border-color: #29abe2;;
+    border-color: red;
+}
+
+.add_task_error{
+    color: red;
+    margin-left: 10px;
+    display: none;
 }
 
 .custom-option-hover {
@@ -794,6 +809,10 @@ input[type="text"]:focus::placeholder {
     outline: none;
 }
 
+.required_focus input:focus{
+    border-color: red !important;
+}
+
 .addTaskDescription:focus{
     border-color:#29abe2;
     outline: none;
@@ -990,4 +1009,9 @@ input[type="text"]:focus::placeholder {
 
 .add_task_clear_button button:hover .add_task_clear_button_image_hover {
     display: block;
+}
+
+
+.addTaskErrorBorder{
+    border-color: red !important;
 }
