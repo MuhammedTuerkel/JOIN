@@ -88,13 +88,22 @@
         width: 150px;
         height: 30px;
     }
+
+    .add_task_overly_img_task_name_container{
+        font-size: 12px;
+    }
 }
 
 @media(max-width: 499px) and (min-width: 320px){
+    .add_task_body{
+        width: 97%;
+    }
     .add_task_title{
         font-size: 21px;
         margin-bottom: 10px;
-        margin: 0;
+        margin-top: 30px;
+        margin-left: 20px;
+        width: 200px;
     }
 
     .form-wrapper{
@@ -102,6 +111,7 @@
         height: 75dvh;
         justify-content: flex-start;
         width: 90%;
+        margin-left: 35px;
     }
 
     .separator{
@@ -128,7 +138,8 @@
         align-items: center;
         flex-direction: column;
         gap: 20px;
-        margin-bottom: 30px;
+        margin-bottom: 70px;
+        margin-top: 90px;
     }
 
     .add_task_clear_button button{
@@ -149,7 +160,7 @@
     }
 
     .main-content{
-        margin-left: 0;
+        margin-left: 0px;
         margin-right: 0;
         justify-content: center;
         display: flex;
@@ -170,4 +181,27 @@
         align-items: center;
     }
 
+    .add-subtask-btn{
+        right: 12px;
+    }
+
+    .subtasks-input{
+        width: 96%;
+    }
+
+    .add_task_overly_img_task_name_container{
+        font-size: 10px;
+    }
+
+    .add_task_overlay_button :nth-child(1){
+        font-size: 12px;
+    }
+
+    .add_task_overlay_button :nth-child(2){
+        font-size: 12px;
+    }
+
+    .add_task_overlay_button :nth-child(3){
+        font-size: 12px;
+    }
 }

@@ -46,8 +46,9 @@
     width: 1px;
     background-color: #D1D1D1;
     align-self: stretch;
-    height: 72%;
+    height: 83%;
     display: flex;
+    margin-top: 10px;
 }
 
 .d_none{
@@ -834,7 +835,7 @@ input[type="text"]:focus::placeholder {
 .add_task_overlay {
     width: 100%;
     height: 100vh;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(5, 5, 5, 0.3);
     z-index: 1000;
     position: fixed;
     top: 0;
@@ -842,7 +843,9 @@ input[type="text"]:focus::placeholder {
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    backdrop-filter: blur(8px); 
 }
+
 
 .add_task_overlay_task {
     width: 100%;
@@ -855,13 +858,24 @@ input[type="text"]:focus::placeholder {
     margin: 50px;
 }
 
+.add_task_overlay_logo img{
+    width: 50%;
+}
+
+.add_task_overlay_logo{
+    display: flex;
+    margin-bottom: 20px;
+    animation: slide-in-right 0.3s forwards;
+}
+
 .add_task_overly_img_task_name_container {
     display: flex;
     align-items: flex-end;
     gap: 40px;
     justify-content: center;
     width: 100%;
-    animation: slide-in-left 1s forwards;
+    animation: slide-in-left 0.4s forwards;
+    color: #000000;
 }
 
 .add_task_overlay_button_container {
@@ -891,7 +905,7 @@ input[type="text"]:focus::placeholder {
     transition: background-color 0.3s, box-shadow 0.3s;
     background-color: white;
     font-size: 16px;
-    animation: slide-in-right 1s forwards;
+    animation: slide-in-right 0.75s forwards;
 }
 
 .add_task_overlay_button :nth-child(2) {
@@ -907,7 +921,7 @@ input[type="text"]:focus::placeholder {
     transition: background-color 0.3s, box-shadow 0.3s;
     background-color: white;
     font-size: 16px;
-    animation: slide-in-left 1s forwards;
+    animation: slide-in-left 0.75s forwards;
 }
 
 .add_task_overlay_button :nth-child(3) {
@@ -922,7 +936,7 @@ input[type="text"]:focus::placeholder {
     font-size: 16px;
     transition: background-color 0.3s, box-shadow 0.3s;
     font-size: 16px;
-    animation: slide-in-right 1s forwards;
+    animation: slide-in-right 0.75s forwards;
 }
 
 .add_task_overlay_button :nth-child(1):hover {

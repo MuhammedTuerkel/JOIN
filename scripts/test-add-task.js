@@ -24,10 +24,12 @@ function saveTaskCreateNewTask(event){
     buildTask();
     document.getElementById('addTaskForm').reset();
     document.getElementById('addTaskOverlayNextStep').style.display = 'none';
+    document.body.style.overflow = 'auto';
 }
 
 function goBackToAddTask(event){
     document.getElementById('addTaskOverlayNextStep').style.display = 'none';
+    document.body.style.overflow = 'auto';
     event.preventDefault();
 }
 
@@ -495,6 +497,8 @@ function generateUniqueID() {
 function showAddTaskOverlayNextStep(event){
     event.preventDefault();
     document.getElementById('addTaskOverlayNextStep').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+
 }
 
 
