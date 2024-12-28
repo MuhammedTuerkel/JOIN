@@ -1,4 +1,4 @@
-@media(max-width:1920px) and (min-width: 1500px){
+@media(max-width:1920px) and (min-width: 1251px){
     .custom-select-wrapper::after{
         right: 48px;
     }
@@ -7,12 +7,8 @@
         width: 100%;
     }
 
-    .add-subtask-btn {
-        right: 41px;
-    }
-
-    .custom_dropdown{
-        width: 32%;
+    .custom-select-wrapper::after{
+        right: 0px;
     }
 }
 
@@ -33,20 +29,21 @@
         font-size: 16px;
     }
 
-    .custom_dropdown{
-        width: 29%;
-    }
 }
 
-@media(max-width: 999px) and (min-width: 500px){
+@media(max-width: 999px) and (min-width: 831px){
     .add_task_title{
         font-size: 21px;
         margin-bottom: 10px;
     }
 
+    .main-content{
+        width: 78%;
+    }
+
     .form-wrapper{
         flex-direction: column;
-        height: 75dvh;
+        height: auto;
         justify-content: flex-start;
     }
 
@@ -66,15 +63,96 @@
         padding: 0px;
     }
 
-    .custom_dropdown{
-        width: 48%;
-    }
 
     .form-buttons{
         align-items: center;
         flex-direction: column;
         gap: 20px;
         margin-bottom: 30px;
+        margin-top: 30px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .required-hint{
+        margin-right: 0px;
+    }
+
+    .btn-wrapper{
+        margin-right: 0px;
+        margin-bottom: 20px;
+    }
+
+    .add_task_clear_button button{
+        font-size: 12px;
+        width: 100px;
+        height: 30px;
+    }
+
+    .create-btn{
+        font-size: 12px;
+        width: 150px;
+        height: 30px;
+    }
+
+    .add_task_overly_img_task_name_container{
+        font-size: 12px;
+    }
+}
+
+@media(max-width: 830px) and (min-width: 500px){
+    .add_task_title{
+        font-size: 21px;
+        margin-bottom: 10px;
+    }
+
+    .main-content{
+        width: 78%;
+    }
+
+    .form-wrapper{
+        flex-direction: column;
+        height: auto;
+        justify-content: flex-start;
+    }
+
+    .separator{
+        display: none;
+    }
+
+    .form-column-right{
+        margin-left: 0px;
+    }
+
+    .form-group{
+        padding: 0px;
+    }
+
+    .assigned_to_container{
+        padding: 0px;
+    }
+
+
+
+    .form-buttons{
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+        margin-bottom: 30px;
+        margin-top: 30px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .required-hint{
+        margin-right: 0px;
+    }
+
+    .btn-wrapper{
+        margin-right: 0px;
+        margin-bottom: 20px;
     }
 
     .add_task_clear_button button{
@@ -96,7 +174,11 @@
 
 @media(max-width: 499px) and (min-width: 320px){
     .add_task_body{
-        width: 97%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: auto;
     }
     .add_task_title{
         font-size: 21px;
@@ -106,40 +188,54 @@
         width: 200px;
     }
 
+    .main-content{
+        margin-left: 15px;
+        margin-right: 15px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
     .form-wrapper{
         flex-direction: column;
-        height: 75dvh;
-        justify-content: flex-start;
-        width: 90%;
-        margin-left: 35px;
+        height: auto;
+        align-items: baseline;
+    }
+
+    .form-column-left{
+        margin-right: 0px;
+        margin-bottom: 40px;
+    }
+
+    .form-column-right{
+        margin-left: 0px;
+        margin-bottom: 50px;
     }
 
     .separator{
         display: none;
     }
 
-    .form-column-right{
-        margin-left: 0px;
-    }
 
-    .form-group{
-        padding: 0px;
-    }
-
-    .assigned_to_container{
-        padding: 0px;
-    }
-
-    .custom_dropdown{
-        width: 48%;
-    }
 
     .form-buttons{
         align-items: center;
         flex-direction: column;
         gap: 20px;
         margin-bottom: 70px;
-        margin-top: 90px;
+        margin-top: 20px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .required-hint{
+        margin: 0px;
+    }
+
+    .btn-wrapper{
+        margin-right: 0px;
+        gap: 12px;
     }
 
     .add_task_clear_button button{
@@ -159,34 +255,11 @@
         width: 100px;
     }
 
-    .main-content{
-        margin-left: 0px;
-        margin-right: 0;
-        justify-content: center;
-        display: flex;
-        align-items: center;
-        width: 100%;
-    }
 
-    .btn-wrapper{
-        margin: 0;
-    }
-
-    .required-hint{
-        margin: 0;
-    }
 
     .prio-options{
         flex-direction: column;
         align-items: center;
-    }
-
-    .add-subtask-btn{
-        right: 12px;
-    }
-
-    .subtasks-input{
-        width: 96%;
     }
 
     .add_task_overly_img_task_name_container{

@@ -95,12 +95,12 @@ function openDropdown(event) {
     let dropdownContainer = document.getElementById('addTaskDropdown');
     let dropdownImage = document.getElementById('dropDownArrow');
 
-    if (dropdownContainer.style.display === 'none' || dropdownContainer.style.display === '') {
-        dropdownContainer.style.display = 'block';
+    if (dropdownContainer.classList.contains('open')) {
+        closeDropdown();
+    } else {
+        dropdownContainer.classList.add('open');
         dropdownImage.style.transform = 'rotate(180deg)';
         loadUserInAssignedToDropdown();
-    } else {
-        closeDropdown();
     }
 }
 
@@ -112,7 +112,7 @@ function closeDropdown() {
     document.getElementById('assigned').classList.remove('add_task_dropdown_active');
     let dropdownContainer = document.getElementById('addTaskDropdown');
     let dropdownImage = document.getElementById('dropDownArrow');
-    dropdownContainer.style.display = 'none';
+    dropdownContainer.classList.remove('open');
     dropdownImage.style.transform = 'rotate(0deg)';
 }
 
@@ -121,7 +121,7 @@ function closeDropdown() {
  */
 function handleDropdownBodyClick() {
     let dropdownContainer = document.getElementById('addTaskDropdown');
-    if (dropdownContainer.style.display === 'block') {
+    if (dropdownContainer.classList.contains('open')) {
         closeDropdown();
     }
 }

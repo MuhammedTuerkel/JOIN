@@ -16,13 +16,13 @@
 
     <link rel="stylesheet" href="./styles/standard.css">
     <link rel="stylesheet" href="./styles/summary.css">
-    <link rel="stylesheet" href="./styles/test-add-task.css">
+    <link rel="stylesheet" href="./styles/add-task.css">
     <link rel="stylesheet" href="./styles/Side-Navigation.css">
     <link rel="stylesheet" href="./styles/add-task-responsive.css">
 
     <script src="./scripts/Side-Navigation.js"></script>
     <script src="./script.js"></script>
-    <script src="./scripts/test-add-task.js"></script>
+    <script src="./scripts/add-task.js"></script>
     <script src="./templates/addTaskTemplates.js"></script>
  
 
@@ -31,11 +31,11 @@
     <div class="side-navigation">
         <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
         <div class="menu">
-            <div class="menu-sections activated">
+            <div class="menu-sections">
                 <img class="menu-icons" src="assets/icons/summary-icon.svg" alt="">
                 <a href="./summary.html">Summary</a>
             </div>
-            <div class="menu-sections">
+            <div class="menu-sections activated">
                 <img class="menu-icons" src="assets/icons/add-task-icon.svg" alt="">
                 <a href="./add-task.html">Add Task</a>
             </div>
@@ -117,8 +117,7 @@
                                     <input type="text" id="addTaskSearchContacts" placeholder="Select contacts to assign" oninput="addTaskSearchUser()">
                                     <img id="dropDownArrow" src="./assets/img/arrow_drop_down.png" alt="" onclick="openDropdown(event)">
                                 </div>
-                                <div id="addTaskDropdown" class="custom_dropdown" onclick="event.stopPropagation()">
-                                </div>
+                                    <div id="addTaskDropdown" class="custom_dropdown" onclick="event.stopPropagation()"></div>
                                 <div id="selectedUsers" class="selected_users"></div>
                             </div>                          
                         </div>
