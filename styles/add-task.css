@@ -47,9 +47,8 @@
     width: 1px;
     background-color: #D1D1D1;
     align-self: stretch;
-    height: 83%;
+    height: 65%;
     display: flex;
-    margin-top: 10px;
 }
 
 .d_none{

@@ -115,6 +115,7 @@ function closeDropdown() {
     let dropdownImage = document.getElementById('dropDownArrow');
     dropdownContainer.classList.remove('open');
     dropdownImage.style.transform = 'rotate(0deg)';
+    document.getElementById('addTaskSearchContacts').value = "";
 }
 
 /**
