@@ -240,8 +240,6 @@ function loadSearchedUsers(filteredUsers){
     }
 }
 
-
-
 /**
  * Ensures that only one button is active and assigns the selected button its appearance
  * 
@@ -255,12 +253,10 @@ function activateButton(buttonId, svgId, buttonClass, svgClass) {
     buttons.forEach((button) => {
         button.classList.remove('urgent', 'medium', 'low', 'active');
     });
-
     const svgs = document.querySelectorAll('svg');
     svgs.forEach((svg) => {
         svg.classList.remove('urgent-icon', 'medium-icon', 'low-icon');
     });
-
     document.getElementById(buttonId).classList.add(buttonClass, 'active');
     document.getElementById(svgId).classList.add(svgClass);
 }
@@ -479,7 +475,6 @@ function handleCancelClick(target) {
     inputContainer.remove();
 }
 
-
 function handleDeleteClick(target) {
     enableInputAndButton();
     const subtaskItem = target.closest('.subtask-item');
@@ -493,15 +488,12 @@ function generateUniqueID() {
     return Date.now().toString(36) + Math.random().toString(36).substring(2, 10);
 }
 
-
 function showAddTaskOverlayNextStep(event){
     event.preventDefault();
     document.getElementById('addTaskOverlayNextStep').style.display = 'flex';
     document.body.style.overflow = 'hidden';
 
 }
-
-
 
 function checkFormValidity() {
     var taskTitle = document.getElementById('task-title').value;
@@ -516,7 +508,6 @@ function checkFormValidity() {
         createTaskButton.disabled = true; 
     }
 }
-
 
 document.addEventListener('DOMContentLoaded', function() {
     let taskCategory = document.getElementById('task-category');
