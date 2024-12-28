@@ -5,6 +5,7 @@ let selectedPrio;
  * Initializes the task form by calling necessary setup functions.
  */
 function addTaskOnInit() {
+    sideNavigation();
     onloadFunction();
     setMedium();
     subtaskInput();
@@ -250,7 +251,9 @@ function addTaskSearchUser() {
 function loadSearchedUsers(filteredUsers){
     let findUser = document.getElementById('addTaskDropdown');
     findUser.innerHTML = "";
-
+    if(filteredUsers.length === 0){
+        findUser.innerHTML = '<div class="add_task_search_error"><small>no results found...</small></div>';
+    }
     for(let index = 0; index < filteredUsers.length; index++){
         const user = filteredUsers[index];
         findUser.innerHTML += createUserTemplate(user);

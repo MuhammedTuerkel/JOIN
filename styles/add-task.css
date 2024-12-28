@@ -650,14 +650,15 @@ input.subtask-input:focus {
 .custom_dropdown {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 99%;
     background-color: white;
-    border-radius: 4px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
     z-index: 1;
     max-height: 0;
-    margin-left: 11px;
+    margin-left: 13px;
     box-sizing: border-box;
     transition: max-height 0.2s ease-out;
 }
@@ -666,13 +667,51 @@ input.subtask-input:focus {
     max-height: 200px; 
 }
 
+.add_task_search_error{
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    color: #666;
+    font-family: inter-18;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    font-size: 14px;
+    gap: 50px;
+}
+
+.add_task_search_error small{
+    margin-bottom: 13px;
+}
+
 .custom_dropdown::-webkit-scrollbar {
-    width: 12px;
+    width: 9px;
 }
 
 .custom_dropdown::-webkit-scrollbar-track {
-    background: #f0f0f0;
+    background: #ffffff;
     border-radius: 10px;
+}
+
+.custom_dropdown::-webkit-scrollbar-thumb{
+    background-color: #29abe2;
+    height: 40px;
+    border-radius: 15px;
+
+}
+
+.custom_dropdown::-webkit-scrollbar-button:single-button:vertical:decrement { 
+    background: url('../assets/img/arrow_up.png') no-repeat center; 
+    background-size: 5px 5px; 
+    height: 28px;
+    width: 16px;
+} 
+
+.custom_dropdown::-webkit-scrollbar-button:single-button:vertical:increment { 
+    background: url('../assets/img/arrow_drop_down.png') no-repeat center; 
+    background-size: 5px 5px; 
+    height: 28px;
+    width: 16px;
 }
 
 .user_template_label{
@@ -851,7 +890,6 @@ input[type="text"]:focus::placeholder {
     backdrop-filter: blur(8px); 
 }
 
-
 .add_task_overlay_task {
     width: 100%;
     height: 100%;
@@ -983,10 +1021,6 @@ input[type="text"]:focus::placeholder {
     }
 }
 
-
-
-
-
 .add_task_clear_button button {
     width: 110px;
     height: 56px;
@@ -1005,7 +1039,6 @@ input[type="text"]:focus::placeholder {
     position: relative;
     transition: background-color 0.3s, box-shadow 0.3s;
 }
-
 
 .add_task_clear_button button:hover { 
     border: solid 1px #29abe2; 
