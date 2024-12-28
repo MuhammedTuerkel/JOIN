@@ -1,11 +1,16 @@
 
 let Contacts = [];
+let x = 0;
 
+// is a onloadFunction it load's the functions that are needed to load at the beginning /*
 
 async function Init() {
-   await getItemsFromFirebase();
+    await getItemsFromFirebase();
     renderContactsListHTML();
 }
+
+//  onclick to a Contact its loading it with an animation and the contact in the Contactlist gets a background-color,
+// if the screen width is smaller than 1050 px then it separates the contact list and the contact
 
 function loadContact(i, event) {
     event.stopPropagation();
@@ -23,6 +28,8 @@ function loadContact(i, event) {
     }, 100);
 }
 
+// it hides the Contact and shows again the Contactlist /*
+
 function hideContactMobile(event) {
     event.stopPropagation();
     if (window.innerWidth < 1050) {
@@ -32,6 +39,8 @@ function hideContactMobile(event) {
     hideContact();
 }
 
+// it hides the Contact and removes the background-color of the Contact in the Contactlist
+
 function hideContact() {
     document.getElementById('all-information').classList.remove('animationRightToPosition');
     document.getElementById('all-information').classList.add('d-none');
@@ -40,6 +49,8 @@ function hideContact() {
         document.getElementById(`name${i}`).style = '';
     }
 }
+
+// onclick to the Add New Contact-button it loads the template and it comes with an animation
 
 function loadAddNewContact(event) {
     event.stopPropagation();
@@ -52,6 +63,8 @@ function loadAddNewContact(event) {
     document.getElementById('deleteSave').style = "display:none;";
 }
 
+// it hides the Add New Contact Template
+
 function hideAddNewContact(event) {
     event.stopPropagation();
     document.getElementById('addNewContact').classList.remove('animationRightToPosition');
@@ -62,9 +75,13 @@ function hideAddNewContact(event) {
     document.getElementById('input-phone').value = ``;
 }
 
+// stops event bubbling
+
 function stopPropagation(event) {
     event.stopPropagation();
 }
+
+// shows the edit delete menu in the mobile version
 
 function showEditDeleteMenu(event) {
     event.stopPropagation();
@@ -72,16 +89,22 @@ function showEditDeleteMenu(event) {
     document.getElementById('editdelete-menu').classList.add('animationRightToPosition');
 }
 
+// hides the edit delete menu in the mobile version
+
 function hideEditDeleteMenu(event) {
     event.stopPropagation();
     document.getElementById('editdelete-menu').classList.add('d-none');
     document.getElementById('editdelete-menu').classList.remove('animationRightToPosition');
 }
 
+// generates the whole alphabet
+
 function generateAlphabet() {
     let a = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
     return a
 }
+
+// render the Contactlist with the whole alphabet
 
 async function renderContactsListHTML() {
     let alphabet = await generateAlphabet();
@@ -98,7 +121,9 @@ async function renderContactsListHTML() {
     }
     renderContact();
 }
-let x = 0
+
+// checks if the First Letter of the name matches with the letter, if yes then its generate the Badge and loads a function named generateContactHTML
+// a the end its clears the empty Div's
 
 function renderContact() {
     let a = generateAlphabet();
@@ -116,6 +141,8 @@ function renderContact() {
         clearEmptyDivs(a);
     }
 }
+
+// generates the Contacts in the Contactlist if its finished with the array it goes back to the renderContact function
 
 function generateContactHTML(a, i, Badge) {
     document.getElementById(`${a[i]}`).innerHTML += `
@@ -135,6 +162,8 @@ function generateContactHTML(a, i, Badge) {
     }
 }
 
+// generates the Badge with the Firstletter of the first and last Name
+
 function generateBadge(x) {
     var values = Contacts[x].name.split(" ");
     var f_name = values.shift().charAt(0).toUpperCase();
@@ -142,15 +171,19 @@ function generateBadge(x) {
     return f_name + l_name;
 }
 
+// checks if the letter divs are empty, if so then it hides it
+
 function clearEmptyDivs(a) {
     for (let i = 0; i < a.length; i++) {
-        let Hallo = document.getElementById(`${a[i]}`).innerHTML;
-        if (Hallo == "") {
+        let Div = document.getElementById(`${a[i]}`).innerHTML;
+        if (Div == "") {
             document.getElementById(`Section${i}`).style = "display:none;"
         }
     }
     hideContact();
 }
+
+// renders the template of the contact information
 
 function renderContactInformation(i) {
     let Badge = generateBadge(i);
@@ -159,23 +192,27 @@ function renderContactInformation(i) {
     document.getElementById('email').innerHTML = `${Contacts[i].email}`;
     document.getElementById('phone').innerHTML = `${Contacts[i].phone}`;
     document.getElementById('editContact').setAttribute(`onclick`, `loadEditContact(event, ${i})`)
-    document.getElementById('editContact1').setAttribute(`onclick`, `loadEditContact(event, ${i})`)
+    document.getElementById('editContactMobile').setAttribute(`onclick`, `loadEditContact(event, ${i})`)
     document.getElementById('deleteContact').setAttribute(`onclick`, `deleteContact(${i})`)
-    document.getElementById('deleteContact1').setAttribute(`onclick`, `deleteContact(${i})`)
+    document.getElementById('deleteContactMobile').setAttribute(`onclick`, `deleteContact(${i})`)
 }
+
+// deletes the Contact but at least one Contact is always required
 
 async function deleteContact(i) {
     if (Contacts.length > 1) {
-    Contacts.splice(i, 1);
-    loadContactsAgain();
-    hideAddNewContact(event);
-    hideContactMobile(event);
-    await deleteContactfromFirebase(i);
-    await getTheItemstoPushTOFireBase();
-    }else{
+        Contacts.splice(i, 1);
+        loadContactsAgain();
+        hideAddNewContact(event);
+        hideContactMobile(event);
+        await deleteContactfromFirebase(i);
+        await getTheItemstoPushTOFireBase();
+    } else {
         alert("You Need To Have at least One Contact");
     }
 }
+
+// loads the edit contact
 
 function loadEditContact(event, i) {
     let Badge = generateBadge(i);
@@ -183,6 +220,8 @@ function loadEditContact(event, i) {
     generateEditNewContactHTML(Badge, i);
     document.getElementById('saveEditContact').setAttribute(`onclick`, `saveNewContact(${i})`);
 }
+
+// loads the Template of edit new contact with an animation
 
 function generateEditNewContactHTML(Badge, i) {
     document.getElementById('addNewContact').classList.add('animationRightToPosition');
@@ -198,12 +237,15 @@ function generateEditNewContactHTML(Badge, i) {
     document.getElementById('cancelCreate').style = "display:none;";
     document.getElementById('DeleteEditContact').setAttribute(`onclick`, `deleteContact(${i})`)
 }
+
+// gets the values of the Contact Information and checks if the the values are empty or filled and gives the information to the functions
+
 function createNewContact(event) {
     event.stopPropagation();
     let name = document.getElementById('input-name').value
     let email = document.getElementById('input-email').value
     let phone = document.getElementById('input-phone').value
-    if (name == ' ' || email == "" || phone == "") { alert('Name, Email oder Telefonnummer nicht eingegeben') } else {
+    if (name == ' ' || email == "" || phone == "") { alert('name, email or phone number not entered') } else {
         Contacts.push({ "name": `${name}`, "email": `${email}`, "phone": phone },);
         getTheItemstoPushTOFireBase();
         loadContactsAgain();
@@ -212,6 +254,8 @@ function createNewContact(event) {
         animateContactCreated();
     }
 }
+
+// generates a Contact Created pop up after the contact was created and it lasts for 3 seconds then it goes
 
 function animateContactCreated() {
     document.getElementById('ContactCreated').style = "";
@@ -222,6 +266,8 @@ function animateContactCreated() {
     }, 3000);
 }
 
+// loads all Contacts in the Contactlist again from new
+
 function loadContactsAgain() {
     let a = generateAlphabet();
     for (let i = 0; i < a.length; i++) {
@@ -230,6 +276,8 @@ function loadContactsAgain() {
     }
     renderContact();
 }
+
+// saves the new contact that has been edited
 
 function saveNewContact(i) {
     let name = document.getElementById('input-name').value
@@ -244,15 +292,18 @@ function saveNewContact(i) {
     getTheItemstoPushTOFireBase();
 }
 
+// pushes and getting the New Contact Array again ro and from Firebase after adding, editing or deleting a Contact
+
 async function getTheItemstoPushTOFireBase() {
     let Useremail = User[0].email
     let result = Useremail.replace(".", "_");
-    let put = localStorage.getItem("loggedInUser", Contacts)
     let Number = await getNumFromFirebase(`/users/${result}`,);
     pushToFireBase(`users/${result}/${Number}/Contacts`);
     Contacts = [];
     getItemsFromFirebase(`users/${result}/${Number}/Contacts`)
 }
+
+// get a random generated number from firebase because it cant connect to the array without it
 
 async function getNumFromFirebase(path = "", data = {}) {
     let response = await fetch(BASE_URL + path + ".json");
@@ -260,6 +311,8 @@ async function getNumFromFirebase(path = "", data = {}) {
     let num = Object.keys(json)[0];
     return num;
 }
+
+// pushes the updated Contacts Array to Firebase 
 
 async function pushToFireBase(path = "") {
     let response = await fetch(BASE_URL + path + ".json", {
@@ -271,6 +324,8 @@ async function pushToFireBase(path = "") {
     });
     return responseToJson = await response.json();
 }
+
+// get the Contacts array from Firebase and push it to the Contacts Array in the Website
 
 async function getItemsFromFirebase() {
     let Useremail = User[0].email
@@ -285,12 +340,15 @@ async function getItemsFromFirebase() {
 
 }
 
+// delete a Contact from Firebase
+
 async function deleteContactfromFirebase(i) {
     let Useremail = User[0].email
     let result = Useremail.replace(".", "_");
     let Number = await getNumFromFirebase(`/users/${result}`);
     let path = `users/${result}/${Number}/Contacts/${i}`
     let response = await fetch(BASE_URL + path + ".json", {
-        method: "DELETE",  });
+        method: "DELETE",
+    });
     return responseToJson = await response.json();
-    }
+}

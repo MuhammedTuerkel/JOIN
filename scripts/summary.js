@@ -1,10 +1,14 @@
 let greeting;
 
+// is a onloadfunction
+
 function Init() {
     getFromLocalStorage();
     putName();
     greetingOnMobile();
 }
+
+// changes the greeting text to match the time of day
 
 document.addEventListener("DOMContentLoaded", function () {
     let today = new Date();
@@ -21,6 +25,8 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('greeting').innerHTML = greeting;
 });
 
+// if the screen width  is under 1400px it shows the greeting text in the loading of the html for 3 seconds 
+
 async function greetingOnMobile() {
     if (window.innerWidth < 1400) {
         document.getElementById('headline').style = "display:none;";
@@ -35,6 +41,8 @@ async function greetingOnMobile() {
         }, 3000);
     }
 }
+
+// makes the firstletter of the name toUpperCase and puts the name in the greeting 
 
 function putName() {
     let name = String(User[0].name).charAt(0).toUpperCase() + String(User[0].name).slice(1);
