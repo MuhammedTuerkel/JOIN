@@ -411,7 +411,7 @@ input.subtask-input:focus {
 }
 
 .custom-select:focus {
-    border-color: #007BFF;
+    border-color: #ff0000;
 }
 
 .add_task_dropdown {
