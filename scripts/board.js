@@ -531,7 +531,7 @@ function handleSearchInput() {
 function startSearch() {
     let searchTerm = document.getElementById('boardSearchInput').value.trim();
     if(searchTerm === '') {
-        reloadBoard(searchTerm);
+        reloadBoard();
         return;
     }
     clearBoard();
@@ -544,11 +544,10 @@ function startSearch() {
         }
     });
     if(searchResults.length === 0) {
-        reloadBoard(searchTerm);
+        reloadBoard();
     } else {
         renderAllTickets(searchResults);
     }
-    //Wird der Suchbegriff gelöscht oder ist das Feld leer, werden alle Tickets wieder angezeigt
 }
 
 /**
@@ -562,8 +561,7 @@ function clearBoard() {
 }
 
 
-function reloadBoard(searchTerm) {
-    //Zeige eine Meldung an, dass der Suchbegriff (searchTerm) nicht vorhanden ist
+function reloadBoard() {
     renderAllTickets(allTasks);
     document.getElementById('boardSearchInput').value = '';
 }

@@ -31,10 +31,8 @@ function saveTaskGoToBoard(event) {
  */
 function saveTaskCreateNewTask(event) {
     event.preventDefault();
-    buildTask();
-
-    postTask();
-   
+    let data = buildTask();
+    postTask('tasks', data);
     document.getElementById('addTaskForm').reset();
     document.getElementById('addTaskOverlayNextStep').style.display = 'none';
     document.body.style.overflow = 'auto';
