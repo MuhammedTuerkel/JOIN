@@ -41,12 +41,13 @@ function saveTaskCreateNewTask(event) {
 
 /**
  * clears the list from all subtasks
- * !create clear function form the id 
+ *  clears the list of all assigned users 
  */
 function addTaskClearSubtaskList(){
     let list = document.getElementById('subtasksList');
-    let assignedList
+    let assignedList = document.getElementById('selectedUsers');
     list.innerHTML = "" ;
+    assignedList.innerHTML = "";
 }
 
 /**
