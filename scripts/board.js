@@ -538,16 +538,6 @@ function saveEditonClick() {
     //Aktualisiere die Firebase
 }
 
-// function handleSearchInput() {
-//     clearTimeout(debounceTimeout);
-//     let searchTerm = document.getElementById('boardSearchInput').value.trim();
-//     if (searchTerm === '') {
-//         reloadBoard();
-//         return;
-//     }
-//     startSearch();
-// }
-
 function handleSearchInput() {
     clearTimeout(debounceTimeout);
     debounceTimeout = setTimeout(() => {
@@ -598,7 +588,6 @@ function clearBoard() {
     document.getElementById('doneColumn').innerHTML = '';
 }
 
-
 /**
  * Reloads the Board with all tickets
  */
@@ -616,4 +605,10 @@ function showFailedSearchMessage(searchTerm) {
     let target = document.getElementById('overlayID');
     target.classList.remove('d_none');
     target.innerHTML = renderFailedSearchBox(searchTerm);
+}
+
+function showAddTaskOnBoard() {
+    let target = document.getElementById('overlayID');
+    target.classList.remove('d_none');
+    target.innerHTML = renderAddTaskFeatureOnBoard();
 }

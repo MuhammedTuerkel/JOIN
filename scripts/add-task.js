@@ -40,6 +40,20 @@ function saveTaskCreateNewTask(event) {
 }
 
 /**
+ * Saves the task and closes the overlay on the board
+ * 
+ * @param {Event} event 
+ */
+function saveTaskCloseOverlay(event) {
+    event.preventDefault();
+    let data = buildTask();
+    postTask('tasks', data);
+    addTaskClearSubtaskList();
+    toggleOverlay();
+    location.reload();
+}
+
+/**
  * clears the list from all subtasks
  *  clears the list of all assigned users 
  */

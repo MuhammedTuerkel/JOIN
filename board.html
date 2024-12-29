@@ -14,13 +14,13 @@
     <script src="./script.js"></script>
     <script src="./scripts/board.js"></script>
     <script src="./templates/boardTemplate.js"></script>
-    <!-- <script src="./scripts/test-add-task.js"></script> -->
+    <script src="./templates/addTaskTemplates.js"></script>
     <script src="./scripts/add-task.js"></script>
     <title>Board</title>
 </head>
 <body onload="onInit()">
     <section class="site-ticket-overlay d_none" id="overlayID" onclick="closeOverlayOnClick(event)">
-
+        
     </section>
     <div class="site-wrapper">
         <section class="side-navigation">
@@ -75,7 +75,7 @@
                             </svg>
                         </div>
                     </div>
-                    <button class="addtask-btn">
+                    <button class="addtask-btn" onclick="showAddTaskOnBoard()">
                         <span>Add task</span>
                         <svg width="25" height="24" viewBox="0 0 25 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_75601_15213" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
