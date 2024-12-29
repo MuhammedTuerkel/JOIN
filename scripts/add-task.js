@@ -108,6 +108,7 @@ function openDropdown(event) {
 /**
  * Handles the click event for the dropdown.
  * Closes the dropdown container and updates the dropdown arrow.
+ * *clears the input field
  */
 function closeDropdown() {
     document.getElementById('assigned').classList.remove('add_task_dropdown_active');

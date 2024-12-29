@@ -57,8 +57,9 @@ async function fetchPassword(userMail) {
  * The class 'login_move_image_container' must be removed after the move to create new contents.
  */
 function moveImage() {
-    image = document.getElementById('loginMovableImage').classList.add('login_moved');
     mobileImg = document.getElementById('loginMobileMovableImage').classList.add('login_moved');
+    image = document.getElementById('loginMovableImage').classList.add('login_moved');
+    
     let position = document.getElementById('loginMoveImgContainer');
     let positionMobile = document.getElementById('loginMobileMoveImgContainer');
     header = document.getElementById('loginHead').classList.remove('login_d_none');
@@ -75,6 +76,7 @@ function moveImage() {
         main.classList.remove('login_d_none');
         loginFooter.classList.remove('login_d_none');
         loginHeaderNav.classList.add('move_in');
+        
     }, 1000);
 }
 
@@ -86,7 +88,7 @@ function hideImageAfterDelay() {
     const image = document.getElementById('loginMobileMovableImage');
     setTimeout(() => {
         image.classList.add('hidden');
-    }, 100);
+    }, 500);
 }
 
 /**

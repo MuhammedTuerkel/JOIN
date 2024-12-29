@@ -81,7 +81,7 @@
 .login_logo_mobile img {
     transition: all 1s ease;
     position: absolute;
-    display: none;
+    display: flex;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -545,6 +545,15 @@
 }
 
 @media (width: 1024px) and (height: 787px) {
+    .login_logo_mobile img {
+        transition: all 1s ease;
+        position: absolute;
+        display: none;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
     .login_card {
         display: flex    ;
         flex-direction: column;
@@ -602,6 +611,17 @@
         display: none;
     }
 
+}
+
+@media (min-width: 787px){
+    .login_logo_mobile img {
+        transition: all 1s ease;
+        position: absolute;
+        display: none;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 }
 
 @media (max-width: 786px) and (min-width: 581px) {
@@ -662,7 +682,7 @@
         background-color: #2a3647;
         font-family: "Inter", serif;
         flex-direction: column;
-        transition: background-color 2s ease;
+        transition: background-color 2.5s ease;
     }
 
     .login_card {
@@ -1300,7 +1320,7 @@
 
     .fade_out {
         opacity: 1;
-        transition: opacity 0.1s ease;
+        transition: opacity 0.8s ease;
     }
 
     .fade_out.hidden {
