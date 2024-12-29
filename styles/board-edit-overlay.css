@@ -440,6 +440,10 @@ input.subtask-input:focus {
     transition: transform 0.3s ease; 
 }
 
+.add_task_dropdown_active {
+    border-color: #29abe2;
+}
+
 .custom_dropdown {
     display: flex;
     flex-direction: column;
@@ -449,7 +453,7 @@ input.subtask-input:focus {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
     z-index: 1;
-    max-height: 200px;
+    max-height: 0px;
     position: absolute;
 }
 

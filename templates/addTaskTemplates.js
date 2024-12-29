@@ -88,7 +88,7 @@ function createUserTemplate(user) {
 
 function renderAddTaskFeatureOnBoard() {
     return `<div class="board-add-task-card slide-in-right">
-            <form id="addTaskForm" class="add_task_main_content" oninput="checkFormValidity()">
+            <form id="addTaskForm" class="add_task_main_content" oninput="checkFormValidity()" onclick="handleDropdownBodyClick()">
                 <div class="form-wrapper">
                         <div class="form-column-left">
                             <div class="form-group required_focus add_task_for_error_height">
