@@ -31,12 +31,24 @@ function saveTaskGoToBoard(event) {
  */
 function saveTaskCreateNewTask(event) {
     event.preventDefault();
-    postTask();
     buildTask();
+
+    postTask();
+   
     document.getElementById('addTaskForm').reset();
     document.getElementById('addTaskOverlayNextStep').style.display = 'none';
     document.body.style.overflow = 'auto';
-    clearSubtaskInput();
+    addTaskClearSubtaskList();
+}
+
+/**
+ * clears the list from all subtasks
+ * !create clear function form the id 
+ */
+function addTaskClearSubtaskList(){
+    let list = document.getElementById('subtasksList');
+    let assignedList
+    list.innerHTML = "" ;
 }
 
 /**
@@ -83,6 +95,7 @@ function buildTask() {
     let taskState = "toDo";
     let taskAssigned = selectedUsers;
     return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState);
+
 }
 
 /**
