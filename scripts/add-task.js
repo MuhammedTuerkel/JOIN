@@ -48,6 +48,7 @@ function addTaskClearSubtaskList(){
     let assignedList = document.getElementById('selectedUsers');
     list.innerHTML = "" ;
     assignedList.innerHTML = "";
+    selectedUsers = [];
 }
 
 /**
