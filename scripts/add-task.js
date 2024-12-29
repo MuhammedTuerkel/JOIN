@@ -36,6 +36,7 @@ function saveTaskCreateNewTask(event) {
     document.getElementById('addTaskForm').reset();
     document.getElementById('addTaskOverlayNextStep').style.display = 'none';
     document.body.style.overflow = 'auto';
+    clearSubtaskInput();
 }
 
 /**
