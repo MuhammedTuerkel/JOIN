@@ -223,6 +223,8 @@ body {
     gap: 26px;
     margin-left: 110px;
     margin-right: 64px;
+    overflow-y: scroll;
+    scrollbar-width: none;
 }
 
 .board-column {
