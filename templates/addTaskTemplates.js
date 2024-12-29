@@ -72,14 +72,14 @@ function createUserTemplate(user) {
 
     return `
         <div onclick="toggleUserSelection('${user.email}')" class="user_template_not_selected" id="template-${user.email}" >
-            <div onclick="toggleUserSelection('${user.email}')" class="user_template_circle_name">
-                <div onclick="toggleUserSelection('${user.email}')" class="user_circle" style="background-color: ${user.color};">
+            <div class="user_template_circle_name">
+                <div class="user_circle" style="background-color: ${user.color};">
                     ${initials}
                 </div>
-                <p onclick="toggleUserSelection('${user.email}')">${user.name}</p>
+                <p>${user.name}</p>
             </div>
-            <input onclick="toggleUserSelection('${user.email}')" type="checkbox" class="user_checkbox" id="checkbox-${user.email}">
-            <label onclick="toggleUserSelection('${user.email}')" class="user_template_label" for="checkbox-${user.email}">
+            <input type="checkbox" class="user_checkbox" id="checkbox-${user.email}">
+            <label class="user_template_label" for="checkbox-${user.email}">
                 <img src="./assets/img/check button.png" alt="" id="img-${user.email}">
             </label>
         </div>
@@ -135,7 +135,7 @@ function renderAddTaskFeatureOnBoard() {
                                         </defs>
                                     </svg>
                                   </button>
-                                  <button type="button" class="prio-btn active" id="medium-btn" onclick="setMedium()">
+                                  <button type="button" class="prio-btn medium active" id="medium-btn" onclick="setMedium()">
                                     <span>Medium</span>
                                     <svg id="medium-svg" width="21" height="8" viewBox="0 0 21 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <g clip-path="url(#clip0_156_950)">
@@ -172,7 +172,7 @@ function renderAddTaskFeatureOnBoard() {
                             <div class="form-group">
                                 <label for="subtasks">Subtasks</label>
                                 <div class="subtasks-input">
-                                    <input type="text" id="task-subtasks" name="subtasks" placeholder="Add new subtask">
+                                    <input type="text" id="task-subtasks" name="subtasks" placeholder="Add new subtask" oninput="subtaskInput()">
                                         <button type="button" class="add-subtask-btn" id="add-subtask-btn">
                                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <mask id="mask0_75601_15213" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
@@ -216,7 +216,7 @@ function renderAddTaskFeatureOnBoard() {
                         <p class="required-hint"><span class="required-icon">*</span>This field is required</p>
                         <div class="btn-wrapper">
                             <div class="add_task_clear_button">
-                                <button type="reset">
+                                <button onclick="addTaskClearTask()" type="reset">
                                     <p>Clear</p>
                                     <img class="add_task_clear_button_image" src="../assets/img/Close.png" alt="">
                                     <img class="add_task_clear_button_image_hover" src="../assets/img/Close-blue.png" alt="">

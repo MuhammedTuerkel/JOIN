@@ -140,7 +140,7 @@ textarea {
 .add-subtask-btn {
     position: absolute;
     top: 50%;
-    right: 4px;
+    right: 10px;
     transform: translateY(-50%);
     cursor: pointer;
     background: none;
@@ -149,7 +149,7 @@ textarea {
 .subtasks-input .icons {
     position: absolute;
     top: 50%;
-    right: 10px;
+    right: 30px;
     transform: translateY(-50%);
     display: flex;
     align-items: center;
@@ -402,7 +402,7 @@ input.subtask-input:focus {
 .custom-select-wrapper::after {
     content: url(../assets/icons/arrow_drop_downaa.svg);
     position: absolute;
-    right: 10px;
+    right: -3px;
     top: 50%;
     transform: translateY(-50%);
     pointer-events: none;

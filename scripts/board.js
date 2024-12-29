@@ -9,7 +9,7 @@ let debounceTimeout;
 async function onInit() {
     await getAllTasks();
     await renderAllTickets(allTasks);
-    await onloadFunction();
+     onloadFunction();
 }
 
 /**

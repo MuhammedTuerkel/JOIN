@@ -9,7 +9,7 @@ function addTaskOnInit() {
     onloadFunction();
     setMedium();
     subtaskInput();
-    clearSubtaskInput();
+    addTaskClearTask();
 }
 
 /**
@@ -36,7 +36,7 @@ function saveTaskCreateNewTask(event) {
     document.getElementById('addTaskForm').reset();
     document.getElementById('addTaskOverlayNextStep').style.display = 'none';
     document.body.style.overflow = 'auto';
-    addTaskClearSubtaskList();
+    addTaskClearTask();
 }
 
 /**
@@ -48,7 +48,7 @@ function saveTaskCloseOverlay(event) {
     event.preventDefault();
     let data = buildTask();
     postTask('tasks', data);
-    addTaskClearSubtaskList();
+    addTaskClearTask();
     toggleOverlay();
     location.reload();
 }
@@ -57,12 +57,19 @@ function saveTaskCloseOverlay(event) {
  * clears the list from all subtasks
  *  clears the list of all assigned users 
  */
-function addTaskClearSubtaskList(){
+function addTaskClearTask(){
     let list = document.getElementById('subtasksList');
     let assignedList = document.getElementById('selectedUsers');
+    document.getElementById('urgent-btn').classList.remove('urgent');
+    document.getElementById('urgent-btn').classList.remove('active');
+    document.getElementById('medium-btn').classList.add('medium');
+    document.getElementById('medium-btn').classList.add('active');
+    document.getElementById('low-btn').classList.remove('low');
+    document.getElementById('low-btn').classList.remove('active');
+    selectedUsers = [];
     list.innerHTML = "" ;
     assignedList.innerHTML = "";
-    selectedUsers = [];
+    
 }
 
 /**
