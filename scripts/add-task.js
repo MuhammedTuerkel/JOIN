@@ -53,7 +53,6 @@ function addTaskClearSubtaskList(){
 
 /**
  * Goes back to the add task step in the overlay.
- * 
  * @param {Event} event - The event object.
  */
 function goBackToAddTask(event) {
