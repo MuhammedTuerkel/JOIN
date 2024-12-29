@@ -1,6 +1,7 @@
 let allTasks = [];
 let currentDraggedElement;
 let editedPrio;
+let debounceTimeout;
 
 /**
  * Initialize the board features which should be active at site load
@@ -332,9 +333,27 @@ async function move(category) {
             body: JSON.stringify({state: category}),
             headers: {'Content-Type': 'application/json'}
         });
-        renderAllTickets(allTasks);
+        renderFilteredTickets();
     } else {
         console.error('Task not found in allTasks array')
+    }
+}
+
+/**
+ * If there is a search term in the input field, only the ticket will be rendered
+ * if it is moved
+ */
+function renderFilteredTickets() {
+    let searchTerm = document.getElementById('boardSearchInput').value.trim();
+    if (searchTerm) {
+        let searchResults = allTasks.filter(task => {
+            const titleMatch = task.title.toLowerCase().includes(searchTerm.toLowerCase());
+            const descriptionMatch = task.description.toLowerCase().includes(searchTerm.toLowerCase());
+            return titleMatch || descriptionMatch;
+        });
+        renderAllTickets(searchResults);
+    } else {
+        renderAllTickets(allTasks);
     }
 }
 
@@ -520,14 +539,22 @@ function saveEditonClick() {
 }
 
 function handleSearchInput() {
-    let searchTerm = document.getElementById('boardSearchInput').value.trim();
-    if (searchTerm === '') {
-        reloadBoard();
-        return;
-    }
-    startSearch();
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(() => {
+        let searchTerm = document.getElementById('boardSearchInput').value.trim();
+        if (searchTerm === '') {
+            reloadBoard();
+            return;
+        }
+        startSearch();
+    }, 1000);
 }
 
+/**
+ * Starts the search on the board based on the searched term
+ * 
+ * @returns Return ends the function if the search input is empty
+ */
 function startSearch() {
     let searchTerm = document.getElementById('boardSearchInput').value.trim();
     if(searchTerm === '') {
@@ -544,6 +571,7 @@ function startSearch() {
         }
     });
     if(searchResults.length === 0) {
+        showFailedSearchMessage(searchTerm);
         reloadBoard();
     } else {
         renderAllTickets(searchResults);
@@ -560,8 +588,27 @@ function clearBoard() {
     document.getElementById('doneColumn').innerHTML = '';
 }
 
-
+/**
+ * Reloads the Board with all tickets
+ */
 function reloadBoard() {
     renderAllTickets(allTasks);
     document.getElementById('boardSearchInput').value = '';
+}
+
+/**
+ * Shows the Failed Search Message in an overlay, if the search could not be found on the board
+ * 
+ * @param {string} searchTerm 
+ */
+function showFailedSearchMessage(searchTerm) {
+    let target = document.getElementById('overlayID');
+    target.classList.remove('d_none');
+    target.innerHTML = renderFailedSearchBox(searchTerm);
+}
+
+function showAddTaskOnBoard() {
+    let target = document.getElementById('overlayID');
+    target.classList.remove('d_none');
+    target.innerHTML = renderAddTaskFeatureOnBoard();
 }

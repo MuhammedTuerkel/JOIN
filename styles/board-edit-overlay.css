@@ -451,7 +451,11 @@ input.subtask-input:focus {
     z-index: 1;
     max-height: 200px;
     position: absolute;
-}   
+}
+
+.custom_dropdown.open {
+    max-height: 200px; 
+}
 
 .custom_dropdown::-webkit-scrollbar {
     width: 12px;
@@ -601,4 +605,9 @@ input.subtask-input:focus {
 .overlay-close-btn-edit {
     cursor: pointer;
     align-self: flex-end;
+}
+
+.overlay-edit-form-wrapper {
+    overflow-y: scroll;
+    scrollbar-width: none;
 }
