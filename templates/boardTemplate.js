@@ -16,14 +16,14 @@ function noTasks(listTitle) {
  * @returns - Returns the correct designed badge for the category
  */
 function categoryBadge(categoryName) {
-    if(categoryName === 'user-story') {
+    if (categoryName === 'user-story') {
         return `<div class="category-badge-user">
                     <span>User Story</span>
                 </div>`;
-    } else if(categoryName === 'technical-tasks') {
+    } else if (categoryName === 'technical-tasks') {
         return `<div class="category-badge-technical">
                     <span>Technical Task</span>
-                </div>`; 
+                </div>`;
     }
 }
 
@@ -33,14 +33,14 @@ function categoryBadge(categoryName) {
  * @returns - Returns the correct designed badge for the category
  */
 function categoryBadgeOverlay(categoryName) {
-    if(categoryName === 'user-story') {
+    if (categoryName === 'user-story') {
         return `<div class="overlay-category-badge-user">
                     <span>User Story</span>
                 </div>`;
-    } else if(categoryName === 'technical-tasks') {
+    } else if (categoryName === 'technical-tasks') {
         return `<div class="overlay-category-badge-technical">
                     <span>Technical Task</span>
-                </div>`; 
+                </div>`;
     }
 }
 
@@ -50,14 +50,14 @@ function categoryBadgeOverlay(categoryName) {
  * @returns - Returns the correct icon based on the users choice
  */
 function prioIcon(prio) {
-    if(prio === 'low') {
+    if (prio === 'low') {
         return `<div class="board-prio-icon" id="boardPrioIcon">
                     <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10.8555 9.69779C10.6209 9.69819 10.3923 9.62335 10.2035 9.48427L1.30038 2.91453C1.18454 2.82898 1.0867 2.72146 1.01245 2.59812C0.938193 2.47478 0.888977 2.33803 0.867609 2.19569C0.824455 1.90821 0.897354 1.61537 1.07027 1.3816C1.24319 1.14782 1.50196 0.992265 1.78965 0.949143C2.07734 0.906021 2.3704 0.978866 2.60434 1.15165L10.8555 7.23414L19.1066 1.15165C19.2224 1.0661 19.354 1.00418 19.4938 0.969432C19.6336 0.934685 19.7788 0.927791 19.9213 0.949143C20.0637 0.970495 20.2006 1.01967 20.324 1.09388C20.4474 1.16808 20.555 1.26584 20.6407 1.3816C20.7263 1.49735 20.7883 1.62882 20.823 1.7685C20.8578 1.90818 20.8647 2.05334 20.8433 2.19569C20.822 2.33803 20.7727 2.47478 20.6985 2.59812C20.6242 2.72146 20.5264 2.82898 20.4106 2.91453L11.5075 9.48427C11.3186 9.62335 11.0901 9.69819 10.8555 9.69779Z" fill="#7AE229"/>
                         <path d="M10.8555 15.4463C10.6209 15.4467 10.3923 15.3719 10.2035 15.2328L1.30038 8.66307C1.06644 8.49028 0.910763 8.2317 0.867609 7.94422C0.824455 7.65674 0.897354 7.3639 1.07027 7.13013C1.24319 6.89636 1.50196 6.7408 1.78965 6.69768C2.07734 6.65456 2.3704 6.7274 2.60434 6.90019L10.8555 12.9827L19.1066 6.90019C19.3405 6.7274 19.6336 6.65456 19.9213 6.69768C20.209 6.7408 20.4678 6.89636 20.6407 7.13013C20.8136 7.3639 20.8865 7.65674 20.8433 7.94422C20.8002 8.2317 20.6445 8.49028 20.4106 8.66307L11.5075 15.2328C11.3186 15.3719 11.0901 15.4467 10.8555 15.4463Z" fill="#7AE229"/>
                     </svg>
                 </div>`;
-    } else if(prio === 'medium') {
+    } else if (prio === 'medium') {
         return `<div class="board-prio-icon" id="boardPrioIcon">
                     <svg width="21" height="8" viewBox="0 0 21 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_156_950)">
@@ -71,7 +71,7 @@ function prioIcon(prio) {
                         </defs>
                     </svg>
                 </div>`;
-    } else if(prio === 'urgent') {
+    } else if (prio === 'urgent') {
         return `<div class="board-prio-icon" id="boardPrioIcon">
                     <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_156_943)">
@@ -89,7 +89,7 @@ function prioIcon(prio) {
 }
 
 function prioIconOverlay(prio) {
-    if(prio === 'low') {
+    if (prio === 'low') {
         return `<div class="overlay-prio-content">
                     <span>Low</span>
                     <div class="board-prio-icon" id="boardPrioIcon">
@@ -99,7 +99,7 @@ function prioIconOverlay(prio) {
                         </svg>
                     </div>
                 </div>`;
-    } else if(prio === 'medium') {
+    } else if (prio === 'medium') {
         return `<div class="overlay-prio-content">
                     <span>Medium</span>
                     <div class="board-prio-icon" id="boardPrioIcon">
@@ -109,7 +109,7 @@ function prioIconOverlay(prio) {
                         </svg>
                     </div>
                 </div>`;
-    } else if(prio === 'urgent') {
+    } else if (prio === 'urgent') {
         return `<div class="overlay-prio-content">
                     <span>Urgent</span>
                     <div class="board-prio-icon" id="boardPrioIcon">
@@ -250,18 +250,18 @@ function renderOverlayTicket(category, ticketTitle, ticketDescription, ticketDat
 }
 
 function renderOverlayEditTicket() {
-    return `
-                <div class="overlay-close-btn-edit" onclick="toggleOverlay()">
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <mask id="mask0_264917_4230" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="4" width="24" height="24">
-                        <rect x="4" y="4" width="24" height="24" fill="#D9D9D9"/>
-                        </mask>
-                        <g mask="url(#mask0_264917_4230)">
-                        <path d="M16 17.4L11.1 22.3C10.9167 22.4834 10.6833 22.575 10.4 22.575C10.1167 22.575 9.88332 22.4834 9.69999 22.3C9.51665 22.1167 9.42499 21.8834 9.42499 21.6C9.42499 21.3167 9.51665 21.0834 9.69999 20.9L14.6 16L9.69999 11.1C9.51665 10.9167 9.42499 10.6834 9.42499 10.4C9.42499 10.1167 9.51665 9.88338 9.69999 9.70005C9.88332 9.51672 10.1167 9.42505 10.4 9.42505C10.6833 9.42505 10.9167 9.51672 11.1 9.70005L16 14.6L20.9 9.70005C21.0833 9.51672 21.3167 9.42505 21.6 9.42505C21.8833 9.42505 22.1167 9.51672 22.3 9.70005C22.4833 9.88338 22.575 10.1167 22.575 10.4C22.575 10.6834 22.4833 10.9167 22.3 11.1L17.4 16L22.3 20.9C22.4833 21.0834 22.575 21.3167 22.575 21.6C22.575 21.8834 22.4833 22.1167 22.3 22.3C22.1167 22.4834 21.8833 22.575 21.6 22.575C21.3167 22.575 21.0833 22.4834 20.9 22.3L16 17.4Z" fill="#2A3647"/>
-                        </g>
-                    </svg>
-                </div>
-            <div class="form-group">
+    return `<div class="overlay-close-btn-edit" onclick="toggleOverlay()">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <mask id="mask0_264917_4230" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="4" width="24" height="24">
+                    <rect x="4" y="4" width="24" height="24" fill="#D9D9D9"/>
+                    </mask>
+                    <g mask="url(#mask0_264917_4230)">
+                    <path d="M16 17.4L11.1 22.3C10.9167 22.4834 10.6833 22.575 10.4 22.575C10.1167 22.575 9.88332 22.4834 9.69999 22.3C9.51665 22.1167 9.42499 21.8834 9.42499 21.6C9.42499 21.3167 9.51665 21.0834 9.69999 20.9L14.6 16L9.69999 11.1C9.51665 10.9167 9.42499 10.6834 9.42499 10.4C9.42499 10.1167 9.51665 9.88338 9.69999 9.70005C9.88332 9.51672 10.1167 9.42505 10.4 9.42505C10.6833 9.42505 10.9167 9.51672 11.1 9.70005L16 14.6L20.9 9.70005C21.0833 9.51672 21.3167 9.42505 21.6 9.42505C21.8833 9.42505 22.1167 9.51672 22.3 9.70005C22.4833 9.88338 22.575 10.1167 22.575 10.4C22.575 10.6834 22.4833 10.9167 22.3 11.1L17.4 16L22.3 20.9C22.4833 21.0834 22.575 21.3167 22.575 21.6C22.575 21.8834 22.4833 22.1167 22.3 22.3C22.1167 22.4834 21.8833 22.575 21.6 22.575C21.3167 22.575 21.0833 22.4834 20.9 22.3L16 17.4Z" fill="#2A3647"/>
+                    </g>
+                </svg>
+            </div>
+            <form class="overlay-edit-form-wrapper">
+                            <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" id="task-title-overlay-edit" name="title">
             </div>
@@ -313,22 +313,15 @@ function renderOverlayEditTicket() {
                   </button>
                 </div>
             </div>
-            <div>
-
-
-
-                                <label for="assigned-to">Assigned to</label>
-                                <div onclick="openDropdown(event)" id="assigned" class="add_task_dropdown" >
-                                    <p>Select contacts to assign</p>
-                                    <img id="dropDownArrow" src="./assets/img/arrow_drop_down.png" alt="" onclick="openDropdown(event)">
-                                </div>
-                                <div id="addTaskDropdown" class="custom_dropdown" onclick="event.stopPropagation()"></div>
-                                <div id="selectedUsers" class="selected_users"></div>
-                
-
-
-
-            </div>
+            <div class="assigned_to_container">
+                <label for="assigned-to">Assigned to</label>
+                <div id="assigned" class="add_task_dropdown" onclick="openDropdown(event)">
+                    <input type="text" id="addTaskSearchContacts" placeholder="Select contacts to assign" oninput="addTaskSearchUser()">
+                    <img id="dropDownArrow" src="./assets/img/arrow_drop_down.png" alt="" onclick="openDropdown(event)">
+                </div>
+                    <div id="addTaskDropdown" class="custom_dropdown" onclick="event.stopPropagation()"></div>
+                <div id="selectedUsers" class="selected_users"></div>
+            </div>                          
             <div class="form-group">
                 <label for="subtasks">Subtasks</label>
                 <div class="subtasks-input">
@@ -371,6 +364,7 @@ function renderOverlayEditTicket() {
                     
                 </div>
             </div>
+            </form>
             <button class="endEdit-btn" onclick="saveEditonClick()">
                 <span>Ok</span>
                 <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -450,11 +444,11 @@ function renderOverlaySubtaskElement(subtaskIndex, subtaskContent, ticketID, tas
  * @returns a different symbol (checked oder unchecked) based on the status of the task
  */
 function subtaskStatus(taskStatus) {
-    if(taskStatus === 'open') {
+    if (taskStatus === 'open') {
         return `<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="4.38818" y="4" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2"/>
                 </svg>`;
-    } else if(taskStatus === 'closed') {
+    } else if (taskStatus === 'closed') {
         return `<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M20.3882 11V17C20.3882 18.6569 19.045 20 17.3882 20H7.38818C5.73133 20 4.38818 18.6569 4.38818 17V7C4.38818 5.34315 5.73133 4 7.38818 4H15.3882" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                     <path d="M8.38818 12L12.3882 16L20.3882 4.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
