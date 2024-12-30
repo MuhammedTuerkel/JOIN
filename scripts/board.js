@@ -10,6 +10,7 @@ async function onInit() {
     await getAllTasks();
     await renderAllTickets(allTasks);
      onloadFunction();
+     subtaskInput();
 }
 
 /**
