@@ -1226,10 +1226,10 @@
 
     .login_input_mail_info {
         color: red;
-        font-size: 0.735em !important;
+        font-size: 0.635em !important;
         position: absolute;
-        bottom: -1.8em !important;
-        left: 0;
+        bottom: -2.5em !important;
+        left: -5px;
         width: 100%;
     }
 
