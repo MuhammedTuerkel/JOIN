@@ -274,7 +274,6 @@
 .board-add-task-card {
     min-width: 1060px;
     max-width: 1150px;
-    width: 70%;
     height: 70%;
     background-color: white;
     border-radius: 30px;

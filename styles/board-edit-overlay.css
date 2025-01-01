@@ -116,7 +116,6 @@ select {
     font-size: 14px;
     /* color: var(--text-grey); */
     border-radius: 10px;
-    width: calc(136px * 3 + 16px);
 }
 
 textarea {
@@ -140,7 +139,6 @@ textarea {
 .add-subtask-btn {
     position: absolute;
     top: 50%;
-    right: 10px;
     transform: translateY(-50%);
     cursor: pointer;
     background: none;
@@ -149,7 +147,6 @@ textarea {
 .subtasks-input .icons {
     position: absolute;
     top: 50%;
-    right: 30px;
     transform: translateY(-50%);
     display: flex;
     align-items: center;
@@ -382,7 +379,6 @@ input.subtask-input:focus {
 .custom-select-wrapper {
     position: relative;
     display: inline-block;
-    width: calc(136px* 3 + 16px);
 }
 
 .custom-select {
@@ -423,7 +419,6 @@ input.subtask-input:focus {
     border: 1px solid #ccc;
     border-radius: 10px;
     cursor: pointer;
-    width: calc(136px* 3 + 16px);
     margin-top: 8px;
 }
 
