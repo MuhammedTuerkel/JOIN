@@ -2,6 +2,7 @@ let allTasks = [];
 let currentDraggedElement;
 let editedPrio;
 let debounceTimeout;
+let selectedPrioOnBoard;
 
 /**
  * Initialize the board features which should be active at site load

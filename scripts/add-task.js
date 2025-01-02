@@ -46,7 +46,7 @@ function saveTaskCreateNewTask(event) {
  */
 function saveTaskCloseOverlay(event) {
     event.preventDefault();
-    let data = buildTask();
+    let data = buildTaskOnBoard();
     postTask('tasks', data);
     addTaskClearTask();
     toggleOverlay();
@@ -115,7 +115,23 @@ function buildTask() {
     let taskState = "toDo";
     let taskAssigned = selectedUsers;
     return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState);
+}
 
+/**
+ * Builds a task object from form input values.
+ * 
+ * @returns {Object} - The task object in JSON format.
+ */
+function buildTaskOnBoard() {
+    let taskTitle = document.getElementById('task-title').value;
+    let taskDate = document.getElementById('task-due-date').value;
+    let taskPrio = selectedPrioOnBoard;
+    let taskDescription = document.getElementById('task-description').value;
+    let taskCategory = document.getElementById('task-category').value;
+    let taskSubtasks = subtasksArray;
+    let taskState = "toDo";
+    let taskAssigned = selectedUsers;
+    return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState);
 }
 
 /**
@@ -339,6 +355,30 @@ function setMedium() {
 function setLow() {
     activateButton('low-btn', 'low-svg', 'low', 'low-icon');
     selectedPrio = 'low';
+}
+
+/**
+ * Sets the design of the Urgent button and temporarily saves the priority into the selectedPrio variable.
+ */
+function setUrgentOnBoard() {
+    activateButton('urgent-btn', 'urgent-svg', 'urgent', 'urgent-icon');
+    selectedPrioOnBoard = 'urgent';
+}
+
+/**
+ * Sets the design of the Medium button and temporarily saves the priority into the selectedPrio variable.
+ */
+function setMediumOnBoard() {
+    activateButton('medium-btn', 'medium-svg', 'medium', 'medium-icon');
+    selectedPrioOnBoard = 'medium';
+}
+
+/**
+ * Sets the design of the Low button and temporarily saves the priority into the selectedPrio variable.
+ */
+function setLowOnBoard() {
+    activateButton('low-btn', 'low-svg', 'low', 'low-icon');
+    selectedPrioOnBoard = 'low';
 }
 
 /**
