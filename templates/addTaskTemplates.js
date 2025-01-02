@@ -87,7 +87,11 @@ function createUserTemplate(user) {
 }
 
 function renderAddTaskFeatureOnBoard(state) {
-    return `<div class="board-add-task-card slide-in-right">
+    return `<div class="board-add-task-card slide-in-right" onload="subtaskInput()">
+            <div class="board_add_task_head">
+                <h1>Add Task</h1>
+                <img onclick="toggleOverlay()" src="./assets/img/Close.png" alt="">
+            </div>
             <form id="addTaskForm" class="add_task_main_content" oninput="checkFormValidity()" onclick="handleDropdownBodyClick()">
                 <div class="form-wrapper">
                         <div class="form-column-left">

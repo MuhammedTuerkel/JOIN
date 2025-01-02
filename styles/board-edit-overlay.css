@@ -610,3 +610,35 @@ input.subtask-input:focus {
     overflow-y: scroll;
     scrollbar-width: none;
 }
+
+
+/* ________________ createt from cici _____________________ */
+
+.board_add_task_head{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin-bottom: 20px;
+    margin-top: 50px;
+}
+
+.board_add_task_head h1{
+    font-size: 48px;
+}
+
+.board_add_task_head img{
+    height: 30px;
+}
+
+.board_add_task_head img:hover{
+    background-color: #E7E7E7;
+    border-radius: 100%;
+}
+
+
+@media(max-width: 1150px) and (min-width: 320px){
+    .board-add-task-card{
+        width:80%;
+        height: 90%;
+    }
+}
