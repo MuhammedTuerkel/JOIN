@@ -1,4 +1,4 @@
-let selectedUsers = [];
+let selectedUsersOnBoard = [];
 let selectedPrio;
 
 /**
@@ -66,7 +66,7 @@ function addTaskClearTask(){
     document.getElementById('medium-btn').classList.add('active');
     document.getElementById('low-btn').classList.remove('low');
     document.getElementById('low-btn').classList.remove('active');
-    selectedUsers = [];
+    selectedUsersOnBoard = [];
     list.innerHTML = "" ;
     assignedList.innerHTML = "";
     
@@ -130,7 +130,7 @@ function buildTaskOnBoard() {
     let taskCategory = document.getElementById('task-category').value;
     let taskSubtasks = subtasksArray;
     let taskState = "toDo";
-    let taskAssigned = selectedUsers;
+    let taskAssigned = selectedUsersOnBoard;
     return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState);
 }
 
@@ -227,8 +227,8 @@ function assignedUserDropDown(email) {
     checkbox.checked = true;
 
     let user = users.find(user => user.email === email);
-    if (!selectedUsers.some(selectedUser => selectedUser.email === user.email)) {
-        selectedUsers.push(user);
+    if (!selectedUsersOnBoard.some(selectedUser => selectedUser.email === user.email)) {
+        selectedUsersOnBoard.push(user);
     }
     updateSelectedUsersContainer();
 }
@@ -248,7 +248,7 @@ function notAssignedUser(email) {
     checkedImg.src = "./assets/img/check button.png";
     checkbox.checked = false;
 
-    selectedUsers = selectedUsers.filter(user => user.email !== email);
+    selectedUsersOnBoard = selectedUsersOnBoard.filter(user => user.email !== email);
     updateSelectedUsersContainer();
 }
 
@@ -256,7 +256,7 @@ function notAssignedUser(email) {
  * Updates the dropdown selections based on the selected users.
  */
 function updateDropdownSelections() {
-    selectedUsers.forEach(user => {
+    selectedUsersOnBoard.forEach(user => {
         let checkbox = document.getElementById(`checkbox-${user.email}`);
         let template = document.getElementById(`template-${user.email}`);
         let img = document.getElementById(`img-${user.email}`);
@@ -277,8 +277,8 @@ function updateSelectedUsersContainer() {
     let container = document.getElementById('selectedUsers');
     container.innerHTML = "";
 
-    for (let index = 0; index < selectedUsers.length; index++) {
-        let user = selectedUsers[index];
+    for (let index = 0; index < selectedUsersOnBoard.length; index++) {
+        let user = selectedUsersOnBoard[index];
         let initials = user.name.charAt(0).toUpperCase() + user.name.charAt(user.name.length - 1).toUpperCase();
         container.innerHTML += `
             <div class="selected_user_circle" style="background-color: ${user.color};">
