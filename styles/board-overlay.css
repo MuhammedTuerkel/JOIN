@@ -283,6 +283,9 @@
     width: 80%;
 }
 
+
+/*____________ added from cici ___________ */
+
 .board_add_task_head{
     display: flex;
     justify-content: space-between;
@@ -311,3 +314,4 @@
         height: 90%;
     }
 }
+

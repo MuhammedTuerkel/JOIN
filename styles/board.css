@@ -39,6 +39,8 @@ body {
     background-color: #F6F7F8;
     max-width: 1440px;
     height: 85dvh;
+    width: 100%;
+    margin-top: 8px;
 }
 
 .side-navigation {
@@ -131,8 +133,6 @@ body {
 }
 
 .title {
-    margin-top: 110px;
-    margin-left: 96px;
     font-size: 40px;
 }
 
@@ -141,15 +141,16 @@ body {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 48px;
-
+    max-width: 1440px;
+    margin-top: 110px;
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 .search-addtask-group {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 110px;
-    margin-right: 88px;
     gap: 32px;
 }
 
@@ -221,13 +222,13 @@ body {
 .main-content {
     display: flex;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: space-around;
     gap: 26px;
-    margin-left: 110px;
-    margin-right: 64px;
     overflow-y: scroll;
     scrollbar-width: none;
-
+    max-width: 1440px;
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 .board-column {
@@ -419,4 +420,15 @@ body {
     font-weight: bold;
     margin-right: 10px;
     text-transform: uppercase;
+}
+
+
+
+
+/* ______________ responsive from board ____________ */
+
+@media(max-width: 1400px){
+    .main-content{
+        width: 90%;
+    }
 }
