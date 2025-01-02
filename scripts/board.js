@@ -609,10 +609,10 @@ function showFailedSearchMessage(searchTerm) {
     target.innerHTML = renderFailedSearchBox(searchTerm);
 }
 
-function showAddTaskOnBoard() {
+function showAddTaskOnBoard(state) {
     let target = document.getElementById('overlayID');
     target.classList.remove('d_none');
-    target.innerHTML = renderAddTaskFeatureOnBoard();
+    target.innerHTML = renderAddTaskFeatureOnBoard(state);
     addEventListeners();
 }
 

@@ -44,13 +44,17 @@ function saveTaskCreateNewTask(event) {
  * 
  * @param {Event} event 
  */
-function saveTaskCloseOverlay(event) {
+async function saveTaskCloseOverlay(event, state) {
     event.preventDefault();
-    let data = buildTaskOnBoard();
-    postTask('tasks', data);
-    addTaskClearTask();
-    toggleOverlay();
-    location.reload();
+    let data = buildTaskOnBoard(state);
+    try {
+        await postTask('tasks', data);
+        addTaskClearTask();
+        toggleOverlay();
+        location.reload();
+    } catch(error) {
+        console.error("Task konnte nicht gespeichert werden:", error);
+    }
 }
 
 /**
@@ -92,7 +96,7 @@ function goBackToAddTask(event) {
 async function postTask(path = "", data = {}) {
     let response = await fetch(BASE_URL + path + ".json", {
         method: 'POST',
-        header: {
+        headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(data)
@@ -122,14 +126,14 @@ function buildTask() {
  * 
  * @returns {Object} - The task object in JSON format.
  */
-function buildTaskOnBoard() {
+function buildTaskOnBoard(state) {
     let taskTitle = document.getElementById('task-title').value;
     let taskDate = document.getElementById('task-due-date').value;
     let taskPrio = selectedPrioOnBoard;
     let taskDescription = document.getElementById('task-description').value;
     let taskCategory = document.getElementById('task-category').value;
     let taskSubtasks = subtasksArray;
-    let taskState = "toDo";
+    let taskState = state;
     let taskAssigned = selectedUsersOnBoard;
     return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState);
 }

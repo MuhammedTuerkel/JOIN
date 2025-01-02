@@ -90,7 +90,7 @@
                             </svg>
                         </div>
                     </div>
-                    <button class="addtask-btn" onclick="showAddTaskOnBoard()">
+                    <button class="addtask-btn" onclick="showAddTaskOnBoard('toDo')">
                         <span>Add task</span>
                         <svg width="25" height="24" viewBox="0 0 25 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_75601_15213" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
@@ -107,7 +107,7 @@
                 <div class="board-column">
                     <div class="column-headline">
                         <h2>To do</h2>
-                        <svg class="column-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="column-icon" onclick="showAddTaskOnBoard('toDo')" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="1" y="1" width="22" height="22" rx="7" stroke="#091931" stroke-width="2"/>
                             <path d="M12 8V16" stroke="#091931" stroke-width="2" stroke-linecap="round"/>
                             <path d="M16 12.0754L8 12.0754" stroke="#091931" stroke-width="2" stroke-linecap="round"/>
@@ -120,7 +120,7 @@
                 <div class="board-column">
                     <div class="column-headline">
                         <h2>In progress</h2>
-                        <svg class="column-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="column-icon" onclick="showAddTaskOnBoard('inProgress')" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="1" y="1" width="22" height="22" rx="7" stroke="#091931" stroke-width="2"/>
                             <path d="M12 8V16" stroke="#091931" stroke-width="2" stroke-linecap="round"/>
                             <path d="M16 12.0754L8 12.0754" stroke="#091931" stroke-width="2" stroke-linecap="round"/>
@@ -133,7 +133,7 @@
                 <div class="board-column">
                     <div class="column-headline">
                         <h2>Await feedback</h2>
-                        <svg class="column-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="column-icon" onclick="showAddTaskOnBoard('awaitFeedback')" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="1" y="1" width="22" height="22" rx="7" stroke="#091931" stroke-width="2"/>
                             <path d="M12 8V16" stroke="#091931" stroke-width="2" stroke-linecap="round"/>
                             <path d="M16 12.0754L8 12.0754" stroke="#091931" stroke-width="2" stroke-linecap="round"/>

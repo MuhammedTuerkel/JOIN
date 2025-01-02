@@ -86,7 +86,7 @@ function createUserTemplate(user) {
     `;
 }
 
-function renderAddTaskFeatureOnBoard() {
+function renderAddTaskFeatureOnBoard(state) {
     return `<div class="board-add-task-card slide-in-right">
             <form id="addTaskForm" class="add_task_main_content" oninput="checkFormValidity()" onclick="handleDropdownBodyClick()">
                 <div class="form-wrapper">
@@ -223,7 +223,7 @@ function renderAddTaskFeatureOnBoard() {
                                 </button>
                             </div>
                             <div class="add_task_create_button">
-                                <button id="createTaskButton" type="submit" class="create-btn" onclick="saveTaskCloseOverlay(event)" disabled>
+                                <button id="createTaskButton" type="submit" class="create-btn" onclick="saveTaskCloseOverlay(event, '${state}')" disabled>
                                     <p>Create Task</p>
                                     <img src="../assets/img/check.png" alt="">
                                 </button>
