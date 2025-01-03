@@ -609,6 +609,12 @@ input.subtask-input:focus {
 .overlay-edit-form-wrapper {
     overflow-y: scroll;
     scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-right: 15px;
+}
+
+.overlay-edit-form-wrapper::-webkit-scrollbar {
+    display: none;
 }
 
 

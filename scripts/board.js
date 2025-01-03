@@ -1,4 +1,5 @@
 let allTasks = [];
+let ticketAssignedUsers = [];
 let currentDraggedElement;
 let editedPrio;
 let debounceTimeout;
@@ -246,6 +247,7 @@ async function renderAssignedUsers(ticketID) {
 function renderAssignedUsersOverlay(ticketID) {
     let searchedTask = allTasks.filter(t => t['id'] == ticketID)[0];
     let assignedUsers = searchedTask.assigned_to;
+    ticketAssignedUsers = assignedUsers;
     let targetElement = document.getElementById(`overlayAssignedUserContent_${ticketID}`);
     if(!targetElement) {
         console.error(`Element with ID overlayAssignedUserContent_${ticketID} not found`);
