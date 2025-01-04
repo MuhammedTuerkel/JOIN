@@ -292,6 +292,13 @@ function updateSelectedUsersContainer() {
     }
 }
 
+function editTaskFillInUsers() {
+    for(let i = 0; i < ticketAssignedUsers.length; i++) {
+        let mail = ticketAssignedUsers[i].email;
+        toggleUserSelection(mail)
+    }
+}
+
 /**
  * Filters and loads users based on the search input value.
  */

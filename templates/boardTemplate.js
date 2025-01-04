@@ -257,7 +257,7 @@ function renderOverlayTicket(category, ticketTitle, ticketDescription, ticketDat
 }
 
 function renderOverlayEditTicket() {
-    return `<div class="overlay-close-btn-edit" onclick="toggleOverlay()">
+    return `<div class="overlay-close-btn-edit" onclick="toggleOverlay()" onload="subtaskInput()">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <mask id="mask0_264917_4230" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="4" width="24" height="24">
                     <rect x="4" y="4" width="24" height="24" fill="#D9D9D9"/>
@@ -332,7 +332,7 @@ function renderOverlayEditTicket() {
                                         <div class="form-group">
                                 <label for="subtasks">Subtasks</label>
                                 <div class="subtasks-input">
-                                    <input type="text" id="task-subtasks" name="subtasks" placeholder="Add new subtask">
+                                    <input type="text" id="task-subtasks" name="subtasks" placeholder="Add new subtask" oninput="subtaskInput()">
                                         <button type="button" class="add-subtask-btn" id="add-subtask-btn">
                                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <mask id="mask0_75601_15213" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
