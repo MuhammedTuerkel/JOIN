@@ -1,64 +1,64 @@
 /**
  * Returns a template that reports the absence of tasks
- *  
+ *
  * @param {string} listTitle - Title of the list in which there is no task
- * @returns 
+ * @returns
  */
 function noTasks(listTitle) {
-    return `<div class="no-task-card">
+  return `<div class="no-task-card">
                 <span>No tasks ${listTitle}</span>
             </div>`;
 }
 
 /**
- * Returns a badge for the chosen category * 
+ * Returns a badge for the chosen category *
  * @param {string} categoryName - Name of the category chosen by the user
  * @returns - Returns the correct designed badge for the category
  */
 function categoryBadge(categoryName) {
-    if (categoryName === 'user-story') {
-        return `<div class="category-badge-user">
+  if (categoryName === "user-story") {
+    return `<div class="category-badge-user">
                     <span>User Story</span>
                 </div>`;
-    } else if (categoryName === 'technical-tasks') {
-        return `<div class="category-badge-technical">
+  } else if (categoryName === "technical-tasks") {
+    return `<div class="category-badge-technical">
                     <span>Technical Task</span>
                 </div>`;
-    }
+  }
 }
 
 /**
- * Returns a badge for the chosen category in the overlay view * 
+ * Returns a badge for the chosen category in the overlay view *
  * @param {string} categoryName - Name of the category chosen by the user
  * @returns - Returns the correct designed badge for the category
  */
 function categoryBadgeOverlay(categoryName) {
-    if (categoryName === 'user-story') {
-        return `<div class="overlay-category-badge-user">
+  if (categoryName === "user-story") {
+    return `<div class="overlay-category-badge-user">
                     <span>User Story</span>
                 </div>`;
-    } else if (categoryName === 'technical-tasks') {
-        return `<div class="overlay-category-badge-technical">
+  } else if (categoryName === "technical-tasks") {
+    return `<div class="overlay-category-badge-technical">
                     <span>Technical Task</span>
                 </div>`;
-    }
+  }
 }
 
 /**
- * Returns the correct Icon based on the users choice by adding the task * 
+ * Returns the correct Icon based on the users choice by adding the task *
  * @param {string} prio - Priority chosen by the user at add-task
  * @returns - Returns the correct icon based on the users choice
  */
 function prioIcon(prio) {
-    if (prio === 'low') {
-        return `<div class="board-prio-icon" id="boardPrioIcon">
+  if (prio === "low") {
+    return `<div class="board-prio-icon" id="boardPrioIcon">
                     <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10.8555 9.69779C10.6209 9.69819 10.3923 9.62335 10.2035 9.48427L1.30038 2.91453C1.18454 2.82898 1.0867 2.72146 1.01245 2.59812C0.938193 2.47478 0.888977 2.33803 0.867609 2.19569C0.824455 1.90821 0.897354 1.61537 1.07027 1.3816C1.24319 1.14782 1.50196 0.992265 1.78965 0.949143C2.07734 0.906021 2.3704 0.978866 2.60434 1.15165L10.8555 7.23414L19.1066 1.15165C19.2224 1.0661 19.354 1.00418 19.4938 0.969432C19.6336 0.934685 19.7788 0.927791 19.9213 0.949143C20.0637 0.970495 20.2006 1.01967 20.324 1.09388C20.4474 1.16808 20.555 1.26584 20.6407 1.3816C20.7263 1.49735 20.7883 1.62882 20.823 1.7685C20.8578 1.90818 20.8647 2.05334 20.8433 2.19569C20.822 2.33803 20.7727 2.47478 20.6985 2.59812C20.6242 2.72146 20.5264 2.82898 20.4106 2.91453L11.5075 9.48427C11.3186 9.62335 11.0901 9.69819 10.8555 9.69779Z" fill="#7AE229"/>
                         <path d="M10.8555 15.4463C10.6209 15.4467 10.3923 15.3719 10.2035 15.2328L1.30038 8.66307C1.06644 8.49028 0.910763 8.2317 0.867609 7.94422C0.824455 7.65674 0.897354 7.3639 1.07027 7.13013C1.24319 6.89636 1.50196 6.7408 1.78965 6.69768C2.07734 6.65456 2.3704 6.7274 2.60434 6.90019L10.8555 12.9827L19.1066 6.90019C19.3405 6.7274 19.6336 6.65456 19.9213 6.69768C20.209 6.7408 20.4678 6.89636 20.6407 7.13013C20.8136 7.3639 20.8865 7.65674 20.8433 7.94422C20.8002 8.2317 20.6445 8.49028 20.4106 8.66307L11.5075 15.2328C11.3186 15.3719 11.0901 15.4467 10.8555 15.4463Z" fill="#7AE229"/>
                     </svg>
                 </div>`;
-    } else if (prio === 'medium') {
-        return `<div class="board-prio-icon" id="boardPrioIcon">
+  } else if (prio === "medium") {
+    return `<div class="board-prio-icon" id="boardPrioIcon">
                     <svg width="21" height="8" viewBox="0 0 21 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_156_950)">
                         <path d="M19.7596 7.91693H1.95136C1.66071 7.91693 1.38197 7.80063 1.17645 7.59362C0.970928 7.3866 0.855469 7.10584 0.855469 6.81308C0.855469 6.52032 0.970928 6.23955 1.17645 6.03254C1.38197 5.82553 1.66071 5.70923 1.95136 5.70923H19.7596C20.0502 5.70923 20.329 5.82553 20.5345 6.03254C20.74 6.23955 20.8555 6.52032 20.8555 6.81308C20.8555 7.10584 20.74 7.3866 20.5345 7.59362C20.329 7.80063 20.0502 7.91693 19.7596 7.91693Z" fill="#FFA800"/>
@@ -71,8 +71,8 @@ function prioIcon(prio) {
                         </defs>
                     </svg>
                 </div>`;
-    } else if (prio === 'urgent') {
-        return `<div class="board-prio-icon" id="boardPrioIcon">
+  } else if (prio === "urgent") {
+    return `<div class="board-prio-icon" id="boardPrioIcon">
                     <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_156_943)">
                         <path d="M19.2597 15.4464C19.0251 15.4468 18.7965 15.3719 18.6077 15.2328L10.3556 9.14965L2.10356 15.2328C1.98771 15.3184 1.85613 15.3803 1.71633 15.4151C1.57652 15.4498 1.43124 15.4567 1.28877 15.4354C1.14631 15.414 1.00944 15.3648 0.885997 15.2906C0.762552 15.2164 0.654943 15.1186 0.569314 15.0029C0.483684 14.8871 0.421712 14.7556 0.386936 14.6159C0.352159 14.4762 0.345259 14.331 0.366629 14.1887C0.409788 13.9012 0.565479 13.6425 0.799451 13.4697L9.70356 6.89926C9.89226 6.75967 10.1208 6.68433 10.3556 6.68433C10.5904 6.68433 10.819 6.75967 11.0077 6.89926L19.9118 13.4697C20.0977 13.6067 20.2356 13.7988 20.3057 14.0186C20.3759 14.2385 20.3747 14.4749 20.3024 14.6941C20.2301 14.9133 20.0904 15.1041 19.9031 15.2391C19.7159 15.3742 19.4907 15.4468 19.2597 15.4464Z" fill="#FF3D00"/>
@@ -85,12 +85,12 @@ function prioIcon(prio) {
                         </defs>
                     </svg>
                 </div>`;
-    }
+  }
 }
 
 function prioIconOverlay(prio) {
-    if (prio === 'low') {
-        return `<div class="overlay-prio-content">
+  if (prio === "low") {
+    return `<div class="overlay-prio-content">
                     <span>Low</span>
                     <div class="board-prio-icon" id="boardPrioIcon">
                         <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -99,8 +99,8 @@ function prioIconOverlay(prio) {
                         </svg>
                     </div>
                 </div>`;
-    } else if (prio === 'medium') {
-        return `<div class="overlay-prio-content">
+  } else if (prio === "medium") {
+    return `<div class="overlay-prio-content">
                     <span>Medium</span>
                     <div class="board-prio-icon" id="boardPrioIcon">
                         <svg width="21" height="8" viewBox="0 0 21 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -116,8 +116,8 @@ function prioIconOverlay(prio) {
                         </svg>
                     </div>
                 </div>`;
-    } else if (prio === 'urgent') {
-        return `<div class="overlay-prio-content">
+  } else if (prio === "urgent") {
+    return `<div class="overlay-prio-content">
                     <span>Urgent</span>
                     <div class="board-prio-icon" id="boardPrioIcon">
                         <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -133,11 +133,21 @@ function prioIconOverlay(prio) {
                         </svg>
                     </div>
                 </div>`;
-    }
+  }
 }
 
-function ticketTemplate(ticketID, category, ticketTitle, ticketDescription, longDescription, prio, subtaskDone, allSubtasks, ticketDate) {
-    return `<div class="ticket-card" draggable="true" ondragstart="startDragging('${ticketID}')" onclick="toggleOverlay(); showOverlayTicket('${category}', '${ticketTitle}', '${longDescription}', '${ticketDate}', '${prio}', '${ticketID}')">
+function ticketTemplate(
+  ticketID,
+  category,
+  ticketTitle,
+  ticketDescription,
+  longDescription,
+  prio,
+  subtaskDone,
+  allSubtasks,
+  ticketDate
+) {
+  return `<div class="ticket-card" draggable="true" ondragstart="startDragging('${ticketID}')" onclick="toggleOverlay(); showOverlayTicket('${category}', '${ticketTitle}', '${longDescription}', '${ticketDate}', '${prio}', '${ticketID}')">
                 ${categoryBadge(category)}
                 <div class="ticket-title">
                     <span>${ticketTitle}</span>
@@ -167,17 +177,24 @@ function ticketTemplate(ticketID, category, ticketTitle, ticketDescription, long
 }
 
 function renderUserCircle(initials, color) {
-    return `<div class="selected_user_circle_board" style="background-color: ${color};">
+  return `<div class="selected_user_circle_board" style="background-color: ${color};">
                 ${initials}
             </div>`;
 }
 
 function renderDummyTicket() {
-    return `<div class="dummy-ticket-card"></div>`;
+  return `<div class="dummy-ticket-card"></div>`;
 }
 
-function renderOverlayTicket(category, ticketTitle, ticketDescription, ticketDate, prio, ticketID) {
-    return `<div class="overlay-card slide-in-right" id="overlayCard">
+function renderOverlayTicket(
+  category,
+  ticketTitle,
+  ticketDescription,
+  ticketDate,
+  prio,
+  ticketID
+) {
+  return `<div class="overlay-card slide-in-right" id="overlayCard">
             <div class="badge-and-close-wrapper">
                 <div class="overlay-badge">
                     ${categoryBadgeOverlay(category)}
@@ -257,7 +274,7 @@ function renderOverlayTicket(category, ticketTitle, ticketDescription, ticketDat
 }
 
 function renderOverlayEditTicket() {
-    return `<div class="overlay-close-btn-edit" onclick="toggleOverlay()" onload="subtaskInput()">
+  return `<div class="overlay-close-btn-edit" onclick="toggleOverlay()" onload="subtaskInput()">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <mask id="mask0_264917_4230" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="4" width="24" height="24">
                     <rect x="4" y="4" width="24" height="24" fill="#D9D9D9"/>
@@ -387,55 +404,62 @@ function renderOverlayEditTicket() {
 
 /**
  * Returns the Ticket Date in the correct format
- * 
+ *
  * @param {string} ticketDate - Ticket Due Date as a string in the incorrect format
  * @returns The Ticket Date in the Format DD/MM/YYYY
  */
 function formatDate(ticketDate) {
-    let [year, month, day] = ticketDate.split('-');
-    return `${day}/${month}/${year}`;
+  let [year, month, day] = ticketDate.split("-");
+  return `${day}/${month}/${year}`;
 }
 
 /**
  * Takes the username and returns it with the first letter capitalized
- * 
- * @param {string} username 
+ *
+ * @param {string} username
  * @returns The username with the first letter in capitals
  */
 function capitalizeFirstChar(username) {
-    if (!username) return '';
-    if (username.charAt(0) === username.charAt(0).toUpperCase()) {
-        return username;
-    }
-    return username.charAt(0).toUpperCase() + username.slice(1);
+  if (!username) return "";
+  if (username.charAt(0) === username.charAt(0).toUpperCase()) {
+    return username;
+  }
+  return username.charAt(0).toUpperCase() + username.slice(1);
 }
 
 /**
  * Returns a HTML Snippet with the Users Circle Icon and his/her name
- * 
- * @param {string} userName 
- * @param {string} initials 
- * @param {string} color 
+ *
+ * @param {string} userName
+ * @param {string} initials
+ * @param {string} color
  * @returns a HTML Snippet to create the User Element in the Front-End
  */
 function renderOverlayUserElement(userName, initials, color) {
-    return `<div class="overlay-assigned-user-element">
+  return `<div class="overlay-assigned-user-element">
                 ${renderUserCircle(initials, color)}
-                <span class="overlay-assigned-user-name">${capitalizeFirstChar(userName)}</span>
+                <span class="overlay-assigned-user-name">${capitalizeFirstChar(
+                  userName
+                )}</span>
             </div>`;
 }
 
 /**
  * Creates a HTML-Snippet to display the subtask element in the front-end
- * 
- * @param {int} subtaskIndex 
- * @param {string} subtaskContent 
- * @param {string} ticketID 
- * @param {string} taskStatus 
+ *
+ * @param {int} subtaskIndex
+ * @param {string} subtaskContent
+ * @param {string} ticketID
+ * @param {string} taskStatus
  * @returns a HTML Snippet to create a Subtask Element in the Front-End
  */
-function renderOverlaySubtaskElement(subtaskIndex, subtaskContent, ticketID, taskStatus) {
-    return `<div class="overlay-subtask-element">
+function renderOverlaySubtaskElement(
+  subtaskIndex,
+  subtaskContent,
+  ticketID,
+  taskStatus
+) {
+  return `<div class="overlay-subtask-element">
                 <div class="overlay-subtask-status" onclick="changeSubtaskStatus(${subtaskIndex}, '${ticketID}')">
                     ${subtaskStatus(taskStatus)}
                 </div>
@@ -445,25 +469,25 @@ function renderOverlaySubtaskElement(subtaskIndex, subtaskContent, ticketID, tas
 
 /**
  * Returns a different symbol (checked oder unchecked) based on the status of the task
- * 
- * @param {string} taskStatus 
+ *
+ * @param {string} taskStatus
  * @returns a different symbol (checked oder unchecked) based on the status of the task
  */
 function subtaskStatus(taskStatus) {
-    if (taskStatus === 'open') {
-        return `<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  if (taskStatus === "open") {
+    return `<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="4.38818" y="4" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2"/>
                 </svg>`;
-    } else if (taskStatus === 'closed') {
-        return `<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  } else if (taskStatus === "closed") {
+    return `<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M20.3882 11V17C20.3882 18.6569 19.045 20 17.3882 20H7.38818C5.73133 20 4.38818 18.6569 4.38818 17V7C4.38818 5.34315 5.73133 4 7.38818 4H15.3882" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                     <path d="M8.38818 12L12.3882 16L20.3882 4.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>`;
-    }
+  }
 }
 
 function renderFailedSearchBox(searchTerm) {
-    return `<div class="failed-search-dialog">
+  return `<div class="failed-search-dialog">
             <div class="failed-search-title-and-close">
                 <p class="failed-search-title">Failed Search</p>
                 <div class="overlay-close-btn" onclick="toggleOverlay()">
