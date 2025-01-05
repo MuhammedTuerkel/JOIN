@@ -170,7 +170,7 @@ function saveEditonClick() {
   ).value;
   let newDueDate = document.getElementById("task-due-date-overlay-edit").value;
   let newPrio = editedPrio;
-  let newAssignedUser = "";
+  let newAssignedUser = selectedUsers;
   let newSubtasks = "";
-  console.log(newTitle, newDescription, newDueDate, newPrio);
+  console.log(newTitle, newDescription, newDueDate, newPrio, newAssignedUser);
 }
