@@ -279,6 +279,18 @@ function renderSubtasksOverlay(ticketID) {
     });
 }
 
+function renderSubtasksEditOverlay(ticketID) {
+    let searchedTask = allTasks.find(t => t['id'] === ticketID);
+    let allSubtasks = searchedTask.subtasks;
+    let targetElement = document.getElementById('subtasksList');
+    targetElement.innerHTML = '';
+    allSubtasks.forEach((subtask, index) => {
+        let subtaskContent = subtask.content;
+        let subtaskID = subtask.id;
+        targetElement.innerHTML += renderSubtaskItem(subtaskID, subtaskContent);
+    })
+}
+
 /**
  * Changes the Subtask Status in the front-end and on the Firebase DB
  * 
