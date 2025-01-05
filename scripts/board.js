@@ -13,6 +13,7 @@ async function onInit() {
   await renderAllTickets(allTasks);
   onloadFunction();
   getLoggedInUserData();
+  sideNavigation();
 }
 
 /**
