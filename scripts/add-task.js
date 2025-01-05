@@ -109,7 +109,7 @@ function buildTask() {
   let taskSubtasks = subtasksArray;
   let taskState = "toDo";
   let taskAssigned = selectedUsers;
-  let taskCreator = "";
+  let taskCreator = userName;
   return taskToJSON(
     taskTitle,
     taskDate,
@@ -136,6 +136,7 @@ function buildTaskOnBoard() {
   let taskSubtasks = subtasksArray;
   let taskState = "toDo";
   let taskAssigned = selectedUsers;
+  let taskCreator = userName;
   return taskToJSON(
     taskTitle,
     taskDate,
@@ -144,7 +145,8 @@ function buildTaskOnBoard() {
     taskCategory,
     taskSubtasks,
     taskAssigned,
-    taskState
+    taskState,
+    taskCreator
   );
 }
 
