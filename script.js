@@ -230,14 +230,19 @@ async function getUserTasks() {
   activeUserTasks = tasks.filter((task) => task["creator"] === userName);
   lengthOfSummaryTasks(activeUserTasks);
   lengthOfToDoTasks(activeUserTasks);
-  lengthOfInProgressTasks(activeUserTasks);
-  lengthOfFeedbackTasks(activeUserTasks);
-  lengthOfDoneTasks(activeUserTasks);
-  lengthOfUrgentTasks(activeUserTasks);
+  //   lengthOfInProgressTasks(activeUserTasks);
+  //   lengthOfFeedbackTasks(activeUserTasks);
+  //   lengthOfDoneTasks(activeUserTasks);
+  //   lengthOfUrgentTasks(activeUserTasks);
 }
 
 function lengthOfSummaryTasks(activeUserTasks) {
   summaryTasks = activeUserTasks.length;
 }
 
-function lengthOfToDoTasks(activeUserTasks) {}
+function lengthOfToDoTasks(activeUserTasks) {
+  summaryToDo = activeUserTasks.filter(
+    (task) => task["state"] === "toDo"
+  ).length;
+  console.log("SummaryToDo:", summ);
+}
