@@ -1,6 +1,7 @@
 let users = [];
 let tasks = [];
 let loggedInUser = [];
+let userName;
 
 const BASE_URL =
   "https://join-bbd82-default-rtdb.europe-west1.firebasedatabase.app/";
@@ -199,6 +200,6 @@ function returnToSessionStoragePage() {
 function getLoggedInUserData() {
   let loggedUser = localStorage.getItem("loggedInUser");
   let UserLogg = JSON.parse(loggedUser);
-
-  console.log(UserLogg);
+  userName = UserLogg.name;
+  console.log(userName);
 }
