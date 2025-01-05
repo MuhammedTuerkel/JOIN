@@ -57,7 +57,8 @@ function taskToJSON(
   taskCategory,
   taskSubtasks,
   taskAssigned,
-  taskState
+  taskState,
+  taskCreator
 ) {
   return {
     id: generateUniqueID(),
@@ -69,6 +70,7 @@ function taskToJSON(
     subtasks: taskSubtasks,
     assigned_to: taskAssigned,
     state: taskState,
+    creator: taskCreator,
   };
 }
 

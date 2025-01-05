@@ -172,4 +172,5 @@ function saveEditonClick() {
   let newPrio = editedPrio;
   let newAssignedUser = "";
   let newSubtasks = "";
+  console.log(newTitle, newDescription, newDueDate, newPrio);
 }
