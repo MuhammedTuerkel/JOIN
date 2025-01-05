@@ -230,7 +230,7 @@ function renderSubtasksOverlay(ticketID) {
     `overlaySubtasksContent_${ticketID}`
   );
   targetElement.innerHTML = "";
-  if ((allSubtasks = [])) {
+  if (allSubtasks === undefined) {
     targetElement.innerHTML = `<p class="subtask_error">no Subtasks added</p>`;
   } else {
     allSubtasks.forEach((subtask, index) => {
