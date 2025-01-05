@@ -324,3 +324,7 @@ function changeDateFormat(earliestDateNumber) {
   let year = date.getFullYear();
   return `${month} ${day}, ${year}`;
 }
+
+function goToBoard() {
+  window.location.href = "/board.html";
+}
