@@ -1,5 +1,6 @@
 let selectedUsers = [];
 let selectedPrio;
+let subtasksArray = [];
 
 /**
  * Initializes the task form by calling necessary setup functions.
@@ -127,75 +128,6 @@ function buildTaskOnBoard() {
     return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState);
 }
 
-
-/**
- * Ensures that only one button is active and assigns the selected button its appearance.
- * @param {string} buttonId - The id of the selected button.
- * @param {string} svgId - The id of the corresponding svg.
- * @param {string} buttonClass - The class of the selected button.
- * @param {string} svgClass - The class of the corresponding svg.
- */
-function activateButton(buttonId, svgId, buttonClass, svgClass) {
-    const buttons = document.querySelectorAll('.prio-btn');
-    buttons.forEach((button) => {
-        button.classList.remove('urgent', 'medium', 'low', 'active');
-    });
-    const svgs = document.querySelectorAll('svg');
-    svgs.forEach((svg) => {
-        svg.classList.remove('urgent-icon', 'medium-icon', 'low-icon');
-    });
-    document.getElementById(buttonId).classList.add(buttonClass, 'active');
-    document.getElementById(svgId).classList.add(svgClass);
-}
-
-/**
- * Sets the design of the Urgent button and temporarily saves the priority into the selectedPrio variable.
- */
-function setUrgent() {
-    activateButton('urgent-btn', 'urgent-svg', 'urgent', 'urgent-icon');
-    selectedPrio = 'urgent';
-}
-
-/**
- * Sets the design of the Medium button and temporarily saves the priority into the selectedPrio variable.
- */
-function setMedium() {
-    activateButton('medium-btn', 'medium-svg', 'medium', 'medium-icon');
-    selectedPrio = 'medium';
-}
-
-/**
- * Sets the design of the Low button and temporarily saves the priority into the selectedPrio variable.
- */
-function setLow() {
-    activateButton('low-btn', 'low-svg', 'low', 'low-icon');
-    selectedPrio = 'low';
-}
-
-/**
- * Sets the design of the Urgent button and temporarily saves the priority into the selectedPrio variable.
- */
-function setUrgentOnBoard() {
-    activateButton('urgent-btn', 'urgent-svg', 'urgent', 'urgent-icon');
-    selectedPrioOnBoard = 'urgent';
-}
-
-/**
- * Sets the design of the Medium button and temporarily saves the priority into the selectedPrio variable.
- */
-function setMediumOnBoard() {
-    activateButton('medium-btn', 'medium-svg', 'medium', 'medium-icon');
-    selectedPrioOnBoard = 'medium';
-}
-
-/**
- * Sets the design of the Low button and temporarily saves the priority into the selectedPrio variable.
- */
-function setLowOnBoard() {
-    activateButton('low-btn', 'low-svg', 'low', 'low-icon');
-    selectedPrioOnBoard = 'low';
-}
-
 /**
  * Handles the input event for the subtask input field.
  */
@@ -229,12 +161,6 @@ function clearSubtaskInput() {
         addSubtaskBtn.style.visibility = 'visible';
     });
 }
-
-/**
- * Array to hold subtasks.
- * @type {Array<Object>}
- */
-let subtasksArray = [];
 
 /**
  * Adds a new subtask to the subtasks array and updates the UI.
@@ -378,8 +304,6 @@ function editArrayEntry(subtaskID, updatedText) {
     const subtask = subtasksArray.find(item => item.id === subtaskID);
     if (subtask) {
         subtask.content = updatedText;
-    } else {
-        console.log('Could not find subtask with this ID');
     }
 }
 
@@ -464,12 +388,10 @@ function showAddTaskOverlayNextStep(event) {
  * Checks the validity of the form fields and enables/disables the create task button accordingly.
  */
 function checkFormValidity() {
-    var taskTitle = document.getElementById('task-title').value;
-    var taskDueDate = document.getElementById('task-due-date').value;
-    var taskCategory = document.getElementById('task-category').value;
-
-    var createTaskButton = document.getElementById('createTaskButton');
-
+    let taskTitle = document.getElementById('task-title').value;
+    let taskDueDate = document.getElementById('task-due-date').value;
+    let taskCategory = document.getElementById('task-category').value;
+    let createTaskButton = document.getElementById('createTaskButton');
     if (taskTitle && taskDueDate && taskCategory) {
         createTaskButton.disabled = false;
     } else {
