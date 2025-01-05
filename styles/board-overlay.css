@@ -1,317 +1,314 @@
 .site-ticket-overlay {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.25);
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.25);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
 }
 
 .overlay-card {
-    width: 525px;
-    height: 90%;
-    background-color: white;
-    padding: 48px 40px;
-    border-radius: 30px;
-    box-shadow: 0px 0px 4px 0px #00000029;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
+  width: 525px;
+  height: 90%;
+  background-color: white;
+  padding: 48px 40px;
+  border-radius: 30px;
+  box-shadow: 0px 0px 4px 0px #00000029;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 
 .badge-and-close-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: self-start;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: self-start;
 }
 
 .overlay-category-badge-user {
-    width: 164px;
-    height: 36px;
-    border-radius: 8px;
-    padding: 4px 24px;
-    background-color: var(--user-story-color);
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 24px;
+  width: 164px;
+  height: 36px;
+  border-radius: 8px;
+  padding: 4px 24px;
+  background-color: var(--user-story-color);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
 }
 
 .overlay-category-badge-technical {
-    width: 170px;
-    height: 36px;
-    border-radius: 8px;
-    padding: 4px 24px;
-    background-color: var(--technical-task-color);
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 24px;
+  width: 170px;
+  height: 36px;
+  border-radius: 8px;
+  padding: 4px 24px;
+  background-color: var(--technical-task-color);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
 }
 
 .overlay-close-btn {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .overlay-card-title {
-    font-weight: 800;
-    font-size: 50px;
-    width: 100%;
+  font-weight: 800;
+  font-size: 50px;
+  width: 100%;
 }
 
 .overlay-card-description {
-    width: 100%;
+  width: 100%;
 }
 
 .overlay-date-wrapper,
 .overlay-prio-wrapper {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 35px;
-    width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 35px;
+  width: 100%;
 }
 
 .overlay-date-label,
 .overlay-prio-label,
 .overlay-assigned-label,
 .overlay-subtasks-label {
-    color: #2A3647;
-    font-size: 18px;
+  color: #2a3647;
+  font-size: 18px;
 }
 
 .overlay-prio-content {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-left: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 15px;
 }
 
 .overlay-service-btn-wrapper {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    justify-content: flex-end;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: flex-end;
 }
 
 .overlay-ticket-delete,
 .overlay-ticket-edit {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
 }
 
 .overlay-ticket-delete:hover,
 .overlay-ticket-edit:hover {
-    color: #29ABE2;
-    font-weight: 700;
+  color: #29abe2;
+  font-weight: 700;
 }
 
 .overlay-ticket-delete:hover svg path {
-    fill: #29ABE2;
+  fill: #29abe2;
 }
 
 .overlay-ticket-edit:hover svg path {
-    fill: #29ABE2;
+  fill: #29abe2;
 }
 
 .overlay-assigned-user-content {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
 }
 
 .overlay-assigned-user-element {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 7px 16px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 7px 16px;
 }
 
 .overlay-assigned-user-element span {
-    margin-left: 21px;
+  margin-left: 21px;
 }
 
 .overlay-subtasks-content {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .overlay-subtask-element {
-    width: 100%;
-    padding: 6px 16px;
-    display: flex;
-    justify-content: flex-start;
-    gap: 16px;
+  width: 100%;
+  padding: 6px 16px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 16px;
 }
 
 .overlay-subtask-element:hover {
-    background-color: #E7E7E7;
-    border-radius: 10px;
-    cursor: pointer;
+  background-color: #e7e7e7;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .slide-in-right {
-    -webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-    animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  -webkit-animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .slide-out-right {
-    -webkit-animation: slide-out-right 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-    animation: slide-out-right 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  -webkit-animation: slide-out-right 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53)
+    both;
+  animation: slide-out-right 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
 }
 
 @-webkit-keyframes slide-in-right {
-    0% {
-        -webkit-transform: translateX(1000px);
-        transform: translateX(1000px);
-        opacity: 0;
-    }
+  0% {
+    -webkit-transform: translateX(1000px);
+    transform: translateX(1000px);
+    opacity: 0;
+  }
 
-    100% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-        opacity: 1;
-    }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 @keyframes slide-in-right {
-    0% {
-        -webkit-transform: translateX(1000px);
-        transform: translateX(1000px);
-        opacity: 0;
-    }
+  0% {
+    -webkit-transform: translateX(1000px);
+    transform: translateX(1000px);
+    opacity: 0;
+  }
 
-    100% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-        opacity: 1;
-    }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes slide-out-right {
-    0% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-        opacity: 1;
-    }
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
 
-    100% {
-        -webkit-transform: translateX(1000px);
-        transform: translateX(1000px);
-        opacity: 0;
-    }
+  100% {
+    -webkit-transform: translateX(1000px);
+    transform: translateX(1000px);
+    opacity: 0;
+  }
 }
 
 @keyframes slide-out-right {
-    0% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-        opacity: 1;
-    }
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
 
-    100% {
-        -webkit-transform: translateX(1000px);
-        transform: translateX(1000px);
-        opacity: 0;
-    }
+  100% {
+    -webkit-transform: translateX(1000px);
+    transform: translateX(1000px);
+    opacity: 0;
+  }
 }
 
 .failed-search-dialog {
-    width: 20%;
-    height: 40%;
-    background-color: white;
-    border: 2px solid red;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding: 21px;
+  width: 20%;
+  height: 40%;
+  background-color: white;
+  border: 2px solid red;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 21px;
 }
 
 .failed-search-title-and-close {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 21px;
 }
 
 .failed-search-title {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .failed-search-info-text {
-    margin-bottom: 21px;
+  margin-bottom: 21px;
 }
 
 .failed-search-cancel-btn {
-    border: unset;
-    border-radius: 10px;
-    background-color: var(--prio-urgent);
-    color: white;
-    font-weight: 700;
-    width: 6rem;
-    height: 2rem;
-    align-self: center;
+  border: unset;
+  border-radius: 10px;
+  background-color: var(--prio-urgent);
+  color: white;
+  font-weight: 700;
+  width: 6rem;
+  height: 2rem;
+  align-self: center;
 }
 
 .board-add-task-card {
-    height: 80%;
-    background-color: white;
-    border-radius: 30px;
-    box-shadow: 0px 0px 4px 0px #00000029;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  height: 80%;
+  background-color: white;
+  border-radius: 30px;
+  box-shadow: 0px 0px 4px 0px #00000029;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 80%;
+}
+
+.board_add_task_head {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin-bottom: 20px;
+  margin-top: 50px;
+}
+
+.board_add_task_head h1 {
+  font-size: 48px;
+}
+
+.board_add_task_head img {
+  height: 30px;
+}
+
+.board_add_task_head img:hover {
+  background-color: #e7e7e7;
+  border-radius: 100%;
+}
+
+@media (max-width: 1150px) and (min-width: 320px) {
+  .board-add-task-card {
     width: 80%;
+    height: 90%;
+  }
 }
-
-
-/*____________ added from cici ___________ */
-
-.board_add_task_head{
-    display: flex;
-    justify-content: space-between;
-    width: 90%;
-    margin-bottom: 20px;
-    margin-top: 50px;
-}
-
-.board_add_task_head h1{
-    font-size: 48px;
-}
-
-.board_add_task_head img{
-    height: 30px;
-}
-
-.board_add_task_head img:hover{
-    background-color: #E7E7E7;
-    border-radius: 100%;
-}
-
-
-@media(max-width: 1150px) and (min-width: 320px){
-    .board-add-task-card{
-        width:80%;
-        height: 90%;
-    }
-}
-

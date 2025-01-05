@@ -5,16 +5,9 @@
  * @returns
  */
 function noTasks(listTitle) {
-<<<<<<< HEAD
-  return `
-    <div class="no-task-card">
-        <span>No tasks ${listTitle}</span>
-    </div>`;
-=======
   return `<div class="no-task-card">
                 <span>No tasks ${listTitle}</span>
             </div>`;
->>>>>>> df6dfa6e06ed1a71092c288f292286411811c853
 }
 
 /**
@@ -24,17 +17,6 @@ function noTasks(listTitle) {
  */
 function categoryBadge(categoryName) {
   if (categoryName === "user-story") {
-<<<<<<< HEAD
-    return `
-        <div class="category-badge-user">
-            <span>User Story</span>
-        </div>`;
-  } else if (categoryName === "technical-tasks") {
-    return `
-        <div class="category-badge-technical">
-            <span>Technical Task</span>
-        </div>`;
-=======
     return `<div class="category-badge-user">
                     <span>User Story</span>
                 </div>`;
@@ -42,7 +24,6 @@ function categoryBadge(categoryName) {
     return `<div class="category-badge-technical">
                     <span>Technical Task</span>
                 </div>`;
->>>>>>> df6dfa6e06ed1a71092c288f292286411811c853
   }
 }
 
@@ -194,17 +175,6 @@ function ticketTemplate(
 }
 
 function renderUserCircle(initials, color) {
-<<<<<<< HEAD
-  return `
-    <div class="selected_user_circle_board" style="background-color: ${color};">
-        ${initials}
-    </div>`;
-}
-
-function renderDummyTicket() {
-  return `
-    <div class="dummy-ticket-card"></div>`;
-=======
   return `<div class="selected_user_circle_board" style="background-color: ${color};">
                 ${initials}
             </div>`;
@@ -212,7 +182,6 @@ function renderDummyTicket() {
 
 function renderDummyTicket() {
   return `<div class="dummy-ticket-card"></div>`;
->>>>>>> df6dfa6e06ed1a71092c288f292286411811c853
 }
 
 function renderOverlayTicket(
