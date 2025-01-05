@@ -3,7 +3,7 @@
  * if the user have an account so he can log in
  */
 function getUserLoginTemplate() {
-    return `
+  return `
     <div class="login_card scale_up_center"> 
         <div class="login_card_headline">
             <h1>Log in</h1> 
@@ -36,7 +36,7 @@ function getUserLoginTemplate() {
  * if the user is not registred so he can here sign up to the application
  */
 function getSignUpTemplate() {
-    return `
+  return `
        <form id="logiSignUp" class="signup_card scale_up_center" onsubmit="pushNewUserinFireBaseArray(event)">
         <div class="login_back_to_sign_in">
             <img onclick="backToLogIn()" src="./assets/img/back_arrow.png" alt="Zurück zur Anmeldung">
@@ -88,7 +88,7 @@ function getSignUpTemplate() {
  * This function returns the HTML template for the "Remember Me" overlay
  */
 function getRememberMeTemplate() {
-    return `
+  return `
     <div id="rememberMeOverlay" class="remember_me_overlay">
         <div id="rememberMeLogoContainer" class="remember_me_content">
             <img src="./assets/img/capa.png" alt="Logo" class="remember_me_logo">
@@ -104,14 +104,14 @@ function getRememberMeTemplate() {
     `;
 }
 
-function getRememberMeYesTemplate(){
-    return `
+function getRememberMeYesTemplate() {
+  return `
     <p id="rememberMeYes">Daten wurden gespeichert</p>
-    `
+    `;
 }
 
-function getRememberMeNoTemplate(){
-    return `
+function getRememberMeNoTemplate() {
+  return `
     <p id="rememberMeNo" >Daten wurden nicht gespeichert</p>
-    `
+    `;
 }

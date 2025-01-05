@@ -1,5 +1,5 @@
-function getPrivacyPolicyTemplate(){
-    return `
+function getPrivacyPolicyTemplate() {
+  return `
             <div class="privacy_and_legal_privacy_plolicy_text_container">
 
                 <h1 class="pp_headline">Privacy Policy</h1>
@@ -67,11 +67,11 @@ function getPrivacyPolicyTemplate(){
                 <h2>6. Kontaktieren Sie uns</h2>
                 <p>Wenn Sie Fragen oder Anmerkungen zu dieser Richtlinie haben, können Sie uns per E-Mail unter <span class="pp_highlight">info@developerakademie.com</span> oder per Post an:</p>
                 <p class="pp_contact_details">Developer Akademie<br>Tassiopl 25<br>84541 München Deutschland</p>
-    `
+    `;
 }
 
-function getLegalNoticeTemplate(){
-    return `
+function getLegalNoticeTemplate() {
+  return `
     <div class="privacy_and_legal_privacy_plolicy_text_container">
         <h1>Imprint</h1>
         <p>Muhammed T.</p>
@@ -108,5 +108,5 @@ function getLegalNoticeTemplate(){
         <p class="pp_highlight">Developer Akademie</p>
         <p class="pp_highlight">Join</p>
     </div>
-    `
+    `;
 }

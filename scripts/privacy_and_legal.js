@@ -91,7 +91,6 @@ function showLegalNoticeTemplate(){
     template.innerHTML += getLegalNoticeTemplate();
 }
 
-
 /**
  * this function is an help function to clear the html and load the Privacy Policy template
  */
@@ -109,7 +108,6 @@ function loadForLogedInUsersLegalTemplate(){
     termPolicy.innerHTML = "";
     termPolicy.innerHTML += getForLoggedInUserPrivacyPolicyTemplate();
 }
-
 
 /**
  * Redirects to the previously visited page and closes the current window.
@@ -131,4 +129,3 @@ function redirectToPreviousPageAndClose() {
         window.location.href = previousPage;
     }
 }
-
