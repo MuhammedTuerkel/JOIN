@@ -222,6 +222,8 @@ async function getAllTasks() {
   allTasks = Object.entries(responseAsJSON).map(([id, task]) => {
     return { firebase_id: id, ...task };
   });
+
+  console.log("all Tasks", allTasks);
 }
 
 async function getUserTasks() {
@@ -241,11 +243,17 @@ async function getUserTasks() {
 function lengthOfSummaryTasks(activeUserTasks) {
   summaryTasks = activeUserTasks.length;
   console.log("allTasks", summaryTasks);
+  let target = document.getElementById("allTasks");
+  target.innerHTML = "";
+  target.innerHTML = `${summaryTasks}`;
 }
 
 function lengthOfToDoTasks(activeUserTasks) {
   summaryToDo = activeUserTasks.filter((item) => item.state === "toDo").length;
   console.log("todo", summaryToDo);
+  let target = document.getElementById("todo");
+  target.innerHTML = "";
+  target.innerHTML = `${summaryToDo}`;
 }
 
 function lengthOfInProgressTasks(activeUserTasks) {
@@ -253,6 +261,9 @@ function lengthOfInProgressTasks(activeUserTasks) {
     (item) => item.state === "inProgress"
   ).length;
   console.log("inProgress", summaryInProgress);
+  let target = document.getElementById("inProgress");
+  target.innerHTML = "";
+  target.innerHTML = `${summaryInProgress}`;
 }
 
 function lengthOfFeedbackTasks(activeUserTasks) {
@@ -260,11 +271,17 @@ function lengthOfFeedbackTasks(activeUserTasks) {
     (item) => item.state === "awaitFeedback"
   ).length;
   console.log("awaitFeedback", summaryFeedback);
+  let target = document.getElementById("awaiting");
+  target.innerHTML = "";
+  target.innerHTML = `${summaryFeedback}`;
 }
 
 function lengthOfDoneTasks(activeUserTasks) {
   summaryDone = activeUserTasks.filter((item) => item.state === "done").length;
   console.log("done", summaryDone);
+  let target = document.getElementById("done");
+  target.innerHTML = "";
+  target.innerHTML = `${summaryDone}`;
 }
 
 function lengthOfUrgentTasks(activeUserTasks) {
@@ -272,6 +289,10 @@ function lengthOfUrgentTasks(activeUserTasks) {
     (item) => item.prio === "urgent"
   ).length;
   console.log("urgent", summaryUrgent);
+
+  let target = document.getElementById("urgent");
+  target.innerHTML = "";
+  target.innerHTML = `${summaryUrgent}`;
 }
 
 /**
@@ -280,6 +301,7 @@ function lengthOfUrgentTasks(activeUserTasks) {
  * @returns {Object} - The object with the earliest due date.
  */
 function getEarliestDate(activeUserTasks) {
+  let target = document.getElementById("earliestDate");
   if (activeUserTasks.length === 0) {
     earliestDateObject = null;
   }
@@ -290,6 +312,8 @@ function getEarliestDate(activeUserTasks) {
   });
   earliestDateNumber = earliestDateObject.due_date;
   let earliestDate = changeDateFormat(earliestDateNumber);
+  target.innerHTML = "";
+  target.innerHTML = `${earliestDate}`;
   console.log(earliestDate);
 }
 

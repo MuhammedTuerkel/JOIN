@@ -14,7 +14,6 @@ async function onInit() {
   onloadFunction();
   getLoggedInUserData();
   sideNavigation();
-  getUserTasks();
 }
 
 /**
