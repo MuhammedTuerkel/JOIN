@@ -66,6 +66,8 @@ function addTaskClearTask() {
   document.getElementById("low-btn").classList.remove("low");
   document.getElementById("low-btn").classList.remove("active");
   selectedUsers = [];
+  subtasksArray = [];
+  enableInputAndButton();
   list.innerHTML = "";
   assignedList.innerHTML = "";
 }

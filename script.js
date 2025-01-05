@@ -203,3 +203,15 @@ function getLoggedInUserData() {
   userName = UserLogg.name;
   console.log(userName);
 }
+
+/**
+ * Gets all tasks which are saved in the firebase realtime database with its Firebase-ID
+ */
+async function getAllTasks() {
+  let response = await fetch(BASE_URL + "tasks" + ".json");
+  let responseAsJSON = await response.json();
+
+  allTasks = Object.entries(responseAsJSON).map(([id, task]) => {
+    return { firebase_id: id, ...task };
+  });
+}
