@@ -1,5 +1,4 @@
 let selectedUsersOnBoard = [];
-let selectedPrio;
 
 /**
  * Initializes the task form by calling necessary setup functions.
@@ -427,12 +426,6 @@ function clearSubtaskInput() {
         addSubtaskBtn.style.visibility = 'visible';
     });
 }
-
-/**
- * Array to hold subtasks.
- * @type {Array<Object>}
- */
-let subtasksArray = [];
 
 /**
  * Adds a new subtask to the subtasks array and updates the UI.

@@ -14,7 +14,6 @@ function addTaskOnInit() {
 
 /**
  * Saves the task and redirects to the board page.
- * 
  * @param {Event} event - The event object.
  */
 function saveTaskGoToBoard(event) {
@@ -26,7 +25,6 @@ function saveTaskGoToBoard(event) {
 
 /**
  * Saves the task and resets the form to create a new task.
- * 
  * @param {Event} event - The event object.
  */
 function saveTaskCreateNewTask(event) {
@@ -41,7 +39,6 @@ function saveTaskCreateNewTask(event) {
 
 /**
  * Saves the task and closes the overlay on the board
- * 
  * @param {Event} event 
  */
 function saveTaskCloseOverlay(event) {
@@ -69,7 +66,6 @@ function addTaskClearTask(){
     selectedUsers = [];
     list.innerHTML = "" ;
     assignedList.innerHTML = "";
-    
 }
 
 /**
@@ -84,7 +80,6 @@ function goBackToAddTask(event) {
 
 /**
  * Posts a task to the server.
- * 
  * @param {string} [path=""] - The path to append to the base URL.
  * @param {Object} [data={}] - The data to be sent in the request body.
  * @returns {Promise<Object>} - The response JSON.
@@ -101,8 +96,7 @@ async function postTask(path = "", data = {}) {
 }
 
 /**
- * Builds a task object from form input values.
- * 
+ * Builds a task object from form input values
  * @returns {Object} - The task object in JSON format.
  */
 function buildTask() {
@@ -119,7 +113,6 @@ function buildTask() {
 
 /**
  * Builds a task object from form input values.
- * 
  * @returns {Object} - The task object in JSON format.
  */
 function buildTaskOnBoard() {
@@ -134,189 +127,9 @@ function buildTaskOnBoard() {
     return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState);
 }
 
-/**
- * Handles the click event for the dropdown.
- * Opens the dropdown container and updates the dropdown arrow.
- * 
- * @param {Event} event - The event object.
- */
-function openDropdown(event) {
-    event.stopPropagation();
-    document.getElementById('assigned').classList.add('add_task_dropdown_active');
-    let dropdownContainer = document.getElementById('addTaskDropdown');
-    let dropdownImage = document.getElementById('dropDownArrow');
-
-    if (dropdownContainer.classList.contains('open')) {
-        closeDropdown();
-    } else {
-        dropdownContainer.classList.add('open');
-        dropdownImage.style.transform = 'rotate(180deg)';
-        loadUserInAssignedToDropdown();
-    }
-}
-
-/**
- * Handles the click event for the dropdown.
- * Closes the dropdown container and updates the dropdown arrow.
- * *clears the input field
- */
-function closeDropdown() {
-    document.getElementById('assigned').classList.remove('add_task_dropdown_active');
-    let dropdownContainer = document.getElementById('addTaskDropdown');
-    let dropdownImage = document.getElementById('dropDownArrow');
-    dropdownContainer.classList.remove('open');
-    dropdownImage.style.transform = 'rotate(0deg)';
-    document.getElementById('addTaskSearchContacts').value = "";
-}
-
-/**
- * Closes the dropdown list if the user clicks outside of it.
- */
-function handleDropdownBodyClick() {
-    let dropdownContainer = document.getElementById('addTaskDropdown');
-    if (dropdownContainer.classList.contains('open')) {
-        closeDropdown();
-    }
-}
-
-/**
- * Loads the users into the dropdown container.
- * Updates the dropdown selections based on previously selected users.
- */
-function loadUserInAssignedToDropdown() {
-    let dropdownContainer = document.getElementById('addTaskDropdown');
-    dropdownContainer.innerHTML = "";
-
-    for (let index = 0; index < users.length; index++) {
-        let user = users[index];
-        dropdownContainer.innerHTML += createUserTemplate(user);
-    }
-    updateDropdownSelections();
-}
-
-/**
- * Toggles user selection based on checkbox status.
- * 
- * @param {string} email - The email of the user to toggle selection.
- */
-function toggleUserSelection(email) {
-    let template = document.getElementById(`template-${email}`);
-    let checkbox = document.getElementById(`checkbox-${email}`);
-    let isChecked = checkbox.checked;
-
-    if (isChecked) {
-        notAssignedUser(email);
-    } else {
-        assignedUserDropDown(email);
-    }
-}
-
-/**
- * Assigns a user and updates the UI accordingly.
- * 
- * @param {string} email - The email of the user to be assigned.
- */
-function assignedUserDropDown(email) {
-    let template = document.getElementById(`template-${email}`);
-    let checkedImg = document.getElementById(`img-${email}`);
-    let checkbox = document.getElementById(`checkbox-${email}`);
-
-    template.classList.remove('user_template_not_selected');
-    template.classList.add('user_template_selected');
-    checkedImg.src = "./assets/img/checked button.png";
-    checkbox.checked = true;
-
-    let user = users.find(user => user.email === email);
-    if (!selectedUsers.some(selectedUser => selectedUser.email === user.email)) {
-        selectedUsers.push(user);
-    }
-    updateSelectedUsersContainer();
-}
-
-/**
- * Unassigns a user and updates the UI accordingly.
- * 
- * @param {string} email - The email of the user to be unassigned.
- */
-function notAssignedUser(email) {
-    let template = document.getElementById(`template-${email}`);
-    let checkedImg = document.getElementById(`img-${email}`);
-    let checkbox = document.getElementById(`checkbox-${email}`);
-
-    template.classList.remove('user_template_selected');
-    template.classList.add('user_template_not_selected');
-    checkedImg.src = "./assets/img/check button.png";
-    checkbox.checked = false;
-
-    selectedUsers = selectedUsers.filter(user => user.email !== email);
-    updateSelectedUsersContainer();
-}
-
-/**
- * Updates the dropdown selections based on the selected users.
- */
-function updateDropdownSelections() {
-    selectedUsers.forEach(user => {
-        let checkbox = document.getElementById(`checkbox-${user.email}`);
-        let template = document.getElementById(`template-${user.email}`);
-        let img = document.getElementById(`img-${user.email}`);
-
-        if (checkbox) {
-            checkbox.checked = true;
-            template.classList.remove('user_template_not_selected');
-            template.classList.add('user_template_selected');
-            img.src = "./assets/img/checked button.png";
-        }
-    });
-}
-
-/**
- * Updates the container with the selected users' initials.
- */
-function updateSelectedUsersContainer() {
-    let container = document.getElementById('selectedUsers');
-    container.innerHTML = "";
-
-    for (let index = 0; index < selectedUsers.length; index++) {
-        let user = selectedUsers[index];
-        let initials = user.name.charAt(0).toUpperCase() + user.name.charAt(user.name.length - 1).toUpperCase();
-        container.innerHTML += `
-            <div class="selected_user_circle" style="background-color: ${user.color};">
-                ${initials}
-            </div>
-        `;
-    }
-}
-
-/**
- * Filters and loads users based on the search input value.
- */
-function addTaskSearchUser() {    
-    let input = document.getElementById('addTaskSearchContacts').value.toLowerCase(); 
-    let filteredUsers = users.filter(user => user.name.toLowerCase().startsWith(input)); 
-    loadSearchedUsers(filteredUsers); 
-}
-
-/**
- * Loads the filtered users into the dropdown container.
- * 
- * @param {Array<Object>} filteredUsers - The filtered list of users.
- */
-function loadSearchedUsers(filteredUsers){
-    let findUser = document.getElementById('addTaskDropdown');
-    findUser.innerHTML = "";
-    if(filteredUsers.length === 0){
-        findUser.innerHTML = '<div class="add_task_search_error"><small>no results found...</small></div>';
-    }
-    for(let index = 0; index < filteredUsers.length; index++){
-        const user = filteredUsers[index];
-        findUser.innerHTML += createUserTemplate(user);
-    }
-}
 
 /**
  * Ensures that only one button is active and assigns the selected button its appearance.
- * 
  * @param {string} buttonId - The id of the selected button.
  * @param {string} svgId - The id of the corresponding svg.
  * @param {string} buttonClass - The class of the selected button.
@@ -508,7 +321,6 @@ document.addEventListener('click', (event) => {
 
 /**
  * Handles the edit click event for a subtask.
- * 
  * @param {HTMLElement} target - The target element that triggered the event.
  */
 function handleEditClick(target) {
@@ -532,7 +344,6 @@ function handleEditClick(target) {
 
 /**
  * Creates an icon element.
- * 
  * @param {string} className - The class name for the icon.
  * @param {string} src - The source URL for the icon image.
  * @returns {HTMLElement} - The created icon element.
@@ -547,7 +358,6 @@ function createIcon(className, src) {
 
 /**
  * Creates an input field element for editing a subtask.
- * 
  * @param {string} currentText - The current text of the subtask.
  * @returns {HTMLElement} - The created input field element.
  */
@@ -561,7 +371,6 @@ function createInputField(currentText) {
 
 /**
  * Edits an entry in the subtasks array.
- * 
  * @param {number} subtaskID - The ID of the subtask to edit.
  * @param {string} updatedText - The updated text for the subtask.
  */
@@ -576,7 +385,6 @@ function editArrayEntry(subtaskID, updatedText) {
 
 /**
  * Deletes an entry from the subtasks array.
- * 
  * @param {number} subtaskID - The ID of the subtask to delete.
  */
 function deleteArrayEntry(subtaskID) {
@@ -588,7 +396,6 @@ function deleteArrayEntry(subtaskID) {
 
 /**
  * Handles the save click event for a subtask.
- * 
  * @param {HTMLElement} target - The target element that triggered the event.
  */
 function handleSaveClick(target) {
@@ -609,7 +416,6 @@ function handleSaveClick(target) {
 
 /**
  * Handles the cancel click event for a subtask.
- * 
  * @param {HTMLElement} target - The target element that triggered the event.
  */
 function handleCancelClick(target) {
@@ -625,7 +431,6 @@ function handleCancelClick(target) {
 
 /**
  * Handles the delete click event for a subtask.
- * 
  * @param {HTMLElement} target - The target element that triggered the event.
  */
 function handleDeleteClick(target) {
@@ -639,7 +444,6 @@ function handleDeleteClick(target) {
 
 /**
  * Generates a unique ID based on the current timestamp and random values.
- * 
  * @returns {string} - The generated unique ID.
  */
 function generateUniqueID() {
@@ -648,7 +452,6 @@ function generateUniqueID() {
 
 /**
  * Shows the next step overlay for adding a task.
- * 
  * @param {Event} event - The event object.
  */
 function showAddTaskOverlayNextStep(event) {
