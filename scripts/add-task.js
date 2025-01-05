@@ -11,6 +11,7 @@ function addTaskOnInit() {
   setMedium();
   subtaskInput();
   addTaskClearTask();
+  getLoggedInUserData();
 }
 
 /**
@@ -110,6 +111,8 @@ function buildTask() {
   let taskState = "toDo";
   let taskAssigned = selectedUsers;
   let taskCreator = userName;
+  console.log(taskCreator);
+
   return taskToJSON(
     taskTitle,
     taskDate,
