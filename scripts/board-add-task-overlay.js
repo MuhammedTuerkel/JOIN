@@ -1,3 +1,5 @@
+let actualFirebaseID;
+
 async function findFirebaseIdById(targetID) {
   try {
     const response = await fetch(BASE_URL + "tasks.json");
@@ -54,7 +56,7 @@ function toggleOverlay() {
  * @param {string} prio - The Priority of the ticket
  * @param {string} ticketID - The exact ID which is based on the Firebase-ID
  */
-function showOverlayTicket(
+async function showOverlayTicket(
   category,
   ticketTitle,
   ticketDescription,
@@ -72,6 +74,7 @@ function showOverlayTicket(
   );
   renderAssignedUsersOverlay(ticketID);
   renderSubtasksOverlay(ticketID);
+  actualFirebaseID = await findFirebaseIdById(ticketID);
 }
 
 /**
