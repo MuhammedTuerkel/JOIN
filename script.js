@@ -9,6 +9,7 @@ let summaryInProgress;
 let summaryFeedback;
 let summaryDone;
 let summaryUrgent;
+let earliestDate;
 
 const BASE_URL =
   "https://join-bbd82-default-rtdb.europe-west1.firebasedatabase.app/";
@@ -234,6 +235,7 @@ async function getUserTasks() {
   lengthOfFeedbackTasks(activeUserTasks);
   lengthOfDoneTasks(activeUserTasks);
   lengthOfUrgentTasks(activeUserTasks);
+  getEarliestDate(activeUserTasks);
 }
 
 function lengthOfSummaryTasks(activeUserTasks) {
@@ -270,4 +272,31 @@ function lengthOfUrgentTasks(activeUserTasks) {
     (item) => item.prio === "urgent"
   ).length;
   console.log("urgent", summaryUrgent);
+}
+
+/**
+ * Finds the object with the earliest due date in an array of objects.
+ * @param {Array} array - Array of objects with a due_date property.
+ * @returns {Object} - The object with the earliest due date.
+ */
+function getEarliestDate(activeUserTasks) {
+  if (activeUserTasks.length === 0) {
+    earliestDateObject = null;
+  }
+  earliestDateObject = activeUserTasks.reduce((earliest, current) => {
+    return new Date(current.due_date) < new Date(earliest.due_date)
+      ? current
+      : earliest;
+  });
+  earliestDateNumber = earliestDateObject.due_date;
+  let earliestDate = changeDateFormat(earliestDateNumber);
+  console.log(earliestDate);
+}
+
+function changeDateFormat(earliestDateNumber) {
+  let date = new Date(earliestDateNumber);
+  let day = String(date.getDate()).padStart(2, "0");
+  let month = date.toLocaleString("de-DE", { month: "long" });
+  let year = date.getFullYear();
+  return `${month} ${day}, ${year}`;
 }
