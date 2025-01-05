@@ -183,7 +183,6 @@ function pushSubtaskArray() {
     } else if (arrayLength >= 4) {
         disableInputAndButton();
     }
-    console.log(subtasksArray);
     document.getElementById('iconsContainer').style.visibility = 'hidden';
     document.getElementById('add-subtask-btn').style.visibility = 'visible';
 }

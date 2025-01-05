@@ -649,31 +649,3 @@ function handleDeleteClick(target) {
 function generateUniqueID() {
     return Date.now().toString(36) + Math.random().toString(36).substring(2, 10);
 }
-
-/**
- * Shows the next step overlay for adding a task.
- * 
- * @param {Event} event - The event object.
- */
-function showAddTaskOverlayNextStep(event) {
-    event.preventDefault();
-    document.getElementById('addTaskOverlayNextStep').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-}
-
-/**
- * Checks the validity of the form fields and enables/disables the create task button accordingly.
- */
-function checkFormValidity() {
-    var taskTitle = document.getElementById('task-title').value;
-    var taskDueDate = document.getElementById('task-due-date').value;
-    var taskCategory = document.getElementById('task-category').value;
-
-    var createTaskButton = document.getElementById('createTaskButton');
-
-    if (taskTitle && taskDueDate && taskCategory) {
-        createTaskButton.disabled = false;
-    } else {
-        createTaskButton.disabled = true;
-    }
-}
