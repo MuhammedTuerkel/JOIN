@@ -2,6 +2,13 @@ let users = [];
 let tasks = [];
 let loggedInUser = [];
 let userName;
+let activeUserTasks = [];
+let summaryTasks;
+let summaryToDo;
+let summaryInProgress;
+let summaryFeedback;
+let summaryDone;
+let summaryUrgent;
 
 const BASE_URL =
   "https://join-bbd82-default-rtdb.europe-west1.firebasedatabase.app/";
@@ -215,3 +222,22 @@ async function getAllTasks() {
     return { firebase_id: id, ...task };
   });
 }
+
+async function getUserTasks() {
+  let user = await fetch(BASE_URL + "tasks" + ".json");
+  let responseAsJSON = await user.json();
+  let tasks = Object.values(responseAsJSON);
+  activeUserTasks = tasks.filter((task) => task["creator"] === userName);
+  lengthOfSummaryTasks(activeUserTasks);
+  lengthOfToDoTasks(activeUserTasks);
+  lengthOfInProgressTasks(activeUserTasks);
+  lengthOfFeedbackTasks(activeUserTasks);
+  lengthOfDoneTasks(activeUserTasks);
+  lengthOfUrgentTasks(activeUserTasks);
+}
+
+function lengthOfSummaryTasks(activeUserTasks) {
+  summaryTasks = activeUserTasks.length;
+}
+
+function lengthOfToDoTasks(activeUserTasks) {}
