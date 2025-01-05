@@ -19,8 +19,8 @@ function addTaskOnInit() {
  */
 function saveTaskGoToBoard(event) {
   event.preventDefault();
-  postTask();
-  buildTask();
+  let data = buildTask();
+  postTask("tasks", data);
   window.location.href = "/board.html";
 }
 
