@@ -1,7 +1,6 @@
 let users = [];
 let tasks = [];
 let loggedInUser = [];
-let userName;
 
 const BASE_URL =
   "https://join-bbd82-default-rtdb.europe-west1.firebasedatabase.app/";
@@ -25,7 +24,6 @@ async function onloadFunction() {
 /**
  * Fetch data from Firebase Realtime Database
  * users is the path to the data in the database
- *
  */
 async function loadData(path = "") {
   let response = await fetch(BASE_URL + path + ".json");
@@ -35,7 +33,6 @@ async function loadData(path = "") {
 
 /**
  * Pushes a new user into the Firebase Realtime Database.
- *
  * This function prevents the default form submission behavior, collects the user input data,
  * generates a random color, creates a user data object, and posts this data to Firebase.
  * After successfully adding the user, it loads the login template and shows a registration confirmation.
@@ -202,6 +199,6 @@ function returnToSessionStoragePage() {
 function getLoggedInUserData() {
   let loggedUser = localStorage.getItem("loggedInUser");
   let UserLogg = JSON.parse(loggedUser);
-  userName = UserLogg.name;
-  console.log(userName);
+
+  console.log(UserLogg);
 }
