@@ -279,12 +279,17 @@ function renderSubtasksOverlay(ticketID) {
     });
 }
 
+/**
+ * Renders all Subtasks into the Edit Overlay
+ * 
+ * @param {int} ticketID 
+ */
 function renderSubtasksEditOverlay(ticketID) {
     let searchedTask = allTasks.find(t => t['id'] === ticketID);
     let allSubtasks = searchedTask.subtasks;
     let targetElement = document.getElementById('subtasksList');
     targetElement.innerHTML = '';
-    allSubtasks.forEach((subtask, index) => {
+    allSubtasks.forEach((subtask) => {
         let subtaskContent = subtask.content;
         let subtaskID = subtask.id;
         targetElement.innerHTML += renderSubtaskItem(subtaskID, subtaskContent);
