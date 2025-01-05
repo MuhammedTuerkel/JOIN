@@ -196,3 +196,21 @@ function renderSubtasksEditOverlay(ticketID) {
         targetElement.innerHTML += renderSubtaskItem(subtaskID, subtaskContent);
     })
 }
+
+/**
+ * If there is a search term in the input field, only the ticket will be rendered
+ * if it is moved
+ */
+function renderFilteredTickets() {
+    let searchTerm = document.getElementById('boardSearchInput').value.trim();
+    if (searchTerm) {
+        let searchResults = allTasks.filter(task => {
+            const titleMatch = task.title.toLowerCase().includes(searchTerm.toLowerCase());
+            const descriptionMatch = task.description.toLowerCase().includes(searchTerm.toLowerCase());
+            return titleMatch || descriptionMatch;
+        });
+        renderAllTickets(searchResults);
+    } else {
+        renderAllTickets(allTasks);
+    }
+}

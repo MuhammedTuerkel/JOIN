@@ -1,14 +1,11 @@
 let users = [];
 let tasks = [];
-
 let loggedInUser = [];
 
 const BASE_URL = "https://join-bbd82-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /**
  * Load user data from Firebase Realtime Database into global users array
- * 
- * 
  */
 async function onloadFunction() {
     let userResponse = await loadData("users");
@@ -157,8 +154,7 @@ function renderLegalNoticeTemplate() {
 document.addEventListener('DOMContentLoaded', function() {
     const templateType = sessionStorage.getItem('templateType');
     let template = document.getElementById('termsContent');
-
-
+    
     if (templateType === 'privacyPolicy') {
         renderPrivacyPolicyTemplate();
     } else if (templateType === 'legalNotice') {

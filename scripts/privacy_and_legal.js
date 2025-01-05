@@ -101,7 +101,6 @@ function loadForLoggedInUserPrivacyTemplate(){
     termPolicy.innerHTML += getForLoggedInUserPrivacyPolicyTemplate();
 }
 
-
 /**
  * this function is an help function to clear the html and load the Legal Notice template
  */
@@ -112,20 +111,24 @@ function loadForLogedInUsersLegalTemplate(){
 }
 
 
-
-
-
-
+/**
+ * Redirects to the previously visited page and closes the current window.
+ * 
+ * The function performs the following steps:
+ * 1. Retrieves the URL of the previous page from sessionStorage.
+ * 2. Opens the previous page in a new tab if it exists.
+ * 3. Closes the current window.
+ * 4. If the window was not closed and the previous page URL exists, redirects the current page to the previous page URL.
+ */
 function redirectToPreviousPageAndClose() {
     const previousPage = sessionStorage.getItem('previousPage');
     
     if (previousPage) {
         window.open(previousPage, '_blank');
     }
-    window.close();
-
-   
+    window.close();   
     if (!window.closed && previousPage) {
         window.location.href = previousPage;
     }
 }
+
