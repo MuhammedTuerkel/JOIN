@@ -161,45 +161,6 @@ function activateButton(buttonId, svgId, buttonClass, svgClass) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- *
- */
 function saveEditonClick() {
   let newTitle = document.getElementById("task-title-overlay-edit").value;
   let newDescription = document.getElementById(
@@ -229,7 +190,6 @@ function saveEditonClick() {
 
 
 
-
 function buildTask() {
   let taskTitle = document.getElementById("task-title").value;
   let taskDate = document.getElementById("task-due-date").value;
@@ -255,15 +215,6 @@ function buildTask() {
   );
 }
 
-
-
-
-
-
-
-
-
-
 function pushEditSubtaskArray(id) {
   let newSubtask = document.getElementById("task-subtasks").value;
   idIndex = allTasks.findIndex((i) => i.id === id);
@@ -276,4 +227,27 @@ function pushEditSubtaskArray(id) {
   idArray.subtasks.push({
     newSubtask,
   });
+}
+
+//FUNKTION --> Bereitstellen des subtasksArrays und updaten des UI
+//Hole mir die Subtasks des Tickets
+//Speichere diese bestehenden Subtasks in die subtasksArray
+//Füge den neuen Subtask zum subtasksArray hinzu
+//Rendere die Subtasks-Liste im Front-End neu
+// ERGEBNIS --> Alle Subtasks inkl. der neuen, sind in einer Array gebündelt, die es bereits gibt. Die UI des Overlay Edit Tickets wird aktualisiert.
+
+function pushEditSubtasksArray(ticketID) {
+  let targetTicket = allTasks.filter((i) => i.id === ticketID);
+  subtasksArray = targetTicket[0].subtasks;
+  let newSubtask = document.getElementById("task-subtasks").value;
+  subtasksArray.push({
+    id: subtasksArray.length + 1,
+    content: newSubtask,
+    status: "open",
+  });
+  newSubtask = "";
+  renderSubtaskList();
+  document.getElementById("iconsContainer").style.visibility = "hidden";
+  document.getElementById("add-subtask-btn").style.visibility = "visible";
+  console.log("TEST", subtasksArray);
 }
