@@ -94,7 +94,7 @@ function editTicket(
 ) {
   let target = document.getElementById("overlayCard");
   target.innerHTML = "";
-  target.innerHTML = renderOverlayEditTicket();
+  target.innerHTML = renderOverlayEditTicket(ticketID);
   document.getElementById("task-title-overlay-edit").value = ticketTitle;
   document.getElementById("task-description-overlay-edit").value =
     ticketDescription;
@@ -160,6 +160,43 @@ function activateButton(buttonId, svgId, buttonClass, svgClass) {
   document.getElementById(svgId).classList.add(svgClass);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  *
  */
@@ -171,6 +208,73 @@ function saveEditonClick() {
   let newDueDate = document.getElementById("task-due-date-overlay-edit").value;
   let newPrio = editedPrio;
   let newAssignedUser = selectedUsers;
-  let newSubtasks = "";
   console.log(newTitle, newDescription, newDueDate, newPrio, newAssignedUser);
+
+
+  let task = allTasks.find((t) => t["id"] === ticketID);
+  let firebaseID = task["firebase_id"];
+  let subtask = task.subtasks[subtaskIndex];
+  subtask.status = subtask.status === "open" ? "closed" : "open";
+  try {
+    await fetch(
+      `${BASE_URL}tasks/${firebaseID}/subtasks/${subtaskIndex}.json`,
+      {
+        method: "PATCH",
+        body: JSON.stringify({ status: subtask.status }),
+        headers: { "Content-Type": "application/json" },
+      }
+    )
+};
+}
+
+
+
+
+
+function buildTask() {
+  let taskTitle = document.getElementById("task-title").value;
+  let taskDate = document.getElementById("task-due-date").value;
+  let taskPrio = selectedPrio;
+  let taskDescription = document.getElementById("task-description").value;
+  let taskCategory = document.getElementById("task-category").value;
+  let taskSubtasks = subtasksArray;
+  let taskState = "toDo";
+  let taskAssigned = selectedUsers;
+  let taskCreator = userName;
+  console.log(taskCreator);
+
+  return taskToJSON(
+    taskTitle,
+    taskDate,
+    taskPrio,
+    taskDescription,
+    taskCategory,
+    taskSubtasks,
+    taskAssigned,
+    taskState,
+    taskCreator
+  );
+}
+
+
+
+
+
+
+
+
+
+
+function pushEditSubtaskArray(id) {
+  let newSubtask = document.getElementById("task-subtasks").value;
+  idIndex = allTasks.findIndex((i) => i.id === id);
+  idArray = allTasks[idIndex];
+  console.log("ticket Id", id);
+  console.log("index", idIndex);
+
+  console.log(idArray.subtasks);
+
+  idArray.subtasks.push({
+    newSubtask,
+  });
 }
