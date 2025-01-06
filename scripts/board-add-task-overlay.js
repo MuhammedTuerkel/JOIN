@@ -230,7 +230,6 @@ function saveEditonClick() {
 
 
 
-
 function buildTask() {
   let taskTitle = document.getElementById("task-title").value;
   let taskDate = document.getElementById("task-due-date").value;

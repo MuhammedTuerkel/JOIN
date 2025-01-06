@@ -241,11 +241,13 @@ async function getUserTasks() {
 }
 
 function lengthOfSummaryTasks(activeUserTasks) {
-  summaryTasks = activeUserTasks.length;
+  summaryTasks = allTasks.length;
   console.log("allTasks", summaryTasks);
   let target = document.getElementById("allTasks");
   target.innerHTML = "";
   target.innerHTML = `${summaryTasks}`;
+  console.log(activeUserTasks);
+  
 }
 
 function lengthOfToDoTasks(activeUserTasks) {
