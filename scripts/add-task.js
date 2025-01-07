@@ -1,5 +1,5 @@
 let selectedUsers = [];
-let selectedPrio;
+let selectedPrio = "medium";
 let subtasksArray = [];
 
 /**
@@ -61,12 +61,13 @@ function addTaskClearTask() {
   let assignedList = document.getElementById("selectedUsers");
   document.getElementById("urgent-btn").classList.remove("urgent");
   document.getElementById("urgent-btn").classList.remove("active");
-  document.getElementById("medium-btn").classList.add("medium");
+  setMedium();
   document.getElementById("medium-btn").classList.add("active");
   document.getElementById("low-btn").classList.remove("low");
   document.getElementById("low-btn").classList.remove("active");
   selectedUsers = [];
   subtasksArray = [];
+  selectedPrio = "medium";
   enableInputAndButton();
   list.innerHTML = "";
   assignedList.innerHTML = "";
