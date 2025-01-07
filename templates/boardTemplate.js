@@ -136,17 +136,7 @@ function prioIconOverlay(prio) {
   }
 }
 
-function ticketTemplate(
-  ticketID,
-  category,
-  ticketTitle,
-  ticketDescription,
-  longDescription,
-  prio,
-  subtaskDone,
-  allSubtasks,
-  ticketDate
-) {
+function ticketTemplate(ticketID, category, ticketTitle, ticketDescription, longDescription, prio, subtaskDone, allSubtasks, ticketDate) {
   return `<div class="ticket-card" draggable="true" ondragstart="startDragging('${ticketID}')" onclick="toggleOverlay(); showOverlayTicket('${category}', '${ticketTitle}', '${longDescription}', '${ticketDate}', '${prio}', '${ticketID}')">
                 ${categoryBadge(category)}
                 <div class="ticket-title">
@@ -184,14 +174,7 @@ function renderDummyTicket() {
   return `<div class="dummy-ticket-card"></div>`;
 }
 
-function renderOverlayTicket(
-  category,
-  ticketTitle,
-  ticketDescription,
-  ticketDate,
-  prio,
-  ticketID
-) {
+function renderOverlayTicket(category, ticketTitle, ticketDescription, ticketDate, prio, ticketID) {
   return `<div class="overlay-card slide-in-right" id="overlayCard">
             <div class="badge-and-close-wrapper">
                 <div class="overlay-badge">
@@ -366,7 +349,7 @@ function renderOverlayEditTicket(ticketID) {
                                             </svg>
                                         </span>
                                         <div class="divider"></div>
-                                        <span class="check-icon" id="checkIcon" onclick="pushEditSubtaskArray('${ticketID}')">
+                                        <span class="check-icon" id="checkIcon" onclick="pushEditSubtasksArray('${ticketID}')">
                                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <mask id="mask0_75592_9963" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
                                                 <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
@@ -382,7 +365,7 @@ function renderOverlayEditTicket(ticketID) {
                                 </div>
                             </div>
             </form>
-            <button class="endEdit-btn" onclick="saveEditonClick('${ticketID}')">
+            <button class="endEdit-btn" onclick="saveEditOnClick('${ticketID}')">
                 <span>Ok</span>
                 <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <mask id="mask0_259614_6254" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
@@ -432,9 +415,7 @@ function capitalizeFirstChar(username) {
 function renderOverlayUserElement(userName, initials, color) {
   return `<div class="overlay-assigned-user-element">
                 ${renderUserCircle(initials, color)}
-                <span class="overlay-assigned-user-name">${capitalizeFirstChar(
-                  userName
-                )}</span>
+                <span class="overlay-assigned-user-name">${capitalizeFirstChar(userName)}</span>
             </div>`;
 }
 
@@ -447,12 +428,7 @@ function renderOverlayUserElement(userName, initials, color) {
  * @param {string} taskStatus
  * @returns a HTML Snippet to create a Subtask Element in the Front-End
  */
-function renderOverlaySubtaskElement(
-  subtaskIndex,
-  subtaskContent,
-  ticketID,
-  taskStatus
-) {
+function renderOverlaySubtaskElement(subtaskIndex, subtaskContent, ticketID, taskStatus) {
   return `<div class="overlay-subtask-element">
                 <div class="overlay-subtask-status" onclick="changeSubtaskStatus(${subtaskIndex}, '${ticketID}')">
                     ${subtaskStatus(taskStatus)}

@@ -173,14 +173,9 @@ async function renderAssignedUsers(ticketID) {
   let searchedTask = await allTasks.filter((t) => t["id"] == ticketID)[0];
   let assignedUsers = await searchedTask.assigned_to;
   for (let i = 0; i < assignedUsers.length; i++) {
-    let initials =
-      assignedUsers[i].name.charAt(0).toUpperCase() +
-      assignedUsers[i].name
-        .charAt(assignedUsers[i].name.length - 1)
-        .toUpperCase();
+    let initials = assignedUsers[i].name.charAt(0).toUpperCase() + assignedUsers[i].name.charAt(assignedUsers[i].name.length - 1).toUpperCase();
     let bgColor = assignedUsers[i].color;
-    document.getElementById(`ticketAssignedUsers_${ticketID}`).innerHTML +=
-      renderUserCircle(initials, bgColor);
+    document.getElementById(`ticketAssignedUsers_${ticketID}`).innerHTML += renderUserCircle(initials, bgColor);
   }
 }
 
@@ -194,26 +189,16 @@ function renderAssignedUsersOverlay(ticketID) {
   let searchedTask = allTasks.filter((t) => t["id"] == ticketID)[0];
   let assignedUsers = searchedTask.assigned_to;
   selectedUsers = assignedUsers;
-  let targetElement = document.getElementById(
-    `overlayAssignedUserContent_${ticketID}`
-  );
+  let targetElement = document.getElementById(`overlayAssignedUserContent_${ticketID}`);
   if (!targetElement) {
-    console.error(
-      `Element with ID overlayAssignedUserContent_${ticketID} not found`
-    );
+    console.error(`Element with ID overlayAssignedUserContent_${ticketID} not found`);
     return;
   } else {
     for (let i = 0; i < assignedUsers.length; i++) {
-      let initials =
-        assignedUsers[i].name.charAt(0).toUpperCase() +
-        assignedUsers[i].name
-          .charAt(assignedUsers[i].name.length - 1)
-          .toUpperCase();
+      let initials = assignedUsers[i].name.charAt(0).toUpperCase() + assignedUsers[i].name.charAt(assignedUsers[i].name.length - 1).toUpperCase();
       let color = assignedUsers[i].color;
       let userName = assignedUsers[i].name;
-      document.getElementById(
-        `overlayAssignedUserContent_${ticketID}`
-      ).innerHTML += renderOverlayUserElement(userName, initials, color);
+      document.getElementById(`overlayAssignedUserContent_${ticketID}`).innerHTML += renderOverlayUserElement(userName, initials, color);
     }
   }
 }
@@ -226,9 +211,7 @@ function renderAssignedUsersOverlay(ticketID) {
 function renderSubtasksOverlay(ticketID) {
   let searchedTask = allTasks.find((t) => t["id"] === ticketID);
   let allSubtasks = searchedTask.subtasks;
-  let targetElement = document.getElementById(
-    `overlaySubtasksContent_${ticketID}`
-  );
+  let targetElement = document.getElementById(`overlaySubtasksContent_${ticketID}`);
   targetElement.innerHTML = "";
   if (allSubtasks === undefined) {
     targetElement.innerHTML = `<p class="subtask_error">no Subtasks added</p>`;
@@ -236,12 +219,7 @@ function renderSubtasksOverlay(ticketID) {
     allSubtasks.forEach((subtask, index) => {
       let taskStatus = subtask.status;
       let subtaskContent = subtask.content;
-      targetElement.innerHTML += renderOverlaySubtaskElement(
-        index,
-        subtaskContent,
-        ticketID,
-        taskStatus
-      );
+      targetElement.innerHTML += renderOverlaySubtaskElement(index, subtaskContent, ticketID, taskStatus);
     });
   }
 }
@@ -253,9 +231,13 @@ function renderSubtasksOverlay(ticketID) {
  */
 function renderSubtasksEditOverlay(ticketID) {
   let searchedTask = allTasks.find((t) => t["id"] === ticketID);
-  let allSubtasks = searchedTask.subtasks;
+  let allSubtasks = searchedTask.subtasks || [];
   let targetElement = document.getElementById("subtasksList");
   targetElement.innerHTML = "";
+  if (allSubtasks.length === 0) {
+    targetElement.innerHTML = "";
+    return;
+  }
   allSubtasks.forEach((subtask) => {
     let subtaskContent = subtask.content;
     let subtaskID = subtask.id;
@@ -271,12 +253,8 @@ function renderFilteredTickets() {
   let searchTerm = document.getElementById("boardSearchInput").value.trim();
   if (searchTerm) {
     let searchResults = allTasks.filter((task) => {
-      const titleMatch = task.title
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
-      const descriptionMatch = task.description
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
+      const titleMatch = task.title.toLowerCase().includes(searchTerm.toLowerCase());
+      const descriptionMatch = task.description.toLowerCase().includes(searchTerm.toLowerCase());
       return titleMatch || descriptionMatch;
     });
     renderAllTickets(searchResults);

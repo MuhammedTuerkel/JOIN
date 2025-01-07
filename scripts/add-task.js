@@ -1,5 +1,5 @@
 let selectedUsers = [];
-let selectedPrio;
+let selectedPrio = "medium";
 let subtasksArray = [];
 
 /**
@@ -18,10 +18,10 @@ function addTaskOnInit() {
  * Saves the task and redirects to the board page.
  * @param {Event} event - The event object.
  */
-function saveTaskGoToBoard(event) {
+async function saveTaskGoToBoard(event, state = "toDo") {
   event.preventDefault();
-  let data = buildTask();
-  postTask("tasks", data);
+  let data = buildTask(state);
+  await postTask("tasks", data);
   window.location.href = "/board.html";
 }
 
@@ -29,10 +29,10 @@ function saveTaskGoToBoard(event) {
  * Saves the task and resets the form to create a new task.
  * @param {Event} event - The event object.
  */
-function saveTaskCreateNewTask(event) {
+async function saveTaskCreateNewTask(event, state = "toDo") {
   event.preventDefault();
-  let data = buildTask();
-  postTask("tasks", data);
+  let data = buildTask(state);
+  await postTask("tasks", data);
   document.getElementById("addTaskForm").reset();
   document.getElementById("addTaskOverlayNextStep").style.display = "none";
   document.body.style.overflow = "auto";
@@ -43,10 +43,10 @@ function saveTaskCreateNewTask(event) {
  * Saves the task and closes the overlay on the board
  * @param {Event} event
  */
-function saveTaskCloseOverlay(event) {
+async function saveTaskCloseOverlay(event, state = "toDo") {
   event.preventDefault();
-  let data = buildTaskOnBoard();
-  postTask("tasks", data);
+  let data = buildTaskOnBoard(state);
+  await postTask("tasks", data);
   addTaskClearTask();
   toggleOverlay();
   location.reload();
@@ -54,19 +54,20 @@ function saveTaskCloseOverlay(event) {
 
 /**
  * clears the list from all subtasks
- *  clears the list of all assigned users
+ * clears the list of all assigned users
  */
 function addTaskClearTask() {
   let list = document.getElementById("subtasksList");
   let assignedList = document.getElementById("selectedUsers");
   document.getElementById("urgent-btn").classList.remove("urgent");
   document.getElementById("urgent-btn").classList.remove("active");
-  document.getElementById("medium-btn").classList.add("medium");
+  setMedium();
   document.getElementById("medium-btn").classList.add("active");
   document.getElementById("low-btn").classList.remove("low");
   document.getElementById("low-btn").classList.remove("active");
   selectedUsers = [];
   subtasksArray = [];
+  selectedPrio = "medium";
   enableInputAndButton();
   list.innerHTML = "";
   assignedList.innerHTML = "";
@@ -103,56 +104,34 @@ async function postTask(path = "", data = {}) {
  * Builds a task object from form input values
  * @returns {Object} - The task object in JSON format.
  */
-function buildTask() {
+function buildTask(state) {
   let taskTitle = document.getElementById("task-title").value;
   let taskDate = document.getElementById("task-due-date").value;
   let taskPrio = selectedPrio;
   let taskDescription = document.getElementById("task-description").value;
   let taskCategory = document.getElementById("task-category").value;
   let taskSubtasks = subtasksArray;
-  let taskState = "toDo";
+  let taskState = state;
   let taskAssigned = selectedUsers;
   let taskCreator = userName;
-  console.log(taskCreator);
-
-  return taskToJSON(
-    taskTitle,
-    taskDate,
-    taskPrio,
-    taskDescription,
-    taskCategory,
-    taskSubtasks,
-    taskAssigned,
-    taskState,
-    taskCreator
-  );
+  return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState, taskCreator);
 }
 
 /**
  * Builds a task object from form input values.
  * @returns {Object} - The task object in JSON format.
  */
-function buildTaskOnBoard() {
+function buildTaskOnBoard(state) {
   let taskTitle = document.getElementById("task-title").value;
   let taskDate = document.getElementById("task-due-date").value;
   let taskPrio = selectedPrioOnBoard;
   let taskDescription = document.getElementById("task-description").value;
   let taskCategory = document.getElementById("task-category").value;
   let taskSubtasks = subtasksArray;
-  let taskState = "toDo";
+  let taskState = state;
   let taskAssigned = selectedUsers;
   let taskCreator = userName;
-  return taskToJSON(
-    taskTitle,
-    taskDate,
-    taskPrio,
-    taskDescription,
-    taskCategory,
-    taskSubtasks,
-    taskAssigned,
-    taskState,
-    taskCreator
-  );
+  return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState, taskCreator);
 }
 
 /**
@@ -283,10 +262,7 @@ function handleEditClick(target) {
   const inputContainer = document.createElement("div");
   inputContainer.classList.add("input-container");
   const input = createInputField(contentSpan.textContent);
-  const deleteIcon = createIcon(
-    "delete-icon",
-    "./assets/icons/subtask-delete.png"
-  );
+  const deleteIcon = createIcon("delete-icon", "./assets/icons/subtask-delete.png");
   const saveIcon = createIcon("save-icon", "./assets/icons/subtask-save.png");
   inputContainer.appendChild(input);
   inputContainer.appendChild(deleteIcon);
