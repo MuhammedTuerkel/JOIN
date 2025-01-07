@@ -227,7 +227,10 @@ function editedTaskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskSu
  */
 function pushEditSubtasksArray(ticketID) {
   let targetTicket = allTasks.filter((i) => i.id === ticketID);
-  subtasksArray = targetTicket[0].subtasks;
+  subtasksArray = targetTicket[0].subtasks || [];
+  if (!targetTicket[0].subtasks) {
+    targetTicket[0].subtasks = subtasksArray;
+  }
   let newSubtask = document.getElementById("task-subtasks");
   subtasksArray.push({
     id: subtasksArray.length + 1,
