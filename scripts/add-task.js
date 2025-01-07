@@ -18,9 +18,9 @@ function addTaskOnInit() {
  * Saves the task and redirects to the board page.
  * @param {Event} event - The event object.
  */
-async function saveTaskGoToBoard(event) {
+async function saveTaskGoToBoard(event, state = "toDo") {
   event.preventDefault();
-  let data = buildTask();
+  let data = buildTask(state);
   await postTask("tasks", data);
   window.location.href = "/board.html";
 }
@@ -29,9 +29,9 @@ async function saveTaskGoToBoard(event) {
  * Saves the task and resets the form to create a new task.
  * @param {Event} event - The event object.
  */
-async function saveTaskCreateNewTask(event) {
+async function saveTaskCreateNewTask(event, state = "toDo") {
   event.preventDefault();
-  let data = buildTask();
+  let data = buildTask(state);
   await postTask("tasks", data);
   document.getElementById("addTaskForm").reset();
   document.getElementById("addTaskOverlayNextStep").style.display = "none";
@@ -43,9 +43,9 @@ async function saveTaskCreateNewTask(event) {
  * Saves the task and closes the overlay on the board
  * @param {Event} event
  */
-async function saveTaskCloseOverlay(event) {
+async function saveTaskCloseOverlay(event, state = "toDo") {
   event.preventDefault();
-  let data = buildTaskOnBoard();
+  let data = buildTaskOnBoard(state);
   await postTask("tasks", data);
   addTaskClearTask();
   toggleOverlay();
@@ -103,14 +103,14 @@ async function postTask(path = "", data = {}) {
  * Builds a task object from form input values
  * @returns {Object} - The task object in JSON format.
  */
-function buildTask() {
+function buildTask(state) {
   let taskTitle = document.getElementById("task-title").value;
   let taskDate = document.getElementById("task-due-date").value;
   let taskPrio = selectedPrio;
   let taskDescription = document.getElementById("task-description").value;
   let taskCategory = document.getElementById("task-category").value;
   let taskSubtasks = subtasksArray;
-  let taskState = "toDo";
+  let taskState = state;
   let taskAssigned = selectedUsers;
   let taskCreator = userName;
   console.log(taskCreator);
@@ -122,14 +122,14 @@ function buildTask() {
  * Builds a task object from form input values.
  * @returns {Object} - The task object in JSON format.
  */
-function buildTaskOnBoard() {
+function buildTaskOnBoard(state) {
   let taskTitle = document.getElementById("task-title").value;
   let taskDate = document.getElementById("task-due-date").value;
   let taskPrio = selectedPrioOnBoard;
   let taskDescription = document.getElementById("task-description").value;
   let taskCategory = document.getElementById("task-category").value;
   let taskSubtasks = subtasksArray;
-  let taskState = "toDo";
+  let taskState = state;
   let taskAssigned = selectedUsers;
   let taskCreator = userName;
   return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState, taskCreator);
