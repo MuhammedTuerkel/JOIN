@@ -54,7 +54,7 @@ async function saveTaskCloseOverlay(event, state = "toDo") {
 
 /**
  * clears the list from all subtasks
- *  clears the list of all assigned users
+ * clears the list of all assigned users
  */
 function addTaskClearTask() {
   let list = document.getElementById("subtasksList");
@@ -113,8 +113,6 @@ function buildTask(state) {
   let taskState = state;
   let taskAssigned = selectedUsers;
   let taskCreator = userName;
-  console.log(taskCreator);
-
   return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState, taskCreator);
 }
 
