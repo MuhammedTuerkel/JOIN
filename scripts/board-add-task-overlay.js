@@ -192,7 +192,7 @@ async function patchTask(firebaseID, data) {
  */
 function buildEditTask(newTitle, newDescription, newDueDate, newPrio, newAssignedUsers, newSubtasks) {
   let taskTitle = newTitle;
-  let taskDate = newDescription;
+  let taskDate = newDueDate;
   let taskPrio = newPrio;
   let taskDescription = newDescription;
   let taskSubtasks = newSubtasks;

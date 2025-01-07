@@ -18,10 +18,10 @@ function addTaskOnInit() {
  * Saves the task and redirects to the board page.
  * @param {Event} event - The event object.
  */
-function saveTaskGoToBoard(event) {
+async function saveTaskGoToBoard(event) {
   event.preventDefault();
   let data = buildTask();
-  postTask("tasks", data);
+  await postTask("tasks", data);
   window.location.href = "/board.html";
 }
 
@@ -29,10 +29,10 @@ function saveTaskGoToBoard(event) {
  * Saves the task and resets the form to create a new task.
  * @param {Event} event - The event object.
  */
-function saveTaskCreateNewTask(event) {
+async function saveTaskCreateNewTask(event) {
   event.preventDefault();
   let data = buildTask();
-  postTask("tasks", data);
+  await postTask("tasks", data);
   document.getElementById("addTaskForm").reset();
   document.getElementById("addTaskOverlayNextStep").style.display = "none";
   document.body.style.overflow = "auto";
@@ -43,10 +43,10 @@ function saveTaskCreateNewTask(event) {
  * Saves the task and closes the overlay on the board
  * @param {Event} event
  */
-function saveTaskCloseOverlay(event) {
+async function saveTaskCloseOverlay(event) {
   event.preventDefault();
   let data = buildTaskOnBoard();
-  postTask("tasks", data);
+  await postTask("tasks", data);
   addTaskClearTask();
   toggleOverlay();
   location.reload();
@@ -115,17 +115,7 @@ function buildTask() {
   let taskCreator = userName;
   console.log(taskCreator);
 
-  return taskToJSON(
-    taskTitle,
-    taskDate,
-    taskPrio,
-    taskDescription,
-    taskCategory,
-    taskSubtasks,
-    taskAssigned,
-    taskState,
-    taskCreator
-  );
+  return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState, taskCreator);
 }
 
 /**
@@ -142,17 +132,7 @@ function buildTaskOnBoard() {
   let taskState = "toDo";
   let taskAssigned = selectedUsers;
   let taskCreator = userName;
-  return taskToJSON(
-    taskTitle,
-    taskDate,
-    taskPrio,
-    taskDescription,
-    taskCategory,
-    taskSubtasks,
-    taskAssigned,
-    taskState,
-    taskCreator
-  );
+  return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState, taskCreator);
 }
 
 /**
@@ -283,10 +263,7 @@ function handleEditClick(target) {
   const inputContainer = document.createElement("div");
   inputContainer.classList.add("input-container");
   const input = createInputField(contentSpan.textContent);
-  const deleteIcon = createIcon(
-    "delete-icon",
-    "./assets/icons/subtask-delete.png"
-  );
+  const deleteIcon = createIcon("delete-icon", "./assets/icons/subtask-delete.png");
   const saveIcon = createIcon("save-icon", "./assets/icons/subtask-save.png");
   inputContainer.appendChild(input);
   inputContainer.appendChild(deleteIcon);
