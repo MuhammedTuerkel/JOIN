@@ -1,3 +1,9 @@
+/**
+ * A HTML-Element for the subtask item gets rendered
+ * @param {int} itemID
+ * @param {string} itemContent
+ * @returns a HTML-Element
+ */
 function renderSubtaskItem(itemID, itemContent) {
   return `<div class="subtask-item" id="subtaskItem_${itemID}">
                 <div class="subtask-content-wrapper">
@@ -49,17 +55,7 @@ function cancelSubtaskItem(text) {
  * @param {string} taskState
  * @returns a JSON Object which is uploaded into the Firebase Realtime DB
  */
-function taskToJSON(
-  taskTitle,
-  taskDate,
-  taskPrio,
-  taskDescription,
-  taskCategory,
-  taskSubtasks,
-  taskAssigned,
-  taskState,
-  taskCreator
-) {
+function taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState, taskCreator) {
   return {
     id: generateUniqueID(),
     title: taskTitle,
@@ -76,12 +72,9 @@ function taskToJSON(
 
 /**
  * Creates a user template with the user's initials.
- *
  */
 function createUserTemplate(user) {
-  let initials =
-    user.name.charAt(0).toUpperCase() +
-    user.name.charAt(user.name.length - 1).toUpperCase();
+  let initials = user.name.charAt(0).toUpperCase() + user.name.charAt(user.name.length - 1).toUpperCase();
 
   return `
         <div onclick="toggleUserSelection('${user.email}')" class="user_template_not_selected" id="template-${user.email}" >
@@ -99,6 +92,11 @@ function createUserTemplate(user) {
     `;
 }
 
+/**
+ * A HTML-Element for the add-task-feature on the board view gets rendered
+ * @param {string} state
+ * @returns a HTML-Element
+ */
 function renderAddTaskFeatureOnBoard(state) {
   return `<div class="board-add-task-card slide-in-right" onload="subtaskInput()">
             <div class="board_add_task_head">
