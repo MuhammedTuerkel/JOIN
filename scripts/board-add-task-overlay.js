@@ -232,13 +232,20 @@ function pushEditSubtasksArray(ticketID) {
     targetTicket[0].subtasks = subtasksArray;
   }
   let newSubtask = document.getElementById("task-subtasks");
-  subtasksArray.push({
-    id: subtasksArray.length + 1,
-    content: newSubtask.value,
-    status: "open",
-  });
-  newSubtask.value = "";
-  renderSubtaskList();
+  if (subtasksArray.length < 4 && newSubtask.value != "") {
+    subtasksArray.push({
+      id: subtasksArray.length + 1,
+      content: newSubtask.value,
+      status: "open",
+    });
+    newSubtask.value = "";
+    renderSubtaskList();
+    if (subtasksArray.length >= 4) {
+      disableInputAndButton();
+    }
+  } else if (subtasksArray.length >= 4) {
+    disableInputAndButton();
+  }
   document.getElementById("iconsContainer").style.visibility = "hidden";
   document.getElementById("add-subtask-btn").style.visibility = "visible";
 }
