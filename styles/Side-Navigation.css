@@ -1,312 +1,310 @@
 @import url(./fonts.css);
 
 .activated {
-    background-color: #091931;
+  background-color: #091931;
 }
 
 .activated a {
-    color: white;
+  color: white;
 }
 
 .side-navigation {
-    width: 232px;
-    background-color: #2A3647;
-    justify-content: space-between;
-    flex-direction: column;
-    display: flex;
-    padding: 64px 0px;
-    align-items: center;
+  width: 232px;
+  background-color: #2a3647;
+  justify-content: space-between;
+  flex-direction: column;
+  display: flex;
+  padding: 64px 0px;
+  align-items: center;
 }
 
 .logo-icon {
-    width: 100px;
-    height: 120px;
-    color: white;
+  width: 100px;
+  height: 120px;
+  color: white;
 }
 
 .menu {
-    width: 232px;
-    height: 229px;
-    gap: 15px;
-    display: flex;
-    flex-direction: column;
-    padding: 8px 0px;
-    font-weight: 400;  
+  width: 232px;
+  height: 229px;
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0px;
+  font-weight: 400;
 }
 
 .menu a {
-    text-decoration: none;
-    color: #CDCDCD;
-    font-size: 16px;
+  text-decoration: none;
+  color: #cdcdcd;
+  font-size: 16px;
 }
 
 .menu-icons {
-    width: 25px;
-    height: 25px;
+  width: 25px;
+  height: 25px;
 }
 
 .menu-sections {
-    width: 100%;
-    height: 46px;
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    padding: 0px 56px;
+  width: 100%;
+  height: 46px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 0px 56px;
 }
 
 .menu-sections:hover {
-    background-color: #091931;
-    ;
+  background-color: #091931;
 }
 
 .Privacy-section {
-    padding-top: 243px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  padding-top: 243px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .Privacy-section a {
-    text-decoration: none;
-    color: #A8A8A8;
-    font-size: 16px;
-    padding: 8px;
+  text-decoration: none;
+  color: #a8a8a8;
+  font-size: 16px;
+  padding: 8px;
 }
 
-.Privacy-section a:hover{
-    color:#29ABE2 ;
-    font-weight: 700
+.Privacy-section a:hover {
+  color: #29abe2;
+  font-weight: 700;
 }
 
 header {
-    height: 96px;
-    box-shadow: 0px 4px 4px 0px #0000001A;
-    background-color: #ffffff;
-
+  height: 96px;
+  box-shadow: 0px 4px 4px 0px #0000001a;
+  background-color: #ffffff;
 }
 
 .header-content {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 40px 20px 348px;
-    align-items: center;
-    max-width: 1440px;
-    height: 96px;
-    box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px 20px 348px;
+  align-items: center;
+  max-width: 1440px;
+  height: 96px;
+  box-sizing: border-box;
 }
 
 header p {
-    font-size: 20px;
-    color: rgb(0, 0, 0);
+  font-size: 20px;
+  color: rgb(0, 0, 0);
 }
 
 .user {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    border-style: solid;
-    border-width: 3px;
-    border-color: #2A3647;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    color: #29ABE2;
-    cursor: pointer;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #2a3647;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  color: #29abe2;
+  cursor: pointer;
 }
 
 .help-user {
-    display: flex;
-    gap: 16px;
-    align-items: center;
+  display: flex;
+  gap: 16px;
+  align-items: center;
 }
 
 .d-flex-column {
-    display: flex;
-    flex-direction: column;
-    width: 158px;
-    height: 56px;
+  display: flex;
+  flex-direction: column;
+  width: 158px;
+  height: 56px;
 }
 
 .header-Join-Logo {
-    width: 32px;
-    height: 39px;
-    display: none;
+  width: 32px;
+  height: 39px;
+  display: none;
 }
 
 body {
-    font-family: 'Inter-18';
-    display: flex;
-   min-height: 100vh;
+  font-family: "Inter-18";
+  display: flex;
+  min-height: 100vh;
 }
 
 .website-body {
-    width: 100%;
-    background-color: #F6F7F8;
+  width: 100%;
+  background-color: #f6f7f8;
 }
 
 .help-user img {
-    width: 32px;
-    height: 32px;
+  width: 32px;
+  height: 32px;
 }
 
 .help-user img:hover {
-    width: 36px;
-    height: 36px;
+  width: 36px;
+  height: 36px;
 }
 
 .Submenu {
-    position: relative;
-    right: 30px;
-    top: 20px;
-    border-radius: 20px 0px 20px 20px;
-    width: 150px;
-    height: 158px;
-    background-color: #2A3647;
-    padding: 10px;
-    box-shadow: 0px 0px 4px 0px #0000001A;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+  position: relative;
+  right: 30px;
+  top: 20px;
+  border-radius: 20px 0px 20px 20px;
+  width: 150px;
+  height: 158px;
+  background-color: #2a3647;
+  padding: 10px;
+  box-shadow: 0px 0px 4px 0px #0000001a;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 1000;
 }
 
 .Submenu-buttons {
-    width: 130px;
-    height: 46px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #CDCDCD;
-    display: flex;
-    padding: 8px;
-    align-items: center;
-    cursor: pointer;
+  width: 130px;
+  height: 46px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #cdcdcd;
+  display: flex;
+  padding: 8px;
+  align-items: center;
+  cursor: pointer;
 }
 
 .d-flex-column {
-    display: flex;
-    flex-direction: column;
-    width: 158px;
-    height: 56px;
+  display: flex;
+  flex-direction: column;
+  width: 158px;
+  height: 56px;
 }
 
 .user:hover {
-    background-color: #0C2E621F;
+  background-color: #0c2e621f;
 }
 
 .d-none1 {
-    display: none;
+  display: none;
 }
 
-.Submenu a{
-    width: 130px;
-    height: 46px;
+.Submenu a {
+  width: 130px;
+  height: 46px;
 }
 
 @media (max-width: 1200px) {
-    .help-user img {
-        display: none;
-    }
+  .help-user img {
+    display: none;
+  }
 
-    .Submenu {
-        height: 204px;
-        right: 86px;
-    }
+  .Submenu {
+    height: 204px;
+    right: 86px;
+  }
 
-    .d-none1 {
-        display: flex;
-    }
+  .d-none1 {
+    display: flex;
+  }
 
-    .header-content {
-        padding-left: 148px;
-    }
+  .header-content {
+    padding-left: 148px;
+  }
 
-    .d-flex-column {
-        width: 60px;
-    }
-    .help-user{
-        gap: 0px;
-    }
+  .d-flex-column {
+    width: 60px;
+  }
+  .help-user {
+    gap: 0px;
+  }
 }
 
 @media (max-width: 830px) {
-    body {
-        display: flex;
-        flex-direction: column-reverse;
-     justify-content: space-between;
-     background-color: #F6F7F8;
-    }
+  body {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    background-color: #f6f7f8;
+  }
 
-    .side-navigation {
-        height: 80px;
-        width: 100%;
-        padding: 0px;
-    }
+  .side-navigation {
+    height: 80px;
+    width: 100%;
+    padding: 0px;
+  }
 
-    .logo-icon {
-        display: none;
-    }
+  .logo-icon {
+    display: none;
+  }
 
-    .Privacy-section {
-        display: none;
-    }
+  .Privacy-section {
+    display: none;
+  }
 
-    .menu {
-        flex-direction: row;
-        width: 100%;
-        height: 80px;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0px 16px;
-        box-sizing: border-box;
-    }
+  .menu {
+    flex-direction: row;
+    width: 100%;
+    height: 80px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 16px;
+    box-sizing: border-box;
+  }
 
-    .menu-sections {
-        flex-direction: column;
-        width: 80px;
-        height: 76px;
-        border-radius: 16px;
-        gap: 10px;
-        justify-content: center;
-        padding: 0px;
-    }
+  .menu-sections {
+    flex-direction: column;
+    width: 80px;
+    height: 76px;
+    border-radius: 16px;
+    gap: 10px;
+    justify-content: center;
+    padding: 0px;
+  }
 
-    header {
-        height: 80px;
-    }
+  header {
+    height: 80px;
+  }
 
-    .header-content {
-        height: 80px;
-        padding: 0px 20px;
-    }
+  .header-content {
+    height: 80px;
+    padding: 0px 20px;
+  }
 
-    .header-Join-Logo {
-        display: flex;
-    }
+  .header-Join-Logo {
+    display: flex;
+  }
 
-    .header-content p {
-        display: none;
-    }
+  .header-content p {
+    display: none;
+  }
 
-    .Submenu {
-        right: 106px;
-        top: 10px;
-    }
+  .Submenu {
+    right: 106px;
+    top: 10px;
+  }
 }
 
 @media (max-width: 600px) {
-    .user {
-        width: 40px;
-        height: 40px;
-        font-size: 24px;
-    }
+  .user {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
 
-    .d-flex-column {
-        flex-direction: column;
-    }
+  .d-flex-column {
+    flex-direction: column;
+  }
 
-    .help-user {
-        padding-top: 8px;
-    }
+  .help-user {
+    padding-top: 8px;
+  }
 }
-
