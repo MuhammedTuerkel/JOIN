@@ -51,6 +51,7 @@ function toggleOverlay() {
     document.body.style.overflow = "auto";
     subtasksArray = [];
     selectedUsers = [];
+    location.reload();
   }
 }
 
