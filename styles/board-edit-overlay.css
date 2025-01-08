@@ -218,7 +218,7 @@ textarea {
 }
 
 .subtask-item {
-  width: calc(136px * 3 + 16px);
+  width: 90%;
   display: flex;
   position: relative;
   justify-content: space-between;
