@@ -50,6 +50,7 @@ function toggleOverlay() {
     overlay.classList.add("d_none");
     document.body.style.overflow = "auto";
     subtasksArray = [];
+    selectedUsers = [];
   }
 }
 
