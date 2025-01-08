@@ -234,6 +234,9 @@ function renderSubtasksEditOverlay(ticketID) {
   let allSubtasks = searchedTask.subtasks || [];
   let targetElement = document.getElementById("subtasksList");
   targetElement.innerHTML = "";
+  if (allSubtasks.length >= 4) {
+    disableInputAndButton();
+  }
   if (allSubtasks.length === 0) {
     targetElement.innerHTML = "";
     return;
