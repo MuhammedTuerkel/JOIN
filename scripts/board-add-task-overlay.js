@@ -49,6 +49,7 @@ function toggleOverlay() {
     overlay.classList.remove("d_flex");
     overlay.classList.add("d_none");
     document.body.style.overflow = "auto";
+    subtasksArray = [];
   }
 }
 

@@ -363,12 +363,14 @@ function handleCancelClick(target) {
  * @param {HTMLElement} target - The target element that triggered the event.
  */
 function handleDeleteClick(target) {
-  enableInputAndButton();
   const subtaskItem = target.closest(".subtask-item");
   const targetID = subtaskItem.id;
   const numericID = parseInt(targetID.split("_")[1], 10);
   subtaskItem.remove();
   deleteArrayEntry(numericID);
+  if (subtasksArray.length < 4) {
+    enableInputAndButton();
+  }
 }
 
 /**
