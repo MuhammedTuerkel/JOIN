@@ -88,6 +88,11 @@ function prioIcon(prio) {
   }
 }
 
+/**
+ * Based on the prio-parameter, a HTML-Element is displayed
+ * @param {string} prio
+ * @returns a HTML-Element
+ */
 function prioIconOverlay(prio) {
   if (prio === "low") {
     return `<div class="overlay-prio-content">
@@ -136,6 +141,19 @@ function prioIconOverlay(prio) {
   }
 }
 
+/**
+ * Returns a HTML-Element to display the ticket on the board
+ * @param {string} ticketID
+ * @param {string} category
+ * @param {string} ticketTitle
+ * @param {string} ticketDescription
+ * @param {string} longDescription
+ * @param {string} prio
+ * @param {int} subtaskDone
+ * @param {int} allSubtasks
+ * @param {string} ticketDate
+ * @returns a HTML-Element
+ */
 function ticketTemplate(ticketID, category, ticketTitle, ticketDescription, longDescription, prio, subtaskDone, allSubtasks, ticketDate) {
   return `<div class="ticket-card" draggable="true" ondragstart="startDragging('${ticketID}')" onclick="toggleOverlay(); showOverlayTicket('${category}', '${ticketTitle}', '${longDescription}', '${ticketDate}', '${prio}', '${ticketID}')">
                 ${categoryBadge(category)}
@@ -164,16 +182,36 @@ function ticketTemplate(ticketID, category, ticketTitle, ticketDescription, long
             </div>`;
 }
 
+/**
+ * Returns a HTML-Element to display the user-initials in a colored circle
+ * @param {string} initials
+ * @param {string} color
+ * @returns a HTML-Element
+ */
 function renderUserCircle(initials, color) {
   return `<div class="selected_user_circle_board" style="background-color: ${color};">
                 ${initials}
             </div>`;
 }
 
+/**
+ * Returns a HTML-Element to display a dummy ticket while drag and drop
+ * @returns a HTML-Element
+ */
 function renderDummyTicket() {
   return `<div class="dummy-ticket-card"></div>`;
 }
 
+/**
+ * Returns a HTML-Element to display the ticket information as an overlay
+ * @param {string} category
+ * @param {string} ticketTitle
+ * @param {string} ticketDescription
+ * @param {string} ticketDate
+ * @param {string} prio
+ * @param {string} ticketID
+ * @returns a HTML-Element
+ */
 function renderOverlayTicket(category, ticketTitle, ticketDescription, ticketDate, prio, ticketID) {
   return `<div class="overlay-card slide-in-right" id="overlayCard">
             <div class="badge-and-close-wrapper">
@@ -250,6 +288,11 @@ function renderOverlayTicket(category, ticketTitle, ticketDescription, ticketDat
         </div>`;
 }
 
+/**
+ * Returns a HTML-Element to display the Overlay Edit Ticket
+ * @param {string} ticketID
+ * @returns a HTML-Element
+ */
 function renderOverlayEditTicket(ticketID) {
   return `<div class="overlay-close-btn-edit" onclick="toggleOverlay()" onload="subtaskInput()">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -381,7 +424,6 @@ function renderOverlayEditTicket(ticketID) {
 
 /**
  * Returns the Ticket Date in the correct format
- *
  * @param {string} ticketDate - Ticket Due Date as a string in the incorrect format
  * @returns The Ticket Date in the Format DD/MM/YYYY
  */
@@ -392,7 +434,6 @@ function formatDate(ticketDate) {
 
 /**
  * Takes the username and returns it with the first letter capitalized
- *
  * @param {string} username
  * @returns The username with the first letter in capitals
  */
@@ -406,7 +447,6 @@ function capitalizeFirstChar(username) {
 
 /**
  * Returns a HTML Snippet with the Users Circle Icon and his/her name
- *
  * @param {string} userName
  * @param {string} initials
  * @param {string} color
@@ -421,7 +461,6 @@ function renderOverlayUserElement(userName, initials, color) {
 
 /**
  * Creates a HTML-Snippet to display the subtask element in the front-end
- *
  * @param {int} subtaskIndex
  * @param {string} subtaskContent
  * @param {string} ticketID
@@ -439,7 +478,6 @@ function renderOverlaySubtaskElement(subtaskIndex, subtaskContent, ticketID, tas
 
 /**
  * Returns a different symbol (checked oder unchecked) based on the status of the task
- *
  * @param {string} taskStatus
  * @returns a different symbol (checked oder unchecked) based on the status of the task
  */
@@ -456,6 +494,11 @@ function subtaskStatus(taskStatus) {
   }
 }
 
+/**
+ * Returns a HTML Element for the error message of a failed search
+ * @param {string} searchTerm
+ * @returns a HTML-Element
+ */
 function renderFailedSearchBox(searchTerm) {
   return `<div class="failed-search-dialog">
             <div class="failed-search-title-and-close">
