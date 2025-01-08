@@ -89,7 +89,7 @@ function prioIcon(prio) {
 }
 
 /**
- * Based on the prio-parameter, a HTML-Element is displayed
+ * Based on the prio-parameter, a HTML-Element in the Overlay is displayed
  * @param {string} prio
  * @returns a HTML-Element
  */
