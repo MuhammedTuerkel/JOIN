@@ -232,6 +232,7 @@ function renderSubtasksOverlay(ticketID) {
 function renderSubtasksEditOverlay(ticketID) {
   let searchedTask = allTasks.find((t) => t["id"] === ticketID);
   let allSubtasks = searchedTask.subtasks || [];
+  subtasksArray = allSubtasks;
   let targetElement = document.getElementById("subtasksList");
   targetElement.innerHTML = "";
   if (allSubtasks.length >= 4) {
