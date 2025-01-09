@@ -356,3 +356,12 @@ function initializeKeyDown() {
     };
   }
 }
+
+function checkOrientation() {
+  const warning = document.getElementById("orientationWarning");
+  if (window.innerWidth < window.innerHeight) {
+    warning.style.display = "none";
+  } else if (window.innerWidth <= 900) {
+    warning.style.display = "block";
+  }
+}
