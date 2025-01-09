@@ -116,16 +116,7 @@ function buildTask() {
   let taskSubtasks = subtasksArray;
   let taskState = "toDo";
   let taskAssigned = selectedUsers;
-  return taskToJSON(
-    taskTitle,
-    taskDate,
-    taskPrio,
-    taskDescription,
-    taskCategory,
-    taskSubtasks,
-    taskAssigned,
-    taskState
-  );
+  return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState);
 }
 
 /**
@@ -142,16 +133,7 @@ function buildTaskOnBoard(state) {
   let taskSubtasks = subtasksArray;
   let taskState = state;
   let taskAssigned = selectedUsersOnBoard;
-  return taskToJSON(
-    taskTitle,
-    taskDate,
-    taskPrio,
-    taskDescription,
-    taskCategory,
-    taskSubtasks,
-    taskAssigned,
-    taskState
-  );
+  return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState);
 }
 
 /**
@@ -181,9 +163,7 @@ function openDropdown(event) {
  * *clears the input field
  */
 function closeDropdown() {
-  document
-    .getElementById("assigned")
-    .classList.remove("add_task_dropdown_active");
+  document.getElementById("assigned").classList.remove("add_task_dropdown_active");
   let dropdownContainer = document.getElementById("addTaskDropdown");
   let dropdownImage = document.getElementById("dropDownArrow");
   dropdownContainer.classList.remove("open");
@@ -249,11 +229,7 @@ function assignedUserDropDown(email) {
   checkbox.checked = true;
 
   let user = users.find((user) => user.email === email);
-  if (
-    !selectedUsersOnBoard.some(
-      (selectedUser) => selectedUser.email === user.email
-    )
-  ) {
+  if (!selectedUsersOnBoard.some((selectedUser) => selectedUser.email === user.email)) {
     selectedUsersOnBoard.push(user);
   }
   updateSelectedUsersContainer();
@@ -274,9 +250,7 @@ function notAssignedUser(email) {
   checkedImg.src = "./assets/img/check button.png";
   checkbox.checked = false;
 
-  selectedUsersOnBoard = selectedUsersOnBoard.filter(
-    (user) => user.email !== email
-  );
+  selectedUsersOnBoard = selectedUsersOnBoard.filter((user) => user.email !== email);
   updateSelectedUsersContainer();
 }
 
@@ -307,9 +281,7 @@ function updateSelectedUsersContainer() {
 
   for (let index = 0; index < selectedUsersOnBoard.length; index++) {
     let user = selectedUsersOnBoard[index];
-    let initials =
-      user.name.charAt(0).toUpperCase() +
-      user.name.charAt(user.name.length - 1).toUpperCase();
+    let initials = user.name.charAt(0).toUpperCase() + user.name.charAt(user.name.length - 1).toUpperCase();
     container.innerHTML += `
             <div class="selected_user_circle" style="background-color: ${user.color};">
                 ${initials}
@@ -329,12 +301,8 @@ function editTaskFillInUsers() {
  * Filters and loads users based on the search input value.
  */
 function addTaskSearchUser() {
-  let input = document
-    .getElementById("addTaskSearchContacts")
-    .value.toLowerCase();
-  let filteredUsers = users.filter((user) =>
-    user.name.toLowerCase().startsWith(input)
-  );
+  let input = document.getElementById("addTaskSearchContacts").value.toLowerCase();
+  let filteredUsers = users.filter((user) => user.name.toLowerCase().startsWith(input));
   loadSearchedUsers(filteredUsers);
 }
 
@@ -347,8 +315,7 @@ function loadSearchedUsers(filteredUsers) {
   let findUser = document.getElementById("addTaskDropdown");
   findUser.innerHTML = "";
   if (filteredUsers.length === 0) {
-    findUser.innerHTML =
-      '<div class="add_task_search_error"><small>no results found...</small></div>';
+    findUser.innerHTML = '<div class="add_task_search_error"><small>no results found...</small></div>';
   }
   for (let index = 0; index < filteredUsers.length; index++) {
     const user = filteredUsers[index];
@@ -480,7 +447,6 @@ function pushSubtaskArray() {
   } else if (arrayLength >= 4) {
     disableInputAndButton();
   }
-  console.log(subtasksArray);
   document.getElementById("iconsContainer").style.visibility = "hidden";
   document.getElementById("add-subtask-btn").style.visibility = "visible";
 }
@@ -555,10 +521,7 @@ function handleEditClick(target) {
   const inputContainer = document.createElement("div");
   inputContainer.classList.add("input-container");
   const input = createInputField(contentSpan.textContent);
-  const deleteIcon = createIcon(
-    "delete-icon",
-    "./assets/icons/subtask-delete.png"
-  );
+  const deleteIcon = createIcon("delete-icon", "./assets/icons/subtask-delete.png");
   const saveIcon = createIcon("save-icon", "./assets/icons/subtask-save.png");
   inputContainer.appendChild(input);
   inputContainer.appendChild(deleteIcon);

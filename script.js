@@ -11,8 +11,7 @@ let summaryDone;
 let summaryUrgent;
 let earliestDate;
 
-const BASE_URL =
-  "https://join-bbd82-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL = "https://join-bbd82-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /**
  * Load user data from Firebase Realtime Database into global users array
@@ -27,7 +26,6 @@ async function onloadFunction() {
       users.push(entry);
     }
   }
-  console.log("Global users array:", users);
 }
 
 /**
@@ -51,9 +49,7 @@ async function pushNewUserinFireBaseArray(event) {
   event.preventDefault();
   let userName = document.getElementById("signUpName").value;
   let userMail = document.getElementById("signUpInputMail").value;
-  let userPassword = document.getElementById(
-    "signUpConfirmInputPassword"
-  ).value;
+  let userPassword = document.getElementById("signUpConfirmInputPassword").value;
   const color = createRandomColor();
   const userData = {
     name: userName,
@@ -70,11 +66,8 @@ async function pushNewUserinFireBaseArray(event) {
     ],
   };
   try {
-    let response = await postData(
-      `users/${userMail.replace(".", "_")}`,
-      userData
-    );
-    console.log("User successfully added to Realtime Database:", response);
+    let response = await postData(`users/${userMail.replace(".", "_")}`, userData);
+    // console.log("User successfully added to Realtime Database:", response);
     createUser();
   } catch (error) {
     console.error("Error adding user to Realtime Database:", error);
@@ -151,8 +144,7 @@ function loadHelpHtml() {
  * and sets the onclick function for the return arrow.
  */
 function renderPrivacyPolicyTemplate() {
-  document.getElementById("termsContent").innerHTML +=
-    getPrivacyPolicyTemplate();
+  document.getElementById("termsContent").innerHTML += getPrivacyPolicyTemplate();
   changeReturnArrowOnclickFunction();
 }
 
@@ -205,11 +197,13 @@ function returnToSessionStoragePage() {
   }
 }
 
+/**
+ * Saves the users name into the global userName-Variable
+ */
 function getLoggedInUserData() {
   let loggedUser = localStorage.getItem("loggedInUser");
   let UserLogg = JSON.parse(loggedUser);
   userName = UserLogg.name;
-  console.log(userName);
 }
 
 /**
@@ -218,14 +212,14 @@ function getLoggedInUserData() {
 async function getAllTasks() {
   let response = await fetch(BASE_URL + "tasks" + ".json");
   let responseAsJSON = await response.json();
-
   allTasks = Object.entries(responseAsJSON).map(([id, task]) => {
     return { firebase_id: id, ...task };
   });
-
-  console.log("all Tasks", allTasks);
 }
 
+/**
+ * Filters all tasks that the user has created and uses them to execute further functions
+ */
 async function getUserTasks() {
   let user = await fetch(BASE_URL + "tasks" + ".json");
   let responseAsJSON = await user.json();
@@ -240,58 +234,67 @@ async function getUserTasks() {
   getEarliestDate(activeUserTasks);
 }
 
+/**
+ * Returns the length of the allTasks Array and shows them in the front-end
+ * @param {array} activeUserTasks
+ */
 function lengthOfSummaryTasks(activeUserTasks) {
   summaryTasks = allTasks.length;
-  console.log("allTasks", summaryTasks);
   let target = document.getElementById("allTasks");
   target.innerHTML = "";
   target.innerHTML = `${summaryTasks}`;
-  console.log(activeUserTasks);
-  
 }
 
+/**
+ * Counts how many tasks the user has with the status “toDo” and displays this value in the front end
+ * @param {array} activeUserTasks
+ */
 function lengthOfToDoTasks(activeUserTasks) {
   summaryToDo = activeUserTasks.filter((item) => item.state === "toDo").length;
-  console.log("todo", summaryToDo);
   let target = document.getElementById("todo");
   target.innerHTML = "";
   target.innerHTML = `${summaryToDo}`;
 }
 
+/**
+ * Counts how many tasks the user has with the status “inProgress” and displays this value in the front end
+ * @param {array} activeUserTasks
+ */
 function lengthOfInProgressTasks(activeUserTasks) {
-  summaryInProgress = activeUserTasks.filter(
-    (item) => item.state === "inProgress"
-  ).length;
-  console.log("inProgress", summaryInProgress);
+  summaryInProgress = activeUserTasks.filter((item) => item.state === "inProgress").length;
   let target = document.getElementById("inProgress");
   target.innerHTML = "";
   target.innerHTML = `${summaryInProgress}`;
 }
 
+/**
+ * Counts how many tasks the user has with the status “awaitFeedback” and displays this value in the front end
+ * @param {array} activeUserTasks
+ */
 function lengthOfFeedbackTasks(activeUserTasks) {
-  summaryFeedback = activeUserTasks.filter(
-    (item) => item.state === "awaitFeedback"
-  ).length;
-  console.log("awaitFeedback", summaryFeedback);
+  summaryFeedback = activeUserTasks.filter((item) => item.state === "awaitFeedback").length;
   let target = document.getElementById("awaiting");
   target.innerHTML = "";
   target.innerHTML = `${summaryFeedback}`;
 }
 
+/**
+ * Counts how many tasks the user has with the status “done” and displays this value in the front end
+ * @param {array} activeUserTasks
+ */
 function lengthOfDoneTasks(activeUserTasks) {
   summaryDone = activeUserTasks.filter((item) => item.state === "done").length;
-  console.log("done", summaryDone);
   let target = document.getElementById("done");
   target.innerHTML = "";
   target.innerHTML = `${summaryDone}`;
 }
 
+/**
+ * Counts how many tasks the user has with the priority “urgent” and displays this value in the front end
+ * @param {array} activeUserTasks
+ */
 function lengthOfUrgentTasks(activeUserTasks) {
-  summaryUrgent = activeUserTasks.filter(
-    (item) => item.prio === "urgent"
-  ).length;
-  console.log("urgent", summaryUrgent);
-
+  summaryUrgent = activeUserTasks.filter((item) => item.prio === "urgent").length;
   let target = document.getElementById("urgent");
   target.innerHTML = "";
   target.innerHTML = `${summaryUrgent}`;
@@ -308,17 +311,19 @@ function getEarliestDate(activeUserTasks) {
     earliestDateObject = null;
   }
   earliestDateObject = activeUserTasks.reduce((earliest, current) => {
-    return new Date(current.due_date) < new Date(earliest.due_date)
-      ? current
-      : earliest;
+    return new Date(current.due_date) < new Date(earliest.due_date) ? current : earliest;
   });
   earliestDateNumber = earliestDateObject.due_date;
   let earliestDate = changeDateFormat(earliestDateNumber);
   target.innerHTML = "";
   target.innerHTML = `${earliestDate}`;
-  console.log(earliestDate);
 }
 
+/**
+ * Takes a date format and changes it to another format
+ * @param {string} earliestDateNumber
+ * @returns
+ */
 function changeDateFormat(earliestDateNumber) {
   let date = new Date(earliestDateNumber);
   let day = String(date.getDate()).padStart(2, "0");
@@ -327,6 +332,9 @@ function changeDateFormat(earliestDateNumber) {
   return `${month} ${day}, ${year}`;
 }
 
+/**
+ * A function that directs to the board.html
+ */
 function goToBoard() {
   window.location.href = "/board.html";
 }
