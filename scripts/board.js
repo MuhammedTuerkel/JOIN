@@ -4,6 +4,7 @@ let currentDraggedElement;
 let editedPrio;
 let debounceTimeout;
 let selectedPrioOnBoard;
+const formVisibilityCheck = setInterval(checkFormVisibility, 100);
 
 /**
  * Initialize the board features which should be active at site load
@@ -23,12 +24,8 @@ async function onInit() {
  * @param {string} ticketID
  */
 function displaySubtasks(allSubtasks, ticketID) {
-  let progressBar = document.getElementById(
-    `ticketSubtaskProgressBar_${ticketID}`
-  );
-  let progressCounter = document.getElementById(
-    `ticketSubtaskCounter_${ticketID}`
-  );
+  let progressBar = document.getElementById(`ticketSubtaskProgressBar_${ticketID}`);
+  let progressCounter = document.getElementById(`ticketSubtaskCounter_${ticketID}`);
   if (allSubtasks === 0) {
     progressBar.classList.add("d_none");
     progressCounter.classList.add("d_none");
@@ -47,8 +44,7 @@ function updateProgressBar(ticketID) {
   let closedTasks = subtasksClosed(ticketID);
   let task = allTasks.find((t) => t["id"] === ticketID);
   let totalSubtasks = task && task.subtasks ? task.subtasks.length : 0;
-  const progressPercentage =
-    totalSubtasks > 0 ? (closedTasks / totalSubtasks) * 100 : 0;
+  const progressPercentage = totalSubtasks > 0 ? (closedTasks / totalSubtasks) * 100 : 0;
   let progressBar = document.getElementById(`progress-bar_${ticketID}`);
   if (progressBar) {
     progressBar.style.width = progressPercentage + "%";
@@ -102,14 +98,11 @@ async function changeSubtaskStatus(subtaskIndex, ticketID) {
   let subtask = task.subtasks[subtaskIndex];
   subtask.status = subtask.status === "open" ? "closed" : "open";
   try {
-    await fetch(
-      `${BASE_URL}tasks/${firebaseID}/subtasks/${subtaskIndex}.json`,
-      {
-        method: "PATCH",
-        body: JSON.stringify({ status: subtask.status }),
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    await fetch(`${BASE_URL}tasks/${firebaseID}/subtasks/${subtaskIndex}.json`, {
+      method: "PATCH",
+      body: JSON.stringify({ status: subtask.status }),
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (error) {
     console.error("Failed to update subtask in Firebase:", error);
   }
@@ -142,9 +135,7 @@ function allowDrop(ev) {
  * @param {string} category - describes in which column the ticket was moved
  */
 async function move(category) {
-  let currentIndex = allTasks.findIndex(
-    (ix) => ix["id"] === currentDraggedElement
-  );
+  let currentIndex = allTasks.findIndex((ix) => ix["id"] === currentDraggedElement);
   if (currentIndex !== -1) {
     allTasks[currentIndex]["state"] = category;
     let firebaseID = allTasks[currentIndex]["firebase_id"];
@@ -235,12 +226,8 @@ function startSearch() {
   clearBoard();
   let searchResults = [];
   allTasks.forEach((task) => {
-    const titleMatch = task.title
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-    const descriptionMatch = task.description
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
+    const titleMatch = task.title.toLowerCase().includes(searchTerm.toLowerCase());
+    const descriptionMatch = task.description.toLowerCase().includes(searchTerm.toLowerCase());
     if (titleMatch || descriptionMatch) {
       searchResults.push(task);
     }
@@ -300,8 +287,7 @@ function addEventListeners() {
   let taskDueDate = document.getElementById("task-due-date");
   let taskTitle = document.getElementById("task-title");
   taskCategory.addEventListener("focus", function () {
-    document.getElementById("addTaskCategoryErrorInput").style.display =
-      "block";
+    document.getElementById("addTaskCategoryErrorInput").style.display = "block";
   });
   taskCategory.addEventListener("blur", function () {
     document.getElementById("addTaskCategoryErrorInput").style.display = "none";
@@ -318,4 +304,15 @@ function addEventListeners() {
   taskTitle.addEventListener("blur", function () {
     document.getElementById("addTaskTitleErrorInput").style.display = "none";
   });
+}
+
+/**
+ * Checks if the form is visible and DOM-loaded, so the initializeKeyDown-function can be started
+ */
+function checkFormVisibility() {
+  const form = document.getElementById("addTaskForm");
+  if (form && form.offsetHeight > 0 && form.offsetWidth > 0) {
+    initializeKeyDown();
+    clearInterval(formVisibilityCheck);
+  }
 }

@@ -338,3 +338,18 @@ function changeDateFormat(earliestDateNumber) {
 function goToBoard() {
   window.location.href = "/board.html";
 }
+
+function initializeKeyDown() {
+  const form = document.getElementById("addTaskForm");
+  if (form) {
+    form.onkeydown = function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault(); // Verhindert das Standard-Submit-Verhalten
+        const checkIcon = document.getElementById("checkIcon");
+        if (checkIcon) {
+          checkIcon.click(); // Simuliert den Klick auf das Icon
+        }
+      }
+    };
+  }
+}
