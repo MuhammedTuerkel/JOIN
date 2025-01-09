@@ -32,6 +32,11 @@ function displaySubtasks(allSubtasks, ticketID) {
   }
 }
 
+/**
+ * Returns the amount of closed subtasks for a certain ticket
+ * @param {string} ticketID
+ * @returns an int
+ */
 function subtasksClosed(ticketID) {
   let task = allTasks.find((t) => t["id"] === ticketID);
   if (!task || !task.subtasks) {
@@ -40,6 +45,10 @@ function subtasksClosed(ticketID) {
   return task.subtasks.filter((st) => st["status"] === "closed").length;
 }
 
+/**
+ * Updates the progress-bar on the UI related to the closed subtasks of a certain ticket
+ * @param {string} ticketID
+ */
 function updateProgressBar(ticketID) {
   let closedTasks = subtasksClosed(ticketID);
   let task = allTasks.find((t) => t["id"] === ticketID);
@@ -51,6 +60,10 @@ function updateProgressBar(ticketID) {
   }
 }
 
+/**
+ * Updates the subtask counter on the UI related to a certain ticket
+ * @param {string} ticketID
+ */
 function updateSubtaskCounter(ticketID) {
   let closedTasks = subtasksClosed(ticketID);
   let task = allTasks.find((t) => t["id"] === ticketID);
