@@ -26,9 +26,7 @@ function loadContact(i, event) {
   setTimeout(() => {
     document.getElementById(`Contact${i}`).style = "background-color: #2A3647;";
     document.getElementById(`name${i}`).style = "color:white;";
-    document
-      .getElementById("all-information")
-      .classList.add("animationRightToPosition");
+    document.getElementById("all-information").classList.add("animationRightToPosition");
     document.getElementById("all-information").classList.remove("d-none");
   }, 100);
 }
@@ -50,9 +48,7 @@ function hideContactMobile(event) {
  * It hides the contact and removes the background color of the contact in the contactlist
  */
 function hideContact() {
-  document
-    .getElementById("all-information")
-    .classList.remove("animationRightToPosition");
+  document.getElementById("all-information").classList.remove("animationRightToPosition");
   document.getElementById("all-information").classList.add("d-none");
   for (let i = 0; i < Contacts.length; i++) {
     document.getElementById(`Contact${i}`).style = "";
@@ -66,13 +62,10 @@ function hideContact() {
  */
 function loadAddNewContact(event) {
   event.stopPropagation();
-  document
-    .getElementById("addNewContact")
-    .classList.add("animationRightToPosition");
+  document.getElementById("addNewContact").classList.add("animationRightToPosition");
   document.getElementById("addNewContact").classList.remove("d-none");
   document.getElementById("headlineAddContacth2").innerHTML = `Add contact`;
-  document.getElementById("addContactProfilePicture").style =
-    "background-image: url(../assets/img/person-white.png);";
+  document.getElementById("addContactProfilePicture").style = "background-image: url(../assets/img/person-white.png);";
   document.getElementById("addContactProfilePicture").innerHTML = ``;
   document.getElementById("cancelCreate").style = "";
   document.getElementById("deleteSave").style = "display:none;";
@@ -84,9 +77,7 @@ function loadAddNewContact(event) {
  */
 function hideAddNewContact(event) {
   event.stopPropagation();
-  document
-    .getElementById("addNewContact")
-    .classList.remove("animationRightToPosition");
+  document.getElementById("addNewContact").classList.remove("animationRightToPosition");
   document.getElementById("addNewContact").classList.add("d-none");
   document.getElementById("headlineAddContactP").style = "";
   document.getElementById("input-name").value = ``;
@@ -109,9 +100,7 @@ function stopPropagation(event) {
 function showEditDeleteMenu(event) {
   event.stopPropagation();
   document.getElementById("editdelete-menu").classList.remove("d-none");
-  document
-    .getElementById("editdelete-menu")
-    .classList.add("animationRightToPosition");
+  document.getElementById("editdelete-menu").classList.add("animationRightToPosition");
 }
 
 /**
@@ -121,9 +110,7 @@ function showEditDeleteMenu(event) {
 function hideEditDeleteMenu(event) {
   event.stopPropagation();
   document.getElementById("editdelete-menu").classList.add("d-none");
-  document
-    .getElementById("editdelete-menu")
-    .classList.remove("animationRightToPosition");
+  document.getElementById("editdelete-menu").classList.remove("animationRightToPosition");
 }
 
 /**
@@ -183,7 +170,8 @@ function renderContact() {
  */
 function generateContactHTML(a, i, Badge) {
   document.getElementById(`${a[i]}`).innerHTML += `
-    <div id="Contact${x}" onclick="loadContact(${x}, event)" class="Contact"><div class="Profile-Badge">
+                <div id="Contact${x}" onclick="loadContact(${x}, event)" class="Contact">
+                    <div class="Profile-Badge" style="background-color: ${Contacts[x].color};">
                         <h4>${Badge}</h4>
                     </div>
                     <div class="name-email">
@@ -205,9 +193,9 @@ function generateContactHTML(a, i, Badge) {
  * @returns the initials
  */
 function generateBadge(x) {
-  var values = Contacts[x].name.split(" ");
-  var f_name = values.shift().charAt(0).toUpperCase();
-  var l_name = values.join(" ").charAt(0).toUpperCase();
+  let values = Contacts[x].name.split(" ");
+  let f_name = values.shift().charAt(0).toUpperCase();
+  let l_name = values.join(" ").charAt(0).toUpperCase();
   return f_name + l_name;
 }
 
@@ -235,18 +223,11 @@ function renderContactInformation(i) {
   document.getElementById("editdelete-name").innerHTML = `${Contacts[i].name}`;
   document.getElementById("email").innerHTML = `${Contacts[i].email}`;
   document.getElementById("phone").innerHTML = `${Contacts[i].phone}`;
-  document
-    .getElementById("editContact")
-    .setAttribute(`onclick`, `loadEditContact(event, ${i})`);
-  document
-    .getElementById("editContactMobile")
-    .setAttribute(`onclick`, `loadEditContact(event, ${i})`);
-  document
-    .getElementById("deleteContact")
-    .setAttribute(`onclick`, `deleteContact(${i})`);
-  document
-    .getElementById("deleteContactMobile")
-    .setAttribute(`onclick`, `deleteContact(${i})`);
+  document.getElementById("badgeBackgroundColor").style.backgroundColor = Contacts[i].color;
+  document.getElementById("editContact").setAttribute(`onclick`, `loadEditContact(event, ${i})`);
+  document.getElementById("editContactMobile").setAttribute(`onclick`, `loadEditContact(event, ${i})`);
+  document.getElementById("deleteContact").setAttribute(`onclick`, `deleteContact(${i})`);
+  document.getElementById("deleteContactMobile").setAttribute(`onclick`, `deleteContact(${i})`);
 }
 
 /**
@@ -275,9 +256,7 @@ function loadEditContact(event, i) {
   let Badge = generateBadge(i);
   event.stopPropagation();
   generateEditNewContactHTML(Badge, i);
-  document
-    .getElementById("saveEditContact")
-    .setAttribute(`onclick`, `saveNewContact(${i})`);
+  document.getElementById("saveEditContact").setAttribute(`onclick`, `saveNewContact(${i})`);
 }
 
 /**
@@ -286,25 +265,18 @@ function loadEditContact(event, i) {
  * @param {int} i
  */
 function generateEditNewContactHTML(Badge, i) {
-  document
-    .getElementById("addNewContact")
-    .classList.add("animationRightToPosition");
+  document.getElementById("addNewContact").classList.add("animationRightToPosition");
   document.getElementById("addNewContact").classList.remove("d-none");
   document.getElementById("headlineAddContacth2").innerHTML = `Edit contact`;
   document.getElementById("headlineAddContactP").style = "display:none;";
-  document.getElementById("addContactProfilePicture").style =
-    "background:orange;";
-  document.getElementById(
-    "addContactProfilePicture"
-  ).innerHTML = `<h2>${Badge}</h2>`;
+  document.getElementById("addContactProfilePicture").style = "background:orange;";
+  document.getElementById("addContactProfilePicture").innerHTML = `<h2>${Badge}</h2>`;
   document.getElementById("input-name").value = `${Contacts[i].name}`;
   document.getElementById("input-email").value = `${Contacts[i].email}`;
   document.getElementById("input-phone").value = `${Contacts[i].phone}`;
   document.getElementById("deleteSave").style = "";
   document.getElementById("cancelCreate").style = "display:none;";
-  document
-    .getElementById("DeleteEditContact")
-    .setAttribute(`onclick`, `deleteContact(${i})`);
+  document.getElementById("DeleteEditContact").setAttribute(`onclick`, `deleteContact(${i})`);
 }
 
 /**
@@ -316,10 +288,16 @@ function createNewContact(event) {
   let name = document.getElementById("input-name").value;
   let email = document.getElementById("input-email").value;
   let phone = document.getElementById("input-phone").value;
+  const color = createRandomColor();
   if (name == " " || email == "" || phone == "") {
     alert("name, email or phone number not entered");
   } else {
-    Contacts.push({ name: `${name}`, email: `${email}`, phone: phone });
+    Contacts.push({
+      name: `${name}`,
+      email: `${email}`,
+      phone: phone,
+      color: color,
+    });
     getTheItemstoPushTOFireBase();
     loadContactsAgain();
     hideAddNewContact(event);
@@ -333,14 +311,10 @@ function createNewContact(event) {
  */
 function animateContactCreated() {
   document.getElementById("ContactCreated").style = "";
-  document
-    .getElementById("ContactCreated")
-    .classList.add("animationRightToPosition");
+  document.getElementById("ContactCreated").classList.add("animationRightToPosition");
   setTimeout(() => {
     document.getElementById("ContactCreated").style = "display:none;";
-    document
-      .getElementById("ContactCreated")
-      .classList.remove("animationRightToPosition");
+    document.getElementById("ContactCreated").classList.remove("animationRightToPosition");
   }, 3000);
 }
 

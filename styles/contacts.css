@@ -727,6 +727,7 @@
 
   #input-name {
     background-position-x: 335px;
+    margin: 0;
   }
 
   #input-email {
