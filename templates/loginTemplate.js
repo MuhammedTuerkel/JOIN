@@ -4,7 +4,7 @@
  */
 function getUserLoginTemplate() {
   return `
-    <div class="login_card scale_up_center"> 
+    <div class="login_card scale_up_center" onload="handleKeyDown(event)"> 
         <div class="login_card_headline">
             <h1>Log in</h1> 
             <div class="login_underline"></div> 
