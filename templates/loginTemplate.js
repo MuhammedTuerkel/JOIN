@@ -104,12 +104,20 @@ function getRememberMeTemplate() {
     `;
 }
 
+/**
+ * Returns a HTML-Element to show if the data were saved
+ * @returns a HTML Element
+ */
 function getRememberMeYesTemplate() {
   return `
     <p id="rememberMeYes">Daten wurden gespeichert</p>
     `;
 }
 
+/**
+ * Returns a HTML-Element to show if the data were not saved
+ * @returns a HTML-Element
+ */
 function getRememberMeNoTemplate() {
   return `
     <p id="rememberMeNo" >Daten wurden nicht gespeichert</p>

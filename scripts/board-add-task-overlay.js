@@ -27,7 +27,6 @@ async function findFirebaseIdById(targetID) {
 
 /**
  * Closes the overlay, after clicking outside of the Overlay-Ticket
- *
  * @param {*} event
  */
 function closeOverlayOnClick(event) {
@@ -72,7 +71,7 @@ async function showOverlayTicket(category, ticketTitle, ticketDescription, ticke
 }
 
 /**
- *
+ * Opens the edit-Overlay of the ticket and loads the ticket-data into the overlay
  * @param {*} ticketID
  * @param {*} ticketTitle
  * @param {*} ticketDescription

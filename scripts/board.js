@@ -19,7 +19,6 @@ async function onInit() {
 
 /**
  * Checks whether subtasks are present and hides the corresponding containers
- *
  * @param {int} allSubtasks
  * @param {string} ticketID
  */
@@ -76,7 +75,6 @@ function updateSubtaskCounter(ticketID) {
 
 /**
  * Shortens a string and adds some points at the end of the sentence
- *
  * @param {string} string - The string which should be shortened
  * @param {int} maxLength - Maximum Length of the text
  * @returns
@@ -90,7 +88,6 @@ function shortenDescription(string, maxLength = 44) {
 
 /**
  * Returns the index of the searched Task based on its title in the allTasks-Array
- *
  * @param {string} title
  * @returns The Index of the searched Task in the allTasks-Array
  */
@@ -101,7 +98,6 @@ function findTicketIndex(title) {
 
 /**
  * Changes the Subtask Status in the front-end and on the Firebase DB
- *
  * @param {int} subtaskIndex
  * @param {string} ticketID
  */
@@ -126,7 +122,6 @@ async function changeSubtaskStatus(subtaskIndex, ticketID) {
 
 /**
  * Saves the ticketID into a variable for further jobs
- *
  * @param {string} ticketID - an unique identifier of the ticket which got moved
  */
 function startDragging(ticketID) {
@@ -135,7 +130,6 @@ function startDragging(ticketID) {
 
 /**
  * Sets the dropzone into a default-mode
- *
  * @param {*} ev
  */
 function allowDrop(ev) {
@@ -144,7 +138,6 @@ function allowDrop(ev) {
 
 /**
  * Moves the ticket into another column and update the state in the firebase database
- *
  * @param {string} category - describes in which column the ticket was moved
  */
 async function move(category) {
@@ -165,7 +158,6 @@ async function move(category) {
 
 /**
  * Places a dummy ticket into the column which got a dragover
- *
  * @param {string} id - The id of the column which got a dragover
  */
 function highlight(id) {
@@ -177,7 +169,6 @@ function highlight(id) {
 
 /**
  * Removes the dummy ticket from the column which got a dragleave
- *
  * @param {string} id - The id of the column which got a dragleave
  */
 function removeHighlight(id) {
@@ -190,7 +181,6 @@ function removeHighlight(id) {
 
 /**
  * Deletes the task from the board, the array and from the Firebase-DB
- *
  * @param {string} ticketID
  * @returns
  */
@@ -212,7 +202,7 @@ async function deleteTicket(ticketID) {
 }
 
 /**
- *
+ *Handles the input event for the search field with a debounce mechanism.
  */
 function handleSearchInput() {
   clearTimeout(debounceTimeout);

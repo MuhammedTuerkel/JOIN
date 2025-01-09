@@ -1,7 +1,8 @@
 let greeting;
 
-// is a onloadfunction
-
+/**
+ * Is a body-onload function
+ */
 async function Init() {
   await getAllTasks();
   getLoggedInUserData();
@@ -10,8 +11,9 @@ async function Init() {
   greetingOnMobile();
 }
 
-// changes the greeting text to match the time of day
-
+/**
+ * Changes the greeting text to match the time of day
+ */
 document.addEventListener("DOMContentLoaded", function () {
   let today = new Date();
   let hourNow = today.getHours();
@@ -25,8 +27,9 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("greeting").innerHTML = greeting;
 });
 
-// if the screen width  is under 1400px it shows the greeting text in the loading of the html for 3 seconds
-
+/**
+ * If the screen width is under 1400px it shows the greeting text in the loading of the html for three seconds
+ */
 async function greetingOnMobile() {
   if (window.innerWidth < 1400) {
     document.getElementById("headline").style = "display:none;";
@@ -42,12 +45,11 @@ async function greetingOnMobile() {
   }
 }
 
-// makes the firstletter of the name toUpperCase and puts the name in the greeting
-
+/**
+ * Makes the first letter of the name toUpperCase and puts the name in the greeting
+ */
 function putName() {
-  let name =
-    String(User[0].name).charAt(0).toUpperCase() +
-    String(User[0].name).slice(1);
+  let name = String(User[0].name).charAt(0).toUpperCase() + String(User[0].name).slice(1);
   document.getElementById("name").innerHTML = `${name}`;
   let firstLetter = User[0].name.charAt(0).toUpperCase();
   document.getElementById("user").innerHTML = `${firstLetter}`;

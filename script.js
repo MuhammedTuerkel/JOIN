@@ -339,6 +339,9 @@ function goToBoard() {
   window.location.href = "/board.html";
 }
 
+/**
+ * Checks if the form is loaded on the website and listens if the enter-key is pressed. If yes, than the onclick-function on the checkIcon is activated
+ */
 function initializeKeyDown() {
   const form = document.getElementById("addTaskForm");
   if (form) {

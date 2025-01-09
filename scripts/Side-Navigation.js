@@ -1,48 +1,57 @@
 let User = [];
 
-// is a onload Function
-
+/**
+ * Is a body-onload function
+ */
 function sideNavigation() {
-    getFromLocalStorage();
-    putName();
+  getFromLocalStorage();
+  putName();
 }
 
-// onclick to the Submenu it opens the menu
-
+/**
+ * Onclick to the submenu it opens the menu
+ * @param {event} event
+ */
 function showSubmenu(event) {
-    event.stopPropagation();
-    document.getElementById('Submenu').style = "";
+  event.stopPropagation();
+  document.getElementById("Submenu").style = "";
 }
 
-// loggingOut and go back to login.html
-
+/**
+ * Logging out and go back to login.html
+ */
 function logOut() {
-    localStorage.setItem("rememberMe", false);
+  localStorage.setItem("rememberMe", false);
 }
 
-// stops event bubbling
-
+/**
+ * Stops event bubbling
+ * @param {event} event
+ */
 function stopEventBubbling(event) {
-    event.stopPropagation();
+  event.stopPropagation();
 }
 
-// hides the Submenu
-
+/**
+ * Hides the submenu
+ */
 function hideSubMenu() {
-    document.getElementById('Submenu').style = "display:none;"
+  document.getElementById("Submenu").style = "display:none;";
 }
 
-// get the LoggedInUser string from localstorage, generates to JSON and push it to User Array
-
+/**
+ * Get the loggedInUser string from localstorage, generates to JSON and push it to user array
+ */
 function getFromLocalStorage() {
-    let text = localStorage.getItem("loggedInUser");
-    let Json = JSON.parse(text);
-    User.push(Json);
+  let text = localStorage.getItem("loggedInUser");
+  let Json = JSON.parse(text);
+  User.push(Json);
 }
 
-// put the Firstletter of the Username to the Profile-Picture
-
+/**
+ * Put the first letter of the username to the profile-picture
+ */
 function putName() {
-    let firstLetter = User[0].name.charAt(0).toUpperCase();
-    document.getElementById('user').innerHTML = `${firstLetter}`;
+  let firstLetter = User[0].name.charAt(0).toUpperCase();
+  document.getElementById("user").innerHTML = `${firstLetter}`;
 }

@@ -1,3 +1,7 @@
+/**
+ * Creates a HTML-Element with the privacy policy content
+ * @returns a HTML-Element
+ */
 function getPrivacyPolicyTemplate() {
   return `
             <div class="privacy_and_legal_privacy_plolicy_text_container">
@@ -70,6 +74,10 @@ function getPrivacyPolicyTemplate() {
     `;
 }
 
+/**
+ * Creates a HTML-Element with the Legal Notice content
+ * @returns a HTML-Element
+ */
 function getLegalNoticeTemplate() {
   return `
     <div class="privacy_and_legal_privacy_plolicy_text_container">
