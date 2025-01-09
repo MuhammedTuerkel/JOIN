@@ -10,7 +10,6 @@ async function renderAllTickets(array) {
 
 /**
  * Renders the tasks which are in the 'To do' Column
- *
  */
 function renderToDoTasks(array) {
   let tasks = array.filter((t) => t["state"] == "toDo");
@@ -49,7 +48,6 @@ function renderToDoTasks(array) {
 
 /**
  * Renders the tasks which are in the 'In progress'-Column
- *
  */
 function renderInProgressTasks(array) {
   let tasks = array.filter((t) => t["state"] == "inProgress");
@@ -88,7 +86,6 @@ function renderInProgressTasks(array) {
 
 /**
  * Renders the tasks which are in the 'Await Feedback' Column
- *
  */
 function renderFeedbackTasks(array) {
   let tasks = array.filter((t) => t["state"] == "awaitFeedback");
@@ -127,7 +124,6 @@ function renderFeedbackTasks(array) {
 
 /**
  * Renders the tasks which are in the 'Done'-Column
- *
  */
 function renderDoneTasks(array) {
   let tasks = array.filter((t) => t["state"] == "done");
@@ -166,7 +162,6 @@ function renderDoneTasks(array) {
 
 /**
  * Places the assigned users of the ticket graphically onto the ticket-element
- *
  * @param {string} ticketID - an unique identifier of the ticket
  */
 async function renderAssignedUsers(ticketID) {
@@ -181,7 +176,6 @@ async function renderAssignedUsers(ticketID) {
 
 /**
  * Renders the assigned Users into the Overlay-Ticket
- *
  * @param {int} ticketID
  * @returns
  */
@@ -205,7 +199,6 @@ function renderAssignedUsersOverlay(ticketID) {
 
 /**
  * Renders all Subtasks into the Overlay-Ticket
- *
  * @param {int} ticketID
  */
 function renderSubtasksOverlay(ticketID) {
@@ -226,7 +219,6 @@ function renderSubtasksOverlay(ticketID) {
 
 /**
  * Renders all Subtasks into the Edit Overlay
- *
  * @param {int} ticketID
  */
 function renderSubtasksEditOverlay(ticketID) {

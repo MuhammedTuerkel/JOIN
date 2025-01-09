@@ -12,6 +12,9 @@
       href="./assets/favicon/favicon-96x96.png"
       sizes="96x96"
     />
+    <link rel="stylesheet" href="./styles/standard.css" />
+    <link rel="stylesheet" href="./styles/summary.css" />
+    <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
     <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
     <link rel="stylesheet" href="./styles/help-privacy-and-legal.css" />
@@ -22,6 +25,7 @@
     <script src="./templates/privacyAndLegalTemplate.js"></script>
     <script src="./scripts/login.js"></script>
     <link rel="stylesheet" href="./styles/Side-Navigation.css" />
+    <link rel="stylesheet" href="./style.css" />
     <script src="./scripts/Side-Navigation.js"></script>
   </head>
 
@@ -29,6 +33,7 @@
     onclick="hideSubMenu(), hideAddNewContact(event)"
     onload="sideNavigation()"
   >
+  <body onclick="hideSubMenu(), hideAddNewContact(event)" onload="sideNavigation()">
     <div class="side-navigation">
       <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="" />
       <div class="menu">
@@ -50,12 +55,8 @@
         </div>
       </div>
       <div class="Privacy-section">
-        <a onclick="renderPrivacyPolicyTemplateLoggedInUser()" href="#"
-          >Privacy Policy</a
-        >
-        <a onclick="renderLegalNoticeTemplateLoggedInUser()" href="#"
-          >Legal Notice</a
-        >
+        <a onclick="renderPrivacyPolicyTemplateLoggedInUser()" href="#">Privacy Policy</a>
+        <a onclick="renderLegalNoticeTemplateLoggedInUser()" href="#">Legal Notice</a>
       </div>
     </div>
     <div class="website-body">
@@ -65,56 +66,40 @@
           <p>Kanban Project Management Tool</p>
           <div class="d-flex-column">
             <div id="help-user" class="help-user">
-              <a href="./help.html"
-                ><img
-                  src="assets/icons/help-symbol-icon-default.svg"
-                  alt=""
-                  style="cursor: pointer"
-              /></a>
+              <a href="./help.html"><img src="assets/icons/help-symbol-icon-default.svg" alt="" style="cursor: pointer" /></a>
               <span onclick="showSubmenu(event)" class="user" id="user"></span>
             </div>
-            <div
-              onclick="stopEventBubbling(event)"
-              id="Submenu"
-              class="Submenu"
-              style="display: none"
-            >
-              <a
-                onclick="openHelpHtml()"
-                href="#"
-                class="Submenu-buttons d-none1"
-                >Help</a
-              >
-              <a
-                onclick="renderLegalNotceTemplateLoggedInUser()"
-                href="#"
-                class="Submenu-buttons"
-              >
-                Legal Notice
-              </a>
-              <a
-                onclick="renderPrivacyPolicyTemplateLoggedInUser()"
-                href="./privacy-and-legal.html"
-                class="Submenu-buttons"
-              >
-                Privacy Policy</a
-              >
-              <a onclick="logOut()" href="./login.html" class="Submenu-buttons">
-                Log out
-              </a>
+            <div onclick="stopEventBubbling(event)" id="Submenu" class="Submenu" style="display: none">
+              <a onclick="openHelpHtml()" href="#" class="Submenu-buttons d-none1">Help</a>
+              <a onclick="renderLegalNotceTemplateLoggedInUser()" href="#" class="Submenu-buttons"> Legal Notice </a>
+              <a onclick="renderPrivacyPolicyTemplateLoggedInUser()" href="./privacy-and-legal.html" class="Submenu-buttons"> Privacy Policy</a>
+              <a onclick="logOut()" href="./login.html" class="Submenu-buttons"> Log out </a>
             </div>
           </div>
         </div>
       </header>
       <div id="closeTab" class="pp_close_tab">
-        <img
-          id="returnArrow"
-          onclick="backToThePage()"
-          src="./assets/img/back_arrow.png"
-          alt="Zurück zur ausgangsseite"
-        />
+        <img id="returnArrow" onclick="backToThePage()" src="./assets/img/back_arrow.png" alt="Zurück zur ausgangsseite" />
       </div>
       <main id="termsContent" class="terms_container"></main>
     </div>
+    <div class="orientation-warning" id="orientationWarning">
+      <div class="warning-container">
+        <p>This page has been optimized for use in portrait mode.</p>
+        <p>Please rotate your mobile device.</p>
+        <div class="tilt-device-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#FFFFFF">
+            <path
+              d="M509.33-188 188-509.33q-19.67-21-19.67-48.67T188-606.67l168.67-168q19.66-21 47.99-21 28.32 0 49.34 21l321.33 321.34q20.34 20.33 20.34 48.66 0 28.34-20.34 48.67L606.67-188q-19.67 21-48 21-28.32 0-49.34-21ZM558-233.33l171.33-171.34-324-324.66L234-558l324 324.67ZM478.67.67q-98.68 0-185.89-37.5-87.21-37.5-152.5-103Q75-205.33 37.5-292.62 0-379.91 0-478.67h66.67q0 77 27 146.34 27 69.33 74.5 123.66 47.5 54.34 112.83 89.84T422.33-73L300.67-194.67 348-242 578.67-11.33q-24 6.66-49.49 9.33Q503.69.67 478.67.67Zm414.66-479.34q0-77-26.66-146.33-26.67-69.33-73.84-124-47.16-54.67-112.16-90.5t-141-46.17L660-765.33 612.67-718 382-948.67q24-6 48.17-8.66 24.16-2.67 48.5-2.67 99.66 0 187.16 37.83 87.5 37.84 153 103.34t103.34 153Q960-578.33 960-478.67h-66.67ZM482-481.33Z"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+    <script>
+      window.addEventListener("orientationchange", checkOrientation);
+      window.addEventListener("resize", checkOrientation);
+      checkOrientation();
+    </script>
   </body>
 </html>

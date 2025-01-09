@@ -4,6 +4,7 @@ let currentDraggedElement;
 let editedPrio;
 let debounceTimeout;
 let selectedPrioOnBoard;
+const formVisibilityCheck = setInterval(checkFormVisibility, 100);
 
 /**
  * Initialize the board features which should be active at site load
@@ -18,23 +19,23 @@ async function onInit() {
 
 /**
  * Checks whether subtasks are present and hides the corresponding containers
- *
  * @param {int} allSubtasks
  * @param {string} ticketID
  */
 function displaySubtasks(allSubtasks, ticketID) {
-  let progressBar = document.getElementById(
-    `ticketSubtaskProgressBar_${ticketID}`
-  );
-  let progressCounter = document.getElementById(
-    `ticketSubtaskCounter_${ticketID}`
-  );
+  let progressBar = document.getElementById(`ticketSubtaskProgressBar_${ticketID}`);
+  let progressCounter = document.getElementById(`ticketSubtaskCounter_${ticketID}`);
   if (allSubtasks === 0) {
     progressBar.classList.add("d_none");
     progressCounter.classList.add("d_none");
   }
 }
 
+/**
+ * Returns the amount of closed subtasks for a certain ticket
+ * @param {string} ticketID
+ * @returns an int
+ */
 function subtasksClosed(ticketID) {
   let task = allTasks.find((t) => t["id"] === ticketID);
   if (!task || !task.subtasks) {
@@ -43,18 +44,25 @@ function subtasksClosed(ticketID) {
   return task.subtasks.filter((st) => st["status"] === "closed").length;
 }
 
+/**
+ * Updates the progress-bar on the UI related to the closed subtasks of a certain ticket
+ * @param {string} ticketID
+ */
 function updateProgressBar(ticketID) {
   let closedTasks = subtasksClosed(ticketID);
   let task = allTasks.find((t) => t["id"] === ticketID);
   let totalSubtasks = task && task.subtasks ? task.subtasks.length : 0;
-  const progressPercentage =
-    totalSubtasks > 0 ? (closedTasks / totalSubtasks) * 100 : 0;
+  const progressPercentage = totalSubtasks > 0 ? (closedTasks / totalSubtasks) * 100 : 0;
   let progressBar = document.getElementById(`progress-bar_${ticketID}`);
   if (progressBar) {
     progressBar.style.width = progressPercentage + "%";
   }
 }
 
+/**
+ * Updates the subtask counter on the UI related to a certain ticket
+ * @param {string} ticketID
+ */
 function updateSubtaskCounter(ticketID) {
   let closedTasks = subtasksClosed(ticketID);
   let task = allTasks.find((t) => t["id"] === ticketID);
@@ -67,7 +75,6 @@ function updateSubtaskCounter(ticketID) {
 
 /**
  * Shortens a string and adds some points at the end of the sentence
- *
  * @param {string} string - The string which should be shortened
  * @param {int} maxLength - Maximum Length of the text
  * @returns
@@ -81,7 +88,6 @@ function shortenDescription(string, maxLength = 44) {
 
 /**
  * Returns the index of the searched Task based on its title in the allTasks-Array
- *
  * @param {string} title
  * @returns The Index of the searched Task in the allTasks-Array
  */
@@ -92,7 +98,6 @@ function findTicketIndex(title) {
 
 /**
  * Changes the Subtask Status in the front-end and on the Firebase DB
- *
  * @param {int} subtaskIndex
  * @param {string} ticketID
  */
@@ -102,14 +107,11 @@ async function changeSubtaskStatus(subtaskIndex, ticketID) {
   let subtask = task.subtasks[subtaskIndex];
   subtask.status = subtask.status === "open" ? "closed" : "open";
   try {
-    await fetch(
-      `${BASE_URL}tasks/${firebaseID}/subtasks/${subtaskIndex}.json`,
-      {
-        method: "PATCH",
-        body: JSON.stringify({ status: subtask.status }),
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    await fetch(`${BASE_URL}tasks/${firebaseID}/subtasks/${subtaskIndex}.json`, {
+      method: "PATCH",
+      body: JSON.stringify({ status: subtask.status }),
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (error) {
     console.error("Failed to update subtask in Firebase:", error);
   }
@@ -120,7 +122,6 @@ async function changeSubtaskStatus(subtaskIndex, ticketID) {
 
 /**
  * Saves the ticketID into a variable for further jobs
- *
  * @param {string} ticketID - an unique identifier of the ticket which got moved
  */
 function startDragging(ticketID) {
@@ -129,7 +130,6 @@ function startDragging(ticketID) {
 
 /**
  * Sets the dropzone into a default-mode
- *
  * @param {*} ev
  */
 function allowDrop(ev) {
@@ -138,13 +138,10 @@ function allowDrop(ev) {
 
 /**
  * Moves the ticket into another column and update the state in the firebase database
- *
  * @param {string} category - describes in which column the ticket was moved
  */
 async function move(category) {
-  let currentIndex = allTasks.findIndex(
-    (ix) => ix["id"] === currentDraggedElement
-  );
+  let currentIndex = allTasks.findIndex((ix) => ix["id"] === currentDraggedElement);
   if (currentIndex !== -1) {
     allTasks[currentIndex]["state"] = category;
     let firebaseID = allTasks[currentIndex]["firebase_id"];
@@ -161,7 +158,6 @@ async function move(category) {
 
 /**
  * Places a dummy ticket into the column which got a dragover
- *
  * @param {string} id - The id of the column which got a dragover
  */
 function highlight(id) {
@@ -173,7 +169,6 @@ function highlight(id) {
 
 /**
  * Removes the dummy ticket from the column which got a dragleave
- *
  * @param {string} id - The id of the column which got a dragleave
  */
 function removeHighlight(id) {
@@ -186,7 +181,6 @@ function removeHighlight(id) {
 
 /**
  * Deletes the task from the board, the array and from the Firebase-DB
- *
  * @param {string} ticketID
  * @returns
  */
@@ -208,7 +202,7 @@ async function deleteTicket(ticketID) {
 }
 
 /**
- *
+ *Handles the input event for the search field with a debounce mechanism.
  */
 function handleSearchInput() {
   clearTimeout(debounceTimeout);
@@ -235,12 +229,8 @@ function startSearch() {
   clearBoard();
   let searchResults = [];
   allTasks.forEach((task) => {
-    const titleMatch = task.title
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-    const descriptionMatch = task.description
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
+    const titleMatch = task.title.toLowerCase().includes(searchTerm.toLowerCase());
+    const descriptionMatch = task.description.toLowerCase().includes(searchTerm.toLowerCase());
     if (titleMatch || descriptionMatch) {
       searchResults.push(task);
     }
@@ -300,8 +290,7 @@ function addEventListeners() {
   let taskDueDate = document.getElementById("task-due-date");
   let taskTitle = document.getElementById("task-title");
   taskCategory.addEventListener("focus", function () {
-    document.getElementById("addTaskCategoryErrorInput").style.display =
-      "block";
+    document.getElementById("addTaskCategoryErrorInput").style.display = "block";
   });
   taskCategory.addEventListener("blur", function () {
     document.getElementById("addTaskCategoryErrorInput").style.display = "none";
@@ -318,4 +307,15 @@ function addEventListeners() {
   taskTitle.addEventListener("blur", function () {
     document.getElementById("addTaskTitleErrorInput").style.display = "none";
   });
+}
+
+/**
+ * Checks if the form is visible and DOM-loaded, so the initializeKeyDown-function can be started
+ */
+function checkFormVisibility() {
+  const form = document.getElementById("addTaskForm");
+  if (form && form.offsetHeight > 0 && form.offsetWidth > 0) {
+    initializeKeyDown();
+    clearInterval(formVisibilityCheck);
+  }
 }

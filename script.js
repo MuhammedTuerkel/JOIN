@@ -338,3 +338,30 @@ function changeDateFormat(earliestDateNumber) {
 function goToBoard() {
   window.location.href = "/board.html";
 }
+
+/**
+ * Checks if the form is loaded on the website and listens if the enter-key is pressed. If yes, than the onclick-function on the checkIcon is activated
+ */
+function initializeKeyDown() {
+  const form = document.getElementById("addTaskForm");
+  if (form) {
+    form.onkeydown = function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault(); // Verhindert das Standard-Submit-Verhalten
+        const checkIcon = document.getElementById("checkIcon");
+        if (checkIcon) {
+          checkIcon.click(); // Simuliert den Klick auf das Icon
+        }
+      }
+    };
+  }
+}
+
+function checkOrientation() {
+  const warning = document.getElementById("orientationWarning");
+  if (window.innerWidth < window.innerHeight) {
+    warning.style.display = "none";
+  } else if (window.innerWidth <= 900) {
+    warning.style.display = "block";
+  }
+}

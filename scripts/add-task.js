@@ -12,6 +12,7 @@ function addTaskOnInit() {
   subtaskInput();
   addTaskClearTask();
   getLoggedInUserData();
+  initializeKeyDown();
 }
 
 /**

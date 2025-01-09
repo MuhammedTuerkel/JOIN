@@ -27,7 +27,6 @@ async function findFirebaseIdById(targetID) {
 
 /**
  * Closes the overlay, after clicking outside of the Overlay-Ticket
- *
  * @param {*} event
  */
 function closeOverlayOnClick(event) {
@@ -64,48 +63,27 @@ function toggleOverlay() {
  * @param {string} prio - The Priority of the ticket
  * @param {string} ticketID - The exact ID which is based on the Firebase-ID
  */
-async function showOverlayTicket(
-  category,
-  ticketTitle,
-  ticketDescription,
-  ticketDate,
-  prio,
-  ticketID
-) {
-  document.getElementById("overlayID").innerHTML = renderOverlayTicket(
-    category,
-    ticketTitle,
-    ticketDescription,
-    ticketDate,
-    prio,
-    ticketID
-  );
+async function showOverlayTicket(category, ticketTitle, ticketDescription, ticketDate, prio, ticketID) {
+  document.getElementById("overlayID").innerHTML = renderOverlayTicket(category, ticketTitle, ticketDescription, ticketDate, prio, ticketID);
   renderAssignedUsersOverlay(ticketID);
   renderSubtasksOverlay(ticketID);
   actualFirebaseID = await findFirebaseIdById(ticketID);
 }
 
 /**
- *
+ * Opens the edit-Overlay of the ticket and loads the ticket-data into the overlay
  * @param {*} ticketID
  * @param {*} ticketTitle
  * @param {*} ticketDescription
  * @param {*} ticketDate
  * @param {*} prio
  */
-function editTicket(
-  ticketID,
-  ticketTitle,
-  ticketDescription,
-  ticketDate,
-  prio
-) {
+function editTicket(ticketID, ticketTitle, ticketDescription, ticketDate, prio) {
   let target = document.getElementById("overlayCard");
   target.innerHTML = "";
   target.innerHTML = renderOverlayEditTicket(ticketID);
   document.getElementById("task-title-overlay-edit").value = ticketTitle;
-  document.getElementById("task-description-overlay-edit").value =
-    ticketDescription;
+  document.getElementById("task-description-overlay-edit").value = ticketDescription;
   document.getElementById("task-due-date-overlay-edit").value = ticketDate;
   setPriorityOnEdit(prio);
 }
@@ -174,22 +152,13 @@ function activateButton(buttonId, svgId, buttonClass, svgClass) {
  */
 async function saveEditOnClick(ticketID) {
   let newTitle = document.getElementById("task-title-overlay-edit").value;
-  let newDescription = document.getElementById(
-    "task-description-overlay-edit"
-  ).value;
+  let newDescription = document.getElementById("task-description-overlay-edit").value;
   let newDueDate = document.getElementById("task-due-date-overlay-edit").value;
   let newPrio = editedPrio;
   let newAssignedUsers = selectedUsers;
   let newSubtasks = subtasksArray;
   let firebaseID = await findFirebaseIdById(ticketID);
-  let data = buildEditTask(
-    newTitle,
-    newDescription,
-    newDueDate,
-    newPrio,
-    newAssignedUsers,
-    newSubtasks
-  );
+  let data = buildEditTask(newTitle, newDescription, newDueDate, newPrio, newAssignedUsers, newSubtasks);
   await patchTask(firebaseID, data);
   toggleOverlay();
   location.reload();
@@ -223,28 +192,14 @@ async function patchTask(firebaseID, data) {
  * @param {Array} newSubtasks
  * @returns a JSON Object
  */
-function buildEditTask(
-  newTitle,
-  newDescription,
-  newDueDate,
-  newPrio,
-  newAssignedUsers,
-  newSubtasks
-) {
+function buildEditTask(newTitle, newDescription, newDueDate, newPrio, newAssignedUsers, newSubtasks) {
   let taskTitle = newTitle;
   let taskDate = newDueDate;
   let taskPrio = newPrio;
   let taskDescription = newDescription;
   let taskSubtasks = newSubtasks;
   let taskAssigned = newAssignedUsers;
-  return editedTaskToJSON(
-    taskTitle,
-    taskDate,
-    taskPrio,
-    taskDescription,
-    taskSubtasks,
-    taskAssigned
-  );
+  return editedTaskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskSubtasks, taskAssigned);
 }
 
 /**
@@ -257,14 +212,7 @@ function buildEditTask(
  * @param {Array} taskAssigned
  * @returns a JSON Object
  */
-function editedTaskToJSON(
-  taskTitle,
-  taskDate,
-  taskPrio,
-  taskDescription,
-  taskSubtasks,
-  taskAssigned
-) {
+function editedTaskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskSubtasks, taskAssigned) {
   return {
     title: taskTitle,
     due_date: taskDate,

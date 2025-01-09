@@ -107,16 +107,16 @@ function renderAddTaskFeatureOnBoard(state) {
                 <div class="form-wrapper">
                         <div class="form-column-left">
                             <div class="form-group required_focus add_task_for_error_height">
-                                <label for="title">Title <span class="required-icon">*</span></label>
+                                <label for="task-title">Title <span class="required-icon">*</span></label>
                                 <input class="" type="text" id="task-title" name="title" placeholder="Enter a title" required>
                                 <small class="add_task_error" id="addTaskTitleErrorInput">* This field is required</small>
                             </div>
                             <div class="form-group">
-                                <label for="description">Description</label>
+                                <label for="task-description">Description</label>
                                 <textarea class="addTaskDescription" id="task-description" name="description" placeholder="Enter a Description"></textarea>
                             </div>
                             <div class="assigned_to_container">
-                                <label for="assigned-to">Assigned to</label>
+                                <label for="addTaskSearchContacts">Assigned to</label>
                                 <div id="assigned" class="add_task_dropdown" onclick="openDropdown(event)">
                                     <input type="text" id="addTaskSearchContacts" placeholder="Select contacts to assign" oninput="addTaskSearchUser()">
                                     <img id="dropDownArrow" src="./assets/img/arrow_drop_down.png" alt="" onclick="openDropdown(event)">
@@ -128,12 +128,12 @@ function renderAddTaskFeatureOnBoard(state) {
                         <div class="separator"></div>
                         <div class="form-column-right">
                             <div class="form-group required_focus add_task_for_error_height">
-                                <label for="due-date">Due date <span class="required-icon">*</span></label>
+                                <label for="task-due-date">Due date <span class="required-icon">*</span></label>
                                 <input class="" type="date" id="task-due-date" name="due-date" placeholder="dd/mm/yyyy" required>
                                 <small class="add_task_error" id="addTaskDateErrorInput">* This field is required</small>
                             </div>
                             <div class="prio-group">
-                                <label>Prio <span class="required-icon">*</span></label>
+                                <span>Prio <span class="required-icon">*</span></span>
                                 <div class="prio-options">
 
                                   <button type="button" class="prio-btn" id="urgent-btn" onclick="setUrgentOnBoard()">
@@ -174,7 +174,7 @@ function renderAddTaskFeatureOnBoard(state) {
                                 </div>
                             </div>
                             <div class="form-group add_task_for_error_height">
-                                <label for="category">Category <span class="required-icon">*</span></label>
+                                <label for="task-category">Category <span class="required-icon">*</span></label>
                                 <div class="custom-select-wrapper ">
                                     <select class="custom-select" name="category" id="task-category" required>                                        
                                         <option value="">Select task category</option>
@@ -185,7 +185,7 @@ function renderAddTaskFeatureOnBoard(state) {
                                 <small class="add_task_error" id="addTaskCategoryErrorInput">* This field is required</small>
                             </div>
                             <div class="form-group">
-                                <label for="subtasks">Subtasks</label>
+                                <label for="task-subtasks">Subtasks</label>
                                 <div class="subtasks-input">
                                     <input type="text" id="task-subtasks" name="subtasks" placeholder="Add new subtask" oninput="subtaskInput()">
                                         <button type="button" class="add-subtask-btn" id="add-subtask-btn">
