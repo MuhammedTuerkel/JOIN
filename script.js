@@ -10,6 +10,8 @@ let summaryFeedback;
 let summaryDone;
 let summaryUrgent;
 let earliestDate;
+window.addEventListener("resize", checkOrientation());
+window.addEventListener("load", checkOrientation());
 
 const BASE_URL = "https://join-bbd82-default-rtdb.europe-west1.firebasedatabase.app/";
 
@@ -337,4 +339,15 @@ function changeDateFormat(earliestDateNumber) {
  */
 function goToBoard() {
   window.location.href = "/board.html";
+}
+
+/**
+ * If landscape mode is used on a mobile device, a message is displayed
+ */
+function checkOrientation() {
+  if (window.innerHeight < window.innerWidth) {
+    document.body.classList.add("landscape");
+  } else {
+    document.body.classList.remove("landscape");
+  }
 }

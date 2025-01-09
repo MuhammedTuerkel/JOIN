@@ -1,81 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>terms</title>
-    <link rel="stylesheet" href="./styles/standard.css">
-    <link rel="stylesheet" href="./styles/summary.css">
+    <link rel="stylesheet" href="./styles/standard.css" />
+    <link rel="stylesheet" href="./styles/summary.css" />
     <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
     <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
-    <link rel="stylesheet" href="./styles/help-privacy-and-legal.css">
+    <link rel="stylesheet" href="./styles/help-privacy-and-legal.css" />
     <meta name="apple-mobile-web-app-title" content="JOIN" />
     <link rel="manifest" href="./assets/favicon/site.webmanifest" />
     <script src="script.js"></script>
     <script src="./scripts/privacy_and_legal.js"></script>
     <script src="./templates/privacyAndLegalTemplate.js"></script>
     <script src="./scripts/login.js"></script>
-    <link rel="stylesheet" href="./styles/Side-Navigation.css">
+    <link rel="stylesheet" href="./styles/Side-Navigation.css" />
     <script src="./scripts/Side-Navigation.js"></script>
-</head>
+  </head>
 
-<body onclick="hideSubMenu(), hideAddNewContact(event)" onload="sideNavigation()">
+  <body onclick="hideSubMenu(), hideAddNewContact(event)" onload="sideNavigation()">
     <div class="side-navigation">
-        <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
-        <div class="menu">
-            <div class="menu-sections">
-                <img class="menu-icons" src="assets/icons/summary-icon.svg" alt="">
-                <a href="./summary.html">Summary</a>
-            </div>
-            <div class="menu-sections">
-                <img class="menu-icons" src="assets/icons/add-task-icon.svg" alt="">
-                <a href="./add-task.html">Add Task</a>
-            </div>
-            <div class="menu-sections">
-                <img class="menu-icons" src="assets/icons/board-icon.svg" alt="">
-                <a href="./board.html">Board</a>
-            </div>
-            <div class="menu-sections">
-                <img class="menu-icons" src="assets/icons/contacts-icon.svg" alt="">
-                <a href="./contacts.html">Contacts</a>
-            </div>
+      <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="" />
+      <div class="menu">
+        <div class="menu-sections">
+          <img class="menu-icons" src="assets/icons/summary-icon.svg" alt="" />
+          <a href="./summary.html">Summary</a>
         </div>
-        <div class="Privacy-section">
-            <a onclick="renderPrivacyPolicyTemplateLoggedInUser()" href="#">Privacy Policy</a>
-            <a onclick="renderLegalNoticeTemplateLoggedInUser()" href="#">Legal Notice</a>
+        <div class="menu-sections">
+          <img class="menu-icons" src="assets/icons/add-task-icon.svg" alt="" />
+          <a href="./add-task.html">Add Task</a>
         </div>
+        <div class="menu-sections">
+          <img class="menu-icons" src="assets/icons/board-icon.svg" alt="" />
+          <a href="./board.html">Board</a>
+        </div>
+        <div class="menu-sections">
+          <img class="menu-icons" src="assets/icons/contacts-icon.svg" alt="" />
+          <a href="./contacts.html">Contacts</a>
+        </div>
+      </div>
+      <div class="Privacy-section">
+        <a onclick="renderPrivacyPolicyTemplateLoggedInUser()" href="#">Privacy Policy</a>
+        <a onclick="renderLegalNoticeTemplateLoggedInUser()" href="#">Legal Notice</a>
+      </div>
     </div>
     <div class="website-body">
-        <header>
-            <div class="header-content">
-                <img class="header-Join-Logo" src="./assets/img/capa.png" alt="">
-                <p>Kanban Project Management Tool</p>
-                <div class="d-flex-column">
-                    <div id="help-user" class="help-user">
-                        <a href="./help.html"><img src="assets/icons/help-symbol-icon-default.svg" alt=""
-                                style="cursor: pointer;"></a>
-                        <span onclick="showSubmenu(event)" class="user" id="user"></span>
-                    </div>
-                    <div onclick="stopEventBubbling(event)" id="Submenu" class="Submenu" style="display: none;">
-                        <a onclick="openHelpHtml()" href="#" class="Submenu-buttons d-none1">Help</a>
-                        <a onclick="renderLegalNotceTemplateLoggedInUser()" href="#" class="Submenu-buttons"> Legal
-                            Notice </a>
-                        <a onclick="renderPrivacyPolicyTemplateLoggedInUser()" href="./privacy-and-legal.html"
-                            class="Submenu-buttons"> Privacy Policy</a>
-                        <a onclick="logOut()" href="./login.html" class="Submenu-buttons"> Log out </a>
-                    </div>
-                </div>
+      <header>
+        <div class="header-content">
+          <img class="header-Join-Logo" src="./assets/img/capa.png" alt="" />
+          <p>Kanban Project Management Tool</p>
+          <div class="d-flex-column">
+            <div id="help-user" class="help-user">
+              <a href="./help.html"><img src="assets/icons/help-symbol-icon-default.svg" alt="" style="cursor: pointer" /></a>
+              <span onclick="showSubmenu(event)" class="user" id="user"></span>
             </div>
-        </header>
-        <div id="closeTab" class="pp_close_tab">
-            <img id="returnArrow" onclick="backToThePage()" src="./assets/img/back_arrow.png"
-                alt="Zurück zur ausgangsseite">
+            <div onclick="stopEventBubbling(event)" id="Submenu" class="Submenu" style="display: none">
+              <a onclick="openHelpHtml()" href="#" class="Submenu-buttons d-none1">Help</a>
+              <a onclick="renderLegalNotceTemplateLoggedInUser()" href="#" class="Submenu-buttons"> Legal Notice </a>
+              <a onclick="renderPrivacyPolicyTemplateLoggedInUser()" href="./privacy-and-legal.html" class="Submenu-buttons"> Privacy Policy</a>
+              <a onclick="logOut()" href="./login.html" class="Submenu-buttons"> Log out </a>
+            </div>
+          </div>
         </div>
-        <main id="termsContent" class="terms_container"></main>
+      </header>
+      <div id="closeTab" class="pp_close_tab">
+        <img id="returnArrow" onclick="backToThePage()" src="./assets/img/back_arrow.png" alt="Zurück zur ausgangsseite" />
+      </div>
+      <main id="termsContent" class="terms_container"></main>
     </div>
-    
-</body>
-
+    <div id="landscape-warning">Please rotate your device to portrait mode for the best experience.</div>
+  </body>
 </html>

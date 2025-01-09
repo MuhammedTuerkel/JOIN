@@ -1,75 +1,70 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>join</title>
 
-    <link rel="icon" href="./assets/favicon/favicon-96x96.png" type="image/x-icon">
-    <link rel="stylesheet" href="./styles/login.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz@0,14..32;1,14..32&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles/signUp.css">
+    <link rel="icon" href="./assets/favicon/favicon-96x96.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./styles/login.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz@0,14..32;1,14..32&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles/signUp.css" />
 
-    <script src="./templates/loginTemplate.js"></script>  
+    <script src="./templates/loginTemplate.js"></script>
     <script src="script.js"></script>
     <script src="./scripts/login.js"></script>
     <script src="scripts/signUp.js"></script>
     <script src="./scripts/privacy_and_legal.js"></script>
     <script src="./templates/privacyAndLegalTemplate.js"></script>
+  </head>
 
-</head>
-
-<body onload="logInInit()" class="login_body">
-    <header id="loginHead"  class="login_header login_d_none">
-        <main class="login_head">
-            <div class="login_header_img"></div>
-            <div id="loginHeader" onclick="loadSignUpTemplate()" class="login_header_nav">
-                <a href="#">Not a Join user?</a>
-                <div class="login_not_a_user_buttons_styles" onclick="loadSignUpTemplate()">
-                    Sign up
-                </div>
-            </div>
-        </main>
-    </header>
- 
-    <div id="loginMoveImgContainer" class="login_move_image_container">
-        <div class="login_logo log">
-            <img id="loginMovableImage" src="./assets/img/capa.png" alt="Logo" class="">
+  <body onload="logInInit()" class="login_body">
+    <header id="loginHead" class="login_header login_d_none">
+      <main class="login_head">
+        <div class="login_header_img"></div>
+        <div id="loginHeader" onclick="loadSignUpTemplate()" class="login_header_nav">
+          <a href="#">Not a Join user?</a>
+          <div class="login_not_a_user_buttons_styles" onclick="loadSignUpTemplate()">Sign up</div>
         </div>
+      </main>
+    </header>
+
+    <div id="loginMoveImgContainer" class="login_move_image_container">
+      <div class="login_logo log">
+        <img id="loginMovableImage" src="./assets/img/capa.png" alt="Logo" class="" />
+      </div>
     </div>
     <div id="loginMobileMoveImgContainer" class="login_move_mobile_image_container">
-        <div class="login_logo_mobile">
-            <img id="loginMobileMovableImage" src="./assets/img/Logo_Mobile.png" alt="Logo" class="fade_out">
-        </div>
+      <div class="login_logo_mobile">
+        <img id="loginMobileMovableImage" src="./assets/img/Logo_Mobile.png" alt="Logo" class="fade_out" />
+      </div>
     </div>
 
     <main id="loginMain" class="login_main_container login_d_none">
-        <article id="loginContent" class="login_variants"></article>
+      <article id="loginContent" class="login_variants"></article>
     </main>
 
     <div id="overlay" class="overlay">
-        <div class="confirmation_container">
-            <div class="sign_up_sucessfully">You Signed Up successfully</div>
-        </div>
+      <div class="confirmation_container">
+        <div class="sign_up_sucessfully">You Signed Up successfully</div>
+      </div>
     </div>
 
-    <div id="loginMobile"  class="login_mobile_head login_d_none">
-        <main class="login_mobile">
-            <div onclick="loadSignUpTemplate()" class="login_moble_nav">
-                <a href="#">Not a Join user?</a>
-                <div class="login_not_a_user_buttons_styles" onclick="loadSignUpTemplate()">
-                    Sign up
-                </div>
-            </div>
-        </main>
+    <div id="loginMobile" class="login_mobile_head login_d_none">
+      <main class="login_mobile">
+        <div onclick="loadSignUpTemplate()" class="login_moble_nav">
+          <a href="#">Not a Join user?</a>
+          <div class="login_not_a_user_buttons_styles" onclick="loadSignUpTemplate()">Sign up</div>
+        </div>
+      </main>
     </div>
 
     <footer id="loginFooter" class="login_footer_container login_d_none">
-        <div class="login_footer login_d_none">
-            <a onclick="renderPrivacyPolicyTemplateNotLoggedInUser()" href="#">Privacy Policy</a>
-            <a onclick="renderLegalNoticeTemplateNotLoggedInUser()" href="#">Legal Notice</a>
-        </div>
+      <div class="login_footer login_d_none">
+        <a onclick="renderPrivacyPolicyTemplateNotLoggedInUser()" href="#">Privacy Policy</a>
+        <a onclick="renderLegalNoticeTemplateNotLoggedInUser()" href="#">Legal Notice</a>
+      </div>
     </footer>
-
-</body>
+    <div id="landscape-warning">Please rotate your device to portrait mode for the best experience.</div>
+  </body>
 </html>
