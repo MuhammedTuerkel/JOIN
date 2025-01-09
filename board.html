@@ -1,27 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="icon"
-      type="image/png"
-      href="./assets/favicon/favicon-96x96.png"
-      sizes="96x96"
-    />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
     <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="./assets/favicon/apple-touch-icon.png"
-    />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="JOIN" />
     <link rel="manifest" href="./assets/favicon/site.webmanifest" />
-    <link rel="stylesheet" href="./style.css" />
-    <link rel="stylesheet" href="./styles/board.css" />
-    <link rel="stylesheet" href="./styles/board-edit-overlay.css" />
-    <link rel="stylesheet" href="./styles/add-task-responsive.css" />
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./styles/board.css">
+    <link rel="stylesheet" href="./styles/board-edit-overlay.css">
+    <link rel="stylesheet" href="./styles/add-task-responsive.css">
     <script src="./scripts/add-task-board.js"></script>
     <script src="./scripts/add-task.js"></script>
     <script src="./scripts/add-task-assigned-user.js"></script>
@@ -30,41 +21,37 @@
     <script src="./scripts/board.js"></script>
     <script src="./templates/boardTemplate.js"></script>
     <script src="./templates/addTaskTemplates.js"></script>
-    <link rel="stylesheet" href="./styles/Side-Navigation.css" />
+    <link rel="stylesheet" href="./styles/Side-Navigation.css">
     <script src="./scripts/board-add-task-overlay.js"></script>
     <script src="./scripts/board-render.js"></script>
     <script src="./scripts/Side-Navigation.js"></script>
     <title>Board</title>
-  </head>
-  <body onload="onInit()" onclick="hideSubMenu()">
+</head>
+<body onload="onInit()" onclick="hideSubMenu()">
     <div class="side-navigation">
-      <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="" />
-      <div class="menu">
-        <div class="menu-sections">
-          <img class="menu-icons" src="assets/icons/summary-icon.svg" alt="" />
-          <a href="./summary.html">Summary</a>
+        <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
+        <div class="menu">
+            <div class="menu-sections ">
+                <img class="menu-icons" src="assets/icons/summary-icon.svg" alt="">
+                <a href="./summary.html">Summary</a>
+            </div>
+            <div class="menu-sections">
+                <img class="menu-icons" src="assets/icons/add-task-icon.svg" alt="">
+                <a href="./add-task.html">Add Task</a>
+            </div>
+            <div class="menu-sections activated">
+                <img class="menu-icons" src="assets/icons/board-icon.svg" alt="">
+                <a href="./board.html">Board</a>
+            </div>
+            <div class="menu-sections">
+                <img class="menu-icons" src="assets/icons/contacts-icon.svg" alt="">
+                <a href="./contacts.html">Contacts</a>
+            </div>
         </div>
-        <div class="menu-sections">
-          <img class="menu-icons" src="assets/icons/add-task-icon.svg" alt="" />
-          <a href="./add-task.html">Add Task</a>
+        <div class="Privacy-section">
+            <a onclick="renderPrivacyPolicyTemplateLoggedInUser()" href="#">Privacy Policy</a>
+            <a onclick="renderLegalNoticeTemplateLoggedInUser()" href="#">Legal Notice</a>
         </div>
-        <div class="menu-sections activated">
-          <img class="menu-icons" src="assets/icons/board-icon.svg" alt="" />
-          <a href="./board.html">Board</a>
-        </div>
-        <div class="menu-sections">
-          <img class="menu-icons" src="assets/icons/contacts-icon.svg" alt="" />
-          <a href="./contacts.html">Contacts</a>
-        </div>
-      </div>
-      <div class="Privacy-section">
-        <a onclick="renderPrivacyPolicyTemplateLoggedInUser()" href="#"
-          >Privacy Policy</a
-        >
-        <a onclick="renderLegalNoticeTemplateLoggedInUser()" href="#"
-          >Legal Notice</a
-        >
-      </div>
     </div>
     <div class="website-body">
         <header>
@@ -192,3 +179,4 @@
     </script>
 </body>
 </html>
+

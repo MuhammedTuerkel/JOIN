@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Help</title>
+    <link rel="shortcut icon" href="./assets/favicon/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./styles/help-privacy-and-legal.css" />
+    <script src="./scripts/Side-Navigation.js"></script>
+    <link rel="stylesheet" href="./styles/Side-Navigation.css" />
+    <script src="script.js"></script>
+    <script src="./scripts/privacy_and_legal.js"></script>
+  </head>
+
+  <body class="pp_body" onclick="hideSubMenu(), hideAddNewContact(event)" onload="sideNavigation()">
+    <div class="side-navigation">
+      <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="" />
+      <div class="menu">
+        <div class="menu-sections">
+          <img class="menu-icons" src="assets/icons/summary-icon.svg" alt="" />
+          <a href="./summary.html">Summary</a>
+        </div>
+        <div class="menu-sections">
+          <img class="menu-icons" src="assets/icons/add-task-icon.svg" alt="" />
+          <a href="./add-task.html">Add Task</a>
+        </div>
+        <div class="menu-sections">
+          <img class="menu-icons" src="assets/icons/board-icon.svg" alt="" />
+          <a href="./board.html">Board</a>
+        </div>
+        <div class="menu-sections">
+          <img class="menu-icons" src="assets/icons/contacts-icon.svg" alt="" />
+          <a href="./contacts.html">Contacts</a>
+        </div>
+      </div>
+      <div class="Privacy-section">
+        <a onclick="renderPrivacyPolicyTemplateLoggedInUser()" href="#">Privacy Policy</a>
+        <a onclick="renderLegalNoticeTemplateLoggedInUser()" href="#">Legal Notice</a>
+      </div>
+    </div>
+    <div class="website-body">
+      <header>
+        <div class="header-content">
+          <img class="header-Join-Logo" src="./assets/img/capa.png" alt="" />
+          <p>Kanban Project Management Tool</p>
+          <div class="d-flex-column">
+            <div id="help-user" class="help-user">
+              <a href="./help.html"><img src="assets/icons/help-symbol-icon-default.svg" alt="" style="cursor: pointer" /></a>
+              <span onclick="showSubmenu(event)" class="user" id="user"></span>
+            </div>
+            <div onclick="stopEventBubbling(event)" id="Submenu" class="Submenu" style="display: none">
+              <a onclick="openHelpHtml()" href="#" class="Submenu-buttons d-none1">Help</a>
+              <a onclick="renderLegalNotceTemplateLoggedInUser()" href="#" class="Submenu-buttons"> Legal Notice </a>
+              <a onclick="renderPrivacyPolicyTemplateLoggedInUser()" href="./privacy-and-legal.html" class="Submenu-buttons"> Privacy Policy</a>
+              <a onclick="logOut()" href="./login.html" class="Submenu-buttons"> Log out </a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div id="closeTab" class="pp_close_tab">
+        <img id="returnArrow" onclick="backToThePage()" src="./assets/img/back_arrow.png" alt="Zurück zur ausgangsseite" />
+      </div>
+      <div class="terms_container">
+        <div class="privacy_and_legal_privacy_plolicy_text_container">
+          <div class="help_headline">
+            <h1>Help</h1>
+          </div>
+          <p>
+            Welcome to the help page for <span class="pp_highlight">Join</span>, your guide to using our kanban project management tool. Here, we'll
+            provide an overview of what <span class="pp_highlight">Join</span> is, how it can benefit you, and how to use it.
+          </p>
+          <h2>What is <span class="pp_highlight">Join</span>?</h2>
+          <p>
+            <span class="pp_highlight">Join</span> is a kanban-based project management tool designed and built by a group of dedicated students as
+            part of their web development bootcamp at the Developer Akademie.
+          </p>
+
+          <p>
+            Kanban, a Japanese term meaning "billboard", is a highly effective method to visualize work, limit work-in-progress, and maximize
+            efficiency (or flow). <span class="pp_highlight">Join</span> leverages the principles of kanban to help users manage their tasks and
+            projects in an intuitive, visual interface.
+          </p>
+
+          <p>
+            It is important to note that <span class="pp_highlight">Join</span> is designed as an educational exercise and is not intended for
+            extensive business usage. While we strive to ensure the best possible user experience, we cannot guarantee consistent availability,
+            reliability, accuracy, or other aspects of quality regarding <span class="pp_highlight">Join</span>.
+          </p>
+
+          <h2>How to use it</h2>
+          <p>Here is a step-by-step guide on how to use <span class="pp_highlight">Join</span>:</p>
+          <ul>
+            <li>
+              <strong>Exploring the Board:</strong> When you log in to <span class="pp_highlight">Join</span>, you'll find a default board. This board
+              represents your project and contains four default lists: "To Do", "In Progress", "Await feedback" and "Done".
+            </li>
+            <li>
+              <strong>Creating Contacts:</strong> In <span class="pp_highlight">Join</span>, you can add contacts to collaborate on your projects. Go
+              to the "Contacts" section, click on "New contact", and fill in the required information. Once added, these contacts can be assigned
+              tasks and they can interact with the tasks on the board.
+            </li>
+            <li>
+              <strong>Adding Cards:</strong> Now that you've added your contacts, you can start adding cards. Cards represent individual tasks. Click
+              the "+" button under the appropriate list to create a new card. Fill in the task details in the card, like task name, description, due
+              date, assignees, etc.
+            </li>
+            <li>
+              <strong>Moving Cards:</strong> As the task moves from one stage to another, you can reflect that on the board by dragging and dropping
+              the card from one list to another.
+            </li>
+            <li>
+              <strong>Deleting Cards:</strong> Once a task is completed, you can either move it to the "Done" list or delete it. Deleting a card will
+              permanently remove it from the board. Please exercise caution when deleting cards, as this action is irreversible.
+            </li>
+          </ul>
+
+          <p>
+            Remember that using <span class="pp_highlight">Join</span> effectively requires consistent updates from you and your team to ensure the
+            board reflects the current state of your project.
+          </p>
+
+          <p>
+            Have more questions about <span class="pp_highlight">Join</span>? Feel free to contact us at [Your Contact Email]. We're here to help you!
+          </p>
+
+          <p>Enjoy using <span class="pp_highlight">Join</span>!</p>
+        </div>
+      </div>
+    </div>
+    <div class="orientation-warning" id="orientationWarning">
+      <div class="warning-container">
+        <p>This page has been optimized for use in portrait mode.</p>
+        <p>Please rotate your mobile device.</p>
+        <div class="tilt-device-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#FFFFFF">
+            <path
+              d="M509.33-188 188-509.33q-19.67-21-19.67-48.67T188-606.67l168.67-168q19.66-21 47.99-21 28.32 0 49.34 21l321.33 321.34q20.34 20.33 20.34 48.66 0 28.34-20.34 48.67L606.67-188q-19.67 21-48 21-28.32 0-49.34-21ZM558-233.33l171.33-171.34-324-324.66L234-558l324 324.67ZM478.67.67q-98.68 0-185.89-37.5-87.21-37.5-152.5-103Q75-205.33 37.5-292.62 0-379.91 0-478.67h66.67q0 77 27 146.34 27 69.33 74.5 123.66 47.5 54.34 112.83 89.84T422.33-73L300.67-194.67 348-242 578.67-11.33q-24 6.66-49.49 9.33Q503.69.67 478.67.67Zm414.66-479.34q0-77-26.66-146.33-26.67-69.33-73.84-124-47.16-54.67-112.16-90.5t-141-46.17L660-765.33 612.67-718 382-948.67q24-6 48.17-8.66 24.16-2.67 48.5-2.67 99.66 0 187.16 37.83 87.5 37.84 153 103.34t103.34 153Q960-578.33 960-478.67h-66.67ZM482-481.33Z"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+    <script>
+      window.addEventListener("orientationchange", checkOrientation);
+      window.addEventListener("resize", checkOrientation);
+      checkOrientation();
+    </script>
+  </body>
+</html>
