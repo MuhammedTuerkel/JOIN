@@ -768,3 +768,28 @@ body {
     margin: 0px;
   }
 }
+
+.context-menu {
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  width: 200px;
+}
+
+.context-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.context-menu ul li {
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.context-menu ul li:hover {
+  background: #f0f0f0;
+}
