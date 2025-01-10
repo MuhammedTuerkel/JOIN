@@ -198,7 +198,10 @@ async function deleteTicket(ticketID) {
   }
   allTasks.splice(taskIndex, 1);
   renderAllTickets(allTasks);
-  toggleOverlay();
+  showToast("The ticket was deleted", "alert");
+  setTimeout(() => {
+    toggleOverlay();
+  }, 2500);
 }
 
 /**

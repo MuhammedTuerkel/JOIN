@@ -49,7 +49,7 @@ async function saveTaskCloseOverlay(event, state = "toDo") {
   let data = buildTaskOnBoard(state);
   await postTask("tasks", data);
   addTaskClearTask();
-  showToast("The ticket was created successfully");
+  showToast("The ticket was created successfully", "success");
   setTimeout(() => {
     toggleOverlay();
     location.reload();

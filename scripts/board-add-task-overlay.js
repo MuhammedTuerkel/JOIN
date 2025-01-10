@@ -160,8 +160,11 @@ async function saveEditOnClick(ticketID) {
   let firebaseID = await findFirebaseIdById(ticketID);
   let data = buildEditTask(newTitle, newDescription, newDueDate, newPrio, newAssignedUsers, newSubtasks);
   await patchTask(firebaseID, data);
-  toggleOverlay();
-  location.reload();
+  showToast("The ticket was edited successfully", "success");
+  setTimeout(() => {
+    toggleOverlay();
+    location.reload();
+  }, 2500);
 }
 
 /**

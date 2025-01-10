@@ -16,8 +16,6 @@
   }
 }
 
-/* var(--prio-low) bei Erfolgsmeldung
-var(--prio-urgent) bei Fehlermeldung */
 .toast {
   display: flex;
   align-items: center;
