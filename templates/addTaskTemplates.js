@@ -103,9 +103,9 @@ function renderAddTaskFeatureOnBoard(state) {
                 <h1>Add Task</h1>
                 <img onclick="toggleOverlay()" src="./assets/img/Close.png" alt="">
             </div>
-            <form id="addTaskForm" class="add_task_main_content" oninput="checkFormValidity()" onclick="handleDropdownBodyClick()">
-                <div class="form-wrapper">
-                        <div class="form-column-left">
+            <form id="addTaskForm" class="board_add_task_main_content" oninput="checkFormValidity()" onclick="handleDropdownBodyClick()">
+                <div class="board_form_wrapper">
+                        <div class="board_form_column_left">
                             <div class="form-group required_focus add_task_for_error_height">
                                 <label for="task-title">Title <span class="required-icon">*</span></label>
                                 <input class="" type="text" id="task-title" name="title" placeholder="Enter a title" required>
@@ -125,8 +125,8 @@ function renderAddTaskFeatureOnBoard(state) {
                                 <div id="selectedUsers" class="selected_users"></div>
                             </div>                          
                         </div>
-                        <div class="separator"></div>
-                        <div class="form-column-right">
+                        <div class="board_separator"></div>
+                        <div class="board_form_column_right">
                             <div class="form-group required_focus add_task_for_error_height">
                                 <label for="task-due-date">Due date <span class="required-icon">*</span></label>
                                 <input class="" type="date" id="task-due-date" name="due-date" placeholder="dd/mm/yyyy" required>
