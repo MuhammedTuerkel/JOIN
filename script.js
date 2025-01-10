@@ -347,10 +347,28 @@ function initializeKeyDown() {
   if (form) {
     form.onkeydown = function (event) {
       if (event.key === "Enter") {
-        event.preventDefault(); // Verhindert das Standard-Submit-Verhalten
+        event.preventDefault();
         const checkIcon = document.getElementById("checkIcon");
         if (checkIcon) {
-          checkIcon.click(); // Simuliert den Klick auf das Icon
+          checkIcon.click();
+        }
+      }
+    };
+  }
+}
+
+/**
+ * Checks if the edit-form is loaded on the website and listens if the enter-key is pressed. If yes, than the onclick-function on the checkIcon is activated
+ */
+function initializeKeyDownOnEdit() {
+  const form = document.getElementById("overlayEditForm");
+  if (form) {
+    form.onkeydown = function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        const checkIcon = document.getElementById("checkIcon");
+        if (checkIcon) {
+          checkIcon.click();
         }
       }
     };

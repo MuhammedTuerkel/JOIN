@@ -5,6 +5,7 @@ let editedPrio;
 let debounceTimeout;
 let selectedPrioOnBoard;
 const formVisibilityCheck = setInterval(checkFormVisibility, 100);
+const formVisibilityCheckOnEdit = setInterval(checkFormVisibilityOnEdit, 100);
 
 /**
  * Initialize the board features which should be active at site load
@@ -320,5 +321,16 @@ function checkFormVisibility() {
   if (form && form.offsetHeight > 0 && form.offsetWidth > 0) {
     initializeKeyDown();
     clearInterval(formVisibilityCheck);
+  }
+}
+
+/**
+ * Checks if the form is visible and DOM-loaded on edit feature, so the initializeKeyDown-function can be started
+ */
+function checkFormVisibilityOnEdit() {
+  const form = document.getElementById("overlayEditForm");
+  if (form && form.offsetHeight > 0 && form.offsetWidth > 0) {
+    initializeKeyDownOnEdit();
+    clearInterval(formVisibilityCheckOnEdit);
   }
 }

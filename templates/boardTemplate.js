@@ -304,7 +304,7 @@ function renderOverlayEditTicket(ticketID) {
                     </g>
                 </svg>
             </div>
-            <form class="overlay-edit-form-wrapper">
+            <form class="overlay-edit-form-wrapper" id="overlayEditForm">
                             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" id="task-title-overlay-edit" name="title">
