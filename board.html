@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="./styles/board.css">
     <link rel="stylesheet" href="./styles/board-edit-overlay.css">
     <link rel="stylesheet" href="./styles/add-task-responsive.css">
+    <link rel="stylesheet" href="./styles/toast-message.css">
+    <script src="./scripts/toast-message.js"></script>
     <script src="./scripts/add-task-board.js"></script>
     <script src="./scripts/add-task.js"></script>
     <script src="./scripts/add-task-assigned-user.js"></script>
@@ -154,7 +156,7 @@
                 </div>
                 <div class="board-column">
                     <div class="column-headline">
-                        <h2>Done</h2>
+                        <h2 onclick="showToast('This is a custom toast message!')">Done</h2>
                     </div>
                     <div class="column-content" id="doneColumn" ondrop="move('done')" ondragover="allowDrop(event); highlight('doneColumn')" ondragleave="removeHighlight('doneColumn')">
                     </div>
@@ -172,6 +174,7 @@
             </div>
         </div>
     </div>
+    <div id="toast-container"></div>
     <script>
         window.addEventListener('orientationchange', checkOrientation);
         window.addEventListener('resize', checkOrientation);

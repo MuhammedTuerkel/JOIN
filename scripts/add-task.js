@@ -49,8 +49,11 @@ async function saveTaskCloseOverlay(event, state = "toDo") {
   let data = buildTaskOnBoard(state);
   await postTask("tasks", data);
   addTaskClearTask();
-  toggleOverlay();
-  location.reload();
+  showToast("The ticket was created successfully");
+  setTimeout(() => {
+    toggleOverlay();
+    location.reload();
+  }, 2500);
 }
 
 /**
@@ -115,17 +118,7 @@ function buildTask(state) {
   let taskState = state;
   let taskAssigned = selectedUsers;
   let taskCreator = userName;
-  return taskToJSON(
-    taskTitle,
-    taskDate,
-    taskPrio,
-    taskDescription,
-    taskCategory,
-    taskSubtasks,
-    taskAssigned,
-    taskState,
-    taskCreator
-  );
+  return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState, taskCreator);
 }
 
 /**
@@ -142,17 +135,7 @@ function buildTaskOnBoard(state) {
   let taskState = state;
   let taskAssigned = selectedUsers;
   let taskCreator = userName;
-  return taskToJSON(
-    taskTitle,
-    taskDate,
-    taskPrio,
-    taskDescription,
-    taskCategory,
-    taskSubtasks,
-    taskAssigned,
-    taskState,
-    taskCreator
-  );
+  return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState, taskCreator);
 }
 
 /**
@@ -283,10 +266,7 @@ function handleEditClick(target) {
   const inputContainer = document.createElement("div");
   inputContainer.classList.add("input-container");
   const input = createInputField(contentSpan.textContent);
-  const deleteIcon = createIcon(
-    "delete-icon",
-    "./assets/icons/subtask-delete.png"
-  );
+  const deleteIcon = createIcon("delete-icon", "./assets/icons/subtask-delete.png");
   const saveIcon = createIcon("save-icon", "./assets/icons/subtask-save.png");
   inputContainer.appendChild(input);
   inputContainer.appendChild(deleteIcon);
