@@ -521,26 +521,31 @@ function renderFailedSearchBox(searchTerm) {
         </div>`;
 }
 
-function renderMoveToOptions() {
+/**
+ * Renders a move to option feature on the board-overlay. On a mobile device the user can decide in which column he wants to put the ticket.
+ * @param {string} ticketID
+ * @returns a HTML-Element
+ */
+function renderMoveToOptions(ticketID) {
   return `<div class="move-to-container">
                 <p class="move-to-title">Move to ...</p>
                 <div class="move-to-box-container-top">
-                    <div class="move-to-box">
+                    <div class="move-to-box" onclick="moveToOverlay('toDo', '${ticketID}')">
                         <p>To Do</p>
                     </div>
-                    <div class="move-to-box">
+                    <div class="move-to-box" onclick="moveToOverlay('inProgress', '${ticketID}')">
                         <p>In Progress</p>
                     </div>
                 </div>
                 <div class="move-to-box-container-bottom">
-                    <div class="move-to-box">
+                    <div class="move-to-box" onclick="moveToOverlay('awaitFeedback', '${ticketID}')">
                         <p>Await Feedback</p>
                     </div>
-                    <div class="move-to-box">
+                    <div class="move-to-box" onclick="moveToOverlay('done', '${ticketID}')">
                         <p>Done</p>
                     </div>
                 </div>
-                <button class="move-to-back-to-board-btn">
+                <button class="move-to-back-to-board-btn" onclick="toggleOverlay()">
                     <span>Back to board</span>
                     <svg width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M22.9546 5.73855L22.9546 26.1929C22.954 26.7955 22.7143 27.3732 22.2882 27.7993C21.8622 28.2253 21.2844 28.465 20.6819 28.4656L16.1365 28.4656C15.5339 28.465 14.9562 28.2253 14.5301 27.7993C14.104 27.3732 13.8644 26.7955 13.8638 26.1929L13.8638 5.73855C13.8644 5.13597 14.104 4.55825 14.5301 4.13217C14.9562 3.70608 15.5339 3.46644 16.1365 3.46584L20.6819 3.46584C21.2844 3.46644 21.8622 3.70608 22.2882 4.13217C22.7143 4.55825 22.954 5.13597 22.9546 5.73855ZM16.1365 26.1929L20.6819 26.1929L20.6819 5.73855L16.1365 5.73855L16.1365 26.1929ZM16.1365 5.73855L16.1365 26.1929C16.1359 26.7955 15.8962 27.3731 15.4701 27.7992C15.0441 28.2253 14.4663 28.4649 13.8638 28.4655L9.31835 28.4655C8.71578 28.4649 8.13806 28.2253 7.71197 27.7992C7.28589 27.3731 7.04625 26.7954 7.04565 26.1928L7.04565 5.73852C7.04625 5.13595 7.28589 4.55823 7.71197 4.13214C8.13806 3.70606 8.71578 3.46642 9.31835 3.46582L13.8638 3.46582C14.4663 3.46642 15.0441 3.70606 15.4701 4.13214C15.8962 4.55823 16.1359 5.13597 16.1365 5.73855ZM9.31835 26.1928L13.8638 26.1929L13.8638 5.73855L9.31835 5.73852L9.31835 26.1928ZM9.31835 5.73852L9.31835 26.1928C9.31775 26.7954 9.07811 27.3731 8.65203 27.7992C8.22594 28.2253 7.64822 28.4649 7.04565 28.4656L2.50024 28.4656C1.89767 28.4649 1.31995 28.2253 0.893863 27.7992C0.467779 27.3731 0.228141 26.7954 0.227539 26.1928L0.227538 5.73852C0.22814 5.13595 0.467778 4.55823 0.893862 4.13214C1.31995 3.70606 1.89767 3.46642 2.50024 3.46582L7.04565 3.46582C7.64822 3.46642 8.22594 3.70606 8.65203 4.13214C9.07811 4.55823 9.31775 5.13595 9.31835 5.73852ZM2.50024 26.1928L7.04565 26.1928L7.04565 5.73852L2.50024 5.73852L2.50024 26.1928Z" fill="#CDCDCD"/>

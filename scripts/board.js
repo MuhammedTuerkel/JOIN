@@ -158,6 +158,54 @@ async function move(category) {
 }
 
 /**
+ * Moves the ticket into another column and update the state in the firebase database. Function as a longtap for mobile use.
+ * @param {string} category - describes in which column the ticket was moved
+ */
+async function moveToOverlay(category, ticketID) {
+  let currentIndex = allTasks.findIndex((ix) => ix["id"] === ticketID);
+  if (currentIndex !== -1) {
+    allTasks[currentIndex]["state"] = category;
+    let firebaseID = allTasks[currentIndex]["firebase_id"];
+    await fetch(`${BASE_URL}tasks/${firebaseID}.json`, {
+      method: "PATCH",
+      body: JSON.stringify({ state: category }),
+      headers: { "Content-Type": "application/json" },
+    });
+    renderFilteredTickets();
+  } else {
+    console.error("Task not found in allTasks array");
+  }
+  toggleOverlay();
+}
+
+/**
+ * Adds a longtap listener to every ticket on the board to use the Move to Options feature
+ */
+function addLongTapListeners() {
+  const tickets = document.querySelectorAll(".ticket-card");
+  tickets.forEach((ticket) => {
+    let timer = null;
+    const ticketID = ticket.getAttribute("ondragstart").match(/'(.*?)'/)[1];
+    ticket.addEventListener("touchstart", () => {
+      timer = setTimeout(() => {
+        showMoveToOptions(ticketID);
+      }, 500);
+    });
+    ticket.addEventListener("touchend", () => clearTimeout(timer));
+    ticket.addEventListener("touchcancel", () => clearTimeout(timer));
+  });
+}
+
+/**
+ * Shows the overlay on the board and renders the Move To Options feature
+ * @param {string} ticketID
+ */
+function showMoveToOptions(ticketID) {
+  toggleOverlay();
+  document.getElementById("overlayID").innerHTML = renderMoveToOptions(ticketID);
+}
+
+/**
  * Places a dummy ticket into the column which got a dragover
  * @param {string} id - The id of the column which got a dragover
  */

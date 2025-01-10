@@ -6,6 +6,7 @@ async function renderAllTickets(array) {
   renderInProgressTasks(array);
   renderFeedbackTasks(array);
   renderDoneTasks(array);
+  addLongTapListeners();
 }
 
 /**
