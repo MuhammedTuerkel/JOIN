@@ -357,6 +357,9 @@ function initializeKeyDown() {
   }
 }
 
+/**
+ * Checks if the screen-orientation of the user is in landscape or portrait mode
+ */
 function checkOrientation() {
   const warning = document.getElementById("orientationWarning");
   if (window.innerWidth < window.innerHeight) {
