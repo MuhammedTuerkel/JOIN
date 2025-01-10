@@ -269,7 +269,7 @@ function generateEditNewContactHTML(Badge, i) {
   document.getElementById("addNewContact").classList.remove("d-none");
   document.getElementById("headlineAddContacth2").innerHTML = `Edit contact`;
   document.getElementById("headlineAddContactP").style = "display:none;";
-  document.getElementById("addContactProfilePicture").style = "background:orange;";
+  document.getElementById("addContactProfilePicture").style.backgroundColor = Contacts[i].color;
   document.getElementById("addContactProfilePicture").innerHTML = `<h2>${Badge}</h2>`;
   document.getElementById("input-name").value = `${Contacts[i].name}`;
   document.getElementById("input-email").value = `${Contacts[i].email}`;
