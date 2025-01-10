@@ -2,9 +2,6 @@ let selectedUsers = [];
 let selectedPrio = "medium";
 let subtasksArray = [];
 
-/**
- * Initializes the task form by calling necessary setup functions.
- */
 function addTaskOnInit() {
   sideNavigation();
   onloadFunction();
@@ -57,8 +54,7 @@ async function saveTaskCloseOverlay(event, state = "toDo") {
 }
 
 /**
- * clears the list from all subtasks
- * clears the list of all assigned users
+ * clears the list from all subtasks, clears the list of all assigned users
  */
 function addTaskClearTask() {
   let list = document.getElementById("subtasksList");
