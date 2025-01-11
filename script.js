@@ -336,7 +336,7 @@ function changeDateFormat(earliestDateNumber) {
  * A function that directs to the board.html
  */
 function goToBoard() {
-  window.location.href = "/board.html";
+  window.location.href = "https://join-401.developerakademie.net/JOIN/board.html";
 }
 
 /**
