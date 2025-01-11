@@ -233,14 +233,14 @@ function renderAddTaskFeatureOnBoard(state) {
                             <div class="add_task_clear_button">
                                 <button onclick="addTaskClearTask()" type="reset">
                                     <p>Clear</p>
-                                    <img class="add_task_clear_button_image" src="../assets/img/Close.png" alt="">
-                                    <img class="add_task_clear_button_image_hover" src="../assets/img/Close-blue.png" alt="">
+                                    <img class="add_task_clear_button_image" src="./assets/img/Close.png" alt="">
+                                    <img class="add_task_clear_button_image_hover" src="./assets/img/Close-blue.png" alt="">
                                 </button>
                             </div>
                             <div class="add_task_create_button">
                                 <button id="createTaskButton" type="submit" class="create-btn" onclick="saveTaskCloseOverlay(event, '${state}')" disabled>
                                     <p>Create Task</p>
-                                    <img src="../assets/img/check.png" alt="">
+                                    <img src="./assets/img/check.png" alt="">
                                 </button>
                             </div>
                         </div>
