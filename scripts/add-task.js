@@ -20,7 +20,7 @@ async function saveTaskGoToBoard(event, state = "toDo") {
   event.preventDefault();
   let data = buildTask(state);
   await postTask("tasks", data);
-  window.location.href = "https://join-401.developerakademie.net/JOIN/board.html";
+  window.location.href = getBaseWebsideURL() + "/board.html";
 }
 
 /**

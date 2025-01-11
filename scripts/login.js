@@ -23,7 +23,7 @@ function LogInNotRemember() {
 function checkRememberMe() {
   let remember = localStorage.getItem("rememberMe");
   if (remember === "true") {
-    window.location.href = "https://join-401.developerakademie.net/JOIN/summary.html";
+    window.location.href = getBaseWebsideURL() + "/summary.html";
   } else {
     LogInNotRemember();
   }
@@ -294,7 +294,7 @@ function clearLocalStorageforGuestUser() {
  */
 function goAsGuestToSummaryHtml() {
   localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser[0]));
-  window.location.href = "https://join-401.developerakademie.net/JOIN/summary.html";
+  window.location.href = getBaseWebsideURL() + "/summary.html";
 }
 
 /**
@@ -311,7 +311,7 @@ function rememberMeYes() {
     flyout();
   }, 1000);
   setTimeout(() => {
-    window.location.href = "https://join-401.developerakademie.net/JOIN/summary.html";
+    window.location.href = getBaseWebsideURL() + "/summary.html";
   }, 1500);
 }
 
@@ -328,7 +328,7 @@ function rememberMeNo() {
     flyout();
   }, 1000);
   setTimeout(() => {
-    window.location.href = "https://join-401.developerakademie.net/JOIN/summary.html";
+    window.location.href = getBaseWebsideURL() + "/summary.html";
   }, 1500);
 }
 
