@@ -23,7 +23,7 @@ function LogInNotRemember() {
 function checkRememberMe() {
   let remember = localStorage.getItem("rememberMe");
   if (remember === "true") {
-    window.location.href = "./summary.html";
+    window.location.href = "https://join-401.developerakademie.net/JOIN/summary.html";
   } else {
     LogInNotRemember();
   }
@@ -311,7 +311,7 @@ function rememberMeYes() {
     flyout();
   }, 1000);
   setTimeout(() => {
-    window.location.href = "/summary.html";
+    window.location.href = "https://join-401.developerakademie.net/JOIN/summary.html";
   }, 1500);
 }
 
@@ -328,7 +328,7 @@ function rememberMeNo() {
     flyout();
   }, 1000);
   setTimeout(() => {
-    window.location.href = "/summary.html";
+    window.location.href = "https://join-401.developerakademie.net/JOIN/summary.html";
   }, 1500);
 }
 
