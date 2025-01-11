@@ -3,7 +3,7 @@ let ticketAssignedUsers = [];
 let currentDraggedElement;
 let editedPrio;
 let debounceTimeout;
-let selectedPrioOnBoard;
+let selectedPrioOnBoard = "medium";
 const formVisibilityCheck = setInterval(checkFormVisibility, 100);
 const formVisibilityCheckOnEdit = setInterval(checkFormVisibilityOnEdit, 100);
 
@@ -189,7 +189,7 @@ function addLongTapListeners() {
     ticket.addEventListener("touchstart", () => {
       timer = setTimeout(() => {
         showMoveToOptions(ticketID);
-      }, 500);
+      }, 750);
     });
     ticket.addEventListener("touchend", () => clearTimeout(timer));
     ticket.addEventListener("touchcancel", () => clearTimeout(timer));
@@ -368,6 +368,7 @@ function checkFormVisibility() {
   const form = document.getElementById("addTaskForm");
   if (form && form.offsetHeight > 0 && form.offsetWidth > 0) {
     initializeKeyDown();
+    setMediumOnBoard();
     clearInterval(formVisibilityCheck);
   }
 }
@@ -379,6 +380,7 @@ function checkFormVisibilityOnEdit() {
   const form = document.getElementById("overlayEditForm");
   if (form && form.offsetHeight > 0 && form.offsetWidth > 0) {
     initializeKeyDownOnEdit();
+    setMediumOnBoard();
     clearInterval(formVisibilityCheckOnEdit);
   }
 }

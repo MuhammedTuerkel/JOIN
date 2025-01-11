@@ -167,7 +167,10 @@ function renderDoneTasks(array) {
  */
 async function renderAssignedUsers(ticketID) {
   let searchedTask = await allTasks.filter((t) => t["id"] == ticketID)[0];
-  let assignedUsers = await searchedTask.assigned_to;
+  let assignedUsers = await searchedTask?.assigned_to;
+  if (!assignedUsers || assignedUsers.length === 0) {
+    return;
+  }
   for (let i = 0; i < assignedUsers.length; i++) {
     let initials = assignedUsers[i].name.charAt(0).toUpperCase() + assignedUsers[i].name.charAt(assignedUsers[i].name.length - 1).toUpperCase();
     let bgColor = assignedUsers[i].color;
