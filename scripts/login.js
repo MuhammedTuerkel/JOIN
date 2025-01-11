@@ -294,7 +294,7 @@ function clearLocalStorageforGuestUser() {
  */
 function goAsGuestToSummaryHtml() {
   localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser[0]));
-  window.location.href = "/summary.html";
+  window.location.href = "https://join-401.developerakademie.net/JOIN/summary.html";
 }
 
 /**
