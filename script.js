@@ -308,7 +308,9 @@ function lengthOfUrgentTasks(activeUserTasks) {
 function getEarliestDate(activeUserTasks) {
   let target = document.getElementById("earliestDate");
   if (activeUserTasks.length === 0) {
-    earliestDateObject = null;
+    target.innerHTML = "No upcoming tasks";
+    document.getElementById("earliestDateInfo").classList.add("d_none");
+    return;
   }
   earliestDateObject = activeUserTasks.reduce((earliest, current) => {
     return new Date(current.due_date) < new Date(earliest.due_date) ? current : earliest;
