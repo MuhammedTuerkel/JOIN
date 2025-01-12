@@ -1,8 +1,4 @@
-let users = [];
-let tasks = [];
-let loggedInUser = [];
 let userName;
-let activeUserTasks = [];
 let summaryTasks;
 let summaryToDo;
 let summaryInProgress;
@@ -379,5 +375,49 @@ function checkOrientation() {
     warning.style.display = "none";
   } else if (window.innerWidth <= 900) {
     warning.style.display = "block";
+  }
+}
+
+/**
+ * Pushes the current state of the Contacts array to the local storage.
+ */
+function pushContactsToLocalStorage() {
+  try {
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+    console.log("contacts array has been updated in Local Storage:", contacts);
+  } catch (error) {
+    console.error("Error saving contacts to Local Storage:", error);
+  }
+}
+
+/**
+ * Gets the Contacts array from local storage and updates the global Contacts array.
+ */
+function getContactsFromLocalStorage() {
+  try {
+    const storedContacts = localStorage.getItem("contacts");
+    if (storedContacts) {
+      contacts = JSON.parse(storedContacts);
+    } else {
+      contacts = [];
+    }
+  } catch (error) {
+    contacts = [];
+  }
+}
+
+/**
+ * Deletes a contact from the Contacts array by index and updates the local storage.
+ * @param {number} index - The index of the contact to delete.
+ */
+function deleteContactFromLocalStorage(index) {
+  if (index >= 0 && index < contacts.length) {
+    console.log(`Deleting contact at index ${index}:`, contacts[index]);
+    contacts.splice(index, 1);
+    console.log("Updated contacts array after deletion:", contacts);
+    pushContactsToLocalStorage();
+    loadContactsAgain();
+  } else {
+    console.warn(`Invalid index: ${index}`);
   }
 }

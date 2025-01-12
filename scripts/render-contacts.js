@@ -23,10 +23,10 @@ async function renderContactsListHTML() {
  */
 function renderContact() {
   let a = generateAlphabet();
-  if (Contacts == 0) {
+  if (contacts == 0) {
     clearEmptyDivs(a);
   } else {
-    let firstLetter = Contacts[x].name.charAt(0).toUpperCase();
+    let firstLetter = contacts[x].name.charAt(0).toUpperCase();
     for (let i = 0; i < a.length; i++) {
       if (firstLetter == a[i]) {
         let Badge = generateBadge(x);
@@ -43,14 +43,19 @@ function renderContact() {
  * @param {int} i
  */
 function renderContactInformation(i) {
-  let Badge = generateBadge(i);
-  document.getElementById("Profile-Badge1").innerHTML = `${Badge}`;
-  document.getElementById("editdelete-name").innerHTML = `${Contacts[i].name}`;
-  document.getElementById("email").innerHTML = `${Contacts[i].email}`;
-  document.getElementById("phone").innerHTML = `${Contacts[i].phone}`;
-  document.getElementById("badgeBackgroundColor").style.backgroundColor = Contacts[i].color;
-  document.getElementById("editContact").setAttribute(`onclick`, `loadEditContact(event, ${i})`);
-  document.getElementById("editContactMobile").setAttribute(`onclick`, `loadEditContact(event, ${i})`);
-  document.getElementById("deleteContact").setAttribute(`onclick`, `deleteContact(${i})`);
-  document.getElementById("deleteContactMobile").setAttribute(`onclick`, `deleteContact(${i})`);
+  if (i >= 0 && i < contacts.length) {
+    let Badge = generateBadge(i);
+    document.getElementById("Profile-Badge1").innerHTML = `${Badge}`;
+    document.getElementById("editdelete-name").innerHTML = `${contacts[i].name}`;
+    document.getElementById("email").innerHTML = `${contacts[i].email}`;
+    document.getElementById("phone").innerHTML = `${contacts[i].phone}`;
+    document.getElementById("badgeBackgroundColor").style.backgroundColor = contacts[i].color;
+    document.getElementById("editContact").setAttribute(`onclick`, `loadEditContact(event, ${i})`);
+    document.getElementById("editContactMobile").setAttribute(`onclick`, `loadEditContact(event, ${i})`);
+    document.getElementById("deleteContact").setAttribute(`onclick`, `deleteContact(${i})`);
+    document.getElementById("deleteContactMobile").setAttribute(`onclick`, `deleteContact(${i})`);
+  } else {
+    console.warn(`Contact with index ${i} not found.`);
+    return;
+  }
 }
