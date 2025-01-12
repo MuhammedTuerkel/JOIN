@@ -70,6 +70,27 @@
                 </div>
             </div>
         </header>
+
+        <section id="addTaskOverlayNextStep" class="add_task_overlay" style="display: none">
+            <form class="add_task_overlay_task">
+              <div class="add_task_overlay_logo">
+                <img src="./assets/img/capa.png" alt="" />
+              </div>
+              <div class="add_task_overly_img_task_name_container">
+                <h1>Choose Your Next Action for the Task</h1>
+              </div>
+              <div class="add_task_overlay_button_container">
+                <div class="add_task_overlay_button">
+                  <button onclick="goBackToAddTask(event)">Go back and make changes</button>
+                  <button onclick="saveTaskCreateNewTask(event)">Save task and add another</button>
+                  <button onclick="saveTaskGoToBoard(event)">Save task and go to board</button>
+                </div>
+              </div>
+            </form>
+          </section>
+
+
+
         <div class="Contacts-body">
             <div id="Contacts" class="Contacts">
                 <div onclick="loadAddNewContact(event)" class="addNewContact-button">
