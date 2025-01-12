@@ -13,7 +13,6 @@
     <script src="./scripts/contacts.js"></script>
     <script src="./scripts/render-contacts.js"></script>
     <script src="./script.js"></script>
-    <script src="./scripts/contact-edit.js"></script>
     <script src="./host.js"></script>
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="JOIN" />
@@ -71,19 +70,18 @@
             </div>
         </header>
 
-        <section id="addTaskOverlayNextStep" class="add_task_overlay" style="display: none">
-            <form class="add_task_overlay_task">
-              <div class="add_task_overlay_logo">
+        <section id="contactDeleteUserOverlay" class="contact_delete_user_overlay_section" style="display: none">
+            <form class="contact_overlay_task">
+              <div class="contact_overlay_logo">
                 <img src="./assets/img/capa.png" alt="" />
               </div>
-              <div class="add_task_overly_img_task_name_container">
-                <h1>Choose Your Next Action for the Task</h1>
+              <div class="contact_overly_img_task_name_container">
+                <h1>Are you sure do delete that contact?</h1>
               </div>
-              <div class="add_task_overlay_button_container">
-                <div class="add_task_overlay_button">
-                  <button onclick="goBackToAddTask(event)">Go back and make changes</button>
-                  <button onclick="saveTaskCreateNewTask(event)">Save task and add another</button>
-                  <button onclick="saveTaskGoToBoard(event)">Save task and go to board</button>
+              <div class="contact_overlay_button_container">
+                <div class="contact_overlay_button">
+                  <button onclick="saveTaskCreateNewTask(event)">NO</button>
+                  <button onclick="saveTaskGoToBoard(event)">YES</button>
                 </div>
               </div>
             </form>
