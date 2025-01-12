@@ -472,6 +472,7 @@
   position: absolute;
   top: 400px;
   left: 742px;
+  justify-content: center;
 }
 
 .Cancel {
@@ -944,7 +945,7 @@
   }
 
   .Create {
-    width: 202px;
+    width: 126px;
     height: 51px;
     padding: 18px 10px;
   }

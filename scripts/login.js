@@ -261,7 +261,7 @@ function pushUserToLoggedInUserArray() {
     color: user.color,
     createdAt: user.createdAt,
     password: user.password,
-    Contacts: user.Contacts,
+    phone: user.phone,
   });
   goToSummaryHtml();
 }

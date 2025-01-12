@@ -5,8 +5,10 @@ let x = 0;
  * Is a onload-function it loads the functions that are needed to load at the beginning
  */
 async function Init() {
-  await getItemsFromFirebase();
+  // await getItemsFromFirebase();
+  await onloadFunction();
   renderContactsListHTML();
+  console.log(users);
 }
 
 /**
@@ -44,13 +46,25 @@ function hideContactMobile(event) {
   hideContact();
 }
 
-/**
+// /**
+//  * It hides the contact and removes the background color of the contact in the contactlist
+//  */
+// function hideContact() {
+//   document.getElementById("all-information").classList.remove("animationRightToPosition");
+//   document.getElementById("all-information").classList.add("d-none");
+//   for (let i = 0; i < Contacts.length; i++) {
+//     document.getElementById(`Contact${i}`).style = "";
+//     document.getElementById(`name${i}`).style = "";
+//   }
+// }
+
+/** SCC
  * It hides the contact and removes the background color of the contact in the contactlist
  */
 function hideContact() {
   document.getElementById("all-information").classList.remove("animationRightToPosition");
   document.getElementById("all-information").classList.add("d-none");
-  for (let i = 0; i < Contacts.length; i++) {
+  for (let i = 0; i < users.length; i++) {
     document.getElementById(`Contact${i}`).style = "";
     document.getElementById(`name${i}`).style = "";
   }
@@ -122,7 +136,32 @@ function generateAlphabet() {
   return a;
 }
 
-/**
+// /**
+//  * Generates the contacts in the contactlist if its finished with the array it goes back to the renderContact function
+//  * @param {*} a
+//  * @param {*} i
+//  * @param {*} Badge
+//  */
+// function generateContactHTML(a, i, Badge) {
+//   document.getElementById(`${a[i]}`).innerHTML += `
+//                 <div id="Contact${x}" onclick="loadContact(${x}, event)" class="Contact">
+//                     <div class="Profile-Badge" style="background-color: ${Contacts[x].color};">
+//                         <h4>${Badge}</h4>
+//                     </div>
+//                     <div class="name-email">
+//                         <h2 id="name${x}">${Contacts[x].name}</h2>
+//                         <h3>${Contacts[x].email}</h3>
+//                     </div>
+//                 </div>
+//                 </div>
+//                 `;
+//   x++;
+//   if (x < Contacts.length) {
+//     renderContact(a);
+//   }
+// }
+
+/** SCC
  * Generates the contacts in the contactlist if its finished with the array it goes back to the renderContact function
  * @param {*} a
  * @param {*} i
@@ -131,31 +170,45 @@ function generateAlphabet() {
 function generateContactHTML(a, i, Badge) {
   document.getElementById(`${a[i]}`).innerHTML += `
                 <div id="Contact${x}" onclick="loadContact(${x}, event)" class="Contact">
-                    <div class="Profile-Badge" style="background-color: ${Contacts[x].color};">
+                    <div class="Profile-Badge" style="background-color: ${users[x].color};">
                         <h4>${Badge}</h4>
                     </div>
                     <div class="name-email">
-                        <h2 id="name${x}">${Contacts[x].name}</h2>
-                        <h3>${Contacts[x].email}</h3>
+                        <h2 id="name${x}">${users[x].name}</h2>
+                        <h3>${users[x].email}</h3>
                     </div>
                 </div>
                 </div>
                 `;
   x++;
-  if (x < Contacts.length) {
+  if (x < users.length) {
     renderContact(a);
   }
 }
 
-/**
- * Generates the badge with the first letter of the first and last name
- * @param {*} x
- * @returns the initials
+// /**
+//  * Generates the badge with the first letter of the first and last name
+//  * @param {*} x
+//  * @returns the initials
+//  */
+// function generateBadge(x) {
+//   let values = Contacts[x].name.split(" ");
+//   let f_name = values.shift().charAt(0).toUpperCase();
+//   let l_name = values.join(" ").charAt(0).toUpperCase();
+//   return f_name + l_name;
+// }
+
+/** SCC
+ * Generates the badge with the first letter of the first and last name (or first and last letter if only one name is provided).
+ * @param {number} x - The index of the user in the users array.
+ * @returns {string} The initials.
  */
 function generateBadge(x) {
-  let values = Contacts[x].name.split(" ");
-  let f_name = values.shift().charAt(0).toUpperCase();
-  let l_name = values.join(" ").charAt(0).toUpperCase();
+  let values = users[x].name.split(" ");
+  let f_name = values[0].charAt(0).toUpperCase();
+
+  let l_name = values.length > 1 ? values[values.length - 1].charAt(0).toUpperCase() : values[0].charAt(values[0].length - 1).toUpperCase();
+
   return f_name + l_name;
 }
 
@@ -173,20 +226,53 @@ function clearEmptyDivs(a) {
   hideContact();
 }
 
+// /**
+//  * Deletes the contact but at least one contact is always required
+//  * @param {int} i
+//  */
+// async function deleteContact(i) {
+//   if (Contacts.length > 1) {
+//     Contacts.splice(i, 1);
+//     loadContactsAgain();
+//     hideAddNewContact(event);
+//     hideContactMobile(event);
+//     await deleteContactfromFirebase(i);
+//     await getTheItemstoPushTOFireBase();
+//   } else {
+//     alert("You Need To Have at least One Contact");
+//   }
+// }
+
 /**
- * Deletes the contact but at least one contact is always required
- * @param {int} i
+ * Deletes a user from the global users array and Firebase Realtime Database.
+ * @param {int} i - The index of the user in the users array.
  */
-async function deleteContact(i) {
-  if (Contacts.length > 1) {
-    Contacts.splice(i, 1);
+async function deleteContact(event, i) {
+  event.stopPropagation();
+  const userEmail = users[i].email.replace(".", "_"); // Format the email to match Firebase key
+  const firebaseURL = `${BASE_URL}users/${userEmail}.json`; // Construct the Firebase URL
+
+  try {
+    // Delete from the local users array
+    users.splice(i, 1);
+
+    // Delete from Firebase
+    let response = await fetch(firebaseURL, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      console.log(`User ${userEmail} deleted successfully from Firebase.`);
+    } else {
+      throw new Error("Failed to delete the user from Firebase.");
+    }
+
+    // Optional: Load the updated contact list
     loadContactsAgain();
     hideAddNewContact(event);
     hideContactMobile(event);
-    await deleteContactfromFirebase(i);
-    await getTheItemstoPushTOFireBase();
-  } else {
-    alert("You Need To Have at least One Contact");
+  } catch (error) {
+    console.error("Error deleting user:", error);
   }
 }
 
@@ -199,10 +285,31 @@ function loadEditContact(event, i) {
   let Badge = generateBadge(i);
   event.stopPropagation();
   generateEditNewContactHTML(Badge, i);
-  document.getElementById("saveEditContact").setAttribute(`onclick`, `saveNewContact(${i})`);
+  document.getElementById("saveEditContact").setAttribute(`onclick`, `saveEditContact(event, ${i})`);
 }
 
-/**
+// /**
+//  * Loads the template of edit new contact with an animation
+//  * @param {object} Badge
+//  * @param {int} i
+//  */
+// function generateEditNewContactHTML(Badge, i) {
+//   document.getElementById("addNewContact").classList.add("animationRightToPosition");
+//   document.getElementById("addNewContact").classList.remove("d-none");
+//   document.getElementById("headlineAddContacth2").innerHTML = `Edit contact`;
+//   document.getElementById("headlineAddContactP").style = "display:none;";
+//   document.getElementById("addContactProfilePicture").style = "";
+//   document.getElementById("addContactProfilePicture").style.backgroundColor = Contacts[i].color;
+//   document.getElementById("addContactProfilePicture").innerHTML = `<h2>${Badge}</h2>`;
+//   document.getElementById("input-name").value = `${Contacts[i].name}`;
+//   document.getElementById("input-email").value = `${Contacts[i].email}`;
+//   document.getElementById("input-phone").value = `${Contacts[i].phone}`;
+//   document.getElementById("deleteSave").style = "";
+//   document.getElementById("cancelCreate").style = "display:none;";
+//   document.getElementById("DeleteEditContact").setAttribute(`onclick`, `deleteContact(${i})`);
+// }
+
+/** SCC
  * Loads the template of edit new contact with an animation
  * @param {object} Badge
  * @param {int} i
@@ -213,14 +320,14 @@ function generateEditNewContactHTML(Badge, i) {
   document.getElementById("headlineAddContacth2").innerHTML = `Edit contact`;
   document.getElementById("headlineAddContactP").style = "display:none;";
   document.getElementById("addContactProfilePicture").style = "";
-  document.getElementById("addContactProfilePicture").style.backgroundColor = Contacts[i].color;
+  document.getElementById("addContactProfilePicture").style.backgroundColor = users[i].color;
   document.getElementById("addContactProfilePicture").innerHTML = `<h2>${Badge}</h2>`;
-  document.getElementById("input-name").value = `${Contacts[i].name}`;
-  document.getElementById("input-email").value = `${Contacts[i].email}`;
-  document.getElementById("input-phone").value = `${Contacts[i].phone}`;
+  document.getElementById("input-name").value = `${users[i].name}`;
+  document.getElementById("input-email").value = `${users[i].email}`;
+  document.getElementById("input-phone").value = `${users[i].phone}`;
   document.getElementById("deleteSave").style = "";
   document.getElementById("cancelCreate").style = "display:none;";
-  document.getElementById("DeleteEditContact").setAttribute(`onclick`, `deleteContact(${i})`);
+  document.getElementById("DeleteEditContact").setAttribute(`onclick`, `deleteContact(event, ${i})`);
 }
 
 /**
@@ -274,34 +381,22 @@ function loadContactsAgain() {
   renderContact();
 }
 
-/**
- * Saves the new contact that has been edited
- * @param {int} i
- */
-function saveNewContact(i) {
-  let name = document.getElementById("input-name").value;
-  let email = document.getElementById("input-email").value;
-  let phone = document.getElementById("input-phone").value;
-  Contacts[i].name = name;
-  Contacts[i].email = email;
-  Contacts[i].phone = phone;
-  loadContactsAgain();
-  hideAddNewContact(event);
-  loadContact(i, event);
-  getTheItemstoPushTOFireBase();
-}
-
-/**
- * Pushes and getting the new contact array again and from firebase after adding, editing or deleting a contact
- */
-async function getTheItemstoPushTOFireBase() {
-  let Useremail = User[0].email;
-  let result = Useremail.replace(".", "_");
-  let Number = await getNumFromFirebase(`/users/${result}`);
-  pushToFireBase(`users/${result}/${Number}/Contacts`);
-  Contacts = [];
-  getItemsFromFirebase(`users/${result}/${Number}/Contacts`);
-}
+// /**
+//  * Saves the new contact that has been edited
+//  * @param {int} i
+//  */
+// function saveNewContact(i) {
+//   let name = document.getElementById("input-name").value;
+//   let email = document.getElementById("input-email").value;
+//   let phone = document.getElementById("input-phone").value;
+//   Contacts[i].name = name;
+//   Contacts[i].email = email;
+//   Contacts[i].phone = phone;
+//   loadContactsAgain();
+//   hideAddNewContact(event);
+//   loadContact(i, event);
+//   getTheItemstoPushTOFireBase();
+// }
 
 /**
  * Get a random generated number from firebase because it can't connect to the array without it
@@ -347,18 +442,20 @@ async function getItemsFromFirebase() {
   }
 }
 
-/**
- * Delete a contact from firebase
- * @param {int} i
- * @returns a response
- */
-async function deleteContactfromFirebase(i) {
-  let Useremail = User[0].email;
-  let result = Useremail.replace(".", "_");
-  let Number = await getNumFromFirebase(`/users/${result}`);
-  let path = `users/${result}/${Number}/Contacts/${i}`;
-  let response = await fetch(BASE_URL + path + ".json", {
-    method: "DELETE",
-  });
-  return (responseToJson = await response.json());
-}
+// /**
+//  * Delete a contact from firebase
+//  * @param {int} i
+//  * @returns a response
+//  */
+// async function deleteContactfromFirebase(i) {
+//   let userEmail = User[0].email;
+//   console.log(userEmail);
+
+//   let result = userEmail.replace(".", "_");
+//   let Number = await getNumFromFirebase(`/users/${result}`);
+//   let path = `users/${result}/${Number}/Contacts/${i}`;
+//   let response = await fetch(BASE_URL + path + ".json", {
+//     method: "DELETE",
+//   });
+//   return (responseToJson = await response.json());
+// }

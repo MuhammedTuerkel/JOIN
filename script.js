@@ -57,17 +57,10 @@ async function pushNewUserinFireBaseArray(event) {
     password: userPassword,
     color: color,
     createdAt: new Date().toISOString(),
-    Contacts: [
-      {
-        name: "First Contact",
-        email: "firstco@gmail.com",
-        phone: "1234567890",
-      },
-    ],
+    phone: "",
   };
   try {
     let response = await postData(`users/${userMail.replace(".", "_")}`, userData);
-    // console.log("User successfully added to Realtime Database:", response);
     createUser();
   } catch (error) {
     console.error("Error adding user to Realtime Database:", error);
