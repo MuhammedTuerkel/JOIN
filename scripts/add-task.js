@@ -1,4 +1,4 @@
-let selectedUsers = [];
+let selectedContacts = [];
 let selectedPrio = "medium";
 let subtasksArray = [];
 
@@ -10,47 +10,19 @@ function addTaskOnInit() {
   addTaskClearTask();
   getLoggedInUserData();
   initializeKeyDown();
+  initializeTasksOnLoad();
 }
 
 /**
- * Saves the task and redirects to the board page.
- * @param {Event} event - The event object.
+ * Initializes the tasks array in local storage on page load.
  */
-async function saveTaskGoToBoard(event, state = "toDo") {
-  event.preventDefault();
-  let data = buildTask(state);
-  await postTask("tasks", data);
-  window.location.href = getBaseWebsideURL() + "/board.html";
-}
-
-/**
- * Saves the task and resets the form to create a new task.
- * @param {Event} event - The event object.
- */
-async function saveTaskCreateNewTask(event, state = "toDo") {
-  event.preventDefault();
-  let data = buildTask(state);
-  await postTask("tasks", data);
-  document.getElementById("addTaskForm").reset();
-  document.getElementById("addTaskOverlayNextStep").style.display = "none";
-  document.body.style.overflow = "auto";
-  addTaskClearTask();
-}
-
-/**
- * Saves the task and closes the overlay on the board
- * @param {Event} event
- */
-async function saveTaskCloseOverlay(event, state = "toDo") {
-  event.preventDefault();
-  let data = buildTaskOnBoard(state);
-  await postTask("tasks", data);
-  addTaskClearTask();
-  showToast("The ticket was created successfully", "success");
-  setTimeout(() => {
-    toggleOverlay();
-    location.reload();
-  }, 2500);
+function initializeTasksOnLoad() {
+  let existingTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  if (existingTasks.length === 0) {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    existingTasks = tasks;
+  }
+  window.tasks = existingTasks;
 }
 
 /**
@@ -65,7 +37,7 @@ function addTaskClearTask() {
   document.getElementById("medium-btn").classList.add("active");
   document.getElementById("low-btn").classList.remove("low");
   document.getElementById("low-btn").classList.remove("active");
-  selectedUsers = [];
+  selectedContacts = [];
   subtasksArray = [];
   selectedPrio = "medium";
   enableInputAndButton();
@@ -84,24 +56,20 @@ function goBackToAddTask(event) {
 }
 
 /**
- * Posts a task to the server.
- * @param {string} [path=""] - The path to append to the base URL.
- * @param {Object} [data={}] - The data to be sent in the request body.
- * @returns {Promise<Object>} - The response JSON.
+ * Posts a task to the local storage and the global tasks array.
+ * @param {string} [path=""] - The path to store in local storage.
+ * @param {Object} [data={}] - The data to be added to the local storage.
  */
-async function postTask(path = "", data = {}) {
-  let response = await fetch(BASE_URL + path + ".json", {
-    method: "POST",
-    header: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  return (responseToJSON = await response.json());
+function postTask(path = "", data = {}) {
+  let tasks = JSON.parse(localStorage.getItem(path)) || [];
+  tasks.push(data);
+  localStorage.setItem(path, JSON.stringify(tasks));
+  window.tasks.push(data);
 }
 
 /**
- * Builds a task object from form input values
+ * Builds a task object from form input values.
+ * @param {string} state - The state of the task.
  * @returns {Object} - The task object in JSON format.
  */
 function buildTask(state) {
@@ -112,13 +80,13 @@ function buildTask(state) {
   let taskCategory = document.getElementById("task-category").value;
   let taskSubtasks = subtasksArray;
   let taskState = state;
-  let taskAssigned = selectedUsers;
-  let taskCreator = userName;
-  return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState, taskCreator);
+  let taskAssigned = selectedContacts;
+  return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState);
 }
 
 /**
- * Builds a task object from form input values.
+ * Builds a task object from form input values for the board.
+ * @param {string} state - The state of the task.
  * @returns {Object} - The task object in JSON format.
  */
 function buildTaskOnBoard(state) {
@@ -129,9 +97,8 @@ function buildTaskOnBoard(state) {
   let taskCategory = document.getElementById("task-category").value;
   let taskSubtasks = subtasksArray;
   let taskState = state;
-  let taskAssigned = selectedUsers;
-  let taskCreator = userName;
-  return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState, taskCreator);
+  let taskAssigned = selectedContacts;
+  return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState);
 }
 
 /**

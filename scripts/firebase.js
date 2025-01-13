@@ -159,19 +159,103 @@ function renderContact() {
  */
 function generateContactHTML(a, i, Badge) {
   document.getElementById(`${a[i]}`).innerHTML += `
-                    <div id="Contact${x}" onclick="loadContact(${x}, event)" class="Contact">
-                        <div class="Profile-Badge" style="background-color: ${Contacts[x].color};">
-                            <h4>${Badge}</h4>
-                        </div>
-                        <div class="name-email">
-                            <h2 id="name${x}">${Contacts[x].name}</h2>
-                            <h3>${Contacts[x].email}</h3>
-                        </div>
-                    </div>
-                    </div>
-                    `;
+                  <div id="Contact${x}" onclick="loadContact(${x}, event)" class="Contact">
+                      <div class="Profile-Badge" style="background-color: ${Contacts[x].color};">
+                          <h4>${Badge}</h4>
+                      </div>
+                      <div class="name-email">
+                          <h2 id="name${x}">${Contacts[x].name}</h2>
+                          <h3>${Contacts[x].email}</h3>
+                      </div>
+                  </div>
+                  </div>
+                  `;
   x++;
   if (x < Contacts.length) {
     renderContact(a);
   }
+}
+
+/*_________ add task ____________________________________________________________________________________________________*/
+
+/**
+ * Saves the task and redirects to the board page.
+ * @param {Event} event - The event object.
+ */
+async function saveTaskGoToBoard(event, state = "toDo") {
+  event.preventDefault();
+  let data = buildTask(state);
+  await postTask("tasks", data);
+  window.location.href = getBaseWebsideURL() + "/board.html";
+}
+
+/**
+ * Saves the task and resets the form to create a new task.
+ * @param {Event} event - The event object.
+ */
+async function saveTaskCreateNewTask(event, state = "toDo") {
+  event.preventDefault();
+  let data = buildTask(state);
+  await postTask("tasks", data);
+  document.getElementById("addTaskForm").reset();
+  document.getElementById("addTaskOverlayNextStep").style.display = "none";
+  document.body.style.overflow = "auto";
+  addTaskClearTask();
+}
+
+/**
+ * Saves the task and closes the overlay on the board
+ * @param {Event} event
+ */
+async function saveTaskCloseOverlay(event, state = "toDo") {
+  event.preventDefault();
+  let data = buildTaskOnBoard(state);
+  await postTask("tasks", data);
+  addTaskClearTask();
+  showToast("The ticket was created successfully", "success");
+  setTimeout(() => {
+    toggleOverlay();
+    location.reload();
+  }, 2500);
+}
+
+/**
+ * Saves the task and redirects to the board page.
+ * @param {Event} event - The event object.
+ */
+async function saveTaskGoToBoard(event, state = "toDo") {
+  event.preventDefault();
+  let data = buildTask(state);
+  await postTask("tasks", data);
+  window.location.href = getBaseWebsideURL() + "/board.html";
+}
+
+/**
+ * Saves the task and resets the form to create a new task.
+ * @param {Event} event - The event object.
+ */
+async function saveTaskCreateNewTask(event, state = "toDo") {
+  event.preventDefault();
+  let data = buildTask(state);
+  await postTask("tasks", data);
+  document.getElementById("addTaskForm").reset();
+  document.getElementById("addTaskOverlayNextStep").style.display = "none";
+  document.body.style.overflow = "auto";
+  addTaskClearTask();
+}
+
+/**
+ * Saves the task and closes the overlay on the board
+ * @param {Event} event
+ */
+async function saveTaskCloseOverlay(event, state = "toDo") {
+  event.preventDefault();
+  let data = buildTaskOnBoard(state);
+  await postTask("tasks", data);
+  addTaskClearTask();
+  showToast("The ticket was created successfully", "success");
+  setTimeout(() => {
+    toggleOverlay();
+    location.reload();
+  }, 2500);
 }

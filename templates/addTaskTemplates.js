@@ -73,23 +73,23 @@ function taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory
 /**
  * Creates a user template with the user's initials.
  */
-function createUserTemplate(user) {
-  let initials = user.name.charAt(0).toUpperCase() + user.name.charAt(user.name.length - 1).toUpperCase();
+function createUserTemplate(contact) {
+  let initials = contact.name.charAt(0).toUpperCase() + contact.name.charAt(contact.name.length - 1).toUpperCase();
 
   return `
-        <div onclick="toggleUserSelection('${user.email}')" class="user_template_not_selected" id="template-${user.email}" >
-            <div class="user_template_circle_name">
-                <div class="user_circle" style="background-color: ${user.color};">
-                    ${initials}
-                </div>
-                <p>${user.name}</p>
-            </div>
-            <input type="checkbox" class="user_checkbox" id="checkbox-${user.email}">
-            <label class="user_template_label" for="checkbox-${user.email}">
-                <img src="./assets/img/check button.png" alt="" id="img-${user.email}">
-            </label>
-        </div>
-    `;
+          <div onclick="toggleUserSelection('${contact.email}')" class="user_template_not_selected" id="template-${contact.email}" >
+              <div class="user_template_circle_name">
+                  <div class="user_circle" style="background-color: ${contact.color};">
+                      ${initials}
+                  </div>
+                  <p>${contact.name}</p>
+              </div>
+              <input type="checkbox" class="user_checkbox" id="checkbox-${contact.email}">
+              <label class="user_template_label" for="checkbox-${contact.email}">
+                  <img src="./assets/img/check button.png" alt="" id="img-${contact.email}">
+              </label>
+          </div>
+      `;
 }
 
 /**
