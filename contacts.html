@@ -19,6 +19,7 @@
     <link rel="manifest" href="./assets/favicon/site.webmanifest" />
     <link rel="stylesheet" href="./styles/standard.css">
     <link rel="stylesheet" href="./styles/contacts.css">
+    <script src="scripts/login.js"></script>
 </head>
 
 <body onclick="hideSubMenu(), hideAddNewContact(event), hideEditDeleteMenu(event)" onload="sideNavigation(),Init()">
@@ -72,20 +73,20 @@
 
         <section id="contactDeleteUserOverlay" class="contact_delete_user_overlay_section" style="display: none">
             <form class="contact_overlay_task">
-              <div class="contact_overlay_logo">
-                <img src="./assets/img/capa.png" alt="" />
-              </div>
-              <div class="contact_overly_img_task_name_container">
-                <h1>Are you sure do delete that contact?</h1>
-              </div>
-              <div class="contact_overlay_button_container">
-                <div class="contact_overlay_button">
-                  <button onclick="saveTaskCreateNewTask(event)">NO</button>
-                  <button onclick="saveTaskGoToBoard(event)">YES</button>
+                <div class="contact_overlay_logo">
+                    <img src="./assets/img/capa.png" alt="" />
                 </div>
-              </div>
+                <div class="contact_overly_img_task_name_container">
+                    <h1>Are you sure do delete that contact?</h1>
+                </div>
+                <div class="contact_overlay_button_container">
+                    <div class="contact_overlay_button">
+                        <button onclick="saveTaskCreateNewTask(event)">NO</button>
+                        <button onclick="saveTaskGoToBoard(event)">YES</button>
+                    </div>
+                </div>
             </form>
-          </section>
+        </section>
 
 
 
@@ -169,30 +170,30 @@
                 <div onclick="hideAddNewContact(event)" class="close"> </div>
                 <div id="addContactProfilePicture" class="addContactProfilePicture">
                 </div>
-                    <div class="addContactInput">
-                        <input class="margin_null" id="input-name" type="text" placeholder="Name" required>
-                        <input id="input-email" type="email" placeholder="Email" required>
-                        <input id="input-phone" type="number" placeholder="Phone" required>
+                <div class="addContactInput">
+                    <input class="margin_null" id="input-name" type="text" placeholder="Name" required>
+                    <input id="input-email" type="email" placeholder="Email" required>
+                    <input id="input-phone" type="number" placeholder="Phone" required>
+                </div>
+                <div id="cancelCreate" style="display: none;" class="cancel-create">
+
+                    <div onclick="hideAddNewContact(event)" class="Cancel">
+                        <h3>Cancel</h3>
                     </div>
-                    <div id="cancelCreate" style="display: none;" class="cancel-create">
-                        
-                        <div onclick="hideAddNewContact(event)" class="Cancel">
-                            <h3>Cancel</h3>
-                        </div>
-                        <div onclick="createNewContact(event)" class="Create">
-                            <h3>Create contact</h3>
-                            <img src="./assets/img/check.png" alt="">
-                        </div>
+                    <div onclick="createNewContact(event)" class="Create">
+                        <h3>Create contact</h3>
+                        <img src="./assets/img/check.png" alt="">
                     </div>
-                    <div id="deleteSave" class="cancel-create">
-                        <div id="DeleteEditContact" class="Cancel DeleteEditContact">
-                            <h3>Delete</h3>
-                        </div>
-                        <div id="saveEditContact" class="Create saveEditContact">
-                            <h3>Save</h3>
-                            <img src="./assets/img/check.png" alt="">
-                        </div>
+                </div>
+                <div id="deleteSave" class="cancel-create">
+                    <div id="DeleteEditContact" class="Cancel DeleteEditContact">
+                        <h3>Delete</h3>
                     </div>
+                    <div id="saveEditContact" class="Create saveEditContact">
+                        <h3>Save</h3>
+                        <img src="./assets/img/check.png" alt="">
+                    </div>
+                </div>
             </div>
         </div>
         <div class="orientation-warning" id="orientationWarning">
@@ -200,7 +201,11 @@
                 <p>This page has been optimized for use in portrait mode.</p>
                 <p>Please rotate your mobile device.</p>
                 <div class="tilt-device-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#FFFFFF"><path d="M509.33-188 188-509.33q-19.67-21-19.67-48.67T188-606.67l168.67-168q19.66-21 47.99-21 28.32 0 49.34 21l321.33 321.34q20.34 20.33 20.34 48.66 0 28.34-20.34 48.67L606.67-188q-19.67 21-48 21-28.32 0-49.34-21ZM558-233.33l171.33-171.34-324-324.66L234-558l324 324.67ZM478.67.67q-98.68 0-185.89-37.5-87.21-37.5-152.5-103Q75-205.33 37.5-292.62 0-379.91 0-478.67h66.67q0 77 27 146.34 27 69.33 74.5 123.66 47.5 54.34 112.83 89.84T422.33-73L300.67-194.67 348-242 578.67-11.33q-24 6.66-49.49 9.33Q503.69.67 478.67.67Zm414.66-479.34q0-77-26.66-146.33-26.67-69.33-73.84-124-47.16-54.67-112.16-90.5t-141-46.17L660-765.33 612.67-718 382-948.67q24-6 48.17-8.66 24.16-2.67 48.5-2.67 99.66 0 187.16 37.83 87.5 37.84 153 103.34t103.34 153Q960-578.33 960-478.67h-66.67ZM482-481.33Z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px"
+                        fill="#FFFFFF">
+                        <path
+                            d="M509.33-188 188-509.33q-19.67-21-19.67-48.67T188-606.67l168.67-168q19.66-21 47.99-21 28.32 0 49.34 21l321.33 321.34q20.34 20.33 20.34 48.66 0 28.34-20.34 48.67L606.67-188q-19.67 21-48 21-28.32 0-49.34-21ZM558-233.33l171.33-171.34-324-324.66L234-558l324 324.67ZM478.67.67q-98.68 0-185.89-37.5-87.21-37.5-152.5-103Q75-205.33 37.5-292.62 0-379.91 0-478.67h66.67q0 77 27 146.34 27 69.33 74.5 123.66 47.5 54.34 112.83 89.84T422.33-73L300.67-194.67 348-242 578.67-11.33q-24 6.66-49.49 9.33Q503.69.67 478.67.67Zm414.66-479.34q0-77-26.66-146.33-26.67-69.33-73.84-124-47.16-54.67-112.16-90.5t-141-46.17L660-765.33 612.67-718 382-948.67q24-6 48.17-8.66 24.16-2.67 48.5-2.67 99.66 0 187.16 37.83 87.5 37.84 153 103.34t103.34 153Q960-578.33 960-478.67h-66.67ZM482-481.33Z" />
+                    </svg>
                 </div>
             </div>
         </div>

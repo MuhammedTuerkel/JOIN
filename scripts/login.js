@@ -4,7 +4,15 @@ let fetchedPassword = "";
  * Onload-Function initialized while loading the site
  */
 function logInInit() {
+  checkLoggedInUser();
   checkRememberMe();
+}
+
+function checkLoggedInUser() {
+  let loggedinuser = localStorage.getItem("LoggedInUser");
+  if (loggedinuser == undefined) {
+    localStorage.setItem("rememberMe", false);
+  }
 }
 
 /**
@@ -59,16 +67,23 @@ async function fetchPassword(userMail) {
  * The class 'login_move_image_container' must be removed after the move to create new contents.
  */
 function moveImage() {
-  mobileImg = document.getElementById("loginMobileMovableImage").classList.add("login_moved");
-  image = document.getElementById("loginMovableImage").classList.add("login_moved");
+  mobileImg = document
+    .getElementById("loginMobileMovableImage")
+    .classList.add("login_moved");
+  image = document
+    .getElementById("loginMovableImage")
+    .classList.add("login_moved");
 
   let position = document.getElementById("loginMoveImgContainer");
   let positionMobile = document.getElementById("loginMobileMoveImgContainer");
-  header = document.getElementById("loginHead").classList.remove("login_d_none");
+  header = document
+    .getElementById("loginHead")
+    .classList.remove("login_d_none");
   let mobileNav = document.getElementById("loginMobile");
   let main = document.getElementById("loginMain");
   let loginFooter = document.getElementById("loginFooter");
-  body = document.querySelector(".login_body").style.backgroundColor = "transparent";
+  body = document.querySelector(".login_body").style.backgroundColor =
+    "transparent";
   let loginHeaderNav = document.getElementById("loginHeader");
 
   setTimeout(function () {
@@ -121,8 +136,12 @@ function togglePasswordIcons() {
   } else {
     toggleIcon.src = "./assets/img/lock.png";
     passwortInput.classList.remove("login_input_error");
-    document.getElementById("loginInputMail").classList.remove("login_input_error");
-    document.getElementById("loginInputWrongPasswordError").classList.add("login_d_none");
+    document
+      .getElementById("loginInputMail")
+      .classList.remove("login_input_error");
+    document
+      .getElementById("loginInputWrongPasswordError")
+      .classList.add("login_d_none");
   }
   checkLoginInputfields();
 }
@@ -195,15 +214,21 @@ function checkLoginInputfields() {
  */
 function checkLoginPassword() {
   let enteredPassword = document.getElementById("loginInputPassword").value;
-  let wrongPasswordError = document.getElementById("loginInputWrongPasswordError");
+  let wrongPasswordError = document.getElementById(
+    "loginInputWrongPasswordError"
+  );
 
   if (enteredPassword === fetchedPassword) {
     wrongPasswordError.classList.add("login_d_none");
     pushUserToLoggedInUserArray();
   } else {
     wrongPasswordError.classList.remove("login_d_none");
-    document.getElementById("loginInputPassword").classList.add("login_input_error");
-    document.getElementById("loginInputMail").classList.add("login_input_error");
+    document
+      .getElementById("loginInputPassword")
+      .classList.add("login_input_error");
+    document
+      .getElementById("loginInputMail")
+      .classList.add("login_input_error");
   }
 }
 
@@ -243,7 +268,9 @@ function showRememberMeOverlay() {
   let overlay = document.getElementById("rememberMeOverlay");
   overlay.style.display = "flex";
   let logoContainer = document.getElementById("rememberMeLogoContainer");
-  let textButtonContainer = document.getElementById("rememberMeTextButtonContainer");
+  let textButtonContainer = document.getElementById(
+    "rememberMeTextButtonContainer"
+  );
   logoContainer.classList.add("logo_fly_in");
   textButtonContainer.classList.add("text_fly_in");
 }
@@ -337,8 +364,12 @@ function rememberMeNo() {
  */
 function removeFlyInClasses() {
   document.getElementById("rememberMeButtons").classList.add("login_d_none");
-  document.getElementById("rememberMeLogoContainer").classList.remove("logo_fly_in");
-  document.getElementById("rememberMeTextButtonContainer").classList.remove("text_fly_in");
+  document
+    .getElementById("rememberMeLogoContainer")
+    .classList.remove("logo_fly_in");
+  document
+    .getElementById("rememberMeTextButtonContainer")
+    .classList.remove("text_fly_in");
 }
 
 /**
@@ -346,5 +377,7 @@ function removeFlyInClasses() {
  */
 function flyout() {
   document.getElementById("rememberMeNo").classList.add("text_fly_out");
-  document.getElementById("rememberMeLogoContainer").classList.add("logo_fly_out");
+  document
+    .getElementById("rememberMeLogoContainer")
+    .classList.add("logo_fly_out");
 }
