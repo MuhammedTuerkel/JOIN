@@ -10,6 +10,18 @@ let earliestDate;
 const BASE_URL = "https://join-bbd82-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /**
+ * check if the user have the status in the locals storage from rememberMe of true than he goes direktly to the summary side
+ */
+function checkRememberMe() {
+  let remember = localStorage.getItem("rememberMe");
+  if (remember === "true") {
+    window.location.href = getBaseWebsideURL() + "/summary.html";
+  } else {
+    LogInNotRemember();
+  }
+}
+
+/**
  * Load user data from Firebase Realtime Database into global users array
  */
 async function onloadFunction() {

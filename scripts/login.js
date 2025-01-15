@@ -18,18 +18,6 @@ function LogInNotRemember() {
 }
 
 /**
- * check if the user have the status in the locals storage from rememberMe of true than he goes direktly to the summary side
- */
-function checkRememberMe() {
-  let remember = localStorage.getItem("rememberMe");
-  if (remember === "true") {
-    window.location.href = getBaseWebsideURL() + "/summary.html";
-  } else {
-    LogInNotRemember();
-  }
-}
-
-/**
  * Fetch the password for a given email from Firebase Realtime Database
  * The email input value with '.' replaced by '_'
  */
