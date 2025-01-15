@@ -509,3 +509,37 @@ async function saveEditOnClick(ticketID) {
     location.reload();
   }, 2500);
 }
+
+/**
+ * Patches the task in the Firebase Realtime Database
+ * @param {string} firebaseID
+ * @param {object} data
+ * @returns
+ */
+async function patchTask(firebaseID, data) {
+  let url = BASE_URL + "tasks/" + firebaseID + ".json";
+  let response = await fetch(url, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return (responseToJSON = await response.json());
+}
+
+/**
+ * Shows the ticket in the overlay when clicked on it
+ * @param {string} category - The category of the ticket
+ * @param {string} ticketTitle  - The Ticket title
+ * @param {string} ticketDescription - The Ticket description
+ * @param {string} ticketDate - The due date of the ticket
+ * @param {string} prio - The Priority of the ticket
+ * @param {string} ticketID - The exact ID which is based on the Firebase-ID
+ */
+async function showOverlayTicket(category, ticketTitle, ticketDescription, ticketDate, prio, ticketID) {
+  document.getElementById("overlayID").innerHTML = renderOverlayTicket(category, ticketTitle, ticketDescription, ticketDate, prio, ticketID);
+  renderAssignedUsersOverlay(ticketID);
+  renderSubtasksOverlay(ticketID);
+  actualFirebaseID = await findFirebaseIdById(ticketID);
+}

@@ -203,19 +203,19 @@ function renderSubtaskList() {
   }
 }
 
-/**
- * Handles click events on subtask action icons.
- */
-document.addEventListener("click", (event) => {
-  const target = event.target;
-  if (target.classList.contains("edit-icon")) {
-    handleEditClick(target);
-  } else if (target.classList.contains("save-icon")) {
-    handleSaveClick(target);
-  } else if (target.classList.contains("delete-icon")) {
-    handleDeleteClick(target);
-  }
-});
+// /**
+//  * Handles click events on subtask action icons.
+//  */
+// document.addEventListener("click", (event, ticketID) => {
+//   const target = event.target;
+//   if (target.classList.contains("edit-icon")) {
+//     handleEditClick(target);
+//   } else if (target.classList.contains("save-icon")) {
+//     handleSaveClick(target);
+//   } else if (target.classList.contains("delete-icon")) {
+//     handleDeleteClick(target, ticketID);
+//   }
+// });
 
 /**
  * Handles the edit click event for a subtask.
@@ -325,31 +325,31 @@ function handleCancelClick(target) {
   inputContainer.remove();
 }
 
-/**
- * Handles the delete click event for a subtask.
- * @param {HTMLElement} target - The target element that triggered the event.
- */
-function handleDeleteClick(target) {
-  const subtaskItem = target.closest(".subtask-item");
-  const targetID = subtaskItem.id;
-  console.log(targetID);
-  let subId = targetID.split("_");
-  let subTaskId;
-  if (subId.length > 1) {
-    subTaskId = subId[1];
-  }
-  console.log(subTaskId);
+// /**
+//  * Handles the delete click event for a subtask.
+//  * @param {HTMLElement} target - The target element that triggered the event.
+//  */
+// function handleDeleteClick(target, ticketID) {
+//   const subtaskItem = target.closest(".subtask-item");
+//   const targetID = subtaskItem.id;
+//   console.log(targetID);
+//   let subId = targetID.split("_");
+//   let subTaskId;
+//   if (subId.length > 1) {
+//     subTaskId = subId[1];
+//   }
+//   console.log(ticketID);
 
-  const numericID = parseInt(targetID.split("_")[1], 10);
+//   const numericID = parseInt(targetID.split("_")[1], 10);
 
-  subtaskItem.remove();
-  localStorage.removeItem(subTaskId);
+//   subtaskItem.remove();
+//   localStorage.removeItem(subTaskId);
 
-  deleteArrayEntry(numericID);
-  if (subtasksArray.length < 4) {
-    enableInputAndButton();
-  }
-}
+//   deleteArrayEntry(numericID);
+//   if (subtasksArray.length < 4) {
+//     enableInputAndButton();
+//   }
+// }
 
 /**
  * Generates a unique ID based on the current timestamp and random values.
@@ -381,5 +381,85 @@ function checkFormValidity() {
     createTaskButton.disabled = false;
   } else {
     createTaskButton.disabled = true;
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const overlay = document.getElementById("overlay");
+  if (overlay) {
+    handleSubtaskClickEvents();
+  } else {
+    console.error("Overlay element not found.");
+  }
+});
+
+/**
+ * Handles click events on subtask action icons within the overlay.
+ * @param {string} ticketID - The ID of the ticket containing the subtask.
+ * @param {HTMLElement} overlay - The overlay element.
+ */
+function handleSubtaskClickEvents(ticketID, overlay) {
+  overlay.addEventListener("click", (event) => {
+    const target = event.target;
+    if (target.classList.contains("edit-icon")) {
+      handleEditClick(target);
+    } else if (target.classList.contains("save-icon")) {
+      handleSaveClick(target);
+    } else if (target.classList.contains("delete-icon")) {
+      handleDeleteClick(target, ticketID);
+    }
+  });
+}
+
+/**
+ * Handles the edit click event for a subtask.
+ * @param {HTMLElement} target - The target element that triggered the event.
+ */
+function handleEditClick(target) {
+  const subtaskItem = target.closest(".subtask-item");
+  const contentWrapper = subtaskItem.querySelector(".subtask-content-wrapper");
+  const contentSpan = subtaskItem.querySelector(".subtask-content");
+  subtaskItem.classList.add("editing");
+  const inputContainer = document.createElement("div");
+  inputContainer.classList.add("input-container");
+  const input = createInputField(contentSpan.textContent);
+  const deleteIcon = createIcon("delete-icon", "./assets/icons/subtask-delete.png");
+  const saveIcon = createIcon("save-icon", "./assets/icons/subtask-save.png");
+  inputContainer.appendChild(input);
+  inputContainer.appendChild(deleteIcon);
+  inputContainer.appendChild(saveIcon);
+  contentWrapper.innerHTML = "";
+  contentWrapper.appendChild(inputContainer);
+  const actions = subtaskItem.querySelector(".subtask-actions");
+  actions.style.visibility = "hidden";
+}
+
+// /**
+//  * Handles the save click event for a subtask.
+//  * @param {HTMLElement} target - The target element that triggered the event.
+//  */
+// function handleSaveClick(target) {
+//   // Code bleibt gleich
+// }
+
+/**
+ * Handles the delete click event for a subtask.
+ * @param {HTMLElement} target - The target element that triggered the event.
+ * @param {string} ticketID - The ID of the ticket containing the subtask.
+ */
+function handleDeleteClick(target, ticketID) {
+  console.log("hallo delete wurde geklickt");
+
+  const subtaskItem = target.closest(".subtask-item");
+  const targetID = subtaskItem.id;
+  let subId = targetID.split("_")[1];
+  const numericID = parseInt(subId, 10);
+
+  subtaskItem.remove(ticketID);
+  localStorage.removeItem(subId);
+  deleteArrayEntry(numericID);
+  localStorage.removeItem(ticketID);
+  if (subtasksArray.length < 4) {
+    enableInputAndButton();
   }
 }

@@ -106,8 +106,8 @@ let tasks = [
     prio: "urgent",
     state: "awaitFeedback",
     subtasks: [
-      { id: "sub1", content: "Subtask 1 for Task 1", status: "open" },
-      { id: "sub2", content: "Subtask 2 for Task 1", status: "closed" },
+      { id: "1", content: "Subtask 1 for Task 1", status: "open" },
+      { id: "2", content: "Subtask 2 for Task 1", status: "closed" },
     ],
   },
   {
@@ -120,7 +120,7 @@ let tasks = [
     due_date: "2025-02-15",
     prio: "medium",
     state: "inProgress",
-    subtasks: [{ id: "sub1", content: "Subtask 1 for Task 2", status: "open" }],
+    subtasks: [{ id: "1", content: "Subtask 1 for Task 2", status: "open" }],
   },
   {
     id: "ghi789",
@@ -133,9 +133,9 @@ let tasks = [
     prio: "low",
     state: "done",
     subtasks: [
-      { id: "sub1", content: "Subtask 1 for Task 3", status: "open" },
-      { id: "sub2", content: "Subtask 2 for Task 3", status: "open" },
-      { id: "sub3", content: "Subtask 3 for Task 3", status: "closed" },
+      { id: "1", content: "Subtask 1 for Task 3", status: "open" },
+      { id: "2", content: "Subtask 2 for Task 3", status: "open" },
+      { id: "3", content: "Subtask 3 for Task 3", status: "closed" },
     ],
   },
   {
@@ -160,7 +160,7 @@ let tasks = [
     due_date: "2025-05-30",
     prio: "medium",
     state: "inProgress",
-    subtasks: [{ id: "sub1", content: "Subtask 1 for Task 5", status: "closed" }],
+    subtasks: [{ id: "1", content: "Subtask 1 for Task 5", status: "closed" }],
   },
   {
     id: "pqr678",
@@ -185,7 +185,7 @@ let tasks = [
     due_date: "2025-07-25",
     prio: "urgent",
     state: "awaitFeedback",
-    subtasks: [{ id: "sub1", content: "Subtask 1 for Task 7", status: "open" }],
+    subtasks: [{ id: "1", content: "Subtask 1 for Task 7", status: "open" }],
   },
   {
     id: "vwx234",
@@ -210,8 +210,8 @@ let tasks = [
     prio: "low",
     state: "toDo",
     subtasks: [
-      { id: "sub1", content: "Subtask 1 for Task 9", status: "open" },
-      { id: "sub2", content: "Subtask 2 for Task 9", status: "closed" },
+      { id: "1", content: "Subtask 1 for Task 9", status: "open" },
+      { id: "2", content: "Subtask 2 for Task 9", status: "closed" },
     ],
   },
   {
