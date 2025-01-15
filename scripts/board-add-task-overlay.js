@@ -1,28 +1,15 @@
-let actualFirebaseID;
-
 /**
- * Finds the unique Firebase ID of the chosen ticket and returns it
+ * Finds the unique task ID in localStorage and returns the task object.
  * @param {string} targetID
- * @returns the firebase ID of the ticket
+ * @returns the task object with the given ID
  */
-async function findFirebaseIdById(targetID) {
-  try {
-    const response = await fetch(BASE_URL + "tasks.json");
-    if (!response.ok) {
-      throw new Error("Error by fetching data from database");
-    }
-    const tasks = await response.json();
-    if (tasks) {
-      for (const [firebaseId, task] of Object.entries(tasks)) {
-        if (task.id === targetID) {
-          return firebaseId;
-        }
-      }
-    }
-  } catch (error) {
-    console.error("Error by fetching data:", error);
-    return null;
+function findTaskById(targetID) {
+  const tasksString = localStorage.getItem("tasks");
+  if (tasksString) {
+    const tasks = JSON.parse(tasksString);
+    return tasks.find((task) => task.id === targetID) || null;
   }
+  return null;
 }
 
 /**
@@ -50,7 +37,6 @@ function toggleOverlay() {
     document.body.style.overflow = "auto";
     subtasksArray = [];
     selectedUsers = [];
-    location.reload();
   }
 }
 
@@ -61,13 +47,12 @@ function toggleOverlay() {
  * @param {string} ticketDescription - The Ticket description
  * @param {string} ticketDate - The due date of the ticket
  * @param {string} prio - The Priority of the ticket
- * @param {string} ticketID - The exact ID which is based on the Firebase-ID
+ * @param {string} ticketID - The exact ID which is based on the localStorage ID
  */
-async function showOverlayTicket(category, ticketTitle, ticketDescription, ticketDate, prio, ticketID) {
+function showOverlayTicket(category, ticketTitle, ticketDescription, ticketDate, prio, ticketID) {
   document.getElementById("overlayID").innerHTML = renderOverlayTicket(category, ticketTitle, ticketDescription, ticketDate, prio, ticketID);
   renderAssignedUsersOverlay(ticketID);
   renderSubtasksOverlay(ticketID);
-  actualFirebaseID = await findFirebaseIdById(ticketID);
 }
 
 /**
@@ -147,42 +132,56 @@ function activateButton(buttonId, svgId, buttonClass, svgClass) {
 }
 
 /**
- * Gets the new variables content and saves it to the firebase database while accordingly updating the board UI
+ * Gets the new variables content and saves it to localStorage while accordingly updating the board UI
  * @param {string} ticketID
  */
-async function saveEditOnClick(ticketID) {
+function saveEditOnClick(ticketID) {
   let newTitle = document.getElementById("task-title-overlay-edit").value;
   let newDescription = document.getElementById("task-description-overlay-edit").value;
   let newDueDate = document.getElementById("task-due-date-overlay-edit").value;
   let newPrio = editedPrio;
   let newAssignedUsers = selectedUsers;
   let newSubtasks = subtasksArray;
-  let firebaseID = await findFirebaseIdById(ticketID);
-  let data = buildEditTask(newTitle, newDescription, newDueDate, newPrio, newAssignedUsers, newSubtasks);
-  await patchTask(firebaseID, data);
-  showToast("The ticket was edited successfully", "success");
-  setTimeout(() => {
-    toggleOverlay();
-    location.reload();
-  }, 2500);
+
+  let taskIndex = allTasks.findIndex((task) => task.id === ticketID);
+  if (taskIndex !== -1) {
+    allTasks[taskIndex] = {
+      ...allTasks[taskIndex],
+      title: newTitle,
+      description: newDescription,
+      due_date: newDueDate,
+      prio: newPrio,
+      assigned_to: newAssignedUsers,
+      subtasks: newSubtasks,
+    };
+    localStorage.setItem("tasks", JSON.stringify(allTasks));
+    showToast("The ticket was edited successfully", "success");
+    setTimeout(() => {
+      toggleOverlay();
+      renderAllTickets(allTasks);
+    }, 2500);
+  } else {
+    console.error("Task not found in allTasks array");
+  }
 }
 
 /**
- * Patches the task in the Firebase Realtime Database
- * @param {string} firebaseID
+ * Patches the task in the localStorage
+ * @param {string} taskID
  * @param {object} data
- * @returns
  */
-async function patchTask(firebaseID, data) {
-  let url = BASE_URL + "tasks/" + firebaseID + ".json";
-  let response = await fetch(url, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  return (responseToJSON = await response.json());
+function patchTask(taskID, data) {
+  let tasksString = localStorage.getItem("tasks");
+  if (tasksString) {
+    let tasks = JSON.parse(tasksString);
+    let taskIndex = tasks.findIndex((task) => task.id === taskID);
+    if (taskIndex !== -1) {
+      tasks[taskIndex] = { ...tasks[taskIndex], ...data };
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    } else {
+      console.error("Task not found in tasks array");
+    }
+  }
 }
 
 /**

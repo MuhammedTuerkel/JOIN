@@ -10,10 +10,9 @@ const formVisibilityCheckOnEdit = setInterval(checkFormVisibilityOnEdit, 100);
 /**
  * Initialize the board features which should be active at site load
  */
-async function onInit() {
-  await getAllTasks();
-  await renderAllTickets(allTasks);
-  onloadFunction();
+function onInit() {
+  getAllTasks();
+  renderAllTickets(allTasks);
   getLoggedInUserData();
   sideNavigation();
 }
@@ -61,20 +60,6 @@ function updateProgressBar(ticketID) {
 }
 
 /**
- * Updates the subtask counter on the UI related to a certain ticket
- * @param {string} ticketID
- */
-function updateSubtaskCounter(ticketID) {
-  let closedTasks = subtasksClosed(ticketID);
-  let task = allTasks.find((t) => t["id"] === ticketID);
-  let totalSubtasks = task.subtasks ? task.subtasks.length : 0;
-  let counterElement = document.getElementById(`subtask-counter_${ticketID}`);
-  if (counterElement) {
-    counterElement.textContent = `${closedTasks}/${totalSubtasks}`;
-  }
-}
-
-/**
  * Shortens a string and adds some points at the end of the sentence
  * @param {string} string - The string which should be shortened
  * @param {int} maxLength - Maximum Length of the text
@@ -98,27 +83,22 @@ function findTicketIndex(title) {
 }
 
 /**
- * Changes the Subtask Status in the front-end and on the Firebase DB
+ * Changes the Subtask Status in the front-end and updates it in localStorage
  * @param {int} subtaskIndex
  * @param {string} ticketID
  */
-async function changeSubtaskStatus(subtaskIndex, ticketID) {
+function changeSubtaskStatus(subtaskIndex, ticketID) {
   let task = allTasks.find((t) => t["id"] === ticketID);
-  let firebaseID = task["firebase_id"];
-  let subtask = task.subtasks[subtaskIndex];
-  subtask.status = subtask.status === "open" ? "closed" : "open";
-  try {
-    await fetch(`${BASE_URL}tasks/${firebaseID}/subtasks/${subtaskIndex}.json`, {
-      method: "PATCH",
-      body: JSON.stringify({ status: subtask.status }),
-      headers: { "Content-Type": "application/json" },
-    });
-  } catch (error) {
-    console.error("Failed to update subtask in Firebase:", error);
+  if (task) {
+    let subtask = task.subtasks[subtaskIndex];
+    subtask.status = subtask.status === "open" ? "closed" : "open";
+    localStorage.setItem("tasks", JSON.stringify(allTasks));
+    renderSubtasksOverlay(ticketID);
+    updateProgressBar(ticketID);
+    renderAllTickets(allTasks);
+  } else {
+    console.error("Task not found in allTasks array");
   }
-  renderSubtasksOverlay(ticketID);
-  updateProgressBar(ticketID);
-  updateSubtaskCounter(ticketID);
 }
 
 /**
@@ -138,19 +118,36 @@ function allowDrop(ev) {
 }
 
 /**
- * Moves the ticket into another column and update the state in the firebase database
+ * Changes the Subtask Status in the front-end and updates it in localStorage
+ * @param {int} subtaskIndex
+ * @param {string} ticketID
+ */
+function changeSubtaskStatus(subtaskIndex, ticketID) {
+  let task = allTasks.find((t) => t["id"] === ticketID);
+  if (task) {
+    let subtask = task.subtasks[subtaskIndex];
+    subtask.status = subtask.status === "open" ? "closed" : "open";
+
+    // Update localStorage with the new task status
+    localStorage.setItem("tasks", JSON.stringify(allTasks));
+
+    renderSubtasksOverlay(ticketID);
+    updateProgressBar(ticketID);
+    renderAllTickets(allTasks);
+  } else {
+    console.error("Task not found in allTasks array");
+  }
+}
+
+/**
+ * Moves the ticket into another column and updates the state in localStorage
  * @param {string} category - describes in which column the ticket was moved
  */
-async function move(category) {
+function move(category) {
   let currentIndex = allTasks.findIndex((ix) => ix["id"] === currentDraggedElement);
   if (currentIndex !== -1) {
     allTasks[currentIndex]["state"] = category;
-    let firebaseID = allTasks[currentIndex]["firebase_id"];
-    await fetch(`${BASE_URL}tasks/${firebaseID}.json`, {
-      method: "PATCH",
-      body: JSON.stringify({ state: category }),
-      headers: { "Content-Type": "application/json" },
-    });
+    localStorage.setItem("tasks", JSON.stringify(allTasks));
     renderFilteredTickets();
   } else {
     console.error("Task not found in allTasks array");
@@ -158,19 +155,15 @@ async function move(category) {
 }
 
 /**
- * Moves the ticket into another column and update the state in the firebase database. Function as a longtap for mobile use.
+ * Moves the ticket into another column and updates the state in localStorage. Function as a longtap for mobile use.
  * @param {string} category - describes in which column the ticket was moved
+ * @param {string} ticketID - unique identifier of the ticket
  */
-async function moveToOverlay(category, ticketID) {
+function moveToOverlay(category, ticketID) {
   let currentIndex = allTasks.findIndex((ix) => ix["id"] === ticketID);
   if (currentIndex !== -1) {
     allTasks[currentIndex]["state"] = category;
-    let firebaseID = allTasks[currentIndex]["firebase_id"];
-    await fetch(`${BASE_URL}tasks/${firebaseID}.json`, {
-      method: "PATCH",
-      body: JSON.stringify({ state: category }),
-      headers: { "Content-Type": "application/json" },
-    });
+    localStorage.setItem("tasks", JSON.stringify(allTasks));
     renderFilteredTickets();
   } else {
     console.error("Task not found in allTasks array");
@@ -229,32 +222,24 @@ function removeHighlight(id) {
 }
 
 /**
- * Deletes the task from the board, the array and from the Firebase-DB
- * @param {string} ticketID
- * @returns
+ * Moves the ticket into another column and updates the state in localStorage. Function as a longtap for mobile use.
+ * @param {string} category - describes in which column the ticket was moved
+ * @param {string} ticketID - unique identifier of the ticket
  */
-async function deleteTicket(ticketID) {
-  let taskIndex = allTasks.findIndex((task) => task["id"] === ticketID);
-  let firebaseID = allTasks[taskIndex]["firebase_id"];
-  try {
-    await fetch(`${BASE_URL}tasks/${firebaseID}.json`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    });
-  } catch (error) {
-    console.error("Failed to delete ticket from Firebase:", error);
-    return;
+function moveToOverlay(category, ticketID) {
+  let currentIndex = allTasks.findIndex((ix) => ix["id"] === ticketID);
+  if (currentIndex !== -1) {
+    allTasks[currentIndex]["state"] = category;
+    localStorage.setItem("tasks", JSON.stringify(allTasks));
+    renderFilteredTickets();
+  } else {
+    console.error("Task not found in allTasks array");
   }
-  allTasks.splice(taskIndex, 1);
-  renderAllTickets(allTasks);
-  showToast("The ticket was deleted", "alert");
-  setTimeout(() => {
-    toggleOverlay();
-  }, 2500);
+  toggleOverlay();
 }
 
 /**
- *Handles the input event for the search field with a debounce mechanism.
+ * Handles the input event for the search field with a debounce mechanism.
  */
 function handleSearchInput() {
   clearTimeout(debounceTimeout);

@@ -208,14 +208,20 @@ function getLoggedInUserData() {
 }
 
 /**
- * Gets all tasks which are saved in the firebase realtime database with its Firebase-ID
+ * Retrieves all tasks saved in localStorage and assigns responsible contacts to each task.
  */
-async function getAllTasks() {
-  let response = await fetch(BASE_URL + "tasks" + ".json");
-  let responseAsJSON = await response.json();
-  allTasks = Object.entries(responseAsJSON).map(([id, task]) => {
-    return { firebase_id: id, ...task };
-  });
+function getAllTasks() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  const tasksString = localStorage.getItem("tasks");
+  if (tasksString) {
+    const tasks = JSON.parse(tasksString);
+    allTasks = tasks.map((task, index) => {
+      return { id: index, ...task };
+    });
+  } else {
+    allTasks = [];
+  }
+  return tasks;
 }
 
 /**

@@ -1,91 +1,88 @@
 <!DOCTYPE html>
 <html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>join</title>
+    <link rel="icon" href="./assets/favicon/favicon-96x96.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./styles/login.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz@0,14..32;1,14..32&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles/signUp.css" />
+    <script src="./templates/loginTemplate.js"></script>
+    <script src="script.js"></script>
+    <script src="array.js"></script>
+    <script src="./host.js"></script>
+    <script src="./scripts/login.js"></script>
+    <script src="scripts/signUp.js"></script>
+    <script src="./scripts/privacy_and_legal.js"></script>
+    <script src="./templates/privacyAndLegalTemplate.js"></script>
+    <script src="./scripts/firebase.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>join</title>
-  =======
-  <link rel="icon" href="./assets/favicon/favicon-96x96.png" type="image/x-icon" />
-  <link rel="stylesheet" href="./styles/login.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz@0,14..32;1,14..32&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="./styles/signUp.css" />
-  <script src="./templates/loginTemplate.js"></script>
-  <script src="script.js"></script>
-  <script src="array.js"></script>
-  <script src="./host.js"></script>
-  <script src="./scripts/login.js"></script>
-  <script src="scripts/signUp.js"></script>
-  <script src="./scripts/privacy_and_legal.js"></script>
-  <script src="./templates/privacyAndLegalTemplate.js"></script>
-  <script src="./scripts/firebase.js"></script>
-</head>
+  <body onload="logInInit()" class="login_body">
+    <header id="loginHead" class="login_header login_d_none">
+      <main class="login_head">
+        <div class="login_header_img"></div>
+        <div id="loginHeader" onclick="loadSignUpTemplate()" class="login_header_nav">
+          <a href="#">Not a Join user?</a>
+          <div class="login_not_a_user_buttons_styles" onclick="loadSignUpTemplate()">Sign up</div>
+        </div>
+      </main>
+    </header>
 
-<body onload="logInInit()" class="login_body">
-  <header id="loginHead" class="login_header login_d_none">
-    <main class="login_head">
-      <div class="login_header_img"></div>
-      <div id="loginHeader" onclick="loadSignUpTemplate()" class="login_header_nav">
-        <a href="#">Not a Join user?</a>
-        <div class="login_not_a_user_buttons_styles" onclick="loadSignUpTemplate()">Sign up</div>
+    <div id="loginMoveImgContainer" class="login_move_image_container">
+      <div class="login_logo log">
+        <img id="loginMovableImage" src="./assets/img/capa.png" alt="Logo" class="" />
       </div>
+    </div>
+    <div id="loginMobileMoveImgContainer" class="login_move_mobile_image_container">
+      <div class="login_logo_mobile">
+        <img id="loginMobileMovableImage" src="./assets/img/Logo_Mobile.png" alt="Logo" class="fade_out" />
+      </div>
+    </div>
+
+    <main id="loginMain" class="login_main_container login_d_none">
+      <article id="loginContent" class="login_variants"></article>
     </main>
-  </header>
 
-  <div id="loginMoveImgContainer" class="login_move_image_container">
-    <div class="login_logo log">
-      <img id="loginMovableImage" src="./assets/img/capa.png" alt="Logo" class="" />
-    </div>
-  </div>
-  <div id="loginMobileMoveImgContainer" class="login_move_mobile_image_container">
-    <div class="login_logo_mobile">
-      <img id="loginMobileMovableImage" src="./assets/img/Logo_Mobile.png" alt="Logo" class="fade_out" />
-    </div>
-  </div>
-
-  <main id="loginMain" class="login_main_container login_d_none">
-    <article id="loginContent" class="login_variants"></article>
-  </main>
-
-  <div id="overlay" class="overlay">
-    <div class="confirmation_container">
-      <div class="sign_up_sucessfully">You Signed Up successfully</div>
-    </div>
-  </div>
-
-  <div id="loginMobile" class="login_mobile_head login_d_none">
-    <main class="login_mobile">
-      <div onclick="loadSignUpTemplate()" class="login_moble_nav">
-        <a href="#">Not a Join user?</a>
-        <div class="login_not_a_user_buttons_styles" onclick="loadSignUpTemplate()">Sign up</div>
-      </div>
-    </main>
-  </div>
-
-  <footer id="loginFooter" class="login_footer_container login_d_none">
-    <div class="login_footer login_d_none">
-      <a onclick="renderPrivacyPolicyTemplateNotLoggedInUser()" href="#">Privacy Policy</a>
-      <a onclick="renderLegalNoticeTemplateNotLoggedInUser()" href="#">Legal Notice</a>
-    </div>
-  </footer>
-  <div class="orientation-warning" id="orientationWarning">
-    <div class="warning-container">
-      <p>This page has been optimized for use in portrait mode.</p>
-      <p>Please rotate your mobile device.</p>
-      <div class="tilt-device-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#FFFFFF">
-          <path
-            d="M509.33-188 188-509.33q-19.67-21-19.67-48.67T188-606.67l168.67-168q19.66-21 47.99-21 28.32 0 49.34 21l321.33 321.34q20.34 20.33 20.34 48.66 0 28.34-20.34 48.67L606.67-188q-19.67 21-48 21-28.32 0-49.34-21ZM558-233.33l171.33-171.34-324-324.66L234-558l324 324.67ZM478.67.67q-98.68 0-185.89-37.5-87.21-37.5-152.5-103Q75-205.33 37.5-292.62 0-379.91 0-478.67h66.67q0 77 27 146.34 27 69.33 74.5 123.66 47.5 54.34 112.83 89.84T422.33-73L300.67-194.67 348-242 578.67-11.33q-24 6.66-49.49 9.33Q503.69.67 478.67.67Zm414.66-479.34q0-77-26.66-146.33-26.67-69.33-73.84-124-47.16-54.67-112.16-90.5t-141-46.17L660-765.33 612.67-718 382-948.67q24-6 48.17-8.66 24.16-2.67 48.5-2.67 99.66 0 187.16 37.83 87.5 37.84 153 103.34t103.34 153Q960-578.33 960-478.67h-66.67ZM482-481.33Z" />
-        </svg>
+    <div id="overlay" class="overlay">
+      <div class="confirmation_container">
+        <div class="sign_up_sucessfully">You Signed Up successfully</div>
       </div>
     </div>
-  </div>
-  <script>
-    window.addEventListener("orientationchange", checkOrientation);
-    window.addEventListener("resize", checkOrientation);
-    checkOrientation();
-  </script>
-</body>
 
+    <div id="loginMobile" class="login_mobile_head login_d_none">
+      <main class="login_mobile">
+        <div onclick="loadSignUpTemplate()" class="login_moble_nav">
+          <a href="#">Not a Join user?</a>
+          <div class="login_not_a_user_buttons_styles" onclick="loadSignUpTemplate()">Sign up</div>
+        </div>
+      </main>
+    </div>
+
+    <footer id="loginFooter" class="login_footer_container login_d_none">
+      <div class="login_footer login_d_none">
+        <a onclick="renderPrivacyPolicyTemplateNotLoggedInUser()" href="#">Privacy Policy</a>
+        <a onclick="renderLegalNoticeTemplateNotLoggedInUser()" href="#">Legal Notice</a>
+      </div>
+    </footer>
+    <div class="orientation-warning" id="orientationWarning">
+      <div class="warning-container">
+        <p>This page has been optimized for use in portrait mode.</p>
+        <p>Please rotate your mobile device.</p>
+        <div class="tilt-device-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#FFFFFF">
+            <path
+              d="M509.33-188 188-509.33q-19.67-21-19.67-48.67T188-606.67l168.67-168q19.66-21 47.99-21 28.32 0 49.34 21l321.33 321.34q20.34 20.33 20.34 48.66 0 28.34-20.34 48.67L606.67-188q-19.67 21-48 21-28.32 0-49.34-21ZM558-233.33l171.33-171.34-324-324.66L234-558l324 324.67ZM478.67.67q-98.68 0-185.89-37.5-87.21-37.5-152.5-103Q75-205.33 37.5-292.62 0-379.91 0-478.67h66.67q0 77 27 146.34 27 69.33 74.5 123.66 47.5 54.34 112.83 89.84T422.33-73L300.67-194.67 348-242 578.67-11.33q-24 6.66-49.49 9.33Q503.69.67 478.67.67Zm414.66-479.34q0-77-26.66-146.33-26.67-69.33-73.84-124-47.16-54.67-112.16-90.5t-141-46.17L660-765.33 612.67-718 382-948.67q24-6 48.17-8.66 24.16-2.67 48.5-2.67 99.66 0 187.16 37.83 87.5 37.84 153 103.34t103.34 153Q960-578.33 960-478.67h-66.67ZM482-481.33Z"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+    <script>
+      window.addEventListener("orientationchange", checkOrientation);
+      window.addEventListener("resize", checkOrientation);
+      checkOrientation();
+    </script>
+  </body>
 </html>

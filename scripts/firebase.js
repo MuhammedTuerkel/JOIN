@@ -259,3 +259,253 @@ async function saveTaskCloseOverlay(event, state = "toDo") {
     location.reload();
   }, 2500);
 }
+
+/*_________________ board.js ______________________________________*/
+
+let actualFirebaseID;
+
+/**
+ * Gets all tasks which are saved in the firebase realtime database with its Firebase-ID
+ */
+async function getAllTasks() {
+  let response = await fetch(BASE_URL + "tasks" + ".json");
+  let responseAsJSON = await response.json();
+  allTasks = Object.entries(responseAsJSON).map(([id, task]) => {
+    return { firebase_id: id, ...task };
+  });
+}
+
+/**
+ * Changes the Subtask Status in the front-end and on the Firebase DB
+ * @param {int} subtaskIndex
+ * @param {string} ticketID
+ */
+async function changeSubtaskStatus(subtaskIndex, ticketID) {
+  let task = allTasks.find((t) => t["id"] === ticketID);
+  let firebaseID = task["firebase_id"];
+  let subtask = task.subtasks[subtaskIndex];
+  subtask.status = subtask.status === "open" ? "closed" : "open";
+  try {
+    await fetch(`${BASE_URL}tasks/${firebaseID}/subtasks/${subtaskIndex}.json`, {
+      method: "PATCH",
+      body: JSON.stringify({ status: subtask.status }),
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (error) {
+    console.error("Failed to update subtask in Firebase:", error);
+  }
+  renderSubtasksOverlay(ticketID);
+  updateProgressBar(ticketID);
+  updateSubtaskCounter(ticketID);
+}
+
+/**
+ * Changes the Subtask Status in the front-end and on the Firebase DB
+ * @param {int} subtaskIndex
+ * @param {string} ticketID
+ */
+async function changeSubtaskStatus(subtaskIndex, ticketID) {
+  let task = allTasks.find((t) => t["id"] === ticketID);
+  let firebaseID = task["firebase_id"];
+  let subtask = task.subtasks[subtaskIndex];
+  subtask.status = subtask.status === "open" ? "closed" : "open";
+  try {
+    await fetch(`${BASE_URL}tasks/${firebaseID}/subtasks/${subtaskIndex}.json`, {
+      method: "PATCH",
+      body: JSON.stringify({ status: subtask.status }),
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (error) {
+    console.error("Failed to update subtask in Firebase:", error);
+  }
+  renderSubtasksOverlay(ticketID);
+  updateProgressBar(ticketID);
+  updateSubtaskCounter(ticketID);
+}
+
+/**
+ * Changes the Subtask Status in the front-end and updates it in localStorage
+ * @param {int} subtaskIndex
+ * @param {string} ticketID
+ */
+function changeSubtaskStatus(subtaskIndex, ticketID) {
+  let task = allTasks.find((t) => t["id"] === ticketID);
+  if (task) {
+    let subtask = task.subtasks[subtaskIndex];
+    subtask.status = subtask.status === "open" ? "closed" : "open";
+    localStorage.setItem("tasks", JSON.stringify(allTasks));
+    renderSubtasksOverlay(ticketID);
+    updateProgressBar(ticketID);
+    updateSubtaskCounter(ticketID);
+  } else {
+    console.error("Task not found in allTasks array");
+  }
+}
+
+/**
+ * Toggles the Overlay view
+ */
+function toggleOverlay() {
+  let overlay = document.getElementById("overlayID");
+  if (overlay.classList.contains("d_none")) {
+    overlay.classList.remove("d_none");
+    overlay.classList.add("d_flex");
+    document.body.style.overflow = "hidden";
+  } else {
+    overlay.classList.remove("d_flex");
+    overlay.classList.add("d_none");
+    document.body.style.overflow = "auto";
+    subtasksArray = [];
+    selectedUsers = [];
+    location.reload();
+  }
+}
+
+/**
+ * Updates the subtask counter on the UI related to a certain ticket
+ * @param {string} ticketID
+ */
+function updateSubtaskCounter(ticketID) {
+  let closedTasks = subtasksClosed(ticketID);
+  let task = allTasks.find((t) => t["id"] === ticketID);
+  let totalSubtasks = task.subtasks ? task.subtasks.length : 0;
+  let counterElement = document.getElementById(`subtask-counter_${ticketID}`);
+  if (counterElement) {
+    counterElement.textContent = `${closedTasks}/${totalSubtasks}`;
+  }
+}
+
+/**
+ * Moves the ticket into another column and update the state in the firebase database
+ * @param {string} category - describes in which column the ticket was moved
+ */
+async function move(category) {
+  let currentIndex = allTasks.findIndex((ix) => ix["id"] === currentDraggedElement);
+  if (currentIndex !== -1) {
+    allTasks[currentIndex]["state"] = category;
+    let firebaseID = allTasks[currentIndex]["firebase_id"];
+    await fetch(`${BASE_URL}tasks/${firebaseID}.json`, {
+      method: "PATCH",
+      body: JSON.stringify({ state: category }),
+      headers: { "Content-Type": "application/json" },
+    });
+    renderFilteredTickets();
+  } else {
+    console.error("Task not found in allTasks array");
+  }
+}
+
+/**
+ * Changes the Subtask Status in the front-end and updates it in localStorage
+ * @param {int} subtaskIndex
+ * @param {string} ticketID
+ */
+function changeSubtaskStatus(subtaskIndex, ticketID) {
+  let task = allTasks.find((t) => t["id"] === ticketID);
+  if (task) {
+    let subtask = task.subtasks[subtaskIndex];
+    subtask.status = subtask.status === "open" ? "closed" : "open";
+
+    // Update localStorage with the new task status
+    localStorage.setItem("tasks", JSON.stringify(allTasks));
+
+    renderSubtasksOverlay(ticketID);
+    updateProgressBar(ticketID);
+    updateSubtaskCounter(ticketID);
+  } else {
+    console.error("Task not found in allTasks array");
+  }
+}
+
+/**
+ * * Mobile Version
+ * Moves the ticket into another column and update the state in the firebase database. Function as a longtap for mobile use.
+ * @param {string} category - describes in which column the ticket was moved
+ */
+async function moveToOverlay(category, ticketID) {
+  let currentIndex = allTasks.findIndex((ix) => ix["id"] === ticketID);
+  if (currentIndex !== -1) {
+    allTasks[currentIndex]["state"] = category;
+    let firebaseID = allTasks[currentIndex]["firebase_id"];
+    await fetch(`${BASE_URL}tasks/${firebaseID}.json`, {
+      method: "PATCH",
+      body: JSON.stringify({ state: category }),
+      headers: { "Content-Type": "application/json" },
+    });
+    renderFilteredTickets();
+  } else {
+    console.error("Task not found in allTasks array");
+  }
+  toggleOverlay();
+}
+
+/**
+ * Deletes the task from the board, the array and from the Firebase-DB
+ * @param {string} ticketID
+ * @returns
+ */
+async function deleteTicket(ticketID) {
+  let taskIndex = allTasks.findIndex((task) => task["id"] === ticketID);
+  let firebaseID = allTasks[taskIndex]["firebase_id"];
+  try {
+    await fetch(`${BASE_URL}tasks/${firebaseID}.json`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (error) {
+    console.error("Failed to delete ticket from Firebase:", error);
+    return;
+  }
+  allTasks.splice(taskIndex, 1);
+  renderAllTickets(allTasks);
+  showToast("The ticket was deleted", "alert");
+  setTimeout(() => {
+    toggleOverlay();
+  }, 2500);
+}
+
+/**
+ * Finds the unique Firebase ID of the chosen ticket and returns it
+ * @param {string} targetID
+ * @returns the firebase ID of the ticket
+ */
+async function findFirebaseIdById(targetID) {
+  try {
+    const response = await fetch(BASE_URL + "tasks.json");
+    if (!response.ok) {
+      throw new Error("Error by fetching data from database");
+    }
+    const tasks = await response.json();
+    if (tasks) {
+      for (const [firebaseId, task] of Object.entries(tasks)) {
+        if (task.id === targetID) {
+          return firebaseId;
+        }
+      }
+    }
+  } catch (error) {
+    console.error("Error by fetching data:", error);
+    return null;
+  }
+}
+
+/**
+ * Gets the new variables content and saves it to the firebase database while accordingly updating the board UI
+ * @param {string} ticketID
+ */
+async function saveEditOnClick(ticketID) {
+  let newTitle = document.getElementById("task-title-overlay-edit").value;
+  let newDescription = document.getElementById("task-description-overlay-edit").value;
+  let newDueDate = document.getElementById("task-due-date-overlay-edit").value;
+  let newPrio = editedPrio;
+  let newAssignedUsers = selectedUsers;
+  let newSubtasks = subtasksArray;
+  let firebaseID = await findFirebaseIdById(ticketID);
+  let data = buildEditTask(newTitle, newDescription, newDueDate, newPrio, newAssignedUsers, newSubtasks);
+  await patchTask(firebaseID, data);
+  showToast("The ticket was edited successfully", "success");
+  setTimeout(() => {
+    toggleOverlay();
+    location.reload();
+  }, 2500);
+}

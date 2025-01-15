@@ -332,8 +332,19 @@ function handleCancelClick(target) {
 function handleDeleteClick(target) {
   const subtaskItem = target.closest(".subtask-item");
   const targetID = subtaskItem.id;
+  console.log(targetID);
+  let subId = targetID.split("_");
+  let subTaskId;
+  if (subId.length > 1) {
+    subTaskId = subId[1];
+  }
+  console.log(subTaskId);
+
   const numericID = parseInt(targetID.split("_")[1], 10);
+
   subtaskItem.remove();
+  localStorage.removeItem(subTaskId);
+
   deleteArrayEntry(numericID);
   if (subtasksArray.length < 4) {
     enableInputAndButton();
