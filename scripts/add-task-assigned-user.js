@@ -41,16 +41,16 @@ function handleDropdownBodyClick() {
   }
 }
 
-/**
+/** updatet
  * Loads the users into the dropdown container.
  * Updates the dropdown selections based on previously selected users.
  */
 function loadUserInAssignedToDropdown() {
   let dropdownContainer = document.getElementById("addTaskDropdown");
   dropdownContainer.innerHTML = "";
-  for (let index = 0; index < users.length; index++) {
-    let user = users[index];
-    dropdownContainer.innerHTML += createUserTemplate(user);
+  for (let index = 0; index < contacts.length; index++) {
+    let contact = contacts[index];
+    dropdownContainer.innerHTML += createUserTemplate(contact);
   }
   updateDropdownSelections();
 }
@@ -82,9 +82,9 @@ function assignedUserDropDown(email) {
   template.classList.add("user_template_selected");
   checkedImg.src = "./assets/img/checked button.png";
   checkbox.checked = true;
-  let user = users.find((user) => user.email === email);
-  if (!selectedUsers.some((selectedUser) => selectedUser.email === user.email)) {
-    selectedUsers.push(user);
+  let contact = contacts.find((contact) => contact.email === email);
+  if (!selectedContacts.some((selectedContact) => selectedContact.email === contact.email)) {
+    selectedContacts.push(contact);
   }
   updateSelectedUsersContainer();
 }
@@ -101,7 +101,7 @@ function notAssignedUser(email) {
   template.classList.add("user_template_not_selected");
   checkedImg.src = "./assets/img/check button.png";
   checkbox.checked = false;
-  selectedUsers = selectedUsers.filter((user) => user.email !== email);
+  selectedContacts = selectedContacts.filter((contact) => contact.email !== email);
   updateSelectedUsersContainer();
 }
 
@@ -109,10 +109,10 @@ function notAssignedUser(email) {
  * Updates the dropdown selections based on the selected users.
  */
 function updateDropdownSelections() {
-  selectedUsers.forEach((user) => {
-    let checkbox = document.getElementById(`checkbox-${user.email}`);
-    let template = document.getElementById(`template-${user.email}`);
-    let img = document.getElementById(`img-${user.email}`);
+  selectedContacts.forEach((contact) => {
+    let checkbox = document.getElementById(`checkbox-${contact.email}`);
+    let template = document.getElementById(`template-${contact.email}`);
+    let img = document.getElementById(`img-${contact.email}`);
     if (checkbox) {
       checkbox.checked = true;
       template.classList.remove("user_template_not_selected");
@@ -128,11 +128,11 @@ function updateDropdownSelections() {
 function updateSelectedUsersContainer() {
   let container = document.getElementById("selectedUsers");
   container.innerHTML = "";
-  for (let index = 0; index < selectedUsers.length; index++) {
-    let user = selectedUsers[index];
-    let initials = user.name.charAt(0).toUpperCase() + user.name.charAt(user.name.length - 1).toUpperCase();
+  for (let index = 0; index < selectedContacts.length; index++) {
+    let contact = selectedContacts[index];
+    let initials = contact.name.charAt(0).toUpperCase() + contact.name.charAt(contact.name.length - 1).toUpperCase();
     container.innerHTML += `
-            <div class="selected_user_circle" style="background-color: ${user.color};">
+            <div class="selected_user_circle" style="background-color: ${contact.color};">
                 ${initials}
             </div>
         `;
@@ -144,22 +144,63 @@ function updateSelectedUsersContainer() {
  */
 function addTaskSearchUser() {
   let input = document.getElementById("addTaskSearchContacts").value.toLowerCase();
-  let filteredUsers = users.filter((user) => user.name.toLowerCase().startsWith(input));
-  loadSearchedUsers(filteredUsers);
+  let fiteredContacts = contacts.filter((contact) => contact.name.toLowerCase().startsWith(input));
+  loadSearchedUsers(fiteredContacts);
 }
 
 /**
  * Loads the filtered users into the dropdown container.
  * @param {Array<Object>} filteredUsers - The filtered list of users.
  */
-function loadSearchedUsers(filteredUsers) {
-  let findUser = document.getElementById("addTaskDropdown");
-  findUser.innerHTML = "";
-  if (filteredUsers.length === 0) {
-    findUser.innerHTML = '<div class="add_task_search_error"><small>no results found...</small></div>';
+function loadSearchedUsers(fiteredContacts) {
+  let findContact = document.getElementById("addTaskDropdown");
+  findContact.innerHTML = "";
+  if (fiteredContacts.length === 0) {
+    findContact.innerHTML = '<div class="add_task_search_error"><small>no results found...</small></div>';
   }
-  for (let index = 0; index < filteredUsers.length; index++) {
-    const user = filteredUsers[index];
-    findUser.innerHTML += createUserTemplate(user);
+  for (let index = 0; index < fiteredContacts.length; index++) {
+    const contact = fiteredContacts[index];
+    findContact.innerHTML += createUserTemplate(contact);
   }
+}
+
+/**
+ * Saves the task and redirects to the board page.
+ * @param {Event} event - The event object.
+ */
+function saveTaskGoToBoard(event, state = "toDo") {
+  event.preventDefault();
+  let data = buildTask(state);
+  postTask("tasks", data);
+  window.location.href = getBaseWebsideURL() + "/board.html";
+}
+
+/**
+ * Saves the task and resets the form to create a new task.
+ * @param {Event} event - The event object.
+ */
+function saveTaskCreateNewTask(event, state = "toDo") {
+  event.preventDefault();
+  let data = buildTask(state);
+  postTask("tasks", data);
+  document.getElementById("addTaskForm").reset();
+  document.getElementById("addTaskOverlayNextStep").style.display = "none";
+  document.body.style.overflow = "auto";
+  addTaskClearTask();
+}
+
+/**
+ * Saves the task and closes the overlay on the board.
+ * @param {Event} event - The event object.
+ */
+function saveTaskCloseOverlay(event, state = "toDo") {
+  event.preventDefault();
+  let data = buildTaskOnBoard(state);
+  postTask("tasks", data);
+  addTaskClearTask();
+  showToast("The ticket was created successfully", "success");
+  setTimeout(() => {
+    toggleOverlay();
+    location.reload();
+  }, 2500);
 }
