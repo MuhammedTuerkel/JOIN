@@ -189,7 +189,7 @@ function enableInputAndButton() {
 /**
  * Renders the list of subtasks.
  */
-function renderSubtaskList() {
+function renderSubtaskList(ticketID) {
   let target = document.getElementById("subtasksList");
   target.innerHTML = "";
   for (let i = 0; i < subtasksArray.length; i++) {
@@ -198,7 +198,8 @@ function renderSubtaskList() {
     } else {
       let itemID = subtasksArray[i].id;
       let itemContent = subtasksArray[i].content;
-      target.innerHTML += renderSubtaskItem(itemID, itemContent);
+      target.innerHTML += renderSubtaskItem(itemID, itemContent, ticketID);
+      console.log("renderSubtaskList:", ticketID);
     }
   }
 }
@@ -384,32 +385,32 @@ function checkFormValidity() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const overlay = document.getElementById("overlay");
-  if (overlay) {
-    handleSubtaskClickEvents();
-  } else {
-    console.error("Overlay element not found.");
-  }
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   const overlay = document.getElementById("overlayID");
+//   if (overlay) {
+//     handleSubtaskClickEvents(ticketID, overlay);
+//   } else {
+//     console.error("Overlay element not found.");
+//   }
+// });
 
 /**
  * Handles click events on subtask action icons within the overlay.
  * @param {string} ticketID - The ID of the ticket containing the subtask.
  * @param {HTMLElement} overlay - The overlay element.
  */
-function handleSubtaskClickEvents(ticketID, overlay) {
-  overlay.addEventListener("click", (event) => {
-    const target = event.target;
-    if (target.classList.contains("edit-icon")) {
-      handleEditClick(target);
-    } else if (target.classList.contains("save-icon")) {
-      handleSaveClick(target);
-    } else if (target.classList.contains("delete-icon")) {
-      handleDeleteClick(target, ticketID);
-    }
-  });
-}
+// function handleSubtaskClickEvents(ticketID, overlay) {
+//   overlay.addEventListener("click", (event) => {
+//     const target = event.target;
+//     if (target.classList.contains("edit-icon")) {
+//       handleEditClick(target);
+//     } else if (target.classList.contains("save-icon")) {
+//       handleSaveClick(target);
+//     } else if (target.classList.contains("delete-icon")) {
+//       handleDeleteClick(target, ticketID);
+//     }
+//   });
+// }
 
 /**
  * Handles the edit click event for a subtask.
@@ -447,18 +448,42 @@ function handleEditClick(target) {
  * @param {HTMLElement} target - The target element that triggered the event.
  * @param {string} ticketID - The ID of the ticket containing the subtask.
  */
-function handleDeleteClick(target, ticketID) {
-  console.log("hallo delete wurde geklickt");
+//! Nur zur Sicherheit drin behalten während des Umbaus
+// function handleDeleteClick(target, ticketID) {
+//   console.log("hallo delete wurde geklickt");
 
+//   const subtaskItem = target.closest(".subtask-item");
+//   const targetID = subtaskItem.id;
+//   let subId = targetID.split("_")[1];
+//   const numericID = parseInt(subId, 10);
+
+//   subtaskItem.remove(ticketID);
+//   localStorage.removeItem(subId);
+//   deleteArrayEntry(numericID);
+//   localStorage.removeItem(ticketID);
+//   if (subtasksArray.length < 4) {
+//     enableInputAndButton();
+//   }
+// }
+
+function handleDeleteClick(event, ticketID) {
+  const target = event.target;
   const subtaskItem = target.closest(".subtask-item");
+  if (!subtaskItem) {
+    console.error("The subtask item could not be found");
+    return;
+  }
+  console.log(ticketID);
+
   const targetID = subtaskItem.id;
   let subId = targetID.split("_")[1];
   const numericID = parseInt(subId, 10);
-
-  subtaskItem.remove(ticketID);
-  localStorage.removeItem(subId);
-  deleteArrayEntry(numericID);
-  localStorage.removeItem(ticketID);
+  subtaskItem.remove();
+  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  const taskIndex = tasks.findIndex((task) => task.id === ticketID);
+  const task = tasks[taskIndex];
+  task.subtasks = task.subtasks.filter((subtask) => parseInt(subtask.id, 10) !== numericID);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
   if (subtasksArray.length < 4) {
     enableInputAndButton();
   }

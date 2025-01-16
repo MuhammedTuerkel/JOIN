@@ -243,7 +243,7 @@ function pushEditSubtasksArray(ticketID) {
       status: "open",
     });
     newSubtask.value = "";
-    renderSubtaskList();
+    renderSubtaskList(ticketID);
     if (subtasksArray.length >= 4) {
       disableInputAndButton();
     }

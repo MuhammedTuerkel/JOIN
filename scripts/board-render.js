@@ -231,6 +231,7 @@ function renderSubtasksEditOverlay(ticketID) {
   subtasksArray = allSubtasks;
   let targetElement = document.getElementById("subtasksList");
   targetElement.innerHTML = "";
+  console.log("renderSubtasksEditOverlay:", ticketID);
   if (allSubtasks.length >= 4) {
     disableInputAndButton();
   }
@@ -241,7 +242,7 @@ function renderSubtasksEditOverlay(ticketID) {
   allSubtasks.forEach((subtask) => {
     let subtaskContent = subtask.content;
     let subtaskID = subtask.id;
-    targetElement.innerHTML += renderSubtaskItem(subtaskID, subtaskContent);
+    targetElement.innerHTML += renderSubtaskItem(subtaskID, subtaskContent, ticketID);
   });
 }
 
