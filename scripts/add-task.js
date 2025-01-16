@@ -64,7 +64,6 @@ function postTask(path = "", data = {}) {
   let tasks = JSON.parse(localStorage.getItem(path)) || [];
   tasks.push(data);
   localStorage.setItem(path, JSON.stringify(tasks));
-  window.tasks.push(data);
 }
 
 /**
@@ -372,28 +371,36 @@ function handleEditClick(target) {
 }
 
 function handleDeleteClick(event, ticketID, index) {
-  const target = event.target;
-  const subtaskItem = target.closest(".subtask-item");
-  if (!subtaskItem) {
-    return;
-  }
-  const targetID = subtaskItem.id;
-  let subId = targetID.split("_")[1];
-  const numericID = parseInt(subId, 10);
-  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  const taskIndex = tasks.findIndex((task) => task.id === ticketID);
-  if (taskIndex === -1) {
-    return;
-  }
-  const task = tasks[taskIndex];
-  if (!task.subtasks || task.subtasks.length === 0) {
-    return;
-  }
-  task.subtasks = task.subtasks.filter((subtask) => parseInt(subtask.id, 10) !== numericID);
-  subtaskItem.remove();
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-  subtasksArray = task.subtasks;
-  if (subtasksArray.length < 4) {
-    enableInputAndButton();
+  if (ticketID === "undefined") {
+    const target = event.target;
+    const subtaskItem = target.closest(".subtask-item");
+    subtaskItem.remove();
+    subtasksArray.splice(index, 1);
+    console.log(subtasksArray);
+  } else {
+    const target = event.target;
+    const subtaskItem = target.closest(".subtask-item");
+    if (!subtaskItem) {
+      return;
+    }
+    const targetID = subtaskItem.id;
+    let subId = targetID.split("_")[1];
+    const numericID = parseInt(subId, 10);
+    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    const taskIndex = tasks.findIndex((task) => task.id === ticketID);
+    if (taskIndex === -1) {
+      return;
+    }
+    const task = tasks[taskIndex];
+    if (!task.subtasks || task.subtasks.length === 0) {
+      return;
+    }
+    task.subtasks = task.subtasks.filter((subtask) => parseInt(subtask.id, 10) !== numericID);
+    subtaskItem.remove();
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    subtasksArray = task.subtasks;
+    if (subtasksArray.length < 4) {
+      enableInputAndButton();
+    }
   }
 }
