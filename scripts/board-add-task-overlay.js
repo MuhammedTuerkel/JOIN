@@ -229,7 +229,7 @@ function editedTaskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskSu
  * Puts the ticket subtasks into the subtasksArray inclusive new subtasks and updates the UI accordingly
  * @param {string} ticketID
  */
-function pushEditSubtasksArray(ticketID) {
+function pushEditSubtasksInGlobalArray(ticketID, index) {
   let targetTicket = allTasks.filter((i) => i.id === ticketID);
   subtasksArray = targetTicket[0].subtasks || [];
   if (!targetTicket[0].subtasks) {
@@ -250,6 +250,31 @@ function pushEditSubtasksArray(ticketID) {
   } else if (subtasksArray.length >= 4) {
     disableInputAndButton();
   }
-  document.getElementById("iconsContainer").style.visibility = "hidden";
-  document.getElementById("add-subtask-btn").style.visibility = "visible";
+}
+
+function pushEditSubtasksArray(ticketID) {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  let targetTask = tasks.find((task) => task.id === ticketID);
+  if (!targetTask) {
+    console.error("Task not found");
+    return;
+  }
+  if (!targetTask.subtasks) {
+    targetTask.subtasks = [];
+  }
+  let newSubtask = document.getElementById("task-subtasks");
+  if (targetTask.subtasks.length < 4 && newSubtask.value.trim() !== "") {
+    let newSubtaskObj = {
+      id: targetTask.subtasks.length + 1,
+      content: newSubtask.value.trim(),
+      status: "open",
+    };
+    pushEditSubtasksInGlobalArray(ticketID);
+    targetTask.subtasks.push(newSubtaskObj);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    newSubtask.value = "";
+    renderSubtaskList(ticketID);
+    document.getElementById("iconsContainer").style.visibility = "hidden";
+    document.getElementById("add-subtask-btn").style.visibility = "visible";
+  }
 }

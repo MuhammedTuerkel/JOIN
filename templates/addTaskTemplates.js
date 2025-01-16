@@ -4,7 +4,7 @@
  * @param {string} itemContent
  * @returns a HTML-Element
  */
-function renderSubtaskItem(itemID, itemContent, ticketID) {
+function renderSubtaskItem(itemID, itemContent, ticketID, index) {
   return `<div class="subtask-item" id="subtaskItem_${itemID}">
                 <div class="subtask-content-wrapper">
                     <span class="bullet-point">•</span>
@@ -13,7 +13,7 @@ function renderSubtaskItem(itemID, itemContent, ticketID) {
                 <div class="subtask-actions">
                     <img class="edit-icon" src="./assets/icons/subtask-edit.png" alt="">
                     <span class="divider"></span>
-                    <img class="delete-icon" onclick="handleDeleteClick(event, '${ticketID}')" src="./assets/icons/subtask-delete.png" alt="">
+                    <img class="delete-icon" onclick="handleDeleteClick(event, '${ticketID}', '${index}')" src="./assets/icons/subtask-delete.png" alt="">
                 </div>
             </div>`;
 }

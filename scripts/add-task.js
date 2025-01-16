@@ -192,31 +192,19 @@ function enableInputAndButton() {
 function renderSubtaskList(ticketID) {
   let target = document.getElementById("subtasksList");
   target.innerHTML = "";
+  localStorage.getItem("subtasks");
   for (let i = 0; i < subtasksArray.length; i++) {
     if (subtasksArray.length == 0) {
       break;
     } else {
       let itemID = subtasksArray[i].id;
       let itemContent = subtasksArray[i].content;
-      target.innerHTML += renderSubtaskItem(itemID, itemContent, ticketID);
+      target.innerHTML += renderSubtaskItem(itemID, itemContent, ticketID, i);
       console.log("renderSubtaskList:", ticketID);
+      console.log("index", i);
     }
   }
 }
-
-// /**
-//  * Handles click events on subtask action icons.
-//  */
-// document.addEventListener("click", (event, ticketID) => {
-//   const target = event.target;
-//   if (target.classList.contains("edit-icon")) {
-//     handleEditClick(target);
-//   } else if (target.classList.contains("save-icon")) {
-//     handleSaveClick(target);
-//   } else if (target.classList.contains("delete-icon")) {
-//     handleDeleteClick(target, ticketID);
-//   }
-// });
 
 /**
  * Handles the edit click event for a subtask.
@@ -231,33 +219,6 @@ function renderSubtaskList(ticketID) {
 //   const inputContainer = document.createElement("div");
 //   inputContainer.classList.add("input-container");
 //   const input = createInputField(contentSpan.textContent);
-//   const deleteIcon = createIcon("delete-icon", "./assets/icons/subtask-delete.png");
-//   const saveIcon = createIcon("save-icon", "./assets/icons/subtask-save.png");
-//   inputContainer.appendChild(input);
-//   inputContainer.appendChild(deleteIcon);
-//   inputContainer.appendChild(saveIcon);
-//   contentWrapper.innerHTML = "";
-//   contentWrapper.appendChild(inputContainer);
-//   const actions = subtaskItem.querySelector(".subtask-actions");
-//   actions.style.visibility = "hidden";
-// }
-
-//? War hier noch nicht fertig und musste dann fahren. Kann gerne auch gelöscht werden. Ich glaub da hatte ich einen Denkfehler.
-// function handleEditClick(event, ticketID) {
-//   const target = event.target;
-//   const subtaskItem = target.closest(".subtask-item");
-//   if (!subtaskItem) {
-//     console.error("Subtask item not found");
-//     return;
-//   }
-//   const contentWrapper = subtaskItem.querySelector(".subtask-content-wrapper");
-//   const contentSpan = subtaskItem.querySelector(".subtask-content");
-//   const originalContent = contentSpan.textContent;
-
-//   subtaskItem.classList.add("editing");
-//   const inputContainer = document.createElement("div");
-//   inputContainer.classList.add("input-container");
-//   const input = createInputField(originalContent);
 //   const deleteIcon = createIcon("delete-icon", "./assets/icons/subtask-delete.png");
 //   const saveIcon = createIcon("save-icon", "./assets/icons/subtask-save.png");
 //   inputContainer.appendChild(input);
@@ -354,32 +315,6 @@ function handleCancelClick(target) {
   inputContainer.remove();
 }
 
-// /**
-//  * Handles the delete click event for a subtask.
-//  * @param {HTMLElement} target - The target element that triggered the event.
-//  */
-// function handleDeleteClick(target, ticketID) {
-//   const subtaskItem = target.closest(".subtask-item");
-//   const targetID = subtaskItem.id;
-//   console.log(targetID);
-//   let subId = targetID.split("_");
-//   let subTaskId;
-//   if (subId.length > 1) {
-//     subTaskId = subId[1];
-//   }
-//   console.log(ticketID);
-
-//   const numericID = parseInt(targetID.split("_")[1], 10);
-
-//   subtaskItem.remove();
-//   localStorage.removeItem(subTaskId);
-
-//   deleteArrayEntry(numericID);
-//   if (subtasksArray.length < 4) {
-//     enableInputAndButton();
-//   }
-// }
-
 /**
  * Generates a unique ID based on the current timestamp and random values.
  * @returns {string} - The generated unique ID.
@@ -413,33 +348,6 @@ function checkFormValidity() {
   }
 }
 
-// document.addEventListener("DOMContentLoaded", () => {
-//   const overlay = document.getElementById("overlayID");
-//   if (overlay) {
-//     handleSubtaskClickEvents(ticketID, overlay);
-//   } else {
-//     console.error("Overlay element not found.");
-//   }
-// });
-
-/**
- * Handles click events on subtask action icons within the overlay.
- * @param {string} ticketID - The ID of the ticket containing the subtask.
- * @param {HTMLElement} overlay - The overlay element.
- */
-// function handleSubtaskClickEvents(ticketID, overlay) {
-//   overlay.addEventListener("click", (event) => {
-//     const target = event.target;
-//     if (target.classList.contains("edit-icon")) {
-//       handleEditClick(target);
-//     } else if (target.classList.contains("save-icon")) {
-//       handleSaveClick(target);
-//     } else if (target.classList.contains("delete-icon")) {
-//       handleDeleteClick(target, ticketID);
-//     }
-//   });
-// }
-
 /**
  * Handles the edit click event for a subtask.
  * @param {HTMLElement} target - The target element that triggered the event.
@@ -463,55 +371,28 @@ function handleEditClick(target) {
   actions.style.visibility = "hidden";
 }
 
-// /**
-//  * Handles the save click event for a subtask.
-//  * @param {HTMLElement} target - The target element that triggered the event.
-//  */
-// function handleSaveClick(target) {
-//   // Code bleibt gleich
-// }
-
-/**
- * Handles the delete click event for a subtask.
- * @param {HTMLElement} target - The target element that triggered the event.
- * @param {string} ticketID - The ID of the ticket containing the subtask.
- */
-//! Nur zur Sicherheit drin behalten während des Umbaus
-// function handleDeleteClick(target, ticketID) {
-//   console.log("hallo delete wurde geklickt");
-
-//   const subtaskItem = target.closest(".subtask-item");
-//   const targetID = subtaskItem.id;
-//   let subId = targetID.split("_")[1];
-//   const numericID = parseInt(subId, 10);
-
-//   subtaskItem.remove(ticketID);
-//   localStorage.removeItem(subId);
-//   deleteArrayEntry(numericID);
-//   localStorage.removeItem(ticketID);
-//   if (subtasksArray.length < 4) {
-//     enableInputAndButton();
-//   }
-// }
-
-function handleDeleteClick(event, ticketID) {
+function handleDeleteClick(event, ticketID, index) {
   const target = event.target;
   const subtaskItem = target.closest(".subtask-item");
   if (!subtaskItem) {
-    console.error("The subtask item could not be found");
     return;
   }
-  console.log(ticketID);
-
   const targetID = subtaskItem.id;
   let subId = targetID.split("_")[1];
   const numericID = parseInt(subId, 10);
-  subtaskItem.remove();
   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   const taskIndex = tasks.findIndex((task) => task.id === ticketID);
+  if (taskIndex === -1) {
+    return;
+  }
   const task = tasks[taskIndex];
+  if (!task.subtasks || task.subtasks.length === 0) {
+    return;
+  }
   task.subtasks = task.subtasks.filter((subtask) => parseInt(subtask.id, 10) !== numericID);
+  subtaskItem.remove();
   localStorage.setItem("tasks", JSON.stringify(tasks));
+  subtasksArray = task.subtasks;
   if (subtasksArray.length < 4) {
     enableInputAndButton();
   }

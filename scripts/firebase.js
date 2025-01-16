@@ -543,3 +543,38 @@ async function showOverlayTicket(category, ticketTitle, ticketDescription, ticke
   renderSubtasksOverlay(ticketID);
   actualFirebaseID = await findFirebaseIdById(ticketID);
 }
+
+/**
+ * Retrieves all tasks saved in localStorage and assigns responsible contacts to each task.
+ */
+function getAllTasks() {
+  if (!tasks.length) {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    const tasksString = localStorage.getItem("tasks");
+    if (tasksString) {
+      const tasks = JSON.parse(tasksString);
+      allTasks = tasks.map((task, index) => {
+        return { id: index, ...task };
+      });
+    } else {
+      allTasks = [];
+    }
+    return tasks;
+  } else {
+    return;
+  }
+}
+
+/**
+ * Handles click events on subtask action icons.
+ */
+document.addEventListener("click", (event, ticketID) => {
+  const target = event.target;
+  if (target.classList.contains("edit-icon")) {
+    handleEditClick(target);
+  } else if (target.classList.contains("save-icon")) {
+    handleSaveClick(target);
+  } else if (target.classList.contains("delete-icon")) {
+    handleDeleteClick(target, ticketID);
+  }
+});

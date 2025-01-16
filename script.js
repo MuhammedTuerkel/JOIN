@@ -208,20 +208,26 @@ function getLoggedInUserData() {
 }
 
 /**
- * Retrieves all tasks saved in localStorage and assigns responsible contacts to each task.
+ * Checks if tasks exist in localStorage. If not, it pushes the global tasks array to localStorage.
+ * If tasks exist, it does nothing.
  */
 function getAllTasks() {
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-  const tasksString = localStorage.getItem("tasks");
-  if (tasksString) {
-    const tasks = JSON.parse(tasksString);
+  let tasksString = localStorage.getItem("tasks");
+
+  if (!tasksString || JSON.parse(tasksString).length === 0) {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    tasks = JSON.parse(tasksString);
     allTasks = tasks.map((task, index) => {
       return { id: index, ...task };
     });
   } else {
-    allTasks = [];
+    // If tasks in localStorage exist, retrieve them
+    tasks = JSON.parse(tasksString);
+    allTasks = tasks.map((task, index) => {
+      return { id: index, ...task };
+    });
+    console.log("Tasks have been retrieved from localStorage.");
   }
-  return tasks;
 }
 
 /**
