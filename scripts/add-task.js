@@ -376,7 +376,13 @@ function handleDeleteClick(event, ticketID, index) {
     const subtaskItem = target.closest(".subtask-item");
     subtaskItem.remove();
     subtasksArray.splice(index, 1);
-    console.log(subtasksArray);
+    if (subtasksArray.length < 4) {
+      enableInputAndButton();
+    }
+    if (subtasksArray.length) {
+      subtasksArray = [];
+    }
+    console.log(subtasksArray.length);
   } else {
     const target = event.target;
     const subtaskItem = target.closest(".subtask-item");
