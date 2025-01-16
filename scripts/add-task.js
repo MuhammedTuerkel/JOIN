@@ -222,24 +222,52 @@ function renderSubtaskList(ticketID) {
  * Handles the edit click event for a subtask.
  * @param {HTMLElement} target - The target element that triggered the event.
  */
-function handleEditClick(target) {
-  const subtaskItem = target.closest(".subtask-item");
-  const contentWrapper = subtaskItem.querySelector(".subtask-content-wrapper");
-  const contentSpan = subtaskItem.querySelector(".subtask-content");
-  subtaskItem.classList.add("editing");
-  const inputContainer = document.createElement("div");
-  inputContainer.classList.add("input-container");
-  const input = createInputField(contentSpan.textContent);
-  const deleteIcon = createIcon("delete-icon", "./assets/icons/subtask-delete.png");
-  const saveIcon = createIcon("save-icon", "./assets/icons/subtask-save.png");
-  inputContainer.appendChild(input);
-  inputContainer.appendChild(deleteIcon);
-  inputContainer.appendChild(saveIcon);
-  contentWrapper.innerHTML = "";
-  contentWrapper.appendChild(inputContainer);
-  const actions = subtaskItem.querySelector(".subtask-actions");
-  actions.style.visibility = "hidden";
-}
+//! Nur zur Sicherheit auskommentiert. Kann gelöscht werden, wenn alles klappt.
+// function handleEditClick(target) {
+//   const subtaskItem = target.closest(".subtask-item");
+//   const contentWrapper = subtaskItem.querySelector(".subtask-content-wrapper");
+//   const contentSpan = subtaskItem.querySelector(".subtask-content");
+//   subtaskItem.classList.add("editing");
+//   const inputContainer = document.createElement("div");
+//   inputContainer.classList.add("input-container");
+//   const input = createInputField(contentSpan.textContent);
+//   const deleteIcon = createIcon("delete-icon", "./assets/icons/subtask-delete.png");
+//   const saveIcon = createIcon("save-icon", "./assets/icons/subtask-save.png");
+//   inputContainer.appendChild(input);
+//   inputContainer.appendChild(deleteIcon);
+//   inputContainer.appendChild(saveIcon);
+//   contentWrapper.innerHTML = "";
+//   contentWrapper.appendChild(inputContainer);
+//   const actions = subtaskItem.querySelector(".subtask-actions");
+//   actions.style.visibility = "hidden";
+// }
+
+//? War hier noch nicht fertig und musste dann fahren. Kann gerne auch gelöscht werden. Ich glaub da hatte ich einen Denkfehler.
+// function handleEditClick(event, ticketID) {
+//   const target = event.target;
+//   const subtaskItem = target.closest(".subtask-item");
+//   if (!subtaskItem) {
+//     console.error("Subtask item not found");
+//     return;
+//   }
+//   const contentWrapper = subtaskItem.querySelector(".subtask-content-wrapper");
+//   const contentSpan = subtaskItem.querySelector(".subtask-content");
+//   const originalContent = contentSpan.textContent;
+
+//   subtaskItem.classList.add("editing");
+//   const inputContainer = document.createElement("div");
+//   inputContainer.classList.add("input-container");
+//   const input = createInputField(originalContent);
+//   const deleteIcon = createIcon("delete-icon", "./assets/icons/subtask-delete.png");
+//   const saveIcon = createIcon("save-icon", "./assets/icons/subtask-save.png");
+//   inputContainer.appendChild(input);
+//   inputContainer.appendChild(deleteIcon);
+//   inputContainer.appendChild(saveIcon);
+//   contentWrapper.innerHTML = "";
+//   contentWrapper.appendChild(inputContainer);
+//   const actions = subtaskItem.querySelector(".subtask-actions");
+//   actions.style.visibility = "hidden";
+// }
 
 /**
  * Creates an icon element.
