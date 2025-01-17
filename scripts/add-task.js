@@ -63,7 +63,7 @@ function goBackToAddTask(event) {
 function postTask(path = "", data = {}) {
   let tasks = JSON.parse(localStorage.getItem(path)) || [];
   tasks.push(data);
-  localStorage.setItem(path, JSON.stringify(tasks));
+  localStorage.setItem(path, JSON.stringify());
 }
 
 /**
@@ -80,7 +80,16 @@ function buildTask(state) {
   let taskSubtasks = subtasksArray;
   let taskState = state;
   let taskAssigned = selectedContacts;
-  return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState);
+  return taskToJSON(
+    taskTitle,
+    taskDate,
+    taskPrio,
+    taskDescription,
+    taskCategory,
+    taskSubtasks,
+    taskAssigned,
+    taskState
+  );
 }
 
 /**
@@ -97,7 +106,16 @@ function buildTaskOnBoard(state) {
   let taskSubtasks = subtasksArray;
   let taskState = state;
   let taskAssigned = selectedContacts;
-  return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState);
+  return taskToJSON(
+    taskTitle,
+    taskDate,
+    taskPrio,
+    taskDescription,
+    taskCategory,
+    taskSubtasks,
+    taskAssigned,
+    taskState
+  );
 }
 
 /**
@@ -359,7 +377,10 @@ function handleEditClick(target) {
   const inputContainer = document.createElement("div");
   inputContainer.classList.add("input-container");
   const input = createInputField(contentSpan.textContent);
-  const deleteIcon = createIcon("delete-icon", "./assets/icons/subtask-delete.png");
+  const deleteIcon = createIcon(
+    "delete-icon",
+    "./assets/icons/subtask-delete.png"
+  );
   const saveIcon = createIcon("save-icon", "./assets/icons/subtask-save.png");
   inputContainer.appendChild(input);
   inputContainer.appendChild(deleteIcon);
@@ -379,7 +400,7 @@ function handleDeleteClick(event, ticketID, index) {
     if (subtasksArray.length < 4) {
       enableInputAndButton();
     }
-    if (subtasksArray.length) {
+    if (subtasksArray.length == 1) {
       subtasksArray = [];
     }
     console.log(subtasksArray.length);
@@ -401,7 +422,9 @@ function handleDeleteClick(event, ticketID, index) {
     if (!task.subtasks || task.subtasks.length === 0) {
       return;
     }
-    task.subtasks = task.subtasks.filter((subtask) => parseInt(subtask.id, 10) !== numericID);
+    task.subtasks = task.subtasks.filter(
+      (subtask) => parseInt(subtask.id, 10) !== numericID
+    );
     subtaskItem.remove();
     localStorage.setItem("tasks", JSON.stringify(tasks));
     subtasksArray = task.subtasks;
