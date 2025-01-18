@@ -326,11 +326,14 @@ function getContactsFromLocalStorage() {
 }
 
 /**
- * Deletes a contact from the Contacts array by index and updates the local storage.
+ * Deletes a contact from the local storage by index and updates the tasks.
  * Additionally, updates tasks to remove the deleted contact.
  * @param {number} index - The index of the contact to delete.
  */
 function deleteContactFromLocalStorage(index) {
+  // Holt die Kontakte aus dem localStorage
+  let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
+
   if (index >= 0 && index < contacts.length) {
     const contactToDelete = contacts[index].id; // Annahme: contacts haben einzigartige IDs
     console.log(`Deleting contact at index ${index}:`, contacts[index]);
@@ -338,7 +341,7 @@ function deleteContactFromLocalStorage(index) {
     contacts.splice(index, 1); // Lösche den Kontakt aus dem Array
     console.log("Updated contacts array after deletion:", contacts);
 
-    // Push updated contacts array to local storage
+    // Aktualisiere das localStorage mit dem neuen contacts-Array
     localStorage.setItem("contacts", JSON.stringify(contacts));
 
     // Lade die Tasks und aktualisiere sie
@@ -350,7 +353,7 @@ function deleteContactFromLocalStorage(index) {
       }
     });
 
-    // Push updated tasks array to local storage
+    // Aktualisiere das localStorage mit dem neuen tasks-Array
     localStorage.setItem("tasks", JSON.stringify(tasks));
 
     console.log("Updated tasks array after removing contact:", tasks);
