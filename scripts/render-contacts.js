@@ -43,13 +43,13 @@ function renderContact() {
  * @param {int} i
  */
 function renderContactInformation(i) {
-  if (i >= 0 && i < contacts.length) {
+  if (i >= 0 && i < storedContacts.length) {
     let Badge = generateBadge(i);
     document.getElementById("Profile-Badge1").innerHTML = `${Badge}`;
-    document.getElementById("editdelete-name").innerHTML = `${contacts[i].name}`;
-    document.getElementById("email").innerHTML = `${contacts[i].email}`;
-    document.getElementById("phone").innerHTML = `${contacts[i].phone}`;
-    document.getElementById("badgeBackgroundColor").style.backgroundColor = contacts[i].color;
+    document.getElementById("editdelete-name").innerHTML = `${storedContacts[i].name}`;
+    document.getElementById("email").innerHTML = `${storedContacts[i].email}`;
+    document.getElementById("phone").innerHTML = `${storedContacts[i].phone}`;
+    document.getElementById("badgeBackgroundColor").style.backgroundColor = storedContacts[i].color;
     document.getElementById("editContact").setAttribute(`onclick`, `loadEditContact(event, ${i})`);
     document.getElementById("editContactMobile").setAttribute(`onclick`, `loadEditContact(event, ${i})`);
     document.getElementById("deleteContact").setAttribute(`onclick`, `deleteContact(${i})`);
