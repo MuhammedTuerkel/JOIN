@@ -201,3 +201,17 @@ function saveTaskCloseOverlay(event, state = "toDo") {
     location.reload();
   }, 2500);
 }
+
+function deleteTicket(ticketID) {
+  let allTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  let taskIndex = allTasks.findIndex((task) => task.id === ticketID);
+  if (taskIndex !== -1) {
+    allTasks.splice(taskIndex, 1);
+    localStorage.setItem("tasks", JSON.stringify(allTasks));
+  }
+  renderAllTickets(allTasks);
+  showToast("The ticket was deleted", "alert");
+  setTimeout(() => {
+    toggleOverlay();
+  }, 2500);
+}

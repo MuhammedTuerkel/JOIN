@@ -5,7 +5,6 @@ let i = 0;
  * Is a onload-function it loads the functions that are needed to load at the beginning
  */
 async function Init() {
-  pushContactsToLocalStorage();
   renderContactsListHTML();
 }
 
@@ -117,51 +116,6 @@ function hideEditDeleteMenu(event) {
   document.getElementById("editdelete-menu").classList.remove("animationRightToPosition");
 }
 
-/**
- * Generates the whole alphabet
- * @returns the alphabet
- */
-function generateAlphabet() {
-  let a = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-  return a;
-}
-
-/**
- * Generates the contacts in the contactlist if its finished with the array it goes back to the renderContact function
- * @param {*} a
- * @param {*} i
- * @param {*} Badge
- */
-function generateContactHTML(a, i, Badge) {
-  // Vergewissere dich, dass der Contacts-Array und die benötigten Daten vorhanden sind
-  if (!contacts || contacts.length === 0) {
-    console.warn("Contacts array is undefined or empty");
-    return;
-  }
-
-  const contact = contacts[x];
-  if (!contact || !contact.color || !contact.name || !contact.email) {
-    console.warn(`Invalid contact data at index ${x}`);
-    return;
-  }
-
-  document.getElementById(`${a[i]}`).innerHTML += `
-    <div id="Contact${x}" onclick="loadContact(${x}, event)" class="Contact">
-      <div class="Profile-Badge" style="background-color: ${contact.color};">
-        <h4>${Badge}</h4>
-      </div>
-      <div class="name-email">
-        <h2 id="name${x}">${contact.name}</h2>
-        <h3>${contact.email}</h3>
-      </div>
-    </div>
-  `;
-  x++;
-  if (x < contacts.length) {
-    renderContact(a);
-  }
-}
-
 function generateBadge(x) {
   if (!contacts[x] || !contacts[x].name) {
     console.warn(`Contact with index ${x} not found or name is undefined`);
@@ -192,11 +146,12 @@ function clearEmptyDivs(a) {
  * @param {int} i
  */
 function deleteContact(i) {
-  deleteContactfromFirebase(i);
+  console.log(i);
+
   hideAddNewContact(event);
   hideContactMobile(event);
-  getTheItemstoPushTOFireBase();
-  renderContactsListHTMLAgain();
+  deleteContactFromLocalStorage(i);
+  renderContactsListHTML();
 }
 
 /**
@@ -304,11 +259,7 @@ function animateContactCreated() {
  * Loads and renders the updated contacts list.
  */
 function loadContactsAgain() {
-  if (!contacts || contacts.length === 0) {
-    console.warn("Contacts array is undefined or empty");
-  } else {
-    renderContact();
-  }
+  renderContacts();
 }
 
 /**
