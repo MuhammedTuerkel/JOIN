@@ -170,8 +170,7 @@ function loadSearchedUsers(fiteredContacts) {
  */
 function saveTaskGoToBoard(event, state = "toDo") {
   event.preventDefault();
-  let data = buildTask(state);
-  postTask("tasks", data);
+  postTask(state);
   window.location.href = getBaseWebsideURL() + "/board.html";
 }
 
@@ -181,8 +180,7 @@ function saveTaskGoToBoard(event, state = "toDo") {
  */
 function saveTaskCreateNewTask(event, state = "toDo") {
   event.preventDefault();
-  let data = buildTask(state);
-  postTask("tasks", data);
+  postTask(state);
   document.getElementById("addTaskForm").reset();
   document.getElementById("addTaskOverlayNextStep").style.display = "none";
   document.body.style.overflow = "auto";
@@ -195,8 +193,7 @@ function saveTaskCreateNewTask(event, state = "toDo") {
  */
 function saveTaskCloseOverlay(event, state = "toDo") {
   event.preventDefault();
-  let data = buildTaskOnBoard(state);
-  postTask("tasks", data);
+  postTask(state);
   addTaskClearTask();
   showToast("The ticket was created successfully", "success");
   setTimeout(() => {
