@@ -203,21 +203,11 @@ function saveTaskCloseOverlay(event, state = "toDo") {
 }
 
 function deleteTicket(ticketID) {
-  // Alle Tasks aus dem localStorage holen
   let allTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
-  // Den Index des Tasks mit der entsprechenden ID finden
   let taskIndex = allTasks.findIndex((task) => task.id === ticketID);
-
-  // Prüfen, ob der Task existiert, und ihn löschen
   if (taskIndex !== -1) {
-    allTasks.splice(taskIndex, 1); // Task aus dem Array entfernen
-
-    // Den aktualisierten Task-Array zurück in den localStorage speichern
+    allTasks.splice(taskIndex, 1);
     localStorage.setItem("tasks", JSON.stringify(allTasks));
-    console.log(`Task ${ticketID} gelöscht und localStorage aktualisiert.`);
-  } else {
-    console.log(`Task mit ID ${ticketID} nicht gefunden.`);
   }
   renderAllTickets(allTasks);
   showToast("The ticket was deleted", "alert");

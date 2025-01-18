@@ -133,7 +133,6 @@ function generateAlphabet() {
  * @param {*} Badge
  */
 function generateContactHTML(a, i, Badge) {
-  // Vergewissere dich, dass der Contacts-Array und die benötigten Daten vorhanden sind
   if (!contacts || contacts.length === 0) {
     console.warn("Contacts array is undefined or empty");
     return;
@@ -192,11 +191,10 @@ function clearEmptyDivs(a) {
  * @param {int} i
  */
 function deleteContact(i) {
-  deleteContactfromFirebase(i);
   hideAddNewContact(event);
   hideContactMobile(event);
-  getTheItemstoPushTOFireBase();
   renderContactsListHTMLAgain();
+  deleteContactFromLocalStorage(i);
 }
 
 /**
