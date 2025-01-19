@@ -15,5 +15,5 @@ function showToast(message, status) {
   container.appendChild(toast);
   setTimeout(() => {
     toast.remove();
-  }, 3000);
+  }, 700);
 }

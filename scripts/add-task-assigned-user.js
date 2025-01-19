@@ -199,7 +199,7 @@ function saveTaskCloseOverlay(event, state = "toDo") {
   setTimeout(() => {
     toggleOverlay();
     location.reload();
-  }, 2500);
+  }, 400);
 }
 
 function deleteTicket(ticketID) {
@@ -213,7 +213,7 @@ function deleteTicket(ticketID) {
   showToast("The ticket was deleted", "alert");
   setTimeout(() => {
     toggleOverlay();
-  }, 2500);
+  }, 500);
 }
 
 /**

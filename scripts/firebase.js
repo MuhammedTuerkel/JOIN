@@ -650,3 +650,22 @@ function getNumericID(subtaskItem) {
 function reindexSubtasks() {
   subtasksArray.forEach((subtask, i) => (subtask.id = i + 1));
 }
+
+/**
+ * Deletes a subtask from the task's subtasks array in local storage.
+ * @param {HTMLElement} subtaskItem - The subtask item to delete.
+ * @param {string} ticketID - The ID of the task the subtask belongs to.
+ */
+function deleteSubtaskFromStorage(subtaskItem, ticketID) {
+  if (!subtaskItem) return;
+  const numericID = getNumericID(subtaskItem);
+  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  const task = tasks.find((task) => task.id === ticketID);
+  if (!task || !task.subtasks) return;
+  task.subtasks = task.subtasks.filter((subtask) => parseInt(subtask.id, 10) !== numericID);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  subtasksArray = task.subtasks;
+  reindexSubtasks();
+  subtaskItem.remove();
+  if (subtasksArray.length < 4) enableInputAndButton();
+}
