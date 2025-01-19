@@ -33,8 +33,6 @@ function generateAlphabet() {
 function renderContacts() {
   let alphabet = generateAlphabet();
   let storedContacts = JSON.parse(localStorage.getItem("contacts")) || [];
-  console.log(storedContacts);
-
   if (storedContacts.length === 0) {
     clearEmptyDivs(alphabet);
   } else {

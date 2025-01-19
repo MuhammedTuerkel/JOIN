@@ -146,8 +146,6 @@ function clearEmptyDivs(a) {
  * @param {int} i
  */
 function deleteContact(i) {
-  console.log(i);
-
   hideAddNewContact(event);
   hideContactMobile(event);
   deleteContactFromLocalStorage(i);
