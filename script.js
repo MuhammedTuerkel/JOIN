@@ -303,7 +303,6 @@ function checkOrientation() {
 function pushContactsToLocalStorage() {
   try {
     localStorage.setItem("contacts", JSON.stringify(contacts));
-    console.log("contacts array has been updated in Local Storage:", contacts);
   } catch (error) {
     console.error("Error saving contacts to Local Storage:", error);
   }
@@ -326,38 +325,22 @@ function getContactsFromLocalStorage() {
 }
 
 /**
- * Deletes a contact from the local storage by index and updates the tasks.
- * Additionally, updates tasks to remove the deleted contact.
+ * Deletes a contact from the local storage by index and updates tasks to remove the deleted contact.
  * @param {number} index - The index of the contact to delete.
  */
 function deleteContactFromLocalStorage(index) {
-  // Holt die Kontakte aus dem localStorage
   let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
-
   if (index >= 0 && index < contacts.length) {
-    const contactToDelete = contacts[index].id; // Annahme: contacts haben einzigartige IDs
-    console.log(`Deleting contact at index ${index}:`, contacts[index]);
-
-    contacts.splice(index, 1); // Lösche den Kontakt aus dem Array
-    console.log("Updated contacts array after deletion:", contacts);
-
-    // Aktualisiere das localStorage mit dem neuen contacts-Array
+    const contactToDelete = contacts[index].id;
+    contacts.splice(index, 1);
     localStorage.setItem("contacts", JSON.stringify(contacts));
-
-    // Lade die Tasks und aktualisiere sie
     let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
     tasks.forEach((task) => {
-      if (task.assigned) {
-        task.assigned = task.assigned.filter((assignedUser) => assignedUser !== contactToDelete);
+      if (task.assigned_to) {
+        task.assigned_to = task.assigned_to.filter((assignedUser) => assignedUser.id !== contactToDelete);
       }
     });
-
-    // Aktualisiere das localStorage mit dem neuen tasks-Array
     localStorage.setItem("tasks", JSON.stringify(tasks));
-
-    console.log("Updated tasks array after removing contact:", tasks);
-
     loadContactsAgain();
   } else {
     console.warn(`Invalid index: ${index}`);
