@@ -85,6 +85,7 @@ function goBackToAddTask(event) {
 //   }
 //   return result;
 // }
+
 /**
  * Posts a task to the local storage.
  * Combines buildTask and postTask into a single function call.
@@ -107,7 +108,6 @@ function postTask(state, path = "tasks") {
  * @returns {Object} - The task object in JSON format.
  */
 function buildTask(state) {
-  let id = generateTaskID();
   let taskTitle = document.getElementById("task-title").value;
   let taskDate = document.getElementById("task-due-date").value;
   let taskPrio = selectedPrio;
@@ -116,7 +116,7 @@ function buildTask(state) {
   let taskSubtasks = subtasksArray;
   let taskState = state;
   let taskAssigned = selectedContacts;
-  return taskToJSON(id, taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState);
+  return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState);
 }
 
 /**
@@ -134,33 +134,6 @@ function generateTaskID() {
     result += numbers.charAt(Math.floor(Math.random() * numbers.length));
   }
   return result;
-}
-
-/**
- * Converts task details into JSON format.
- * @param {string} id - The task ID.
- * @param {string} title - The task title.
- * @param {string} date - The task due date.
- * @param {string} prio - The task priority.
- * @param {string} description - The task description.
- * @param {string} category - The task category.
- * @param {Array} subtasks - The task subtasks.
- * @param {Array} assigned - The contacts assigned to the task.
- * @param {string} state - The state of the task.
- * @returns {Object} - The task object in JSON format.
- */
-function taskToJSON(id, title, date, prio, description, category, subtasks, assigned, state) {
-  return {
-    id: id,
-    title: title,
-    due_date: date,
-    prio: prio,
-    description: description,
-    category: category,
-    subtasks: subtasks,
-    assigned_to: assigned,
-    state: state,
-  };
 }
 
 /**

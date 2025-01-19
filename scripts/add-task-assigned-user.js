@@ -41,17 +41,19 @@ function handleDropdownBodyClick() {
   }
 }
 
-/** updatet
+/**
  * Loads the users into the dropdown container.
  * Updates the dropdown selections based on previously selected users.
  */
 function loadUserInAssignedToDropdown() {
   let dropdownContainer = document.getElementById("addTaskDropdown");
   dropdownContainer.innerHTML = "";
-  for (let index = 0; index < contacts.length; index++) {
-    let contact = contacts[index];
+  let storedContacts = JSON.parse(localStorage.getItem("contacts")) || [];
+  for (let index = 0; index < storedContacts.length; index++) {
+    let contact = storedContacts[index];
     dropdownContainer.innerHTML += createUserTemplate(contact);
   }
+
   updateDropdownSelections();
 }
 
@@ -82,8 +84,9 @@ function assignedUserDropDown(email) {
   template.classList.add("user_template_selected");
   checkedImg.src = "./assets/img/checked button.png";
   checkbox.checked = true;
+  let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
   let contact = contacts.find((contact) => contact.email === email);
-  if (!selectedContacts.some((selectedContact) => selectedContact.email === contact.email)) {
+  if (contact && !selectedContacts.some((selectedContact) => selectedContact.email === contact.email)) {
     selectedContacts.push(contact);
   }
   updateSelectedUsersContainer();
@@ -101,6 +104,7 @@ function notAssignedUser(email) {
   template.classList.add("user_template_not_selected");
   checkedImg.src = "./assets/img/check button.png";
   checkbox.checked = false;
+  let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
   selectedContacts = selectedContacts.filter((contact) => contact.email !== email);
   updateSelectedUsersContainer();
 }
@@ -126,13 +130,14 @@ function updateDropdownSelections() {
  * Updates the container with the selected users' initials.
  */
 function updateSelectedUsersContainer() {
+  console.log(selectedContacts);
   let container = document.getElementById("selectedUsers");
   container.innerHTML = "";
   for (let index = 0; index < selectedContacts.length; index++) {
-    let contact = selectedContacts[index];
-    let initials = contact.name.charAt(0).toUpperCase() + contact.name.charAt(contact.name.length - 1).toUpperCase();
+    let user = selectedContacts[index];
+    let initials = user.name.charAt(0).toUpperCase() + user.name.charAt(user.name.length - 1).toUpperCase();
     container.innerHTML += `
-            <div class="selected_user_circle" style="background-color: ${contact.color};">
+            <div class="selected_user_circle" style="background-color: ${user.color};">
                 ${initials}
             </div>
         `;

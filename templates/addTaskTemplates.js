@@ -77,7 +77,7 @@ function cancelSubtaskItem(text) {
  */
 function taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState, taskCreator) {
   return {
-    id: generateUniqueID(),
+    id: generateTaskID(),
     title: taskTitle,
     due_date: taskDate,
     prio: taskPrio,
