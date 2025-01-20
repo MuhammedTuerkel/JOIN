@@ -43,8 +43,8 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  height: 80vh;
   overflow: scroll;
+  height: calc(100vh - 204px);
 }
 
 .lettersbox {
@@ -108,6 +108,9 @@
   font-size: 16px;
   color: #007cee;
   font-weight: 400;
+}
+.website-body {
+  height: 100vh;
 }
 
 .ContactsList::-webkit-scrollbar {
@@ -309,6 +312,10 @@
   overflow-x: hidden;
 }
 
+.over-hidden {
+  overflow: hidden;
+}
+
 @keyframes run {
   0% {
     transform: translateX(1000px);
@@ -462,6 +469,11 @@
   background-repeat: no-repeat;
   background-position: right;
   background-position-x: 380px;
+}
+
+#input-phone::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .cancel-create {
@@ -1010,6 +1022,20 @@
   }
 }
 
+@media (max-width: 830px) {
+  .website-body {
+    height: calc(100vh - 80px);
+  }
+
+  .Contacts {
+    height: calc(100vh - 160px);
+  }
+
+  .ContactsList {
+    height: calc(100vh - 250px);
+  }
+}
+
 @media (max-width: 600px) {
   .Contact {
     width: 100%;
@@ -1017,6 +1043,18 @@
 }
 
 @media (max-width: 530px) {
+  .addNewContact {
+    height: 600px;
+  }
+
+  .ContactsList {
+    height: calc(100vh - 180px);
+  }
+
+  .headline-addContact {
+    height: 280px;
+  }
+
   .Contacts {
     padding: 10px;
   }
@@ -1027,10 +1065,12 @@
 
   .addContactProfilePicture {
     left: 135px;
+    top: 220px;
   }
 
   .addContactInput {
     left: 15px;
+    top: 355px;
   }
 
   .Create {
@@ -1046,6 +1086,7 @@
   .cancel-create {
     height: 51px;
     left: 25px;
+    top: 530px;
   }
 
   .close {
@@ -1062,10 +1103,6 @@
 
   .edit-delete {
     display: none;
-  }
-
-  .ContactsList {
-    height: 81vh;
   }
 }
 
@@ -1093,11 +1130,9 @@
   }
 
   .cancel-create {
-    flex-direction: column;
     align-items: center;
     gap: 10px;
-    left: -13px;
-    top: 630px;
+    left: -20px;
   }
 
   .close {

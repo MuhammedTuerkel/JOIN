@@ -23,7 +23,8 @@
     <script src="scripts/login.js"></script>
 </head>
 
-<body onclick="hideSubMenu(), hideAddNewContact(event), hideEditDeleteMenu(event)" onload="sideNavigation(),Init()">
+<body id="body" onclick="hideSubMenu(), hideAddNewContact(event), hideEditDeleteMenu(event)"
+    onload="sideNavigation(),Init()">
     <div class="side-navigation">
         <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
         <div class="menu">
@@ -171,21 +172,24 @@
                 <div onclick="hideAddNewContact(event)" class="close"> </div>
                 <div id="addContactProfilePicture" class="addContactProfilePicture">
                 </div>
-                <div class="addContactInput">
-                    <input class="margin_null" id="input-name" type="text" placeholder="Name" required>
-                    <input id="input-email" type="email" placeholder="Email" required>
-                    <input id="input-phone" type="number" placeholder="Phone" required>
-                </div>
-                <div id="cancelCreate" style="display: none;" class="cancel-create">
+                <form id="form">
+                    <div class="addContactInput">
+                        <input class="margin_null" id="input-name" type="text" placeholder="Name" required>
+                        <input id="input-email" type="email" placeholder="Email" required>
+                        <input id="input-phone" type="number" placeholder="Phone" required>
 
-                    <div onclick="hideAddNewContact(event)" class="Cancel">
-                        <h3>Cancel</h3>
                     </div>
-                    <div onclick="createNewContact(event)" class="Create">
-                        <h3>Create contact</h3>
-                        <img src="./assets/img/check.png" alt="">
+                    <div id="cancelCreate" style="display: none;" class="cancel-create">
+
+                        <div onclick="hideAddNewContact(event)" class="Cancel">
+                            <h3>Cancel</h3>
+                        </div>
+                        <button type="submit" class="Create">
+                            <h3>Create contact</h3>
+                            <img src="./assets/img/check.png" alt="">
+                        </button>
                     </div>
-                </div>
+                </form>
                 <div id="deleteSave" class="cancel-create">
                     <div id="DeleteEditContact" class="Cancel DeleteEditContact">
                         <h3>Delete</h3>
