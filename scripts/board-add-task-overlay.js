@@ -269,23 +269,6 @@ function renderEditSubtaskList(ticketID) {
   }
 }
 
-// /**
-//  * Deletes an editable subtask from local storage and updates the tasks array.
-//  * @param {HTMLElement} subtaskItem - The subtask item to delete.
-//  * @param {string} ticketID - The ID of the task the subtask belongs to.
-//  * @param {number} index - The index of the subtask to delete.
-//  */
-// function deleteEditSubtaskFromStorage(subtaskItem, ticketID, index) {
-//   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-//   let task = tasks.find((t) => t.id === ticketID);
-//   if (task && task.subtasks) {
-//     task.subtasks.splice(index, 1);
-//     localStorage.setItem("tasks", JSON.stringify(tasks));
-//     subtasksArray = task.subtasks;
-//   }
-//   if (subtasksArray.length < 4) enableInputAndButton();
-// }
-
 /**
  * Gets the numeric ID from a subtask ID string.
  * @param {string} id - The subtask ID.
