@@ -3,7 +3,6 @@ let selectedUsersOnBoard = [];
 /**
  * Handles the click event for the dropdown.
  * Opens the dropdown container and updates the dropdown arrow.
- *
  * @param {Event} event - The event object.
  */
 function openDropdown(event) {
@@ -11,7 +10,6 @@ function openDropdown(event) {
   document.getElementById("assigned").classList.add("add_task_dropdown_active");
   let dropdownContainer = document.getElementById("addTaskDropdown");
   let dropdownImage = document.getElementById("dropDownArrow");
-
   if (dropdownContainer.classList.contains("open")) {
     closeDropdown();
   } else {
@@ -52,11 +50,12 @@ function handleDropdownBodyClick() {
 function loadUserInAssignedToDropdown() {
   let dropdownContainer = document.getElementById("addTaskDropdown");
   dropdownContainer.innerHTML = "";
-
-  for (let index = 0; index < users.length; index++) {
-    let user = users[index];
-    dropdownContainer.innerHTML += createUserTemplate(user);
+  let storedContacts = JSON.parse(localStorage.getItem("contacts")) || [];
+  for (let index = 0; index < storedContacts.length; index++) {
+    let contact = storedContacts[index];
+    dropdownContainer.innerHTML += createUserTemplate(contact);
   }
+
   updateDropdownSelections();
 }
 
@@ -138,19 +137,23 @@ function updateDropdownSelections() {
 
 /**
  * Updates the container with the selected users' initials.
+ * @param {string} ticketID - The ID of the task.
  */
-function updateSelectedUsersContainer() {
+function updateEditSelectedUsersContainer(ticketID) {
   let container = document.getElementById("selectedUsers");
   container.innerHTML = "";
-
-  for (let index = 0; index < selectedUsersOnBoard.length; index++) {
-    let user = selectedUsersOnBoard[index];
-    let initials = user.name.charAt(0).toUpperCase() + user.name.charAt(user.name.length - 1).toUpperCase();
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  let task = tasks.find((task) => task.id === ticketID);
+  if (!task) return;
+  let assignedContacts = task.assigned_to || [];
+  for (let index = 0; index < assignedContacts.length; index++) {
+    let contact = assignedContacts[index];
+    let initials = contact.name.charAt(0).toUpperCase() + contact.name.charAt(contact.name.length - 1).toUpperCase();
     container.innerHTML += `
-            <div class="selected_user_circle" style="background-color: ${user.color};">
-                ${initials}
-            </div>
-        `;
+      <div class="selected_user_circle" style="background-color: ${contact.color};">
+        ${initials}
+      </div>
+    `;
   }
 }
 

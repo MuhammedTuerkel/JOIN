@@ -132,37 +132,62 @@ function activateButton(buttonId, svgId, buttonClass, svgClass) {
 }
 
 /**
- * Gets the new variables content and saves it to localStorage while accordingly updating the board UI
- * @param {string} ticketID
+ * Saves the edited task details and updates the local storage.
+ * @param {string} ticketID - The ID of the task to update.
  */
 function saveEditOnClick(ticketID) {
-  let newTitle = document.getElementById("task-title-overlay-edit").value;
-  let newDescription = document.getElementById("task-description-overlay-edit").value;
-  let newDueDate = document.getElementById("task-due-date-overlay-edit").value;
-  let newPrio = editedPrio;
-  let newAssignedUsers = selectedUsers;
-  let newSubtasks = subtasksArray;
+  const updatedTask = getUpdatedTaskDetails();
+  const taskIndex = allTasks.findIndex((task) => task.id === ticketID);
 
-  let taskIndex = allTasks.findIndex((task) => task.id === ticketID);
   if (taskIndex !== -1) {
-    allTasks[taskIndex] = {
-      ...allTasks[taskIndex],
-      title: newTitle,
-      description: newDescription,
-      due_date: newDueDate,
-      prio: newPrio,
-      assigned_to: newAssignedUsers,
-      subtasks: newSubtasks,
-    };
-    localStorage.setItem("tasks", JSON.stringify(allTasks));
-    showToast("The ticket was edited successfully", "success");
-    setTimeout(() => {
-      toggleOverlay();
-      renderAllTickets(allTasks);
-    }, 2500);
+    updateTaskInAllTasks(taskIndex, updatedTask);
+    updateTasksInLocalStorage();
+    handleSuccessfulEdit();
   } else {
     console.error("Task not found in allTasks array");
   }
+}
+
+/**
+ * Retrieves the updated task details from the edit form.
+ * @returns {Object} The updated task details.
+ */
+function getUpdatedTaskDetails() {
+  return {
+    title: document.getElementById("task-title-overlay-edit").value,
+    description: document.getElementById("task-description-overlay-edit").value,
+    due_date: document.getElementById("task-due-date-overlay-edit").value,
+    prio: editedPrio,
+    assigned_to: selectedUsers,
+    subtasks: subtasksArray,
+  };
+}
+
+/**
+ * Updates the task in the allTasks array.
+ * @param {number} index - The index of the task to update.
+ * @param {Object} updatedTask - The updated task details.
+ */
+function updateTaskInAllTasks(index, updatedTask) {
+  allTasks[index] = { ...allTasks[index], ...updatedTask };
+}
+
+/**
+ * Updates the tasks array in local storage.
+ */
+function updateTasksInLocalStorage() {
+  localStorage.setItem("tasks", JSON.stringify(allTasks));
+}
+
+/**
+ * Handles the successful edit process by showing a toast and updating the UI.
+ */
+function handleSuccessfulEdit() {
+  showToast("The ticket was edited successfully", "success");
+  setTimeout(() => {
+    toggleOverlay();
+    renderAllTickets(allTasks);
+  }, 2500);
 }
 
 /**
@@ -226,55 +251,149 @@ function editedTaskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskSu
 }
 
 /**
- * Puts the ticket subtasks into the subtasksArray inclusive new subtasks and updates the UI accordingly
- * @param {string} ticketID
+ * Renders the list of editable subtasks for a specific task.
+ * @param {string} ticketID - The ID of the task for which to render the subtasks.
  */
-function pushEditSubtasksInGlobalArray(ticketID, index) {
-  let targetTicket = allTasks.filter((i) => i.id === ticketID);
-  subtasksArray = targetTicket[0].subtasks || [];
-  if (!targetTicket[0].subtasks) {
-    targetTicket[0].subtasks = subtasksArray;
-  }
-  let newSubtask = document.getElementById("task-subtasks");
-  if (subtasksArray.length < 4 && newSubtask.value != "") {
-    subtasksArray.push({
-      id: subtasksArray.length + 1,
-      content: newSubtask.value,
-      status: "open",
-    });
-    newSubtask.value = "";
-    renderSubtaskList(ticketID);
-    if (subtasksArray.length >= 4) {
-      disableInputAndButton();
+function renderEditSubtaskList(ticketID) {
+  let target = document.getElementById("subtasksList");
+  target.innerHTML = "";
+  localStorage.getItem("subtasks");
+  for (let i = 0; i < subtasksArray.length; i++) {
+    if (subtasksArray.length == 0) {
+      break;
+    } else {
+      let itemID = subtasksArray[i].id;
+      let itemContent = subtasksArray[i].content;
+      target.innerHTML += renderEditSubtaskItem(itemID, itemContent, ticketID, i);
     }
-  } else if (subtasksArray.length >= 4) {
-    disableInputAndButton();
   }
 }
 
-function pushEditSubtasksArray(ticketID) {
+/**
+ * Deletes an editable subtask from local storage and updates the tasks array.
+ * @param {HTMLElement} subtaskItem - The subtask item to delete.
+ * @param {string} ticketID - The ID of the task the subtask belongs to.
+ * @param {number} index - The index of the subtask to delete.
+ */
+function deleteEditSubtaskFromStorage(subtaskItem, ticketID, index) {
   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  let targetTask = tasks.find((task) => task.id === ticketID);
-  if (!targetTask) {
-    console.error("Task not found");
+  let task = tasks.find((t) => t.id === ticketID);
+  if (task && task.subtasks) {
+    task.subtasks.splice(index, 1);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    subtasksArray = task.subtasks;
+  }
+  if (subtasksArray.length < 4) enableInputAndButton();
+}
+
+/**
+ * Gets the numeric ID from a subtask ID string.
+ * @param {string} id - The subtask ID.
+ * @returns {string} The numeric ID.
+ */
+function getEditNumericID(id) {
+  return id;
+}
+
+/**
+ * Reindexes the subtasks array and updates their IDs.
+ */
+function reindexEditSubtasks() {
+  subtasksArray.forEach((subtask, i) => {
+    subtask.id = `subtask_${i + 1}`;
+  });
+}
+
+/**
+ * Retrieves the closest subtask item element from the event target.
+ * @param {Event} event - The event object.
+ * @returns {HTMLElement} The closest subtask item element.
+ */
+function getClosestEditSubtaskItem(event) {
+  return event.target.closest(".subtask-item");
+}
+
+/**
+ * Handles the delete click event for an editable subtask.
+ * @param {Event} event - The event object.
+ * @param {string} ticketID - The ID of the task the subtask belongs to.
+ */
+function handleDeleteEditClick(event, ticketID) {
+  const subtaskItem = getClosestEditSubtaskItem(event);
+  if (!subtaskItem) {
+    console.error("Subtask item not found");
     return;
   }
-  if (!targetTask.subtasks) {
-    targetTask.subtasks = [];
+  const index = Array.from(subtaskItem.parentElement.children).indexOf(subtaskItem);
+  if (ticketID === undefined) {
+    deleteEditSubtaskLocally(subtaskItem, index);
+  } else {
+    deleteEditSubtaskFromStorage(subtaskItem, ticketID, index);
   }
-  let newSubtask = document.getElementById("task-subtasks");
-  if (targetTask.subtasks.length < 4 && newSubtask.value.trim() !== "") {
-    let newSubtaskObj = {
-      id: targetTask.subtasks.length + 1,
-      content: newSubtask.value.trim(),
-      status: "open",
-    };
-    pushEditSubtasksInGlobalArray(ticketID);
-    targetTask.subtasks.push(newSubtaskObj);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    newSubtask.value = "";
-    renderSubtaskList(ticketID);
-    document.getElementById("iconsContainer").style.visibility = "hidden";
-    document.getElementById("add-subtask-btn").style.visibility = "visible";
+  renderEditSubtaskList(ticketID);
+}
+
+/**
+ * Deletes an editable subtask locally and updates the UI.
+ * @param {HTMLElement} subtaskItem - The subtask item to delete.
+ * @param {number} index - The index of the subtask to delete.
+ */
+function deleteEditSubtaskLocally(subtaskItem, index) {
+  subtasksArray.splice(index, 1);
+  subtaskItem.remove();
+  if (subtasksArray.length < 4) {
+    enableInputAndButton();
   }
+}
+
+/**
+ * Handles the delete click event for a subtask.
+ * @param {Event} event - The event object.
+ * @param {string} ticketID - The ID of the task the subtask belongs to.
+ * @param {number} index - The index of the subtask to delete.
+ */
+function handleDeleteClick(event, ticketID, index) {
+  const subtaskItem = getClosestSubtaskItem(event);
+  if (ticketID === "undefined") {
+    deleteSubtaskLocally(subtaskItem, index);
+  } else {
+    deleteSubtaskFromStorage(subtaskItem, ticketID);
+  }
+}
+
+/**
+ * Retrieves the closest subtask item element from the event target.
+ * @param {Event} event - The event object.
+ * @returns {HTMLElement} The closest subtask item element.
+ */
+function getClosestSubtaskItem(event) {
+  return event.target.closest(".subtask-item");
+}
+
+/**
+ * Deletes a subtask locally and updates the UI.
+ * @param {HTMLElement} subtaskItem - The subtask item to delete.
+ * @param {number} index - The index of the subtask to delete.
+ */
+function deleteSubtaskLocally(subtaskItem, index) {
+  if (subtaskItem) subtaskItem.remove();
+  subtasksArray.splice(index, 1);
+  reindexSubtasks();
+  if (subtasksArray.length < 4) enableInputAndButton();
+}
+
+/**
+ * Extracts the numeric ID from a subtask item's ID.
+ * @param {HTMLElement} subtaskItem - The subtask item.
+ * @returns {number} The numeric ID.
+ */
+function getNumericID(subtaskItem) {
+  return parseInt(subtaskItem.id.split("_")[1], 10);
+}
+
+/**
+ * Reindexes the subtasks array and updates their IDs.
+ */
+function reindexSubtasks() {
+  subtasksArray.forEach((subtask, i) => (subtask.id = i + 1));
 }

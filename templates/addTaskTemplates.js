@@ -19,6 +19,26 @@ function renderSubtaskItem(itemID, itemContent, ticketID, index) {
 }
 
 /**
+ * A HTML-Element for the subtask item gets rendered
+ * @param {int} itemID
+ * @param {string} itemContent
+ * @returns a HTML-Element
+ */
+function renderEditSubtaskItem(itemID, itemContent, ticketID, index) {
+  return `<div class="subtask-item" id="subtaskItem_${itemID}">
+                  <div class="subtask-content-wrapper">
+                      <span class="bullet-point">•</span>
+                      <span class="subtask-content" id="subtaskContent_${itemID}">${itemContent}</span>
+                  </div>
+                  <div class="subtask-actions">
+                      <img class="edit-icon" src="./assets/icons/subtask-edit.png" alt="">
+                      <span class="divider"></span>
+                      <img class="delete-icon" onclick="handleDeleteEditClick(event, '${ticketID}')" src="./assets/icons/subtask-delete.png" alt="">
+                  </div>
+              </div>`;
+}
+
+/**
  * Returns the new and updated text as a bullet point if any changes were made
  *
  * @param {string} updatedText
@@ -57,7 +77,7 @@ function cancelSubtaskItem(text) {
  */
 function taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState, taskCreator) {
   return {
-    id: generateUniqueID(),
+    id: generateTaskID(),
     title: taskTitle,
     due_date: taskDate,
     prio: taskPrio,

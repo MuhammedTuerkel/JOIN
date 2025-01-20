@@ -41,17 +41,19 @@ function handleDropdownBodyClick() {
   }
 }
 
-/** updatet
+/**
  * Loads the users into the dropdown container.
  * Updates the dropdown selections based on previously selected users.
  */
 function loadUserInAssignedToDropdown() {
   let dropdownContainer = document.getElementById("addTaskDropdown");
   dropdownContainer.innerHTML = "";
-  for (let index = 0; index < contacts.length; index++) {
-    let contact = contacts[index];
+  let storedContacts = JSON.parse(localStorage.getItem("contacts")) || [];
+  for (let index = 0; index < storedContacts.length; index++) {
+    let contact = storedContacts[index];
     dropdownContainer.innerHTML += createUserTemplate(contact);
   }
+
   updateDropdownSelections();
 }
 
@@ -82,8 +84,9 @@ function assignedUserDropDown(email) {
   template.classList.add("user_template_selected");
   checkedImg.src = "./assets/img/checked button.png";
   checkbox.checked = true;
+  let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
   let contact = contacts.find((contact) => contact.email === email);
-  if (!selectedContacts.some((selectedContact) => selectedContact.email === contact.email)) {
+  if (contact && !selectedContacts.some((selectedContact) => selectedContact.email === contact.email)) {
     selectedContacts.push(contact);
   }
   updateSelectedUsersContainer();
@@ -101,6 +104,7 @@ function notAssignedUser(email) {
   template.classList.add("user_template_not_selected");
   checkedImg.src = "./assets/img/check button.png";
   checkbox.checked = false;
+  let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
   selectedContacts = selectedContacts.filter((contact) => contact.email !== email);
   updateSelectedUsersContainer();
 }
@@ -126,13 +130,14 @@ function updateDropdownSelections() {
  * Updates the container with the selected users' initials.
  */
 function updateSelectedUsersContainer() {
+  console.log(selectedContacts);
   let container = document.getElementById("selectedUsers");
   container.innerHTML = "";
   for (let index = 0; index < selectedContacts.length; index++) {
-    let contact = selectedContacts[index];
-    let initials = contact.name.charAt(0).toUpperCase() + contact.name.charAt(contact.name.length - 1).toUpperCase();
+    let user = selectedContacts[index];
+    let initials = user.name.charAt(0).toUpperCase() + user.name.charAt(user.name.length - 1).toUpperCase();
     container.innerHTML += `
-            <div class="selected_user_circle" style="background-color: ${contact.color};">
+            <div class="selected_user_circle" style="background-color: ${user.color};">
                 ${initials}
             </div>
         `;
@@ -170,8 +175,7 @@ function loadSearchedUsers(fiteredContacts) {
  */
 function saveTaskGoToBoard(event, state = "toDo") {
   event.preventDefault();
-  let data = buildTask(state);
-  postTask("tasks", data);
+  postTask(state);
   window.location.href = getBaseWebsideURL() + "/board.html";
 }
 
@@ -181,8 +185,7 @@ function saveTaskGoToBoard(event, state = "toDo") {
  */
 function saveTaskCreateNewTask(event, state = "toDo") {
   event.preventDefault();
-  let data = buildTask(state);
-  postTask("tasks", data);
+  postTask(state);
   document.getElementById("addTaskForm").reset();
   document.getElementById("addTaskOverlayNextStep").style.display = "none";
   document.body.style.overflow = "auto";
@@ -195,12 +198,120 @@ function saveTaskCreateNewTask(event, state = "toDo") {
  */
 function saveTaskCloseOverlay(event, state = "toDo") {
   event.preventDefault();
-  let data = buildTaskOnBoard(state);
-  postTask("tasks", data);
+  postTask(state);
   addTaskClearTask();
   showToast("The ticket was created successfully", "success");
   setTimeout(() => {
     toggleOverlay();
     location.reload();
-  }, 2500);
+  }, 400);
+}
+
+function deleteTicket(ticketID) {
+  let allTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  let taskIndex = allTasks.findIndex((task) => task.id === ticketID);
+  if (taskIndex !== -1) {
+    allTasks.splice(taskIndex, 1);
+    localStorage.setItem("tasks", JSON.stringify(allTasks));
+  }
+  renderAllTickets(allTasks);
+  showToast("The ticket was deleted", "alert");
+  setTimeout(() => {
+    toggleOverlay();
+  }, 500);
+}
+
+/**
+ * Handles the edit click event for a subtask.
+ * @param {HTMLElement} target - The target element that triggered the event.
+ */
+function handleEditClick(target) {
+  const subtaskItem = target.closest(".subtask-item");
+  const contentWrapper = subtaskItem.querySelector(".subtask-content-wrapper");
+  const contentSpan = subtaskItem.querySelector(".subtask-content");
+  subtaskItem.classList.add("editing");
+  const inputContainer = document.createElement("div");
+  inputContainer.classList.add("input-container");
+  const input = createInputField(contentSpan.textContent);
+  const deleteIcon = createIcon("delete-icon", "./assets/icons/subtask-delete.png");
+  const saveIcon = createIcon("save-icon", "./assets/icons/subtask-save.png");
+  inputContainer.appendChild(input);
+  inputContainer.appendChild(deleteIcon);
+  inputContainer.appendChild(saveIcon);
+  contentWrapper.innerHTML = "";
+  contentWrapper.appendChild(inputContainer);
+  const actions = subtaskItem.querySelector(".subtask-actions");
+  actions.style.visibility = "hidden";
+}
+
+/**
+ * Handles the delete click event for a subtask.
+ * @param {Event} event - The event object.
+ * @param {string} ticketID - The ID of the task the subtask belongs to.
+ * @param {number} index - The index of the subtask to delete.
+ */
+function handleDeleteClick(event, ticketID, index) {
+  const subtaskItem = getClosestSubtaskItem(event);
+
+  if (ticketID === "undefined") {
+    deleteSubtaskLocally(subtaskItem, index);
+  } else {
+    deleteSubtaskFromStorage(subtaskItem, ticketID);
+  }
+}
+
+/**
+ * Retrieves the closest subtask item element from the event target.
+ * @param {Event} event - The event object.
+ * @returns {HTMLElement} The closest subtask item element.
+ */
+function getClosestSubtaskItem(event) {
+  return event.target.closest(".subtask-item");
+}
+
+/**
+ * Deletes a subtask locally and updates the UI.
+ * @param {HTMLElement} subtaskItem - The subtask item to delete.
+ * @param {number} index - The index of the subtask to delete.
+ */
+function deleteSubtaskLocally(subtaskItem, index) {
+  if (subtaskItem) subtaskItem.remove();
+  subtasksArray.splice(index, 1);
+  reindexSubtasks();
+  if (subtasksArray.length < 4) enableInputAndButton();
+}
+
+/**
+ * Deletes a subtask from the task's subtasks array in local storage.
+ * @param {HTMLElement} subtaskItem - The subtask item to delete.
+ * @param {string} ticketID - The ID of the task the subtask belongs to.
+ */
+function deleteSubtaskFromStorage(subtaskItem, ticketID) {
+  if (!subtaskItem) return;
+  const numericID = getNumericID(subtaskItem);
+  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  const task = tasks.find((task) => task.id === ticketID);
+  if (!task || !task.subtasks) return;
+  task.subtasks = task.subtasks.filter((subtask) => parseInt(subtask.id, 10) !== numericID);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  subtasksArray = task.subtasks;
+  reindexSubtasks();
+  subtaskItem.remove();
+  if (subtasksArray.length < 4) enableInputAndButton();
+}
+
+/**
+ * Extracts the numeric ID from a subtask item's ID.
+ * @param {HTMLElement} subtaskItem - The subtask item.
+ * @returns {number} The numeric ID.
+ */
+function getNumericID(subtaskItem) {
+  return parseInt(subtaskItem.id.split("_")[1], 10);
+}
+
+/**
+ * Reindexes the subtasks array and updates their IDs.
+ */
+function reindexSubtasks() {
+  subtasksArray.forEach((subtask, i) => (subtask.id = i + 1));
 }

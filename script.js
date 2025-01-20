@@ -7,8 +7,7 @@ let summaryDone;
 let summaryUrgent;
 let earliestDate;
 
-const BASE_URL =
-  "https://join-bbd82-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL = "https://join-bbd82-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /**
  * check if the user have the status in the locals storage from rememberMe of true than he goes direktly to the summary side
@@ -20,6 +19,7 @@ function checkRememberMe() {
   } else {
     LogInNotRemember();
   }
+  checkAndLoadArraysToLocalStorage();
 }
 
 /**
@@ -34,6 +34,20 @@ async function onloadFunction() {
     for (let entry of userEntries) {
       users.push(entry);
     }
+  }
+}
+
+/**
+ * Load global arrays to local storage if they don't exist or are empty.
+ */
+function checkAndLoadArraysToLocalStorage() {
+  let storedContacts = localStorage.getItem("contacts");
+  if (storedContacts === null || JSON.parse(storedContacts).length === 0) {
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+  }
+  let storedTasks = localStorage.getItem("tasks");
+  if (storedTasks === null || JSON.parse(storedTasks).length === 0) {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   }
 }
 
@@ -58,9 +72,7 @@ async function pushNewUserinFireBaseArray(event) {
   event.preventDefault();
   let userName = document.getElementById("signUpName").value;
   let userMail = document.getElementById("signUpInputMail").value;
-  let userPassword = document.getElementById(
-    "signUpConfirmInputPassword"
-  ).value;
+  let userPassword = document.getElementById("signUpConfirmInputPassword").value;
   const color = createRandomColor();
   const userData = {
     name: userName,
@@ -71,10 +83,7 @@ async function pushNewUserinFireBaseArray(event) {
     phone: "",
   };
   try {
-    let response = await postData(
-      `users/${userMail.replace(".", "_")}`,
-      userData
-    );
+    let response = await postData(`users/${userMail.replace(".", "_")}`, userData);
     createUser();
   } catch (error) {
     console.error("Error adding user to Realtime Database:", error);
@@ -151,8 +160,7 @@ function loadHelpHtml() {
  * and sets the onclick function for the return arrow.
  */
 function renderPrivacyPolicyTemplate() {
-  document.getElementById("termsContent").innerHTML +=
-    getPrivacyPolicyTemplate();
+  document.getElementById("termsContent").innerHTML += getPrivacyPolicyTemplate();
   changeReturnArrowOnclickFunction();
 }
 
@@ -220,7 +228,6 @@ function getLoggedInUserData() {
  */
 function getAllTasks() {
   let tasksString = localStorage.getItem("tasks");
-
   if (!tasksString || JSON.parse(tasksString).length === 0) {
     localStorage.setItem("tasks", JSON.stringify(tasks));
     tasks = JSON.parse(tasksString);
@@ -228,136 +235,11 @@ function getAllTasks() {
       return { id: index, ...task };
     });
   } else {
-    // If tasks in localStorage exist, retrieve them
     tasks = JSON.parse(tasksString);
     allTasks = tasks.map((task, index) => {
       return { id: index, ...task };
     });
-    console.log("Tasks have been retrieved from localStorage.");
   }
-}
-
-/**
- * Filters all tasks that the user has created and uses them to execute further functions
- */
-async function getUserTasks() {
-  let user = await fetch(BASE_URL + "tasks" + ".json");
-  let responseAsJSON = await user.json();
-  let tasks = Object.values(responseAsJSON);
-  activeUserTasks = tasks.filter((task) => task["creator"] === userName);
-  lengthOfSummaryTasks();
-  lengthOfToDoTasks();
-  lengthOfInProgressTasks();
-  lengthOfFeedbackTasks();
-  lengthOfDoneTasks();
-  lengthOfUrgentTasks();
-  getEarliestDate();
-}
-
-/**
- * Returns the length of the allTasks Array and shows them in the front-end
- * @param {array}
- */
-function lengthOfSummaryTasks() {
-  summaryTasks = allTasks.length;
-  let target = document.getElementById("allTasks");
-  target.innerHTML = "";
-  target.innerHTML = `${summaryTasks}`;
-}
-
-/**
- * Counts how many tasks the user has with the status “toDo” and displays this value in the front end
- * @param {array}
- */
-function lengthOfToDoTasks() {
-  summaryToDo = allTasks.filter((item) => item.state === "toDo").length;
-  let target = document.getElementById("todo");
-  target.innerHTML = "";
-  target.innerHTML = `${summaryToDo}`;
-}
-
-/**
- * Counts how many tasks the user has with the status “inProgress” and displays this value in the front end
- * @param {array}
- */
-function lengthOfInProgressTasks() {
-  summaryInProgress = allTasks.filter(
-    (item) => item.state === "inProgress"
-  ).length;
-  let target = document.getElementById("inProgress");
-  target.innerHTML = "";
-  target.innerHTML = `${summaryInProgress}`;
-}
-
-/**
- * Counts how many tasks the user has with the status “awaitFeedback” and displays this value in the front end
- * @param {array}
- */
-function lengthOfFeedbackTasks() {
-  summaryFeedback = allTasks.filter(
-    (item) => item.state === "awaitFeedback"
-  ).length;
-  let target = document.getElementById("awaiting");
-  target.innerHTML = "";
-  target.innerHTML = `${summaryFeedback}`;
-}
-
-/**
- * Counts how many tasks the user has with the status “done” and displays this value in the front end
- * @param {array}
- */
-function lengthOfDoneTasks() {
-  summaryDone = allTasks.filter((item) => item.state === "done").length;
-  let target = document.getElementById("done");
-  target.innerHTML = "";
-  target.innerHTML = `${summaryDone}`;
-}
-
-/**
- * Counts how many tasks the user has with the priority “urgent” and displays this value in the front end
- * @param {array}
- */
-function lengthOfUrgentTasks() {
-  summaryUrgent = allTasks.filter((item) => item.prio === "urgent").length;
-  let target = document.getElementById("urgent");
-  target.innerHTML = "";
-  target.innerHTML = `${summaryUrgent}`;
-}
-
-/**
- * Finds the object with the earliest due date in an array of objects.
- * @param {Array} array - Array of objects with a due_date property.
- * @returns {Object} - The object with the earliest due date.
- */
-function getEarliestDate() {
-  let target = document.getElementById("earliestDate");
-  if (allTasks.length === 0) {
-    target.innerHTML = "No upcoming tasks";
-    document.getElementById("earliestDateInfo").classList.add("d_none");
-    return;
-  }
-  earliestDateObject = allTasks.reduce((earliest, current) => {
-    return new Date(current.due_date) < new Date(earliest.due_date)
-      ? current
-      : earliest;
-  });
-  earliestDateNumber = earliestDateObject.due_date;
-  let earliestDate = changeDateFormat(earliestDateNumber);
-  target.innerHTML = "";
-  target.innerHTML = `${earliestDate}`;
-}
-
-/**
- * Takes a date format and changes it to another format
- * @param {string} earliestDateNumber
- * @returns
- */
-function changeDateFormat(earliestDateNumber) {
-  let date = new Date(earliestDateNumber);
-  let day = String(date.getDate()).padStart(2, "0");
-  let month = date.toLocaleString("de-DE", { month: "long" });
-  let year = date.getFullYear();
-  return `${month} ${day}, ${year}`;
 }
 
 /**
@@ -421,7 +303,6 @@ function checkOrientation() {
 function pushContactsToLocalStorage() {
   try {
     localStorage.setItem("contacts", JSON.stringify(contacts));
-    console.log("contacts array has been updated in Local Storage:", contacts);
   } catch (error) {
     console.error("Error saving contacts to Local Storage:", error);
   }
@@ -444,15 +325,22 @@ function getContactsFromLocalStorage() {
 }
 
 /**
- * Deletes a contact from the Contacts array by index and updates the local storage.
+ * Deletes a contact from the local storage by index and updates tasks to remove the deleted contact.
  * @param {number} index - The index of the contact to delete.
  */
 function deleteContactFromLocalStorage(index) {
+  let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
   if (index >= 0 && index < contacts.length) {
-    console.log(`Deleting contact at index ${index}:`, contacts[index]);
+    const contactToDelete = contacts[index].id;
     contacts.splice(index, 1);
-    console.log("Updated contacts array after deletion:", contacts);
-    pushContactsToLocalStorage();
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    tasks.forEach((task) => {
+      if (task.assigned_to) {
+        task.assigned_to = task.assigned_to.filter((assignedUser) => assignedUser.id !== contactToDelete);
+      }
+    });
+    localStorage.setItem("tasks", JSON.stringify(tasks));
     loadContactsAgain();
   } else {
     console.warn(`Invalid index: ${index}`);
