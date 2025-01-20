@@ -269,22 +269,22 @@ function renderEditSubtaskList(ticketID) {
   }
 }
 
-/**
- * Deletes an editable subtask from local storage and updates the tasks array.
- * @param {HTMLElement} subtaskItem - The subtask item to delete.
- * @param {string} ticketID - The ID of the task the subtask belongs to.
- * @param {number} index - The index of the subtask to delete.
- */
-function deleteEditSubtaskFromStorage(subtaskItem, ticketID, index) {
-  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  let task = tasks.find((t) => t.id === ticketID);
-  if (task && task.subtasks) {
-    task.subtasks.splice(index, 1);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    subtasksArray = task.subtasks;
-  }
-  if (subtasksArray.length < 4) enableInputAndButton();
-}
+// /**
+//  * Deletes an editable subtask from local storage and updates the tasks array.
+//  * @param {HTMLElement} subtaskItem - The subtask item to delete.
+//  * @param {string} ticketID - The ID of the task the subtask belongs to.
+//  * @param {number} index - The index of the subtask to delete.
+//  */
+// function deleteEditSubtaskFromStorage(subtaskItem, ticketID, index) {
+//   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+//   let task = tasks.find((t) => t.id === ticketID);
+//   if (task && task.subtasks) {
+//     task.subtasks.splice(index, 1);
+//     localStorage.setItem("tasks", JSON.stringify(tasks));
+//     subtasksArray = task.subtasks;
+//   }
+//   if (subtasksArray.length < 4) enableInputAndButton();
+// }
 
 /**
  * Gets the numeric ID from a subtask ID string.
@@ -347,39 +347,12 @@ function deleteEditSubtaskLocally(subtaskItem, index) {
 }
 
 /**
- * Handles the delete click event for a subtask.
- * @param {Event} event - The event object.
- * @param {string} ticketID - The ID of the task the subtask belongs to.
- * @param {number} index - The index of the subtask to delete.
- */
-function handleDeleteClick(event, ticketID, index) {
-  const subtaskItem = getClosestSubtaskItem(event);
-  if (ticketID === "undefined") {
-    deleteSubtaskLocally(subtaskItem, index);
-  } else {
-    deleteSubtaskFromStorage(subtaskItem, ticketID);
-  }
-}
-
-/**
  * Retrieves the closest subtask item element from the event target.
  * @param {Event} event - The event object.
  * @returns {HTMLElement} The closest subtask item element.
  */
 function getClosestSubtaskItem(event) {
   return event.target.closest(".subtask-item");
-}
-
-/**
- * Deletes a subtask locally and updates the UI.
- * @param {HTMLElement} subtaskItem - The subtask item to delete.
- * @param {number} index - The index of the subtask to delete.
- */
-function deleteSubtaskLocally(subtaskItem, index) {
-  if (subtaskItem) subtaskItem.remove();
-  subtasksArray.splice(index, 1);
-  reindexSubtasks();
-  if (subtasksArray.length < 4) enableInputAndButton();
 }
 
 /**

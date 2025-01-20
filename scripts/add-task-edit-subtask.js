@@ -4,8 +4,6 @@ document.addEventListener("click", (event) => {
     handleEditClick(target);
   } else if (target.classList.contains("save-icon")) {
     handleSaveClick(target);
-  } else if (target.classList.contains("delete-icon")) {
-    handleDeleteClick(target);
   }
 });
 
@@ -60,4 +58,40 @@ function editArrayEntry(subtaskID, updatedText) {
   if (subtask) {
     subtask.content = updatedText;
   }
+}
+
+/**
+ * Handles the delete click event for a subtask.
+ * @param {Event} event - The event object.
+ * @param {string} ticketID - The ID of the task the subtask belongs to.
+ * @param {number} index - The index of the subtask to delete.
+ */
+function handleDeleteClick(event, ticketID, index) {
+  const subtaskItem = getClosestSubtaskItem(event);
+  if (ticketID === "undefined") {
+    deleteSubtaskLocally(subtaskItem, index);
+  } else {
+    deleteSubtaskFromStorage(subtaskItem, ticketID);
+  }
+}
+
+/**
+ * Deletes a subtask locally and updates the UI.
+ * @param {HTMLElement} subtaskItem - The subtask item to delete.
+ * @param {number} index - The index of the subtask to delete.
+ */
+function deleteSubtaskLocally(subtaskItem, index) {
+  if (subtaskItem) subtaskItem.remove();
+  subtasksArray.splice(index, 1);
+  updateUI();
+}
+
+/**
+ * Updates the UI based on the current state of the subtasks array.
+ */
+function updateUI() {
+  const subtasksContainer = document.getElementById("subtasksList");
+  subtasksContainer.innerHTML = "";
+
+  renderAddTaskSubtaskList();
 }

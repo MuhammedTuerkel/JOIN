@@ -52,23 +52,14 @@ function pushEditSubtasksArray(ticketID) {
       content: content,
       status: "open",
     };
-
     targetTask.subtasks.push(newSubtask);
     localStorage.setItem("tasks", JSON.stringify(tasks));
     subtasksArray = targetTask.subtasks;
     subTaskInput.value = "";
     renderEditSubtaskList(ticketID);
-
-    if (targetTask.subtasks.length >= 4) {
-      disableInputAndButton();
-    } else {
-      enableInputAndButton();
-    }
-  } else if (targetTask.subtasks.length >= 4) {
-    disableInputAndButton();
+    document.getElementById("iconsContainer").style.visibility = "hidden";
+    document.getElementById("add-subtask-btn").style.visibility = "visible";
   }
-  document.getElementById("iconsContainer").style.visibility = "hidden";
-  document.getElementById("add-subtask-btn").style.visibility = "visible";
 }
 
 /**
@@ -86,7 +77,4 @@ function deleteEditSubtaskFromStorage(subtaskItem, ticketID, index) {
     subtasksArray = task.subtasks;
   }
   subtaskItem.remove();
-  if (subtasksArray.length < 4) {
-    enableInputAndButton();
-  }
 }

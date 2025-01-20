@@ -187,7 +187,6 @@ function pushSubtaskArray() {
   subtasksArray.push(newSubtask);
   subTaskInput.value = "";
   renderAddTaskSubtaskList();
-  console.log("subtasksArray", subtasksArray);
 }
 
 /**
@@ -307,21 +306,6 @@ function showAddTaskOverlayNextStep(event) {
   document.getElementById("addTaskOverlayNextStep").style.display = "flex";
   document.body.style.overflow = "hidden";
 }
-
-// /**
-//  * Checks the validity of the form fields and enables/disables the create task button accordingly.
-//  */
-// function checkFormValidity() {
-//   let taskTitle = document.getElementById("task-title").value;
-//   let taskDueDate = document.getElementById("task-due-date").value;
-//   let taskCategory = document.getElementById("task-category").value;
-//   let createTaskButton = document.getElementById("createTaskButton");
-//   if (taskTitle && taskDueDate && taskCategory) {
-//     createTaskButton.disabled = false;
-//   } else {
-//     createTaskButton.disabled = true;
-//   }
-// }
 
 // /**
 //  * Checks the validity of the form fields and enables/disables the create task button accordingly.
