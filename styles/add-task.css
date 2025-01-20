@@ -269,9 +269,18 @@ select.focus {
 }
 
 .subtasks-list {
-  margin-top: 10px;
+  margin-top: 1px;
   width: 95%;
   margin-left: 10px;
+  height: 230px;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Webkit-Browser (Chrome, Safari) */
+.subtasks-list::-webkit-scrollbar {
+  display: flex; /* Scrollleiste verstecken */
 }
 
 .subtasks-list .subtask {
@@ -319,7 +328,7 @@ select.focus {
 }
 
 .subtask-item {
-  width: 100%;
+  width: 95%;
   display: flex;
   position: relative;
   justify-content: space-between;

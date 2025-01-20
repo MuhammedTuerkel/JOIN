@@ -252,7 +252,6 @@ function handleEditClick(target) {
  */
 function handleDeleteClick(event, ticketID, index) {
   const subtaskItem = getClosestSubtaskItem(event);
-
   if (ticketID === "undefined") {
     deleteSubtaskLocally(subtaskItem, index);
   } else {
@@ -275,10 +274,13 @@ function getClosestSubtaskItem(event) {
  * @param {number} index - The index of the subtask to delete.
  */
 function deleteSubtaskLocally(subtaskItem, index) {
-  if (subtaskItem) subtaskItem.remove();
+  if (subtaskItem) {
+    subtaskItem.remove();
+  }
   subtasksArray.splice(index, 1);
   reindexSubtasks();
-  if (subtasksArray.length < 4) enableInputAndButton();
+  updateSubtasksUI();
+  console.log(subtasksArray);
 }
 
 /**
@@ -297,7 +299,6 @@ function deleteSubtaskFromStorage(subtaskItem, ticketID) {
   subtasksArray = task.subtasks;
   reindexSubtasks();
   subtaskItem.remove();
-  if (subtasksArray.length < 4) enableInputAndButton();
 }
 
 /**

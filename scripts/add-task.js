@@ -179,21 +179,15 @@ function clearSubtaskInput() {
 function pushSubtaskArray() {
   let subTaskInput = document.getElementById("task-subtasks");
   let content = subTaskInput.value.trim();
-  if (subtasksArray.length < 4 && content !== "") {
-    let newSubtask = {
-      id: generateUniqueID(),
-      content: content,
-      status: "open",
-    };
-    subtasksArray.push(newSubtask);
-    subTaskInput.value = "";
-    renderAddTaskSubtaskList();
-    if (subtasksArray.length >= 4) {
-      disableInputAndButton();
-    }
-  } else if (subtasksArray.length >= 4) {
-    disableInputAndButton();
-  }
+  let newSubtask = {
+    id: generateUniqueID(),
+    content: content,
+    status: "open",
+  };
+  subtasksArray.push(newSubtask);
+  subTaskInput.value = "";
+  renderAddTaskSubtaskList();
+  console.log("subtasksArray", subtasksArray);
 }
 
 /**
@@ -255,45 +249,6 @@ function renderSubtaskList(ticketID) {
       let itemContent = subtasksArray[i].content;
       target.innerHTML += renderSubtaskItem(itemID, itemContent, ticketID, i);
     }
-  }
-}
-
-/**
- * Creates an icon element.
- * @param {string} className - The class name for the icon.
- * @param {string} src - The source URL for the icon image.
- * @returns {HTMLElement} - The created icon element.
- */
-function createIcon(className, src) {
-  const icon = document.createElement("img");
-  icon.setAttribute("src", src);
-  icon.setAttribute("alt", className);
-  icon.classList.add(className);
-  return icon;
-}
-
-/**
- * Creates an input field element for editing a subtask.
- * @param {string} currentText - The current text of the subtask.
- * @returns {HTMLElement} - The created input field element.
- */
-function createInputField(currentText) {
-  const input = document.createElement("input");
-  input.type = "text";
-  input.value = currentText;
-  input.classList.add("subtask-input");
-  return input;
-}
-
-/**
- * Edits an entry in the subtasks array.
- * @param {number} subtaskID - The ID of the subtask to edit.
- * @param {string} updatedText - The updated text for the subtask.
- */
-function editArrayEntry(subtaskID, updatedText) {
-  const subtask = subtasksArray.find((item) => item.id === subtaskID);
-  if (subtask) {
-    subtask.content = updatedText;
   }
 }
 
