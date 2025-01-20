@@ -11,6 +11,7 @@ function addTaskOnInit() {
   getLoggedInUserData();
   initializeKeyDown();
   checkAndLoadArraysToLocalStorage();
+  checkFormValidity();
 }
 
 /**
@@ -31,6 +32,9 @@ function addTaskClearTask() {
   enableInputAndButton();
   list.innerHTML = "";
   assignedList.innerHTML = "";
+  document.getElementById("addTaskTitleErrorInput").style.display = "block";
+  document.getElementById("addTaskDateErrorInput").style.display = "block";
+  document.getElementById("addTaskCategoryErrorInput").style.display = "block";
 }
 
 /**
@@ -95,7 +99,6 @@ function goBackToAddTask(event) {
 function postTask(state, path = "tasks") {
   console.log("state", state);
   console.log("path", path);
-
   let task = buildTask(state);
   let tasks = JSON.parse(localStorage.getItem(path)) || [];
   tasks.push(task);
@@ -234,6 +237,7 @@ function enableInputAndButton() {
   addButton.disabled = false;
   subtaskInput.classList.remove("disabled");
   addButton.classList.remove("disabled");
+  checkFormValidity();
 }
 
 /**
@@ -349,17 +353,47 @@ function showAddTaskOverlayNextStep(event) {
   document.body.style.overflow = "hidden";
 }
 
-/**
- * Checks the validity of the form fields and enables/disables the create task button accordingly.
- */
+// /**
+//  * Checks the validity of the form fields and enables/disables the create task button accordingly.
+//  */
+// function checkFormValidity() {
+//   let taskTitle = document.getElementById("task-title").value;
+//   let taskDueDate = document.getElementById("task-due-date").value;
+//   let taskCategory = document.getElementById("task-category").value;
+//   let createTaskButton = document.getElementById("createTaskButton");
+//   if (taskTitle && taskDueDate && taskCategory) {
+//     createTaskButton.disabled = false;
+//   } else {
+//     createTaskButton.disabled = true;
+//   }
+// }
+
+// /**
+//  * Checks the validity of the form fields and enables/disables the create task button accordingly.
+//  */
 function checkFormValidity() {
-  let taskTitle = document.getElementById("task-title").value;
-  let taskDueDate = document.getElementById("task-due-date").value;
-  let taskCategory = document.getElementById("task-category").value;
-  let createTaskButton = document.getElementById("createTaskButton");
-  if (taskTitle && taskDueDate && taskCategory) {
-    createTaskButton.disabled = false;
+  const taskCategory = document.getElementById("task-category");
+  const taskDueDate = document.getElementById("task-due-date");
+  const taskTitle = document.getElementById("task-title");
+  const createTaskButton = document.getElementById("createTaskButton");
+  let valid = true;
+  if (taskTitle.value.trim() === "") {
+    document.getElementById("addTaskTitleErrorInput").style.display = "block";
+    valid = false;
   } else {
-    createTaskButton.disabled = true;
+    document.getElementById("addTaskTitleErrorInput").style.display = "none";
   }
+  if (taskDueDate.value.trim() === "") {
+    document.getElementById("addTaskDateErrorInput").style.display = "block";
+    valid = false;
+  } else {
+    document.getElementById("addTaskDateErrorInput").style.display = "none";
+  }
+  if (taskCategory.value.trim() === "") {
+    document.getElementById("addTaskCategoryErrorInput").style.display = "block";
+    valid = false;
+  } else {
+    document.getElementById("addTaskCategoryErrorInput").style.display = "none";
+  }
+  createTaskButton.disabled = !valid;
 }
