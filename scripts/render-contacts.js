@@ -2,20 +2,19 @@
  * Render the contactlist with the whole alphabet
  */
 async function renderContactsListHTML() {
-  let list = (document.getElementById("ContactsList").innerHTML = "");
   let alphabet = await generateAlphabet();
-  alphabet.forEach((letter, i) => {
+  for (let i = 0; i < alphabet.length; i++) {
     document.getElementById("ContactsList").innerHTML += `
-      <div id="Section${i}" class="letterSections">
-        <div class="lettersbox">
-          <h3>${letter}</h3>
-        </div>
-        <div class="contact_line"></div>
-        <div id="${letter}"></div>
-      </div>
-    `;
-  });
-  renderContacts();
+          <div id="Section${i}" class="letterSections">
+      <div class="lettersbox">
+                          <h3>${alphabet[i]}</h3>
+                      </div>
+                      <div class="contact_line"></div>
+                      <div id="${alphabet[i]}"></div>
+                      </div>
+                      `;
+  }
+  renderContact();
 }
 
 /**
@@ -30,24 +29,20 @@ async function generateAlphabet() {
  * Checks if the first letter of the name matches with the letter, if yes then it generates the badge and loads a function named generateContactHTML
  * at the end it clears the empty divs
  */
-async function renderContacts() {
-  let alphabet = await generateAlphabet();
-  let storedContacts = JSON.parse(localStorage.getItem("contacts")) || [];
-  if (storedContacts.length === 0) {
-    clearEmptyDivs(alphabet);
+function renderContact() {
+  let a = generateAlphabet();
+  if (contacts == 0) {
+    clearEmptyDivs(a);
   } else {
-    storedContacts.forEach((contact, index) => {
-      if (contact && contact.name) {
-        let firstLetter = contact.name.charAt(0).toUpperCase();
-        let letterIndex = alphabet.indexOf(firstLetter);
-        if (letterIndex !== -1) {
-          let badge = generateBadge(index);
-          generateContactHTML(storedContacts, alphabet, letterIndex, badge);
-        }
+    let firstLetter = contacts[x].name.charAt(0).toUpperCase();
+    for (let i = 0; i < a.length; i++) {
+      if (firstLetter == a[i]) {
+        let Badge = generateBadge(x);
+        generateContactHTML(a, i, Badge);
       }
-    });
-
-    clearEmptyDivs(alphabet);
+    }
+    x = 0;
+    clearEmptyDivs(a);
   }
 }
 
@@ -88,23 +83,27 @@ function generateContactHTML(storedContacts, a, i, badge) {
 /**
  * Clears the empty divs to ensure a clean structure.
  */
-function clearEmptyDivs(alphabet) {
-  alphabet.forEach((letter) => {
-    const section = document.getElementById(letter);
-    if (!section || section.innerHTML.trim() === "") {
-      section && section.parentElement.remove();
-    }
-  });
-}
+// function clearEmptyDivs(alphabet) {
+//   alphabet.forEach((letter) => {
+//     const section = document.getElementById(letter);
+//     if (!section || section.innerHTML.trim() === "") {
+//       section && section.parentElement.remove();
+//     }
+//   });
+// }
+
+/**
+ * Renders the template of the contact information
+ * @param {int} i
+ */
 function renderContactInformation(i) {
-  let storedContacts = JSON.parse(localStorage.getItem("contacts")) || [];
-  if (i >= 0 && i < storedContacts.length) {
+  if (i >= 0 && i < contacts.length) {
     let Badge = generateBadge(i);
     document.getElementById("Profile-Badge1").innerHTML = `${Badge}`;
-    document.getElementById("editdelete-name").innerHTML = `${storedContacts[i].name}`;
-    document.getElementById("email").innerHTML = `${storedContacts[i].email}`;
-    document.getElementById("phone").innerHTML = `${storedContacts[i].phone}`;
-    document.getElementById("badgeBackgroundColor").style.backgroundColor = storedContacts[i].color;
+    document.getElementById("editdelete-name").innerHTML = `${contacts[i].name}`;
+    document.getElementById("email").innerHTML = `${contacts[i].email}`;
+    document.getElementById("phone").innerHTML = `${contacts[i].phone}`;
+    document.getElementById("badgeBackgroundColor").style.backgroundColor = contacts[i].color;
     document.getElementById("editContact").setAttribute(`onclick`, `loadEditContact(event, ${i})`);
     document.getElementById("editContactMobile").setAttribute(`onclick`, `loadEditContact(event, ${i})`);
     document.getElementById("deleteContact").setAttribute(`onclick`, `deleteContact(${i})`);

@@ -23,8 +23,8 @@
     <script src="scripts/login.js"></script>
 </head>
 
-<body id="body" onclick="hideSubMenu(), hideAddNewContact(event), hideEditDeleteMenu(event)"
-    onload="sideNavigation(),Init()">
+<body id="body" onclick="hideSubMenu(); hideAddNewContact(event); hideEditDeleteMenu(event)"
+    onload="sideNavigation(); Init()">
     <div class="side-navigation">
         <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="">
         <div class="menu">
@@ -184,7 +184,7 @@
                         <div onclick="hideAddNewContact(event)" class="Cancel">
                             <h3>Cancel</h3>
                         </div>
-                        <button type="submit" class="Create">
+                        <button type="submit" class="Create" onclick="createNewContact(event)">
                             <h3>Create contact</h3>
                             <img src="./assets/img/check.png" alt="">
                         </button>

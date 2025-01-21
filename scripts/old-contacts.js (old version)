@@ -4,8 +4,7 @@ let i = 0;
 /**
  * Is a onload-function it loads the functions that are needed to load at the beginning
  */
-async function Init() {
-  pushContactsToLocalStorage();
+async function init() {
   renderContactsListHTML();
 }
 
@@ -15,7 +14,8 @@ async function Init() {
  * @param {*} i
  * @param {event} event
  */
-function loadContact(i, event) {
+async function loadContact(i, event) {
+  document.getElementById("body").classList.add("over-hidden");
   event.stopPropagation();
   if (window.innerWidth < 1050) {
     document.getElementById("Contacts").style = "display:none;";
@@ -24,11 +24,18 @@ function loadContact(i, event) {
   hideContact(i);
   renderContactInformation(i);
   setTimeout(() => {
-    document.getElementById(`Contact${i}`).style = "background-color: #2A3647;";
-    document.getElementById(`name${i}`).style = "color:white;";
-    document.getElementById("all-information").classList.add("animationRightToPosition");
-    document.getElementById("all-information").classList.remove("d-none");
+    waitForAnimation(i);
   }, 100);
+  setTimeout(() => {
+    document.getElementById("body").classList.remove("over-hidden");
+  }, 500);
+}
+
+function waitForAnimation(i) {
+  document.getElementById(`Contact${i}`).style = "background-color: #2A3647;";
+  document.getElementById(`name${i}`).style = "color:white;";
+  document.getElementById("all-information").classList.add("animationRightToPosition");
+  document.getElementById("all-information").classList.remove("d-none");
 }
 
 /**
@@ -69,7 +76,7 @@ function loadAddNewContact(event) {
   document.getElementById("addNewContact").classList.add("animationRightToPosition");
   document.getElementById("addNewContact").classList.remove("d-none");
   document.getElementById("headlineAddContacth2").innerHTML = `Add contact`;
-  document.getElementById("addContactProfilePicture").style = "background-image: url(../assets/img/person-white.png);";
+  document.getElementById("addContactProfilePicture").style = "background-image: url(./assets/img/person-white.png);";
   document.getElementById("addContactProfilePicture").innerHTML = ``;
   document.getElementById("cancelCreate").style = "";
   document.getElementById("deleteSave").style = "display:none;";
@@ -117,55 +124,10 @@ function hideEditDeleteMenu(event) {
   document.getElementById("editdelete-menu").classList.remove("animationRightToPosition");
 }
 
-/**
- * Generates the whole alphabet
- * @returns the alphabet
- */
-function generateAlphabet() {
-  let a = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-  return a;
-}
-
-/**
- * Generates the contacts in the contactlist if its finished with the array it goes back to the renderContact function
- * @param {*} a
- * @param {*} i
- * @param {*} Badge
- */
-function generateContactHTML(a, i, Badge) {
-  // Vergewissere dich, dass der Contacts-Array und die benötigten Daten vorhanden sind
-  if (!contacts || contacts.length === 0) {
-    console.warn("Contacts array is undefined or empty");
-    return;
-  }
-
-  const contact = contacts[x];
-  if (!contact || !contact.color || !contact.name || !contact.email) {
-    console.warn(`Invalid contact data at index ${x}`);
-    return;
-  }
-
-  document.getElementById(`${a[i]}`).innerHTML += `
-    <div id="Contact${x}" onclick="loadContact(${x}, event)" class="Contact">
-      <div class="Profile-Badge" style="background-color: ${contact.color};">
-        <h4>${Badge}</h4>
-      </div>
-      <div class="name-email">
-        <h2 id="name${x}">${contact.name}</h2>
-        <h3>${contact.email}</h3>
-      </div>
-    </div>
-  `;
-  x++;
-  if (x < contacts.length) {
-    renderContact(a);
-  }
-}
-
 function generateBadge(x) {
   if (!contacts[x] || !contacts[x].name) {
     console.warn(`Contact with index ${x} not found or name is undefined`);
-    return "N/A"; // returning N/A to handle error cases
+    return "N/A";
   }
   let values = contacts[x].name.split(" ");
   let f_name = values.shift().charAt(0).toUpperCase();
@@ -192,11 +154,10 @@ function clearEmptyDivs(a) {
  * @param {int} i
  */
 function deleteContact(i) {
-  deleteContactfromFirebase(i);
   hideAddNewContact(event);
   hideContactMobile(event);
-  getTheItemstoPushTOFireBase();
-  renderContactsListHTMLAgain();
+  deleteContactFromLocalStorage(i);
+  renderContactsListHTML();
 }
 
 /**
@@ -240,33 +201,35 @@ function generateEditNewContactHTML(Badge, i) {
  * Gets the values of the contact information and checks if the values are empty or filled and gives the information to the functions
  * @param {event} event
  */
-function createNewContact(event) {
-  event.stopPropagation();
-  let contactContainer = document.getElementsByClassName("Contact");
+async function createNewContact() {
   let name = document.getElementById("input-name").value;
   let email = document.getElementById("input-email").value;
   let phone = document.getElementById("input-phone").value;
+  event.stopPropagation();
+  let contactContainer = document.getElementsByClassName("Contact");
   const color = createRandomColor();
-
-  if (name.trim() == "" || email.trim() == "" || phone.trim() == "") {
-    alert("Name, email, or phone number not entered");
-  } else {
-    contacts.push({
-      name: name,
-      email: email,
-      phone: phone,
-      color: color,
-      createdAt: new Date().toISOString(),
-    });
-    pushContactsToLocalStorage();
-    while (contactContainer.length > 0) {
-      contactContainer[0].parentNode.removeChild(contactContainer[0]);
-    }
-    hideAddNewContact(event);
-    animateContactCreated();
-    renderContactsListHTMLAgain();
+  contacts.push({
+    name: name,
+    email: email,
+    phone: phone,
+    color: color,
+    createdAt: new Date().toISOString(),
+  });
+  await pushContactsToLocalStorage();
+  while (contactContainer.length > 0) {
+    contactContainer[0].parentNode.removeChild(contactContainer[0]);
   }
+  hideAddNewContact(event);
+  animateContactCreated();
+  await renderContactsListHTMLAgain();
 }
+document.addEventListener("DOMContentLoaded", function () {
+  let form = document.getElementById("form");
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    createNewContact();
+  });
+});
 
 /**
  * Render the contactlist with the whole alphabet
@@ -276,7 +239,7 @@ async function renderContactsListHTMLAgain() {
   let alphabet = await generateAlphabet();
   for (let i = 0; i < alphabet.length; i++) {
     document.getElementById("ContactsList").innerHTML += `
-          <div id="Section${i}" class="letterSections">
+          <div id="Section${i}" class="letterSections"> 
       <div class="lettersbox">
                           <h3>${alphabet[i]}</h3>
                       </div>
@@ -285,7 +248,7 @@ async function renderContactsListHTMLAgain() {
                       </div>
                       `;
   }
-  renderContact();
+  await loadContactsAgain();
 }
 
 /**
@@ -303,12 +266,8 @@ function animateContactCreated() {
 /**
  * Loads and renders the updated contacts list.
  */
-function loadContactsAgain() {
-  if (!contacts || contacts.length === 0) {
-    console.warn("Contacts array is undefined or empty");
-  } else {
-    renderContact();
-  }
+async function loadContactsAgain() {
+  renderContacts();
 }
 
 /**
