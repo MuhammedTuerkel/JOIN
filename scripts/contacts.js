@@ -15,7 +15,8 @@ async function Init() {
  * @param {*} i
  * @param {event} event
  */
-function loadContact(i, event) {
+async function loadContact(i, event) {
+  document.getElementById("body").classList.add("over-hidden");
   event.stopPropagation();
   if (window.innerWidth < 1050) {
     document.getElementById("Contacts").style = "display:none;";
@@ -24,11 +25,18 @@ function loadContact(i, event) {
   hideContact(i);
   renderContactInformation(i);
   setTimeout(() => {
-    document.getElementById(`Contact${i}`).style = "background-color: #2A3647;";
-    document.getElementById(`name${i}`).style = "color:white;";
-    document.getElementById("all-information").classList.add("animationRightToPosition");
-    document.getElementById("all-information").classList.remove("d-none");
+    waitForAnimation();
   }, 100);
+  setTimeout(() => {
+    document.getElementById("body").classList.remove("over-hidden");
+  }, 500);
+}
+
+function waitForAnimation() {
+  document.getElementById(`Contact${i}`).style = "background-color: #2A3647;";
+  document.getElementById(`name${i}`).style = "color:white;";
+  document.getElementById("all-information").classList.add("animationRightToPosition");
+  document.getElementById("all-information").classList.remove("d-none");
 }
 
 /**
@@ -69,7 +77,7 @@ function loadAddNewContact(event) {
   document.getElementById("addNewContact").classList.add("animationRightToPosition");
   document.getElementById("addNewContact").classList.remove("d-none");
   document.getElementById("headlineAddContacth2").innerHTML = `Add contact`;
-  document.getElementById("addContactProfilePicture").style = "background-image: url(../assets/img/person-white.png);";
+  document.getElementById("addContactProfilePicture").style = "background-image: url(./assets/img/person-white.png);";
   document.getElementById("addContactProfilePicture").innerHTML = ``;
   document.getElementById("cancelCreate").style = "";
   document.getElementById("deleteSave").style = "display:none;";
@@ -249,7 +257,6 @@ function createNewContact(event) {
   const color = createRandomColor();
 
   if (name.trim() == "" || email.trim() == "" || phone.trim() == "") {
-    alert("Name, email, or phone number not entered");
   } else {
     contacts.push({
       name: name,
@@ -276,7 +283,7 @@ async function renderContactsListHTMLAgain() {
   let alphabet = await generateAlphabet();
   for (let i = 0; i < alphabet.length; i++) {
     document.getElementById("ContactsList").innerHTML += `
-          <div id="Section${i}" class="letterSections">
+          <div id="Section${i}" class="letterSections"> 
       <div class="lettersbox">
                           <h3>${alphabet[i]}</h3>
                       </div>
@@ -285,7 +292,7 @@ async function renderContactsListHTMLAgain() {
                       </div>
                       `;
   }
-  renderContact();
+  renderContacts();
 }
 
 /**
@@ -366,4 +373,17 @@ function pushToFireBase() {
  */
 function deleteContactfromFirebase(i) {
   deleteContactFromLocalStorage(i);
+}
+
+function contactsFormValidation() {
+  let name = document.getElementById("input-name").value;
+  let email = document.getElementById("input-email").value;
+  let phone = document.getElementById("input-phone").value;
+
+  if (name.trim() == "" || email.trim() == "" || phone.trim() == "") {
+    document.getElementById("createNewContactButton").classList.add("disabled");
+    document.getElementById("createNewContactButton").classList.remove("enabled");
+  } else {
+    document.getElementById("createNewContactButton").classList.remove("disabled");
+  }
 }

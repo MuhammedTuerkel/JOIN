@@ -816,6 +816,22 @@
   animation: slide-in-right 0.75s forwards;
 }
 
+.Create.enabled {
+  background-color: #2a3647;
+  color: white;
+  cursor: pointer;
+  animation: pulse 1s cubic-bezier(0.455, 0.03, 0.515, 0.955) 2;
+}
+
+.Create.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.contact_new_contact_error {
+  border-color: red !important;
+}
+
 @media (max-width: 999px) and (min-width: 831px) {
   .contact_overly_img_task_name_container {
     font-size: 12px;
