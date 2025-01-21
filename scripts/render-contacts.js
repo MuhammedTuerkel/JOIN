@@ -1,9 +1,9 @@
 /**
  * Render the contactlist with the whole alphabet
  */
-function renderContactsListHTML() {
+async function renderContactsListHTML() {
   let list = (document.getElementById("ContactsList").innerHTML = "");
-  let alphabet = generateAlphabet();
+  let alphabet = await generateAlphabet();
   alphabet.forEach((letter, i) => {
     document.getElementById("ContactsList").innerHTML += `
       <div id="Section${i}" class="letterSections">
@@ -22,7 +22,7 @@ function renderContactsListHTML() {
  * Generates the whole alphabet
  * @returns the alphabet
  */
-function generateAlphabet() {
+async function generateAlphabet() {
   return "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 }
 
@@ -30,8 +30,8 @@ function generateAlphabet() {
  * Checks if the first letter of the name matches with the letter, if yes then it generates the badge and loads a function named generateContactHTML
  * at the end it clears the empty divs
  */
-function renderContacts() {
-  let alphabet = generateAlphabet();
+async function renderContacts() {
+  let alphabet = await generateAlphabet();
   let storedContacts = JSON.parse(localStorage.getItem("contacts")) || [];
   if (storedContacts.length === 0) {
     clearEmptyDivs(alphabet);
