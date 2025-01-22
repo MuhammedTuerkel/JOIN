@@ -314,7 +314,7 @@ function loadContactsAgain() {
   if (!contacts || contacts.length === 0) {
     console.warn("Contacts array is undefined or empty");
   } else {
-    renderContact();
+    renderContacts();
   }
 }
 
