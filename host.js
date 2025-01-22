@@ -7,7 +7,7 @@
  * @property {string} production - The base URL for the production environment.
  */
 const CONFIG = {
-  development: "http://127.0.0.1:5500",
+  development: "http://127.0.0.1:5501",
   staging: "new server if you want to get a second server",
   production: "https://join-401.developerakademie.net/JOIN",
 };
