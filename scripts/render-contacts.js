@@ -2,7 +2,7 @@
  * Render the contactlist with the whole alphabet
  */
 function renderContactsListHTML() {
-  let list = (document.getElementById("ContactsList").innerHTML = "");
+  document.getElementById("ContactsList").innerHTML = "";
   let alphabet = generateAlphabet();
   alphabet.forEach((letter, i) => {
     document.getElementById("ContactsList").innerHTML += `
@@ -33,6 +33,12 @@ function generateAlphabet() {
 function renderContacts() {
   let alphabet = generateAlphabet();
   let storedContacts = JSON.parse(localStorage.getItem("contacts")) || [];
+  alphabet.forEach((letter) => {
+    let container = document.getElementById(letter);
+    if (container) {
+      container.innerHTML = "";
+    }
+  });
   if (storedContacts.length === 0) {
     clearEmptyDivs(alphabet);
   } else {
@@ -42,11 +48,10 @@ function renderContacts() {
         let letterIndex = alphabet.indexOf(firstLetter);
         if (letterIndex !== -1) {
           let badge = generateBadge(index);
-          generateContactHTML(storedContacts, alphabet, letterIndex, badge);
+          generateContactHTML(storedContacts, alphabet, letterIndex, badge, index);
         }
       }
     });
-
     clearEmptyDivs(alphabet);
   }
 }
@@ -57,32 +62,28 @@ function renderContacts() {
  * @param {*} i - Current index in the alphabet array.
  * @param {*} Badge - The generated badge for the contact.
  */
-function generateContactHTML(storedContacts, a, i, badge) {
-  if (storedContacts.length === 0) {
-    console.warn("Contacts array is empty");
-    return;
-  }
-
-  storedContacts.forEach((storedContacts, index) => {
-    if (storedContacts && storedContacts.color && storedContacts.name && storedContacts.email) {
-      if (storedContacts.name.charAt(0).toUpperCase() === a[i]) {
-        document.getElementById(`${a[i]}`).innerHTML += `
+function generateContactHTML(storedContacts, a, i, badge, index) {
+  const contact = storedContacts[index];
+  if (contact && contact.color && contact.name && contact.email) {
+    if (contact.name.charAt(0).toUpperCase() === a[i]) {
+      let container = document.getElementById(`${a[i]}`);
+      if (container) {
+        container.innerHTML += `
           <div id="Contact${index}" onclick="loadContact(${index}, event)" class="Contact">
-            <div class="Profile-Badge" style="background-color: ${storedContacts.color};">
+            <div class="Profile-Badge" style="background-color: ${contact.color};">
               <h4>${badge}</h4>
             </div>
             <div class="name-email">
-              <h2 id="name${index}">${storedContacts.name}</h2>
-              <h3>${storedContacts.email}</h3>
+              <h2 id="name${index}">${contact.name}</h2>
+              <h3>${contact.email}</h3>
             </div>
           </div>
         `;
       }
-    } else {
-      console.warn(`Invalid contact data at index ${x}`, storedContacts);
     }
-    x++;
-  });
+  } else {
+    console.warn(`Invalid contact data at index ${index}`, contact);
+  }
 }
 
 /**
@@ -96,6 +97,12 @@ function clearEmptyDivs(alphabet) {
     }
   });
 }
+
+/**
+ * renders the contact information.
+ * @param {*} i
+ * @returns
+ */
 function renderContactInformation(i) {
   let storedContacts = JSON.parse(localStorage.getItem("contacts")) || [];
   if (i >= 0 && i < storedContacts.length) {

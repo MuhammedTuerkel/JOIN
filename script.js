@@ -324,25 +324,45 @@ function getContactsFromLocalStorage() {
   }
 }
 
-/**
- * Deletes a contact from the local storage by index and updates tasks to remove the deleted contact.
- * @param {number} index - The index of the contact to delete.
- */
-function deleteContactFromLocalStorage(index) {
-  let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
-  if (index >= 0 && index < contacts.length) {
-    const contactToDelete = contacts[index].id;
-    contacts.splice(index, 1);
-    localStorage.setItem("contacts", JSON.stringify(contacts));
-    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    tasks.forEach((task) => {
-      if (task.assigned_to) {
-        task.assigned_to = task.assigned_to.filter((assignedUser) => assignedUser.id !== contactToDelete);
-      }
-    });
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    loadContactsAgain();
+function deleteContactFromLocalStorage(i) {
+  let storedContacts = JSON.parse(localStorage.getItem("contacts")) || [];
+  if (i >= 0 && i < storedContacts.length) {
+    storedContacts.splice(i, 1);
+    localStorage.setItem("contacts", JSON.stringify(storedContacts));
+    // Entfernen Sie den Aufruf von renderContacts hier
   } else {
-    console.warn(`Invalid index: ${index}`);
+    console.warn(`Contact with index ${i} not found in local storage.`);
   }
+}
+
+function updateTasksAfterContactDeletion(deletedContactIndex) {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  const deletedContactId = contacts[deletedContactIndex].id;
+
+  tasks = tasks.map((task) => {
+    if (task.assigned_to) {
+      task.assigned_to = task.assigned_to.filter((assignedUser) => assignedUser.id !== deletedContactId);
+    }
+    return task;
+  });
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+/**
+ * Updates tasks after a contact is deleted
+ * @param {number} deletedContactIndex - The index of the deleted contact
+ */
+function updateTasksAfterContactDeletion(deletedContactIndex) {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  const deletedContactId = contacts[deletedContactIndex].id;
+
+  tasks = tasks.map((task) => {
+    if (task.assigned_to) {
+      task.assigned_to = task.assigned_to.filter((assignedUser) => assignedUser.id !== deletedContactId);
+    }
+    return task;
+  });
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 }

@@ -15,7 +15,7 @@ async function Init() {
  * @param {*} i
  * @param {event} event
  */
-async function loadContact(i, event) {
+function loadContact(i, event) {
   document.getElementById("body").classList.add("over-hidden");
   event.stopPropagation();
   if (window.innerWidth < 1050) {
@@ -25,14 +25,18 @@ async function loadContact(i, event) {
   hideContact(i);
   renderContactInformation(i);
   setTimeout(() => {
-    waitForAnimation();
+    waitForAnimation(i);
   }, 100);
   setTimeout(() => {
     document.getElementById("body").classList.remove("over-hidden");
   }, 500);
 }
 
-function waitForAnimation() {
+/**
+ * gives the choosen contact the background color and shows the contact information
+ * @param {} i
+ */
+function waitForAnimation(i) {
   document.getElementById(`Contact${i}`).style = "background-color: #2A3647;";
   document.getElementById(`name${i}`).style = "color:white;";
   document.getElementById("all-information").classList.add("animationRightToPosition");
@@ -43,19 +47,19 @@ function waitForAnimation() {
  * It hides the contact and shows again the contact list
  * @param {event} event
  */
-function hideContactMobile(event) {
-  event.stopPropagation();
+function hideContactMobile(i, event) {
+  event.stopPropagation(i);
   if (window.innerWidth < 1050) {
     document.getElementById("Contacts").style = "";
     document.getElementById("headline-contact").classList.add("d-none3");
   }
-  hideContact();
+  hideContact(i);
 }
 
 /**
  * It hides the contact and removes the background color of the contact in the contactlist
  */
-function hideContact() {
+function hideContact(i) {
   document.getElementById("all-information").classList.remove("animationRightToPosition");
   document.getElementById("all-information").classList.add("d-none");
   if (contacts && contacts.length) {
@@ -200,11 +204,18 @@ function clearEmptyDivs(a) {
  * @param {int} i
  */
 function deleteContact(i) {
-  deleteContactfromFirebase(i);
   hideAddNewContact(event);
   hideContactMobile(event);
-  getTheItemstoPushTOFireBase();
-  renderContactsListHTMLAgain();
+  deleteContactFromLocalStorage(i);
+  updateContactsDisplay();
+  updateTasksAfterContactDeletion(i);
+}
+
+/**
+ * step between contact deletion and updating tasks
+ */
+function updateContactsDisplay() {
+  renderContactsListHTML();
 }
 
 /**
@@ -249,38 +260,34 @@ function generateEditNewContactHTML(Badge, i) {
  * @param {event} event
  */
 function createNewContact(event) {
-  event.stopPropagation();
-  let contactContainer = document.getElementsByClassName("Contact");
+  event.preventDefault();
   let name = document.getElementById("input-name").value;
   let email = document.getElementById("input-email").value;
   let phone = document.getElementById("input-phone").value;
   const color = createRandomColor();
 
-  if (name.trim() == "" || email.trim() == "" || phone.trim() == "") {
-  } else {
-    contacts.push({
-      name: name,
-      email: email,
-      phone: phone,
-      color: color,
-      createdAt: new Date().toISOString(),
-    });
-    pushContactsToLocalStorage();
-    while (contactContainer.length > 0) {
-      contactContainer[0].parentNode.removeChild(contactContainer[0]);
-    }
-    hideAddNewContact(event);
-    animateContactCreated();
-    renderContactsListHTMLAgain();
-  }
+  const newContact = {
+    name: name,
+    email: email,
+    phone: phone,
+    color: color,
+    createdAt: new Date().toISOString(),
+  };
+
+  contacts.push(newContact);
+  pushContactsToLocalStorage();
+
+  hideAddNewContact(event);
+  animateContactCreated();
+  renderContactsListHTML();
 }
 
 /**
  * Render the contactlist with the whole alphabet
  */
-async function renderContactsListHTMLAgain() {
+function renderContactsListHTMLAgain() {
   document.getElementById("ContactsList").innerHTML = "";
-  let alphabet = await generateAlphabet();
+  let alphabet = generateAlphabet();
   for (let i = 0; i < alphabet.length; i++) {
     document.getElementById("ContactsList").innerHTML += `
           <div id="Section${i}" class="letterSections"> 
@@ -375,6 +382,9 @@ function deleteContactfromFirebase(i) {
   deleteContactFromLocalStorage(i);
 }
 
+/**
+ * checks if the input fields are empty and enables or disables the save button
+ */
 function contactsFormValidation() {
   let name = document.getElementById("input-name").value;
   let email = document.getElementById("input-email").value;
