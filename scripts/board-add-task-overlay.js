@@ -136,6 +136,8 @@ function activateButton(buttonId, svgId, buttonClass, svgClass) {
  * @param {string} ticketID - The ID of the task to update.
  */
 function saveEditOnClick(ticketID) {
+  console.log(selectedUsers);
+
   const updatedTask = getUpdatedTaskDetails();
   const taskIndex = allTasks.findIndex((task) => task.id === ticketID);
 
