@@ -5,7 +5,6 @@ let i = 0;
  * Is a onload-function it loads the functions that are needed to load at the beginning
  */
 async function Init() {
-  // pushContactsToLocalStorage();
   renderContactsListHTML();
 }
 

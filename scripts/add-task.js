@@ -47,49 +47,6 @@ function goBackToAddTask(event) {
   event.preventDefault();
 }
 
-// /**
-//  * Posts a task to the local storage.
-//  * Combines buildTask and postTask into a single function call.
-//  * @param {string} state - The state of the task.
-//  */
-// function postTask(state, path = "tasks") {
-//   let task = buildTask(state);
-//   let tasks = JSON.parse(localStorage.getItem(path)) || [];
-//   tasks.push(task);
-//   localStorage.setItem(path, JSON.stringify(tasks));
-// }
-
-// /**
-//  * Builds a task object from form input values for the board.
-//  * @param {string} state - The state of the task.
-//  * @returns {Object} - The task object in JSON format.
-//  */
-// function buildTask(state) {
-//   let id = generateTaskID();
-//   let taskTitle = document.getElementById("task-title").value;
-//   let taskDate = document.getElementById("task-due-date").value;
-//   let taskPrio = selectedPrio;
-//   let taskDescription = document.getElementById("task-description").value;
-//   let taskCategory = document.getElementById("task-category").value;
-//   let taskSubtasks = subtasksArray;
-//   let taskState = state;
-//   let taskAssigned = selectedContacts;
-//   return taskToJSON(id, taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState);
-// }
-
-// function generateTaskID() {
-//   const characters = "abcdefghijklmnopqrstuvwxyz";
-//   const numbers = "0123456789";
-//   let result = "";
-//   for (let i = 0; i < 3; i++) {
-//     result += characters.charAt(Math.floor(Math.random() * characters.length));
-//   }
-//   for (let i = 0; i < 3; i++) {
-//     result += numbers.charAt(Math.floor(Math.random() * numbers.length));
-//   }
-//   return result;
-// }
-
 /**
  * Posts a task to the local storage.
  * Combines buildTask and postTask into a single function call.
@@ -294,9 +251,9 @@ function showAddTaskOverlayNextStep(event) {
   document.body.style.overflow = "hidden";
 }
 
-// /**
-//  * Checks the validity of the form fields and enables/disables the create task button accordingly.
-//  */
+/**
+ * Checks the validity of the form fields and enables/disables the create task button accordingly.
+ */
 function checkFormValidity() {
   const taskCategory = document.getElementById("task-category");
   const taskDueDate = document.getElementById("task-due-date");

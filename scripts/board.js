@@ -127,10 +127,7 @@ function changeSubtaskStatus(subtaskIndex, ticketID) {
   if (task) {
     let subtask = task.subtasks[subtaskIndex];
     subtask.status = subtask.status === "open" ? "closed" : "open";
-
-    // Update localStorage with the new task status
     localStorage.setItem("tasks", JSON.stringify(allTasks));
-
     renderSubtasksOverlay(ticketID);
     updateProgressBar(ticketID);
     renderAllTickets(allTasks);
