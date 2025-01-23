@@ -95,3 +95,55 @@ function updateUI() {
 
   renderAddTaskSubtaskList();
 }
+
+/**
+ * Toggles user selection based on checkbox status.
+ * @param {string} email - The email of the user to toggle selection.
+ */
+function toggleUserSelection(email) {
+  let template = document.getElementById(`template-${email}`);
+  let checkbox = document.getElementById(`checkbox-${email}`);
+  let isChecked = checkbox.checked;
+  if (isChecked) {
+    notAssignedUser(email);
+  } else {
+    assignedUserDropDown(email);
+  }
+}
+
+/**
+ * Assigns a user and updates the UI accordingly.
+ * @param {string} email - The email of the user to be assigned.
+ */
+function assignedUserDropDown(email) {
+  let template = document.getElementById(`template-${email}`);
+  let checkedImg = document.getElementById(`img-${email}`);
+  let checkbox = document.getElementById(`checkbox-${email}`);
+  template.classList.remove("user_template_not_selected");
+  template.classList.add("user_template_selected");
+  checkedImg.src = "./assets/img/checked button.png";
+  checkbox.checked = true;
+  let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
+  let contact = contacts.find((contact) => contact.email === email);
+  if (contact && !selectedContacts.some((selectedContact) => selectedContact.email === contact.email)) {
+    selectedContacts.push(contact);
+  }
+  updateSelectedUsersContainer();
+}
+
+/**
+ * Unassigns a user and updates the UI accordingly.
+ * @param {string} email - The email of the user to be unassigned.
+ */
+function notAssignedUser(email) {
+  let template = document.getElementById(`template-${email}`);
+  let checkedImg = document.getElementById(`img-${email}`);
+  let checkbox = document.getElementById(`checkbox-${email}`);
+  template.classList.remove("user_template_selected");
+  template.classList.add("user_template_not_selected");
+  checkedImg.src = "./assets/img/check button.png";
+  checkbox.checked = false;
+  let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
+  selectedContacts = selectedContacts.filter((contact) => contact.email !== email);
+  updateSelectedUsersContainer();
+}

@@ -47,8 +47,8 @@ function waitForAnimation(i) {
  * It hides the contact and shows again the contact list
  * @param {event} event
  */
-function hideContactMobile(i, event) {
-  event.stopPropagation(i);
+function hideContactMobile(event) {
+  event.stopPropagation();
   if (window.innerWidth < 1050) {
     document.getElementById("Contacts").style = "";
     document.getElementById("headline-contact").classList.add("d-none3");
@@ -273,10 +273,8 @@ function createNewContact(event) {
     color: color,
     createdAt: new Date().toISOString(),
   };
-
   contacts.push(newContact);
   pushContactsToLocalStorage();
-
   hideAddNewContact(event);
   animateContactCreated();
   renderContactsListHTML();
@@ -380,20 +378,4 @@ function pushToFireBase() {
  */
 function deleteContactfromFirebase(i) {
   deleteContactFromLocalStorage(i);
-}
-
-/**
- * checks if the input fields are empty and enables or disables the save button
- */
-function contactsFormValidation() {
-  let name = document.getElementById("input-name").value;
-  let email = document.getElementById("input-email").value;
-  let phone = document.getElementById("input-phone").value;
-
-  if (name.trim() == "" || email.trim() == "" || phone.trim() == "") {
-    document.getElementById("createNewContactButton").classList.add("disabled");
-    document.getElementById("createNewContactButton").classList.remove("enabled");
-  } else {
-    document.getElementById("createNewContactButton").classList.remove("disabled");
-  }
 }

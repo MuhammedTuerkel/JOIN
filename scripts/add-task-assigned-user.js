@@ -53,7 +53,6 @@ function loadUserInAssignedToDropdown() {
     let contact = storedContacts[index];
     dropdownContainer.innerHTML += createUserTemplate(contact);
   }
-
   updateDropdownSelections();
 }
 

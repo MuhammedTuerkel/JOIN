@@ -348,21 +348,3 @@ function updateTasksAfterContactDeletion(deletedContactIndex) {
 
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
-
-/**
- * Updates tasks after a contact is deleted
- * @param {number} deletedContactIndex - The index of the deleted contact
- */
-function updateTasksAfterContactDeletion(deletedContactIndex) {
-  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  const deletedContactId = contacts[deletedContactIndex].id;
-
-  tasks = tasks.map((task) => {
-    if (task.assigned_to) {
-      task.assigned_to = task.assigned_to.filter((assignedUser) => assignedUser.id !== deletedContactId);
-    }
-    return task;
-  });
-
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-}

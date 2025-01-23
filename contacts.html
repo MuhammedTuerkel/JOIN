@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="./styles/contacts.css">
     <script src="./array.js"></script>
     <script src="scripts/login.js"></script>
+    <script src="./scripts/contacts-form-validation.js"></script>
 </head>
 
 <body id="body" onclick="hideSubMenu(), hideAddNewContact(event), hideEditDeleteMenu(event)"
@@ -177,7 +178,9 @@
                     <input oninput="contactsFormValidation()" class="margin_null" id="input-name" type="text" placeholder="Name" required>
                     <input oninput="contactsFormValidation()" id="input-email" type="email" placeholder="Email" required>
                     <input oninput="contactsFormValidation()" id="input-phone" type="number" placeholder="Phone" required>
+                    <small id="contactsInputMail" class="contact_input_mail_info contacts_d_none">Bitte geben Sie eine gültige E-Mail-Adresse ein.</small>   
                 </div>
+ 
                 <div id="cancelCreate" style="display: none;" class="cancel-create">
 
                     <div onclick="hideAddNewContact(event)" class="Cancel">

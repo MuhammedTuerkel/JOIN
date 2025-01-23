@@ -832,6 +832,25 @@
   border-color: red !important;
 }
 
+.contacts_d_none {
+  display: none;
+}
+
+.contact_input_mail_info {
+  color: red;
+  font-size: 0.875em;
+  position: absolute;
+  bottom: -1.5em;
+  left: 0;
+  width: 100%;
+  margin-left: 10px;
+  margin-left: 10px;
+}
+
+.contacts_input_error {
+  border-color: #e40000 !important;
+}
+
 @media (max-width: 999px) and (min-width: 831px) {
   .contact_overly_img_task_name_container {
     font-size: 12px;
