@@ -209,6 +209,7 @@ function deleteContact(i) {
   deleteContactFromLocalStorage(i);
   updateContactsDisplay();
   updateTasksAfterContactDeletion(i);
+  showToast("Contact deleted successfully", "success");
 }
 
 /**

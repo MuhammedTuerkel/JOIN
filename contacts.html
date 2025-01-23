@@ -20,9 +20,11 @@
     <link rel="manifest" href="./assets/favicon/site.webmanifest" />
     <link rel="stylesheet" href="./styles/standard.css">
     <link rel="stylesheet" href="./styles/contacts.css">
+    <link rel="stylesheet" href="./styles/toast-message.css">
     <script src="./array.js"></script>
     <script src="scripts/login.js"></script>
     <script src="./scripts/contacts-form-validation.js"></script>
+    <script src="./scripts/toast-message.js"></script>
 </head>
 
 <body id="body" onclick="hideSubMenu(), hideAddNewContact(event), hideEditDeleteMenu(event)"
@@ -215,6 +217,7 @@
                 </div>
             </div>
         </div>
+        <div id="toast-container"></div>
         <script>
             window.addEventListener('orientationchange', checkOrientation);
             window.addEventListener('resize', checkOrientation);
