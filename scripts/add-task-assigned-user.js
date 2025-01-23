@@ -285,3 +285,24 @@ function getNumericID(subtaskItem) {
 function reindexSubtasks() {
   subtasksArray.forEach((subtask, i) => (subtask.id = i + 1));
 }
+
+/**
+ * Updates the dropdown selections based on the assigned users.
+ * Adds the `user_template_selected` class to the contacts in assignedContacts.
+ * @param {Array<Object>} assignedContacts - The contacts assigned to the selected task.
+ */
+function updateEditAssignedUsersDropdown(ticketID) {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  let task = tasks.find((task) => task.id === ticketID);
+  if (!task) return;
+  let assignedContacts = task.assigned_to || [];
+  assignedContacts.forEach((contact) => {
+    let templateId = `template-${contact.email}`;
+    document.getElementById(templateId).classList.remove("user_template_not_selected");
+    document.getElementById(templateId).classList.add("user_template_selected");
+    let checkbox = document.getElementById(`checkbox-${contact.email}`);
+    let img = document.getElementById(`img-${contact.email}`);
+    checkbox.checked = true;
+    img.src = "./assets/img/checked button.png";
+  });
+}

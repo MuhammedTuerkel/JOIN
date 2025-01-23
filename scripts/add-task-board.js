@@ -5,7 +5,7 @@ let selectedUsersOnBoard = [];
  * Opens the dropdown container and updates the dropdown arrow.
  * @param {Event} event - The event object.
  */
-function openDropdown(event) {
+function openEditDropdown(ticketID, event) {
   event.stopPropagation();
   document.getElementById("assigned").classList.add("add_task_dropdown_active");
   let dropdownContainer = document.getElementById("addTaskDropdown");
@@ -16,6 +16,7 @@ function openDropdown(event) {
     dropdownContainer.classList.add("open");
     dropdownImage.style.transform = "rotate(180deg)";
     loadUserInAssignedToDropdown();
+    updateEditAssignedUsersDropdown(ticketID);
   }
 }
 
@@ -55,7 +56,6 @@ function loadUserInAssignedToDropdown() {
     let contact = storedContacts[index];
     dropdownContainer.innerHTML += createUserTemplate(contact);
   }
-
   updateDropdownSelections();
 }
 
@@ -155,13 +155,9 @@ function updateEditSelectedUsersContainer(ticketID) {
       </div>
     `;
   }
-}
+  console.log("assigned Contacts", assignedContacts);
 
-function editTaskFillInUsers() {
-  for (let i = 0; i < ticketAssignedUsers.length; i++) {
-    let mail = ticketAssignedUsers[i].email;
-    toggleUserSelection(mail);
-  }
+  updateEditAssignedUsersDropdown(assignedContacts);
 }
 
 /**
