@@ -207,19 +207,6 @@ function renderAddTaskSubtaskList(ticketID) {
 }
 
 /**
- * Disables the subtask input field and add button.
- */
-function disableInputAndButton() {
-  let subtaskInput = document.getElementById("task-subtasks");
-  let addButton = document.getElementById("add-subtask-btn");
-  subtaskInput.placeholder = "maximum 4 Subtasks reached";
-  subtaskInput.disabled = true;
-  addButton.disabled = true;
-  subtaskInput.classList.add("disabled");
-  addButton.classList.add("disabled");
-}
-
-/**
  * Enables the subtask input field and add button.
  */
 function enableInputAndButton() {

@@ -9,20 +9,13 @@ function pushEditSubtasksInGlobalArray(ticketID, index) {
     targetTicket[0].subtasks = subtasksArray;
   }
   let newSubtask = document.getElementById("task-subtasks");
-  if (subtasksArray.length < 4 && newSubtask.value != "") {
-    subtasksArray.push({
-      id: subtasksArray.length + 1,
-      content: newSubtask.value,
-      status: "open",
-    });
-    newSubtask.value = "";
-    renderSubtaskList(ticketID);
-    if (subtasksArray.length >= 4) {
-      disableInputAndButton();
-    }
-  } else if (subtasksArray.length >= 4) {
-    disableInputAndButton();
-  }
+  subtasksArray.push({
+    id: subtasksArray.length + 1,
+    content: newSubtask.value,
+    status: "open",
+  });
+  newSubtask.value = "";
+  renderSubtaskList(ticketID);
 }
 
 /**
