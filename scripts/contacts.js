@@ -5,7 +5,7 @@ let i = 0;
  * Is a onload-function it loads the functions that are needed to load at the beginning
  */
 async function Init() {
-  pushContactsToLocalStorage();
+  // pushContactsToLocalStorage();
   renderContactsListHTML();
 }
 
@@ -141,22 +141,17 @@ function generateAlphabet() {
 /**
  * Generates the contacts in the contactlist if its finished with the array it goes back to the renderContact function
  * @param {*} a
- * @param {*} i
- * @param {*} Badge
  */
 function generateContactHTML(a, i, Badge) {
-  // Vergewissere dich, dass der Contacts-Array und die benötigten Daten vorhanden sind
   if (!contacts || contacts.length === 0) {
     console.warn("Contacts array is undefined or empty");
     return;
   }
-
   const contact = contacts[x];
   if (!contact || !contact.color || !contact.name || !contact.email) {
     console.warn(`Invalid contact data at index ${x}`);
     return;
   }
-
   document.getElementById(`${a[i]}`).innerHTML += `
     <div id="Contact${x}" onclick="loadContact(${x}, event)" class="Contact">
       <div class="Profile-Badge" style="background-color: ${contact.color};">
@@ -177,7 +172,7 @@ function generateContactHTML(a, i, Badge) {
 function generateBadge(x) {
   if (!contacts[x] || !contacts[x].name) {
     console.warn(`Contact with index ${x} not found or name is undefined`);
-    return "N/A"; // returning N/A to handle error cases
+    return "N/A";
   }
   let values = contacts[x].name.split(" ");
   let f_name = values.shift().charAt(0).toUpperCase();
@@ -220,7 +215,6 @@ function updateContactsDisplay() {
 
 /**
  * Loads the edit contact
- * @param {event} event
  * @param {int} i
  */
 function loadEditContact(event, i) {
@@ -236,7 +230,6 @@ function loadEditContact(event, i) {
 
 /**
  * Loads the template of edit new contact with an animation
- * @param {object} Badge
  * @param {int} i
  */
 function generateEditNewContactHTML(Badge, i) {
@@ -265,7 +258,6 @@ function createNewContact(event) {
   let email = document.getElementById("input-email").value;
   let phone = document.getElementById("input-phone").value;
   const color = createRandomColor();
-
   const newContact = {
     name: name,
     email: email,
@@ -274,10 +266,19 @@ function createNewContact(event) {
     createdAt: new Date().toISOString(),
   };
   contacts.push(newContact);
-  pushContactsToLocalStorage();
+  saveNewContacttoLocalStorage(newContact);
   hideAddNewContact(event);
   animateContactCreated();
   renderContactsListHTML();
+}
+
+/**
+ * pushes the new contact to the local storage
+ */
+function saveNewContacttoLocalStorage(newContact) {
+  let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
+  contacts.push(newContact);
+  localStorage.setItem("contacts", JSON.stringify(contacts));
 }
 
 /**
@@ -313,17 +314,6 @@ function animateContactCreated() {
 }
 
 /**
- * Loads and renders the updated contacts list.
- */
-function loadContactsAgain() {
-  if (!contacts || contacts.length === 0) {
-    console.warn("Contacts array is undefined or empty");
-  } else {
-    renderContacts();
-  }
-}
-
-/**
  * Saves the new contact that has been edited
  * @param {int} i
  */
@@ -345,8 +335,30 @@ function saveNewContact(i) {
   }
   renderContactsListHTMLAgain();
   hideAddNewContact(event);
-
   getTheItemstoPushTOFireBase();
+  loadContactEdit(i);
+}
+
+/**
+ * Onclick to a contact its loading it with an animation and the contact in the contactlist gets a background-color,
+ * if the screen width is smaller than 1050px then it separates the contact list and the contact
+ * @param {*} i
+ * @param {event} event
+ */
+function loadContactEdit(i) {
+  document.getElementById("body").classList.add("over-hidden");
+  if (window.innerWidth < 1050) {
+    document.getElementById("Contacts").style = "display:none;";
+    document.getElementById("headline-contact").classList.remove("d-none3");
+  }
+  hideContact(i);
+  renderContactInformation(i);
+  setTimeout(() => {
+    waitForAnimation(i);
+  }, 100);
+  setTimeout(() => {
+    document.getElementById("body").classList.remove("over-hidden");
+  }, 500);
 }
 
 /**

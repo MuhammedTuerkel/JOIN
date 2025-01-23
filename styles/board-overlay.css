@@ -13,7 +13,7 @@
 
 .overlay-card {
   width: 525px;
-  height: 90%;
+  height: 60%;
   background-color: white;
   padding: 48px 40px;
   border-radius: 30px;
@@ -149,6 +149,10 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  height: 230px;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .overlay-subtask-element {
