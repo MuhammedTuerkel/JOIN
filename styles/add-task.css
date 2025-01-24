@@ -352,6 +352,7 @@ select.focus {
   display: flex;
   align-items: center;
   margin-left: 11px;
+  width: 100%;
 }
 
 .bullet-point {

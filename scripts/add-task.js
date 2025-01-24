@@ -217,7 +217,12 @@ function handleSaveClick(target) {
   const contentWrapper = subtaskItem.querySelector(".subtask-content-wrapper");
   const inputContainer = subtaskItem.querySelector(".input-container");
   const input = inputContainer.querySelector(".subtask-input");
-  const updatedText = input.value;
+  const updatedText = input.value.trim();
+  if (updatedText === "") {
+    input.value = "";
+    input.placeholder = "No empty subtasks allowed";
+    return;
+  }
   contentWrapper.innerHTML = saveSubtaskItem(updatedText);
   const actions = subtaskItem.querySelector(".subtask-actions");
   actions.style.visibility = "visible";
