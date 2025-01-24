@@ -1021,8 +1021,9 @@
   }
 
   .addContactInput {
-    top: 450px;
+    top: 425px;
     left: 70px;
+    gap: 0;
   }
 
   .cancel-create {
@@ -1135,7 +1136,7 @@
   .cancel-create {
     height: 51px;
     left: 25px;
-    top: 530px;
+    top: 575px;
   }
 
   .close {
@@ -1183,7 +1184,7 @@
     left: 10px;
     top: 340px;
     width: 300px;
-    gap: 20px;
+    gap: 0px;
   }
 
   .cancel-create {
@@ -1195,6 +1196,7 @@
 
   .contact_input_mail_info {
     bottom: -3em;
+    inset: auto;
   }
 
   .close {

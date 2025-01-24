@@ -23,31 +23,34 @@ function contactsFormValidation() {
 }
 
 function validateAndSubmitForm(event) {
-  let name = document.getElementById("input-name").value.trim();
-  let email = document.getElementById("input-email").value.trim();
-  let phone = document.getElementById("input-phone").value.trim();
-
-  let nameValid = name.length >= 3 && /^[a-zA-Z\s]+$/.test(name); // Überprüfung, ob der Name gültig ist
-  let emailValid = checkContactsMailInput(email); // Überprüfung der E-Mail
-  let phoneValid = checkPhoneInput(phone); // Überprüfung der Telefonnummer
-
-  handleValidationFeedback("input-name", "contactsInputName", nameValid);
-  handleValidationFeedback("input-email", "contactsInputMail", emailValid);
-  handleValidationFeedback("input-phone", "contactsInputPhone", phoneValid);
+  let nameValid = validateName();
+  let emailValid = validateEmail();
+  let phoneValid = validatePhone();
 
   if (nameValid && emailValid && phoneValid) {
-    createNewContact(event); // Funktion ausführen, wenn alles korrekt ist
+    createNewContact(event);
   }
 }
 
-function checkContactsMailInput(email) {
-  let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regulärer Ausdruck für E-Mail-Überprüfung
-  return emailPattern.test(email);
+function validateName() {
+  let name = document.getElementById("input-name").value.trim();
+  let nameValid = name.length >= 3 && /^[a-zA-Z\s]+$/.test(name);
+  handleValidationFeedback("input-name", "contactsInputName", nameValid);
+  return nameValid;
 }
 
-function checkPhoneInput(phone) {
-  let phonePattern = /^\+?[1-9]\d{1,14}$/; // Regulärer Ausdruck für Telefon-Überprüfung
-  return phonePattern.test(phone);
+function validateEmail() {
+  let email = document.getElementById("input-email").value.trim();
+  let emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  handleValidationFeedback("input-email", "contactsInputMail", emailValid);
+  return emailValid;
+}
+
+function validatePhone() {
+  let phone = document.getElementById("input-phone").value.trim();
+  let phoneValid = /^\+?[1-9]\d{9,}$/.test(phone); // Änderung: Mindestens 10 Ziffern erforderlich
+  handleValidationFeedback("input-phone", "contactsInputPhone", phoneValid);
+  return phoneValid;
 }
 
 function handleValidationFeedback(inputFieldId, errorFieldId, isValid) {
@@ -56,9 +59,9 @@ function handleValidationFeedback(inputFieldId, errorFieldId, isValid) {
 
   if (isValid) {
     inputField.classList.remove("contacts_input_error");
-    errorField.style.display = "block";
+    errorField.style.display = "none";
   } else {
     inputField.classList.add("contacts_input_error");
-    errorField.style.display = "none";
+    errorField.style.display = "block";
   }
 }
