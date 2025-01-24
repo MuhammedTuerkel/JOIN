@@ -22,6 +22,10 @@ function contactsFormValidation() {
   }
 }
 
+/**
+ * Validates the form fields and submits if all fields are valid.
+ * @param {Event} event - The event triggered on form submission.
+ */
 function validateAndSubmitForm(event) {
   let nameValid = validateName();
   let emailValid = validateEmail();
@@ -32,6 +36,10 @@ function validateAndSubmitForm(event) {
   }
 }
 
+/**
+ * Validates the name field.
+ * @returns {boolean} - Returns true if the name is valid, otherwise false.
+ */
 function validateName() {
   let name = document.getElementById("input-name").value.trim();
   let nameValid = name.length >= 3 && /^[a-zA-Z\s]+$/.test(name);
@@ -39,6 +47,10 @@ function validateName() {
   return nameValid;
 }
 
+/**
+ * Validates the email field.
+ * @returns {boolean} - Returns true if the email is valid, otherwise false.
+ */
 function validateEmail() {
   let email = document.getElementById("input-email").value.trim();
   let emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -46,13 +58,23 @@ function validateEmail() {
   return emailValid;
 }
 
+/**
+ * Validates the phone number field.
+ * @returns {boolean} - Returns true if the phone number is valid, otherwise false.
+ */
 function validatePhone() {
   let phone = document.getElementById("input-phone").value.trim();
-  let phoneValid = /^\+?[1-9]\d{9,}$/.test(phone); // Änderung: Mindestens 10 Ziffern erforderlich
+  let phoneValid = /^\+?[1-9]\d{9,}$/.test(phone);
   handleValidationFeedback("input-phone", "contactsInputPhone", phoneValid);
   return phoneValid;
 }
 
+/**
+ * Handles the validation feedback for an input field.
+ * @param {string} inputFieldId - The ID of the input field.
+ * @param {string} errorFieldId - The ID of the error message field.
+ * @param {boolean} isValid - Indicates whether the input field is valid.
+ */
 function handleValidationFeedback(inputFieldId, errorFieldId, isValid) {
   let inputField = document.getElementById(inputFieldId);
   let errorField = document.getElementById(errorFieldId);
