@@ -177,8 +177,6 @@
   justify-content: center;
   align-items: center;
   box-shadow: 0px 0px 4px 0px #0000001a;
-  margin-right: 10px;
-  margin-left: 1px;
 }
 
 .Profile-Badge1 h2 {
@@ -1061,6 +1059,16 @@
   .Contact {
     width: 80%;
   }
+
+  .ContactsList {
+    align-items: center;
+  }
+
+  .Contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 @media (max-width: 830px) {
@@ -1085,7 +1093,7 @@
 
 @media (max-width: 530px) {
   .addNewContact {
-    height: 600px;
+    height: 650px;
   }
 
   .ContactsList {
@@ -1154,7 +1162,11 @@
   }
 
   .headline-contact {
-    padding: 50px 0px 0px 10px;
+    padding: 15px 0px 0px 10px;
+    gap: 30px;
+  }
+  .all-information {
+    gap: 15px;
   }
 
   .addNewContact {
@@ -1162,18 +1174,27 @@
   }
 
   .addContactProfilePicture {
-    left: 95px;
+    left: 110px;
+    width: 100px;
+    height: 100px;
   }
 
   .addContactInput {
     left: 10px;
+    top: 340px;
     width: 300px;
+    gap: 20px;
   }
 
   .cancel-create {
     align-items: center;
     gap: 10px;
     left: -20px;
+    top: 555px;
+  }
+
+  .contact_input_mail_info {
+    bottom: -3em;
   }
 
   .close {
@@ -1198,6 +1219,12 @@
 
   #input-phone {
     background-position-x: 270px;
+  }
+  .Contacts {
+    display: block;
+  }
+  .ContactsList {
+    align-items: unset;
   }
 }
 
