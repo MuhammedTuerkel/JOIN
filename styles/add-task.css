@@ -275,12 +275,17 @@ select.focus {
   height: 230px;
   overflow-y: scroll;
   -ms-overflow-style: none;
-  scrollbar-width: none;
+  scrollbar-width: 9px;
 }
 
-/* Webkit-Browser (Chrome, Safari) */
+.subtasks-list::-webkit-scrollbar-thumb {
+  background-color: #29abe2;
+  height: 40px;
+  border-radius: 15px;
+}
+
 .subtasks-list::-webkit-scrollbar {
-  display: flex; /* Scrollleiste verstecken */
+  width: 9px;
 }
 
 .subtasks-list .subtask {

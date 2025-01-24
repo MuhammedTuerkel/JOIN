@@ -96,12 +96,13 @@ function generateTaskID() {
 }
 
 /**
- * Handles the input event for the subtask input field.
+ * Handles the input and blur events for the subtask input field.
  */
 function subtaskInput() {
   const input = document.getElementById("task-subtasks");
   const iconsContainer = document.getElementById("iconsContainer");
   const addSubtaskBtn = document.getElementById("add-subtask-btn");
+
   input.addEventListener("input", () => {
     if (input.value.trim() !== "") {
       iconsContainer.style.visibility = "visible";
@@ -110,6 +111,10 @@ function subtaskInput() {
       iconsContainer.style.visibility = "hidden";
       addSubtaskBtn.style.visibility = "visible";
     }
+  });
+  input.addEventListener("blur", () => {
+    iconsContainer.style.visibility = "hidden";
+    addSubtaskBtn.style.visibility = "visible";
   });
 }
 
