@@ -421,7 +421,7 @@
   left: 742px;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 8px;
 }
 
 .addContactInput input {
@@ -845,6 +845,11 @@
   width: 100%;
   margin-left: 10px;
   margin-left: 10px;
+  inset: auto;
+}
+
+.contact_input_container {
+  margin-bottom: 1.5em;
 }
 
 .contacts_input_error {
@@ -899,6 +904,7 @@
     width: 364px;
     gap: 15px;
     left: 620px;
+    top: 105px;
   }
 
   #input-name {
@@ -920,7 +926,7 @@
   }
 
   .cancel-create {
-    top: 360px;
+    top: 400px;
     left: 595px;
   }
 }

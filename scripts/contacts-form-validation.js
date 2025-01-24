@@ -7,70 +7,58 @@ function contactsFormValidation() {
   let email = document.getElementById("input-email").value.trim();
   let phone = document.getElementById("input-phone").value.trim();
   let createNewContactButton = document.getElementById("createNewContactButton");
-  let nameFilled = name !== "";
-  let emailFilled = email !== "";
-  let phoneFilled = phone !== "";
-  if (nameFilled && emailFilled && phoneFilled) {
-    let isValidEmail = checkContactsMailInput();
-    let allFieldsValid = isValidEmail && phone !== "";
-    if (allFieldsValid) {
-      createNewContactButton.disabled = false;
-      createNewContactButton.classList.add("enabled");
-      createNewContactButton.classList.remove("disabled");
-    } else {
-      createNewContactButton.disabled = true;
-      createNewContactButton.classList.add("disabled");
-      createNewContactButton.classList.remove("enabled");
-    }
+  const minimumLength = 3;
+
+  if (name.length >= minimumLength && email.length >= minimumLength && phone.length >= minimumLength) {
+    createNewContactButton.disabled = false;
+    createNewContactButton.classList.add("enabled");
+    createNewContactButton.classList.remove("disabled");
+    createNewContactButton.style.pointerEvents = "auto";
   } else {
     createNewContactButton.disabled = true;
     createNewContactButton.classList.add("disabled");
     createNewContactButton.classList.remove("enabled");
+    createNewContactButton.style.pointerEvents = "none";
   }
-  addInputErrorStyles(nameFilled, emailFilled, phoneFilled);
 }
 
-/**
- * Checks if the email input field is correctly filled
- * and shows an error message if the email format is invalid.
- * @returns {boolean} - Returns true if the email is valid, otherwise false.
- */
-function checkContactsMailInput() {
-  let input = document.getElementById("input-email");
-  let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  let emailError = document.getElementById("contactsInputMail");
+function validateAndSubmitForm(event) {
+  let name = document.getElementById("input-name").value.trim();
+  let email = document.getElementById("input-email").value.trim();
+  let phone = document.getElementById("input-phone").value.trim();
 
-  if (!emailPattern.test(input.value)) {
-    emailError.classList.remove("contacts_d_none");
-    return false;
+  let nameValid = name.length >= 3 && /^[a-zA-Z\s]+$/.test(name); // Überprüfung, ob der Name gültig ist
+  let emailValid = checkContactsMailInput(email); // Überprüfung der E-Mail
+  let phoneValid = checkPhoneInput(phone); // Überprüfung der Telefonnummer
+
+  handleValidationFeedback("input-name", "contactsInputName", nameValid);
+  handleValidationFeedback("input-email", "contactsInputMail", emailValid);
+  handleValidationFeedback("input-phone", "contactsInputPhone", phoneValid);
+
+  if (nameValid && emailValid && phoneValid) {
+    createNewContact(event); // Funktion ausführen, wenn alles korrekt ist
+  }
+}
+
+function checkContactsMailInput(email) {
+  let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regulärer Ausdruck für E-Mail-Überprüfung
+  return emailPattern.test(email);
+}
+
+function checkPhoneInput(phone) {
+  let phonePattern = /^\+?[1-9]\d{1,14}$/; // Regulärer Ausdruck für Telefon-Überprüfung
+  return phonePattern.test(phone);
+}
+
+function handleValidationFeedback(inputFieldId, errorFieldId, isValid) {
+  let inputField = document.getElementById(inputFieldId);
+  let errorField = document.getElementById(errorFieldId);
+
+  if (isValid) {
+    inputField.classList.remove("contacts_input_error");
+    errorField.style.display = "block";
   } else {
-    emailError.classList.add("contacts_d_none");
-    return true;
-  }
-}
-
-/**
- * Adds error styles to input fields that have been filled incorrectly.
- * @param {boolean} nameFilled - Indicates if the name field has been filled.
- * @param {boolean} emailFilled - Indicates if the email field has been filled.
- * @param {boolean} phoneFilled - Indicates if the phone field has been filled.
- */
-function addInputErrorStyles(nameFilled, emailFilled, phoneFilled) {
-  let nameInput = document.getElementById("input-name");
-  let emailInput = document.getElementById("input-email");
-  let phoneInput = document.getElementById("input-phone");
-
-  let name = nameInput.value.trim();
-  let email = emailInput.value.trim();
-  let phone = phoneInput.value.trim();
-
-  if (nameFilled) {
-    nameInput.classList.toggle("contacts_input_error", name === "");
-  }
-  if (emailFilled) {
-    emailInput.classList.toggle("contacts_input_error", !checkContactsMailInput());
-  }
-  if (phoneFilled) {
-    phoneInput.classList.toggle("contacts_input_error", phone === "");
+    inputField.classList.add("contacts_input_error");
+    errorField.style.display = "none";
   }
 }
