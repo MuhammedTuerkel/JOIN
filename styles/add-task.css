@@ -390,6 +390,11 @@ select.focus {
   color: #ff0000;
 }
 
+button[aria-disabled="true"] {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
 .divider {
   width: 1px;
   height: 16px;

@@ -45,6 +45,8 @@ function createInputField(currentText) {
   input.type = "text";
   input.value = currentText;
   input.classList.add("subtask-input");
+  input.id = currentText;
+  input.setAttribute("oninput", `checkEditSubtaskInput('${currentText}')`);
   return input;
 }
 

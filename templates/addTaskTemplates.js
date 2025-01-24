@@ -95,7 +95,6 @@ function taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory
  */
 function createUserTemplate(contact) {
   let initials = contact.name.charAt(0).toUpperCase() + contact.name.charAt(contact.name.length - 1).toUpperCase();
-
   return `
           <div onclick="toggleUserSelection('${contact.email}')" class="user_template_not_selected" id="template-${contact.email}" >
               <div class="user_template_circle_name">

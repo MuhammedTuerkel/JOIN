@@ -210,6 +210,7 @@ function deleteArrayEntry(subtaskID) {
  */
 function handleSaveClick(target) {
   const subtaskItem = target.closest(".subtask-item");
+  const createTaskButton = document.getElementById("createTaskButton");
   const targetID = subtaskItem.id;
   const numericID = parseInt(targetID.split("_")[1], 10);
   const contentWrapper = subtaskItem.querySelector(".subtask-content-wrapper");
@@ -227,6 +228,23 @@ function handleSaveClick(target) {
   inputContainer.remove();
   subtaskItem.classList.remove("editing");
   editArrayEntry(numericID, updatedText);
+}
+
+/**
+ * this function checks the input field of a subtask for changes and updates the button accordingly.
+ * @param {string} currentText
+ */
+function checkEditSubtaskInput(currentText) {
+  const createTaskButton = document.getElementById("createTaskButton");
+  let currentInputfield = document.getElementById(currentText);
+  const currentInputfieldfilled = currentInputfield.value.trim();
+  if (currentInputfieldfilled.length > 0) {
+    createTaskButton.setAttribute("aria-disabled", "false");
+    createTaskButton.classList.remove("disabled");
+  } else {
+    createTaskButton.setAttribute("aria-disabled", "true");
+    createTaskButton.classList.add("disabled");
+  }
 }
 
 /**
