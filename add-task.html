@@ -98,13 +98,13 @@
       </div>
 
       <main class="add_task_body">
-        <form id="addTaskForm" class="add_task_main_content" oninput="checkFormValidity()">
+        <form id="addTaskForm" class="add_task_main_content" oninput="checkFormFilled()">
           <div class="form-wrapper">
             <div class="form-column-left">
               <div class="form-group required_focus add_task_for_error_height">
                 <label for="task-title">Title <span class="required-icon">*</span></label>
                 <input class="" type="text" id="task-title" name="title" placeholder="Enter a title" required />
-                <small class="add_task_error" id="addTaskTitleErrorInput">* This field is required</small>
+                <small style="display: none" class="add_task_error" id="addTaskTitleErrorInput">Please enter a valid task title</small>
               </div>
               <div class="form-group">
                 <label for="task-description">Description</label>
@@ -131,7 +131,7 @@
               <div class="form-group required_focus add_task_for_error_height">
                 <label for="task-due-date">Due date <span class="required-icon">*</span></label>
                 <input class="" type="date" id="task-due-date" name="due-date" placeholder="dd/mm/yyyy" required />
-                <small class="add_task_error" id="addTaskDateErrorInput">* This field is required</small>
+                <small style="display: none" class="add_task_error" id="addTaskDateErrorInput">Please enter a valid due date.</small>
               </div>
               <div class="prio-group">
                 <span id="prio-label">Prio <span class="required-icon">*</span></span>
@@ -200,7 +200,7 @@
                     <option value="user-story">User Story</option>
                   </select>
                 </div>
-                <small class="add_task_error" id="addTaskCategoryErrorInput">* This field is required</small>
+                <small style="display: none" class="add_task_error" id="addTaskCategoryErrorInput">Please enter a valid task category</small>
               </div>
               <div class="form-group">
                 <label for="task-subtasks">Subtasks</label>
@@ -264,7 +264,7 @@
                 </button>
               </div>
               <div class="add_task_create_button">
-                <button id="createTaskButton" type="submit" class="create-btn" onclick="showAddTaskOverlayNextStep(event)" disabled>
+                <button id="createTaskButton" type="submit" class="create-btn" onclick="checkFormValidity(event)" disabled>
                   <p>Create Task</p>
                   <img src="./assets/img/check.png" alt="" />
                 </button>

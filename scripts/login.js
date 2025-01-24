@@ -161,29 +161,6 @@ function checkEmailInput() {
   checkLoginInputfields();
 }
 
-// /**
-//  * Checks the email and password input fields for validity.
-//  * Enables or disables the login button based on the validation.
-//  */
-// function checkLoginInputfields() {
-//   const loginButton = document.getElementById("loginButton");
-//   const emailInput = document.getElementById("loginInputMail");
-//   const passwordInput = document.getElementById("loginInputPassword");
-//   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-//   const isEmailValid = emailPattern.test(emailInput.value.trim());
-//   const isPasswordValid = passwordInput.value.length >= 3;
-
-//   if (isEmailValid && isPasswordValid) {
-//     loginButton.disabled = false;
-//     loginButton.classList.add("enabled");
-//     loginButton.classList.remove("disabled");
-//   } else {
-//     loginButton.disabled = true;
-//     loginButton.classList.remove("enabled");
-//     loginButton.classList.add("disabled");
-//   }
-// }
-
 /**
  * Checks the email and password input fields for validity.
  * Enables or disables the login button based on the validation.

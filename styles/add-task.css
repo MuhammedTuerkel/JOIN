@@ -597,7 +597,6 @@ input.subtask-input:focus {
 .add_task_error {
   color: red;
   margin-left: 30px;
-  display: flex;
 }
 
 .custom-option-hover {
@@ -859,10 +858,6 @@ input[type="text"]:focus::placeholder {
   border-color: #29abe2;
   outline: none;
 }
-
-/* .required_focus input:focus {
-  border-color: red !important;
-} */
 
 .addTaskDescription:focus {
   border-color: #29abe2;

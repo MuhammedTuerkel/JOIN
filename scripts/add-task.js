@@ -11,7 +11,6 @@ function addTaskOnInit() {
   getLoggedInUserData();
   initializeKeyDown();
   checkAndLoadArraysToLocalStorage();
-  checkFormValidity();
 }
 
 /**
@@ -32,9 +31,9 @@ function addTaskClearTask() {
   enableInputAndButton();
   list.innerHTML = "";
   assignedList.innerHTML = "";
-  document.getElementById("addTaskTitleErrorInput").style.display = "block";
-  document.getElementById("addTaskDateErrorInput").style.display = "block";
-  document.getElementById("addTaskCategoryErrorInput").style.display = "block";
+  document.getElementById("addTaskTitleErrorInput").style.display = "none";
+  document.getElementById("addTaskDateErrorInput").style.display = "none";
+  document.getElementById("addTaskCategoryErrorInput").style.display = "none";
 }
 
 /**
@@ -174,7 +173,6 @@ function enableInputAndButton() {
   addButton.disabled = false;
   subtaskInput.classList.remove("disabled");
   addButton.classList.remove("disabled");
-  checkFormValidity();
 }
 
 /**
@@ -257,31 +255,66 @@ function showAddTaskOverlayNextStep(event) {
 }
 
 /**
- * Checks the validity of the form fields and enables/disables the create task button accordingly.
+ * Checks if the form fields are filled and enables the create task button.
  */
-function checkFormValidity() {
-  const taskCategory = document.getElementById("task-category");
-  const taskDueDate = document.getElementById("task-due-date");
-  const taskTitle = document.getElementById("task-title");
+function checkFormFilled() {
+  const taskTitle = document.getElementById("task-title").value.trim();
+  const taskDueDate = document.getElementById("task-due-date").value.trim();
+  const taskCategory = document.getElementById("task-category").value.trim();
   const createTaskButton = document.getElementById("createTaskButton");
-  let valid = true;
-  if (taskTitle.value.trim() === "") {
-    document.getElementById("addTaskTitleErrorInput").style.display = "block";
-    valid = false;
+  const titleError = document.getElementById("addTaskTitleErrorInput");
+  const dueDateError = document.getElementById("addTaskDateErrorInput");
+  const categoryError = document.getElementById("addTaskCategoryErrorInput");
+  const allFilled = taskTitle !== "" && taskDueDate !== "" && taskCategory !== "";
+  if (allFilled) {
+    createTaskButton.disabled = false;
   } else {
-    document.getElementById("addTaskTitleErrorInput").style.display = "none";
+    createTaskButton.disabled = true;
+    if (taskTitle === "") titleError.style.display = "none";
+    if (taskDueDate === "") dueDateError.style.display = "none";
+    if (taskCategory === "") categoryError.style.display = "none";
   }
-  if (taskDueDate.value.trim() === "") {
-    document.getElementById("addTaskDateErrorInput").style.display = "block";
-    valid = false;
+}
+
+/**
+ * Prevents form submission and checks the validity of the form fields.
+ * @param {Event} event - The event triggered on form submission.
+ */
+function checkFormValidity(event) {
+  event.preventDefault();
+
+  const taskTitle = document.getElementById("task-title").value.trim();
+  const taskDueDate = document.getElementById("task-due-date").value.trim();
+  const taskCategory = document.getElementById("task-category").value.trim();
+
+  const titleValid = taskTitle.length >= 4;
+  const dueDateValid = taskDueDate.length >= 6;
+  const categoryValid = taskCategory.length >= 3;
+
+  showValidationFeedback("task-title", "addTaskTitleErrorInput", titleValid);
+  showValidationFeedback("task-due-date", "addTaskDateErrorInput", dueDateValid);
+  showValidationFeedback("task-category", "addTaskCategoryErrorInput", categoryValid);
+
+  if (titleValid && dueDateValid && categoryValid) {
+    showAddTaskOverlayNextStep();
+  }
+}
+
+/**
+ * Displays validation feedback for each input field.
+ * @param {string} inputId - The ID of the input field.
+ * @param {string} errorId - The ID of the error message.
+ * @param {boolean} isValid - Indicates if the input field is valid.
+ */
+function showValidationFeedback(inputId, errorId, isValid) {
+  const inputField = document.getElementById(inputId);
+  const errorField = document.getElementById(errorId);
+
+  if (isValid) {
+    inputField.classList.remove("contacts_input_error");
+    errorField.style.display = "none"; // Fehlernachricht ausblenden
   } else {
-    document.getElementById("addTaskDateErrorInput").style.display = "none";
+    inputField.classList.add("contacts_input_error");
+    errorField.style.display = "block"; // Fehlernachricht anzeigen
   }
-  if (taskCategory.value.trim() === "") {
-    document.getElementById("addTaskCategoryErrorInput").style.display = "block";
-    valid = false;
-  } else {
-    document.getElementById("addTaskCategoryErrorInput").style.display = "none";
-  }
-  createTaskButton.disabled = !valid;
 }
