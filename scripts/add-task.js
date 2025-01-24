@@ -282,19 +282,15 @@ function checkFormFilled() {
  */
 function checkFormValidity(event) {
   event.preventDefault();
-
   const taskTitle = document.getElementById("task-title").value.trim();
   const taskDueDate = document.getElementById("task-due-date").value.trim();
   const taskCategory = document.getElementById("task-category").value.trim();
-
   const titleValid = taskTitle.length >= 4;
   const dueDateValid = taskDueDate.length >= 6;
   const categoryValid = taskCategory.length >= 3;
-
   showValidationFeedback("task-title", "addTaskTitleErrorInput", titleValid);
   showValidationFeedback("task-due-date", "addTaskDateErrorInput", dueDateValid);
   showValidationFeedback("task-category", "addTaskCategoryErrorInput", categoryValid);
-
   if (titleValid && dueDateValid && categoryValid) {
     showAddTaskOverlayNextStep();
   }
@@ -312,9 +308,9 @@ function showValidationFeedback(inputId, errorId, isValid) {
 
   if (isValid) {
     inputField.classList.remove("contacts_input_error");
-    errorField.style.display = "none"; // Fehlernachricht ausblenden
+    errorField.style.display = "none";
   } else {
     inputField.classList.add("contacts_input_error");
-    errorField.style.display = "block"; // Fehlernachricht anzeigen
+    errorField.style.display = "block";
   }
 }

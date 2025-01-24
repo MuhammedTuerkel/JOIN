@@ -462,9 +462,9 @@ input.subtask-input:focus {
   opacity: 1;
 }
 
-.subtask-actions {
+/* .subtask-actions {
   display: none;
-}
+} */
 
 .subtask-item.editing .subtask-actions {
   visibility: hidden;
