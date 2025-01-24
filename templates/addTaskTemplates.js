@@ -122,13 +122,13 @@ function renderAddTaskFeatureOnBoard(state) {
                 <h1>Add Task</h1>
                 <img onclick="toggleOverlay()" src="./assets/img/Close.png" alt="">
             </div>
-            <form id="addTaskForm" class="board_add_task_main_content" oninput="checkFormValidity()" onclick="handleDropdownBodyClick()">
+            <form id="addTaskForm" class="board_add_task_main_content" oninput="checkFormFilledBoard()" onclick="handleDropdownBodyClick()">
                 <div class="board_form_wrapper">
                         <div class="board_form_column_left">
                             <div class="form-group required_focus add_task_for_error_height">
                                 <label for="task-title">Title <span class="required-icon">*</span></label>
                                 <input class="" type="text" id="task-title" name="title" placeholder="Enter a title" required>
-                                <small class="add_task_error" id="addTaskTitleErrorInput">* This field is required</small>
+                                <small style="display: none" class="add_task_error" id="addTaskTitleErrorInput">* This field is required</small>
                             </div>
                             <div class="form-group">
                                 <label for="task-description">Description</label>
@@ -149,7 +149,7 @@ function renderAddTaskFeatureOnBoard(state) {
                             <div class="form-group required_focus add_task_for_error_height">
                                 <label for="task-due-date">Due date <span class="required-icon">*</span></label>
                                 <input class="" type="date" id="task-due-date" name="due-date" placeholder="dd/mm/yyyy" required>
-                                <small class="add_task_error" id="addTaskDateErrorInput">* This field is required</small>
+                                <small style="display: none" class="add_task_error" id="addTaskDateErrorInput">* This field is required</small>
                             </div>
                             <div class="prio-group">
                                 <span>Prio <span class="required-icon">*</span></span>
@@ -201,7 +201,7 @@ function renderAddTaskFeatureOnBoard(state) {
                                         <option value="user-story">User Story</option>
                                     </select>                                    
                                 </div>
-                                <small class="add_task_error" id="addTaskCategoryErrorInput">* This field is required</small>
+                                <small style="display: none" class="add_task_error" id="addTaskCategoryErrorInput">* This field is required</small>
                             </div>
                             <div class="form-group">
                                 <label for="task-subtasks">Subtasks</label>
@@ -257,7 +257,7 @@ function renderAddTaskFeatureOnBoard(state) {
                                 </button>
                             </div>
                             <div class="add_task_create_button">
-                                <button id="createTaskButton" type="submit" class="create-btn" onclick="saveTaskCloseOverlay(event, '${state}')" disabled>
+                                <button id="createTaskButton" type="submit" class="create-btn" onclick="checkFormValidityBoard(event, '${state}')" disabled>
                                     <p>Create Task</p>
                                     <img src="./assets/img/check.png" alt="">
                                 </button>

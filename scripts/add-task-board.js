@@ -254,3 +254,64 @@ function setLowOnBoard() {
   activateButton("low-btn", "low-svg", "low", "low-icon");
   selectedPrioOnBoard = "low";
 }
+
+/**
+ * Checks if the form fields are filled and enables the create task button.
+ */
+function checkFormFilledBoard() {
+  const taskTitle = document.getElementById("task-title").value.trim();
+  const taskDueDate = document.getElementById("task-due-date").value.trim();
+  const taskCategory = document.getElementById("task-category").value.trim();
+  const createTaskButton = document.getElementById("createTaskButton");
+  const titleError = document.getElementById("addTaskTitleErrorInput");
+  const dueDateError = document.getElementById("addTaskDateErrorInput");
+  const categoryError = document.getElementById("addTaskCategoryErrorInput");
+  const allFilled = taskTitle !== "" && taskDueDate !== "" && taskCategory !== "";
+  if (allFilled) {
+    createTaskButton.disabled = false;
+  } else {
+    createTaskButton.disabled = true;
+    if (taskTitle === "") titleError.style.display = "none";
+    if (taskDueDate === "") dueDateError.style.display = "none";
+    if (taskCategory === "") categoryError.style.display = "none";
+  }
+}
+
+/**
+ * Prevents form submission and checks the validity of the form fields.
+ * @param {Event} event - The event triggered on form submission.
+ */
+function checkFormValidityBoard(event, state) {
+  event.preventDefault();
+  const taskTitle = document.getElementById("task-title").value.trim();
+  const taskDueDate = document.getElementById("task-due-date").value.trim();
+  const taskCategory = document.getElementById("task-category").value.trim();
+  const titleValid = taskTitle.length >= 4;
+  const dueDateValid = taskDueDate.length >= 6;
+  const categoryValid = taskCategory.length >= 3;
+  showValidationFeedback("task-title", "addTaskTitleErrorInput", titleValid);
+  showValidationFeedback("task-due-date", "addTaskDateErrorInput", dueDateValid);
+  showValidationFeedback("task-category", "addTaskCategoryErrorInput", categoryValid);
+  if (titleValid && dueDateValid && categoryValid) {
+    saveTaskCloseOverlay(state);
+  }
+}
+
+/**
+ * Displays validation feedback for each input field.
+ * @param {string} inputId - The ID of the input field.
+ * @param {string} errorId - The ID of the error message.
+ * @param {boolean} isValid - Indicates if the input field is valid.
+ */
+function showValidationFeedback(inputId, errorId, isValid) {
+  const inputField = document.getElementById(inputId);
+  const errorField = document.getElementById(errorId);
+
+  if (isValid) {
+    inputField.classList.remove("contacts_input_error");
+    errorField.style.display = "none";
+  } else {
+    inputField.classList.add("contacts_input_error");
+    errorField.style.display = "block";
+  }
+}
