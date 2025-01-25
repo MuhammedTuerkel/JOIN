@@ -196,7 +196,7 @@ function renderAddTaskFeatureOnBoard(state) {
                                 <label for="task-category">Category <span class="required-icon">*</span></label>
                                 <div class="custom-select-wrapper ">
                                     <select class="custom-select" name="category" id="task-category" required>                                        
-                                        <option value="">Select task category</option>
+                                        <option value="" disabled selected>Select task category</option>
                                         <option value="technical-tasks">Technical Tasks</option>
                                         <option value="user-story">User Story</option>
                                     </select>                                    
