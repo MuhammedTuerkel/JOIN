@@ -321,6 +321,7 @@ body {
   font-size: 16px;
   line-height: 19.2px;
   color: #2a3647;
+  word-break: break-word;
 }
 
 .ticket-description {
@@ -449,6 +450,10 @@ body {
     margin-right: 25px;
   }
 
+  .ticket-title {
+    font-size: 12px;
+  }
+
   .ticket-card {
     width: 80%;
     gap: 5px;
@@ -460,6 +465,7 @@ body {
 
   .ticket-description {
     margin-bottom: 8px;
+    font-size: 12px;
   }
 
   .board-column {

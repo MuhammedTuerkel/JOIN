@@ -280,12 +280,13 @@ select.focus {
 
 .subtasks-list::-webkit-scrollbar-thumb {
   background-color: #29abe2;
-  height: 40px;
+  height: 15px;
   border-radius: 15px;
 }
 
 .subtasks-list::-webkit-scrollbar {
-  width: 9px;
+  width: 3px;
+  height: 3px;
 }
 
 .subtasks-list .subtask {
