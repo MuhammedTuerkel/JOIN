@@ -34,6 +34,7 @@ function addTaskClearTask() {
   document.getElementById("addTaskTitleErrorInput").style.display = "none";
   document.getElementById("addTaskDateErrorInput").style.display = "none";
   document.getElementById("addTaskCategoryErrorInput").style.display = "none";
+  checkFormFilled();
 }
 
 /**
@@ -112,10 +113,19 @@ function subtaskInput() {
       addSubtaskBtn.style.visibility = "visible";
     }
   });
-  input.addEventListener("blur", () => {
+}
+
+/**
+ * this function controlls the state of the add task form and enables/disables the buttons.
+ */
+function checkSubtaskInputfieldAfterEnter() {
+  const iconsContainer = document.getElementById("iconsContainer");
+  const addSubtaskBtn = document.getElementById("add-subtask-btn");
+  const input = document.getElementById("task-subtasks");
+  if (input.value === "") {
     iconsContainer.style.visibility = "hidden";
     addSubtaskBtn.style.visibility = "visible";
-  });
+  }
 }
 
 /**
@@ -148,6 +158,7 @@ function pushSubtaskArray() {
   subtasksArray.push(newSubtask);
   subTaskInput.value = "";
   renderAddTaskSubtaskList();
+  checkSubtaskInputfieldAfterEnter();
 }
 
 /**
@@ -330,10 +341,52 @@ function showValidationFeedback(inputId, errorId, isValid) {
   const errorField = document.getElementById(errorId);
 
   if (isValid) {
-    inputField.classList.remove("contacts_input_error");
+    inputField.classList.remove("addTaskErrorBorder");
     errorField.style.display = "none";
   } else {
-    inputField.classList.add("contacts_input_error");
+    inputField.classList.add("addTaskErrorBorder");
     errorField.style.display = "block";
+  }
+}
+
+/**
+ * Prevents form submission and checks the validity of the form fields.
+ */
+function checkFormValidityFromInputFieldTitle() {
+  let taskTitleElement = document.getElementById("task-title");
+  let taskTitle = taskTitleElement.value.trim();
+  let titleError = document.getElementById("addTaskTitleErrorInput");
+
+  if (taskTitle.length > 4 || taskTitle.length === 0) {
+    titleError.style.display = "none";
+    taskTitleElement.classList.remove("addTaskErrorBorder");
+  }
+}
+
+/**
+ * this function checks the validity of the form fields.
+ */
+function checkFormValidityFromInputFieldDueDate() {
+  let taskDueDateElement = document.getElementById("task-due-date");
+  let taskDueDate = taskDueDateElement.value.trim();
+  let dueDateError = document.getElementById("addTaskDateErrorInput");
+
+  if (taskDueDate.length === 6 || taskDueDate.length === 0) {
+    dueDateError.style.display = "none";
+    taskDueDateElement.classList.remove("addTaskErrorBorder");
+  }
+}
+
+/**
+ * this function checks the validity of the form fields.
+ */
+function checkFormValidityFromInputFieldCategory() {
+  let taskCategoryElement = document.getElementById("task-category");
+  let taskCategory = taskCategoryElement.value.trim();
+  let categoryError = document.getElementById("addTaskCategoryErrorInput");
+
+  if (taskCategory.length > 1 || taskCategory.length === 0) {
+    categoryError.style.display = "none";
+    taskCategoryElement.classList.remove("addTaskErrorBorder");
   }
 }

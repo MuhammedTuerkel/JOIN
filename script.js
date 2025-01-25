@@ -253,7 +253,7 @@ function goToBoard() {
  * Checks if the form is loaded on the website and listens if the enter-key is pressed. If yes, than the onclick-function on the checkIcon is activated
  */
 function initializeKeyDown() {
-  const form = document.getElementById("addTaskForm");
+  const form = document.getElementById("task-subtasks");
   if (form) {
     form.onkeydown = function (event) {
       if (event.key === "Enter") {

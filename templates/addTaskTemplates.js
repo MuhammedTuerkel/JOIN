@@ -127,7 +127,7 @@ function renderAddTaskFeatureOnBoard(state) {
                         <div class="board_form_column_left">
                             <div class="form-group required_focus add_task_for_error_height">
                                 <label for="task-title">Title <span class="required-icon">*</span></label>
-                                <input class="" type="text" id="task-title" name="title" placeholder="Enter a title" required>
+                                <input id="task-title" oninput="checkFormValidityFromInputFieldTitleBoard()" class="" type="text"  name="title" placeholder="Enter a title" required>
                                 <small style="display: none" class="add_task_error" id="addTaskTitleErrorInput">* This field is required</small>
                             </div>
                             <div class="form-group">
@@ -148,7 +148,7 @@ function renderAddTaskFeatureOnBoard(state) {
                         <div class="board_form_column_right">
                             <div class="form-group required_focus add_task_for_error_height">
                                 <label for="task-due-date">Due date <span class="required-icon">*</span></label>
-                                <input class="" type="date" id="task-due-date" name="due-date" placeholder="dd/mm/yyyy" required>
+                                <input oninput="checkFormValidityFromInputFieldDueDateBoard()" class="" type="date" id="task-due-date" name="due-date" placeholder="dd/mm/yyyy" required>
                                 <small style="display: none" class="add_task_error" id="addTaskDateErrorInput">* This field is required</small>
                             </div>
                             <div class="prio-group">
@@ -195,7 +195,7 @@ function renderAddTaskFeatureOnBoard(state) {
                             <div class="form-group add_task_for_error_height">
                                 <label for="task-category">Category <span class="required-icon">*</span></label>
                                 <div class="custom-select-wrapper ">
-                                    <select class="custom-select" name="category" id="task-category" required>                                        
+                                    <select oninput="checkFormValidityFromInputFieldCategoryBoard()" class="custom-select" name="category" id="task-category" required>                                        
                                         <option value="" disabled selected>Select task category</option>
                                         <option value="technical-tasks">Technical Tasks</option>
                                         <option value="user-story">User Story</option>

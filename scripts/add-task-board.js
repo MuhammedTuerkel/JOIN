@@ -289,9 +289,9 @@ function checkFormValidityBoard(event, state) {
   const titleValid = taskTitle.length >= 4;
   const dueDateValid = taskDueDate.length >= 6;
   const categoryValid = taskCategory.length >= 3;
-  showValidationFeedback("task-title", "addTaskTitleErrorInput", titleValid);
-  showValidationFeedback("task-due-date", "addTaskDateErrorInput", dueDateValid);
-  showValidationFeedback("task-category", "addTaskCategoryErrorInput", categoryValid);
+  showValidationFeedbackBoard("task-title", "addTaskTitleErrorInput", titleValid);
+  showValidationFeedbackBoard("task-due-date", "addTaskDateErrorInput", dueDateValid);
+  showValidationFeedbackBoard("task-category", "addTaskCategoryErrorInput", categoryValid);
   if (titleValid && dueDateValid && categoryValid) {
     saveTaskCloseOverlay(state);
   }
@@ -303,15 +303,57 @@ function checkFormValidityBoard(event, state) {
  * @param {string} errorId - The ID of the error message.
  * @param {boolean} isValid - Indicates if the input field is valid.
  */
-function showValidationFeedback(inputId, errorId, isValid) {
+function showValidationFeedbackBoard(inputId, errorId, isValid) {
   const inputField = document.getElementById(inputId);
   const errorField = document.getElementById(errorId);
 
   if (isValid) {
-    inputField.classList.remove("contacts_input_error");
+    inputField.classList.remove("addTaskErrorBorder");
     errorField.style.display = "none";
   } else {
-    inputField.classList.add("contacts_input_error");
+    inputField.classList.add("addTaskErrorBorder");
     errorField.style.display = "block";
+  }
+}
+
+/**
+ * Prevents form submission and checks the validity of the form fields.
+ */
+function checkFormValidityFromInputFieldTitleBoard() {
+  let taskTitleElement = document.getElementById("task-title");
+  let taskTitle = taskTitleElement.value.trim();
+  let titleError = document.getElementById("addTaskTitleErrorInput");
+
+  if (taskTitle.length > 4 || taskTitle.length === 0) {
+    titleError.style.display = "none";
+    taskTitleElement.classList.remove("addTaskErrorBorder");
+  }
+}
+
+/**
+ * this function checks the validity of the form fields.
+ */
+function checkFormValidityFromInputFieldDueDateBoard() {
+  let taskDueDateElement = document.getElementById("task-due-date");
+  let taskDueDate = taskDueDateElement.value.trim();
+  let dueDateError = document.getElementById("addTaskDateErrorInput");
+
+  if (taskDueDate.length === 6 || taskDueDate.length === 0) {
+    dueDateError.style.display = "none";
+    taskDueDateElement.classList.remove("addTaskErrorBorder");
+  }
+}
+
+/**
+ * this function checks the validity of the form fields.
+ */
+function checkFormValidityFromInputFieldCategoryBoard() {
+  let taskCategoryElement = document.getElementById("task-category");
+  let taskCategory = taskCategoryElement.value.trim();
+  let categoryError = document.getElementById("addTaskCategoryErrorInput");
+
+  if (taskCategory.length > 1 || taskCategory.length === 0) {
+    categoryError.style.display = "none";
+    taskCategoryElement.classList.remove("addTaskErrorBorder");
   }
 }
