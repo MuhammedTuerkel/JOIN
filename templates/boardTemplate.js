@@ -408,7 +408,7 @@ function renderOverlayEditTicket(ticketID) {
                                 </div>
                             </div>
             </form>
-            <button class="endEdit-btn" onclick="saveEditOnClick('${ticketID}')">
+            <button class="endEdit-btn" id="endEditBtn" onclick="saveEditOnClick('${ticketID}')">
                 <span>Ok</span>
                 <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <mask id="mask0_259614_6254" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">

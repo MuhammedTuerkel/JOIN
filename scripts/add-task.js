@@ -251,7 +251,10 @@ function handleSaveClick(target) {
  * @param {string} currentText
  */
 function checkEditSubtaskInput(currentText) {
-  const createTaskButton = document.getElementById("createTaskButton");
+  let createTaskButton = document.getElementById("createTaskButton");
+  if (!createTaskButton) {
+    createTaskButton = document.getElementById("endEditBtn");
+  }
   let currentInputfield = document.getElementById(currentText);
   const currentInputfieldfilled = currentInputfield.value.trim();
   if (currentInputfieldfilled.length > 0) {
