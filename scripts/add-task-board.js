@@ -293,7 +293,7 @@ function checkFormValidityBoard(event, state) {
   showValidationFeedbackBoard("task-due-date", "addTaskDateErrorInput", dueDateValid);
   showValidationFeedbackBoard("task-category", "addTaskCategoryErrorInput", categoryValid);
   if (titleValid && dueDateValid && categoryValid) {
-    saveTaskCloseOverlay(state);
+    saveTaskCloseOverlay(event, state);
   }
 }
 
