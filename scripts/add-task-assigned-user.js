@@ -129,7 +129,6 @@ function updateDropdownSelections() {
  * Updates the container with the selected users' initials.
  */
 function updateSelectedUsersContainer() {
-  console.log(selectedContacts);
   let container = document.getElementById("selectedUsers");
   container.innerHTML = "";
   for (let index = 0; index < selectedContacts.length; index++) {
