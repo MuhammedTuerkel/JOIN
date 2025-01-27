@@ -165,7 +165,10 @@ function handleDeleteWhileEditInput(element) {
     const input = inputContainer.querySelector("input.subtask-input");
     if (input) {
       const subtaskID = input.id;
-      const ticketID = getTicketIDFromLocalStorage(subtaskID);
+      let ticketID = getTicketIDFromLocalStorage(subtaskID);
+      if (ticketID === null) {
+        ticketID = "undefined";
+      }
       handleDeleteClick(event, ticketID);
     } else {
       console.error("Keine Subtask ID gefunden");
