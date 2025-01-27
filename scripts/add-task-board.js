@@ -155,8 +155,6 @@ function updateEditSelectedUsersContainer(ticketID) {
       </div>
     `;
   }
-  console.log("assigned Contacts", assignedContacts);
-
   updateEditAssignedUsersDropdown(assignedContacts);
 }
 

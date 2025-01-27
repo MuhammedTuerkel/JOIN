@@ -54,8 +54,6 @@ function goBackToAddTask(event) {
  * @param {string} [path='tasks'] - The storage path for the task.
  */
 function postTask(state, path = "tasks") {
-  console.log("state", state);
-  console.log("path", path);
   let task = buildTask(state);
   let tasks = JSON.parse(localStorage.getItem(path)) || [];
   tasks.push(task);

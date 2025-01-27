@@ -32,6 +32,11 @@ function createIcon(className, src) {
   icon.setAttribute("src", src);
   icon.setAttribute("alt", className);
   icon.classList.add(className);
+  if (className === "delete-icon") {
+    icon.addEventListener("click", function () {
+      handleDeleteWhileEditInput(this);
+    });
+  }
   return icon;
 }
 
@@ -148,4 +153,43 @@ function notAssignedUser(email) {
   let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
   selectedContacts = selectedContacts.filter((contact) => contact.email !== email);
   updateSelectedUsersContainer();
+}
+
+/**
+ * Handle the click event for deleting a subtask while editing an input field.
+ * @param {HTML-Element} element
+ */
+function handleDeleteWhileEditInput(element) {
+  const inputContainer = element.closest(".input-container");
+  if (inputContainer) {
+    const input = inputContainer.querySelector("input.subtask-input");
+    if (input) {
+      const subtaskID = input.id;
+      const ticketID = getTicketIDFromLocalStorage(subtaskID);
+      handleDeleteClick(event, ticketID);
+    } else {
+      console.error("Keine Subtask ID gefunden");
+    }
+  } else {
+    console.error('Kein übergeordnetes Element mit der Klasse "input-container" gefunden');
+  }
+}
+
+/**
+ * Gets the subtask content and finds the ticket ID associated with it.
+ * @param {string} subtaskID
+ * @returns the ticketID of the searched subtask
+ */
+function getTicketIDFromLocalStorage(subtaskID) {
+  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  for (const task of tasks) {
+    if (task.subtasks) {
+      for (const subtask of task.subtasks) {
+        if (subtask.content === subtaskID.toString()) {
+          return task.id;
+        }
+      }
+    }
+  }
+  return null;
 }

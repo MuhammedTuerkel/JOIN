@@ -25,10 +25,6 @@ function pushEditSubtasksInGlobalArray(ticketID, index) {
 function pushEditSubtasksArray(ticketID) {
   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   let targetTask = tasks.find((task) => task.id === ticketID);
-  console.log("ticket ID", ticketID);
-
-  console.log("target", targetTask);
-
   if (!targetTask) {
     console.error("Task not found");
     return;
