@@ -434,6 +434,7 @@ input.subtask-input:focus {
   margin-right: 8px !important;
   border-radius: 0px !important;
   width: 100% !important;
+  padding-right: 80px !important;
 }
 
 .input-container {
@@ -443,7 +444,7 @@ input.subtask-input:focus {
 
 .input-container .subtask-input {
   width: 100%;
-  padding-right: 60px;
+  padding-right: 80px !important;
   font-size: 16px;
   border-bottom: 1px solid #005dff;
   border-radius: 0px;
