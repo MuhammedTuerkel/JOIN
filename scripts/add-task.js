@@ -327,7 +327,7 @@ function checkFormValidity(event) {
   showValidationFeedback("task-due-date", "addTaskDateErrorInput", dueDateValid);
   showValidationFeedback("task-category", "addTaskCategoryErrorInput", categoryValid);
   if (titleValid && dueDateValid && categoryValid) {
-    showAddTaskOverlayNextStep();
+    showAddTaskOverlayNextStep(event);
   }
 }
 

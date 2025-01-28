@@ -237,6 +237,7 @@ select.focus {
   justify-content: space-between;
   align-content: flex-end;
   width: 100%;
+  margin-top: 50px;
 }
 
 .subtasks-input {
@@ -272,8 +273,9 @@ select.focus {
   margin-top: 1px;
   width: 95%;
   margin-left: 10px;
-  height: 230px;
+  height: 100px;
   overflow-y: scroll;
+  overflow-x: hidden;
   -ms-overflow-style: none;
   scrollbar-width: 9px;
 }
