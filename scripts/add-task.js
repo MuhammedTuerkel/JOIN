@@ -19,6 +19,7 @@ function addTaskOnInit() {
 function addTaskClearTask() {
   let list = document.getElementById("subtasksList");
   let assignedList = document.getElementById("selectedUsers");
+  const createTaskButton = document.getElementById("createTaskButton");
   document.getElementById("urgent-btn").classList.remove("urgent");
   document.getElementById("urgent-btn").classList.remove("active");
   setMedium();
@@ -34,7 +35,8 @@ function addTaskClearTask() {
   document.getElementById("addTaskTitleErrorInput").style.display = "none";
   document.getElementById("addTaskDateErrorInput").style.display = "none";
   document.getElementById("addTaskCategoryErrorInput").style.display = "none";
-  checkFormFilled();
+  //! checkFormFilled(); @Christian: Hab das mal auskommentiert, da sich nach einem Clear der Create-Btn nicht mehr disabled hat.
+  createTaskButton.disabled = true;
 }
 
 /**
