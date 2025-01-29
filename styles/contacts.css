@@ -45,6 +45,23 @@
   gap: 8px;
   overflow: scroll;
   height: calc(100vh - 204px);
+  position: relative;
+  padding-right: 0px;
+  margin-right: 0px;
+}
+
+.ContactsList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ContactsList::-webkit-scrollbar-thumb {
+  border: 0px solid white;
+  background: #a8a8a8;
+  border-radius: 15px;
+}
+
+.ContactsList::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .lettersbox {
@@ -111,16 +128,6 @@
 }
 .website-body {
   height: 100vh;
-}
-
-.ContactsList::-webkit-scrollbar {
-  width: 24px;
-}
-
-.ContactsList::-webkit-scrollbar-thumb {
-  border: 8px solid white;
-  background: #a8a8a8;
-  border-radius: 15px;
 }
 
 .Contacts-body {
@@ -814,18 +821,6 @@
   animation: slide-in-right 0.75s forwards;
 }
 
-.Create.enabled {
-  background-color: #2a3647;
-  color: white;
-  cursor: pointer;
-  animation: pulse 1s cubic-bezier(0.455, 0.03, 0.515, 0.955) 2;
-}
-
-.Create.disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
 .contact_new_contact_error {
   border-color: red !important;
 }
@@ -861,6 +856,30 @@ input::placeholder {
 
 input:focus::placeholder {
   color: rgba(255, 255, 255, 0.3);
+}
+
+.contacts_create_buttons_styles {
+  width: 214px;
+  height: 57px;
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  gap: 4px;
+  box-sizing: border-box;
+  background-color: #2a3647;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: unset;
+  background-color: #ccc;
+  border: none;
+  cursor: not-allowed;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+.contacts_create_buttons_styles h3 {
+  font-size: 21px;
+  font-weight: 700;
+  color: white;
 }
 
 @media (max-width: 999px) and (min-width: 831px) {
@@ -1056,6 +1075,7 @@ input:focus::placeholder {
 
   .Contacts {
     width: 100%;
+    padding-right: 0px;
   }
 
   .ContactsList {
@@ -1136,6 +1156,30 @@ input:focus::placeholder {
     width: 126px;
     height: 51px;
     padding: 18px 10px;
+  }
+
+  .contacts_create_buttons_styles {
+    width: 126px;
+    height: 51px;
+    padding: 18px 10px;
+    border-radius: 10px;
+    display: flex;
+    gap: 4px;
+    box-sizing: border-box;
+    background-color: #2a3647;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: unset;
+    background-color: #ccc;
+    border: none;
+    cursor: not-allowed;
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+  .contacts_create_buttons_styles h3 {
+    font-size: 21px;
+    font-weight: 700;
+    color: white;
   }
 
   .Cancel {
@@ -1236,6 +1280,19 @@ input:focus::placeholder {
   }
   .ContactsList {
     align-items: unset;
+    overflow-x: hidden;
+  }
+
+  .name-email h2 {
+    font-size: 18px;
+  }
+
+  .name-email h3 {
+    font-size: 14px;
+  }
+
+  .contact_line {
+    width: 90%;
   }
 }
 

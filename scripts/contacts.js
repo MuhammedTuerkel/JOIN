@@ -103,6 +103,7 @@ function hideAddNewContact(event) {
   document.getElementById("input-name").value = ``;
   document.getElementById("input-email").value = ``;
   document.getElementById("input-phone").value = ``;
+  document.getElementById("ContactsList").style.overflow = "scroll";
 }
 
 /**
@@ -281,6 +282,7 @@ function createNewContact(event) {
   hideAddNewContact(event);
   animateContactCreated();
   renderContactsListHTML();
+  document.getElementById("ContactsList").style.overflow = "scroll";
 }
 
 /**

@@ -65,12 +65,48 @@ function addClassActivateLegalNotice() {
 }
 
 /**
- * close these tab
+ * Navigates back to the previous page or to the login page.
+ *
+ * This function sets a flag in sessionStorage to indicate that the user is returning,
+ * then retrieves the URL of the previous page (if available) from sessionStorage.
+ * If a previous page URL exists, it redirects to that page. Otherwise, it redirects
+ * to the login page.
+ *
+ * @returns {void} This function does not return a value.
  */
 function backToThePage() {
-  window.close();
+  sessionStorage.setItem("isReturning", "true");
+  let previousPage = sessionStorage.getItem("previousPage");
+  if (previousPage) {
+    window.location.href = previousPage;
+  } else {
+    window.location.href = "/login.html";
+  }
 }
 
+/**
+ * This script handles the privacy policy and legal notice templates.
+ * It checks if the user is returning from the login page and if so, loads the respective template.
+ * If not, it adds event listeners to the aside elements and loads the initial template.
+ */
+document.addEventListener("DOMContentLoaded", function () {
+  const isReturning = sessionStorage.getItem("isReturning");
+
+  if (isReturning !== "true") {
+    const templateType = sessionStorage.getItem("templateType");
+    let template = document.getElementById("termsContent");
+
+    if (templateType === "privacyPolicy") {
+      renderPrivacyPolicyTemplate();
+    } else if (templateType === "legalNotice") {
+      renderLegalNoticeTemplate();
+    } else if (templateType === "help") {
+      loadHelpHtml();
+    }
+  } else {
+    sessionStorage.removeItem("isReturning");
+  }
+});
 /**
  *  if the user clicks at the aside on the Privacy Policy Button then he can see the template from the Privacy Policy
  */

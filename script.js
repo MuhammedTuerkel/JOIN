@@ -174,23 +174,6 @@ function renderLegalNoticeTemplate() {
 }
 
 /**
- * Sets up the template rendering process based on the stored template type in sessionStorage.
- * Clears the 'termsContent' element and renders the corresponding template.
- */
-document.addEventListener("DOMContentLoaded", function () {
-  const templateType = sessionStorage.getItem("templateType");
-  let template = document.getElementById("termsContent");
-
-  if (templateType === "privacyPolicy") {
-    renderPrivacyPolicyTemplate();
-  } else if (templateType === "legalNotice") {
-    renderLegalNoticeTemplate();
-  } else if (templateType === "help") {
-    loadHelpHtml();
-  }
-});
-
-/**
  * Changes the onclick function of the return arrow to call the returnToSessionStoragePage function.
  */
 function changeReturnArrowOnclickFunction() {
