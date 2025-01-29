@@ -141,6 +141,10 @@
     margin-bottom: 10px;
   }
 
+  .addTask {
+    height: calc(100vh - 160px);
+  }
+
   .add_task_main_content {
     width: 78%;
   }
@@ -211,6 +215,11 @@
     justify-content: center;
     height: auto;
   }
+
+  .addTask {
+    height: calc(100vh - 160px);
+  }
+
   .add_task_title {
     font-size: 21px;
     margin-bottom: 10px;
