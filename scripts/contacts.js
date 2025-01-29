@@ -88,6 +88,7 @@ function loadAddNewContact(event) {
   setTimeout(() => {
     document.getElementById("body").classList.remove("over-hidden");
   }, 500);
+  openContactForm();
 }
 
 /**

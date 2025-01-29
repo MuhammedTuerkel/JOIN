@@ -854,6 +854,15 @@
   border-color: #e40000 !important;
 }
 
+input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s ease;
+}
+
+input:focus::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
 @media (max-width: 999px) and (min-width: 831px) {
   .contact_overly_img_task_name_container {
     font-size: 12px;

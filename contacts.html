@@ -184,28 +184,32 @@
                 <div onclick="hideAddNewContact(event)" class="close"> </div>
                 <div id="addContactProfilePicture" class="addContactProfilePicture">
                 </div>
+
+                
                 <div class="addContactInput">
                     <div class="contact_input_container">
-                        <input oninput="contactsFormValidation()" class="margin_null" id="input-name" type="text" placeholder="Name" required>
+                        <input oninput="resetValidation(this)" onblur="validateName()" class="margin_null" id="input-name" type="text" placeholder="Name" required>
                         <small style="display: none;" id="contactsInputName" class="contact_input_mail_info contacts_d_none">Bitte geben Sie einen gültigen Namen ein.</small>  
                     </div>
                     <div class="contact_input_container">
-                        <input oninput="contactsFormValidation()" id="input-email" type="email" placeholder="Email" required>
+                        <input oninput="resetValidation(this)" onblur="validateEmail()" id="input-email" type="email" placeholder="Email" required>
                         <small style="display: none;" id="contactsInputMail" class="contact_input_mail_info contacts_d_none">Bitte geben Sie eine gültige E-Mail-Adresse ein.</small>  
                     </div>
                     <div class="contact_input_container">
-                        <input oninput="contactsFormValidation()" id="input-phone" type="number" placeholder="Phone" required>                  
+                        <input oninput="resetValidation(this)" onblur="validatePhone()" id="input-phone" type="number" placeholder="Phone" required>
                         <small style="display: none;" id="contactsInputPhone" class="contact_input_mail_info contacts_d_none">Bitte geben Sie eine gültige Telefonnummer ein.</small>   
                     </div>
                 </div>
+                
+                
                 <div id="cancelCreate" style="display: none;" class="cancel-create">
                     <div onclick="hideAddNewContact(event)" class="Cancel">
                         <h3>Cancel</h3>
                     </div>
-                    <div id="createNewContactButton" onclick="validateAndSubmitForm(event)" class="Create disabled" style="pointer-events: none;">
+                    <button id="createNewContactButton" onclick="validateAndSubmitForm(event)" class="Create disabled" style="pointer-events: none;">
                         <h3>Create contact</h3>
                         <img src="./assets/img/check.png" alt="">
-                    </div>
+                    </button>
                 </div>
                 <div id="deleteSave" class="cancel-create">
                     <div id="DeleteEditContact" class="Cancel DeleteEditContact">
