@@ -152,6 +152,10 @@
   margin-left: 21px;
 }
 
+.overlay-subtasks-wrapper {
+  width: 90%;
+}
+
 .overlay-subtasks-content {
   width: 100%;
   display: flex;
@@ -160,6 +164,10 @@
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.overlay-subtasks-content::-webkit-scrollbar {
+  display: none;
 }
 
 .overlay-subtask-element {
@@ -172,7 +180,7 @@
 
 .overlay-subtask-element:hover {
   background-color: #e7e7e7;
-  border-radius: 10px;
+  /* border-radius: 10px !important; */
   cursor: pointer;
 }
 
