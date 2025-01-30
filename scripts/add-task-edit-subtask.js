@@ -161,6 +161,8 @@ function notAssignedUser(email) {
  */
 function handleDeleteWhileEditInput(element) {
   const inputContainer = element.closest(".input-container");
+  const endEditButton = document.getElementById("endEditBtn");
+  const createTaskButton = document.getElementById("createTaskButton");
   if (inputContainer) {
     const input = inputContainer.querySelector("input.subtask-input");
     if (input) {
@@ -168,6 +170,11 @@ function handleDeleteWhileEditInput(element) {
       let ticketID = getTicketIDFromLocalStorage(subtaskID);
       if (ticketID === null) {
         ticketID = "undefined";
+      }
+      if (endEditButton) {
+        endEditButton.ariaDisabled = false;
+      } else if (createTaskButton) {
+        createTaskButton.ariaDisabled = false;
       }
       handleDeleteClick(event, ticketID);
     } else {
