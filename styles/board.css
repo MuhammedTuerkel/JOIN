@@ -510,6 +510,30 @@ body {
   }
 }
 
+@media (max-width: 1038px) and (min-width: 460px) {
+  .board-column {
+    width: 362px;
+  }
+
+  .column-headline {
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 80%;
+  }
+}
+
+@media (max-width: 459px) and (min-width: 310px) {
+  .board-column {
+    width: 253px;
+  }
+
+  .column-headline {
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 90%;
+  }
+}
+
 @media (max-width: 1159px) and (min-width: 831px) {
   .main-content {
     flex-wrap: wrap;

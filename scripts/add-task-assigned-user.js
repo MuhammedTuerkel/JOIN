@@ -56,10 +56,10 @@ function loadUserInAssignedToDropdown() {
   updateDropdownSelections();
 }
 
-/**
- * Toggles user selection based on checkbox status.
- * @param {string} email - The email of the user to toggle selection.
- */
+// /**
+//  * Toggles user selection based on checkbox status.
+//  * @param {string} email - The email of the user to toggle selection.
+//  */
 function toggleUserSelection(email) {
   let template = document.getElementById(`template-${email}`);
   let checkbox = document.getElementById(`checkbox-${email}`);
@@ -85,8 +85,8 @@ function assignedUserDropDown(email) {
   checkbox.checked = true;
   let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
   let contact = contacts.find((contact) => contact.email === email);
-  if (contact && !selectedContacts.some((selectedContact) => selectedContact.email === contact.email)) {
-    selectedContacts.push(contact);
+  if (contact && !selectedUsers.some((selectedUsers) => selectedUsers.email === contact.email)) {
+    selectedUsers.push(contact);
   }
   updateSelectedUsersContainer();
 }
@@ -131,8 +131,8 @@ function updateDropdownSelections() {
 function updateSelectedUsersContainer() {
   let container = document.getElementById("selectedUsers");
   container.innerHTML = "";
-  for (let index = 0; index < selectedContacts.length; index++) {
-    let user = selectedContacts[index];
+  for (let index = 0; index < selectedUsers.length; index++) {
+    let user = selectedUsers[index];
     let initials = user.name.charAt(0).toUpperCase() + user.name.charAt(user.name.length - 1).toUpperCase();
     container.innerHTML += `
             <div class="selected_user_circle" style="background-color: ${user.color};">

@@ -85,9 +85,7 @@ async function pushNewUserinFireBaseArray(event) {
   try {
     let response = await postData(`users/${userMail.replace(".", "_")}`, userData);
     createUser();
-  } catch (error) {
-    console.error("Error adding user to Realtime Database:", error);
-  }
+  } catch (error) {}
 }
 
 /**
@@ -286,9 +284,7 @@ function checkOrientation() {
 function pushContactsToLocalStorage() {
   try {
     localStorage.setItem("contacts", JSON.stringify(contacts));
-  } catch (error) {
-    console.error("Error saving contacts to Local Storage:", error);
-  }
+  } catch (error) {}
 }
 
 /**

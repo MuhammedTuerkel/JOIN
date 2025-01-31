@@ -68,7 +68,6 @@ function toggleUserSelection(email) {
   let template = document.getElementById(`template-${email}`);
   let checkbox = document.getElementById(`checkbox-${email}`);
   let isChecked = checkbox.checked;
-
   if (isChecked) {
     notAssignedUser(email);
   } else {

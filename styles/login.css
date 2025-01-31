@@ -18,8 +18,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Stellt sicher, dass der Container die volle Seitenhöhe einnimmt */
+  height: 100vh;
   flex-direction: column;
+  min-width: 100%;
 }
 
 .login_d_none {
@@ -27,18 +28,16 @@
 }
 
 .login_header {
-  max-width: 1920px;
   height: 100px;
   position: fixed;
   top: 0;
-  width: 100%;
+  right: 23%;
   margin-top: 0;
   margin-left: 0;
   margin-right: 0;
   z-index: 1000;
   justify-content: flex-end;
   align-items: center;
-  padding: 0 77px;
 }
 
 .login_head {
@@ -110,7 +109,7 @@
   }
   100% {
     top: 2%;
-    left: 10%;
+    left: 23%;
     transform: translate(0, 0);
     width: 137.03px;
     height: 167.035px;
@@ -225,7 +224,7 @@
   background-color: #ffffff;
   box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.05);
   height: auto;
-  width: 700px;
+  width: 630px;
   margin-left: 18px;
   margin-right: 18px;
   align-items: center;
@@ -971,9 +970,9 @@
   }
 
   .login_card {
-    width: 100%;
+    width: 70%;
     margin: 0;
-    height: 78%;
+    height: 60%;
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -14,8 +14,9 @@
   align-items: center;
   font-family: "Inter", serif;
   justify-content: space-around;
-  height: 80%;
-  margin-top: 90px;
+  height: 60%;
+  margin-top: 10px;
+  position: fixed;
 }
 
 .sign_up_card_headline {
@@ -30,14 +31,14 @@
   font-size: 52px;
   margin-bottom: 12px;
   font-weight: bold;
-  margin-top: 18px;
+  margin-top: 0px;
 }
 
 .signup_underline {
   height: 3px;
   background-color: #29abe2;
   width: 20%;
-  margin-bottom: 37px;
+  margin-bottom: 23px;
 }
 
 .signup_input_field {
@@ -94,7 +95,7 @@
   margin-right: 0.5em;
   display: flex;
   flex-direction: row;
-  margin-top: 30px;
+  margin-top: 10px;
   align-items: center;
   cursor: pointer;
 }
@@ -118,7 +119,7 @@
   gap: 6px;
   color: #ababab;
   margin-left: 8px;
-  font-size: 19px;
+  font-size: 14px;
 }
 
 .signup_checkbox p {
@@ -277,6 +278,21 @@
   width: 100%;
 }
 
+@media (max-width: 1250px) and (min-width: 787px) {
+  .signup_card {
+    width: 30%;
+    height: 60%;
+  }
+
+  .signup_input_field input {
+    width: 100%;
+  }
+
+  .login_card {
+    width: 50%;
+  }
+}
+
 @media (max-width: 786px) and (min-width: 501px) {
   .signup_card {
     display: block;
@@ -296,7 +312,11 @@
     justify-content: space-around;
     width: 60%;
     margin-top: 6%;
-    height: 77%;
+    height: 60%;
+  }
+
+  .sign_up_card_headline {
+    margin-bottom: 30px;
   }
 
   .sign_up_card_headline h1 {
@@ -435,6 +455,11 @@
     font-size: 16px;
     margin-top: 5px;
   }
+
+  .login_logo img {
+    top: 2%;
+    left: 25%;
+  }
 }
 
 @media (max-width: 500px) and (min-width: 411px) {
@@ -454,7 +479,7 @@
     align-items: center;
     font-family: "Inter", serif;
     justify-content: space-around;
-    width: 90%;
+    width: 70%;
     margin-top: 6%;
     height: 60%;
   }
@@ -585,7 +610,7 @@
   .signup_card {
     display: block;
     flex-direction: column;
-    padding-top: 0;
+    padding-top: 20px;
     padding-right: 0;
     padding-bottom: 0;
     padding-left: 0;
@@ -599,8 +624,8 @@
     font-family: "Inter", serif;
     justify-content: space-around;
     width: 90%;
-    margin-top: 6%;
-    height: 77%;
+    margin-top: 20%;
+    height: 50%;
   }
 
   .sign_up_card_headline h1 {
