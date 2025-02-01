@@ -347,3 +347,10 @@ function flyout() {
   document.getElementById("rememberMeNo").classList.add("text_fly_out");
   document.getElementById("rememberMeLogoContainer").classList.add("logo_fly_out");
 }
+
+function handleLogin(event) {
+  event.preventDefault();
+  userMail = document.getElementById("loginInputMail").value;
+  fetchPassword(userMail);
+  checkLoginPassword();
+}

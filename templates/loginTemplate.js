@@ -4,7 +4,7 @@
  */
 function getUserLoginTemplate() {
   return `
-    <form class="login_card scale_up_center" onload="handleKeyDown(event)"> 
+    <form class="login_card scale_up_center" onload="handleKeyDown(event)" onsubmit="handleLogin(event)"> 
         <div class="login_card_headline">
             <h1>Log in</h1> 
             <div class="login_underline"></div> 
@@ -20,7 +20,7 @@ function getUserLoginTemplate() {
             <small id="loginInputWrongPasswordError" class="login_input_mail_info login_d_none">E-Mail-Adresse und Passwort stimmen nicht überein</small> 
         </div>
         <div class="login_buttons"> 
-            <button id="loginButton" onclick="checkLoginPassword()" class="login_buttons_styles" disabled>
+            <button type="submit" id="loginButton"  class="login_buttons_styles" disabled>
                 Log in 
             </button> 
             <div onclick="guestLogIn()" class="login_buttons_styles_clear"> 
