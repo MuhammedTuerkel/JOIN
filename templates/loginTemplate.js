@@ -10,7 +10,7 @@ function getUserLoginTemplate() {
             <div class="login_underline"></div> 
         </div>
         <div class="login_input_field">
-            <input id="loginInputMail" type="text" placeholder="Mail" onchange="checkLoginInputfields()" required class="blur_placeholder restricted_input">
+            <input id="loginInputMail" type="text" placeholder="Mail" onchange="checkEmailInput()" required class="blur_placeholder restricted_input">
             <img src="./assets/img/mail.png" alt="Mail Icon" class="input_icon_mail"> 
             <small id="loginInputMailError" class="login_input_mail_info login_d_none">Bitte geben Sie eine gültige E-Mail-Adresse ein.</small>
         </div>
