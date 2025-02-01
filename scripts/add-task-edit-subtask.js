@@ -107,14 +107,14 @@ function updateUI() {
  * Toggles user selection based on checkbox status.
  * @param {string} email - The email of the user to toggle selection.
  */
-function toggleUserSelection(email) {
+function toggleUserSelectionEdit(email) {
   let template = document.getElementById(`template-${email}`);
   let checkbox = document.getElementById(`checkbox-${email}`);
   let isChecked = checkbox.checked;
   if (isChecked) {
-    notAssignedUser(email);
+    notAssignedUserEdit(email);
   } else {
-    assignedUserDropDown(email);
+    assignedUserDropDownEdit(email);
   }
 }
 
@@ -122,7 +122,7 @@ function toggleUserSelection(email) {
  * Assigns a user and updates the UI accordingly.
  * @param {string} email - The email of the user to be assigned.
  */
-function assignedUserDropDown(email) {
+function assignedUserDropDownEdit(email) {
   let template = document.getElementById(`template-${email}`);
   let checkedImg = document.getElementById(`img-${email}`);
   let checkbox = document.getElementById(`checkbox-${email}`);
@@ -132,17 +132,17 @@ function assignedUserDropDown(email) {
   checkbox.checked = true;
   let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
   let contact = contacts.find((contact) => contact.email === email);
-  if (contact && !selectedContacts.some((selectedContact) => selectedContact.email === contact.email)) {
-    selectedContacts.push(contact);
+  if (contact && !selectedUsers.some((selectedContact) => selectedContact.email === contact.email)) {
+    selectedUsers.push(contact);
   }
-  updateSelectedUsersContainer();
+  updateSelectedUsersContainerEdit();
 }
 
 /**
  * Unassigns a user and updates the UI accordingly.
  * @param {string} email - The email of the user to be unassigned.
  */
-function notAssignedUser(email) {
+function notAssignedUserEdit(email) {
   let template = document.getElementById(`template-${email}`);
   let checkedImg = document.getElementById(`img-${email}`);
   let checkbox = document.getElementById(`checkbox-${email}`);
@@ -151,8 +151,33 @@ function notAssignedUser(email) {
   checkedImg.src = "./assets/img/check button.png";
   checkbox.checked = false;
   let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
-  selectedContacts = selectedContacts.filter((contact) => contact.email !== email);
-  updateSelectedUsersContainer();
+  let contact = contacts.find((contact) => contact.email === email);
+  if (contact) {
+    let userIndex = selectedUsers.findIndex((selectedContact) => selectedContact.email === contact.email);
+    if (userIndex !== -1) {
+      selectedUsers.splice(userIndex, 1);
+    }
+  }
+  updateSelectedUsersContainerEdit();
+}
+
+/**
+ * Updates the container with the selected users' initials.
+ */
+function updateSelectedUsersContainerEdit() {
+  console.log("array Selected Users", selectedUsers);
+
+  let container = document.getElementById("selectedUsers");
+  container.innerHTML = "";
+  for (let index = 0; index < selectedUsers.length; index++) {
+    let user = selectedUsers[index];
+    let initials = user.name.charAt(0).toUpperCase() + user.name.charAt(user.name.length - 1).toUpperCase();
+    container.innerHTML += `
+            <div class="selected_user_circle" style="background-color: ${user.color};">
+                ${initials}
+            </div>
+        `;
+  }
 }
 
 /**
@@ -202,4 +227,77 @@ function getTicketIDFromLocalStorage(subtaskID) {
     }
   }
   return null;
+}
+
+/**
+ * Handles the click event for the dropdown.
+ * Opens the dropdown container and updates the dropdown arrow.
+ * @param {Event} event - The event object.
+ */
+function openEditDropdown(event) {
+  event.stopPropagation();
+  console.log(selectedUsers);
+
+  document.getElementById("assigned").classList.add("add_task_dropdown_active");
+  let dropdownContainer = document.getElementById("addTaskDropdown");
+  let dropdownImage = document.getElementById("dropDownArrow");
+  if (dropdownContainer.classList.contains("open")) {
+    closeDropdown();
+  } else {
+    dropdownContainer.classList.add("open");
+    dropdownImage.style.transform = "rotate(180deg)";
+    loadUserInEditAssignedToDropdown();
+  }
+}
+
+/**
+ * Loads user contacts into the assigned-to dropdown for editing tasks.
+ * This function retrieves contacts from local storage, clears the existing dropdown content,
+ * populates the dropdown with user templates for each contact, and updates the dropdown selections.
+ * @throws {Error} If there's an issue parsing the contacts from localStorage or accessing the DOM elements.
+ */
+function loadUserInEditAssignedToDropdown() {
+  let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
+
+  let dropdownContainer = document.getElementById("addTaskDropdown");
+  dropdownContainer.innerHTML = "";
+
+  for (let index = 0; index < contacts.length; index++) {
+    let contact = contacts[index];
+    dropdownContainer.innerHTML += createUserTemplateEdit(contact);
+  }
+
+  updateEditDropdownSelections();
+}
+
+/**
+ * Loads the users into the dropdown container.
+ * Updates the dropdown selections based on previously selected users.
+ */
+function loadUserInAssignedToDropdownEdit() {
+  let dropdownContainer = document.getElementById("addTaskDropdown");
+  dropdownContainer.innerHTML = "";
+  let storedContacts = JSON.parse(localStorage.getItem("contacts")) || [];
+  for (let index = 0; index < storedContacts.length; index++) {
+    let contact = storedContacts[index];
+    dropdownContainer.innerHTML += createUserTemplateEdit(contact);
+  }
+  updateDropdownSelectionsEdit();
+}
+
+/**
+ * Updates the dropdown selections based on the selected users.
+ */
+function updateEditDropdownSelections() {
+  selectedUsers.forEach((contact) => {
+    let checkbox = document.getElementById(`checkbox-${contact.email}`);
+    let template = document.getElementById(`template-${contact.email}`);
+    let img = document.getElementById(`img-${contact.email}`);
+    if (checkbox) {
+      checkbox.checked = true;
+      template.classList.remove("user_template_not_selected");
+      template.classList.add("user_template_selected");
+      img.src = "./assets/img/checked button.png";
+    }
+  });
 }

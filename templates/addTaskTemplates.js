@@ -112,6 +112,27 @@ function createUserTemplate(contact) {
 }
 
 /**
+ * Creates a user template with the user's initials.
+ */
+function createUserTemplateEdit(contact) {
+  let initials = contact.name.charAt(0).toUpperCase() + contact.name.charAt(contact.name.length - 1).toUpperCase();
+  return `
+            <div onclick="toggleUserSelectionEdit('${contact.email}')" class="user_template_not_selected" id="template-${contact.email}" >
+                <div class="user_template_circle_name">
+                    <div class="user_circle" style="background-color: ${contact.color};">
+                        ${initials}
+                    </div>
+                    <p>${contact.name}</p>
+                </div>
+                <input type="checkbox" class="user_checkbox" id="checkbox-${contact.email}">
+                <label class="user_template_label" for="checkbox-${contact.email}">
+                    <img src="./assets/img/check button.png" alt="" id="img-${contact.email}">
+                </label>
+            </div>
+        `;
+}
+
+/**
  * A HTML-Element for the add-task-feature on the board view gets rendered
  * @param {string} state
  * @returns a HTML-Element

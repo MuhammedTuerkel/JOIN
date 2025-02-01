@@ -136,6 +136,7 @@ function activateButton(buttonId, svgId, buttonClass, svgClass) {
  * @param {string} ticketID - The ID of the task to update.
  */
 function saveEditOnClick(ticketID) {
+  clearAssignedTo(ticketID);
   const updatedTask = getUpdatedTaskDetails();
   const taskIndex = allTasks.findIndex((task) => task.id === ticketID);
   if (taskIndex !== -1) {
@@ -144,6 +145,27 @@ function saveEditOnClick(ticketID) {
     handleSuccessfulEdit();
   } else {
     console.error("Task not found in allTasks array");
+  }
+}
+
+/**
+ * Clears the assigned users for a specific task.
+ *
+ * @param {string} ticketID - The unique identifier of the task to be updated.
+ * @returns {void} This function doesn't return a value, it modifies the allTasks array in-place.
+ * @description
+ * This function searches for a task in the allTasks array using the provided ticketID.
+ * If found, it clears the assigned_to array of that task, effectively removing all assigned users.
+ * If the task is not found, it logs an error to the console.
+ */
+function clearAssignedTo(ticketID) {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  const taskIndex = tasks.findIndex((task) => task.id === ticketID);
+  if (taskIndex !== -1) {
+    tasks[taskIndex].assigned_to = [];
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  } else {
+    console.error("Task not found in tasks array");
   }
 }
 

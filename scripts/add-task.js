@@ -35,7 +35,6 @@ function addTaskClearTask() {
   document.getElementById("addTaskTitleErrorInput").style.display = "none";
   document.getElementById("addTaskDateErrorInput").style.display = "none";
   document.getElementById("addTaskCategoryErrorInput").style.display = "none";
-  //! checkFormFilled(); @Christian: Hab das mal auskommentiert, da sich nach einem Clear der Create-Btn nicht mehr disabled hat.
   createTaskButton.disabled = true;
 }
 

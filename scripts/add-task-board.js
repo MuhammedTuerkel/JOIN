@@ -2,26 +2,6 @@ let selectedUsersOnBoard = [];
 
 /**
  * Handles the click event for the dropdown.
- * Opens the dropdown container and updates the dropdown arrow.
- * @param {Event} event - The event object.
- */
-function openEditDropdown(ticketID, event) {
-  event.stopPropagation();
-  document.getElementById("assigned").classList.add("add_task_dropdown_active");
-  let dropdownContainer = document.getElementById("addTaskDropdown");
-  let dropdownImage = document.getElementById("dropDownArrow");
-  if (dropdownContainer.classList.contains("open")) {
-    closeDropdown();
-  } else {
-    dropdownContainer.classList.add("open");
-    dropdownImage.style.transform = "rotate(180deg)";
-    loadUserInAssignedToDropdown();
-    updateEditAssignedUsersDropdown(ticketID);
-  }
-}
-
-/**
- * Handles the click event for the dropdown.
  * Closes the dropdown container and updates the dropdown arrow.
  * *clears the input field
  */
@@ -45,59 +25,6 @@ function handleDropdownBodyClick() {
 }
 
 /**
- * Loads the users into the dropdown container.
- * Updates the dropdown selections based on previously selected users.
- */
-function loadUserInAssignedToDropdown() {
-  let dropdownContainer = document.getElementById("addTaskDropdown");
-  dropdownContainer.innerHTML = "";
-  let storedContacts = JSON.parse(localStorage.getItem("contacts")) || [];
-  for (let index = 0; index < storedContacts.length; index++) {
-    let contact = storedContacts[index];
-    dropdownContainer.innerHTML += createUserTemplate(contact);
-  }
-  updateDropdownSelections();
-}
-
-/**
- * Toggles user selection based on checkbox status.
- *
- * @param {string} email - The email of the user to toggle selection.
- */
-function toggleUserSelection(email) {
-  let template = document.getElementById(`template-${email}`);
-  let checkbox = document.getElementById(`checkbox-${email}`);
-  let isChecked = checkbox.checked;
-  if (isChecked) {
-    notAssignedUser(email);
-  } else {
-    assignedUserDropDown(email);
-  }
-}
-
-/**
- * Assigns a user and updates the UI accordingly.
- *
- * @param {string} email - The email of the user to be assigned.
- */
-function assignedUserDropDown(email) {
-  let template = document.getElementById(`template-${email}`);
-  let checkedImg = document.getElementById(`img-${email}`);
-  let checkbox = document.getElementById(`checkbox-${email}`);
-
-  template.classList.remove("user_template_not_selected");
-  template.classList.add("user_template_selected");
-  checkedImg.src = "./assets/img/checked button.png";
-  checkbox.checked = true;
-
-  let user = users.find((user) => user.email === email);
-  if (!selectedUsersOnBoard.some((selectedUser) => selectedUser.email === user.email)) {
-    selectedUsersOnBoard.push(user);
-  }
-  updateSelectedUsersContainer();
-}
-
-/**
  * Unassigns a user and updates the UI accordingly.
  *
  * @param {string} email - The email of the user to be unassigned.
@@ -113,18 +40,34 @@ function notAssignedUser(email) {
   checkbox.checked = false;
 
   selectedUsersOnBoard = selectedUsersOnBoard.filter((user) => user.email !== email);
-  updateSelectedUsersContainer();
+  updateEditSelectedUsersContainer();
+}
+
+/**
+ * Updates the container with the selected users' initials.
+ */
+function updateEditSelectedUsersContainer() {
+  let container = document.getElementById("selectedUsers");
+  container.innerHTML = "";
+  for (let index = 0; index < selectedUsers.length; index++) {
+    let user = selectedUsers[index];
+    let initials = user.name.charAt(0).toUpperCase() + user.name.charAt(user.name.length - 1).toUpperCase();
+    container.innerHTML += `
+            <div class="selected_user_circle" style="background-color: ${user.color};">
+                ${initials}
+            </div>
+        `;
+  }
 }
 
 /**
  * Updates the dropdown selections based on the selected users.
  */
-function updateDropdownSelections() {
+function updateDropdownSelectionsEdit() {
   selectedUsersOnBoard.forEach((user) => {
     let checkbox = document.getElementById(`checkbox-${user.email}`);
     let template = document.getElementById(`template-${user.email}`);
     let img = document.getElementById(`img-${user.email}`);
-
     if (checkbox) {
       checkbox.checked = true;
       template.classList.remove("user_template_not_selected");
@@ -135,26 +78,11 @@ function updateDropdownSelections() {
 }
 
 /**
- * Updates the container with the selected users' initials.
- * @param {string} ticketID - The ID of the task.
+ * tooks the contacts list from the local storage
+ *
  */
-function updateEditSelectedUsersContainer(ticketID) {
-  let container = document.getElementById("selectedUsers");
-  container.innerHTML = "";
-  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  let task = tasks.find((task) => task.id === ticketID);
-  if (!task) return;
-  let assignedContacts = task.assigned_to || [];
-  for (let index = 0; index < assignedContacts.length; index++) {
-    let contact = assignedContacts[index];
-    let initials = contact.name.charAt(0).toUpperCase() + contact.name.charAt(contact.name.length - 1).toUpperCase();
-    container.innerHTML += `
-      <div class="selected_user_circle" style="background-color: ${contact.color};">
-        ${initials}
-      </div>
-    `;
-  }
-  updateEditAssignedUsersDropdown(assignedContacts);
+function getContactsFromLocalStorage() {
+  return JSON.parse(localStorage.getItem("contacts")) || [];
 }
 
 /**

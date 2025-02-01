@@ -46,20 +46,20 @@ function handleDropdownBodyClick() {
  * Updates the dropdown selections based on previously selected users.
  */
 function loadUserInAssignedToDropdown() {
+  let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
   let dropdownContainer = document.getElementById("addTaskDropdown");
   dropdownContainer.innerHTML = "";
-  let storedContacts = JSON.parse(localStorage.getItem("contacts")) || [];
-  for (let index = 0; index < storedContacts.length; index++) {
-    let contact = storedContacts[index];
+  for (let index = 0; index < contacts.length; index++) {
+    let contact = contacts[index];
     dropdownContainer.innerHTML += createUserTemplate(contact);
   }
   updateDropdownSelections();
 }
 
-// /**
-//  * Toggles user selection based on checkbox status.
-//  * @param {string} email - The email of the user to toggle selection.
-//  */
+/**
+ * Toggles user selection based on checkbox status.* @param {string} email -
+ * The email of the user to toggle selection.
+ */
 function toggleUserSelection(email) {
   let template = document.getElementById(`template-${email}`);
   let checkbox = document.getElementById(`checkbox-${email}`);
@@ -83,10 +83,9 @@ function assignedUserDropDown(email) {
   template.classList.add("user_template_selected");
   checkedImg.src = "./assets/img/checked button.png";
   checkbox.checked = true;
-  let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
   let contact = contacts.find((contact) => contact.email === email);
-  if (contact && !selectedUsers.some((selectedUsers) => selectedUsers.email === contact.email)) {
-    selectedUsers.push(contact);
+  if (!selectedContacts.some((selectedContact) => selectedContact.email === contact.email)) {
+    selectedContacts.push(contact);
   }
   updateSelectedUsersContainer();
 }
@@ -131,8 +130,8 @@ function updateDropdownSelections() {
 function updateSelectedUsersContainer() {
   let container = document.getElementById("selectedUsers");
   container.innerHTML = "";
-  for (let index = 0; index < selectedUsers.length; index++) {
-    let user = selectedUsers[index];
+  for (let index = 0; index < selectedContacts.length; index++) {
+    let user = selectedContacts[index];
     let initials = user.name.charAt(0).toUpperCase() + user.name.charAt(user.name.length - 1).toUpperCase();
     container.innerHTML += `
             <div class="selected_user_circle" style="background-color: ${user.color};">
@@ -283,25 +282,4 @@ function getNumericID(subtaskItem) {
  */
 function reindexSubtasks() {
   subtasksArray.forEach((subtask, i) => (subtask.id = i + 1));
-}
-
-/**
- * Updates the dropdown selections based on the assigned users.
- * Adds the `user_template_selected` class to the contacts in assignedContacts.
- * @param {Array<Object>} assignedContacts - The contacts assigned to the selected task.
- */
-function updateEditAssignedUsersDropdown(ticketID) {
-  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  let task = tasks.find((task) => task.id === ticketID);
-  if (!task) return;
-  let assignedContacts = task.assigned_to || [];
-  assignedContacts.forEach((contact) => {
-    let templateId = `template-${contact.email}`;
-    document.getElementById(templateId).classList.remove("user_template_not_selected");
-    document.getElementById(templateId).classList.add("user_template_selected");
-    let checkbox = document.getElementById(`checkbox-${contact.email}`);
-    let img = document.getElementById(`img-${contact.email}`);
-    checkbox.checked = true;
-    img.src = "./assets/img/checked button.png";
-  });
 }

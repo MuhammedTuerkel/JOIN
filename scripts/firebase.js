@@ -2,7 +2,6 @@
  * Is a onload-function it loads the functions that are needed to load at the beginning
  */
 async function Init() {
-  // await getItemsFromFirebase();
   renderContactsListHTML();
 }
 
@@ -405,10 +404,7 @@ function changeSubtaskStatus(subtaskIndex, ticketID) {
   if (task) {
     let subtask = task.subtasks[subtaskIndex];
     subtask.status = subtask.status === "open" ? "closed" : "open";
-
-    // Update localStorage with the new task status
     localStorage.setItem("tasks", JSON.stringify(allTasks));
-
     renderSubtasksOverlay(ticketID);
     updateProgressBar(ticketID);
     updateSubtaskCounter(ticketID);
