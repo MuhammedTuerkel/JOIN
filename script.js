@@ -308,7 +308,6 @@ function deleteContactFromLocalStorage(i) {
   if (i >= 0 && i < storedContacts.length) {
     storedContacts.splice(i, 1);
     localStorage.setItem("contacts", JSON.stringify(storedContacts));
-    // Entfernen Sie den Aufruf von renderContacts hier
   } else {
     console.warn(`Contact with index ${i} not found in local storage.`);
   }

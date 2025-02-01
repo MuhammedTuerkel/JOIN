@@ -165,8 +165,6 @@ function notAssignedUserEdit(email) {
  * Updates the container with the selected users' initials.
  */
 function updateSelectedUsersContainerEdit() {
-  console.log("array Selected Users", selectedUsers);
-
   let container = document.getElementById("selectedUsers");
   container.innerHTML = "";
   for (let index = 0; index < selectedUsers.length; index++) {
@@ -236,8 +234,6 @@ function getTicketIDFromLocalStorage(subtaskID) {
  */
 function openEditDropdown(event) {
   event.stopPropagation();
-  console.log(selectedUsers);
-
   document.getElementById("assigned").classList.add("add_task_dropdown_active");
   let dropdownContainer = document.getElementById("addTaskDropdown");
   let dropdownImage = document.getElementById("dropDownArrow");
