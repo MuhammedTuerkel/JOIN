@@ -832,21 +832,23 @@
     font-size: 19px;
   }
 
-  .login_input_field input {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    border: solid 1px #d1d1d1;
-    border-radius: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 21px;
-    padding-right: 51px;
-    font-size: 19px;
-    transition: border-color 0.3s;
-    cursor: text;
-    box-sizing: border-box;
+  @media (pointer: coarse) {
+    .login_input_field input {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      border: solid 1px #d1d1d1;
+      border-radius: 10px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 21px;
+      padding-right: 51px;
+      font-size: 19px;
+      transition: border-color 0.3s;
+      cursor: text;
+      box-sizing: border-box;
+    }
   }
 
   .login_input_field img {
@@ -1074,21 +1076,23 @@
     font-size: 16px;
   }
 
-  .login_input_field input {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    border: solid 1px #d1d1d1;
-    border-radius: 10px;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    padding-left: 21px;
-    padding-right: 51px;
-    font-size: 14px;
-    transition: border-color 0.3s;
-    cursor: text;
-    box-sizing: border-box;
+  @media (pointer: coarse) {
+    .login_input_field input {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      border: solid 1px #d1d1d1;
+      border-radius: 10px;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      padding-left: 21px;
+      padding-right: 51px;
+      font-size: 14px;
+      transition: border-color 0.3s;
+      cursor: text;
+      box-sizing: border-box;
+    }
   }
 
   .login_input_field img {
@@ -1317,15 +1321,17 @@
     font-size: 16px;
   }
 
-  .login_input_field input {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 12px;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    padding-left: 21px;
-    padding-right: 51px;
+  @media (pointer: coarse) {
+    .login_input_field input {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      padding-left: 21px;
+      padding-right: 51px;
+    }
   }
 
   .login_input_field img {
@@ -1496,15 +1502,17 @@
     margin-bottom: 10px;
   }
 
-  .login_input_field input {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 12px;
-    padding-top: 7px;
-    padding-bottom: 4px;
-    padding-left: 12px;
-    padding-right: 43px;
+  @media (pointer: coarse) {
+    .login_input_field input {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      padding-top: 7px;
+      padding-bottom: 4px;
+      padding-left: 12px;
+      padding-right: 43px;
+    }
   }
 
   .login_input_mail_info {

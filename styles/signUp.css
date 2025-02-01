@@ -284,8 +284,10 @@
     height: 50%;
   }
 
-  .signup_input_field input {
-    width: 100%;
+  @media (pointer: coarse) {
+    .signup_input_field input {
+      width: 100%;
+    }
   }
 
   .login_card {
@@ -372,17 +374,19 @@
     margin-bottom: 1.5em;
   }
 
-  .signup_input_field input {
-    width: 90%;
-    border: solid 1px #d1d1d1;
-    border-radius: 10px;
-    padding-top: 9px;
-    padding-bottom: 9px;
-    padding-left: 15px;
-    padding-right: 15px;
-    font-size: 16px;
-    transition: border-color 0.3s;
-    cursor: text;
+  @media (pointer: coarse) {
+    .signup_input_field input {
+      width: 90%;
+      border: solid 1px #d1d1d1;
+      border-radius: 10px;
+      padding-top: 9px;
+      padding-bottom: 9px;
+      padding-left: 15px;
+      padding-right: 15px;
+      font-size: 16px;
+      transition: border-color 0.3s;
+      cursor: text;
+    }
   }
 
   .signup_input_field input::placeholder {
@@ -536,17 +540,19 @@
     margin-bottom: 2em;
   }
 
-  .signup_input_field input {
-    width: 90%;
-    border: solid 1px #d1d1d1;
-    border-radius: 10px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 15px;
-    padding-right: 15px;
-    font-size: 14px;
-    transition: border-color 0.3s;
-    cursor: text;
+  @media (pointer: coarse) {
+    .signup_input_field input {
+      width: 90%;
+      border: solid 1px #d1d1d1;
+      border-radius: 10px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      padding-left: 15px;
+      padding-right: 15px;
+      font-size: 14px;
+      transition: border-color 0.3s;
+      cursor: text;
+    }
   }
 
   .signup_input_field input::placeholder {
@@ -680,17 +686,19 @@
     margin-bottom: 1.2em;
   }
 
-  .signup_input_field input {
-    width: 90%;
-    border: solid 1px #d1d1d1;
-    border-radius: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 15px;
-    padding-right: 15px;
-    font-size: 14px;
-    transition: border-color 0.3s;
-    cursor: text;
+  @media (pointer: coarse) {
+    .signup_input_field input {
+      width: 90%;
+      border: solid 1px #d1d1d1;
+      border-radius: 10px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-left: 15px;
+      padding-right: 15px;
+      font-size: 14px;
+      transition: border-color 0.3s;
+      cursor: text;
+    }
   }
 
   .signup_input_field input::placeholder {
