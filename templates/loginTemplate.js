@@ -48,7 +48,7 @@ function getSignUpTemplate() {
         <div class="signup_input_field">
             <input id="signUpName" type="text" placeholder="Name" class="blur_placeholder" oninput="validateSignUpForm(); checkSignUpNameInput()">
             <img src="./assets/img/person.png" alt="Person Icon" class="input_icon_mail">
-            <small id="signUpNameError" class="signup_input_mail_info login_d_none">Bitte geben Sie einen gültigen Namen ein (nur Buchstaben und Leerzeichen).</small>
+            <small id="signUpNameError" class="signup_input_mail_info login_d_none">Bitte geben Sie einen gültigen Namen ein.</small>
         </div>
         <div class="signup_input_field">
             <input id="signUpInputMail" type="text" placeholder="Mail" oninput="validateSignUpForm(); checkSignUpEmailInput()" class="blur_placeholder" required>
