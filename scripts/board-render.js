@@ -171,9 +171,15 @@ async function renderAssignedUsers(ticketID) {
   if (!assignedUsers || assignedUsers.length === 0) {
     return;
   }
-  for (let i = 0; i < assignedUsers.length; i++) {
+  let maxUsers = Math.min(assignedUsers.length, 3);
+  for (let i = 0; i < maxUsers; i++) {
     let initials = assignedUsers[i].name.charAt(0).toUpperCase() + assignedUsers[i].name.charAt(assignedUsers[i].name.length - 1).toUpperCase();
     let bgColor = assignedUsers[i].color;
+    document.getElementById(`ticketAssignedUsers_${ticketID}`).innerHTML += renderUserCircle(initials, bgColor);
+  }
+  if (assignedUsers.length > 3) {
+    let initials = "+";
+    let bgColor = "#2B3647";
     document.getElementById(`ticketAssignedUsers_${ticketID}`).innerHTML += renderUserCircle(initials, bgColor);
   }
 }
