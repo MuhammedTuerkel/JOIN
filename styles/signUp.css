@@ -15,7 +15,7 @@
   font-family: "Inter", serif;
   justify-content: space-around;
   height: 60%;
-  margin-top: 10px;
+  margin-top: 70px;
   position: fixed;
 }
 
@@ -213,7 +213,8 @@
   position: absolute;
   bottom: -300px;
   text-align: center;
-  transition: bottom 0.8s ease-in-out, opacity 0.5s ease-in-out, transform 1s ease-in-out;
+  transition: bottom 0.8s ease-in-out, opacity 0.5s ease-in-out,
+    transform 1s ease-in-out;
 }
 
 .confirmation_container.fly-up {
@@ -243,13 +244,16 @@
 }
 
 .confirmation_container.flip-horizontal-bottom {
-  -webkit-animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
-  animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+  -webkit-animation: flip-horizontal-bottom 0.4s
+    cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+  animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+    both;
   opacity: 0;
 }
 
 .confirmation_containerb {
-  transition: bottom 0.8s ease-in-out, opacity 0.5s ease-in-out, transform 1s ease-in-out;
+  transition: bottom 0.8s ease-in-out, opacity 0.5s ease-in-out,
+    transform 1s ease-in-out;
 }
 
 .sign_up_sucessfully {
@@ -279,19 +283,19 @@
 }
 
 @media (max-width: 1250px) and (min-width: 787px) {
-  .signup_card {
-    width: 40%;
-    height: 50%;
-  }
-
-  @media (pointer: coarse) {
-    .signup_input_field input {
-      width: 100%;
-    }
-  }
-
   .login_card {
     width: 50%;
+  }
+}
+
+@media (max-width: 1250px) {
+  .signup_input_field {
+    margin-bottom: 2em;
+  }
+
+  .signup_card {
+    width: 40%;
+    height: 500px;
   }
 }
 
@@ -322,7 +326,7 @@
     justify-content: space-around;
     width: 60%;
     margin-top: 13%;
-    height: 55%;
+    height: 420px;
   }
 
   .sign_up_card_headline {
@@ -493,7 +497,7 @@
     justify-content: space-around;
     width: 70%;
     margin-top: 6%;
-    height: 50%;
+    height: 440px;
   }
 
   .sign_up_card_headline h1 {
@@ -620,7 +624,7 @@
   }
 }
 
-@media (max-width: 410px) and (min-width: 319px) {
+@media (max-width: 410px) {
   .signup_card {
     display: block;
     flex-direction: column;
@@ -639,7 +643,7 @@
     justify-content: space-around;
     width: 90%;
     margin-top: 9%;
-    height: 50%;
+    height: 350px;
   }
 
   .sign_up_card_headline h1 {

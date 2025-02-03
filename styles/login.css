@@ -394,6 +394,7 @@
   align-items: center;
   gap: 35px;
   margin-bottom: 35px;
+  margin-top: 20px;
 }
 
 .login_footer a {
