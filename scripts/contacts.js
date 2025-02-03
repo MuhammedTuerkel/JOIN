@@ -180,18 +180,26 @@ function clearEmptyDivs(a) {
   hideContact();
 }
 
-// /**
-//  * Deletes the contact but at least one contact is always required
-//  * @param {int} i
-//  */
-// function deleteContact(i) {
-//   console.log("delete");
-//   hideAddNewContact(event);
-//   hideContactMobile(event);
-//   deleteContactfromFirebase(i);
-//   updateContactsDisplay();
-//   updateTasksAfterContactDeletion(i);
-// }
+/**
+ * Delete a contact and update the UI
+ * @param {int} i - The index of the contact in the local array
+ */
+async function deleteContact(i) {
+  hideAddNewContact(event);
+  hideContactMobile(event);
+  let contactId = contactIds[i];
+  let response = await deleteContactfromFirebase(contactId);
+  if (response.success) {
+    contacts.splice(i, 1);
+    contactIds.splice(i, 1);
+    renderContacts();
+    console.log("Contact successfully deleted and UI updated.");
+  } else {
+    console.error("Failed to delete contact:", response.error);
+    updateContactsDisplay();
+    updateTasksAfterContactDeletion(i);
+  }
+}
 
 /**
  * step between contact deletion and updating tasks
@@ -327,34 +335,3 @@ function loadContactEdit(i) {
     document.getElementById("body").classList.remove("over-hidden");
   }, 500);
 }
-
-// /**
-//  * Fetches the current state of Contacts array and initializes it if it is undefined or not an array.
-//  */
-// function getTheItemstoPushTOFireBase() {
-//   pushContactsToLocalStorage();
-// }
-
-// /**
-//  * Get contacts-array from wherever you store it and push it to the contacts-array on the website
-//  */
-// function getItemsFromFirebase() {
-//   getContactsFromLocalStorage();
-// }
-
-/**
- * Aktualisiert den globalen Contacts-Array
- * @returns {array} Aktualisierter Contacts-Array
- */
-function pushToFireBase() {
-  pushContactsToLocalStorage();
-}
-
-// /**
-//  * Deletes a contact from the global Contacts array
-//  * @param {int} i - The index of the contact to be deleted
-//  * @returns {array} - Updated Contacts array
-//  */
-// function deleteContactfromFirebase(i) {
-//   deleteContactFromLocalStorage(i);
-// }

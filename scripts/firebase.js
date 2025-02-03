@@ -32,38 +32,6 @@ async function getItemsFromFirebase() {
 }
 
 /**
- * Checks if the first letter of the name matches with the letter, if yes then it generates the badge and loads a function named generateContactHTML
- * at the end it clears the empty divs
- */
-async function renderContacts() {
-  let alphabet = generateAlphabet();
-  let storedContacts = await getItemsFromFirebase();
-
-  alphabet.forEach((letter) => {
-    let container = document.getElementById(letter);
-    if (container) {
-      container.innerHTML = "";
-    }
-  });
-
-  if (storedContacts && storedContacts.length === 0) {
-    clearEmptyDivs(alphabet);
-  } else {
-    storedContacts.forEach((contact, index) => {
-      if (contact && contact.name) {
-        let firstLetter = contact.name.charAt(0).toUpperCase();
-        let letterIndex = alphabet.indexOf(firstLetter);
-        if (letterIndex !== -1) {
-          let badge = generateBadge(index);
-          generateContactHTML(storedContacts, alphabet, letterIndex, badge, index);
-        }
-      }
-    });
-    clearEmptyDivs(alphabet);
-  }
-}
-
-/**
  * Updates a contact in Firebase
  * @param {int} i
  * @param {string} contactName
@@ -138,28 +106,6 @@ function loadContact(i, event) {
 }
 
 /**
- * Renders the template of the contact information
- * @param {Object} contact - The contact object
- * @param {int} i - The index of the contact
- */
-function renderContactInformation(contact, i) {
-  if (contact) {
-    let Badge = generateBadge(i);
-    document.getElementById("Profile-Badge1").innerHTML = `${Badge}`;
-    document.getElementById("editdelete-name").innerHTML = `${contact.name}`;
-    document.getElementById("email").innerHTML = `${contact.email}`;
-    document.getElementById("phone").innerHTML = `${contact.phone}`;
-    document.getElementById("badgeBackgroundColor").style.backgroundColor = contact.color;
-    document.getElementById("editContact").setAttribute(`onclick`, `loadEditContact(event, ${i})`);
-    document.getElementById("editContactMobile").setAttribute(`onclick`, `loadEditContact(event, ${i})`);
-    document.getElementById("deleteContact").setAttribute(`onclick`, `deleteContact(${i})`);
-    document.getElementById("deleteContactMobile").setAttribute(`onclick`, `deleteContact(${i})`);
-  } else {
-    console.error("Contact object is null or undefined");
-  }
-}
-
-/**
  * Fetches the contact information from firebase by index
  * @param {int} i
  * @returns {Object} contact
@@ -190,9 +136,6 @@ async function getContactFromFirebase(i) {
  * @returns {Object} response
  */
 async function deleteContactfromFirebase(id) {
-  console.log("delete");
-  console.log("contact ID", id);
-
   try {
     let path = `contacts/${id}.json`;
     console.log("Firebase path:", path);
@@ -202,40 +145,13 @@ async function deleteContactfromFirebase(id) {
         "Content-Type": "application/json",
       },
     });
-
-    console.log("Firebase response status:", response.status);
-
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-
-    console.log("Successfully deleted contact from Firebase");
     return { success: true };
   } catch (error) {
     console.error("Failed to delete contact from Firebase:", error);
     return { success: false, error: error.message };
-  }
-}
-
-/**
- * Delete a contact and update the UI
- * @param {int} i - The index of the contact in the local array
- */
-async function deleteContact(i) {
-  hideAddNewContact(event);
-  hideContactMobile(event);
-  let contactId = contactIds[i]; // Get the unique ID of the contact
-  let response = await deleteContactfromFirebase(contactId);
-
-  if (response.success) {
-    contacts.splice(i, 1); // Remove the contact from the global contacts array
-    contactIds.splice(i, 1); // Remove the contact ID from the global contact IDs array
-    renderContacts(); // Re-render the contacts list
-    console.log("Contact successfully deleted and UI updated.");
-  } else {
-    console.error("Failed to delete contact:", response.error);
-    updateContactsDisplay();
-    updateTasksAfterContactDeletion(i);
   }
 }
 
@@ -262,81 +178,6 @@ function generateBadge(x) {
   let f_name = values.shift().charAt(0).toUpperCase();
   let l_name = values.join(" ").charAt(0).toUpperCase();
   return f_name + l_name;
-}
-
-// /**
-//  * It hides the contact and removes the background color of the contact in the contact list
-//  */
-// function hideContact() {
-//   document.getElementById("all-information").classList.remove("animationRightToPosition");
-//   document.getElementById("all-information").classList.add("d-none");
-//   for (let i = 0; i < contacts.length; i++) {
-//     document.getElementById(`Contact${i}`).style = "";
-//     document.getElementById(`name${i}`).style = "";
-//   }
-// }
-
-// /**
-//  * Renders the template of the contact information
-//  * @param {int} i
-//  */
-// function renderContactInformation(i) {
-//   let Badge = generateBadge(i);
-//   document.getElementById("Profile-Badge1").innerHTML = `${Badge}`;
-//   document.getElementById("editdelete-name").innerHTML = `${Contacts[i].name}`;
-//   document.getElementById("email").innerHTML = `${contacts[i].email}`;
-//   document.getElementById("phone").innerHTML = `${contacts[i].phone}`;
-//   document.getElementById("badgeBackgroundColor").style.backgroundColor = Contacts[i].color;
-//   document.getElementById("editContact").setAttribute(`onclick`, `loadEditContact(event, ${i})`);
-//   document.getElementById("editContactMobile").setAttribute(`onclick`, `loadEditContact(event, ${i})`);
-//   document.getElementById("deleteContact").setAttribute(`onclick`, `deleteContact(${i})`);
-//   document.getElementById("deleteContactMobile").setAttribute(`onclick`, `deleteContact(${i})`);
-// }
-
-/**
- * Checks if the first letter of the name matches with the letter, if yes then it generates the badge and loads a function named generateContactHTML
- * at the end it clears the empty divs
- */
-function renderContact() {
-  let a = generateAlphabet();
-  if (Contacts == 0) {
-    clearEmptyDivs(a);
-  } else {
-    let firstLetter = contacts[x].name.charAt(0).toUpperCase();
-    for (let i = 0; i < a.length; i++) {
-      if (firstLetter == a[i]) {
-        let Badge = generateBadge(x);
-        generateContactHTML(a, i, Badge);
-      }
-    }
-    x = 0;
-    clearEmptyDivs(a);
-  }
-}
-
-/**
- * Generates the contacts in the contactlist if its finished with the array it goes back to the renderContact function
- * @param {*} a
- * @param {*} i
- * @param {*} Badge
- */
-function generateContactHTML(a, i, Badge) {
-  document.getElementById(`${a[i]}`).innerHTML += `
-                  <div id="Contact${x}" onclick="loadContact(${x}, event)" class="Contact">
-                      <div class="Profile-Badge" style="background-color: ${contacts[x].color};">
-                          <h4>${Badge}</h4>
-                      </div>
-                      <div class="name-email">
-                          <h2 id="name${x}">${contacts[x].name}</h2>
-                          <h3>${contacts[x].email}</h3>
-                      </div>
-                  </div>
-                  </div>
-                  `;
-  x++;
-  if (x < Contacts.length) {
-    renderContact(a);
-  }
 }
 
 /*_________ add task ____________________________________________________________________________________________________*/
