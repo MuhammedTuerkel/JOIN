@@ -193,7 +193,6 @@ async function deleteContact(i) {
     contacts.splice(i, 1);
     contactIds.splice(i, 1);
     renderContacts();
-    console.log("Contact successfully deleted and UI updated.");
   } else {
     console.error("Failed to delete contact:", response.error);
     updateContactsDisplay();
@@ -292,7 +291,7 @@ function animateContactCreated() {
  * Saves the new contact that has been edited
  * @param {int} i
  */
-function saveNewContact(i) {
+async function saveNewContact(i) {
   let contactContainer = document.getElementsByClassName("Contact");
   let name = document.getElementById("input-name").value;
   let email = document.getElementById("input-email").value;
@@ -301,6 +300,8 @@ function saveNewContact(i) {
     contacts[i].name = name;
     contacts[i].email = email;
     contacts[i].phone = phone;
+    let contactId = contactIds[i];
+    await updateContactInFirebase(contactId, contacts[i]);
   } else {
     console.warn(`No contact found at index ${i}`);
     return;
@@ -309,9 +310,23 @@ function saveNewContact(i) {
     contactContainer[0].parentNode.removeChild(contactContainer[0]);
   }
   renderContactsListHTMLAgain();
-  hideAddNewContact(event);
-  getTheItemstoPushTOFireBase();
+  hideAddEditContact();
+  getItemsFromFirebase();
   loadContactEdit(i);
+}
+
+/**
+ * It hides the add new contact template
+ * @param {event} event
+ */
+function hideAddEditContact() {
+  document.getElementById("addNewContact").classList.remove("animationRightToPosition");
+  document.getElementById("addNewContact").classList.add("d-none");
+  document.getElementById("headlineAddContactP").style = "";
+  document.getElementById("input-name").value = ``;
+  document.getElementById("input-email").value = ``;
+  document.getElementById("input-phone").value = ``;
+  document.getElementById("ContactsList").style.overflow = "scroll";
 }
 
 /**
@@ -326,8 +341,9 @@ function loadContactEdit(i) {
     document.getElementById("Contacts").style = "display:none;";
     document.getElementById("headline-contact").classList.remove("d-none3");
   }
-  hideContact(i);
-  renderContactInformation(i);
+  hideContact();
+  let contact = contacts[i];
+  renderContactInformation(contact, i);
   setTimeout(() => {
     waitForAnimation(i);
   }, 100);

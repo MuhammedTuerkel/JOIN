@@ -9,10 +9,6 @@ async function getItemsFromFirebase() {
     let path = `contacts/`;
     let response = await fetch(BASE_URL + path + ".json");
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
     let json = await response.json();
     contacts = [];
     contactIds = [];
@@ -24,7 +20,7 @@ async function getItemsFromFirebase() {
         }
       }
     }
-    return contacts; // Return the global contacts array
+    return contacts;
   } catch (error) {
     console.error("Failed to fetch contacts from Firebase:", error);
     return [];
@@ -76,10 +72,7 @@ async function pushContactToFirebase(contact) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     let data = await response.json();
-    console.log("Successfully pushed contact to Firebase:", data);
-  } catch (error) {
-    console.error("Failed to push contact to Firebase:", error);
-  }
+  } catch (error) {}
 }
 
 /**
@@ -111,9 +104,6 @@ function loadContact(i, event) {
  * @returns {Object} contact
  */
 async function getContactFromFirebase(i) {
-  console.log(i);
-  console.log(contacts);
-
   try {
     let path = `contacts/${i}.json`;
     let response = await fetch(BASE_URL + path);
@@ -138,7 +128,6 @@ async function getContactFromFirebase(i) {
 async function deleteContactfromFirebase(id) {
   try {
     let path = `contacts/${id}.json`;
-    console.log("Firebase path:", path);
     let response = await fetch(BASE_URL + path, {
       method: "DELETE",
       headers: {
@@ -169,15 +158,24 @@ async function getNumFromFirebase(path = "", data = {}) {
 }
 
 /**
- * Generates the badge with the first letter of the first and last name
- * @param {*} x
- * @returns the initials
+ * Update a contact in firebase
+ * @param {string} id - The unique ID of the contact
+ * @param {Object} contact - The contact object to be updated
+ * @returns {Object} response
  */
-function generateBadge(x) {
-  let values = Contacts[x].name.split(" ");
-  let f_name = values.shift().charAt(0).toUpperCase();
-  let l_name = values.join(" ").charAt(0).toUpperCase();
-  return f_name + l_name;
+async function updateContactInFirebase(id, contact) {
+  try {
+    let path = `contacts/${id}.json`;
+    let response = await fetch(BASE_URL + path, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(contact),
+    });
+    let responseToJson = await response.json();
+    return responseToJson;
+  } catch (error) {}
 }
 
 /*_________ add task ____________________________________________________________________________________________________*/
