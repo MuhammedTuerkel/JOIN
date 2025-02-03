@@ -178,44 +178,30 @@ async function updateContactInFirebase(id, contact) {
 /*_________ add task ____________________________________________________________________________________________________*/
 
 /**
- * Saves the task and redirects to the board page.
- * @param {Event} event - The event object.
+ * Pushes a task to Firebase.
+ * @param {Object} task - The task object to be pushed.
+ * @param {string} path - The storage path for the task in Firebase.
+ * @returns {Object} response
  */
-async function saveTaskGoToBoard(event, state = "toDo") {
-  event.preventDefault();
-  let data = buildTask(state);
-  await postTask("tasks", data);
-  window.location.href = getBaseWebsideURL() + "/board.html";
-}
+async function pushTaskToFirebase(task, path = "tasks") {
+  try {
+    let response = await fetch(BASE_URL + path + ".json", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(task),
+    });
 
-/**
- * Saves the task and resets the form to create a new task.
- * @param {Event} event - The event object.
- */
-async function saveTaskCreateNewTask(event, state = "toDo") {
-  event.preventDefault();
-  let data = buildTask(state);
-  await postTask("tasks", data);
-  document.getElementById("addTaskForm").reset();
-  document.getElementById("addTaskOverlayNextStep").style.display = "none";
-  document.body.style.overflow = "auto";
-  addTaskClearTask();
-}
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
 
-/**
- * Saves the task and closes the overlay on the board
- * @param {Event} event
- */
-async function saveTaskCloseOverlay(event, state = "toDo") {
-  event.preventDefault();
-  let data = buildTaskOnBoard(state);
-  await postTask("tasks", data);
-  addTaskClearTask();
-  showToast("The ticket was created successfully", "success");
-  setTimeout(() => {
-    toggleOverlay();
-    location.reload();
-  }, 2500);
+    let responseToJson = await response.json();
+    return responseToJson;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
 }
 
 /**
@@ -299,49 +285,6 @@ async function changeSubtaskStatus(subtaskIndex, ticketID) {
 }
 
 /**
- * Changes the Subtask Status in the front-end and on the Firebase DB
- * @param {int} subtaskIndex
- * @param {string} ticketID
- */
-async function changeSubtaskStatus(subtaskIndex, ticketID) {
-  let task = allTasks.find((t) => t["id"] === ticketID);
-  let firebaseID = task["firebase_id"];
-  let subtask = task.subtasks[subtaskIndex];
-  subtask.status = subtask.status === "open" ? "closed" : "open";
-  try {
-    await fetch(`${BASE_URL}tasks/${firebaseID}/subtasks/${subtaskIndex}.json`, {
-      method: "PATCH",
-      body: JSON.stringify({ status: subtask.status }),
-      headers: { "Content-Type": "application/json" },
-    });
-  } catch (error) {
-    console.error("Failed to update subtask in Firebase:", error);
-  }
-  renderSubtasksOverlay(ticketID);
-  updateProgressBar(ticketID);
-  updateSubtaskCounter(ticketID);
-}
-
-/**
- * Changes the Subtask Status in the front-end and updates it in localStorage
- * @param {int} subtaskIndex
- * @param {string} ticketID
- */
-function changeSubtaskStatus(subtaskIndex, ticketID) {
-  let task = allTasks.find((t) => t["id"] === ticketID);
-  if (task) {
-    let subtask = task.subtasks[subtaskIndex];
-    subtask.status = subtask.status === "open" ? "closed" : "open";
-    localStorage.setItem("tasks", JSON.stringify(allTasks));
-    renderSubtasksOverlay(ticketID);
-    updateProgressBar(ticketID);
-    updateSubtaskCounter(ticketID);
-  } else {
-    console.error("Task not found in allTasks array");
-  }
-}
-
-/**
  * Toggles the Overlay view
  */
 function toggleOverlay() {
@@ -389,25 +332,6 @@ async function move(category) {
       headers: { "Content-Type": "application/json" },
     });
     renderFilteredTickets();
-  } else {
-    console.error("Task not found in allTasks array");
-  }
-}
-
-/**
- * Changes the Subtask Status in the front-end and updates it in localStorage
- * @param {int} subtaskIndex
- * @param {string} ticketID
- */
-function changeSubtaskStatus(subtaskIndex, ticketID) {
-  let task = allTasks.find((t) => t["id"] === ticketID);
-  if (task) {
-    let subtask = task.subtasks[subtaskIndex];
-    subtask.status = subtask.status === "open" ? "closed" : "open";
-    localStorage.setItem("tasks", JSON.stringify(allTasks));
-    renderSubtasksOverlay(ticketID);
-    updateProgressBar(ticketID);
-    updateSubtaskCounter(ticketID);
   } else {
     console.error("Task not found in allTasks array");
   }
@@ -538,27 +462,6 @@ async function showOverlayTicket(category, ticketTitle, ticketDescription, ticke
   renderAssignedUsersOverlay(ticketID);
   renderSubtasksOverlay(ticketID);
   actualFirebaseID = await findFirebaseIdById(ticketID);
-}
-
-/**
- * Retrieves all tasks saved in localStorage and assigns responsible contacts to each task.
- */
-function getAllTasks() {
-  if (!tasks.length) {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    const tasksString = localStorage.getItem("tasks");
-    if (tasksString) {
-      const tasks = JSON.parse(tasksString);
-      allTasks = tasks.map((task, index) => {
-        return { id: index, ...task };
-      });
-    } else {
-      allTasks = [];
-    }
-    return tasks;
-  } else {
-    return;
-  }
 }
 
 /**

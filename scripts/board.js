@@ -10,8 +10,8 @@ const formVisibilityCheckOnEdit = setInterval(checkFormVisibilityOnEdit, 100);
 /**
  * Initialize the board features which should be active at site load
  */
-function onInit() {
-  getAllTasks();
+async function onInit() {
+  await getAllTasks();
   renderAllTickets(allTasks);
   getLoggedInUserData();
   sideNavigation();
@@ -82,24 +82,24 @@ function findTicketIndex(title) {
   return ticketIndex;
 }
 
-/**
- * Changes the Subtask Status in the front-end and updates it in localStorage
- * @param {int} subtaskIndex
- * @param {string} ticketID
- */
-function changeSubtaskStatus(subtaskIndex, ticketID) {
-  let task = allTasks.find((t) => t["id"] === ticketID);
-  if (task) {
-    let subtask = task.subtasks[subtaskIndex];
-    subtask.status = subtask.status === "open" ? "closed" : "open";
-    localStorage.setItem("tasks", JSON.stringify(allTasks));
-    renderSubtasksOverlay(ticketID);
-    updateProgressBar(ticketID);
-    renderAllTickets(allTasks);
-  } else {
-    console.error("Task not found in allTasks array");
-  }
-}
+// /**
+//  * Changes the Subtask Status in the front-end and updates it in localStorage
+//  * @param {int} subtaskIndex
+//  * @param {string} ticketID
+//  */
+// function changeSubtaskStatus(subtaskIndex, ticketID) {
+//   let task = allTasks.find((t) => t["id"] === ticketID);
+//   if (task) {
+//     let subtask = task.subtasks[subtaskIndex];
+//     subtask.status = subtask.status === "open" ? "closed" : "open";
+//     localStorage.setItem("tasks", JSON.stringify(allTasks));
+//     renderSubtasksOverlay(ticketID);
+//     updateProgressBar(ticketID);
+//     renderAllTickets(allTasks);
+//   } else {
+//     console.error("Task not found in allTasks array");
+//   }
+// }
 
 /**
  * Saves the ticketID into a variable for further jobs
@@ -115,57 +115,6 @@ function startDragging(ticketID) {
  */
 function allowDrop(ev) {
   ev.preventDefault();
-}
-
-/**
- * Changes the Subtask Status in the front-end and updates it in localStorage
- * @param {int} subtaskIndex
- * @param {string} ticketID
- */
-function changeSubtaskStatus(subtaskIndex, ticketID) {
-  let task = allTasks.find((t) => t["id"] === ticketID);
-  if (task) {
-    let subtask = task.subtasks[subtaskIndex];
-    subtask.status = subtask.status === "open" ? "closed" : "open";
-    localStorage.setItem("tasks", JSON.stringify(allTasks));
-    renderSubtasksOverlay(ticketID);
-    updateProgressBar(ticketID);
-    renderAllTickets(allTasks);
-  } else {
-    console.error("Task not found in allTasks array");
-  }
-}
-
-/**
- * Moves the ticket into another column and updates the state in localStorage
- * @param {string} category - describes in which column the ticket was moved
- */
-function move(category) {
-  let currentIndex = allTasks.findIndex((ix) => ix["id"] === currentDraggedElement);
-  if (currentIndex !== -1) {
-    allTasks[currentIndex]["state"] = category;
-    localStorage.setItem("tasks", JSON.stringify(allTasks));
-    renderFilteredTickets();
-  } else {
-    console.error("Task not found in allTasks array");
-  }
-}
-
-/**
- * Moves the ticket into another column and updates the state in localStorage. Function as a longtap for mobile use.
- * @param {string} category - describes in which column the ticket was moved
- * @param {string} ticketID - unique identifier of the ticket
- */
-function moveToOverlay(category, ticketID) {
-  let currentIndex = allTasks.findIndex((ix) => ix["id"] === ticketID);
-  if (currentIndex !== -1) {
-    allTasks[currentIndex]["state"] = category;
-    localStorage.setItem("tasks", JSON.stringify(allTasks));
-    renderFilteredTickets();
-  } else {
-    console.error("Task not found in allTasks array");
-  }
-  toggleOverlay();
 }
 
 /**
@@ -216,23 +165,6 @@ function removeHighlight(id) {
   if (dummyCard) {
     column.removeChild(dummyCard);
   }
-}
-
-/**
- * Moves the ticket into another column and updates the state in localStorage. Function as a longtap for mobile use.
- * @param {string} category - describes in which column the ticket was moved
- * @param {string} ticketID - unique identifier of the ticket
- */
-function moveToOverlay(category, ticketID) {
-  let currentIndex = allTasks.findIndex((ix) => ix["id"] === ticketID);
-  if (currentIndex !== -1) {
-    allTasks[currentIndex]["state"] = category;
-    localStorage.setItem("tasks", JSON.stringify(allTasks));
-    renderFilteredTickets();
-  } else {
-    console.error("Task not found in allTasks array");
-  }
-  toggleOverlay();
 }
 
 /**
