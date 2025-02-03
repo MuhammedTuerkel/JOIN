@@ -5,30 +5,8 @@ let i = 0;
  * Is a onload-function it loads the functions that are needed to load at the beginning
  */
 async function Init() {
+  getItemsFromFirebase();
   renderContactsListHTML();
-}
-
-/**
- * Onclick to a contact its loading it with an animation and the contact in the contactlist gets a background-color,
- * if the screen width is smaller than 1050px then it separates the contact list and the contact
- * @param {*} i
- * @param {event} event
- */
-function loadContact(i, event) {
-  document.getElementById("body").classList.add("over-hidden");
-  event.stopPropagation();
-  if (window.innerWidth < 1050) {
-    document.getElementById("Contacts").style = "display:none;";
-    document.getElementById("headline-contact").classList.remove("d-none3");
-  }
-  hideContact(i);
-  renderContactInformation(i);
-  setTimeout(() => {
-    waitForAnimation(i);
-  }, 100);
-  setTimeout(() => {
-    document.getElementById("body").classList.remove("over-hidden");
-  }, 500);
 }
 
 /**
@@ -58,7 +36,7 @@ function hideContactMobile(event) {
 /**
  * It hides the contact and removes the background color of the contact in the contactlist
  */
-function hideContact(i) {
+function hideContact() {
   document.getElementById("all-information").classList.remove("animationRightToPosition");
   document.getElementById("all-information").classList.add("d-none");
   if (contacts && contacts.length) {
@@ -202,17 +180,18 @@ function clearEmptyDivs(a) {
   hideContact();
 }
 
-/**
- * Deletes the contact but at least one contact is always required
- * @param {int} i
- */
-function deleteContact(i) {
-  hideAddNewContact(event);
-  hideContactMobile(event);
-  deleteContactFromLocalStorage(i);
-  updateContactsDisplay();
-  updateTasksAfterContactDeletion(i);
-}
+// /**
+//  * Deletes the contact but at least one contact is always required
+//  * @param {int} i
+//  */
+// function deleteContact(i) {
+//   console.log("delete");
+//   hideAddNewContact(event);
+//   hideContactMobile(event);
+//   deleteContactfromFirebase(i);
+//   updateContactsDisplay();
+//   updateTasksAfterContactDeletion(i);
+// }
 
 /**
  * step between contact deletion and updating tasks
@@ -258,31 +237,6 @@ function generateEditNewContactHTML(Badge, i) {
   document.getElementById("deleteSave").style = "";
   document.getElementById("cancelCreate").style = "display:none;";
   document.getElementById("DeleteEditContact").setAttribute(`onclick`, `deleteContact(${i})`);
-}
-
-/**
- * Gets the values of the contact information and checks if the values are empty or filled and gives the information to the functions
- * @param {event} event
- */
-function createNewContact(event) {
-  event.preventDefault();
-  let name = document.getElementById("input-name").value;
-  let email = document.getElementById("input-email").value;
-  let phone = document.getElementById("input-phone").value;
-  const color = createRandomColor();
-  const newContact = {
-    name: name,
-    email: email,
-    phone: phone,
-    color: color,
-    createdAt: new Date().toISOString(),
-  };
-  contacts.push(newContact);
-  saveNewContacttoLocalStorage(newContact);
-  hideAddNewContact(event);
-  animateContactCreated();
-  renderContactsListHTML();
-  document.getElementById("ContactsList").style.overflow = "scroll";
 }
 
 /**
@@ -374,19 +328,19 @@ function loadContactEdit(i) {
   }, 500);
 }
 
-/**
- * Fetches the current state of Contacts array and initializes it if it is undefined or not an array.
- */
-function getTheItemstoPushTOFireBase() {
-  pushContactsToLocalStorage();
-}
+// /**
+//  * Fetches the current state of Contacts array and initializes it if it is undefined or not an array.
+//  */
+// function getTheItemstoPushTOFireBase() {
+//   pushContactsToLocalStorage();
+// }
 
-/**
- * Get contacts-array from wherever you store it and push it to the contacts-array on the website
- */
-function getItemsFromFirebase() {
-  getContactsFromLocalStorage();
-}
+// /**
+//  * Get contacts-array from wherever you store it and push it to the contacts-array on the website
+//  */
+// function getItemsFromFirebase() {
+//   getContactsFromLocalStorage();
+// }
 
 /**
  * Aktualisiert den globalen Contacts-Array
@@ -396,11 +350,11 @@ function pushToFireBase() {
   pushContactsToLocalStorage();
 }
 
-/**
- * Deletes a contact from the global Contacts array
- * @param {int} i - The index of the contact to be deleted
- * @returns {array} - Updated Contacts array
- */
-function deleteContactfromFirebase(i) {
-  deleteContactFromLocalStorage(i);
-}
+// /**
+//  * Deletes a contact from the global Contacts array
+//  * @param {int} i - The index of the contact to be deleted
+//  * @returns {array} - Updated Contacts array
+//  */
+// function deleteContactfromFirebase(i) {
+//   deleteContactFromLocalStorage(i);
+// }

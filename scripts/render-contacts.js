@@ -26,35 +26,35 @@ function generateAlphabet() {
   return "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 }
 
-/**
- * Checks if the first letter of the name matches with the letter, if yes then it generates the badge and loads a function named generateContactHTML
- * at the end it clears the empty divs
- */
-function renderContacts() {
-  let alphabet = generateAlphabet();
-  let storedContacts = JSON.parse(localStorage.getItem("contacts")) || [];
-  alphabet.forEach((letter) => {
-    let container = document.getElementById(letter);
-    if (container) {
-      container.innerHTML = "";
-    }
-  });
-  if (storedContacts.length === 0) {
-    clearEmptyDivs(alphabet);
-  } else {
-    storedContacts.forEach((contact, index) => {
-      if (contact && contact.name) {
-        let firstLetter = contact.name.charAt(0).toUpperCase();
-        let letterIndex = alphabet.indexOf(firstLetter);
-        if (letterIndex !== -1) {
-          let badge = generateBadge(index);
-          generateContactHTML(storedContacts, alphabet, letterIndex, badge, index);
-        }
-      }
-    });
-    clearEmptyDivs(alphabet);
-  }
-}
+// /**
+//  * Checks if the first letter of the name matches with the letter, if yes then it generates the badge and loads a function named generateContactHTML
+//  * at the end it clears the empty divs
+//  */
+// async function renderContacts() {
+//   let alphabet = generateAlphabet();
+//   let storedContacts = await getItemsFromFirebase();
+//   alphabet.forEach((letter) => {
+//     let container = document.getElementById(letter);
+//     if (container) {
+//       container.innerHTML = "";
+//     }
+//   });
+//   if (storedContacts.length === 0) {
+//     clearEmptyDivs(alphabet);
+//   } else {
+//     storedContacts.forEach((contact, index) => {
+//       if (contact && contact.name) {
+//         let firstLetter = contact.name.charAt(0).toUpperCase();
+//         let letterIndex = alphabet.indexOf(firstLetter);
+//         if (letterIndex !== -1) {
+//           let badge = generateBadge(index);
+//           generateContactHTML(storedContacts, alphabet, letterIndex, badge, index);
+//         }
+//       }
+//     });
+//     clearEmptyDivs(alphabet);
+//   }
+// }
 
 /**
  * Generates the contacts in the contact list. If it finishes with the array, it goes back to the renderContacts function.
@@ -98,26 +98,26 @@ function clearEmptyDivs(alphabet) {
   });
 }
 
-/**
- * renders the contact information.
- * @param {*} i
- * @returns
- */
-function renderContactInformation(i) {
-  let storedContacts = JSON.parse(localStorage.getItem("contacts")) || [];
-  if (i >= 0 && i < storedContacts.length) {
-    let Badge = generateBadge(i);
-    document.getElementById("Profile-Badge1").innerHTML = `${Badge}`;
-    document.getElementById("editdelete-name").innerHTML = `${storedContacts[i].name}`;
-    document.getElementById("email").innerHTML = `${storedContacts[i].email}`;
-    document.getElementById("phone").innerHTML = `${storedContacts[i].phone}`;
-    document.getElementById("badgeBackgroundColor").style.backgroundColor = storedContacts[i].color;
-    document.getElementById("editContact").setAttribute(`onclick`, `loadEditContact(event, ${i})`);
-    document.getElementById("editContactMobile").setAttribute(`onclick`, `loadEditContact(event, ${i})`);
-    document.getElementById("deleteContact").setAttribute(`onclick`, `deleteContact(${i})`);
-    document.getElementById("deleteContactMobile").setAttribute(`onclick`, `deleteContact(${i})`);
-  } else {
-    console.warn(`Contact with index ${i} not found.`);
-    return;
-  }
-}
+// /**
+//  * renders the contact information.
+//  * @param {*} i
+//  * @returns
+//  */
+// function renderContactInformation(i) {
+//   let storedContacts = JSON.parse(localStorage.getItem("contacts")) || [];
+//   if (i >= 0 && i < storedContacts.length) {
+//     let Badge = generateBadge(i);
+//     document.getElementById("Profile-Badge1").innerHTML = `${Badge}`;
+//     document.getElementById("editdelete-name").innerHTML = `${storedContacts[i].name}`;
+//     document.getElementById("email").innerHTML = `${storedContacts[i].email}`;
+//     document.getElementById("phone").innerHTML = `${storedContacts[i].phone}`;
+//     document.getElementById("badgeBackgroundColor").style.backgroundColor = storedContacts[i].color;
+//     document.getElementById("editContact").setAttribute(`onclick`, `loadEditContact(event, ${i})`);
+//     document.getElementById("editContactMobile").setAttribute(`onclick`, `loadEditContact(event, ${i})`);
+//     document.getElementById("deleteContact").setAttribute(`onclick`, `deleteContact(${i})`);
+//     document.getElementById("deleteContactMobile").setAttribute(`onclick`, `deleteContact(${i})`);
+//   } else {
+//     console.warn(`Contact with index ${i} not found.`);
+//     return;
+//   }
+// }
