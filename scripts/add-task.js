@@ -10,7 +10,6 @@ function addTaskOnInit() {
   addTaskClearTask();
   getLoggedInUserData();
   initializeKeyDown();
-  checkAndLoadArraysToLocalStorage();
 }
 
 /**

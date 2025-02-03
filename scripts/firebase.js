@@ -8,7 +8,6 @@ async function getItemsFromFirebase() {
   try {
     let path = `contacts/`;
     let response = await fetch(BASE_URL + path + ".json");
-
     let json = await response.json();
     contacts = [];
     contactIds = [];
@@ -107,11 +106,9 @@ async function getContactFromFirebase(i) {
   try {
     let path = `contacts/${i}.json`;
     let response = await fetch(BASE_URL + path);
-
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-
     let contact = await response.json();
     return { ...contact, id: i }; // Add the index to the contact object
   } catch (error) {

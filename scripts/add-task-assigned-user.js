@@ -45,8 +45,8 @@ function handleDropdownBodyClick() {
  * Loads the users into the dropdown container.
  * Updates the dropdown selections based on previously selected users.
  */
-function loadUserInAssignedToDropdown() {
-  let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
+async function loadUserInAssignedToDropdown() {
+  let contacts = await getItemsFromFirebase();
   let dropdownContainer = document.getElementById("addTaskDropdown");
   dropdownContainer.innerHTML = "";
   for (let index = 0; index < contacts.length; index++) {
