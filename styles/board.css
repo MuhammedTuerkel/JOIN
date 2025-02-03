@@ -511,34 +511,79 @@ body {
 }
 
 @media (max-width: 1038px) and (min-width: 460px) {
+  .column-content {
+    flex-direction: row;
+    align-items: baseline;
+    min-height: 440px;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .column-content::-webkit-scrollbar-thumb {
+    background-color: #29abe2;
+    height: 15px;
+    border-radius: 15px;
+  }
+
+  .column-content::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+  }
+
   .board-column {
-    width: 362px;
+    width: 80%;
+    margin: 0 auto;
   }
 
   .column-headline {
-    padding-left: 20px;
-    padding-right: 20px;
-    width: 80%;
+    justify-content: flex-start;
+    gap: 32px;
+  }
+
+  .main-content {
+    flex-direction: column;
   }
 }
 
 @media (max-width: 459px) and (min-width: 310px) {
+  .column-content {
+    flex-direction: row;
+    align-items: baseline;
+    min-height: 440px;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .column-content::-webkit-scrollbar-thumb {
+    background-color: #29abe2;
+    height: 15px;
+    border-radius: 15px;
+  }
+
+  .column-content::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+  }
+
   .board-column {
-    width: 253px;
+    width: 80%;
+    margin: 0 auto;
   }
 
   .column-headline {
-    padding-left: 10px;
-    padding-right: 10px;
-    width: 90%;
+    justify-content: flex-start;
+    gap: 32px;
+  }
+
+  .main-content {
+    flex-direction: column;
   }
 }
 
 @media (max-width: 1159px) and (min-width: 831px) {
   .main-content {
-    flex-wrap: wrap;
-    margin-left: 5px;
-    margin-right: 10px;
+    margin: 0 auto;
+    flex-direction: column;
   }
 
   .board_headline {
@@ -552,11 +597,40 @@ body {
   }
 
   .ticket-card {
-    width: 80%;
+    width: 30%;
   }
 
   .column-headline h2 {
     font-size: 20px;
+  }
+
+  .column-content {
+    flex-direction: row;
+    align-items: baseline;
+    min-height: 440px;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .column-content::-webkit-scrollbar-thumb {
+    background-color: #29abe2;
+    height: 15px;
+    border-radius: 15px;
+  }
+
+  .column-content::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+  }
+
+  .board-column {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .column-headline {
+    justify-content: flex-start;
+    gap: 32px;
   }
 }
 
@@ -654,10 +728,6 @@ body {
 
   .addtask-btn {
     display: none;
-  }
-
-  .main-content {
-    flex-wrap: wrap;
   }
 }
 
