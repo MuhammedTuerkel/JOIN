@@ -118,26 +118,44 @@ async function getContactFromFirebase(i) {
 }
 
 /**
- * Delete a contact from firebase
+ * Delete a contact from Firebase
  * @param {string} id - The unique ID of the contact
- * @returns {Object} response
  */
 async function deleteContactfromFirebase(id) {
-  try {
-    let path = `contacts/${id}.json`;
-    let response = await fetch(BASE_URL + path, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+  let contactPath = `contacts/${id}.json`;
+  let contactResponse = await fetch(BASE_URL + contactPath);
+  let contact = await contactResponse.json();
+  await removeContactFromTasks(contact.email);
+  await fetch(BASE_URL + contactPath, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  });
+  return { success: true };
+}
+
+/**
+ * Remove contact from all tasks
+ * @param {string} contactEmail - The email of the contact
+ */
+async function removeContactFromTasks(contactEmail) {
+  let tasksPath = `tasks.json`;
+  let tasksResponse = await fetch(BASE_URL + tasksPath);
+  let tasks = await tasksResponse.json();
+  let updates = {};
+  for (let taskId in tasks) {
+    let assigned = tasks[taskId].assigned_to || [];
+    let index = assigned.findIndex((c) => c.email === contactEmail);
+    if (index > -1) {
+      assigned.splice(index, 1);
+      updates[`tasks/${taskId}/assigned_to`] = assigned;
     }
-    return { success: true };
-  } catch (error) {
-    console.error("Failed to delete contact from Firebase:", error);
-    return { success: false, error: error.message };
+  }
+  if (Object.keys(updates).length > 0) {
+    await fetch(BASE_URL + ".json", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updates),
+    });
   }
 }
 

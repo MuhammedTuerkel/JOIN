@@ -71,6 +71,26 @@ function toggleUserSelection(email) {
   }
 }
 
+// /**
+//  * Assigns a user and updates the UI accordingly.
+//  * @param {string} email - The email of the user to be assigned.
+//  */
+// function assignedUserDropDown(email) {
+//   let template = document.getElementById(`template-${email}`);
+//   let checkedImg = document.getElementById(`img-${email}`);
+//   let checkbox = document.getElementById(`checkbox-${email}`);
+//   template.classList.remove("user_template_not_selected");
+//   template.classList.add("user_template_selected");
+//   checkedImg.src = "./assets/img/checked button.png";
+//   checkbox.checked = true;
+//   let contact = contacts.find((contact) => contact.email === email);
+//   if (!selectedContacts.some((selectedContact) => selectedContact.email === contact.email)) {
+//     selectedContacts.push(contact);
+//   }
+//   updateSelectedUsersContainer();
+//   console.log(selectedContacts);
+// }
+
 /**
  * Assigns a user and updates the UI accordingly.
  * @param {string} email - The email of the user to be assigned.
@@ -83,11 +103,18 @@ function assignedUserDropDown(email) {
   template.classList.add("user_template_selected");
   checkedImg.src = "./assets/img/checked button.png";
   checkbox.checked = true;
-  let contact = contacts.find((contact) => contact.email === email);
+
+  // Finde den Kontakt einschließlich seiner Firebase-ID
+  let contactKey = Object.keys(contacts).find((key) => contacts[key].email === email);
+  let contact = contacts[contactKey];
+  contact.id = contactKey; // ID hinzufügen
+
   if (!selectedContacts.some((selectedContact) => selectedContact.email === contact.email)) {
     selectedContacts.push(contact);
   }
+
   updateSelectedUsersContainer();
+  console.log(selectedContacts);
 }
 
 /**
