@@ -359,7 +359,7 @@ function renderOverlayEditTicket(ticketID) {
             </div>
             <div class="assigned_to_container">
                 <label for="assigned-to">Assigned to</label>
-                <div id="assigned" class="add_task_dropdown" onclick="openEditDropdown(event)">
+                <div id="assigned" class="add_task_dropdown" onclick="openEditDropdown('${ticketID}' , event)"">
                     <input type="text" id="addTaskSearchContacts" placeholder="Select contacts to assign" oninput="addTaskSearchUser()">
                     <img id="dropDownArrow" src="./assets/img/arrow_drop_down.png" alt="" onclick="openEditDropdown('${ticketID}' , event)">
                 </div>

@@ -232,7 +232,7 @@ function getTicketIDFromLocalStorage(subtaskID) {
  * Opens the dropdown container and updates the dropdown arrow.
  * @param {Event} event - The event object.
  */
-function openEditDropdown(event) {
+function openEditDropdown(ticketID, event) {
   event.stopPropagation();
   document.getElementById("assigned").classList.add("add_task_dropdown_active");
   let dropdownContainer = document.getElementById("addTaskDropdown");
@@ -242,49 +242,32 @@ function openEditDropdown(event) {
   } else {
     dropdownContainer.classList.add("open");
     dropdownImage.style.transform = "rotate(180deg)";
-    loadUserInEditAssignedToDropdown();
+    loadUserInEditAssignedToDropdown(ticketID);
   }
-}
-
-/**
- * Loads user contacts into the assigned-to dropdown for editing tasks.
- * This function retrieves contacts from local storage, clears the existing dropdown content,
- * populates the dropdown with user templates for each contact, and updates the dropdown selections.
- * @throws {Error} If there's an issue parsing the contacts from localStorage or accessing the DOM elements.
- */
-function loadUserInEditAssignedToDropdown() {
-  let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
-
-  let dropdownContainer = document.getElementById("addTaskDropdown");
-  dropdownContainer.innerHTML = "";
-
-  for (let index = 0; index < contacts.length; index++) {
-    let contact = contacts[index];
-    dropdownContainer.innerHTML += createUserTemplateEdit(contact);
-  }
-
-  updateEditDropdownSelections();
 }
 
 /**
  * Loads the users into the dropdown container.
  * Updates the dropdown selections based on previously selected users.
  */
-function loadUserInAssignedToDropdownEdit() {
+async function loadUserInEditAssignedToDropdown(ticketID) {
+  let contacts = await getItemsFromFirebase();
   let dropdownContainer = document.getElementById("addTaskDropdown");
   dropdownContainer.innerHTML = "";
-  let storedContacts = JSON.parse(localStorage.getItem("contacts")) || [];
-  for (let index = 0; index < storedContacts.length; index++) {
-    let contact = storedContacts[index];
+  for (let index = 0; index < contacts.length; index++) {
+    let contact = contacts[index];
     dropdownContainer.innerHTML += createUserTemplateEdit(contact);
   }
-  updateDropdownSelectionsEdit();
+  updateEditDropdownSelections(ticketID);
 }
 
 /**
  * Updates the dropdown selections based on the selected users.
+ * @param {string} ticketID - The ID of the selected task
  */
-function updateEditDropdownSelections() {
+function updateEditDropdownSelections(ticketID) {
+  let task = allTasks.find((task) => task.id === ticketID);
+  selectedUsers = task.assigned_to;
   selectedUsers.forEach((contact) => {
     let checkbox = document.getElementById(`checkbox-${contact.email}`);
     let template = document.getElementById(`template-${contact.email}`);

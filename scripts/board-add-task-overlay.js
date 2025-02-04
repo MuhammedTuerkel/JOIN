@@ -40,20 +40,20 @@ function toggleOverlay() {
   }
 }
 
-/**
- * Shows the ticket in the overlay when clicked on it
- * @param {string} category - The category of the ticket
- * @param {string} ticketTitle  - The Ticket title
- * @param {string} ticketDescription - The Ticket description
- * @param {string} ticketDate - The due date of the ticket
- * @param {string} prio - The Priority of the ticket
- * @param {string} ticketID - The exact ID which is based on the localStorage ID
- */
-function showOverlayTicket(category, ticketTitle, ticketDescription, ticketDate, prio, ticketID) {
-  document.getElementById("overlayID").innerHTML = renderOverlayTicket(category, ticketTitle, ticketDescription, ticketDate, prio, ticketID);
-  renderAssignedUsersOverlay(ticketID);
-  renderSubtasksOverlay(ticketID);
-}
+// /**
+//  * Shows the ticket in the overlay when clicked on it
+//  * @param {string} category - The category of the ticket
+//  * @param {string} ticketTitle  - The Ticket title
+//  * @param {string} ticketDescription - The Ticket description
+//  * @param {string} ticketDate - The due date of the ticket
+//  * @param {string} prio - The Priority of the ticket
+//  * @param {string} ticketID - The exact ID which is based on the localStorage ID
+//  */
+// function showOverlayTicket(category, ticketTitle, ticketDescription, ticketDate, prio, ticketID) {
+//   document.getElementById("overlayID").innerHTML = renderOverlayTicket(category, ticketTitle, ticketDescription, ticketDate, prio, ticketID);
+//   renderAssignedUsersOverlay(ticketID);
+//   renderSubtasksOverlay(ticketID);
+// }
 
 /**
  * Opens the edit-Overlay of the ticket and loads the ticket-data into the overlay

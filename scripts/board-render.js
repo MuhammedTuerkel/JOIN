@@ -198,7 +198,7 @@ function renderAssignedUsersOverlay(ticketID) {
     console.error(`Element with ID overlayAssignedUserContent_${ticketID} not found`);
     return;
   } else {
-    if ((selectedUsers = [])) {
+    if ((selectedUsers = "")) {
       targetElement.innerHTML = `<p class="subtask_error">no Assigned Users</p>`;
       return;
     } else {
