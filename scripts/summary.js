@@ -4,7 +4,6 @@ let greeting;
  * Is a body-onload function
  */
 async function Init() {
-  checkAndLoadArraysToLocalStorage();
   await getAllTasks();
   getLoggedInUserData();
   getFromLocalStorage();

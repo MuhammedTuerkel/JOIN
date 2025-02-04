@@ -198,11 +198,16 @@ function renderAssignedUsersOverlay(ticketID) {
     console.error(`Element with ID overlayAssignedUserContent_${ticketID} not found`);
     return;
   } else {
-    for (let i = 0; i < assignedUsers.length; i++) {
-      let initials = assignedUsers[i].name.charAt(0).toUpperCase() + assignedUsers[i].name.charAt(assignedUsers[i].name.length - 1).toUpperCase();
-      let color = assignedUsers[i].color;
-      let userName = assignedUsers[i].name;
-      document.getElementById(`overlayAssignedUserContent_${ticketID}`).innerHTML += renderOverlayUserElement(userName, initials, color);
+    if ((selectedUsers = [])) {
+      targetElement.innerHTML = `<p class="subtask_error">no Assigned Users</p>`;
+      return;
+    } else {
+      for (let i = 0; i < assignedUsers.length; i++) {
+        let initials = assignedUsers[i].name.charAt(0).toUpperCase() + assignedUsers[i].name.charAt(assignedUsers[i].name.length - 1).toUpperCase();
+        let color = assignedUsers[i].color;
+        let userName = assignedUsers[i].name;
+        document.getElementById(`overlayAssignedUserContent_${ticketID}`).innerHTML += renderOverlayUserElement(userName, initials, color);
+      }
     }
   }
 }

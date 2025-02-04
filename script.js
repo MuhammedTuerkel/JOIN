@@ -19,7 +19,6 @@ function checkRememberMe() {
   } else {
     LogInNotRemember();
   }
-  checkAndLoadArraysToLocalStorage();
 }
 
 /**
@@ -36,20 +35,6 @@ async function onloadFunction() {
     }
   }
 }
-
-// /**
-//  * Load global arrays to local storage if they don't exist or are empty.
-//  */
-// function checkAndLoadArraysToLocalStorage() {
-//   let storedContacts = localStorage.getItem("contacts");
-//   if (storedContacts === null || JSON.parse(storedContacts).length === 0) {
-//     localStorage.setItem("contacts", JSON.stringify(contacts));
-//   }
-//   let storedTasks = localStorage.getItem("tasks");
-//   if (storedTasks === null || JSON.parse(storedTasks).length === 0) {
-//     localStorage.setItem("tasks", JSON.stringify(tasks));
-//   }
-// }
 
 /**
  * Fetch data from Firebase Realtime Database
