@@ -515,7 +515,7 @@ body {
     flex-direction: row;
     align-items: baseline;
     min-height: 440px;
-    width: 100%;
+    width: 90%;
     overflow-x: auto;
   }
 
@@ -531,7 +531,7 @@ body {
   }
 
   .board-column {
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
   }
 
@@ -542,6 +542,11 @@ body {
 
   .main-content {
     flex-direction: column;
+    width: 100%;
+  }
+
+  .ticket-card {
+    width: 200px;
   }
 }
 
@@ -639,16 +644,9 @@ body {
     margin-left: 18px;
     margin-right: 18px;
   }
-  .board-column {
-    width: 200px;
-  }
 
   .column-headline h2 {
     font-size: 18px;
-  }
-
-  .ticket-card {
-    width: 70%;
   }
 
   .category-badge-technical,
@@ -759,11 +757,11 @@ body {
   }
 
   .main-content {
-    flex-wrap: wrap;
+    flex-direction: column;
   }
 
   .board-column {
-    width: 200px;
+    width: 100%;
   }
 
   .column-headline h2 {
@@ -771,7 +769,7 @@ body {
   }
 
   .ticket-card {
-    width: 70%;
+    width: 200px;
   }
 
   .category-badge-technical,
