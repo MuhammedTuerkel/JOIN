@@ -140,21 +140,26 @@ function activateButton(buttonId, svgId, buttonClass, svgClass) {
   document.getElementById(svgId).classList.add(svgClass);
 }
 
-// /**
-//  * Saves the edited task details and updates the local storage.
-//  * @param {string} ticketID - The ID of the task to update.
-//  */
-// function saveEditOnClick(ticketID) {
-//   const updatedTask = getUpdatedTaskDetails();
-//   const taskIndex = allTasks.findIndex((task) => task.id === ticketID);
-//   if (taskIndex !== -1) {
-//     updateTaskInAllTasks(taskIndex, updatedTask);
-//     updateTasksInLocalStorage();
-//     handleSuccessfulEdit();
-//   } else {
-//     console.error("Task not found in allTasks array");
-//   }
-// }
+/**
+ * Gets the new variables content and saves it to the firebase database while accordingly updating the board UI
+ * @param {string} ticketID
+ */
+async function saveEditOnClick(ticketID) {
+  let newTitle = document.getElementById("task-title-overlay-edit").value;
+  let newDescription = document.getElementById("task-description-overlay-edit").value;
+  let newDueDate = document.getElementById("task-due-date-overlay-edit").value;
+  let newPrio = editedPrio;
+  let newAssignedUsers = selectedUsers;
+  let newSubtasks = subtasksArray;
+  let firebaseID = await findFirebaseIdById(ticketID);
+  let data = buildEditTask(newTitle, newDescription, newDueDate, newPrio, newAssignedUsers, newSubtasks);
+  await patchTask(firebaseID, data);
+  showToast("The ticket was edited successfully", "success");
+  setTimeout(() => {
+    toggleOverlay();
+    location.reload();
+  }, 2500);
+}
 
 /**
  * Clears the assigned users for a specific task.
@@ -218,25 +223,6 @@ function handleSuccessfulEdit() {
     renderAllTickets(allTasks);
   }, 2500);
 }
-
-// /**
-//  * Patches the task in the localStorage
-//  * @param {string} taskID
-//  * @param {object} data
-//  */
-// function patchTask(taskID, data) {
-//   let tasksString = localStorage.getItem("tasks");
-//   if (tasksString) {
-//     let tasks = JSON.parse(tasksString);
-//     let taskIndex = tasks.findIndex((task) => task.id === taskID);
-//     if (taskIndex !== -1) {
-//       tasks[taskIndex] = { ...tasks[taskIndex], ...data };
-//       localStorage.setItem("tasks", JSON.stringify(tasks));
-//     } else {
-//       console.error("Task not found in tasks array");
-//     }
-//   }
-// }
 
 /**
  * Gets the new entries and returns a JSON Object

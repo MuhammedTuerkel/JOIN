@@ -1,4 +1,32 @@
-document.addEventListener("click", (event) => {
+/**
+ * Shows the ticket in the overlay when clicked on it
+ * @param {string} category - The category of the ticket
+ * @param {string} ticketTitle  - The Ticket title
+ * @param {string} ticketDescription - The Ticket description
+ * @param {string} ticketDate - The due date of the ticket
+ * @param {string} prio - The Priority of the ticket
+ * @param {string} ticketID - The exact ID which is based on the Firebase-ID
+ */
+async function showOverlayTicket(category, ticketTitle, ticketDescription, ticketDate, prio, ticketID) {
+  document.getElementById("overlayID").innerHTML = renderOverlayTicket(category, ticketTitle, ticketDescription, ticketDate, prio, ticketID);
+  renderAssignedUsersOverlay(ticketID);
+  renderSubtasksOverlay(ticketID);
+  actualFirebaseID = await findFirebaseIdById(ticketID);
+}
+
+// document.addEventListener("click", (event) => {
+//   const target = event.target;
+//   if (target.classList.contains("edit-icon")) {
+//     handleEditClick(target);
+//   } else if (target.classList.contains("save-icon")) {
+//     handleSaveClick(target);
+//   }
+// });
+
+/**
+ * Handles click events on subtask action icons.
+ */
+document.addEventListener("click", (event, ticketID) => {
   const target = event.target;
   if (target.classList.contains("edit-icon")) {
     handleEditClick(target);
@@ -68,42 +96,6 @@ function editArrayEntry(subtaskID, updatedText) {
 }
 
 /**
- * Handles the delete click event for a subtask.
- * @param {Event} event - The event object.
- * @param {string} ticketID - The ID of the task the subtask belongs to.
- * @param {number} index - The index of the subtask to delete.
- */
-function handleDeleteClick(event, ticketID, index) {
-  const subtaskItem = getClosestSubtaskItem(event);
-  if (ticketID === "undefined") {
-    deleteSubtaskLocally(subtaskItem, index);
-  } else {
-    deleteSubtaskFromStorage(subtaskItem, ticketID);
-  }
-}
-
-/**
- * Deletes a subtask locally and updates the UI.
- * @param {HTMLElement} subtaskItem - The subtask item to delete.
- * @param {number} index - The index of the subtask to delete.
- */
-function deleteSubtaskLocally(subtaskItem, index) {
-  if (subtaskItem) subtaskItem.remove();
-  subtasksArray.splice(index, 1);
-  updateUI();
-}
-
-/**
- * Updates the UI based on the current state of the subtasks array.
- */
-function updateUI() {
-  const subtasksContainer = document.getElementById("subtasksList");
-  subtasksContainer.innerHTML = "";
-
-  renderAddTaskSubtaskList();
-}
-
-/**
  * Toggles user selection based on checkbox status.
  * @param {string} email - The email of the user to toggle selection.
  */
@@ -120,49 +112,6 @@ function toggleUserSelectionEdit(email) {
   }
 }
 
-// /**
-//  * Assigns a user and updates the UI accordingly.
-//  * @param {string} email - The email of the user to be assigned.
-//  */
-// function assignedUserDropDownEdit(email) {
-//   let template = document.getElementById(`template-${email}`);
-//   let checkedImg = document.getElementById(`img-${email}`);
-//   let checkbox = document.getElementById(`checkbox-${email}`);
-//   template.classList.remove("user_template_not_selected");
-//   template.classList.add("user_template_selected");
-//   checkedImg.src = "./assets/img/checked button.png";
-//   checkbox.checked = true;
-//   let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
-//   let contact = contacts.find((contact) => contact.email === email);
-//   if (contact && !selectedUsers.some((selectedContact) => selectedContact.email === contact.email)) {
-//     selectedUsers.push(contact);
-//   }
-//   updateSelectedUsersContainerEdit();
-// }
-
-// /**
-//  * Unassigns a user and updates the UI accordingly.
-//  * @param {string} email - The email of the user to be unassigned.
-//  */
-// function notAssignedUserEdit(email) {
-//   let template = document.getElementById(`template-${email}`);
-//   let checkedImg = document.getElementById(`img-${email}`);
-//   let checkbox = document.getElementById(`checkbox-${email}`);
-//   template.classList.remove("user_template_selected");
-//   template.classList.add("user_template_not_selected");
-//   checkedImg.src = "./assets/img/check button.png";
-//   checkbox.checked = false;
-//   let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
-//   let contact = contacts.find((contact) => contact.email === email);
-//   if (contact) {
-//     let userIndex = selectedUsers.findIndex((selectedContact) => selectedContact.email === contact.email);
-//     if (userIndex !== -1) {
-//       selectedUsers.splice(userIndex, 1);
-//     }
-//   }
-//   updateSelectedUsersContainerEdit();
-// }
-
 /**
  * Updates the container with the selected users' initials.
  */
@@ -178,6 +127,56 @@ function updateSelectedUsersContainerEdit() {
             </div>
         `;
   }
+}
+
+/**
+ * Handles the delete click event for a subtask.
+ * @param {Event} event - The event object.
+ * @param {string} ticketID - The ID of the task the subtask belongs to.
+ * @param {number} index - The index of the subtask to delete.
+ */
+function handleDeleteClick(event, ticketID, index) {
+  const subtaskItem = getClosestSubtaskItem(event);
+  if (ticketID === "undefined") {
+    deleteSubtaskLocally(subtaskItem, index);
+  }
+}
+
+/**
+ * Retrieves the closest subtask item element from the event target.
+ * @param {Event} event - The event object.
+ * @returns {HTMLElement} The closest subtask item element.
+ */
+function getClosestSubtaskItem(event) {
+  return event.target.closest(".subtask-item");
+}
+
+/**
+ * Deletes a subtask locally and updates the UI.
+ * @param {HTMLElement} subtaskItem - The subtask item to delete.
+ * @param {number} index - The index of the subtask to delete.
+ */
+function deleteSubtaskLocally(subtaskItem, index) {
+  if (subtaskItem) subtaskItem.remove();
+  subtasksArray.splice(index, 1);
+  reindexSubtasks();
+  if (subtasksArray.length < 4) enableInputAndButton();
+}
+
+/**
+ * Extracts the numeric ID from a subtask item's ID.
+ * @param {HTMLElement} subtaskItem - The subtask item.
+ * @returns {number} The numeric ID.
+ */
+function getNumericID(subtaskItem) {
+  return parseInt(subtaskItem.id.split("_")[1], 10);
+}
+
+/**
+ * Reindexes the subtasks array and updates their IDs.
+ */
+function reindexSubtasks() {
+  subtasksArray.forEach((subtask, i) => (subtask.id = i + 1));
 }
 
 /**
