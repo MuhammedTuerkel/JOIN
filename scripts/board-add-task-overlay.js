@@ -40,21 +40,6 @@ function toggleOverlay() {
   }
 }
 
-// /**
-//  * Shows the ticket in the overlay when clicked on it
-//  * @param {string} category - The category of the ticket
-//  * @param {string} ticketTitle  - The Ticket title
-//  * @param {string} ticketDescription - The Ticket description
-//  * @param {string} ticketDate - The due date of the ticket
-//  * @param {string} prio - The Priority of the ticket
-//  * @param {string} ticketID - The exact ID which is based on the localStorage ID
-//  */
-// function showOverlayTicket(category, ticketTitle, ticketDescription, ticketDate, prio, ticketID) {
-//   document.getElementById("overlayID").innerHTML = renderOverlayTicket(category, ticketTitle, ticketDescription, ticketDate, prio, ticketID);
-//   renderAssignedUsersOverlay(ticketID);
-//   renderSubtasksOverlay(ticketID);
-// }
-
 /**
  * Opens the edit-Overlay of the ticket and loads the ticket-data into the overlay
  * @param {*} ticketID
@@ -71,6 +56,30 @@ function editTicket(ticketID, ticketTitle, ticketDescription, ticketDate, prio) 
   document.getElementById("task-description-overlay-edit").value = ticketDescription;
   document.getElementById("task-due-date-overlay-edit").value = ticketDate;
   setPriorityOnEdit(prio);
+  loadAssignedContacts(ticketID);
+}
+
+/**
+ * Loads the assigned contacts and updates the display.
+ * @param {string} ticketID - The ID of the selected task
+ */
+function loadAssignedContacts(ticketID) {
+  let task = allTasks.find((task) => task.id === ticketID);
+  selectedUsers = task.assigned_to;
+  let container = document.getElementById("selectedUsers");
+  container.innerHTML = "";
+  let maxUsers = Math.min(selectedUsers.length, 4);
+  for (let i = 0; i < maxUsers; i++) {
+    let initials = selectedUsers[i].name.charAt(0).toUpperCase() + selectedUsers[i].name.charAt(selectedUsers[i].name.length - 1).toUpperCase();
+    let bgColor = selectedUsers[i].color;
+    container.innerHTML += renderUserCircle(initials, bgColor);
+  }
+  if (selectedUsers.length > 4) {
+    let additionalUsers = selectedUsers.length - 4;
+    let initials = `+${additionalUsers}`;
+    let bgColor = "#2B3647";
+    container.innerHTML += renderUserCircle(initials, bgColor);
+  }
 }
 
 /**

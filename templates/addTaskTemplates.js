@@ -288,3 +288,15 @@ function renderAddTaskFeatureOnBoard(state) {
             </form>
         </div>`;
 }
+
+/**
+ * Returns a HTML-Element to display the user-initials in a colored circle
+ * @param {string} initials
+ * @param {string} color
+ * @returns a HTML-Element
+ */
+function renderAssignedContactCircle(initials, color) {
+  return `<div class="selected_user_circle" style="background-color: ${color};">
+                  ${initials}
+              </div>`;
+}

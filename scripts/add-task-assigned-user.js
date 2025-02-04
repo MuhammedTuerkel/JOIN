@@ -71,26 +71,6 @@ function toggleUserSelection(email) {
   }
 }
 
-// /**
-//  * Assigns a user and updates the UI accordingly.
-//  * @param {string} email - The email of the user to be assigned.
-//  */
-// function assignedUserDropDown(email) {
-//   let template = document.getElementById(`template-${email}`);
-//   let checkedImg = document.getElementById(`img-${email}`);
-//   let checkbox = document.getElementById(`checkbox-${email}`);
-//   template.classList.remove("user_template_not_selected");
-//   template.classList.add("user_template_selected");
-//   checkedImg.src = "./assets/img/checked button.png";
-//   checkbox.checked = true;
-//   let contact = contacts.find((contact) => contact.email === email);
-//   if (!selectedContacts.some((selectedContact) => selectedContact.email === contact.email)) {
-//     selectedContacts.push(contact);
-//   }
-//   updateSelectedUsersContainer();
-//   console.log(selectedContacts);
-// }
-
 /**
  * Assigns a user and updates the UI accordingly.
  * @param {string} email - The email of the user to be assigned.
@@ -103,16 +83,12 @@ function assignedUserDropDown(email) {
   template.classList.add("user_template_selected");
   checkedImg.src = "./assets/img/checked button.png";
   checkbox.checked = true;
-
-  // Finde den Kontakt einschließlich seiner Firebase-ID
   let contactKey = Object.keys(contacts).find((key) => contacts[key].email === email);
   let contact = contacts[contactKey];
-  contact.id = contactKey; // ID hinzufügen
-
+  contact.id = contactKey;
   if (!selectedContacts.some((selectedContact) => selectedContact.email === contact.email)) {
     selectedContacts.push(contact);
   }
-
   updateSelectedUsersContainer();
   console.log(selectedContacts);
 }
@@ -157,14 +133,18 @@ function updateDropdownSelections() {
 function updateSelectedUsersContainer() {
   let container = document.getElementById("selectedUsers");
   container.innerHTML = "";
-  for (let index = 0; index < selectedContacts.length; index++) {
-    let user = selectedContacts[index];
-    let initials = user.name.charAt(0).toUpperCase() + user.name.charAt(user.name.length - 1).toUpperCase();
-    container.innerHTML += `
-            <div class="selected_user_circle" style="background-color: ${user.color};">
-                ${initials}
-            </div>
-        `;
+  let maxUsers = Math.min(selectedContacts.length, 4);
+  for (let i = 0; i < maxUsers; i++) {
+    let initials =
+      selectedContacts[i].name.charAt(0).toUpperCase() + selectedContacts[i].name.charAt(selectedContacts[i].name.length - 1).toUpperCase();
+    let color = selectedContacts[i].color;
+    document.getElementById("selectedUsers").innerHTML += renderAssignedContactCircle(initials, color);
+  }
+  if (selectedContacts.length > 4) {
+    let additionalUsers = selectedContacts.length - 4;
+    let initials = `+${additionalUsers}`;
+    let color = "#2B3647";
+    document.getElementById("selectedUsers").innerHTML += renderAssignedContactCircle(initials, color);
   }
 }
 
