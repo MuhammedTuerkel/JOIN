@@ -113,53 +113,55 @@ function toggleUserSelectionEdit(email) {
   let isChecked = checkbox.checked;
   if (isChecked) {
     notAssignedUserEdit(email);
+    console.log(selectedUsers);
   } else {
     assignedUserDropDownEdit(email);
+    console.log(selectedUsers);
   }
 }
 
-/**
- * Assigns a user and updates the UI accordingly.
- * @param {string} email - The email of the user to be assigned.
- */
-function assignedUserDropDownEdit(email) {
-  let template = document.getElementById(`template-${email}`);
-  let checkedImg = document.getElementById(`img-${email}`);
-  let checkbox = document.getElementById(`checkbox-${email}`);
-  template.classList.remove("user_template_not_selected");
-  template.classList.add("user_template_selected");
-  checkedImg.src = "./assets/img/checked button.png";
-  checkbox.checked = true;
-  let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
-  let contact = contacts.find((contact) => contact.email === email);
-  if (contact && !selectedUsers.some((selectedContact) => selectedContact.email === contact.email)) {
-    selectedUsers.push(contact);
-  }
-  updateSelectedUsersContainerEdit();
-}
+// /**
+//  * Assigns a user and updates the UI accordingly.
+//  * @param {string} email - The email of the user to be assigned.
+//  */
+// function assignedUserDropDownEdit(email) {
+//   let template = document.getElementById(`template-${email}`);
+//   let checkedImg = document.getElementById(`img-${email}`);
+//   let checkbox = document.getElementById(`checkbox-${email}`);
+//   template.classList.remove("user_template_not_selected");
+//   template.classList.add("user_template_selected");
+//   checkedImg.src = "./assets/img/checked button.png";
+//   checkbox.checked = true;
+//   let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
+//   let contact = contacts.find((contact) => contact.email === email);
+//   if (contact && !selectedUsers.some((selectedContact) => selectedContact.email === contact.email)) {
+//     selectedUsers.push(contact);
+//   }
+//   updateSelectedUsersContainerEdit();
+// }
 
-/**
- * Unassigns a user and updates the UI accordingly.
- * @param {string} email - The email of the user to be unassigned.
- */
-function notAssignedUserEdit(email) {
-  let template = document.getElementById(`template-${email}`);
-  let checkedImg = document.getElementById(`img-${email}`);
-  let checkbox = document.getElementById(`checkbox-${email}`);
-  template.classList.remove("user_template_selected");
-  template.classList.add("user_template_not_selected");
-  checkedImg.src = "./assets/img/check button.png";
-  checkbox.checked = false;
-  let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
-  let contact = contacts.find((contact) => contact.email === email);
-  if (contact) {
-    let userIndex = selectedUsers.findIndex((selectedContact) => selectedContact.email === contact.email);
-    if (userIndex !== -1) {
-      selectedUsers.splice(userIndex, 1);
-    }
-  }
-  updateSelectedUsersContainerEdit();
-}
+// /**
+//  * Unassigns a user and updates the UI accordingly.
+//  * @param {string} email - The email of the user to be unassigned.
+//  */
+// function notAssignedUserEdit(email) {
+//   let template = document.getElementById(`template-${email}`);
+//   let checkedImg = document.getElementById(`img-${email}`);
+//   let checkbox = document.getElementById(`checkbox-${email}`);
+//   template.classList.remove("user_template_selected");
+//   template.classList.add("user_template_not_selected");
+//   checkedImg.src = "./assets/img/check button.png";
+//   checkbox.checked = false;
+//   let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
+//   let contact = contacts.find((contact) => contact.email === email);
+//   if (contact) {
+//     let userIndex = selectedUsers.findIndex((selectedContact) => selectedContact.email === contact.email);
+//     if (userIndex !== -1) {
+//       selectedUsers.splice(userIndex, 1);
+//     }
+//   }
+//   updateSelectedUsersContainerEdit();
+// }
 
 /**
  * Updates the container with the selected users' initials.
@@ -279,4 +281,48 @@ function updateEditDropdownSelections(ticketID) {
       img.src = "./assets/img/checked button.png";
     }
   });
+}
+
+/**
+ * Assigns a user and updates the UI accordingly.
+ * @param {string} email - The email of the user to be assigned.
+ */
+function assignedUserDropDownEdit(email) {
+  let template = document.getElementById(`template-${email}`);
+  let checkedImg = document.getElementById(`img-${email}`);
+  let checkbox = document.getElementById(`checkbox-${email}`);
+  template.classList.remove("user_template_not_selected");
+  template.classList.add("user_template_selected");
+  checkedImg.src = "./assets/img/checked button.png";
+  checkbox.checked = true;
+
+  // Finde den Kontakt im selectedUsers Array und füge ihn hinzu, wenn er nicht bereits vorhanden ist
+  let contact = contacts.find((contact) => contact.email === email);
+  if (contact && !selectedUsers.some((selectedContact) => selectedContact.email === contact.email)) {
+    selectedUsers.push(contact);
+  }
+
+  updateSelectedUsersContainerEdit();
+}
+
+/**
+ * Unassigns a user and updates the UI accordingly.
+ * @param {string} email - The email of the user to be unassigned.
+ */
+function notAssignedUserEdit(email) {
+  let template = document.getElementById(`template-${email}`);
+  let checkedImg = document.getElementById(`img-${email}`);
+  let checkbox = document.getElementById(`checkbox-${email}`);
+  template.classList.remove("user_template_selected");
+  template.classList.add("user_template_not_selected");
+  checkedImg.src = "./assets/img/check button.png";
+  checkbox.checked = false;
+
+  // Entferne den Kontakt aus dem selectedUsers Array
+  let userIndex = selectedUsers.findIndex((selectedContact) => selectedContact.email === email);
+  if (userIndex !== -1) {
+    selectedUsers.splice(userIndex, 1);
+  }
+
+  updateSelectedUsersContainerEdit();
 }

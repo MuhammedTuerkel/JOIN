@@ -140,22 +140,21 @@ function activateButton(buttonId, svgId, buttonClass, svgClass) {
   document.getElementById(svgId).classList.add(svgClass);
 }
 
-/**
- * Saves the edited task details and updates the local storage.
- * @param {string} ticketID - The ID of the task to update.
- */
-function saveEditOnClick(ticketID) {
-  clearAssignedTo(ticketID);
-  const updatedTask = getUpdatedTaskDetails();
-  const taskIndex = allTasks.findIndex((task) => task.id === ticketID);
-  if (taskIndex !== -1) {
-    updateTaskInAllTasks(taskIndex, updatedTask);
-    updateTasksInLocalStorage();
-    handleSuccessfulEdit();
-  } else {
-    console.error("Task not found in allTasks array");
-  }
-}
+// /**
+//  * Saves the edited task details and updates the local storage.
+//  * @param {string} ticketID - The ID of the task to update.
+//  */
+// function saveEditOnClick(ticketID) {
+//   const updatedTask = getUpdatedTaskDetails();
+//   const taskIndex = allTasks.findIndex((task) => task.id === ticketID);
+//   if (taskIndex !== -1) {
+//     updateTaskInAllTasks(taskIndex, updatedTask);
+//     updateTasksInLocalStorage();
+//     handleSuccessfulEdit();
+//   } else {
+//     console.error("Task not found in allTasks array");
+//   }
+// }
 
 /**
  * Clears the assigned users for a specific task.
@@ -220,24 +219,24 @@ function handleSuccessfulEdit() {
   }, 2500);
 }
 
-/**
- * Patches the task in the localStorage
- * @param {string} taskID
- * @param {object} data
- */
-function patchTask(taskID, data) {
-  let tasksString = localStorage.getItem("tasks");
-  if (tasksString) {
-    let tasks = JSON.parse(tasksString);
-    let taskIndex = tasks.findIndex((task) => task.id === taskID);
-    if (taskIndex !== -1) {
-      tasks[taskIndex] = { ...tasks[taskIndex], ...data };
-      localStorage.setItem("tasks", JSON.stringify(tasks));
-    } else {
-      console.error("Task not found in tasks array");
-    }
-  }
-}
+// /**
+//  * Patches the task in the localStorage
+//  * @param {string} taskID
+//  * @param {object} data
+//  */
+// function patchTask(taskID, data) {
+//   let tasksString = localStorage.getItem("tasks");
+//   if (tasksString) {
+//     let tasks = JSON.parse(tasksString);
+//     let taskIndex = tasks.findIndex((task) => task.id === taskID);
+//     if (taskIndex !== -1) {
+//       tasks[taskIndex] = { ...tasks[taskIndex], ...data };
+//       localStorage.setItem("tasks", JSON.stringify(tasks));
+//     } else {
+//       console.error("Task not found in tasks array");
+//     }
+//   }
+// }
 
 /**
  * Gets the new entries and returns a JSON Object
