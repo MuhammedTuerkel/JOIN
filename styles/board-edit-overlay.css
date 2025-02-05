@@ -602,6 +602,15 @@ input.subtask-input:focus {
   fill: white;
 }
 
+.endEdit-btn.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.disabled {
+  cursor: not-allowed;
+}
+
 .overlay-close-btn-edit {
   cursor: pointer;
   align-self: flex-end;

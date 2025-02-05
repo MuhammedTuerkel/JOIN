@@ -32,6 +32,7 @@ document.addEventListener("click", (event, ticketID) => {
     handleEditClick(target);
   } else if (target.classList.contains("save-icon")) {
     handleSaveClick(target);
+    enableActionButton();
   }
 });
 
@@ -207,6 +208,7 @@ function handleDeleteWhileEditInput(element) {
   } else {
     console.error('Kein übergeordnetes Element mit der Klasse "input-container" gefunden');
   }
+  enableActionButton();
 }
 
 /**

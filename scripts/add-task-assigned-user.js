@@ -211,25 +211,12 @@ function saveTaskCloseOverlay(event, state = "toDo") {
   }, 400);
 }
 
-// function deleteTicket(ticketID) {
-//   let allTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-//   let taskIndex = allTasks.findIndex((task) => task.id === ticketID);
-//   if (taskIndex !== -1) {
-//     allTasks.splice(taskIndex, 1);
-//     localStorage.setItem("tasks", JSON.stringify(allTasks));
-//   }
-//   renderAllTickets(allTasks);
-//   showToast("The ticket was deleted", "alert");
-//   setTimeout(() => {
-//     toggleOverlay();
-//   }, 500);
-// }
-
 /**
  * Handles the edit click event for a subtask.
  * @param {HTMLElement} target - The target element that triggered the event.
  */
 function handleEditClick(target) {
+  disabledActionButton();
   const subtaskItem = target.closest(".subtask-item");
   const contentWrapper = subtaskItem.querySelector(".subtask-content-wrapper");
   const contentSpan = subtaskItem.querySelector(".subtask-content");
@@ -246,6 +233,98 @@ function handleEditClick(target) {
   contentWrapper.appendChild(inputContainer);
   const actions = subtaskItem.querySelector(".subtask-actions");
   actions.style.visibility = "hidden";
+}
+
+function disabledActionButton() {
+  let actionButton = document.getElementById("endEditBtn");
+  let titleInput = document.getElementById("task-title-overlay-edit");
+  let discriptionInput = document.getElementById("task-description-overlay-edit");
+  let dateInput = document.getElementById("task-due-date-overlay-edit");
+  actionButton.disabled = true;
+  titleInput.disabled = true;
+  discriptionInput.disabled = true;
+  dateInput.disabled = true;
+  actionButton.classList.add("disabled");
+  titleInput.classList.add("disabled");
+  discriptionInput.classList.add("disabled");
+  dateInput.classList.add("disabled");
+  disablePrioButtons();
+  disableAssignedField();
+  disableSubtaskInput();
+}
+
+function disablePrioButtons() {
+  let prioLowButton = document.getElementById("low-btn");
+  let prioMediumButton = document.getElementById("medium-btn");
+  let prioUrgentButon = document.getElementById("urgent-btn");
+  prioLowButton.classList.add("disabled");
+  prioMediumButton.classList.add("disabled");
+  prioUrgentButon.classList.add("disabled");
+  prioLowButton.disabled = true;
+  prioMediumButton.disabled = true;
+  prioUrgentButon.disabled = true;
+}
+
+function disableAssignedField() {
+  let assignedInput = document.getElementById("addTaskSearchContacts");
+  let assignedContainer = document.getElementById("assigned");
+  assignedInput.classList.add("disabled");
+  assignedContainer.classList.add("disabled");
+  assignedInput.disabled = true;
+}
+
+function disableSubtaskInput() {
+  let tasksList = document.getElementById("task-subtasks");
+  let taskButton = document.getElementById("add-subtask-btn");
+  taskButton.disabled = true;
+  tasksList.classList.add("disabled");
+  taskButton.classList.add("disabled");
+}
+
+function enableActionButton() {
+  let actionButton = document.getElementById("endEditBtn");
+  let titleInput = document.getElementById("task-title-overlay-edit");
+  let discriptionInput = document.getElementById("task-description-overlay-edit");
+  let dateInput = document.getElementById("task-due-date-overlay-edit");
+  actionButton.disabled = false;
+  titleInput.disabled = false;
+  discriptionInput.disabled = false;
+  dateInput.disabled = false;
+  actionButton.classList.remove("disabled");
+  titleInput.classList.remove("disabled");
+  discriptionInput.classList.remove("disabled");
+  dateInput.classList.remove("disabled");
+  enablePrioButtons();
+  enableAssignedField();
+  enableSubtaskInput();
+}
+
+function enablePrioButtons() {
+  let prioLowButton = document.getElementById("low-btn");
+  let prioMediumButton = document.getElementById("medium-btn");
+  let prioUrgentButon = document.getElementById("urgent-btn");
+  prioLowButton.classList.remove("disabled");
+  prioMediumButton.classList.remove("disabled");
+  prioUrgentButon.classList.remove("disabled");
+  prioLowButton.disabled = false;
+  prioMediumButton.disabled = false;
+  prioUrgentButon.disabled = false;
+}
+
+function enableAssignedField(event) {
+  let assignedInput = document.getElementById("addTaskSearchContacts");
+  let assignedContainer = document.getElementById("assigned");
+  assignedInput.classList.remove("disabled");
+  assignedContainer.classList.remove("disabled");
+  assignedInput.disabled = false;
+}
+
+function enableSubtaskInput() {
+  let tasksList = document.getElementById("task-subtasks");
+  let taskButton = document.getElementById("add-subtask-btn");
+  taskButton.disabled = false;
+  tasksList.classList.remove("disabled");
+  taskButton.classList.remove("disabled");
 }
 
 /**

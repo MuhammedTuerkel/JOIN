@@ -326,7 +326,7 @@ function handleDeleteEditClick(event, ticketID) {
   if (ticketID === undefined) {
     deleteEditSubtaskLocally(subtaskItem, index);
   } else {
-    deleteEditSubtaskFromStorage(subtaskItem, ticketID, index);
+    deleteSubtaskBoardEdit(subtaskItem, ticketID, index);
   }
   renderEditSubtaskList(ticketID);
 }
@@ -342,6 +342,16 @@ function deleteEditSubtaskLocally(subtaskItem, index) {
   if (subtasksArray.length < 4) {
     enableInputAndButton();
   }
+}
+
+/**
+ * Deletes an editable subtask from the Firebase database and updates the UI.
+ * @param {HTMLElement} subtaskItem - The subtask item to delete.
+ * @param {string} ticketID - The ID of the task the subtask belongs to.
+ * @param {number} index - The index of the subtask to delete.
+ **/
+function deleteSubtaskBoardEdit(subtaskItem, ticketID, index) {
+  subtasksArray.splice(index, 1);
 }
 
 /**

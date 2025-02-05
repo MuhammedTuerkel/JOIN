@@ -193,19 +193,22 @@ function renderAssignedUsersOverlay(ticketID) {
   let searchedTask = allTasks.filter((t) => t["id"] == ticketID)[0];
   let assignedUsers = searchedTask.assigned_to;
   selectedUsers = assignedUsers;
+  console.log("selectedUsers", selectedUsers);
+
   let targetElement = document.getElementById(`overlayAssignedUserContent_${ticketID}`);
+  targetElement.innerHTML = "";
   if (!targetElement) {
     console.error(`Element with ID overlayAssignedUserContent_${ticketID} not found`);
     return;
   } else {
-    if ((selectedUsers = "")) {
+    if (selectedUsers.length < 0) {
       targetElement.innerHTML = `<p class="subtask_error">no Assigned Users</p>`;
       return;
     } else {
-      for (let i = 0; i < assignedUsers.length; i++) {
-        let initials = assignedUsers[i].name.charAt(0).toUpperCase() + assignedUsers[i].name.charAt(assignedUsers[i].name.length - 1).toUpperCase();
-        let color = assignedUsers[i].color;
-        let userName = assignedUsers[i].name;
+      for (let i = 0; i < selectedUsers.length; i++) {
+        let initials = selectedUsers[i].name.charAt(0).toUpperCase() + selectedUsers[i].name.charAt(selectedUsers[i].name.length - 1).toUpperCase();
+        let color = selectedUsers[i].color;
+        let userName = selectedUsers[i].name;
         document.getElementById(`overlayAssignedUserContent_${ticketID}`).innerHTML += renderOverlayUserElement(userName, initials, color);
       }
     }

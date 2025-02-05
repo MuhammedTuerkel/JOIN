@@ -22,48 +22,50 @@ function pushEditSubtasksInGlobalArray(ticketID, index) {
  * Pushes a new subtask to the task's subtasks array in local storage and updates the UI.
  * @param {string} ticketID - The ID of the task to which the subtask will be added.
  */
-function pushEditSubtasksArray(ticketID) {
-  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  let targetTask = tasks.find((task) => task.id === ticketID);
-  if (!targetTask) {
-    console.error("Task not found");
-    return;
-  }
-  if (!targetTask.subtasks) {
-    targetTask.subtasks = [];
-  }
-  let subTaskInput = document.getElementById("task-subtasks");
-  let content = subTaskInput.value.trim();
+// function pushEditSubtasksArray(ticketID) {
+//   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+//   let targetTask = tasks.find((task) => task.id === ticketID);
+//   if (!targetTask) {
+//     console.error("Task not found");
+//     return;
+//   }
+//   if (!targetTask.subtasks) {
+//     targetTask.subtasks = [];
+//   }
+//   let subTaskInput = document.getElementById("task-subtasks");
+//   let content = subTaskInput.value.trim();
 
-  if (content !== "") {
-    let newSubtask = {
-      id: generateUniqueID(),
-      content: content,
-      status: "open",
-    };
-    targetTask.subtasks.push(newSubtask);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    subtasksArray = targetTask.subtasks;
-    subTaskInput.value = "";
-    renderEditSubtaskList(ticketID);
-    document.getElementById("iconsContainer").style.visibility = "hidden";
-    document.getElementById("add-subtask-btn").style.visibility = "visible";
-  }
-}
+//   if (content !== "") {
+//     let newSubtask = {
+//       id: generateUniqueID(),
+//       content: content,
+//       status: "open",
+//     };
+//     targetTask.subtasks.push(newSubtask);
+//     localStorage.setItem("tasks", JSON.stringify(tasks));
+//     subtasksArray = targetTask.subtasks;
+//     subTaskInput.value = "";
+//     renderEditSubtaskList(ticketID);
+//     document.getElementById("iconsContainer").style.visibility = "hidden";
+//     document.getElementById("add-subtask-btn").style.visibility = "visible";
+//   }
+// }
 
 /**
- * Deletes an editable subtask from the task's subtasks array in local storage.
- * @param {HTMLElement} subtaskItem - The subtask item to delete.
- * @param {string} ticketID - The ID of the task the subtask belongs to.
- * @param {number} index - The index of the subtask to delete.
+ * Pushes a new subtask to the task's subtasks array in local storage and updates the UI.
+ * @param {string} ticketID - The ID of the task to which the subtask will be added.
  */
-function deleteEditSubtaskFromStorage(subtaskItem, ticketID, index) {
-  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  let task = tasks.find((t) => t.id === ticketID);
-  if (task && task.subtasks) {
-    task.subtasks.splice(index, 1);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    subtasksArray = task.subtasks;
-  }
-  subtaskItem.remove();
+function pushEditSubtasksArray(ticketID) {
+  let subTaskInput = document.getElementById("task-subtasks");
+  let content = subTaskInput.value.trim();
+  let newSubtask = {
+    id: generateUniqueID(),
+    content: content,
+    status: "open",
+  };
+  subtasksArray.push(newSubtask);
+  subTaskInput.value = "";
+  renderEditSubtaskList(ticketID);
+  document.getElementById("iconsContainer").style.visibility = "hidden";
+  document.getElementById("add-subtask-btn").style.visibility = "visible";
 }
