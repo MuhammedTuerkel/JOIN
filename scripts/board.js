@@ -82,25 +82,6 @@ function findTicketIndex(title) {
   return ticketIndex;
 }
 
-// /**
-//  * Changes the Subtask Status in the front-end and updates it in localStorage
-//  * @param {int} subtaskIndex
-//  * @param {string} ticketID
-//  */
-// function changeSubtaskStatus(subtaskIndex, ticketID) {
-//   let task = allTasks.find((t) => t["id"] === ticketID);
-//   if (task) {
-//     let subtask = task.subtasks[subtaskIndex];
-//     subtask.status = subtask.status === "open" ? "closed" : "open";
-//     localStorage.setItem("tasks", JSON.stringify(allTasks));
-//     renderSubtasksOverlay(ticketID);
-//     updateProgressBar(ticketID);
-//     renderAllTickets(allTasks);
-//   } else {
-//     console.error("Task not found in allTasks array");
-//   }
-// }
-
 /**
  * Saves the ticketID into a variable for further jobs
  * @param {string} ticketID - an unique identifier of the ticket which got moved

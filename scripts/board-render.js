@@ -193,8 +193,6 @@ function renderAssignedUsersOverlay(ticketID) {
   let searchedTask = allTasks.filter((t) => t["id"] == ticketID)[0];
   let assignedUsers = searchedTask.assigned_to;
   selectedUsers = assignedUsers;
-  console.log("selectedUsers", selectedUsers);
-
   let targetElement = document.getElementById(`overlayAssignedUserContent_${ticketID}`);
   targetElement.innerHTML = "";
   if (!targetElement) {
