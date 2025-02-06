@@ -90,7 +90,6 @@ function assignedUserDropDown(email) {
     selectedContacts.push(contact);
   }
   updateSelectedUsersContainer();
-  console.log(selectedContacts);
 }
 
 /**
