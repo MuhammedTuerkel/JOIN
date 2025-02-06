@@ -5,15 +5,15 @@
  * @returns a HTML-Element
  */
 function renderSubtaskItem(itemID, itemContent, ticketID, index) {
-  return `<div class="subtask-item" id="subtaskItem_${itemID}">
+  return `<div class="subtask-item" id="subtaskItem_${index}">
                 <div class="subtask-content-wrapper">
                     <span class="bullet-point">•</span>
                     <span class="subtask-content" id="subtaskContent_${itemID}">${itemContent}</span>
                 </div>
                 <div class="subtask-actions">
-                    <img class="edit-icon" src="./assets/icons/subtask-edit.png" alt="">
+                    <img class="add-task-edit-icon" onclick="addTaskHandleEditClick('${index}')" src="./assets/icons/subtask-edit.png" alt="">
                     <span class="divider"></span>
-                    <img class="delete-icon" onclick="handleDeleteClick(event, '${ticketID}', '${index}')" src="./assets/icons/subtask-delete.png" alt="">
+                    <img class="delete-icon" onclick="addTaskhandleDeleteClick('${index}')" src="./assets/icons/subtask-delete.png" alt="">
                 </div>
             </div>`;
 }

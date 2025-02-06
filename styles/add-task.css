@@ -320,7 +320,7 @@ select.focus {
   visibility: hidden;
 }
 
-.subtasks-list .actions .edit-icon,
+.subtasks-list .actions .add-task-edit-icon,
 .subtasks-list .actions .delete-icon {
   cursor: pointer;
   font-size: 16px;
@@ -385,7 +385,7 @@ select.focus {
   align-items: center;
 }
 
-.edit-icon {
+.add-task-edit-icon {
   font-size: 16px;
   color: #666;
   cursor: pointer;
@@ -400,7 +400,7 @@ select.focus {
   transition: color 0.3s ease;
 }
 
-.edit-icon:hover,
+.add-task-edit-icon:hover,
 .delete-icon:hover {
   color: #ff0000;
 }

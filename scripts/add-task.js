@@ -174,6 +174,8 @@ function clearSubtaskInput() {
  * Adds a new subtask to the subtasks array and updates the UI.
  */
 function pushSubtaskArray() {
+  console.log(subtasksArray);
+
   let subTaskInput = document.getElementById("task-subtasks");
   let content = subTaskInput.value.trim();
   let newSubtask = {

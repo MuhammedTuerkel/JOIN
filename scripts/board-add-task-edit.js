@@ -69,3 +69,200 @@ function pushEditSubtasksArray(ticketID) {
   document.getElementById("iconsContainer").style.visibility = "hidden";
   document.getElementById("add-subtask-btn").style.visibility = "visible";
 }
+
+/**
+ * Handles the edit click event for a subtask.
+ * @param {HTMLElement} target - The target element that triggered the event.
+ */
+function handleEditClick(target) {
+  disabledActionButton();
+  const subtaskItem = target.closest(".subtask-item");
+  const contentWrapper = subtaskItem.querySelector(".subtask-content-wrapper");
+  const contentSpan = subtaskItem.querySelector(".subtask-content");
+  subtaskItem.classList.add("editing");
+  const inputContainer = document.createElement("div");
+  inputContainer.classList.add("input-container");
+  const input = createInputField(contentSpan.textContent);
+  const deleteIcon = createIcon("delete-icon", "./assets/icons/subtask-delete.png");
+  const saveIcon = createIcon("save-icon", "./assets/icons/subtask-save.png");
+  inputContainer.appendChild(input);
+  inputContainer.appendChild(deleteIcon);
+  inputContainer.appendChild(saveIcon);
+  contentWrapper.innerHTML = "";
+  contentWrapper.appendChild(inputContainer);
+  const actions = subtaskItem.querySelector(".subtask-actions");
+  actions.style.visibility = "hidden";
+}
+
+function disabledActionButton() {
+  let actionButton = document.getElementById("endEditBtn");
+  let titleInput = document.getElementById("task-title-overlay-edit");
+  let discriptionInput = document.getElementById("task-description-overlay-edit");
+  let dateInput = document.getElementById("task-due-date-overlay-edit");
+  actionButton.disabled = true;
+  titleInput.disabled = true;
+  discriptionInput.disabled = true;
+  dateInput.disabled = true;
+  actionButton.classList.add("disabled");
+  titleInput.classList.add("disabled");
+  discriptionInput.classList.add("disabled");
+  dateInput.classList.add("disabled");
+  disablePrioButtons();
+  disableAssignedField();
+  disableSubtaskInput();
+}
+
+function disablePrioButtons() {
+  let prioLowButton = document.getElementById("low-btn");
+  let prioMediumButton = document.getElementById("medium-btn");
+  let prioUrgentButon = document.getElementById("urgent-btn");
+  prioLowButton.classList.add("disabled");
+  prioMediumButton.classList.add("disabled");
+  prioUrgentButon.classList.add("disabled");
+  prioLowButton.disabled = true;
+  prioMediumButton.disabled = true;
+  prioUrgentButon.disabled = true;
+}
+
+function disableAssignedField() {
+  let assignedInput = document.getElementById("addTaskSearchContacts");
+  let assignedContainer = document.getElementById("assigned");
+  assignedInput.classList.add("disabled");
+  assignedContainer.classList.add("disabled");
+  assignedInput.disabled = true;
+}
+
+function disableSubtaskInput() {
+  let tasksList = document.getElementById("task-subtasks");
+  let taskButton = document.getElementById("add-subtask-btn");
+  taskButton.disabled = true;
+  tasksList.classList.add("disabled");
+  taskButton.classList.add("disabled");
+}
+
+function enableActionButton() {
+  let actionButton = document.getElementById("endEditBtn");
+  let titleInput = document.getElementById("task-title-overlay-edit");
+  let discriptionInput = document.getElementById("task-description-overlay-edit");
+  let dateInput = document.getElementById("task-due-date-overlay-edit");
+  actionButton.disabled = false;
+  titleInput.disabled = false;
+  discriptionInput.disabled = false;
+  dateInput.disabled = false;
+  actionButton.classList.remove("disabled");
+  titleInput.classList.remove("disabled");
+  discriptionInput.classList.remove("disabled");
+  dateInput.classList.remove("disabled");
+  enablePrioButtons();
+  enableAssignedField();
+  enableSubtaskInput();
+}
+
+function enablePrioButtons() {
+  let prioLowButton = document.getElementById("low-btn");
+  let prioMediumButton = document.getElementById("medium-btn");
+  let prioUrgentButon = document.getElementById("urgent-btn");
+  prioLowButton.classList.remove("disabled");
+  prioMediumButton.classList.remove("disabled");
+  prioUrgentButon.classList.remove("disabled");
+  prioLowButton.disabled = false;
+  prioMediumButton.disabled = false;
+  prioUrgentButon.disabled = false;
+}
+
+function enableAssignedField(event) {
+  let assignedInput = document.getElementById("addTaskSearchContacts");
+  let assignedContainer = document.getElementById("assigned");
+  assignedInput.classList.remove("disabled");
+  assignedContainer.classList.remove("disabled");
+  assignedInput.disabled = false;
+}
+
+function enableSubtaskInput() {
+  let tasksList = document.getElementById("task-subtasks");
+  let taskButton = document.getElementById("add-subtask-btn");
+  taskButton.disabled = false;
+  tasksList.classList.remove("disabled");
+  taskButton.classList.remove("disabled");
+}
+
+/**
+ * Retrieves the closest subtask item element from the event target.
+ * @param {Event} event - The event object.
+ * @returns {HTMLElement} The closest subtask item element.
+ */
+function getClosestSubtaskItem(event) {
+  return event.target.closest(".subtask-item");
+}
+
+/**
+ * Handle the click event for deleting a subtask while editing an input field.
+ * @param {HTML-Element} element
+ */
+function handleDeleteWhileEditInput(element) {
+  const inputContainer = element.closest(".input-container");
+  const endEditButton = document.getElementById("endEditBtn");
+  const createTaskButton = document.getElementById("createTaskButton");
+  if (inputContainer) {
+    const input = inputContainer.querySelector("input.subtask-input");
+    if (input) {
+      const subtaskID = input.id;
+      let ticketID = getTicketIDFromLocalStorage(subtaskID);
+      if (ticketID === null) {
+        ticketID = "undefined";
+      }
+      if (endEditButton) {
+        endEditButton.ariaDisabled = false;
+      } else if (createTaskButton) {
+        createTaskButton.ariaDisabled = false;
+      }
+      handleDeleteClick(event, ticketID);
+    } else {
+      console.error("Keine Subtask ID gefunden");
+    }
+  } else {
+    console.error('Kein übergeordnetes Element mit der Klasse "input-container" gefunden');
+  }
+  enableActionButton();
+}
+
+/**
+ * Reindexes the subtasks array and updates their IDs.
+ */
+function reindexSubtasks() {
+  subtasksArray.forEach((subtask, i) => (subtask.id = i + 1));
+}
+
+/**
+ * Handles the delete click event for a subtask.
+ * @param {Event} event - The event object.
+ * @param {string} ticketID - The ID of the task the subtask belongs to.
+ * @param {number} index - The index of the subtask to delete.
+ */
+function handleDeleteClick(event, ticketID, index) {
+  const subtaskItem = getClosestSubtaskItem(event);
+  if (ticketID === "undefined") {
+    deleteSubtaskLocally(subtaskItem, index);
+  }
+}
+
+/**
+ * Retrieves the closest subtask item element from the event target.
+ * @param {Event} event - The event object.
+ * @returns {HTMLElement} The closest subtask item element.
+ */
+function getClosestSubtaskItem(event) {
+  return event.target.closest(".subtask-item");
+}
+
+/**
+ * Deletes a subtask locally and updates the UI.
+ * @param {HTMLElement} subtaskItem - The subtask item to delete.
+ * @param {number} index - The index of the subtask to delete.
+ */
+function deleteSubtaskLocally(subtaskItem, index) {
+  if (subtaskItem) subtaskItem.remove();
+  subtasksArray.splice(index, 1);
+  reindexSubtasks();
+  if (subtasksArray.length < 4) enableInputAndButton();
+}
