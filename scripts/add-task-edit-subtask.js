@@ -277,7 +277,7 @@ function addTaskHandleEditClick(index) {
   const inputContainer = document.createElement("div");
   inputContainer.classList.add("input-container");
   const input = createInputField(contentSpan.textContent);
-  const deleteIcon = createIcon("delete-icon", "./assets/icons/subtask-delete.png", "onclick="addTaskhandleDeleteClick(index)", ;
+  const deleteIcon = createIcon("delete-icon", "./assets/icons/subtask-delete.png", (onclick = "addTaskhandleDeleteClick(index)"));
   const saveIcon = createIcon("save-icon", "./assets/icons/subtask-save.png");
   deleteIcon.onclick = function () {
     addTaskhandleDeleteClick(index);
