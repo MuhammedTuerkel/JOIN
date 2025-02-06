@@ -121,27 +121,3 @@ function clearEmptyDivs(alphabet) {
     }
   });
 }
-
-// /**
-//  * renders the contact information.
-//  * @param {*} i
-//  * @returns
-//  */
-// function renderContactInformation(i) {
-//   let storedContacts = JSON.parse(localStorage.getItem("contacts")) || [];
-//   if (i >= 0 && i < storedContacts.length) {
-//     let Badge = generateBadge(i);
-//     document.getElementById("Profile-Badge1").innerHTML = `${Badge}`;
-//     document.getElementById("editdelete-name").innerHTML = `${storedContacts[i].name}`;
-//     document.getElementById("email").innerHTML = `${storedContacts[i].email}`;
-//     document.getElementById("phone").innerHTML = `${storedContacts[i].phone}`;
-//     document.getElementById("badgeBackgroundColor").style.backgroundColor = storedContacts[i].color;
-//     document.getElementById("editContact").setAttribute(`onclick`, `loadEditContact(event, ${i})`);
-//     document.getElementById("editContactMobile").setAttribute(`onclick`, `loadEditContact(event, ${i})`);
-//     document.getElementById("deleteContact").setAttribute(`onclick`, `deleteContact(${i})`);
-//     document.getElementById("deleteContactMobile").setAttribute(`onclick`, `deleteContact(${i})`);
-//   } else {
-//     console.warn(`Contact with index ${i} not found.`);
-//     return;
-//   }
-// }
