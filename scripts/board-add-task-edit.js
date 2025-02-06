@@ -135,6 +135,18 @@ function handleSaveClick(target) {
   editArrayEntry(numericID, updatedText);
 }
 
+/**
+ * Edits an entry in the subtasks array.
+ * @param {number} subtaskID - The ID of the subtask to edit.
+ * @param {string} updatedText - The updated text for the subtask.
+ */
+function editArrayEntry(subtaskID, updatedText) {
+  const subtask = subtasksArray.find((item) => item.id === subtaskID);
+  if (subtask) {
+    subtask.content = updatedText;
+  }
+}
+
 function disabledActionButton() {
   let actionButton = document.getElementById("endEditBtn");
   let titleInput = document.getElementById("task-title-overlay-edit");

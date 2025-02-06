@@ -14,16 +14,6 @@ async function showOverlayTicket(category, ticketTitle, ticketDescription, ticke
   actualFirebaseID = await findFirebaseIdById(ticketID);
 }
 
-// document.addEventListener("click", (event) => {
-//   const target = event.target;
-//   if (target.classList.contains("edit-icon")) {
-//     handleEditClick(target);
-//   } else if (target.classList.contains("save-icon")) {
-//     handleSaveClick(target);
-//   } else if (target.classList.contains("save-icon")) {
-//     handleSaveClick(target);
-// });
-
 function createEditIcons() {
   const deleteIcon = document.createElement("img");
   deleteIcon.src = "./assets/icons/subtask-delete.png";
@@ -73,19 +63,6 @@ function createInputField(currentText) {
 }
 
 /**
- * Edits an entry in the subtasks array.
- * @param {number} subtaskID - The ID of the subtask to edit.
- * @param {string} updatedText - The updated text for the subtask.
- */
-function editArrayEntry(subtaskID, updatedText) {
-  const subtask = subtasksArray.find((item) => item.id === subtaskID);
-  if (subtask) {
-    subtask.content = updatedText;
-  }
-  console.log("subtask", subtasksArray);
-}
-
-/**
  * Toggles user selection based on checkbox status.
  * @param {string} email - The email of the user to toggle selection.
  */
@@ -128,25 +105,6 @@ function updateSelectedUsersContainerEdit() {
 function getNumericID(subtaskItem) {
   return parseInt(subtaskItem.id.split("_")[1], 10);
 }
-
-// /**
-//  * Gets the subtask content and finds the ticket ID associated with it.
-//  * @param {string} subtaskID
-//  * @returns the ticketID of the searched subtask
-//  */
-// function getTicketIDFromLocalStorage(subtaskID) {
-//   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-//   for (const task of tasks) {
-//     if (task.subtasks) {
-//       for (const subtask of task.subtasks) {
-//         if (subtask.content === subtaskID.toString()) {
-//           return task.id;
-//         }
-//       }
-//     }
-//   }
-//   return null;
-// }
 
 /**
  * Handles the click event for the dropdown.
@@ -250,7 +208,6 @@ function addTaskHandleDeleteClick(index) {
   subtasksArray.splice(index, 1);
   reindexSubtasks();
   renderAddTaskSubtaskList();
-  console.log(subtasksArray);
 }
 
 /**
@@ -263,11 +220,9 @@ function reindexSubtasks() {
 /**
  * Handles click events on subtask action icons.
  */
-document.addEventListener("click", (event, ticketID) => {
+document.addEventListener("click", (event) => {
   const target = event.target;
-  if (target.classList.contains("edit-icon")) {
-    handleEditClick(target);
-  } else if (target.classList.contains("add-task-save-icon")) {
+  if (target.classList.contains("add-task-save-icon")) {
     addTaskHandleSaveClick(target);
     enableActionButton();
   } else if (target.classList.contains("add-task-delete-icon")) {
@@ -275,34 +230,6 @@ document.addEventListener("click", (event, ticketID) => {
     enableActionButton();
   }
 });
-
-/**
- * Handles the save click event for a subtask.
- * @param {HTMLElement} target - The target element that triggered the event.
- */
-function addTaskHandleSaveClick(index) {
-  const subtaskItem = document.getElementById(index);
-  console.log(subtaskItem);
-
-  const createTaskButton = document.getElementById("createTaskButton");
-  const targetID = subtaskItem.id;
-  const numericID = parseInt(targetID.split("_")[1], 10);
-  const contentWrapper = subtaskItem.querySelector(".subtask-content-wrapper");
-  const inputContainer = subtaskItem.querySelector(".input-container");
-  const input = inputContainer.querySelector(".subtask-input");
-  const updatedText = input.value.trim();
-  if (updatedText === "") {
-    input.value = "";
-    input.placeholder = "No empty subtasks allowed";
-    return;
-  }
-  contentWrapper.innerHTML = saveSubtaskItem(updatedText);
-  const actions = subtaskItem.querySelector(".subtask-actions");
-  actions.style.visibility = "visible";
-  inputContainer.remove();
-  subtaskItem.classList.remove("editing");
-  editArrayEntry(numericID, updatedText);
-}
 
 /**
  * Handles the edit click event for a subtask.
@@ -330,6 +257,43 @@ function addTaskHandleEditClick(index) {
   contentWrapper.appendChild(inputContainer);
   const actions = subtaskItem.querySelector(".subtask-actions");
   actions.style.visibility = "hidden";
+}
+
+/**
+ * Handles the save click event for a subtask.
+ * @param {HTMLElement} target - The target element that triggered the event.
+ */
+function addTaskHandleSaveClick(target) {
+  const subtaskItem = target.closest(".subtask-item");
+  const createTaskButton = document.getElementById("createTaskButton");
+  const targetID = subtaskItem.id;
+  const numericID = parseInt(targetID.split("_")[1], 10);
+  const contentWrapper = subtaskItem.querySelector(".subtask-content-wrapper");
+  const inputContainer = subtaskItem.querySelector(".input-container");
+  const input = inputContainer.querySelector(".subtask-input");
+  const updatedText = input.value.trim();
+  if (updatedText === "") {
+    input.value = "";
+    input.placeholder = "No empty subtasks allowed";
+    return;
+  }
+  contentWrapper.innerHTML = saveSubtaskItem(updatedText);
+  const actions = subtaskItem.querySelector(".subtask-actions");
+  actions.style.visibility = "visible";
+  inputContainer.remove();
+  subtaskItem.classList.remove("editing");
+  addTaskEditArrayEntry(numericID, updatedText);
+}
+
+/**
+ * Updates a subtask's content based on its index.
+ * @param {number} subtaskID - The index of the subtask to update.
+ * @param {string} updatedText - The new content for the subtask.
+ */
+function addTaskEditArrayEntry(subtaskID, updatedText) {
+  if (subtaskID >= 0 && subtaskID < subtasksArray.length) {
+    subtasksArray[subtaskID].content = updatedText;
+  }
 }
 
 function disabledActionButton() {

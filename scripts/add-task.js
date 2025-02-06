@@ -175,7 +175,6 @@ function clearSubtaskInput() {
  */
 function pushSubtaskArray() {
   console.log(subtasksArray);
-
   let subTaskInput = document.getElementById("task-subtasks");
   let content = subTaskInput.value.trim();
   let newSubtask = {
