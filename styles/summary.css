@@ -1,550 +1,545 @@
 @import url(./fonts.css);
 
 .headline {
-    display: flex;
-    align-items: center;
-    gap: 30px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
 }
 
 .headline h1 {
-    font-size: 61px;
-    font-weight: 700;
+  font-size: 61px;
+  font-weight: 700;
 }
 
 .headline h3 {
-    font-size: 27px;
-    font-weight: 400;
+  font-size: 27px;
+  font-weight: 400;
 }
 
 .line {
-    height: 59px;
-    width: 3px;
-    background-color: #29ABE2;
+  height: 59px;
+  width: 3px;
+  background-color: #29abe2;
 }
 
 .Tasks {
-    width: 560px;
-    height: 562px;
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-
+  width: 560px;
+  height: 562px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 }
 
 .Todo-Done {
-    width: 560px;
-    height: 168px;
-    display: flex;
-    justify-content: space-between;
+  width: 560px;
+  height: 168px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .Urgency {
-    width: 560px;
-    height: 168px;
-    padding: 28px 48px;
-    display: flex;
-    gap: 61px;
-    border-radius: 30px;
-    box-shadow: 0px 0px 4px 0px #0000001A;
-    background-color: #FFFFFF;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
+  width: 560px;
+  height: 168px;
+  padding: 28px 48px;
+  display: flex;
+  gap: 61px;
+  border-radius: 30px;
+  box-shadow: 0px 0px 4px 0px #0000001a;
+  background-color: #ffffff;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
 .viewOfTasks {
-    width: 560px;
-    height: 170px;
-    display: flex;
-    justify-content: space-between;
+  width: 560px;
+  height: 170px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .To-do {
-    width: 264px;
-    height: 100%;
-    border-radius: 30px;
-    background-color: white;
-    box-shadow: 0px 0px 4px 0px #0000001A;
-    padding: 38px 19px;
-    gap: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
+  width: 264px;
+  height: 100%;
+  border-radius: 30px;
+  background-color: white;
+  box-shadow: 0px 0px 4px 0px #0000001a;
+  padding: 38px 19px;
+  gap: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
 }
 
 .To-do h2 {
-    font-size: 64px;
-    font-weight: 600;
+  font-size: 64px;
+  font-weight: 600;
 }
 
 .To-do p {
-    font-size: 20px;
-    font-weight: 400;
+  font-size: 20px;
+  font-weight: 400;
 }
 
 .urgent-number {
-    display: flex;
-    align-items: center;
-    gap: 18px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
 }
 
 .urgent-number img {
-    width: 60px;
-    height: 60px;
+  width: 60px;
+  height: 60px;
 }
 
 .urgent-number h2 {
-    font-size: 64px;
-    font-weight: 600;
-    text-align: center;
-    color: black;
+  font-size: 64px;
+  font-weight: 600;
+  text-align: center;
+  color: black;
 }
 
 .Urgent-line {
-    width: 2px;
-    background-color: #D1D1D1;
-    height: 102px;
+  width: 2px;
+  background-color: #d1d1d1;
+  height: 102px;
 }
 
 .Deadline {
-    display: flex;
-    flex-direction: column;
-    gap: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
 }
 
 .Deadline h3 {
-    font-size: 21px;
-    font-weight: 700;
-    color: #2A3647;
+  font-size: 21px;
+  font-weight: 700;
+  color: #2a3647;
 }
 
 .Deadline p {
-    font-size: 16px;
-    font-weight: 400;
-    color: #2A3647;
+  font-size: 16px;
+  font-weight: 400;
+  color: #2a3647;
 }
 
 .Task {
-    width: 168px;
-    height: 168px;
-    border-radius: 30px;
-    padding: 20px 42.5px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    background-color: white;
-    box-shadow: 0px 0px 4px 0px #0000001A;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
+  width: 168px;
+  height: 168px;
+  border-radius: 30px;
+  padding: 20px 42.5px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: white;
+  box-shadow: 0px 0px 4px 0px #0000001a;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
 }
 
 .Task h2 {
-    font-size: 64px;
-    font-weight: 600;
-    text-align: center;
+  font-size: 64px;
+  font-weight: 600;
+  text-align: center;
 }
 
 .Task p {
-    font-size: 20px;
-    font-weight: 400;
-    text-align: center;
-    color: #2A3647;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+  color: #2a3647;
 }
 
 .greeting {
-    width: 385px;
-    height: 136px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 3px;
+  width: 385px;
+  height: 136px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 3px;
 }
 
 .greeting h2 {
-    font-size: 47px;
-    font-weight: 500;
-    color: #2A3647;
+  font-size: 47px;
+  font-weight: 500;
+  color: #2a3647;
 }
 
 .greeting h1 {
-    font-size: 64px;
-    font-weight: 700;
-    color: #29ABE2;
+  font-size: 64px;
+  font-weight: 700;
+  color: #29abe2;
 }
 
 .Urgency:hover {
-    background-color: #2A3647;
-    width: 576px;
-    height: 184px;
-    box-shadow: 0px 4px 4px 0px #00000040;
-    transition: ease-in-out 100ms;
-    cursor: pointer;
+  background-color: #2a3647;
+  width: 576px;
+  height: 184px;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  transition: ease-in-out 100ms;
+  cursor: pointer;
 
-    .urgent-number div {
-        color: white;
-    }
+  .urgent-number div {
+    color: white;
+  }
 
-    .urgent-number h2 {
-        color: white;
-    }
+  .urgent-number h2 {
+    color: white;
+  }
 
-    .Deadline h3 {
-        color: white;
-    }
+  .Deadline h3 {
+    color: white;
+  }
 
-    .Deadline p {
-        color: white;
-    }
+  .Deadline p {
+    color: white;
+  }
 }
 
 .image1 {
-    width: 70px;
-    height: 70px;
-    background-size: cover;
-    background-position: center;
-    background-image: url(../assets/img/pencil_blue.png);
-
+  width: 70px;
+  height: 70px;
+  background-size: cover;
+  background-position: center;
+  background-image: url(../assets/img/pencil_blue.png);
 }
 
 .image2 {
-    width: 70px;
-    height: 70px;
-    background-size: cover;
-    background-position: center;
-    background-image: url(../assets/img/done_blue.png);
+  width: 70px;
+  height: 70px;
+  background-size: cover;
+  background-position: center;
+  background-image: url(../assets/img/done_blue.png);
 }
 
 .To-do:hover {
-    width: 282.5px;
-    height: 184px;
-    background-color: #2A3647;
-    box-shadow: 0px 4px 4px 0px #00000040;
-    transition: ease-in-out 100ms;
-    cursor: pointer;
+  width: 282.5px;
+  height: 184px;
+  background-color: #2a3647;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  transition: ease-in-out 100ms;
+  cursor: pointer;
 
-    .image1 {
-        background-image: url(../assets/img/pencil_white.png);
-    }
+  .image1 {
+    background-image: url(../assets/img/pencil_white.png);
+  }
 
-    .image2 {
-        background-image: url(../assets/img/done_white.png);
-    }
+  .image2 {
+    background-image: url(../assets/img/done_white.png);
+  }
 
-    .To-do_text h2 {
-        color: white;
-    }
+  .To-do_text h2 {
+    color: white;
+  }
 
-    .To-do_text p {
-        color: white;
-    }
+  .To-do_text p {
+    color: white;
+  }
 }
 
 .Task:hover {
-    width: 184px;
-    height: 184px;
-    background-color: #2A3647;
-    box-shadow: 0px 4px 4px 0px #00000040;
-    transition: ease-in-out 100ms;
-    cursor: pointer;
+  width: 184px;
+  height: 184px;
+  background-color: #2a3647;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  transition: ease-in-out 100ms;
+  cursor: pointer;
 
-    .Task_h2 {
-        color: white;
-    }
+  .Task_h2 {
+    color: white;
+  }
 
-    .Task_p {
-        color: white;
-    }
+  .Task_p {
+    color: white;
+  }
 }
 
 .Summary-body {
-    max-width: 1440px;
-    display: flex;
-    flex-direction: column;
-    padding: 75px 0px 0px 75px;
-    gap: 30px;
+  max-width: 1440px;
+  display: flex;
+  flex-direction: column;
+  padding: 75px 0px 0px 75px;
+  gap: 30px;
 }
 
 .greeting-position {
-    position: absolute;
-    top: 547.5px;
-    left: 968px;
+  position: absolute;
+  top: 547.5px;
+  left: 968px;
 }
 
 @media (max-width: 1400px) {
-    .d-none {
-        display: none;
-    }
+  .d-none {
+    display: none;
+  }
 
-    .greeting-position {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin: auto;
-    }
+  .greeting-position {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: auto;
+  }
 }
 
 .line2 {
-    height: 3px;
-    width: 90px;
-    background-color: #29ABE2;
-    display: none;
+  height: 3px;
+  width: 90px;
+  background-color: #29abe2;
+  display: none;
 }
 
 @media (max-width: 1000px) {
-    .line {
-        display: none;
-    }
+  .line {
+    display: none;
+  }
 
-    .line2 {
-        display: flex;
-    }
+  .line2 {
+    display: flex;
+  }
 
-    .headline {
-        flex-direction: column;
-        gap: 16px;
-        top: 128px;
-        align-items: start;
-    }
+  .headline {
+    flex-direction: column;
+    gap: 16px;
+    top: 128px;
+    align-items: start;
+  }
 
-    .Summary-body {
-        padding: 50px 0px 40px 20px;
-    }
+  .Summary-body {
+    padding: 50px 0px 40px 20px;
+  }
 }
 
 @media (max-width: 900px) {
-    .Tasks {
-        left: 260px;
-    }
+  .Tasks {
+    left: 260px;
+  }
 
-    .headline {
-        left: 260px;
-    }
+  .headline {
+    left: 260px;
+  }
 }
 
 @media (max-width: 830px) {
-    .greeting-position {
-        position: absolute;
-        inset: 0;
-        margin: auto;
-    }
+  .greeting-position {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+  }
 
-    .headline {
-        left: 100px;
-    }
+  .headline {
+    left: 100px;
+  }
 
-    .Tasks {
-        left: 100px;
-    }
+  .Tasks {
+    left: 100px;
+  }
 
-    .headline h1 {
-        font-size: 47px;
-    }
+  .headline h1 {
+    font-size: 47px;
+  }
 
-    .headline h3 {
-        font-size: 20px;
-    }
+  .headline h3 {
+    font-size: 20px;
+  }
 
-    .Todo-Done {
-        width: 396px;
-        height: 110px;
-    }
+  .Todo-Done {
+    width: 396px;
+    height: 110px;
+  }
 
-    .To-do {
-        width: 186px;
-        height: 110px;
-        gap: 10px;
-    }
+  .To-do {
+    width: 186px;
+    height: 110px;
+    gap: 10px;
+  }
 
-    .image1 {
-        width: 40px;
-        height: 40px;
-    }
+  .image1 {
+    width: 40px;
+    height: 40px;
+  }
 
-    .image2 {
-        width: 40px;
-        height: 40px;
-    }
+  .image2 {
+    width: 40px;
+    height: 40px;
+  }
 
-    .To-do h2 {
-        font-size: 47px;
-    }
+  .To-do h2 {
+    font-size: 47px;
+  }
 
-    .To-do p {
-        font-size: 14px;
-    }
+  .To-do p {
+    font-size: 14px;
+  }
 
-    .Urgency {
-        width: 396px;
-        height: 110px;
-        gap: 20px;
-    }
+  .Urgency {
+    width: 396px;
+    height: 110px;
+    gap: 20px;
+  }
 
-    .urgent-number img {
-        width: 40px;
-        height: 40px;
-    }
+  .urgent-number img {
+    width: 40px;
+    height: 40px;
+  }
 
-    .urgent-number h2 {
-        font-size: 47px;
-    }
+  .urgent-number h2 {
+    font-size: 47px;
+  }
 
-    .urgent-number p {
-        font-size: 14px;
-    }
+  .urgent-number p {
+    font-size: 14px;
+  }
 
-    .Deadline h3 {
-        font-size: 16px;
-    }
+  .Deadline h3 {
+    font-size: 16px;
+  }
 
-    .Deadline p {
-        font-size: 14px;
-    }
+  .Deadline p {
+    font-size: 14px;
+  }
 
-    .Urgent-line {
-        height: 68px;
-    }
+  .Urgent-line {
+    height: 68px;
+  }
 
-    .viewOfTasks {
-        width: 396px;
-        height: 116px;
-    }
+  .viewOfTasks {
+    width: 396px;
+    height: 116px;
+  }
 
-    .Task {
-        height: 116px;
-        width: 116px;
-        gap: 13px;
-        padding: 25px 0px
-    }
+  .Task {
+    height: 116px;
+    width: 116px;
+    gap: 13px;
+    padding: 25px 0px;
+  }
 
-    .Task h2 {
-        font-size: 47px;
-    }
+  .Task h2 {
+    font-size: 47px;
+  }
 
-    .Task p {
-        font-size: 14px;
-        width: 65px;
-    }
+  .Task p {
+    font-size: 14px;
+    width: 65px;
+  }
 
-    .headline {
-        left: 16px;
-    }
+  .headline {
+    left: 16px;
+  }
 
-    .Tasks {
-        left: 16px;
-        width: 396px;
-        height: 384px;
-    }
+  .Tasks {
+    left: 16px;
+    width: 396px;
+    height: 384px;
+  }
 
-    .To-do:hover {
-        width: 200px;
-        height: 124px;
-    }
+  .To-do:hover {
+    width: 200px;
+    height: 124px;
+  }
 
-    .Urgency:hover {
-        width: 412px;
-        height: 124px;
-    }
+  .Urgency:hover {
+    width: 412px;
+    height: 124px;
+  }
 
-    .Task:hover {
-        width: 130px;
-        height: 130px;
-    }
-
+  .Task:hover {
+    width: 130px;
+    height: 130px;
+  }
 }
 
-
 @media (max-width: 600px) {
+  .greeting h1 {
+    font-size: 47px;
+  }
 
-    .greeting h1 {
-        font-size: 47px;
-    }
+  .greeting h2 {
+    font-size: 36px;
+  }
 
-    .greeting h2 {
-        font-size: 36px;
-    }
-
-    .greeting {
-        width: 300px;
-    }
+  .greeting {
+    width: 300px;
+  }
 }
 
 @media (max-width: 430px) {
-    .Tasks {
-        width: 300px;
-    }
+  .Tasks {
+    width: 300px;
+  }
 
-    .Todo-Done {
-        width: 300px;
-    }
+  .Todo-Done {
+    width: 300px;
+  }
 
-    .To-do {
-        width: 140px;
-    }
+  .To-do {
+    width: 140px;
+  }
 
-    .Urgency {
-        width: 300px;
-        padding: 27px 25px;
-    }
+  .Urgency {
+    width: 300px;
+    padding: 27px 25px;
+  }
 
-    .viewOfTasks {
-        width: 300px;
-    }
+  .viewOfTasks {
+    width: 300px;
+  }
 
-    .urgent-number img {
-        width: 30px;
-        height: 30px;
-    }
+  .urgent-number img {
+    width: 30px;
+    height: 30px;
+  }
 
-    .urgent-number {
-        gap: 8px;
-    }
+  .urgent-number {
+    gap: 8px;
+  }
 
-    .urgent-number h2 {
-        font-size: 40px;
-    }
+  .urgent-number h2 {
+    font-size: 40px;
+  }
 
-    .Deadline h3 {
-        font-size: 14px;
-    }
+  .Deadline h3 {
+    font-size: 14px;
+  }
 
-    .Deadline p {
-        font-size: 13px;
-    }
+  .Deadline p {
+    font-size: 13px;
+  }
 
-    .To-do h2 {
-        font-size: 40px;
-    }
+  .To-do h2 {
+    font-size: 40px;
+  }
 
-    .Task {
-        width: 96px;
-        height: 110px;
-    }
+  .Task {
+    width: 96px;
+    height: 110px;
+  }
 
-    .Task h2 {
-        font-size: 40px;
-    }
+  .Task h2 {
+    font-size: 40px;
+  }
 
-    .To-do:hover {
-        width: 154px;
-        height: 124px;
-    }
+  .To-do:hover {
+    width: 154px;
+    height: 124px;
+  }
 
-    .Urgency:hover {
-        width: 314px;
-        height: 124px;
-    }
+  .Urgency:hover {
+    width: 314px;
+    height: 124px;
+  }
 
-    .Task:hover {
-        width: 110px;
-        height: 130px;
-    }
+  .Task:hover {
+    width: 110px;
+    height: 130px;
+  }
 }
 
 @media (max-width: 340px) {
-    .Summary-body {
-        padding-left: 10px;
-    }
+  .Summary-body {
+    padding-left: 10px;
+  }
 }

@@ -49,7 +49,9 @@ async function greetingOnMobile() {
  * Makes the first letter of the name toUpperCase and puts the name in the greeting
  */
 function putName() {
-  let name = String(User[0].name).charAt(0).toUpperCase() + String(User[0].name).slice(1);
+  let name =
+    String(User[0].name).charAt(0).toUpperCase() +
+    String(User[0].name).slice(1);
   document.getElementById("name").innerHTML = `${name}`;
   let firstLetter = User[0].name.charAt(0).toUpperCase();
   document.getElementById("user").innerHTML = `${firstLetter}`;
@@ -99,7 +101,9 @@ function lengthOfToDoTasks() {
  * @param {array}
  */
 function lengthOfInProgressTasks() {
-  summaryInProgress = allTasks.filter((item) => item.state === "inProgress").length;
+  summaryInProgress = allTasks.filter(
+    (item) => item.state === "inProgress"
+  ).length;
   let target = document.getElementById("inProgress");
   target.innerHTML = "";
   target.innerHTML = `${summaryInProgress}`;
@@ -110,7 +114,9 @@ function lengthOfInProgressTasks() {
  * @param {array}
  */
 function lengthOfFeedbackTasks() {
-  summaryFeedback = allTasks.filter((item) => item.state === "awaitFeedback").length;
+  summaryFeedback = allTasks.filter(
+    (item) => item.state === "awaitFeedback"
+  ).length;
   let target = document.getElementById("awaiting");
   target.innerHTML = "";
   target.innerHTML = `${summaryFeedback}`;
@@ -151,7 +157,9 @@ function getEarliestDate() {
     return;
   }
   earliestDateObject = allTasks.reduce((earliest, current) => {
-    return new Date(current.due_date) < new Date(earliest.due_date) ? current : earliest;
+    return new Date(current.due_date) < new Date(earliest.due_date)
+      ? current
+      : earliest;
   });
   earliestDateNumber = earliestDateObject.due_date;
   let earliestDate = changeDateFormat(earliestDateNumber);
