@@ -249,34 +249,6 @@ function deleteArrayEntry(subtaskID) {
 }
 
 /**
- * Handles the save click event for a subtask.
- * @param {HTMLElement} target - The target element that triggered the event.
- */
-function addTaskandleSaveClick(index) {
-  const subtaskItem = document.getElementById(index);
-  console.log(subtaskItem);
-
-  // const createTaskButton = document.getElementById("createTaskButton");
-  // const targetID = subtaskItem.id;
-  // const numericID = parseInt(targetID.split("_")[1], 10);
-  // const contentWrapper = subtaskItem.querySelector(".subtask-content-wrapper");
-  // const inputContainer = subtaskItem.querySelector(".input-container");
-  // const input = inputContainer.querySelector(".subtask-input");
-  // const updatedText = input.value.trim();
-  // if (updatedText === "") {
-  //   input.value = "";
-  //   input.placeholder = "No empty subtasks allowed";
-  //   return;
-  // }
-  // contentWrapper.innerHTML = saveSubtaskItem(updatedText);
-  // const actions = subtaskItem.querySelector(".subtask-actions");
-  // actions.style.visibility = "visible";
-  // inputContainer.remove();
-  // subtaskItem.classList.remove("editing");
-  // editArrayEntry(numericID, updatedText);
-}
-
-/**
  * this function checks the input field of a subtask for changes and updates the button accordingly.
  * @param {string} currentText
  */

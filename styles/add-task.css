@@ -458,8 +458,8 @@ input.subtask-input:focus {
   margin-right: 0;
 }
 
-.input-container .delete-icon,
-.input-container .save-icon {
+.input-container .add-task-delete-icon,
+.input-container .add-task-save-icon {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -470,16 +470,16 @@ input.subtask-input:focus {
   border-radius: 10px;
 }
 
-.input-container .delete-icon {
+.input-container .add-task-delete-icon {
   right: 40px;
 }
 
-.input-container .save-icon {
+.input-container .add-task-save-icon {
   right: 10px;
 }
 
-.input-container .delete-icon:hover,
-.input-container .save-icon:hover {
+.input-container .add-task-delete-icon:hover,
+.input-container .add-task-save-icon:hover {
   opacity: 1;
 }
 
@@ -487,16 +487,16 @@ input.subtask-input:focus {
   visibility: hidden;
 }
 
-.save-icon,
-.delete-icon {
+.add-task-save-icon,
+.add-task-delete-icon {
   width: 16px;
   height: 16px;
   cursor: pointer;
   transition: opacity 0.3s ease;
 }
 
-.save-icon:hover,
-.delete-icon:hover {
+.add-task-save-icon:hover,
+.add-task-delete-icon:hover {
   opacity: 0.8;
 }
 

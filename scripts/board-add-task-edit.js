@@ -93,7 +93,6 @@ function handleEditClick(target) {
   const actions = subtaskItem.querySelector(".subtask-actions");
   actions.style.visibility = "hidden";
 }
-
 /**
  * Handles click events on subtask action icons.
  */
@@ -104,6 +103,9 @@ document.addEventListener("click", (event, ticketID) => {
   } else if (target.classList.contains("save-icon")) {
     handleSaveClick(target);
     enableActionButton();
+  } else if (target.classList.contains("delete-icon")) {
+    handleDeleteClick(target);
+    enableActionButton();
   }
 });
 
@@ -113,8 +115,6 @@ document.addEventListener("click", (event, ticketID) => {
  */
 function handleSaveClick(target) {
   const subtaskItem = target.closest(".subtask-item");
-  console.log(subtaskItem);
-
   const createTaskButton = document.getElementById("createTaskButton");
   const targetID = subtaskItem.id;
   const numericID = parseInt(targetID.split("_")[1], 10);

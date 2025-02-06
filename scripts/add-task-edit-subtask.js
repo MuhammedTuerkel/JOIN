@@ -20,7 +20,8 @@ async function showOverlayTicket(category, ticketTitle, ticketDescription, ticke
 //     handleEditClick(target);
 //   } else if (target.classList.contains("save-icon")) {
 //     handleSaveClick(target);
-//   }
+//   } else if (target.classList.contains("save-icon")) {
+//     handleSaveClick(target);
 // });
 
 function createEditIcons() {
@@ -217,7 +218,6 @@ function assignedUserDropDownEdit(email) {
   if (contact && !selectedUsers.some((selectedContact) => selectedContact.email === contact.email)) {
     selectedUsers.push(contact);
   }
-
   updateSelectedUsersContainerEdit();
 }
 
@@ -242,7 +242,7 @@ function notAssignedUserEdit(email) {
   updateSelectedUsersContainerEdit();
 }
 
-function addTaskhandleDeleteClick(index) {
+function addTaskHandleDeleteClick(index) {
   if (index < 0 || index >= subtasksArray.length) {
     console.error("Invalid index");
     return;
@@ -258,6 +258,50 @@ function addTaskhandleDeleteClick(index) {
  */
 function reindexSubtasks() {
   subtasksArray.forEach((subtask, i) => (subtask.id = i + 1));
+}
+
+/**
+ * Handles click events on subtask action icons.
+ */
+document.addEventListener("click", (event, ticketID) => {
+  const target = event.target;
+  if (target.classList.contains("edit-icon")) {
+    handleEditClick(target);
+  } else if (target.classList.contains("add-task-save-icon")) {
+    addTaskHandleSaveClick(target);
+    enableActionButton();
+  } else if (target.classList.contains("add-task-delete-icon")) {
+    addTaskHandleDeleteClick(target);
+    enableActionButton();
+  }
+});
+
+/**
+ * Handles the save click event for a subtask.
+ * @param {HTMLElement} target - The target element that triggered the event.
+ */
+function addTaskHandleSaveClick(index) {
+  const subtaskItem = document.getElementById(index);
+  console.log(subtaskItem);
+
+  const createTaskButton = document.getElementById("createTaskButton");
+  const targetID = subtaskItem.id;
+  const numericID = parseInt(targetID.split("_")[1], 10);
+  const contentWrapper = subtaskItem.querySelector(".subtask-content-wrapper");
+  const inputContainer = subtaskItem.querySelector(".input-container");
+  const input = inputContainer.querySelector(".subtask-input");
+  const updatedText = input.value.trim();
+  if (updatedText === "") {
+    input.value = "";
+    input.placeholder = "No empty subtasks allowed";
+    return;
+  }
+  contentWrapper.innerHTML = saveSubtaskItem(updatedText);
+  const actions = subtaskItem.querySelector(".subtask-actions");
+  actions.style.visibility = "visible";
+  inputContainer.remove();
+  subtaskItem.classList.remove("editing");
+  editArrayEntry(numericID, updatedText);
 }
 
 /**
@@ -277,15 +321,8 @@ function addTaskHandleEditClick(index) {
   const inputContainer = document.createElement("div");
   inputContainer.classList.add("input-container");
   const input = createInputField(contentSpan.textContent);
-  const deleteIcon = createIcon("delete-icon", "./assets/icons/subtask-delete.png", (onclick = "addTaskhandleDeleteClick(index)"));
-  const saveIcon = createIcon("save-icon", "./assets/icons/subtask-save.png");
-  deleteIcon.onclick = function () {
-    addTaskhandleDeleteClick(index);
-  };
-  saveIcon.onclick = function () {
-    addTaskandleSaveClick(index);
-  };
-
+  const deleteIcon = createIcon("add-task-delete-icon", "./assets/icons/subtask-delete.png");
+  const saveIcon = createIcon("add-task-save-icon", "./assets/icons/subtask-save.png");
   inputContainer.appendChild(input);
   inputContainer.appendChild(deleteIcon);
   inputContainer.appendChild(saveIcon);
