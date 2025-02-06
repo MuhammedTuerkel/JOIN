@@ -188,26 +188,6 @@ function getLoggedInUserData() {
   userName = UserLogg.name;
 }
 
-// /**
-//  * Checks if tasks exist in localStorage. If not, it pushes the global tasks array to localStorage.
-//  * If tasks exist, it does nothing.
-//  */
-// function getAllTasks() {
-//   let tasksString = localStorage.getItem("tasks");
-//   if (!tasksString || JSON.parse(tasksString).length === 0) {
-//     localStorage.setItem("tasks", JSON.stringify(tasks));
-//     tasks = JSON.parse(tasksString);
-//     allTasks = tasks.map((task, index) => {
-//       return { id: index, ...task };
-//     });
-//   } else {
-//     tasks = JSON.parse(tasksString);
-//     allTasks = tasks.map((task, index) => {
-//       return { id: index, ...task };
-//     });
-//   }
-// }
-
 /**
  * A function that directs to the board.html
  */
