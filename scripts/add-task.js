@@ -47,36 +47,6 @@ function goBackToAddTask(event) {
   event.preventDefault();
 }
 
-// /**
-//  * Posts a task to the local storage.
-//  * Combines buildTask and postTask into a single function call.
-//  * @param {string} state - The state of the task.
-//  * @param {string} [path='tasks'] - The storage path for the task.
-//  */
-// function postTask(state, path = "tasks") {
-//   let task = buildTask(state);
-//   let tasks = JSON.parse(localStorage.getItem(path)) || [];
-//   tasks.push(task);
-//   localStorage.setItem(path, JSON.stringify(tasks));
-// }
-
-// /**
-//  * Builds a task object from form input values for the board.
-//  * @param {string} state - The state of the task.
-//  * @returns {Object} - The task object in JSON format.
-//  */
-// function buildTask(state) {
-//   let taskTitle = document.getElementById("task-title").value;
-//   let taskDate = document.getElementById("task-due-date").value;
-//   let taskPrio = selectedPrio;
-//   let taskDescription = document.getElementById("task-description").value;
-//   let taskCategory = document.getElementById("task-category").value;
-//   let taskSubtasks = subtasksArray;
-//   let taskState = state;
-//   let taskAssigned = selectedContacts;
-//   return taskToJSON(taskTitle, taskDate, taskPrio, taskDescription, taskCategory, taskSubtasks, taskAssigned, taskState);
-// }
-
 /**
  * Posts a task to Firebase.
  * Combines buildTask and pushTaskToFirebase into a single function call.
@@ -174,7 +144,6 @@ function clearSubtaskInput() {
  * Adds a new subtask to the subtasks array and updates the UI.
  */
 function pushSubtaskArray() {
-  console.log(subtasksArray);
   let subTaskInput = document.getElementById("task-subtasks");
   let content = subTaskInput.value.trim();
   let newSubtask = {
