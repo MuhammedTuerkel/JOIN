@@ -110,7 +110,7 @@ async function getContactFromFirebase(i) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     let contact = await response.json();
-    return { ...contact, id: i }; // Add the index to the contact object
+    return { ...contact, id: i };
   } catch (error) {
     console.error("Failed to fetch contact from Firebase:", error);
     return null;
