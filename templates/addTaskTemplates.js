@@ -6,7 +6,7 @@
  */
 function renderSubtaskItem(itemID, itemContent, ticketID, index) {
   return `<div class="subtask-item" id="subtaskItem_${index}">
-                <div class="subtask-content-wrapper">
+                <div class="subtask-content-wrapper" id="addTaskSubContentWrapper${index}">
                     <span class="bullet-point">•</span>
                     <span class="subtask-content" id="subtaskContent_${itemID}">${itemContent}</span>
                 </div>

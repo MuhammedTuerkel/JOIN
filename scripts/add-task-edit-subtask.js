@@ -23,19 +23,6 @@ async function showOverlayTicket(category, ticketTitle, ticketDescription, ticke
 //   }
 // });
 
-/**
- * Handles click events on subtask action icons.
- */
-document.addEventListener("click", (event, ticketID) => {
-  const target = event.target;
-  if (target.classList.contains("edit-icon")) {
-    handleEditClick(target);
-  } else if (target.classList.contains("save-icon")) {
-    handleSaveClick(target);
-    enableActionButton();
-  }
-});
-
 function createEditIcons() {
   const deleteIcon = document.createElement("img");
   deleteIcon.src = "./assets/icons/subtask-delete.png";
@@ -94,6 +81,7 @@ function editArrayEntry(subtaskID, updatedText) {
   if (subtask) {
     subtask.content = updatedText;
   }
+  console.log("subtask", subtasksArray);
 }
 
 /**
@@ -106,10 +94,8 @@ function toggleUserSelectionEdit(email) {
   let isChecked = checkbox.checked;
   if (isChecked) {
     notAssignedUserEdit(email);
-    console.log(selectedUsers);
   } else {
     assignedUserDropDownEdit(email);
-    console.log(selectedUsers);
   }
 }
 
@@ -119,14 +105,17 @@ function toggleUserSelectionEdit(email) {
 function updateSelectedUsersContainerEdit() {
   let container = document.getElementById("selectedUsers");
   container.innerHTML = "";
-  for (let index = 0; index < selectedUsers.length; index++) {
-    let user = selectedUsers[index];
-    let initials = user.name.charAt(0).toUpperCase() + user.name.charAt(user.name.length - 1).toUpperCase();
-    container.innerHTML += `
-            <div class="selected_user_circle" style="background-color: ${user.color};">
-                ${initials}
-            </div>
-        `;
+  let maxUsers = Math.min(selectedUsers.length, 4);
+  for (let i = 0; i < maxUsers; i++) {
+    let initials = selectedUsers[i].name.charAt(0).toUpperCase() + selectedUsers[i].name.charAt(selectedUsers[i].name.length - 1).toUpperCase();
+    let color = selectedUsers[i].color;
+    document.getElementById("selectedUsers").innerHTML += renderAssignedContactCircle(initials, color);
+  }
+  if (selectedUsers.length > 4) {
+    let additionalUsers = selectedUsers.length - 4;
+    let initials = `+${additionalUsers}`;
+    let color = "#2B3647";
+    document.getElementById("selectedUsers").innerHTML += renderAssignedContactCircle(initials, color);
   }
 }
 
@@ -224,8 +213,6 @@ function assignedUserDropDownEdit(email) {
   template.classList.add("user_template_selected");
   checkedImg.src = "./assets/img/checked button.png";
   checkbox.checked = true;
-
-  // Finde den Kontakt im selectedUsers Array und füge ihn hinzu, wenn er nicht bereits vorhanden ist
   let contact = contacts.find((contact) => contact.email === email);
   if (contact && !selectedUsers.some((selectedContact) => selectedContact.email === contact.email)) {
     selectedUsers.push(contact);
@@ -247,7 +234,6 @@ function notAssignedUserEdit(email) {
   checkedImg.src = "./assets/img/check button.png";
   checkbox.checked = false;
 
-  // Entferne den Kontakt aus dem selectedUsers Array
   let userIndex = selectedUsers.findIndex((selectedContact) => selectedContact.email === email);
   if (userIndex !== -1) {
     selectedUsers.splice(userIndex, 1);
@@ -280,19 +266,26 @@ function reindexSubtasks() {
  */
 function addTaskHandleEditClick(index) {
   disabledActionButton();
-  const subtaskItem = document.querySelector(`.subtask-item${index}`); // Corrected class selector
+  const subtaskItem = document.getElementById(`subtaskItem_${index}`);
   if (!subtaskItem) {
     console.error(`Subtask item with index ${index} not found.`);
     return;
   }
-  const contentWrapper = subtaskItem.querySelector(".subtask-content-wrapper");
+  const contentWrapper = document.getElementById(`addTaskSubContentWrapper${index}`);
   const contentSpan = subtaskItem.querySelector(".subtask-content");
   subtaskItem.classList.add("editing");
   const inputContainer = document.createElement("div");
   inputContainer.classList.add("input-container");
   const input = createInputField(contentSpan.textContent);
-  const deleteIcon = createIcon("delete-icon", "./assets/icons/subtask-delete.png");
+  const deleteIcon = createIcon("delete-icon", "./assets/icons/subtask-delete.png", "onclick="addTaskhandleDeleteClick(index)", ;
   const saveIcon = createIcon("save-icon", "./assets/icons/subtask-save.png");
+  deleteIcon.onclick = function () {
+    addTaskhandleDeleteClick(index);
+  };
+  saveIcon.onclick = function () {
+    addTaskandleSaveClick(index);
+  };
+
   inputContainer.appendChild(input);
   inputContainer.appendChild(deleteIcon);
   inputContainer.appendChild(saveIcon);
@@ -349,10 +342,10 @@ function disableSubtaskInput() {
 }
 
 function enableActionButton() {
-  let actionButton = document.getElementById("endEditBtn");
-  let titleInput = document.getElementById("task-title-overlay-edit");
-  let discriptionInput = document.getElementById("task-description-overlay-edit");
-  let dateInput = document.getElementById("task-due-date-overlay-edit");
+  let actionButton = document.getElementById("createTaskButton");
+  let titleInput = document.getElementById("task-title");
+  let discriptionInput = document.getElementById("task-description");
+  let dateInput = document.getElementById("task-due-date");
   actionButton.disabled = false;
   titleInput.disabled = false;
   discriptionInput.disabled = false;

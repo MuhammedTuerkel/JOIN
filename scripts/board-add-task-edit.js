@@ -94,6 +94,47 @@ function handleEditClick(target) {
   actions.style.visibility = "hidden";
 }
 
+/**
+ * Handles click events on subtask action icons.
+ */
+document.addEventListener("click", (event, ticketID) => {
+  const target = event.target;
+  if (target.classList.contains("edit-icon")) {
+    handleEditClick(target);
+  } else if (target.classList.contains("save-icon")) {
+    handleSaveClick(target);
+    enableActionButton();
+  }
+});
+
+/**
+ * Handles the save click event for a subtask.
+ * @param {HTMLElement} target - The target element that triggered the event.
+ */
+function handleSaveClick(target) {
+  const subtaskItem = target.closest(".subtask-item");
+  console.log(subtaskItem);
+
+  const createTaskButton = document.getElementById("createTaskButton");
+  const targetID = subtaskItem.id;
+  const numericID = parseInt(targetID.split("_")[1], 10);
+  const contentWrapper = subtaskItem.querySelector(".subtask-content-wrapper");
+  const inputContainer = subtaskItem.querySelector(".input-container");
+  const input = inputContainer.querySelector(".subtask-input");
+  const updatedText = input.value.trim();
+  if (updatedText === "") {
+    input.value = "";
+    input.placeholder = "No empty subtasks allowed";
+    return;
+  }
+  contentWrapper.innerHTML = saveSubtaskItem(updatedText);
+  const actions = subtaskItem.querySelector(".subtask-actions");
+  actions.style.visibility = "visible";
+  inputContainer.remove();
+  subtaskItem.classList.remove("editing");
+  editArrayEntry(numericID, updatedText);
+}
+
 function disabledActionButton() {
   let actionButton = document.getElementById("endEditBtn");
   let titleInput = document.getElementById("task-title-overlay-edit");
