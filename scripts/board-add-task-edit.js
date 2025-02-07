@@ -60,6 +60,7 @@ function handleEditClick(target) {
   const actions = subtaskItem.querySelector(".subtask-actions");
   actions.style.visibility = "hidden";
 }
+
 /**
  * Handles click events on subtask action icons.
  */

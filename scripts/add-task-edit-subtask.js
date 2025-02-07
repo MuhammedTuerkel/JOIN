@@ -236,7 +236,7 @@ document.addEventListener("click", (event) => {
  * @param {HTMLElement} target - The target element that triggered the event.
  */
 function addTaskHandleEditClick(index) {
-  disabledActionButton();
+  addTaskDisabledActionButton();
   const subtaskItem = document.getElementById(`subtaskItem_${index}`);
   if (!subtaskItem) {
     console.error(`Subtask item with index ${index} not found.`);
@@ -283,6 +283,7 @@ function addTaskHandleSaveClick(target) {
   inputContainer.remove();
   subtaskItem.classList.remove("editing");
   addTaskEditArrayEntry(numericID, updatedText);
+  addTaskEnableActionButton();
 }
 
 /**
@@ -296,7 +297,7 @@ function addTaskEditArrayEntry(subtaskID, updatedText) {
   }
 }
 
-function disabledActionButton() {
+function addTaskDisabledActionButton() {
   let actionButton = document.getElementById("createTaskButton");
   let titleInput = document.getElementById("task-title");
   let discriptionInput = document.getElementById("task-description");
@@ -309,12 +310,12 @@ function disabledActionButton() {
   titleInput.classList.add("disabled");
   discriptionInput.classList.add("disabled");
   dateInput.classList.add("disabled");
-  disablePrioButtons();
-  disableAssignedField();
-  disableSubtaskInput();
+  addTaskDisablePrioButtons();
+  addTaskDisableAssignedField();
+  addTaskDisableSubtaskInput();
 }
 
-function disablePrioButtons() {
+function addTaskDisablePrioButtons() {
   let prioLowButton = document.getElementById("low-btn");
   let prioMediumButton = document.getElementById("medium-btn");
   let prioUrgentButon = document.getElementById("urgent-btn");
@@ -326,7 +327,7 @@ function disablePrioButtons() {
   prioUrgentButon.disabled = true;
 }
 
-function disableAssignedField() {
+function addTaskDisableAssignedField() {
   let assignedInput = document.getElementById("addTaskSearchContacts");
   let assignedContainer = document.getElementById("assigned");
   assignedInput.classList.add("disabled");
@@ -334,7 +335,7 @@ function disableAssignedField() {
   assignedInput.disabled = true;
 }
 
-function disableSubtaskInput() {
+function addTaskDisableSubtaskInput() {
   let tasksList = document.getElementById("task-subtasks");
   let taskButton = document.getElementById("add-subtask-btn");
   taskButton.disabled = true;
@@ -342,7 +343,7 @@ function disableSubtaskInput() {
   taskButton.classList.add("disabled");
 }
 
-function enableActionButton() {
+function addTaskEnableActionButton() {
   let actionButton = document.getElementById("createTaskButton");
   let titleInput = document.getElementById("task-title");
   let discriptionInput = document.getElementById("task-description");
@@ -355,12 +356,12 @@ function enableActionButton() {
   titleInput.classList.remove("disabled");
   discriptionInput.classList.remove("disabled");
   dateInput.classList.remove("disabled");
-  enablePrioButtons();
-  enableAssignedField();
-  enableSubtaskInput();
+  addTaskEnablePrioButtons();
+  addTaskEnableAssignedField();
+  addTaskEnableSubtaskInput();
 }
 
-function enablePrioButtons() {
+function addTaskEnablePrioButtons() {
   let prioLowButton = document.getElementById("low-btn");
   let prioMediumButton = document.getElementById("medium-btn");
   let prioUrgentButon = document.getElementById("urgent-btn");
@@ -372,7 +373,7 @@ function enablePrioButtons() {
   prioUrgentButon.disabled = false;
 }
 
-function enableAssignedField(event) {
+function addTaskEnableAssignedField(event) {
   let assignedInput = document.getElementById("addTaskSearchContacts");
   let assignedContainer = document.getElementById("assigned");
   assignedInput.classList.remove("disabled");
@@ -380,7 +381,7 @@ function enableAssignedField(event) {
   assignedInput.disabled = false;
 }
 
-function enableSubtaskInput() {
+function addTaskEnableSubtaskInput() {
   let tasksList = document.getElementById("task-subtasks");
   let taskButton = document.getElementById("add-subtask-btn");
   taskButton.disabled = false;
