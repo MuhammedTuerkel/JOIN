@@ -543,3 +543,11 @@
     padding-left: 10px;
   }
 }
+
+@media (max-height: 750px) {
+  .Summary-body {
+    height: 65%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
