@@ -470,7 +470,7 @@
   justify-content: space-evenly;
 }
 
-@media (max-width: 1150px) and (min-width: 320px) {
+@media (max-width: 1150px) and (min-width: 310px) {
   .board-add-task-card {
     width: 85%;
     height: 75%;

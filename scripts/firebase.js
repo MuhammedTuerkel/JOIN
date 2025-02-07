@@ -399,7 +399,7 @@ async function deleteTicket(ticketID) {
   showToast("The ticket was deleted", "alert");
   setTimeout(() => {
     toggleOverlay();
-  }, 2500);
+  }, 750);
 }
 
 /**
