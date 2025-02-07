@@ -224,9 +224,6 @@ body {
     padding-left: 148px;
   }
 
-  .d-flex-column {
-    width: 60px;
-  }
   .help-user {
     gap: 0px;
   }
@@ -306,6 +303,7 @@ body {
 
   .d-flex-column {
     flex-direction: column;
+    width: 110px;
   }
 
   .help-user {

@@ -653,9 +653,15 @@ input.subtask-input:focus {
 
 @media (max-width: 539px) and (min-width: 310px) {
   .overlay-card {
-    height: 83%;
+    height: 70%;
     width: 80%;
     padding: 15px 15px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  .overlay-card::-webkit-scrollbar {
+    display: none;
   }
 
   .overlay-edit-form-wrapper {
@@ -725,5 +731,18 @@ input.subtask-input:focus {
     margin-top: 10px;
     padding-left: 5px;
     width: 80%;
+  }
+
+  .overlay-assigned-user-element {
+    width: 90%;
+  }
+
+  .overlay-subtask-element {
+    width: 90%;
+  }
+
+  .overlay-service-btn-wrapper {
+    justify-content: center;
+    width: 100%;
   }
 }

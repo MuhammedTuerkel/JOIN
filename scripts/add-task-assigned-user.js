@@ -176,9 +176,9 @@ function loadSearchedUsers(fiteredContacts) {
  * Saves the task and redirects to the board page.
  * @param {Event} event - The event object.
  */
-function saveTaskGoToBoard(event, state = "toDo") {
+async function saveTaskGoToBoard(event, state = "toDo") {
   event.preventDefault();
-  postTask(state);
+  await postTask(state);
   window.location.href = getBaseWebsideURL() + "/board.html";
 }
 
