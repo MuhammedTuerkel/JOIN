@@ -215,8 +215,7 @@
   position: absolute;
   bottom: -300px;
   text-align: center;
-  transition: bottom 0.8s ease-in-out, opacity 0.5s ease-in-out,
-    transform 1s ease-in-out;
+  transition: bottom 0.8s ease-in-out, opacity 0.5s ease-in-out, transform 1s ease-in-out;
 }
 
 .confirmation_container.fly-up {
@@ -246,16 +245,13 @@
 }
 
 .confirmation_container.flip-horizontal-bottom {
-  -webkit-animation: flip-horizontal-bottom 0.4s
-    cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
-  animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955)
-    both;
+  -webkit-animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+  animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
   opacity: 0;
 }
 
 .confirmation_containerb {
-  transition: bottom 0.8s ease-in-out, opacity 0.5s ease-in-out,
-    transform 1s ease-in-out;
+  transition: bottom 0.8s ease-in-out, opacity 0.5s ease-in-out, transform 1s ease-in-out;
 }
 
 .sign_up_sucessfully {
@@ -476,11 +472,6 @@
     transition: background-color 0.3s, box-shadow 0.3s;
     font-size: 16px;
     margin-top: 5px;
-  }
-
-  .login_logo img {
-    top: 2%;
-    left: 25%;
   }
 }
 

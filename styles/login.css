@@ -50,9 +50,9 @@
   height: 7%;
 }
 
-.login_mobile {
+/* .login_mobile {
   display: flex;
-}
+} */
 
 .login_move_image_container {
   display: flex;
@@ -408,11 +408,11 @@
   font-weight: bold;
 }
 
-.login_input_mail_info {
+/* .login_input_mail_info {
   color: #999;
   font-size: 14px;
   height: 20px;
-}
+} */
 
 .blur_placeholder:focus::placeholder {
   filter: blur(1.5px);
@@ -659,65 +659,30 @@
 
 @media (width: 1024px) and (height: 787px) {
   .login_logo_mobile img {
-    transition: all 1s ease;
-    position: absolute;
     display: none;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
   }
 
   .login_card {
-    display: flex;
-    flex-direction: column;
-    border: solid 1px #d1d1d1;
-    border-radius: 30px;
-    background-color: #ffffff;
-    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.05);
-    height: 94%;
+    height: 70%;
     width: 500px;
-    margin-left: 18px;
-    margin-right: 18px;
-    align-items: center;
-    font-family: "Inter", serif;
   }
 
   .login_card_headline {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
     padding-top: 0px;
   }
 
   .login_underline {
-    height: 3px;
-    background-color: #29abe2;
     width: 20%;
     margin-bottom: 26px;
   }
 
   .login_buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin-top: 17px;
-    gap: 32px;
     padding-bottom: 25px;
   }
 
   .login_input_field input {
     width: 327px;
-    border: solid 1px #d1d1d1;
-    border-radius: 10px;
-    padding-top: 6px;
-    padding-bottom: 6px;
-    padding-left: 21px;
-    padding-right: 21px;
-    font-size: 24px;
-    transition: border-color 0.3s;
-    cursor: text;
   }
 
   .login_mobile {
@@ -727,37 +692,17 @@
 
 @media (min-width: 787px) {
   .login_logo_mobile img {
-    transition: all 1s ease;
-    position: absolute;
     display: none;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
   }
 }
 
 @media (max-width: 786px) and (min-width: 581px) {
-  .login_logo_mobile img {
-    transition: all 1s ease;
-    position: absolute;
-    display: flex;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
   .login_variants {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 76dvh;
-    width: 100%;
-  }
-  .login_head {
-    display: none;
   }
 
-  .login_main_container {
-    width: 100%;
+  .login_head {
+    display: none;
   }
 
   .login_mobile {
@@ -767,33 +712,9 @@
     display: flex;
   }
 
-  .login_moble_nav {
-    display: flex;
-    gap: 35px;
-    height: 49px;
-    width: 279px;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .login_moble_nav a {
-    text-decoration: none;
-    color: black;
-  }
-
   .login_body {
-    max-width: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
     align-items: center;
-    top: 0;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
     background-color: #2a3647;
-    font-family: "Inter", serif;
-    flex-direction: column;
     transition: background-color 2.5s ease;
   }
 
@@ -801,10 +722,7 @@
     width: 74%;
     margin: 0;
     height: 74%;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
     margin-top: 9%;
   }
 
@@ -814,8 +732,6 @@
 
   .login_card_headline h1 {
     font-size: 45px;
-    margin-bottom: 12px;
-    font-weight: bold;
     margin-top: 0px;
   }
 
@@ -825,7 +741,6 @@
 
   .login_input_field {
     width: 90%;
-    position: relative;
     margin-bottom: 2.4em !important;
   }
 
@@ -838,43 +753,25 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 100%;
-      border: solid 1px #d1d1d1;
-      border-radius: 10px;
       padding-top: 10px;
       padding-bottom: 10px;
-      padding-left: 21px;
-      padding-right: 51px;
       font-size: 19px;
-      transition: border-color 0.3s;
-      cursor: text;
       box-sizing: border-box;
     }
   }
 
   .login_input_field img {
-    position: absolute;
     height: 18px;
     right: 21px;
-    top: 50%;
-    transform: translateY(-50%);
   }
 
   .login_input_mail_info {
     color: red;
-    font-size: 0.875em !important;
-    position: absolute;
     bottom: -1.8em !important;
-    left: 0;
-    width: 100%;
   }
 
   .login_buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin-top: 20px;
-    gap: 32px;
     padding-bottom: 0px;
     flex-direction: column;
     width: 90%;
@@ -883,13 +780,7 @@
 
   .login_buttons_styles_clear {
     display: flex;
-    border: solid 1px #2a3647;
-    color: #2a3647;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
-    font-weight: bold;
     justify-content: center;
-    border-radius: 8px;
     padding: 10px 20px;
     width: 52%;
     height: 21px;
@@ -898,31 +789,14 @@
   }
 
   .login_buttons_styles {
-    cursor: not-allowed;
-    background-color: #ccc;
-    border: none;
-    transition: background-color 0.3s, box-shadow 0.3s;
-    border-radius: 8px;
     padding: 10px 20px;
-    font-size: 19px;
     width: 62%;
     height: 44px;
   }
 
   .login_logo img {
-    transition: all 1s ease;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .login_mobile img {
-    transition: all 1s ease;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 2%;
+    left: 25%;
   }
 
   @keyframes moveAndResize {
@@ -974,16 +848,9 @@
   }
 
   .login_not_a_user_buttons_styles {
-    background-color: #2a3647;
-    color: white;
-    border-radius: 8px;
     padding-top: 12px;
     padding-bottom: 15px;
-    padding-left: 24px;
-    padding-right: 24px;
-    cursor: pointer;
     font-size: 19px;
-    transition: background-color 0.3s, box-shadow 0.3s;
   }
 
   .login_moble_nav {
@@ -1001,11 +868,8 @@
     display: none;
   }
 
-  .login_main_container {
-    width: 100%;
-  }
-
   .login_mobile {
+    display: flex;
     height: 100px;
     width: 100%;
     z-index: 1000;
@@ -1023,32 +887,20 @@
   .login_moble_nav a {
     text-decoration: none;
     color: black;
+    font-size: 16px;
   }
 
   .login_body {
     max-width: 100%;
-    width: 100%;
-    display: flex;
     justify-content: center;
-    align-items: center;
-    top: 0;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
     background-color: #2a3647;
-    font-family: "Inter", serif;
-    flex-direction: column;
     transition: background-color 2s ease;
   }
 
   .login_card {
     width: 70%;
     margin: 0;
-    height: auto;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
     margin-top: 10%;
   }
 
@@ -1058,8 +910,6 @@
 
   .login_card_headline h1 {
     font-size: 35px;
-    margin-bottom: 12px;
-    font-weight: bold;
     margin-top: 0px;
   }
 
@@ -1069,7 +919,6 @@
 
   .login_input_field {
     width: 90%;
-    position: relative;
     margin-bottom: 1.6em !important;
   }
 
@@ -1082,41 +931,23 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 100%;
-      border: solid 1px #d1d1d1;
-      border-radius: 10px;
       padding-top: 12px;
       padding-bottom: 12px;
-      padding-left: 21px;
-      padding-right: 51px;
       font-size: 14px;
-      transition: border-color 0.3s;
-      cursor: text;
       box-sizing: border-box;
     }
   }
 
   .login_input_field img {
-    position: absolute;
     height: 18px;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
   }
 
   .login_input_mail_info {
-    color: red;
     font-size: 0.735em !important;
-    position: absolute;
     bottom: -1.8em !important;
-    left: 0;
-    width: 100%;
   }
 
   .login_buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin-top: 18px;
     gap: 12px;
     padding-bottom: 0px;
@@ -1127,13 +958,7 @@
 
   .login_buttons_styles_clear {
     display: flex;
-    border: solid 1px #2a3647;
-    color: #2a3647;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
-    font-weight: bold;
     justify-content: center;
-    border-radius: 8px;
     padding: 10px 20px;
     width: 52%;
     height: 21px;
@@ -1142,11 +967,6 @@
   }
 
   .login_buttons_styles {
-    cursor: not-allowed;
-    background-color: #ccc;
-    border: none;
-    transition: background-color 0.3s, box-shadow 0.3s;
-    border-radius: 8px;
     padding: 10px 20px;
     font-size: 12px;
     width: 66%;
@@ -1154,14 +974,6 @@
   }
 
   .login_logo img {
-    transition: all 1s ease;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .login_mobile img {
     transition: all 1s ease;
     position: absolute;
     top: 50%;
@@ -1211,27 +1023,11 @@
     height: 10%;
   }
 
-  .login_mobile {
-    display: flex;
-  }
-
-  .login_moble_nav a {
-    text-decoration: none;
-    color: black;
-    font-size: 12px;
-  }
-
   .login_not_a_user_buttons_styles {
-    background-color: #2a3647;
-    color: white;
-    border-radius: 8px;
     padding-top: 12px;
     padding-bottom: 15px;
-    padding-left: 24px;
-    padding-right: 24px;
-    cursor: pointer;
+
     font-size: 12px;
-    transition: background-color 0.3s, box-shadow 0.3s;
   }
 
   .remember_me_overlay {
@@ -1272,28 +1068,14 @@
 
   .login_body {
     max-width: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
     background-color: #2a3647;
-    font-family: "Inter", serif;
-    flex-direction: column;
     transition: background-color 2s ease;
   }
 
   .login_card {
     width: 80%;
     margin: 0;
-    height: auto;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
     margin-top: 18%;
   }
 
@@ -1303,8 +1085,6 @@
 
   .login_card_headline h1 {
     font-size: 35px;
-    margin-bottom: 12px;
-    font-weight: bold;
     margin-top: 0px;
   }
 
@@ -1330,34 +1110,22 @@
       font-size: 12px;
       padding-top: 12px;
       padding-bottom: 12px;
-      padding-left: 21px;
-      padding-right: 51px;
     }
   }
 
   .login_input_field img {
-    position: absolute;
     height: 18px;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
   }
 
   .login_input_mail_info {
-    color: red;
     font-size: 0.52em !important;
-    position: absolute;
     bottom: -2.5em !important;
     left: -5px;
-    width: 100%;
   }
 
   .login_buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5px;
-    gap: 20px;
+    margin-top: 8px;
+    gap: 16px;
     padding-bottom: 0px;
     flex-direction: column;
     width: 90%;
@@ -1366,13 +1134,7 @@
 
   .login_buttons_styles_clear {
     display: flex;
-    border: solid 1px #2a3647;
-    color: #2a3647;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
-    font-weight: bold;
     justify-content: center;
-    border-radius: 8px;
     padding: 10px 20px;
     width: 52%;
     height: 21px;
@@ -1381,11 +1143,6 @@
   }
 
   .login_buttons_styles {
-    cursor: not-allowed;
-    background-color: #ccc;
-    border: none;
-    transition: background-color 0.3s, box-shadow 0.3s;
-    border-radius: 8px;
     padding: 10px 20px;
     font-size: 12px;
     width: 66%;
@@ -1461,16 +1218,9 @@
   }
 
   .login_not_a_user_buttons_styles {
-    background-color: #2a3647;
-    color: white;
-    border-radius: 8px;
     padding-top: 12px;
     padding-bottom: 15px;
-    padding-left: 24px;
-    padding-right: 24px;
-    cursor: pointer;
     font-size: 12px;
-    transition: background-color 0.3s, box-shadow 0.3s;
   }
 
   .remember_me_overlay {
@@ -1517,7 +1267,6 @@
   }
 
   .login_input_mail_info {
-    color: red;
     font-size: 0.53em !important;
     position: absolute;
     bottom: -2.5em !important;
@@ -1532,11 +1281,6 @@
   }
 
   .login_buttons_styles {
-    cursor: not-allowed;
-    background-color: #ccc;
-    border: none;
-    transition: background-color 0.3s, box-shadow 0.3s;
-    border-radius: 8px;
     padding: 5px 20px;
     font-size: 15px;
     width: 66%;
@@ -1545,13 +1289,7 @@
 
   .login_buttons_styles_clear {
     display: flex;
-    border: solid 1px #2a3647;
-    color: #2a3647;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
-    font-weight: bold;
     justify-content: center;
-    border-radius: 8px;
     padding: 5px 20px;
     width: 47%;
     height: 19px;

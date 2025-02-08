@@ -224,10 +224,10 @@ document.addEventListener("click", (event) => {
   const target = event.target;
   if (target.classList.contains("add-task-save-icon")) {
     addTaskHandleSaveClick(target);
-    enableActionButton();
+    addTaskEnableActionButton();
   } else if (target.classList.contains("add-task-delete-icon")) {
     addTaskHandleDeleteClick(target);
-    enableActionButton();
+    addTaskEnableActionButton();
   }
 });
 
