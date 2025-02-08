@@ -14,9 +14,10 @@
   align-items: center;
   font-family: "Inter", serif;
   justify-content: space-around;
-  height: 60%;
+  height: 550px;
   margin-top: 70px;
   position: fixed;
+  width: 550px;
 }
 
 .sign_up_card_headline {
@@ -44,10 +45,11 @@
 .signup_input_field {
   position: relative;
   margin-bottom: 2.5em;
+  width: 90%;
 }
 
 .signup_input_field input {
-  width: 442px;
+  width: 100%;
   border: solid 1px #d1d1d1;
   border-radius: 10px;
   padding-top: 6px;
@@ -311,7 +313,7 @@
   .signup_card {
     display: block;
     flex-direction: column;
-    padding-top: 10;
+    padding-top: 10px;
     padding-right: 15px;
     padding-bottom: 10px;
     padding-left: 15px;
@@ -324,7 +326,7 @@
     align-items: center;
     font-family: "Inter", serif;
     justify-content: space-around;
-    width: 60%;
+    width: 450px;
     margin-top: 13%;
     height: 420px;
   }
@@ -376,6 +378,10 @@
     margin-left: 15px;
     margin-right: 15px;
     margin-bottom: 1.5em;
+    width: 90%;
+  }
+  .signup_input_field input {
+    width: 90%;
   }
 
   @media (pointer: coarse) {
@@ -495,7 +501,7 @@
     align-items: center;
     font-family: "Inter", serif;
     justify-content: space-around;
-    width: 70%;
+    width: 400px;
     margin-top: 6%;
     height: 440px;
   }
@@ -542,6 +548,10 @@
     margin-left: 15px;
     margin-right: 15px;
     margin-bottom: 2em;
+  }
+
+  .signup_input_field input {
+    width: 90%;
   }
 
   @media (pointer: coarse) {
@@ -619,7 +629,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 20px;
   }
 }
@@ -644,6 +654,10 @@
     width: 90%;
     margin-top: 9%;
     height: 350px;
+  }
+
+  .signup_input_field input {
+    width: 85%;
   }
 
   .sign_up_card_headline h1 {
@@ -687,7 +701,7 @@
   .signup_input_field {
     margin-left: 15px;
     margin-right: 15px;
-    margin-bottom: 1.2em;
+    margin-bottom: 1em;
   }
 
   @media (pointer: coarse) {
@@ -765,7 +779,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 20px;
   }
 
