@@ -193,7 +193,6 @@ function enableInputAndButton() {
 function renderSubtaskList(ticketID) {
   let target = document.getElementById("subtasksList");
   target.innerHTML = "";
-  localStorage.getItem("subtasks");
   for (let i = 0; i < subtasksArray.length; i++) {
     if (subtasksArray.length == 0) {
       break;
