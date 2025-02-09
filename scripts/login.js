@@ -334,7 +334,7 @@ function rememberMeNo() {
 }
 
 /**
- * If the screen width is under 1400px it shows the greeting text in the loading of the html for three seconds
+ * If the screen width is under 1400px it shows the greeting text in the loading of the html for one.five seconds
  */
 async function greetingOnMobile() {
   if (window.innerWidth < 1400) {
