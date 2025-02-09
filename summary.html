@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Summary</title>
-    <link rel="stylesheet" href="./styles/loading-overlay.css" />
     <link rel="stylesheet" href="./styles/standard.css" />
     <link rel="stylesheet" href="./styles/summary.css" />
     <script src="./scripts/firebase.js"></script>
@@ -22,6 +21,7 @@
     <link rel="stylesheet" href="./styles/Side-Navigation.css" />
     <link rel="stylesheet" href="./style.css" />
     <script src="scripts/login.js"></script>
+    <link rel="stylesheet" href="./styles/loading-overlay.css" />
   </head>
 
   <body onclick="hideSubMenu()" onload="sideNavigation(), Init(), getUserTasks()">
@@ -29,7 +29,6 @@
       <div class="loader"></div>
       <p>Loading resources...</p>
     </div>
-
     <div class="side-navigation">
       <img class="logo-icon" src="assets/img/Join-logo-white.svg" alt="" />
       <div class="menu">
@@ -122,7 +121,7 @@
           </div>
           <div class="viewOfTasks">
             <div class="Task" onclick="goToBoard()">
-              <h2 class="Task_h2" id="allTasks"></h2>
+              <h2 class="Task_h2" id="summOfAllTasks"></h2>
               <p class="Task_p">Tasks in Board</p>
             </div>
             <div class="Task" onclick="goToBoard()">

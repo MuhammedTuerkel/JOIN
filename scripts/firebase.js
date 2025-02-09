@@ -38,10 +38,8 @@ function hideLoadingScreen() {
  */
 async function loadResources() {
   if (!resourcesLoaded) {
-    await Promise.all([getAllTasks(), getItemsFromFirebase()]);
-    resourcesLoaded = true;
+    await Promise.all([getUserTasks()]);
   }
-  hideLoadingScreen();
 }
 
 /**
