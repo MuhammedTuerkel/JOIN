@@ -200,7 +200,7 @@ function notAssignedUserEdit(email) {
   updateSelectedUsersContainerEdit();
 }
 
-function addTaskHandleDeleteClick(index) {
+function addTaskhandleDeleteClick(index) {
   if (index < 0 || index >= subtasksArray.length) {
     console.error("Invalid index");
     return;

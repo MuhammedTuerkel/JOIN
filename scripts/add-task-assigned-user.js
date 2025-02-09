@@ -104,7 +104,6 @@ function notAssignedUser(email) {
   template.classList.add("user_template_not_selected");
   checkedImg.src = "./assets/img/check button.png";
   checkbox.checked = false;
-  let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
   selectedContacts = selectedContacts.filter((contact) => contact.email !== email);
   updateSelectedUsersContainer();
 }
@@ -210,23 +209,23 @@ function saveTaskCloseOverlay(event, state = "toDo") {
   }, 400);
 }
 
-/**
- * Deletes a subtask from the task's subtasks array in local storage.
- * @param {HTMLElement} subtaskItem - The subtask item to delete.
- * @param {string} ticketID - The ID of the task the subtask belongs to.
- */
-function deleteSubtaskFromStorage(subtaskItem, ticketID) {
-  if (!subtaskItem) return;
-  const numericID = getNumericID(subtaskItem);
-  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  const task = tasks.find((task) => task.id === ticketID);
-  if (!task || !task.subtasks) return;
-  task.subtasks = task.subtasks.filter((subtask) => parseInt(subtask.id, 10) !== numericID);
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-  subtasksArray = task.subtasks;
-  reindexSubtasks();
-  subtaskItem.remove();
-}
+// /**
+//  * Deletes a subtask from the task's subtasks array in local storage.
+//  * @param {HTMLElement} subtaskItem - The subtask item to delete.
+//  * @param {string} ticketID - The ID of the task the subtask belongs to.
+//  */
+// function deleteSubtaskFromStorage(subtaskItem, ticketID) {
+//   if (!subtaskItem) return;
+//   const numericID = getNumericID(subtaskItem);
+//   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+//   const task = tasks.find((task) => task.id === ticketID);
+//   if (!task || !task.subtasks) return;
+//   task.subtasks = task.subtasks.filter((subtask) => parseInt(subtask.id, 10) !== numericID);
+//   localStorage.setItem("tasks", JSON.stringify(tasks));
+//   subtasksArray = task.subtasks;
+//   reindexSubtasks();
+//   subtaskItem.remove();
+// }
 
 /**
  * Extracts the numeric ID from a subtask item's ID.

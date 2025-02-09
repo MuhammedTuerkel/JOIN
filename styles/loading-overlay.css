@@ -4,17 +4,17 @@
   height: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(255, 255, 255, 0.8); /* Transparent white background */
+  background-color: rgba(0, 0, 0, 0.63);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  z-index: 9999; /* Ensure it is above other elements */
+  z-index: 9999;
 }
 
 .loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #29abe2;
   border-radius: 50%;
   width: 120px;
   height: 120px;
@@ -33,5 +33,5 @@
 .loading_overlay p {
   margin-top: 20px;
   font-size: 18px;
-  color: #3498db;
+  color: #29abe2;
 }
