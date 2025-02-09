@@ -99,15 +99,11 @@ function lengthOfToDoTasks(tasks) {
  * Counts how many tasks the user has with the status “inProgress” and displays this value in the front end
  * @param {array}
  */
-<<<<<<< HEAD
-function lengthOfInProgressTasks() {
-  summaryInProgress = allTasks.filter(
+
+function lengthOfInProgressTasks(tasks) {
+  summaryInProgress = tasks.filter(
     (item) => item.state === "inProgress"
   ).length;
-=======
-function lengthOfInProgressTasks(tasks) {
-  summaryInProgress = tasks.filter((item) => item.state === "inProgress").length;
->>>>>>> ff34d4d19903acc871c8e6a15564ff5171e89c20
   let target = document.getElementById("inProgress");
   target.innerHTML = "";
   target.innerHTML = `${summaryInProgress}`;
@@ -117,15 +113,10 @@ function lengthOfInProgressTasks(tasks) {
  * Counts how many tasks the user has with the status “awaitFeedback” and displays this value in the front end
  * @param {array}
  */
-<<<<<<< HEAD
-function lengthOfFeedbackTasks() {
-  summaryFeedback = allTasks.filter(
+function lengthOfFeedbackTasks(tasks) {
+  summaryFeedback = tasks.filter(
     (item) => item.state === "awaitFeedback"
   ).length;
-=======
-function lengthOfFeedbackTasks(tasks) {
-  summaryFeedback = tasks.filter((item) => item.state === "awaitFeedback").length;
->>>>>>> ff34d4d19903acc871c8e6a15564ff5171e89c20
   let target = document.getElementById("awaiting");
   target.innerHTML = "";
   target.innerHTML = `${summaryFeedback}`;
@@ -165,15 +156,10 @@ function getEarliestDate(tasks) {
     document.getElementById("earliestDateInfo").classList.add("d_none");
     return;
   }
-<<<<<<< HEAD
-  earliestDateObject = allTasks.reduce((earliest, current) => {
+  earliestDateObject = tasks.reduce((earliest, current) => {
     return new Date(current.due_date) < new Date(earliest.due_date)
       ? current
       : earliest;
-=======
-  earliestDateObject = tasks.reduce((earliest, current) => {
-    return new Date(current.due_date) < new Date(earliest.due_date) ? current : earliest;
->>>>>>> ff34d4d19903acc871c8e6a15564ff5171e89c20
   });
   earliestDateNumber = earliestDateObject.due_date;
   let earliestDate = changeDateFormat(earliestDateNumber);
