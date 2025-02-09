@@ -196,7 +196,6 @@ function notAssignedUserEdit(email) {
   if (userIndex !== -1) {
     selectedUsers.splice(userIndex, 1);
   }
-
   updateSelectedUsersContainerEdit();
 }
 
@@ -226,7 +225,7 @@ document.addEventListener("click", (event) => {
     addTaskHandleSaveClick(target);
     addTaskEnableActionButton();
   } else if (target.classList.contains("add-task-delete-icon")) {
-    addTaskHandleDeleteClick(target);
+    addTaskhandleDeleteClick(target);
     addTaskEnableActionButton();
   }
 });
