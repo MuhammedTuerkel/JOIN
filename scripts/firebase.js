@@ -1,4 +1,46 @@
 contacts = [];
+let resourcesLoaded = false;
+
+/**
+ * check if the contacts and tasks are loaded
+ */
+function checkOverlay() {
+  if (resourcesLoaded) {
+    hideLoadingScreen();
+  } else {
+    loadResources();
+  }
+}
+
+/**
+ * Hides the loading screen overlay.
+ * This function attempts to find an element with the ID "loading-overlay" and sets its display style to "none",
+ * effectively hiding it from view.
+ *
+ * @returns {void} This function does not return a value.
+ */
+function hideLoadingScreen() {
+  const loadingOverlay = document.getElementById("loading-overlay");
+  if (loadingOverlay) {
+    loadingOverlay.style.display = "none";
+  }
+}
+
+/**
+ * Loads resources asynchronously and hides the loading screen.
+ * This function checks if resources have already been loaded. If not, it fetches all tasks
+ * and items from Firebase concurrently. After loading, it marks resources as loaded
+ * and hides the loading screen.
+ *
+ * @async
+ * @function loadResources
+ * @returns {Promise<void>} A promise that resolves when resources are loaded and the loading screen is hidden.
+ */
+async function loadResources() {
+  if (!resourcesLoaded) {
+    await Promise.all([getUserTasks()]);
+  }
+}
 
 /**
  * Get all contacts from firebase and push them to the global contacts array

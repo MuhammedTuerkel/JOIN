@@ -196,7 +196,6 @@ async function deleteContact(i) {
   } else {
     console.error("Failed to delete contact:", response.error);
     updateContactsDisplay();
-    updateTasksAfterContactDeletion(i);
   }
 }
 

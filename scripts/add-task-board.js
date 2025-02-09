@@ -78,14 +78,6 @@ function updateDropdownSelectionsEdit() {
 }
 
 /**
- * tooks the contacts list from the local storage
- *
- */
-function getContactsFromLocalStorage() {
-  return JSON.parse(localStorage.getItem("contacts")) || [];
-}
-
-/**
  * Filters and loads users based on the search input value.
  */
 function addTaskSearchUser() {

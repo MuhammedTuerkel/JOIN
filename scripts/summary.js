@@ -4,11 +4,12 @@ let greeting;
  * Is a body-onload function
  */
 async function Init() {
-  await getAllTasks();
+  await loadResources();
   getLoggedInUserData();
   getFromLocalStorage();
   putName();
   greetingOnMobile();
+  checkOverlay();
 }
 
 /**
@@ -35,10 +36,8 @@ async function greetingOnMobile() {
     document.getElementById("headline").style = "display:none;";
     document.getElementById("Tasks").style = "display:none;";
     document.getElementById("greeting-top").classList.remove("d-none");
-
     setTimeout(() => {
       document.getElementById("greeting-top").classList.add("d-none");
-
       document.getElementById("headline").style = "";
       document.getElementById("Tasks").style = "";
     }, 1500);
@@ -64,23 +63,23 @@ async function getUserTasks() {
   let user = await fetch(BASE_URL + "tasks" + ".json");
   let responseAsJSON = await user.json();
   let tasks = Object.values(responseAsJSON);
-  activeUserTasks = tasks.filter((task) => task["creator"] === userName);
-  lengthOfSummaryTasks();
-  lengthOfToDoTasks();
-  lengthOfInProgressTasks();
-  lengthOfFeedbackTasks();
-  lengthOfDoneTasks();
-  lengthOfUrgentTasks();
-  getEarliestDate();
+  lengthOfSummaryTasks(tasks);
+  lengthOfToDoTasks(tasks);
+  lengthOfInProgressTasks(tasks);
+  lengthOfFeedbackTasks(tasks);
+  lengthOfDoneTasks(tasks);
+  lengthOfUrgentTasks(tasks);
+  getEarliestDate(tasks);
+  resourcesLoaded = true;
 }
 
 /**
  * Returns the length of the allTasks Array and shows them in the front-end
  * @param {array}
  */
-function lengthOfSummaryTasks() {
-  summaryTasks = allTasks.length;
-  let target = document.getElementById("allTasks");
+function lengthOfSummaryTasks(tasks) {
+  summaryTasks = tasks.length;
+  let target = document.getElementById("summOfAllTasks");
   target.innerHTML = "";
   target.innerHTML = `${summaryTasks}`;
 }
@@ -89,8 +88,8 @@ function lengthOfSummaryTasks() {
  * Counts how many tasks the user has with the status “toDo” and displays this value in the front end
  * @param {array}
  */
-function lengthOfToDoTasks() {
-  summaryToDo = allTasks.filter((item) => item.state === "toDo").length;
+function lengthOfToDoTasks(tasks) {
+  summaryToDo = tasks.filter((item) => item.state === "toDo").length;
   let target = document.getElementById("todo");
   target.innerHTML = "";
   target.innerHTML = `${summaryToDo}`;
@@ -100,10 +99,15 @@ function lengthOfToDoTasks() {
  * Counts how many tasks the user has with the status “inProgress” and displays this value in the front end
  * @param {array}
  */
+<<<<<<< HEAD
 function lengthOfInProgressTasks() {
   summaryInProgress = allTasks.filter(
     (item) => item.state === "inProgress"
   ).length;
+=======
+function lengthOfInProgressTasks(tasks) {
+  summaryInProgress = tasks.filter((item) => item.state === "inProgress").length;
+>>>>>>> ff34d4d19903acc871c8e6a15564ff5171e89c20
   let target = document.getElementById("inProgress");
   target.innerHTML = "";
   target.innerHTML = `${summaryInProgress}`;
@@ -113,10 +117,15 @@ function lengthOfInProgressTasks() {
  * Counts how many tasks the user has with the status “awaitFeedback” and displays this value in the front end
  * @param {array}
  */
+<<<<<<< HEAD
 function lengthOfFeedbackTasks() {
   summaryFeedback = allTasks.filter(
     (item) => item.state === "awaitFeedback"
   ).length;
+=======
+function lengthOfFeedbackTasks(tasks) {
+  summaryFeedback = tasks.filter((item) => item.state === "awaitFeedback").length;
+>>>>>>> ff34d4d19903acc871c8e6a15564ff5171e89c20
   let target = document.getElementById("awaiting");
   target.innerHTML = "";
   target.innerHTML = `${summaryFeedback}`;
@@ -126,8 +135,8 @@ function lengthOfFeedbackTasks() {
  * Counts how many tasks the user has with the status “done” and displays this value in the front end
  * @param {array}
  */
-function lengthOfDoneTasks() {
-  summaryDone = allTasks.filter((item) => item.state === "done").length;
+function lengthOfDoneTasks(tasks) {
+  summaryDone = tasks.filter((item) => item.state === "done").length;
   let target = document.getElementById("done");
   target.innerHTML = "";
   target.innerHTML = `${summaryDone}`;
@@ -137,8 +146,8 @@ function lengthOfDoneTasks() {
  * Counts how many tasks the user has with the priority “urgent” and displays this value in the front end
  * @param {array}
  */
-function lengthOfUrgentTasks() {
-  summaryUrgent = allTasks.filter((item) => item.prio === "urgent").length;
+function lengthOfUrgentTasks(tasks) {
+  summaryUrgent = tasks.filter((item) => item.prio === "urgent").length;
   let target = document.getElementById("urgent");
   target.innerHTML = "";
   target.innerHTML = `${summaryUrgent}`;
@@ -149,17 +158,22 @@ function lengthOfUrgentTasks() {
  * @param {Array} array - Array of objects with a due_date property.
  * @returns {Object} - The object with the earliest due date.
  */
-function getEarliestDate() {
+function getEarliestDate(tasks) {
   let target = document.getElementById("earliestDate");
-  if (allTasks.length === 0) {
+  if (tasks.length === 0) {
     target.innerHTML = "No upcoming tasks";
     document.getElementById("earliestDateInfo").classList.add("d_none");
     return;
   }
+<<<<<<< HEAD
   earliestDateObject = allTasks.reduce((earliest, current) => {
     return new Date(current.due_date) < new Date(earliest.due_date)
       ? current
       : earliest;
+=======
+  earliestDateObject = tasks.reduce((earliest, current) => {
+    return new Date(current.due_date) < new Date(earliest.due_date) ? current : earliest;
+>>>>>>> ff34d4d19903acc871c8e6a15564ff5171e89c20
   });
   earliestDateNumber = earliestDateObject.due_date;
   let earliestDate = changeDateFormat(earliestDateNumber);
