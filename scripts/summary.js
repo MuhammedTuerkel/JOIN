@@ -36,10 +36,8 @@ async function greetingOnMobile() {
     document.getElementById("headline").style = "display:none;";
     document.getElementById("Tasks").style = "display:none;";
     document.getElementById("greeting-top").classList.remove("d-none");
-
     setTimeout(() => {
       document.getElementById("greeting-top").classList.add("d-none");
-
       document.getElementById("headline").style = "";
       document.getElementById("Tasks").style = "";
     }, 1500);
