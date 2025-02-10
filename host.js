@@ -8,8 +8,8 @@
  */
 const CONFIG = {
   development: "http://127.0.0.1:5501",
-  staging: "new server if you want to get a second server",
-  production: "https://join-401.developerakademie.net/JOIN",
+  staging: "https://christian-schreter.developerakademie.net/JOIN",
+  production: "https://christian-schreter.developerakademie.net/JOIN",
 };
 
 /**

@@ -7,7 +7,7 @@ let summaryDone;
 let summaryUrgent;
 let earliestDate;
 
-const BASE_URL = "https://join-bbd82-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL = "https://join-kanbanboard-558ae-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /**
  * check if the user have the status in the locals storage from rememberMe of true than he goes direktly to the summary side

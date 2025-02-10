@@ -60,14 +60,26 @@ function putName() {
 async function getUserTasks() {
   let user = await fetch(BASE_URL + "tasks" + ".json");
   let responseAsJSON = await user.json();
-  let tasks = Object.values(responseAsJSON);
-  lengthOfSummaryTasks(tasks);
-  lengthOfToDoTasks(tasks);
-  lengthOfInProgressTasks(tasks);
-  lengthOfFeedbackTasks(tasks);
-  lengthOfDoneTasks(tasks);
-  lengthOfUrgentTasks(tasks);
-  getEarliestDate(tasks);
+
+  // Überprüfe, ob responseAsJSON null oder undefined ist
+  if (responseAsJSON) {
+    let tasks = Object.values(responseAsJSON);
+    lengthOfSummaryTasks(tasks);
+    lengthOfToDoTasks(tasks);
+    lengthOfInProgressTasks(tasks);
+    lengthOfFeedbackTasks(tasks);
+    lengthOfDoneTasks(tasks);
+    lengthOfUrgentTasks(tasks);
+    getEarliestDate(tasks);
+  } else {
+    document.getElementById("summOfAllTasks").innerHTML = 0;
+    document.getElementById("todo").innerHTML = 0;
+    document.getElementById("inProgress").innerHTML = 0;
+    document.getElementById("awaiting").innerHTML = 0;
+    document.getElementById("done").innerHTML = 0;
+    document.getElementById("urgent").innerHTML = 0;
+    document.getElementById("earliestDate").innerHTML = "No  tasks";
+  }
   resourcesLoaded = true;
 }
 
