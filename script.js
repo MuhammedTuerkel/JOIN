@@ -7,6 +7,9 @@ let summaryDone;
 let summaryUrgent;
 let earliestDate;
 
+/**
+ * URL for the database
+ */
 const BASE_URL = "https://join-kanbanboard-558ae-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /**
